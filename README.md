@@ -23,3 +23,8 @@
 └── main.js                                // 游戏入口主函数
 
 ```
+
+## click hero wiki
+地址：http://clickerheroes.wikia.com/wiki/ClickerHeroes_Wiki
+单位：http://clickerheroes.wikia.com/wiki/Units
+数值：http://clickerheroes.wikia.com/wiki/Formulas
