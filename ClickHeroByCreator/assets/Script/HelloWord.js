@@ -19,4 +19,9 @@ cc.Class({
     update: function (dt) {
 
     },
+
+    onTestBtnClick () {
+        const self = this;
+        GameGlobal.WeChatUtil.authorize();
+    },
 });
