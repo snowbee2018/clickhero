@@ -7,12 +7,15 @@ cc.Class({
             type: cc.Label
         },
         // defaults, set visually when attaching this script to the Canvas
-        text: 'Hello, World!'
+        text: 'Hello, World!',
+        openDataNode : cc.Node,
     },
 
     // use this for initialization
     onLoad: function () {
-        this.label.string = this.text;
+        const self = this;
+        self.label.string = this.text;
+        self.openDataNode.active = false;
     },
 
     // called every frame
@@ -26,11 +29,14 @@ cc.Class({
         //     console.log("FFFFFFF, result = " + result);
             
         // });
-        GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
-            console.log("bSuccess = " + bSuccess);
+
+        // GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
+        //     console.log("bSuccess = " + bSuccess);
             
-            console.log(userData);
+        //     console.log(userData);
             
-        });
+        // });
+
+        self.openDataNode.active = true;
     },
 });
