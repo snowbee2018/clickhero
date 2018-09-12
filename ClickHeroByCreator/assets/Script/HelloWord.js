@@ -22,6 +22,15 @@ cc.Class({
 
     onTestBtnClick () {
         const self = this;
-        GameGlobal.WeChatUtil.authorize();
+        // GameGlobal.WeChatUtil.authorize(GameGlobal.WeChatUtil.scope.userLocation, function (result) {
+        //     console.log("FFFFFFF, result = " + result);
+            
+        // });
+        GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
+            console.log("bSuccess = " + bSuccess);
+            
+            console.log(userData);
+            
+        });
     },
 });
