@@ -11,10 +11,28 @@
 cc.Class({
     extends: cc.Component,
 
-    onLoad () {
-        const self = this;
+    ctor () {
         window.GameGlobal = {};
         GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
+        GameGlobal.DataCenter = new (require("DataCenter"))();
+    },
+
+    onLoad () {
+        const self = this;
         GameGlobal.WeChatUtil.sayHello();
+        self.node.active = false;
+        GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
+            console.log("bSuccess = " + bSuccess);
+            console.log(userData);
+            let DataMap = GameGlobal.DataCenter.DataMap;
+            GameGlobal.DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
+            self.node.active = true;
+            self.startGame();
+        });
+    },
+
+    startGame () {
+        const self = this;
+        self.getComponent("HelloWord").setWeChatUser();
     },
 });

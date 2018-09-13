@@ -33,7 +33,7 @@
     "appid": "wx6ac3f5090a6b99c5",
     "isSubdomain": false,
     "orientation": "portrait",
-    "subContext": "WxOpenDataView"
+    "subContext": "wechatgame-subcontext"
   },
   "xxteaKey": "1aeac818-dc0a-47",
   "zipCompressJs": true

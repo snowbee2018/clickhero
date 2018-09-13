@@ -7,7 +7,8 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
+const screenWidth = window.innerWidth
+const screenHeight = window.innerHeight
 cc.Class({
     ctor () {
         const self = this;
@@ -24,14 +25,14 @@ cc.Class({
 
 
         
-        let winSize = cc.director.getWinSize();
+        
         self.UserInfoBtnStyle = {
             type : "text",
             text : "为了您更好的体验，请先同意授权，点我点我",
+            withCredentials : false,
+            lang : "zh_CN",
         }
         let style = {
-            width : 300,
-            height : 80,
             lineHeight : 40,
             backgroundColor: '#ff0000',
             color: '#ffffff',
@@ -39,15 +40,17 @@ cc.Class({
             fontSize: 16,
             borderRadius: 4,
         }
+        style.left = 10;
+        style.top = 20;
         let offsetY = 20;
-        console.log(winSize);
-        
+        // console.log(winSize);
+        style.width = screenWidth - style.left * 2;
+        style.height = screenHeight - style.top * 2;
         // style.left = (winSize.width - style.width)/2;
         // style.top = winSize.height / 2;
         console.log(style);
         // 不知道这个坐标是怎么回事，先随便写一个能看到的吧
-        style.left = 10;
-        style.top = 100;
+
         self.UserInfoBtnStyle.style = style;
     },
 
@@ -111,6 +114,7 @@ cc.Class({
             self.getScopeState(self.scope.userInfo, function (state) {
                 if (state) {
                     wx.getUserInfo({
+                        lang : "zh_CN",
                         withCredentials : false,
                         success : function (params) {
                             console.log("wx.getUserInfo success");
@@ -164,6 +168,16 @@ cc.Class({
                     })
                 }
 
+            });
+        }
+    },
+
+    postMsgToOpenDataView (msg) {
+        const self = this;
+        if (self.isWeChatPlatform()) {
+            wx.postMessage({
+                msgName : "HelloMsg",
+                msgContent : msg,
             });
         }
     },
