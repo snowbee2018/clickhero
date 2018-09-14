@@ -13,7 +13,8 @@ cc.Class({
     ctor () {
         const self = this;
         self.scope = {};
-        
+        self.isWeChatPlatform = cc.sys.platform === cc.sys.WECHAT_GAME;
+
         self.scope.userInfo = "scope.userInfo"; // 用户信息
         self.scope.userLocation = "scope.userLocation"; // wx.getLocation, wx.chooseLocation, wx.openLocation 地理位置
         self.scope.address = "scope.address"; // wx.chooseAddress 通讯地址
@@ -22,9 +23,6 @@ cc.Class({
         self.scope.invoiceTitle = "scope.record"; // wx.startRecord	录音功能
         self.scope.invoiceTitle = "scope.writePhotosAlbum"; // wx.saveImageToPhotosAlbum, wx.saveVideoToPhotosAlbum	保存到相册
         self.scope.invoiceTitle = "scope.camera"; // < camera /> 组件	摄像头
-
-
-        
         
         self.UserInfoBtnStyle = {
             type : "text",
@@ -42,21 +40,15 @@ cc.Class({
         }
         style.left = 10;
         style.top = 20;
-        let offsetY = 20;
-        // console.log(winSize);
         style.width = screenWidth - style.left * 2;
         style.height = screenHeight - style.top * 2;
-        // style.left = (winSize.width - style.width)/2;
-        // style.top = winSize.height / 2;
-        console.log(style);
-        // 不知道这个坐标是怎么回事，先随便写一个能看到的吧
-
         self.UserInfoBtnStyle.style = style;
-    },
 
-    isWeChatPlatform () {
-        const self = this;
-        return cc.sys.platform === cc.sys.WECHAT_GAME;
+        if (self.isWeChatPlatform) {
+            self.fs = wx.getFileSystemManager();
+            self.localStoragePath = `${wx.env.USER_DATA_PATH}/LocalUserStorage.json`;
+        }
+        
     },
 
     sayHello () {
@@ -72,7 +64,7 @@ cc.Class({
     getScopeState (scope, callBack) {
         const self = this;
         console.log("getScopeState, scope = " + scope);
-        if (self.isWeChatPlatform()) {
+        if (self.isWeChatPlatform) {
             wx.getSetting({
                 success: function (result) {
                     console.log("wx.getSetting success");
@@ -110,7 +102,7 @@ cc.Class({
     getUserInfo (callBack) {
         const self = this;
         console.log("getUserInfo");
-        if (self.isWeChatPlatform()) {
+        if (self.isWeChatPlatform) {
             self.getScopeState(self.scope.userInfo, function (state) {
                 if (state) {
                     wx.getUserInfo({
@@ -146,7 +138,7 @@ cc.Class({
     authorize (scope, callBack) {
         const self = this;
         console.log("authorize, scope = " + scope);
-        if (self.isWeChatPlatform() && scope != self.scope.userInfo) {
+        if (self.isWeChatPlatform && scope != self.scope.userInfo) {
             self.getScopeState(scope, function (state) {
                 if (state) {
                     callBack(true);
@@ -174,11 +166,92 @@ cc.Class({
 
     postMsgToOpenDataView (msg) {
         const self = this;
-        if (self.isWeChatPlatform()) {
+        if (self.isWeChatPlatform) {
             wx.postMessage({
                 msgName : "HelloMsg",
                 msgContent : msg,
             });
         }
     },
+
+    // 托管排行榜数据
+    setCloudStorage (key, jsonObj) {
+        const self = this;
+        if (self.isWeChatPlatform) {
+            jsonObj.update_time = Date.now().toString();
+            let jsonStr = JSON.stringify(jsonObj);
+            wx.setUserCloudStorage({
+                KVDataList: [{ key: key, value: jsonStr }],
+                success : function () {
+                    console.log("wx.setUserCloudStorage, success");
+                },
+                fail : function (params) {
+                    console.log("wx.setUserCloudStorage, fail");
+                    console.log(params);
+                }
+            });
+        }
+    },
+
+    removeCloudStorage(key) {
+        const self = this;
+        if (self.isWeChatPlatform) {
+            wx.removeUserCloudStorage({
+                keyList: [key],
+                success: function () {
+                    console.log("wx.removeUserCloudStorage, success");
+                },
+                fail: function (params) {
+                    console.log("wx.removeUserCloudStorage, fail");
+                    console.log(params);
+                }
+            });
+        }
+    },
+    
+    setLocalStorage (jsonStr) {
+        const self = this;
+        if (self.isWeChatPlatform) {
+            if (jsonStr && jsonStr.length > 0) {
+                self.fs.writeFile({
+                    filePath: self.localStoragePath,
+                    data: jsonStr,
+                    encoding: "utf8",
+                    success: function () {
+                        console.log("setLocalStorage success");
+                    },
+                    fail: function (params) {
+                        console.log(params);
+                    }
+                });
+            }
+            
+        }
+    },
+
+    getLocalStorage (callBack) {
+        const self = this;
+        if (self.isWeChatPlatform) {
+            self.fs.access({
+                path: self.localStoragePath,
+                success: function () {
+                    self.fs.readFile({
+                        filePath: self.localStoragePath,
+                        encoding: "utf8",
+                        success: function (res) {
+                            callBack(true, res.data);
+                        },
+                        fail: function (params) {
+                            console.log(params);
+                            callBack(false);
+                        }
+                    });
+                },
+                fail: function (params) {
+                    console.log(params);
+                    callBack(false);
+                }
+            });
+        }
+    }
 });

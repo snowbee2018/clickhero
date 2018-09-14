@@ -80,5 +80,20 @@ cc.Class({
     onRightBtnClick () {
         const self = this;
         GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
+        let obj = {
+            helloMsg: "你好，开放数据域。这是主域托管的数据！"
+        }
+        
+        GameGlobal.WeChatUtil.setCloudStorage("test_cloud_storage", obj);
+
+        obj.helloMsg = "你好，微信小游戏。这是保存到微信小游戏文件系统的数据！";
+        GameGlobal.WeChatUtil.setLocalStorage(JSON.stringify(obj));
+
+        GameGlobal.WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
+            if (bSuccess) {
+                console.log("jsonStr = " + jsonStr);
+                
+            }
+        })
     },
 });

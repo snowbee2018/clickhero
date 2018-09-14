@@ -3,7 +3,7 @@ cc.Class({
     statics: {
         // 计算DPS
         getDPS(baseDPS,lv){
-            let DPS = baseDPS * lv;
+            // let DPS = baseDPS * lv;
             let DPS = baseDPS * lv * this.getDPSTimes();
             return DPS;
         },

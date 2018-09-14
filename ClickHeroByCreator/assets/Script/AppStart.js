@@ -21,14 +21,19 @@ cc.Class({
         const self = this;
         GameGlobal.WeChatUtil.sayHello();
         self.node.active = false;
-        GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
-            console.log("bSuccess = " + bSuccess);
-            console.log(userData);
-            let DataMap = GameGlobal.DataCenter.DataMap;
-            GameGlobal.DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
+                console.log("bSuccess = " + bSuccess);
+                console.log(userData);
+                let DataMap = GameGlobal.DataCenter.DataMap;
+                GameGlobal.DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
+                self.node.active = true;
+                self.startGame();
+            });
+        } else {
             self.node.active = true;
-            self.startGame();
-        });
+        }
+        
     },
 
     startGame () {
