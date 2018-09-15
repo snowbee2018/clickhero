@@ -33,13 +33,29 @@ cc.Class({
 
     },
 
+    onEnable () {
+        const self = this;
+        cc.systemEvent.on(GameGlobal.WeChatUtil.Events.ShareAppDone, self.onShareAppDone.bind(self));
+    },
+
+    onDisable () {
+        const self = this;
+        cc.systemEvent.off(GameGlobal.WeChatUtil.Events.ShareAppDone, self.onShareAppDone.bind(self));
+    },
+
+    onShareAppDone (event) {
+        const self = this;
+        console.log("分享成功了");
+        
+    },
+
     setWeChatUser () {
         const self = this;
         let DataMap = GameGlobal.DataCenter.DataMap;
         let weChatUserInfo = GameGlobal.DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
-        cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
+        cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "jpg"}, function (err, texture) {
             if (texture) {
                 // 不知道为什么远程图片显示不出来，以后来看一下
                 self.headSprite.sreiteFrame = new cc.SpriteFrame(texture);
@@ -75,6 +91,22 @@ cc.Class({
         // self.openDataNode.active = true;
         // self.wXSubContextView.updateSubContextViewport();
         // self.wXSubContextView.update();
+
+        GameGlobal.WeChatUtil.showModal({
+            title: "分享给好友",
+            content: "点一下，玩一年，把快乐分享给好友吧",
+            callBack: function (res) {
+                console.log("模态对话框用户操作返回");
+                console.log(res);
+                if (res.confirm) {
+                    console.log("点击了确定");
+                    GameGlobal.WeChatUtil.shareAppMessage();
+                } else if (res.cancel) {
+                    console.log("点击了取消");
+                    GameGlobal.WeChatUtil.showToast("取消了分享");
+                }
+            }
+        });
     },
 
     onRightBtnClick () {
@@ -92,8 +124,24 @@ cc.Class({
         GameGlobal.WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
             if (bSuccess) {
                 console.log("jsonStr = " + jsonStr);
-                
+                GameGlobal.WeChatUtil.showModal({
+                    title: "测试模态对话框",
+                    content: "本地数据获取成功：" + jsonStr,
+                    callBack: function (res) {
+                        console.log("模态对话框用户操作返回");
+                        console.log(res);
+                        if (res.confirm) {
+                            console.log("点击了确定");
+                            GameGlobal.WeChatUtil.showToast("点击了确定");
+                        } else if (res.cancel) {
+                            console.log("点击了取消");
+                            GameGlobal.WeChatUtil.showToast("点击了取消");
+                        }
+                    }
+                });
             }
-        })
+        });
+
+        
     },
 });

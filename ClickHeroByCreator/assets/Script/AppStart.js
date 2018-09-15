@@ -38,6 +38,9 @@ cc.Class({
 
     startGame () {
         const self = this;
+        let launchOpt = GameGlobal.WeChatUtil.getLaunchOptionsSync();
+        console.log(launchOpt);
+        
         self.getComponent("HelloWord").setWeChatUser();
     },
 });
