@@ -10,7 +10,7 @@ cc.Class({
         sprite : null,//cc.SpriteFrame,
         baseCost : 0,
         baseDPS : 0,
-        skills : [], 
+        skills : [],
         level : 0,
         cost : 0,//升级花费
         DPS : 0,//当前dps
