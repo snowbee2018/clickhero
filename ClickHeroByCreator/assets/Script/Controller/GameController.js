@@ -1,3 +1,6 @@
+var BigNumber = require("BigNumber")
+var ClickEnable = true;
+var ClickDt = 0;
 cc.Class({
     extends: cc.Component,
 
@@ -14,6 +17,8 @@ cc.Class({
         location : cc.Label,
         nickaName : cc.Label,
         gender : cc.Label,
+
+        totalCostLab: cc.Label,
     },
     
     // use this for initialization
@@ -26,27 +31,71 @@ cc.Class({
         self.wXSubContextView = self.openDataNode.getComponent("WXSubContextView");
         self._show = cc.moveTo(0.2, 0, 0);
         self._hide = cc.moveTo(0.2, 0, 1000);
-    },
 
-    // called every frame
-    update: function (dt) {
-
+        self.monsterController = self.getComponent("MonsterController");
     },
 
     onEnable () {
         const self = this;
-        cc.systemEvent.on(GameGlobal.WeChatUtil.Events.ShareAppDone, self.onShareAppDone.bind(self));
+        
     },
 
     onDisable () {
         const self = this;
-        cc.systemEvent.off(GameGlobal.WeChatUtil.Events.ShareAppDone, self.onShareAppDone.bind(self));
+        
     },
 
-    onShareAppDone (event) {
+    // called every frame
+    update (dt) {
         const self = this;
-        console.log("分享成功了");
+        // console.log("dt = " + dt);
+        if (ClickEnable == false) {
+            ClickDt += dt;
+            if (ClickDt >= 0.05) {
+                ClickDt = 0;
+                ClickEnable = true;
+            }
+        }
+    },
+
+    start () {
+        const self = this;
         
+    },
+
+    onGameStart () {
+        const self = this;
+        self.monsterController.makeMonster(1, 1);
+        self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
+        self._totalClickCount = new BigNumber(0);
+        
+        self._totalCost = new BigNumber(0);
+        self.totalCostLab.string = self._totalCost.toString(10);
+    },
+
+    onTouchStart (event) {
+        const self = this;
+        if (ClickEnable == true) {
+            let pos = event.getLocation();
+            self.clickHit();
+            ClickEnable = false;
+        }
+        
+    },
+
+    clickHit () {
+        const self = this;
+        self._totalClickCount = self._totalClickCount.plus(1);
+        console.log("hit : count = " + self._totalClickCount.toString(10));
+        
+        let damage = new BigNumber(100);
+        self.monsterController.hit(damage);
+    },
+
+    onMonsterCost (cost) {
+        const self = this;
+        self._totalCost = self._totalCost.plus(cost);
+        self.totalCostLab.string = self._totalCost.toString(10);
     },
 
     setWeChatUser () {
