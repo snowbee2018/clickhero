@@ -12,13 +12,15 @@ cc.Class({
     extends: cc.Component,
 
     ctor () {
-        window.GameGlobal = {};
-        GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
-        GameGlobal.DataCenter = new (require("DataCenter"))();
+        
     },
 
     onLoad () {
         const self = this;
+        window.GameGlobal = {};
+        GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
+        GameGlobal.DataCenter = new (require("DataCenter"))();
+
         GameGlobal.WeChatUtil.sayHello();
         self.node.active = false;
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
@@ -32,15 +34,19 @@ cc.Class({
             });
         } else {
             self.node.active = true;
+            self.startGame();
         }
         
     },
 
     startGame () {
         const self = this;
-        let launchOpt = GameGlobal.WeChatUtil.getLaunchOptionsSync();
-        console.log(launchOpt);
-        
-        self.getComponent("HelloWord").setWeChatUser();
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            let launchOpt = GameGlobal.WeChatUtil.getLaunchOptionsSync();
+            console.log(launchOpt);
+            self.getComponent("GameController").setWeChatUser();
+        } else {
+            self.getComponent("GameController").onGameStart();
+        }
     },
 });
