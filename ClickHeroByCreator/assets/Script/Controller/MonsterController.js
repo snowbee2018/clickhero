@@ -39,12 +39,14 @@ cc.Class({
         monsterNode.parent = self.monsterPos;
         self.curMonster = monsterNode.getComponent("Monster");
         self.curMonster.setMonsterByLv(lv, num, self.onCurMonsterDestroy.bind(self));
+        self.gameController.updataMonsterInfoDisplay();
     },
 
     hit (damage) {
         const self = this;
         if (cc.isValid(self.curMonster)) {
             self.curMonster.hurt(damage);
+            self.gameController.updataMonsterInfoDisplay();
         }
     },
 
@@ -56,5 +58,15 @@ cc.Class({
             self.makeMonster(num == 9 ? lv + 1 : lv, num == 9 ? 0 : num + 1);
         }
         self.gameController.onMonsterCost(cost);
+    },
+
+    getCurMonsterInfo () {
+        const self = this;
+        return {
+            lv: self.curMonster._lv,
+            num: self.curMonster._num,
+            hp: self.curMonster._curHP,
+            cost: self.curMonster._cost,
+        }
     },
 });

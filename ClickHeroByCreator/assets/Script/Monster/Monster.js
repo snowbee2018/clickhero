@@ -19,10 +19,7 @@ cc.Class({
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
 
-        lvLab: cc.Label,
-        numLab: cc.Label,
-        hpLab: cc.Label,
-        costLab: cc.Label,
+        damageAnim: cc.Prefab,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -34,10 +31,24 @@ cc.Class({
         self._curHP = new BigNumber(0);
     },
 
-    // onLoad () {},
+    onLoad () {
+        const self = this;
+        self.anim = self.getComponent(cc.Animation);
+    },
 
     start () {
+        const self = this;
+        self.playAnim("ComeOn");
+    },
 
+    playAnim (name) {
+        const self = this;
+        self.anim.stop();
+        self.node.x = 0;
+        self.node.y = 0;
+        self.node.scaleX = 1;
+        self.node.scaleY = 1;
+        self.anim.play(name);
     },
 
     onDestroy () {
@@ -60,14 +71,11 @@ cc.Class({
         self._cost = Formulas.getMonsterGold(lv, self._totalHP);
         self._onMonsterDestroy = onMonsterDestroy;
         // self._totalHP.toString(10);
-        console.log("self._totalHP.toString(10) = " + self._totalHP.toString(10));
-        console.log("self._cost.toString(10) = " + self._cost.toString(10));
+        // console.log("self._totalHP.toString(10) = " + self._totalHP.toString(10));
+        // console.log("self._cost.toString(10) = " + self._cost.toString(10));
         
 
-        self.lvLab.string = self._lv;
-        self.numLab.string = self._num;
-        self.hpLab.string = self._curHP.toString(10);
-        self.costLab.string = self._cost.toString(10);
+
     },
 
     setMonsterByData(lv, num, totalHP, curHP, cost) {
@@ -78,32 +86,42 @@ cc.Class({
         self._curHP = new BigNumber(curHP);
         self._cost = new BigNumber(cost);
         self._onMonsterDestroy = onMonsterDestroy;
-        
-        self.lvLab.string = self._lv;
-        self.numLab.string = self._num;
-        self.hpLab.string = self._curHP.toString(10);
-        self.costLab.string = self._cost.toString(10);
+    },
+
+    playDamage (damage) {
+        const self = this;
+        var damageNode = cc.instantiate(self.damageAnim);
+        damageNode.parent = self.node.parent;
+        damageNode.zIndex = 100;
+        damageNode.getComponent("DamageAnim").setDamage(damage);
     },
 
     hurt (damage) {
         const self = this;
         if (!self._curHP.isZero()) {
-            console.log("hurt : damage = " + damage.toString(10));
+            // console.log("hurt : damage = " + damage.toString(10));
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
+                self.playAnim("Hurt");
             } else {
                 self._curHP = new BigNumber(0);
                 self.goDie();
             }
-            console.log("cur hp : " + self._curHP.toString(10));
-            self.hpLab.string = self._curHP.toString(10);
+            // console.log("cur hp : " + self._curHP.toString(10));
+            self.playDamage(damage);
         }
         
     },
 
     goDie () {
         const self = this;
-        console.log("Die");
+        // console.log("Die");
+        self.playAnim("Dieing");
+
+    },
+
+    onDieAnimEnd () {
+        const self = this;
         self.node.destroy();
     },
 });

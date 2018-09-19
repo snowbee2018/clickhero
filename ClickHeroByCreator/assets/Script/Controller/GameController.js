@@ -1,16 +1,11 @@
-var BigNumber = require("BigNumber")
+var BigNumber = require("BigNumber");
+var Formulas = require("Formulas");
 var ClickEnable = true;
 var ClickDt = 0;
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        label: {
-            default: null,
-            type: cc.Label
-        },
-        // defaults, set visually when attaching this script to the Canvas
-        text: 'Hello, World!',
         openDataNode : cc.Node,
 
         headSprite : cc.Sprite,
@@ -19,12 +14,15 @@ cc.Class({
         gender : cc.Label,
 
         totalCostLab: cc.Label,
+        lvLab: cc.Label,
+        numLab: cc.Label,
+        hpLab: cc.Label,
+        costLab: cc.Label,
     },
     
     // use this for initialization
     onLoad: function () {
         const self = this;
-        self.label.string = this.text;
         self.openDataNode.active = true;
         self.openDataNode.x = 0;
         self.openDataNode.y = 1000;
@@ -73,6 +71,15 @@ cc.Class({
         self.totalCostLab.string = self._totalCost.toString(10);
     },
 
+    updataMonsterInfoDisplay () {
+        const self = this;
+        let info = self.monsterController.getCurMonsterInfo();
+        self.lvLab.string = info.lv;
+        self.numLab.string = info.num;
+        self.hpLab.string = info.hp.toString(10);
+        self.costLab.string = info.cost.toString(10);
+    },
+
     onTouchStart (event) {
         const self = this;
         if (ClickEnable == true) {
@@ -86,15 +93,15 @@ cc.Class({
     clickHit () {
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
-        console.log("hit : count = " + self._totalClickCount.toString(10));
+        // console.log("hit : count = " + self._totalClickCount.toString(10));
         
-        let damage = new BigNumber(100);
+        let damage = new BigNumber(1);
         self.monsterController.hit(damage);
     },
 
     onMonsterCost (cost) {
         const self = this;
-        self._totalCost = self._totalCost.plus(cost);
+        self._totalCost = self._totalCost.plus(cost.times(Formulas.getGoldTimes()));
         self.totalCostLab.string = self._totalCost.toString(10);
     },
 

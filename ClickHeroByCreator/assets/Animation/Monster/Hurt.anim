@@ -1,0 +1,57 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Hurt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.36,
+  "sample": 25,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.24,
+            "y": 0.68
+          }
+        },
+        {
+          "frame": 0.08,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.78,
+            "y": 0.26
+          }
+        },
+        {
+          "frame": 0.2,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.61,
+            "y": 1.52
+          }
+        },
+        {
+          "frame": 0.28,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.42,
+            "y": 0.72
+          }
+        },
+        {
+          "frame": 0.36,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}
