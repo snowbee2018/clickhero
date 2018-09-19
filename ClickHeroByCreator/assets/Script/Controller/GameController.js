@@ -68,7 +68,7 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         
         self._totalCost = new BigNumber(0);
-        self.totalCostLab.string = self._totalCost.toString(10);
+        self.totalCostLab.string = self._totalCost.toString();
     },
 
     updataMonsterInfoDisplay () {
@@ -76,8 +76,8 @@ cc.Class({
         let info = self.monsterController.getCurMonsterInfo();
         self.lvLab.string = info.lv;
         self.numLab.string = info.num;
-        self.hpLab.string = info.hp.toString(10);
-        self.costLab.string = info.cost.toString(10);
+        self.hpLab.string = info.hp.toExponential(5);
+        self.costLab.string = info.cost.toExponential(5);
     },
 
     onTouchStart (event) {
@@ -93,7 +93,7 @@ cc.Class({
     clickHit () {
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
-        // console.log("hit : count = " + self._totalClickCount.toString(10));
+        // console.log("hit : count = " + self._totalClickCount.toString());
         
         let damage = new BigNumber(1);
         self.monsterController.hit(damage);
@@ -102,7 +102,7 @@ cc.Class({
     onMonsterCost (cost) {
         const self = this;
         self._totalCost = self._totalCost.plus(cost.times(Formulas.getGoldTimes()));
-        self.totalCostLab.string = self._totalCost.toString(10);
+        self.totalCostLab.string = self._totalCost.toString();
     },
 
     setWeChatUser () {

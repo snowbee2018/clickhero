@@ -3,7 +3,7 @@
 cc.Class({
 
     properties: {
-        // 
+        //  
     },
 
 });

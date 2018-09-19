@@ -38,6 +38,7 @@ cc.Class({
         },
         // 计算怪物HP
         getMonsterHP(lv){
+            lv = 200002;
             var boss = lv % 5 == 0 ? 10 : 1;
             var hp;
             if (lv <= 140) {

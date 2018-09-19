@@ -70,12 +70,6 @@ cc.Class({
         
         self._cost = Formulas.getMonsterGold(lv, self._totalHP);
         self._onMonsterDestroy = onMonsterDestroy;
-        // self._totalHP.toString(10);
-        // console.log("self._totalHP.toString(10) = " + self._totalHP.toString(10));
-        // console.log("self._cost.toString(10) = " + self._cost.toString(10));
-        
-
-
     },
 
     setMonsterByData(lv, num, totalHP, curHP, cost) {
@@ -99,7 +93,7 @@ cc.Class({
     hurt (damage) {
         const self = this;
         if (!self._curHP.isZero()) {
-            // console.log("hurt : damage = " + damage.toString(10));
+            // console.log("hurt : damage = " + damage.toString());
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
                 self.playAnim("Hurt");
@@ -107,7 +101,7 @@ cc.Class({
                 self._curHP = new BigNumber(0);
                 self.goDie();
             }
-            // console.log("cur hp : " + self._curHP.toString(10));
+            // console.log("cur hp : " + self._curHP.toString());
             self.playDamage(damage);
         }
         
