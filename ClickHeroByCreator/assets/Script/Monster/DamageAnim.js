@@ -12,42 +12,24 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        content: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         const self = this;
-        self.label = self.getComponent(cc.Label);
-        self.anim = self.getComponent(cc.Animation);
     },
 
     start () {
         const self = this;
-        var num = Math.ceil(Math.random() * 5 + 0);
-        self.anim.play("Damage" + num);
     },
 
     // update (dt) {},
 
     setDamage (damage) {
         const self = this;
-        self.label.string = "-" + damage;
+        self.content.string = "-" + damage;
     },
 
     onAnimEnd () {

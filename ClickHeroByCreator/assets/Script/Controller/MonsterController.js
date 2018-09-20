@@ -32,9 +32,6 @@ cc.Class({
 
     makeMonster (lv, num) {
         const self = this;
-        if (!cc.isValid(self.curMonster)) {
-            
-        }
         let monsterNode = cc.instantiate(self.monsterPrefab);
         monsterNode.parent = self.monsterPos;
         self.curMonster = monsterNode.getComponent("Monster");

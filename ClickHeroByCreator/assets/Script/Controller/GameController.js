@@ -31,6 +31,7 @@ cc.Class({
         self._hide = cc.moveTo(0.2, 0, 1000);
 
         self.monsterController = self.getComponent("MonsterController");
+        self.clickDamage = new BigNumber(1);
     },
 
     onEnable () {
@@ -68,7 +69,7 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         
         self._totalCost = new BigNumber(0);
-        self.totalCostLab.string = self._totalCost.toString();
+        self.totalCostLab.string = self._totalCost.toExponential(3);
     },
 
     updataMonsterInfoDisplay () {
@@ -76,8 +77,8 @@ cc.Class({
         let info = self.monsterController.getCurMonsterInfo();
         self.lvLab.string = info.lv;
         self.numLab.string = info.num;
-        self.hpLab.string = info.hp.toExponential(5);
-        self.costLab.string = info.cost.toExponential(5);
+        self.hpLab.string = info.hp.toExponential(3);
+        self.costLab.string = info.cost.toExponential(3);
     },
 
     onTouchStart (event) {
@@ -93,16 +94,15 @@ cc.Class({
     clickHit () {
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
-        // console.log("hit : count = " + self._totalClickCount.toString());
+        // console.log("hit : count = " + self._totalClickCount.toExponential(3));
         
-        let damage = new BigNumber(1);
-        self.monsterController.hit(damage);
+        self.monsterController.hit(self.clickDamage);
     },
 
     onMonsterCost (cost) {
         const self = this;
         self._totalCost = self._totalCost.plus(cost.times(Formulas.getGoldTimes()));
-        self.totalCostLab.string = self._totalCost.toString();
+        self.totalCostLab.string = self._totalCost.toExponential(3);
     },
 
     setWeChatUser () {
@@ -129,14 +129,8 @@ cc.Class({
         self.nickaName.string = weChatUserInfo.nickName;
     },
 
-    onLeftBtnClick () {
+    showOpenDataView () {
         const self = this;
-        // GameGlobal.WeChatUtil.authorize(GameGlobal.WeChatUtil.scope.userLocation, function (result) {
-        //     console.log("FFFFFFF, result = " + result);
-            
-        // });
-
- 
         self._isShow = !self._isShow;
         self.openDataNode.stopAllActions();
         if (self._isShow) {
@@ -144,10 +138,15 @@ cc.Class({
         } else {
             self.openDataNode.runAction(self._hide);
         }
-        // self.openDataNode.active = true;
-        // self.wXSubContextView.updateSubContextViewport();
-        // self.wXSubContextView.update();
+    },
 
+    onLeftBtnClick () {
+        const self = this;
+        // GameGlobal.WeChatUtil.authorize(GameGlobal.WeChatUtil.scope.userLocation, function (result) {
+        //     console.log("FFFFFFF, result = " + result);
+            
+        // });
+        self.showOpenDataView();
         GameGlobal.WeChatUtil.showModal({
             title: "分享给好友",
             content: "点一下，玩一年，把快乐分享给好友吧",
@@ -157,44 +156,62 @@ cc.Class({
                 if (res.confirm) {
                     console.log("点击了确定");
                     GameGlobal.WeChatUtil.shareAppMessage();
+                    self.showOpenDataView();
                 } else if (res.cancel) {
                     console.log("点击了取消");
+                    self.showOpenDataView();
                     GameGlobal.WeChatUtil.showToast("取消了分享");
                 }
             }
         });
+        GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
     },
 
     onRightBtnClick () {
         const self = this;
-        GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
-        let obj = {
-            helloMsg: "你好，开放数据域。这是主域托管的数据！"
-        }
-        
-        GameGlobal.WeChatUtil.setCloudStorage("test_cloud_storage", obj);
+        // GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
+        // let obj = {
+        //     helloMsg: "你好，开放数据域。这是主域托管的数据！"
+        // }
+        // GameGlobal.WeChatUtil.setCloudStorage("test_cloud_storage", obj);
 
-        obj.helloMsg = "你好，微信小游戏。这是保存到微信小游戏文件系统的数据！";
-        GameGlobal.WeChatUtil.setLocalStorage(JSON.stringify(obj));
+        // obj.helloMsg = "你好，微信小游戏。这是保存到微信小游戏文件系统的数据！";
+        // GameGlobal.WeChatUtil.setLocalStorage(JSON.stringify(obj));
+        // GameGlobal.WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
+        //     if (bSuccess) {
+        //         console.log("jsonStr = " + jsonStr);
+        //         GameGlobal.WeChatUtil.showModal({
+        //             title: "测试模态对话框",
+        //             content: "本地数据获取成功：" + jsonStr,
+        //             callBack: function (res) {
+        //                 console.log("模态对话框用户操作返回");
+        //                 console.log(res);
+        //                 if (res.confirm) {
+        //                     console.log("点击了确定");
+        //                     GameGlobal.WeChatUtil.showToast("点击了确定");
+        //                 } else if (res.cancel) {
+        //                     console.log("点击了取消");
+        //                     GameGlobal.WeChatUtil.showToast("点击了取消");
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
 
-        GameGlobal.WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
-            if (bSuccess) {
-                console.log("jsonStr = " + jsonStr);
-                GameGlobal.WeChatUtil.showModal({
-                    title: "测试模态对话框",
-                    content: "本地数据获取成功：" + jsonStr,
-                    callBack: function (res) {
-                        console.log("模态对话框用户操作返回");
-                        console.log(res);
-                        if (res.confirm) {
-                            console.log("点击了确定");
-                            GameGlobal.WeChatUtil.showToast("点击了确定");
-                        } else if (res.cancel) {
-                            console.log("点击了取消");
-                            GameGlobal.WeChatUtil.showToast("点击了取消");
-                        }
-                    }
-                });
+        GameGlobal.WeChatUtil.showModal({
+            title: "温馨提示",
+            content: "点击确定将增加100点击伤害",
+            callBack: function (res) {
+                console.log("模态对话框用户操作返回");
+                console.log(res);
+                if (res.confirm) {
+                    console.log("点击了确定");
+                    GameGlobal.WeChatUtil.showToast("点击伤害+100");
+                    self.clickDamage = self.clickDamage.plus(100);
+                } else if (res.cancel) {
+                    console.log("点击了取消");
+                    // GameGlobal.WeChatUtil.showToast("点击了取消");
+                }
             }
         });
 

@@ -58,8 +58,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1.24,
-      "y": 0.68,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_rotationX": 0,
@@ -103,7 +103,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "a4fp+lH/xF+pGzUiYAEIRm"
+    "_id": "04aMDbKKdAPIbj5oxecylv"
   },
   {
     "__type__": "f629d3ER3BIK7Dw0+EVW3Ao",
@@ -119,9 +119,9 @@
     "_totalHP": null,
     "_curHP": null,
     "damageAnim": {
-      "__uuid__": "b5d03cdc-f63b-464d-8429-881be1097004"
+      "__uuid__": "cba380f5-173e-48fb-8ce7-0987819caf9c"
     },
-    "_id": "81gk7sWSFPYINLUGQXnFbC"
+    "_id": "9aSGHlv/ZLGak2epFUlSw5"
   },
   {
     "__type__": "cc.Animation",
@@ -144,7 +144,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "7aMwYwP4FMeIwdF9zPPAz1"
+    "_id": "05KsIq+udFXr/J7xkXwtwn"
   },
   {
     "__type__": "cc.PrefabInfo",

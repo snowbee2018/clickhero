@@ -37,8 +37,7 @@ cc.Class({
             return Math.floor(baseCost * Math.pow(1.07,lv - 1));
         },
         // 计算怪物HP
-        getMonsterHP(lv){
-            lv = 200002;
+        getMonsterHP(lv) {
             var boss = lv % 5 == 0 ? 10 : 1;
             var hp;
             if (lv <= 140) {

@@ -3,8 +3,8 @@
   "_name": "Hurt",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.36,
-  "sample": 25,
+  "_duration": 0.37142857142857144,
+  "sample": 35,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
@@ -19,7 +19,7 @@
           }
         },
         {
-          "frame": 0.08,
+          "frame": 0.08571428571428572,
           "value": {
             "__type__": "cc.Vec2",
             "x": 1.78,
@@ -35,7 +35,7 @@
           }
         },
         {
-          "frame": 0.28,
+          "frame": 0.2857142857142857,
           "value": {
             "__type__": "cc.Vec2",
             "x": 1.42,
@@ -43,7 +43,7 @@
           }
         },
         {
-          "frame": 0.36,
+          "frame": 0.37142857142857144,
           "value": {
             "__type__": "cc.Vec2",
             "x": 1,

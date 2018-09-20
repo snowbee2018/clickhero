@@ -39,6 +39,7 @@ cc.Class({
     start () {
         const self = this;
         self.playAnim("ComeOn");
+        self._alive = true;
     },
 
     playAnim (name) {
@@ -87,11 +88,14 @@ cc.Class({
         var damageNode = cc.instantiate(self.damageAnim);
         damageNode.parent = self.node.parent;
         damageNode.zIndex = 100;
+        damageNode.x = 100;
+        damageNode.y = 100;
         damageNode.getComponent("DamageAnim").setDamage(damage);
     },
 
     hurt (damage) {
         const self = this;
+        if (!self._alive) return;
         if (!self._curHP.isZero()) {
             // console.log("hurt : damage = " + damage.toString());
             if (self._curHP.isGreaterThan(damage)) {
@@ -103,6 +107,8 @@ cc.Class({
             }
             // console.log("cur hp : " + self._curHP.toString());
             self.playDamage(damage);
+        } else {
+            self.goDie();
         }
         
     },
@@ -110,6 +116,7 @@ cc.Class({
     goDie () {
         const self = this;
         // console.log("Die");
+        self._alive = false;
         self.playAnim("Dieing");
 
     },

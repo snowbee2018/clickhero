@@ -46,7 +46,8 @@ cc.Class({
             console.log(launchOpt);
             self.getComponent("GameController").setWeChatUser();
         } else {
-            self.getComponent("GameController").onGameStart();
+            
         }
+        self.getComponent("GameController").onGameStart();
     },
 });
