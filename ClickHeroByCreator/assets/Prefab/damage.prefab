@@ -99,9 +99,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 243,
+      "g": 253,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -164,7 +164,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "48r87oP81JcZSu/hGKkMMF"
+    "_id": "78tpdMz6VG8YSr50kAg0fu"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -188,7 +188,7 @@
     "content": {
       "__id__": 3
     },
-    "_id": "56NME3D+1P/ZWgwjqIhvJb"
+    "_id": "9dRYFb0KhJoK0PKl9oE4r2"
   },
   {
     "__type__": "cc.Animation",
@@ -207,7 +207,7 @@
       }
     ],
     "playOnLoad": true,
-    "_id": "f4zXCEWvZL5YJWK39KGLq2"
+    "_id": "15ivwO90RCjKXUeMQNO4mN"
   },
   {
     "__type__": "cc.PrefabInfo",

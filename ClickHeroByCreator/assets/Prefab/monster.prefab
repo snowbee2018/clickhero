@@ -42,13 +42,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195,
-      "height": 270
+      "width": 260,
+      "height": 290
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0
+      "x": 0.41,
+      "y": 0.3
     },
     "_position": {
       "__type__": "cc.Vec3",
@@ -58,8 +58,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 1.24,
+      "y": 0.68,
       "z": 1
     },
     "_rotationX": 0,
@@ -88,10 +88,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "31bc895a-c003-4566-a9f3-2e54ae1c17dc"
+      "__uuid__": "eb5a12ac-6489-49a3-92f5-0a91ec755d27"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -100,10 +100,12 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": true,
+    "_isTrimmedMode": false,
     "_state": 0,
-    "_atlas": null,
-    "_id": "04aMDbKKdAPIbj5oxecylv"
+    "_atlas": {
+      "__uuid__": "10d6a18a-9027-4801-b9da-1c014d53fa88"
+    },
+    "_id": "ee1EQHdG5JCZtLEsEtOYkr"
   },
   {
     "__type__": "f629d3ER3BIK7Dw0+EVW3Ao",
@@ -121,7 +123,39 @@
     "damageAnim": {
       "__uuid__": "cba380f5-173e-48fb-8ce7-0987819caf9c"
     },
-    "_id": "9aSGHlv/ZLGak2epFUlSw5"
+    "monsterSprf": [
+      {
+        "__uuid__": "eb5a12ac-6489-49a3-92f5-0a91ec755d27"
+      },
+      {
+        "__uuid__": "0f0439a8-52b8-4774-b6c8-334fbcd2bb8a"
+      },
+      {
+        "__uuid__": "3e39d06e-6a08-4ba8-af29-9d9a0524cfeb"
+      },
+      {
+        "__uuid__": "82caf18a-7931-4bf0-b81d-2fe5aa9d9af8"
+      },
+      {
+        "__uuid__": "a0de56a6-5a05-4b10-a4cb-79290e0ea7a2"
+      },
+      {
+        "__uuid__": "b2279b68-6e5b-4878-9340-038c9e84f105"
+      },
+      {
+        "__uuid__": "e1e340fb-7220-432e-94b1-f963a9b58834"
+      },
+      {
+        "__uuid__": "c08792c6-30a8-4695-9b2a-2d5b354714c9"
+      },
+      {
+        "__uuid__": "4ae29bf6-31f4-461e-b4e8-2f6c2deca343"
+      },
+      {
+        "__uuid__": "0f7fcf81-b8cd-488a-8334-dcc86d80b7ff"
+      }
+    ],
+    "_id": "1cNin1gxFH3IdvRoYQeTOc"
   },
   {
     "__type__": "cc.Animation",
@@ -144,7 +178,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "05KsIq+udFXr/J7xkXwtwn"
+    "_id": "10CQMepAVDeaGsGGYJy5qH"
   },
   {
     "__type__": "cc.PrefabInfo",
