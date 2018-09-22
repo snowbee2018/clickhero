@@ -165,6 +165,10 @@ cc.Class({
         });
         GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
 
+        var SkillMgr = require("SkillMgr");
+        let skillObj = SkillMgr.getSkillObj(0);
+        console.log(skillObj);
+
     },
 
     onRightBtnClick () {

@@ -8,12 +8,11 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
-var SkillCfg = require("SkillCfg");
+// var SkillCfg = require("SkillCfg");
 
 cc.Class({
     statics: {
         // globalDPS // 全局DPS加成
-        // clickDamage // 点击伤害加成
         // gold // 金币加成
         // heroDPS // 英雄DPS加成
         // bjDamage // 暴击伤害加成
@@ -23,10 +22,10 @@ cc.Class({
         // level // 解锁技能的等级
         // name // 技能显示的名字
         // describe // 技能描述
+        // isBy // 是否被激活
         getObj() {
             return {
                 globalDPS: 0,
-                clickDamage: 0,
                 gold: 0,
                 heroDPS: 0,
                 bjDamage: 0,
@@ -36,6 +35,7 @@ cc.Class({
                 level: 0,
                 name: "",
                 describe: "",
+                isBy: false,
             }
         },
 
@@ -55,8 +55,6 @@ cc.Class({
                             skillObj[key] = element;
                         }
                     }
-                    console.log(skillObj);
-
                     skills.push(skillObj);
                 }
 
