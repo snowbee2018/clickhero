@@ -1,4 +1,4 @@
-var BigNumber = require("BigNumber");
+
 var bigPow = function (m, n) {
     let a = new BigNumber(m);
     let b = new BigNumber(n);

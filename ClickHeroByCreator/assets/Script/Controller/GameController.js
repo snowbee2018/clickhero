@@ -1,5 +1,4 @@
-var BigNumber = require("BigNumber");
-var Formulas = require("Formulas");
+
 var ClickEnable = true;
 var ClickDt = 0;
 cc.Class({
