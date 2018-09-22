@@ -7,7 +7,7 @@
  /**
   * 流程：
   * let hero = HeroDatas.getHero(0);
-  * hero.buy(); or hero.upgrage();
+  * hero.buy(); or hero.upgrage(); or hero.buySkill();
   * use GameData.clickDamage;
   * use GameData.dpsDamage;
   */
