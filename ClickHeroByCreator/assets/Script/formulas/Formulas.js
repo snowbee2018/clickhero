@@ -16,13 +16,51 @@ var bigMin = function (m, n) {
 }
 cc.Class({
     statics: {
-        // 计算DPS
-        getDPS(baseDPS,lv){
+        clickDamage = 1,//
+        dpsDamage = 0,
+        DPSClickTimes = 1,
+        globalDPSTimes = 1,
+        globalGoldTimes = 1,
+        // 计算总点击伤害
+        calClickDamage(){
+            clickDamage = HeroDatas.getHero(0).DPS + 1;
+        },
+        // 计算总DPS伤害
+        calDPSDamage(){
+            let dps = 0;
+            HeroDatas.heroList.forEach(hero => {
+                if (hero.isBuy) {
+                    dps+=hero.DPS;
+                }
+            });
+            dpsDamage = dps;
+        },
+        // 计算DPS点击加成
+        calDPSClickTimes(){
+            DPSClickTimes = 1;
+        },
+        // 计算全局DPS倍数
+        calGlobalDPSTimes(){
+            globalDPSTimes = 1;
+        },
+        // 计算全局金币倍数
+        calGoldTimes(){
+            globalGoldTimes = 1;
+        },
+        /* ------------- 下面是计算公式 ------------ */
+        //计算点击伤害
+        getClickDPS(lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = baseDPS * lv * this.getDPSTimes();
+            let DPS = lv * this.getDPSTimes() * times;
             return DPS;
         },
-        // 升级点击怪金币
+        // 计算DPS
+        getDPS(baseDPS,lv,times){
+            // let DPS = baseDPS * lv;
+            let DPS = baseDPS * lv * this.getDPSTimes() * times;
+            return DPS;
+        },
+        // 升级点击英雄金币
         getClickHeroCost(lv){
             if (lv <= 15) {
                 // return BigNumber.pow(1.07, lv - 1).times(5 + lv);
@@ -32,7 +70,7 @@ cc.Class({
                 return Math.floor(20 * Math.pow(1.07, lv - 1));
             }
         },
-        // 升级DPS怪金币
+        // 升级DPS英雄金币
         getHeroCost(baseCost,lv){
             return Math.floor(baseCost * Math.pow(1.07,lv - 1));
         },
@@ -70,14 +108,6 @@ cc.Class({
             let result = hp.div(15).times(bigMin(3, bigPow(1.025, lv)));
             return result.integerValue();
             // return Math.ceil(hp / 15 * Math.min(3,Math.pow(1.025,lv)));
-        },
-        // 计算DPS倍数
-        getDPSTimes(){
-            return 1;
-        },
-        // 计算金币倍数
-        getGoldTimes(){
-            return 1;
         },
     },
 });
