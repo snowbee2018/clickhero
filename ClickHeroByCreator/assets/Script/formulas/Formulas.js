@@ -16,51 +16,19 @@ var bigMin = function (m, n) {
 }
 cc.Class({
     statics: {
-        clickDamage = 1,//
-        dpsDamage = 0,
-        DPSClickTimes = 1,
-        globalDPSTimes = 1,
-        globalGoldTimes = 1,
-        // 计算总点击伤害
-        calClickDamage(){
-            clickDamage = HeroDatas.getHero(0).DPS + 1;
-        },
-        // 计算总DPS伤害
-        calDPSDamage(){
-            let dps = 0;
-            HeroDatas.heroList.forEach(hero => {
-                if (hero.isBuy) {
-                    dps+=hero.DPS;
-                }
-            });
-            dpsDamage = dps;
-        },
-        // 计算DPS点击加成
-        calDPSClickTimes(){
-            DPSClickTimes = 1;
-        },
-        // 计算全局DPS倍数
-        calGlobalDPSTimes(){
-            globalDPSTimes = 1;
-        },
-        // 计算全局金币倍数
-        calGoldTimes(){
-            globalGoldTimes = 1;
-        },
-        /* ------------- 下面是计算公式 ------------ */
-        //计算点击伤害
+        //计算点击伤害 for hero
         getClickDPS(lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = lv * this.getDPSTimes() * times;
+            let DPS = lv * times;
             return DPS;
         },
-        // 计算DPS
+        // 计算DPS for hero
         getDPS(baseDPS,lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = baseDPS * lv * this.getDPSTimes() * times;
+            let DPS = baseDPS * lv * times;
             return DPS;
         },
-        // 升级点击英雄金币
+        // 升级点击英雄金币 for hero
         getClickHeroCost(lv){
             if (lv <= 15) {
                 // return BigNumber.pow(1.07, lv - 1).times(5 + lv);
@@ -70,11 +38,11 @@ cc.Class({
                 return Math.floor(20 * Math.pow(1.07, lv - 1));
             }
         },
-        // 升级DPS英雄金币
+        // 升级DPS英雄金币 for hero
         getHeroCost(baseCost,lv){
             return Math.floor(baseCost * Math.pow(1.07,lv - 1));
         },
-        // 计算怪物HP
+        // 计算怪物HP for monster
         getMonsterHP(lv) {
             var boss = lv % 5 == 0 ? 10 : 1;
             var hp;
@@ -102,7 +70,7 @@ cc.Class({
             // return Math.ceil(hp);
             return hp.integerValue();
         },
-        // 计算怪物金币
+        // 计算怪物金币 for monster
         // hp = getMonsterHP(lv);
         getMonsterGold(lv, hp) {
             let result = hp.div(15).times(bigMin(3, bigPow(1.025, lv)));

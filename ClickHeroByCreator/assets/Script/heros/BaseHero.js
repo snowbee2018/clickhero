@@ -52,19 +52,36 @@ cc.Class({
         }
     },
 
+    buySkill(index){
+        let skill = this.skills[index];
+        let isSuccess = false;
+        if (this.level >= skill.level) {
+            isSuccess = UserData.spendGold(skill.cost);
+            // 刷新全局点击附加
+            // 刷新全局DPS倍数
+            // 刷新全局金币倍数
+            // 刷新点击伤害
+            // 刷新DPS伤害
+            // 刷新暴击倍数
+            // 刷新暴击倍率
+            this.refresh();
+            GameData.refresh();
+        }
+        return isSuccess;
+    },
+
     refresh(){
         if (this.isPassive) {
             this.DPS = Formulas.getDPS(this.baseDPS,this.level,this.getDPSTimes());
             this.cost = Formulas.getUpgradeCost(this.baseCost,thos.level+1);
         }else{
-            this.DPS = this.level * this.getDPSTimes();//实际要考虑技能
+            this.DPS = this.level * this.getDPSTimes();
             this.cost = Formulas.getClickHeroCost(this.level);
             Formulas.calClickDamage();
         }
     },
-    
+    // DPS倍数
     getDPSTimes(){
-        // 根据skills而升级
         let times = 1;
         this.skills.forEach(skill => {
             if (skill.isBuy&&skill.heroDPS) {
@@ -73,8 +90,8 @@ cc.Class({
         });
         return times;
     },
+    // 全局DPS倍数
     getGlobalDPSTimes(){
-        // 根据skills而升级
         let times = 1;
         this.skills.forEach(skill => {
             if (skill.isBuy&&skill.globalDPS) {
@@ -83,12 +100,22 @@ cc.Class({
         });
         return times;
     },
+    // 全局金币倍数
     getGlobalGoldTimes(){
-        // 根据skills而升级
         let times = 1;
         this.skills.forEach(skill => {
             if (skill.isBuy&&skill.gold) {
                 times *= skill.gold;
+            }
+        });
+        return times;
+    },
+    // 附加点击伤害倍数
+    getDPSClickTimes(){
+        let times = 0;
+        this.skills.forEach(skill => {
+            if (skill.isBuy&&skill.bjDamage) {
+                times += skill.bjDamage;
             }
         });
         return times;
