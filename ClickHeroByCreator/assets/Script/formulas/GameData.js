@@ -4,6 +4,14 @@
  * 购买技能触发 refresh
  */
 
+ /**
+  * 流程：
+  * let hero = HeroDatas.getHero(0);
+  * hero.buy(); or hero.upgrage();
+  * use GameData.clickDamage;
+  * use GameData.dpsDamage;
+  */
+
 cc.Class({
     statics: {
         clickDamage = 1,//
@@ -23,7 +31,13 @@ cc.Class({
         // 刷新暴击倍率
         // 刷新点击伤害
         refresh(){
-
+            this.calGlobalDPSTimes();
+            this.calGoldTimes();
+            this.calDPSDamage();
+            this.calDPSClickDamage();
+            this.calClickDamage();
+            this.calClickCrit();
+            this.calClickCritOdds();
         },
         // 计算全局DPS倍数
         calGlobalDPSTimes(){

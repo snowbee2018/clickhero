@@ -32,6 +32,7 @@ cc.Class({
             this.level ++;
             this.isBuy = true;
             this.refresh();
+            this.isPassive ? GameData.calDPSDamage: GameData.calClickDamage();
             return true;
         } else {
             return false;
@@ -46,6 +47,7 @@ cc.Class({
         if (isSuccess) {
             this.level ++;
             this.refresh();
+            this.isPassive ? GameData.calDPSDamage: GameData.calClickDamage();
             return true;
         } else {
             return false;
