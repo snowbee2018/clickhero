@@ -15,7 +15,7 @@ cc.Class({
         cost : 0,//升级花费
         DPS : 0,//当前dps
     },
-    ctor(id,heroName,baseCost,baseDPS){
+    init(id,heroName,baseCost,baseDPS){
         this.isPassive = !(id == 0);
         this.id = id;
         this.heroName = heroName;

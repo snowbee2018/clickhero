@@ -7,20 +7,20 @@
  /**
   * 流程：
   * let hero = HeroDatas.getHero(0);
-  * hero.buy(); or hero.upgrage(); or hero.buySkill();
+  * hero.buy(); or hero.upgrade(); or hero.buySkill();
   * use GameData.clickDamage;
   * use GameData.dpsDamage;
   */
 
 cc.Class({
     statics: {
-        clickDamage = 1,//
-        dpsDamage = 0,
-        DPSClickDamage = 0,
-        globalDPSTimes = 1,
-        globalGoldTimes = 1,
-        clickCrit = 1,// 暴击倍数
-        clickCritOdds = 0,// 暴击概率
+        clickDamage : 1,
+        dpsDamage : 0,
+        DPSClickDamage : 0,
+        globalDPSTimes : 1,
+        globalGoldTimes : 1,
+        clickCrit : 1,// 暴击倍数
+        clickCritOdds : 0,// 暴击概率
 
         // 购买技能时触发
         // 刷新全局DPS倍数
