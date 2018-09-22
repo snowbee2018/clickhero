@@ -21,6 +21,7 @@ cc.Class({
         GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
         GameGlobal.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
+        window.Events = require("Events");
 
         GameGlobal.WeChatUtil.sayHello();
         self.node.active = false;
