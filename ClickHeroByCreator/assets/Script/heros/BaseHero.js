@@ -26,7 +26,8 @@ cc.Class({
 
     buy(){
         // 伪代码
-        let isSuccess = UserData.spendGold(this.baseCost);
+        // let isSuccess = UserData.spendGold(this.baseCost);
+        let isSuccess = true;
         if (isSuccess) {
             this.level ++;
             this.isBuy = true;
@@ -36,11 +37,12 @@ cc.Class({
             return false;
         }
     },
-    
+
     // 升级
     upgrade(){
         // 伪代码
-        let isSuccess = UserData.spendGold(this.cost);
+        let isSuccess = true;
+        // let isSuccess = UserData.spendGold(this.cost);
         if (isSuccess) {
             this.level ++;
             this.refresh();
@@ -57,6 +59,7 @@ cc.Class({
         }else{
             this.DPS = this.level * this.getDPSTimes();//实际要考虑技能
             this.cost = Formulas.getClickHeroCost(this.level);
+            Formulas.calClickDamage();
         }
     },
     
