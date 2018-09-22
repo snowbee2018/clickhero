@@ -22,6 +22,7 @@ cc.Class({
         GameGlobal.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
         window.Events = require("Events");
+        window.BigNumber = require("BigNumber");
 
         GameGlobal.WeChatUtil.sayHello();
         self.node.active = false;
