@@ -43,23 +43,29 @@ cc.Class({
         // let shillObj = ShillMgr.getSkillObj(0);
         // console.log(shillObj);
         getSkillObj(heroID) {
-            let cfg = SkillCfg[heroID];
-            if (cfg) {
-                let skills = [];
-                for (let index = 0; index < cfg.length; index++) {
-                    const skilData = cfg[index];
-                    var skillObj = this.getObj();
-                    for (const key in skilData) {
-                        if (skilData.hasOwnProperty(key)) {
-                            const element = skilData[key];
-                            skillObj[key] = element;
+            if (SkillCfg) {
+                let cfg = SkillCfg[heroID];
+                if (cfg) {
+                    let skills = [];
+                    for (let index = 0; index < cfg.length; index++) {
+                        const skilData = cfg[index];
+                        var skillObj = this.getObj();
+                        for (const key in skilData) {
+                            if (skilData.hasOwnProperty(key)) {
+                                const element = skilData[key];
+                                skillObj[key] = element;
+                            }
                         }
+                        skills.push(skillObj);
                     }
-                    skills.push(skillObj);
-                }
 
-                return skills;
+                    return skills;
+                }
+            } else {
+                console.log("配置尚未加载完成");
+                
             }
+            
 
         },
     }
