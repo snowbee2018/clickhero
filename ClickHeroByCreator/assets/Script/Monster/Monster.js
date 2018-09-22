@@ -26,13 +26,14 @@ cc.Class({
 
     ctor () {
         const self = this;
-        self._cost = new BigNumber(0);
-        self._totalHP = new BigNumber(0);
-        self._curHP = new BigNumber(0);
+
     },
 
     onLoad () {
         const self = this;
+        self._cost = new BigNumber(0);
+        self._totalHP = new BigNumber(0);
+        self._curHP = new BigNumber(0);
         self.anim = self.getComponent(cc.Animation);
     },
 
