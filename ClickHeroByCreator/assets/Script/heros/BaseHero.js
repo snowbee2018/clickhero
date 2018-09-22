@@ -1,4 +1,3 @@
-var Formulas = require("Formulas");
 
 cc.Class({
     name : "Hero",//用于序列化

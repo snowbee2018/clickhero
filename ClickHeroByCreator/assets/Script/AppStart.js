@@ -20,6 +20,7 @@ cc.Class({
         window.GameGlobal = {};
         GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
         GameGlobal.DataCenter = new (require("DataCenter"))();
+        window.Formulas = require("Formulas");
 
         GameGlobal.WeChatUtil.sayHello();
         self.node.active = false;
