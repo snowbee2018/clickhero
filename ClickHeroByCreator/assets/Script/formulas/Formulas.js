@@ -16,13 +16,19 @@ var bigMin = function (m, n) {
 }
 cc.Class({
     statics: {
-        // 计算DPS
-        getDPS(baseDPS,lv){
+        //计算点击伤害 for hero
+        getClickDPS(lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = baseDPS * lv * this.getDPSTimes();
+            let DPS = lv * times;
             return DPS;
         },
-        // 升级点击怪金币
+        // 计算DPS for hero
+        getDPS(baseDPS,lv,times){
+            // let DPS = baseDPS * lv;
+            let DPS = baseDPS * lv * times;
+            return DPS;
+        },
+        // 升级点击英雄金币 for hero
         getClickHeroCost(lv){
             if (lv <= 15) {
                 // return BigNumber.pow(1.07, lv - 1).times(5 + lv);
@@ -32,11 +38,11 @@ cc.Class({
                 return Math.floor(20 * Math.pow(1.07, lv - 1));
             }
         },
-        // 升级DPS怪金币
+        // 升级DPS英雄金币 for hero
         getHeroCost(baseCost,lv){
             return Math.floor(baseCost * Math.pow(1.07,lv - 1));
         },
-        // 计算怪物HP
+        // 计算怪物HP for monster
         getMonsterHP(lv) {
             var boss = lv % 5 == 0 ? 10 : 1;
             var hp;
@@ -64,20 +70,12 @@ cc.Class({
             // return Math.ceil(hp);
             return hp.integerValue();
         },
-        // 计算怪物金币
+        // 计算怪物金币 for monster
         // hp = getMonsterHP(lv);
         getMonsterGold(lv, hp) {
             let result = hp.div(15).times(bigMin(3, bigPow(1.025, lv)));
             return result.integerValue();
             // return Math.ceil(hp / 15 * Math.min(3,Math.pow(1.025,lv)));
-        },
-        // 计算DPS倍数
-        getDPSTimes(){
-            return 1;
-        },
-        // 计算金币倍数
-        getGoldTimes(){
-            return 1;
         },
     },
 });
