@@ -20,6 +20,7 @@ cc.Class({
         _curHP: 0, // 当前血量 bignumber
 
         damageAnim: cc.Prefab,
+        monsterSprf: [cc.SpriteFrame],
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -67,7 +68,7 @@ cc.Class({
         self._num = num;
         self._totalHP = Formulas.getMonsterHP(lv);
         self._curHP = new BigNumber(self._totalHP);
-        
+        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[num];
         
         self._cost = Formulas.getMonsterGold(lv, self._totalHP);
         self._onMonsterDestroy = onMonsterDestroy;
