@@ -22,6 +22,7 @@ cc.Class({
         this.baseCost = baseCost;
         this.baseDPS = baseDPS;
         this.skills = CfgMgr.getHeroSkills(id);
+        return this;
     },
 
     buy(){

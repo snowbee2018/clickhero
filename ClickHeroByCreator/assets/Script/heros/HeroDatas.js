@@ -2,14 +2,16 @@
 var BaseHero = require("BaseHero");
 var CfgMgr = require("LocalCfgMgr");
 cc.Class({
+    
     statics:{
         heroList : [],
         init(){
-            for (let i = 0; i < 20; i++) {
-                var heroCfg = CfgMgr.getHeroCfg(i);
-                var hero = new BaseHero().init(i, heroCfg.name, heroCfg.baseCost, heroCfg.baseDPS);
+            for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
+                const heroCfg = HerosCfg[heroID];
+                var hero = new BaseHero().init(heroID, heroCfg.name, heroCfg.baseCost, heroCfg.baseDPS);
                 this.heroList.push(hero);
             }
+
             // this.heroList = [
             //     new BaseHero().init(0,"冒险家",5,1),
             //     new BaseHero().init(1,"树妖",50,5),
@@ -33,7 +35,7 @@ cc.Class({
             //     new BaseHero().init(19,"兽王",3.000e17,4.914e13),
             // ]
         },
-        getHore(id){
+        getHero(id){
             return this.heroList[id];
         },
     }

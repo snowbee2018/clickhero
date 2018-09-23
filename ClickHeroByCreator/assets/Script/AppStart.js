@@ -27,15 +27,18 @@ cc.Class({
         GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
         GameGlobal.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
+        // window.GameData = new (require("GameData"))();
+        // window.HeroDatas = new (require("HeroDatas"))();
         window.GameData = require("GameData");
+        window.HeroDatas = require("HeroDatas");
         window.Events = require("Events");
         window.BigNumber = require("BigNumber");
 
-        CfgMgr.loadHeroCfg(self.ready.bind(self));
-        CfgMgr.loadSkillCfg(self.ready.bind(self));
+        CfgMgr.loadHeroCfg(self.checkReady.bind(self));
+        CfgMgr.loadSkillCfg(self.checkReady.bind(self));
     },
 
-    ready() {
+    checkReady() {
         const self = this;
         // 检查全局工具类是否加载完成
         if (window.GameGlobal == undefined) return;
@@ -43,6 +46,7 @@ cc.Class({
         if (GameGlobal.DataCenter == undefined) return;
         if (window.Formulas == undefined) return;
         if (window.GameData == undefined) return;
+        if (window.HeroDatas == undefined) return;
         if (window.Events == undefined) return;
         if (window.BigNumber == undefined) return;
         

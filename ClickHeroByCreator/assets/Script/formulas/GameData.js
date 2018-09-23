@@ -13,6 +13,7 @@
   */
 
 cc.Class({
+    
     statics: {
         clickDamage : 1,
         dpsDamage : 0,

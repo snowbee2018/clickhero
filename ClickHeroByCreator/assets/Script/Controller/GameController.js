@@ -63,6 +63,10 @@ cc.Class({
 
     onGameStart () {
         const self = this;
+        // console.log(HeroDatas);
+        
+        HeroDatas.init();
+        GameData.refresh();
         self.monsterController.makeMonster(1, 1);
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
