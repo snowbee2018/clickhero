@@ -5,7 +5,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        openDataNode : cc.Node,
+        // openDataNode : cc.Node,
 
         headSprite : cc.Sprite,
         location : cc.Label,
@@ -24,12 +24,12 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         const self = this;
-        self.openDataNode.active = true;
-        self.openDataNode.x = 0;
-        self.openDataNode.y = 1000;
-        self.wXSubContextView = self.openDataNode.getComponent("WXSubContextView");
-        self._show = cc.moveTo(0.2, 0, 0);
-        self._hide = cc.moveTo(0.2, 0, 1000);
+        // self.openDataNode.active = true;
+        // self.openDataNode.x = 0;
+        // self.openDataNode.y = 1000;
+        // self.wXSubContextView = self.openDataNode.getComponent("WXSubContextView");
+        // self._show = cc.moveTo(0.2, 0, 0);
+        // self._hide = cc.moveTo(0.2, 0, 1000);
 
         self.monsterController = self.getComponent("MonsterController");
         self.heroListControl = self.getComponent("HeroListControl");
@@ -150,12 +150,12 @@ cc.Class({
     showOpenDataView () {
         const self = this;
         self._isShow = !self._isShow;
-        self.openDataNode.stopAllActions();
-        if (self._isShow) {
-            self.openDataNode.runAction(self._show);
-        } else {
-            self.openDataNode.runAction(self._hide);
-        }
+        // self.openDataNode.stopAllActions();
+        // if (self._isShow) {
+        //     self.openDataNode.runAction(self._show);
+        // } else {
+        //     self.openDataNode.runAction(self._hide);
+        // }
     },
 
     onHeroBtnClick () {

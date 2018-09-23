@@ -44,18 +44,15 @@ cc.Class({
 
     // update (dt) {},
 
-    onEnable () {
-        const self = this;
-        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
-        Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
-        Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
-    },
+    // onEnable () {
+    //     const self = this;
+    // },
 
-    onDisable () {
+    onDestroy () {
         const self = this;
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.off(Events.ON_BY_HERO, self.onHeroChange, self);
-        Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
+        Events.off(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
     },
 
     onGoldChange () {
@@ -78,7 +75,9 @@ cc.Class({
     setItem (heroID) {
         const self = this;
         self._heroID = heroID;
-        
+        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
+        Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
     },
 
     isCanBuy () {
