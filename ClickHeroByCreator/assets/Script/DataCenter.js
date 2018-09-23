@@ -69,8 +69,6 @@ cc.Class({
     consumeGold (gold) {
         const self = this;
         if (BigNumber.isBigNumber(gold)) {
-            console.log(gold);
-            
             var key = self.KeyMap.curGold;
             var oldGold = self.getDataByKey(key);
             if (oldGold.isGreaterThanOrEqualTo(gold)) {
