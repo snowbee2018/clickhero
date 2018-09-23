@@ -1,4 +1,4 @@
-let SkillMgr = require("SkillMgr");
+let CfgMgr = require("LocalCfgMgr");
 
 cc.Class({
     name : "Hero",//用于序列化
@@ -21,7 +21,7 @@ cc.Class({
         this.heroName = heroName;
         this.baseCost = baseCost;
         this.baseDPS = baseDPS;
-        this.skills = SkillMgr.getSkillObj(id);
+        this.skills = CfgMgr.getHeroSkills(id);
     },
 
     buy(){

@@ -30,7 +30,7 @@ cc.Class({
         self._hide = cc.moveTo(0.2, 0, 1000);
 
         self.monsterController = self.getComponent("MonsterController");
-        self.clickDamage = new BigNumber(1);
+        // self.clickDamage = new BigNumber(1);
     },
 
     onEnable () {
@@ -95,12 +95,12 @@ cc.Class({
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));
         
-        self.monsterController.hit(self.clickDamage);
+        self.monsterController.hit(GameData.clickDamage);
     },
 
     onMonsterCost (cost) {
         const self = this;
-        self._totalCost = self._totalCost.plus(cost.times(Formulas.getGoldTimes()));
+        self._totalCost = self._totalCost.plus(cost.times(GameData.globalGoldTimes));
         self.totalCostLab.string = self._totalCost.toExponential(3);
     },
 
@@ -164,11 +164,6 @@ cc.Class({
             }
         });
         GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
-
-        var SkillMgr = require("SkillMgr");
-        let skillObj = SkillMgr.getSkillObj(0);
-        console.log(skillObj);
-
     },
 
     onRightBtnClick () {
