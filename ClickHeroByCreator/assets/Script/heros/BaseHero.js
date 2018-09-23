@@ -15,6 +15,7 @@ cc.Class({
         cost : 0,//升级花费
         DPS : 0,//当前dps
     },
+
     init(id,heroName,baseCost,baseDPS){
         this.isPassive = !(id == 0);
         this.id = id;
@@ -22,18 +23,28 @@ cc.Class({
         this.baseCost = baseCost;
         this.baseDPS = baseDPS;
         this.skills = CfgMgr.getHeroSkills(id);
+        this.refresh();
         return this;
+    },
+
+    onGoldChange () {
+
     },
 
     buy(){
         // 伪代码
         // let isSuccess = UserData.spendGold(this.baseCost);
-        let isSuccess = true;
-        if (isSuccess) {
+        var isCanBy = GameGlobal.DataCenter.isGoldEnough(this.baseCost);
+        var cost = new BigNumber(this.baseCost);
+        // let isSuccess = true;
+        if (isCanBy) {
             this.level ++;
             this.isBuy = true;
             this.refresh();
-            this.isPassive ? GameData.calDPSDamage: GameData.calClickDamage();
+            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+
+            GameGlobal.DataCenter.consumeGold(cost);
+            Events.emit(Events.ON_BY_HERO, this.id);
             return true;
         } else {
             return false;
@@ -43,12 +54,17 @@ cc.Class({
     // 升级
     upgrade(){
         // 伪代码
-        let isSuccess = true;
+        var isCanUpgrade = GameGlobal.DataCenter.isGoldEnough(this.cost);
+        var cost = new BigNumber(this.cost);
+        // let isSuccess = true;
         // let isSuccess = UserData.spendGold(this.cost);
-        if (isSuccess) {
+        if (isCanUpgrade) {
             this.level ++;
             this.refresh();
-            this.isPassive ? GameData.calDPSDamage: GameData.calClickDamage();
+            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+
+            GameGlobal.DataCenter.consumeGold(cost);
+            Events.emit(Events.ON_UPGRADE_HERO, this.id);
             return true;
         } else {
             return false;
@@ -73,14 +89,15 @@ cc.Class({
         return isSuccess;
     },
 
-    refresh(){
-        if (this.isPassive) {
-            this.DPS = Formulas.getDPS(this.baseDPS,this.level,this.getDPSTimes());
-            this.cost = Formulas.getUpgradeCost(this.baseCost,thos.level+1);
-        }else{
-            this.DPS = this.level * this.getDPSTimes();
-            this.cost = Formulas.getClickHeroCost(this.level);
-            Formulas.calClickDamage();
+    refresh() {
+        if (this.isBuy) {
+            if (this.isPassive) {
+                this.DPS = Formulas.getDPS(this.baseDPS, this.level, this.getDPSTimes());
+                this.cost = Formulas.getHeroCost(this.baseCost, this.level + 1);
+            } else {
+                this.DPS = Formulas.getClickDPS(this.level, this.getDPSTimes());
+                this.cost = Formulas.getClickHeroCost(this.level);
+            }
         }
     },
     // DPS倍数

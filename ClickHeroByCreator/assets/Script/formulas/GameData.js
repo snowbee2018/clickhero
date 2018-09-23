@@ -82,8 +82,10 @@ cc.Class({
         },
 
         // 计算总点击伤害
-        calClickDamage(){
-            this.clickDamage = HeroDatas.getHero(0).DPS + 1 + this.DPSClickDamage;
+        calClickDamage() {
+            var baseClickDamage = new BigNumber(HeroDatas.getHero(0).DPS);
+            this.clickDamage = baseClickDamage.plus(1).plus(this.DPSClickDamage);
+            // this.clickDamage = HeroDatas.getHero(0).DPS + 1 + this.DPSClickDamage;
         },
         // 计算点击暴击倍数
         calClickCrit(){

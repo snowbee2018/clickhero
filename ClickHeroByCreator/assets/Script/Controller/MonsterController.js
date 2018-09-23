@@ -47,14 +47,14 @@ cc.Class({
         }
     },
 
-    onCurMonsterDestroy (lv, num, cost) {
+    onCurMonsterDestroy (lv, num, gold) {
         const self = this;
         if (lv % 5 == 0) {
             self.makeMonster(lv + 1, 0);
         } else {
             self.makeMonster(num == 9 ? lv + 1 : lv, num == 9 ? 0 : num + 1);
         }
-        self.gameController.onMonsterCost(cost);
+        self.gameController.onMonsterGold(gold);
     },
 
     getCurMonsterInfo () {
@@ -63,7 +63,7 @@ cc.Class({
             lv: self.curMonster._lv,
             num: self.curMonster._num,
             hp: self.curMonster._curHP,
-            cost: self.curMonster._cost,
+            gold: self.curMonster._gold,
         }
     },
 });

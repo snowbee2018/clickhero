@@ -1,18 +1,13 @@
 cc.Class({
+    
     ctor () {
         const self = this;
-        self.ContentData = {}
-        self.DataMap = {
-            WXUserInfo: "WXUserInfo", // 当前用户微信信息
-        }
-
-        // 本地数据库存储的数据
-        self.LocalStorageDataMap = {
+        self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
             curLever: "curLever", // 当前所在关卡
             curDiamond: "curDiamond", // 当前钻石数量
-            curCoin: "curCoin", // 当前金币数量
+            curGold: "curGold", // 当前金币数量
             curSoul: "curSoul", // 当前英魂数量
             additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
             enemyNumber: "enemyNumber", // 打到当前关卡的第几只怪
@@ -26,14 +21,20 @@ cc.Class({
 
             curSetting: "curSetting", // 当前设置信息
         }
-        // question : 大佬们好，我想问一下，用 cc.sys.localStorage.setItem 这个保存的数据 正常 访问微信小游戏时没有问题，
-        // 但是在小游戏更新后，之前保存的数据就没有了，请问这个问题该如何解决。
-        // answer : 如果是微信小游戏的话, 可以考虑使用微信小游戏的文件管理方法, 把每次需要保存的数据写入到小游戏自己的文件夹下, 
-        // 用.txt或者.json的格式保存, 按照官方的说法, 这个文件夹不会被轻易的清理掉, 
-        // 另外, 自测也发现, 更新版本并不会清理这个文件夹.如果数据比较重要, 可以考虑加密以后保存
+        self.ContentData = {}
+        self.DataMap = {
+            WXUserInfo: "WXUserInfo", // 当前用户微信信息
+        }
+        
     },
 
-
+    // 读取本地用户数据之后用来初始化
+    init () {
+        const self = this;
+        console.log(self);
+        
+        self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)))
+    },
 
     setDataByKey (key, params) {
         const self = this;
@@ -51,4 +52,55 @@ cc.Class({
         }
     },
 
+    // 金币增加
+    addGold (gold) {
+        const self = this;
+        if (BigNumber.isBigNumber(gold)) {
+            var key = self.KeyMap.curGold;
+            var oldGold = self.getDataByKey(key);
+            self.setDataByKey(key, oldGold.plus(gold));
+            Events.emit(Events.ON_GOLD_CHANGE);
+        } else {
+            console.error("type error, 'gold' must be a BigNumber.");
+        }
+    },
+
+    // 消费金币
+    consumeGold (gold) {
+        const self = this;
+        if (BigNumber.isBigNumber(gold)) {
+            console.log(gold);
+            
+            var key = self.KeyMap.curGold;
+            var oldGold = self.getDataByKey(key);
+            if (oldGold.isGreaterThanOrEqualTo(gold)) {
+                self.setDataByKey(key, oldGold.minus(gold));
+                Events.emit(Events.ON_GOLD_CHANGE);
+            } else {
+                console.error("gold is not enough.");
+            }
+        } else {
+            console.error("type error, 'gold' must be a BigNumber.");
+        }
+    },
+
+    // 金币是否足够
+    isGoldEnough(price) {
+        const self = this;
+        if (BigNumber.isBigNumber(price)) {
+            var key = self.KeyMap.curGold;
+            var curGold = self.getDataByKey(key);
+            return curGold.isGreaterThanOrEqualTo(price);
+        } else {
+            console.error("type error, 'gold' must be a BigNumber.");
+            return false;
+        }
+    },
+
+    getGoldStr () {
+        const self = this;
+        var key = self.KeyMap.curGold;
+        var curGold = self.getDataByKey(key);
+        return curGold.toExponential(3);
+    },
 });

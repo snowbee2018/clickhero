@@ -14,7 +14,7 @@ cc.Class({
     properties: {
         _lv: 0, // 怪物等级
         _num: 0, // 怪物在当前等级的序号，0 ~ 9
-        _cost: 0, // 掉落金币 bignumber
+        _gold: 0, // 掉落金币 bignumber
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
 
@@ -31,7 +31,7 @@ cc.Class({
 
     onLoad () {
         const self = this;
-        self._cost = new BigNumber(0);
+        self._gold = new BigNumber(0);
         self._totalHP = new BigNumber(0);
         self._curHP = new BigNumber(0);
         self.anim = self.getComponent(cc.Animation);
@@ -56,7 +56,7 @@ cc.Class({
     onDestroy () {
         const self = this;
         if (self._onMonsterDestroy) {
-            self._onMonsterDestroy(self._lv, self._num, self._cost);
+            self._onMonsterDestroy(self._lv, self._num, self._gold);
         }
     },
 
@@ -70,7 +70,7 @@ cc.Class({
         self._curHP = new BigNumber(self._totalHP);
         self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[num];
         
-        self._cost = Formulas.getMonsterGold(lv, self._totalHP);
+        self._gold = Formulas.getMonsterGold(lv, self._totalHP);
         self._onMonsterDestroy = onMonsterDestroy;
     },
 
@@ -80,7 +80,7 @@ cc.Class({
         self._num = num;
         self._totalHP = new BigNumber(totalHP);
         self._curHP = new BigNumber(curHP);
-        self._cost = new BigNumber(cost);
+        self._gold = Formulas.getMonsterGold(lv, self._totalHP);
         self._onMonsterDestroy = onMonsterDestroy;
     },
 

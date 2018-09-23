@@ -17,30 +17,31 @@ var bigMin = function (m, n) {
 cc.Class({
     statics: {
         //计算点击伤害 for hero
-        getClickDPS(lv,times){
+        getClickDPS(lv, times){
             // let DPS = baseDPS * lv;
-            let DPS = lv * times;
+            let DPS = new BigNumber(lv * times);
             return DPS;
         },
         // 计算DPS for hero
         getDPS(baseDPS,lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = baseDPS * lv * times;
+            let DPS = baseDPS.times(lv * times);
             return DPS;
         },
         // 升级点击英雄金币 for hero
         getClickHeroCost(lv){
             if (lv <= 15) {
-                // return BigNumber.pow(1.07, lv - 1).times(5 + lv);
-                return Math.floor((5 + lv) * Math.pow(1.07, lv - 1));
+                return bigPow(1.07, lv - 1).times(5 + lv).integerValue();
+                // return Math.floor((5 + lv) * Math.pow(1.07, lv - 1)); 
             } else if (lv >= 16) {
-                // return BigNumber.pow(1.07, lv - 1).times(20); 
-                return Math.floor(20 * Math.pow(1.07, lv - 1));
+                return bigPow(1.07, lv - 1).times(20).integerValue(); 
+                // return Math.floor(20 * Math.pow(1.07, lv - 1));
             }
         },
         // 升级DPS英雄金币 for hero
-        getHeroCost(baseCost,lv){
-            return Math.floor(baseCost * Math.pow(1.07,lv - 1));
+        getHeroCost(baseCost, lv){
+            return bigPow(1.07, lv - 1).times(baseCost).integerValue();
+            // return Math.floor(baseCost * Math.pow(1.07,lv - 1));
         },
         // 计算怪物HP for monster
         getMonsterHP(lv) {

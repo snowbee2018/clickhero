@@ -30,17 +30,8 @@ cc.Class({
         self._hide = cc.moveTo(0.2, 0, 1000);
 
         self.monsterController = self.getComponent("MonsterController");
+        self.heroListControl = self.getComponent("HeroListControl");
         // self.clickDamage = new BigNumber(1);
-    },
-
-    onEnable () {
-        const self = this;
-        
-    },
-
-    onDisable () {
-        const self = this;
-        
     },
 
     // called every frame
@@ -61,18 +52,35 @@ cc.Class({
         
     },
 
+    onEnable() {
+        const self = this;
+        
+    },
+
+    onDisable() {
+        const self = this;
+        Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+    },
+
     onGameStart () {
         const self = this;
         // console.log(HeroDatas);
         
+        GameGlobal.DataCenter.init();
         HeroDatas.init();
         GameData.refresh();
+        self.heroListControl.setHeroList();
         self.monsterController.makeMonster(1, 1);
+
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
         
-        self._totalCost = new BigNumber(0);
-        self.totalCostLab.string = self._totalCost.toExponential(3);
+        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+    },
+
+    onGoldChange () {
+        const self = this;
+        self.totalCostLab.string = GameGlobal.DataCenter.getGoldStr();
     },
 
     updataMonsterInfoDisplay () {
@@ -81,7 +89,7 @@ cc.Class({
         self.lvLab.string = info.lv;
         self.numLab.string = info.num;
         self.hpLab.string = info.hp.toExponential(3);
-        self.costLab.string = info.cost.toExponential(3);
+        self.costLab.string = info.gold.toExponential(3);
     },
 
     onTouchStart (event) {
@@ -102,10 +110,9 @@ cc.Class({
         self.monsterController.hit(GameData.clickDamage);
     },
 
-    onMonsterCost (cost) {
+    onMonsterGold (gold) {
         const self = this;
-        self._totalCost = self._totalCost.plus(cost.times(GameData.globalGoldTimes));
-        self.totalCostLab.string = self._totalCost.toExponential(3);
+        GameGlobal.DataCenter.addGold(gold.times(GameData.globalGoldTimes));
     },
 
     setWeChatUser () {
