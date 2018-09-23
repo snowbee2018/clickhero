@@ -31,8 +31,6 @@ cc.Class({
     // 读取本地用户数据之后用来初始化
     init () {
         const self = this;
-        console.log(self);
-        
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)))
     },
 

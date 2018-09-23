@@ -34,7 +34,7 @@ cc.Class({
     buy(){
         // 伪代码
         // let isSuccess = UserData.spendGold(this.baseCost);
-        var isCanBy = GameGlobal.DataCenter.isGoldEnough(this.baseCost);
+        var isCanBy = DataCenter.isGoldEnough(this.baseCost);
         var cost = new BigNumber(this.baseCost);
         // let isSuccess = true;
         if (isCanBy) {
@@ -43,7 +43,7 @@ cc.Class({
             this.refresh();
             this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
-            GameGlobal.DataCenter.consumeGold(cost);
+            DataCenter.consumeGold(cost);
             Events.emit(Events.ON_BY_HERO, this.id);
             return true;
         } else {
@@ -54,7 +54,7 @@ cc.Class({
     // 升级
     upgrade(){
         // 伪代码
-        var isCanUpgrade = GameGlobal.DataCenter.isGoldEnough(this.cost);
+        var isCanUpgrade = DataCenter.isGoldEnough(this.cost);
         var cost = new BigNumber(this.cost);
         // let isSuccess = true;
         // let isSuccess = UserData.spendGold(this.cost);
@@ -63,7 +63,7 @@ cc.Class({
             this.refresh();
             this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
-            GameGlobal.DataCenter.consumeGold(cost);
+            DataCenter.consumeGold(cost);
             Events.emit(Events.ON_UPGRADE_HERO, this.id);
             return true;
         } else {

@@ -23,9 +23,8 @@ cc.Class({
 
     initGame () {
         const self = this;
-        window.GameGlobal = {};
-        GameGlobal.WeChatUtil = new (require("WeChatUtils"))();
-        GameGlobal.DataCenter = new (require("DataCenter"))();
+        window.WeChatUtil = new (require("WeChatUtils"))();
+        window.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
         // window.GameData = new (require("GameData"))();
         // window.HeroDatas = new (require("HeroDatas"))();
@@ -41,9 +40,8 @@ cc.Class({
     checkReady() {
         const self = this;
         // 检查全局工具类是否加载完成
-        if (window.GameGlobal == undefined) return;
-        if (GameGlobal.WeChatUtil == undefined) return;
-        if (GameGlobal.DataCenter == undefined) return;
+        if (window.WeChatUtil == undefined) return;
+        if (window.DataCenter == undefined) return;
         if (window.Formulas == undefined) return;
         if (window.GameData == undefined) return;
         if (window.HeroDatas == undefined) return;
@@ -56,15 +54,15 @@ cc.Class({
 
         console.log("所有本地配置加载完成");
 
-        GameGlobal.WeChatUtil.sayHello();
+        WeChatUtil.sayHello();
         
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-            GameGlobal.WeChatUtil.getUserInfo(function (bSuccess, userData) {
+            WeChatUtil.getUserInfo(function (bSuccess, userData) {
                 console.log("bSuccess = " + bSuccess);
                 console.log(userData);
-                let DataMap = GameGlobal.DataCenter.DataMap;
-                GameGlobal.DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
-                let launchOpt = GameGlobal.WeChatUtil.getLaunchOptionsSync();
+                let DataMap = DataCenter.DataMap;
+                DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
+                let launchOpt = WeChatUtil.getLaunchOptionsSync();
                 console.log(launchOpt);
                 self.getComponent("GameController").setWeChatUser();
                 self.startGame();

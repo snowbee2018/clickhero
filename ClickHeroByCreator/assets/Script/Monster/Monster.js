@@ -94,14 +94,16 @@ cc.Class({
         damageNode.getComponent("DamageAnim").setDamage(damage);
     },
 
-    hurt (damage) {
+    hurt (damage, bDPS) {
         const self = this;
         if (!self._alive) return;
         if (!self._curHP.isZero()) {
+            if (damage.isZero()) return;
             // console.log("hurt : damage = " + damage.toString());
+            bDPS = bDPS ? true : false;
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
-                self.playAnim("Hurt");
+                if (!bDPS) self.playAnim("Hurt");
             } else {
                 self._curHP = new BigNumber(0);
                 self.goDie();

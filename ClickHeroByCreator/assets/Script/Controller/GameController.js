@@ -17,6 +17,8 @@ cc.Class({
         numLab: cc.Label,
         hpLab: cc.Label,
         costLab: cc.Label,
+
+        pageNode: cc.Node,
     },
     
     // use this for initialization
@@ -66,7 +68,7 @@ cc.Class({
         const self = this;
         // console.log(HeroDatas);
         
-        GameGlobal.DataCenter.init();
+        DataCenter.init();
         HeroDatas.init();
         GameData.refresh();
         self.heroListControl.setHeroList();
@@ -76,11 +78,12 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        self.schedule(self.applyDPS.bind(self), 1);
     },
 
     onGoldChange () {
         const self = this;
-        self.totalCostLab.string = GameGlobal.DataCenter.getGoldStr();
+        self.totalCostLab.string = DataCenter.getGoldStr();
     },
 
     updataMonsterInfoDisplay () {
@@ -107,18 +110,23 @@ cc.Class({
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));
         
-        self.monsterController.hit(GameData.clickDamage);
+        self.monsterController.hit(GameData.clickDamage, false);
+    },
+
+    applyDPS() {
+        const self = this;
+        self.monsterController.hit(GameData.dpsDamage, true);
     },
 
     onMonsterGold (gold) {
         const self = this;
-        GameGlobal.DataCenter.addGold(gold.times(GameData.globalGoldTimes));
+        DataCenter.addGold(gold.times(GameData.globalGoldTimes));
     },
 
     setWeChatUser () {
         const self = this;
-        let DataMap = GameGlobal.DataCenter.DataMap;
-        let weChatUserInfo = GameGlobal.DataCenter.getDataByKey(DataMap.WXUserInfo);
+        let DataMap = DataCenter.DataMap;
+        let weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
         cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "jpg"}, function (err, texture) {
@@ -150,14 +158,19 @@ cc.Class({
         }
     },
 
+    onHeroBtnClick () {
+        const self = this;
+        self.pageNode.active = !self.pageNode.active;
+    },
+
     onLeftBtnClick () {
         const self = this;
-        // GameGlobal.WeChatUtil.authorize(GameGlobal.WeChatUtil.scope.userLocation, function (result) {
+        // WeChatUtil.authorize(WeChatUtil.scope.userLocation, function (result) {
         //     console.log("FFFFFFF, result = " + result);
             
         // });
         self.showOpenDataView();
-        GameGlobal.WeChatUtil.showModal({
+        WeChatUtil.showModal({
             title: "分享给好友",
             content: "点一下，玩一年，把快乐分享给好友吧",
             callBack: function (res) {
@@ -165,32 +178,32 @@ cc.Class({
                 console.log(res);
                 if (res.confirm) {
                     console.log("点击了确定");
-                    GameGlobal.WeChatUtil.shareAppMessage();
+                    WeChatUtil.shareAppMessage();
                     self.showOpenDataView();
                 } else if (res.cancel) {
                     console.log("点击了取消");
                     self.showOpenDataView();
-                    GameGlobal.WeChatUtil.showToast("取消了分享");
+                    WeChatUtil.showToast("取消了分享");
                 }
             }
         });
-        GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
+        WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
     },
 
     onRightBtnClick () {
         const self = this;
-        // GameGlobal.WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
+        // WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
         // let obj = {
         //     helloMsg: "你好，开放数据域。这是主域托管的数据！"
         // }
-        // GameGlobal.WeChatUtil.setCloudStorage("test_cloud_storage", obj);
+        // WeChatUtil.setCloudStorage("test_cloud_storage", obj);
 
         // obj.helloMsg = "你好，微信小游戏。这是保存到微信小游戏文件系统的数据！";
-        // GameGlobal.WeChatUtil.setLocalStorage(JSON.stringify(obj));
-        // GameGlobal.WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
+        // WeChatUtil.setLocalStorage(JSON.stringify(obj));
+        // WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
         //     if (bSuccess) {
         //         console.log("jsonStr = " + jsonStr);
-        //         GameGlobal.WeChatUtil.showModal({
+        //         WeChatUtil.showModal({
         //             title: "测试模态对话框",
         //             content: "本地数据获取成功：" + jsonStr,
         //             callBack: function (res) {
@@ -198,17 +211,17 @@ cc.Class({
         //                 console.log(res);
         //                 if (res.confirm) {
         //                     console.log("点击了确定");
-        //                     GameGlobal.WeChatUtil.showToast("点击了确定");
+        //                     WeChatUtil.showToast("点击了确定");
         //                 } else if (res.cancel) {
         //                     console.log("点击了取消");
-        //                     GameGlobal.WeChatUtil.showToast("点击了取消");
+        //                     WeChatUtil.showToast("点击了取消");
         //                 }
         //             }
         //         });
         //     }
         // });
 
-        GameGlobal.WeChatUtil.showModal({
+        WeChatUtil.showModal({
             title: "温馨提示",
             content: "点击确定将增加100点击伤害",
             callBack: function (res) {
@@ -216,11 +229,11 @@ cc.Class({
                 console.log(res);
                 if (res.confirm) {
                     console.log("点击了确定");
-                    GameGlobal.WeChatUtil.showToast("点击伤害+100");
+                    WeChatUtil.showToast("点击伤害+100");
                     self.clickDamage = self.clickDamage.plus(100);
                 } else if (res.cancel) {
                     console.log("点击了取消");
-                    // GameGlobal.WeChatUtil.showToast("点击了取消");
+                    // WeChatUtil.showToast("点击了取消");
                 }
             }
         });

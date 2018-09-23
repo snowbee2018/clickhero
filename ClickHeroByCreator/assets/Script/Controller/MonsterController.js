@@ -39,10 +39,10 @@ cc.Class({
         self.gameController.updataMonsterInfoDisplay();
     },
 
-    hit (damage) {
+    hit (damage, bDPS) {
         const self = this;
         if (cc.isValid(self.curMonster)) {
-            self.curMonster.hurt(damage);
+            self.curMonster.hurt(damage, bDPS);
             self.gameController.updataMonsterInfoDisplay();
         }
     },

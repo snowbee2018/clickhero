@@ -62,13 +62,13 @@ cc.Class({
         },
         // 计算总DPS伤害
         calDPSDamage(){
-            let dps = 0;
+            let dps = new BigNumber(0);
             HeroDatas.heroList.forEach(hero => {
                 if (hero.isBuy&&hero.isPassive) {
-                    dps+=hero.DPS;
+                    dps = dps.plus(hero.DPS)
                 }
             });
-            this.dpsDamage = dps * this.globalDPSTimes;
+            this.dpsDamage = dps.times(this.globalDPSTimes);
         },
         // 计算点击附加伤害
         calDPSClickDamage(){
