@@ -53,6 +53,7 @@ cc.Class({
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.off(Events.ON_BY_HERO, self.onHeroChange, self);
         Events.off(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
+        Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
     },
 
     onGoldChange () {
@@ -72,12 +73,20 @@ cc.Class({
         }
     },
 
+    onSkillChange (skillInfo) {
+        const self = this;
+        if (skillInfo.heroID == self._heroID) {
+            self.setDisplay();
+        }
+    },
+
     setItem (heroID) {
         const self = this;
         self._heroID = heroID;
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
         Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
+        Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
     },
 
     isCanBuy () {

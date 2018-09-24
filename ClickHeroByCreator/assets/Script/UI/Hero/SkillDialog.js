@@ -35,6 +35,28 @@ cc.Class({
 
     // update (dt) {},
 
+    onEnable () {
+        const self = this;
+        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onBuySkill, self);
+    },
+
+    onDisable () {
+            const self = this;
+        Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onBuySkill, self);
+    },
+    
+    onGoldChange () {
+        const self = this;
+        self.setDisplay();
+    },
+
+    onBuySkill() {
+        const self = this;
+        self.setDisplay();
+    },
+
     setDialog (heroID) {
         const self = this;
         self._heroID = heroID;

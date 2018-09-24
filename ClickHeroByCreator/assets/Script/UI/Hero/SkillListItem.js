@@ -71,7 +71,17 @@ cc.Class({
                 
             }
         }
-        
+    },
 
+    onBuyBtnClick () {
+        const self = this;
+        var hero = HeroDatas.getHero(self._heroID);
+        var skillArr = hero.skills;
+        if (skillArr) {
+            var skill = skillArr[self._skillID];
+            if (skill.isBuy == false) {
+                hero.buySkill(self._skillID);
+            }
+        }
     },
 });

@@ -118,7 +118,7 @@ cc.Class({
         // level // 解锁技能的等级
         // name // 技能显示的名字
         // describe // 技能描述
-        // isBy // 是否被激活
+        // isBuy // 是否被激活
         // var CfgMgr = require("LocalCfgMgr");
         // let skillObj = CfgMgr.getHeroSkills(0);
         // console.log(skillObj);
@@ -140,7 +140,7 @@ cc.Class({
                             level: 0,
                             name: "",
                             describe: "",
-                            isBy: false,
+                            isBuy: false,
                         }
                         for (const key in skilData) {
                             if (skilData.hasOwnProperty(key)) {

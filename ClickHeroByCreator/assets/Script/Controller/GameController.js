@@ -79,6 +79,7 @@ cc.Class({
         
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         self.schedule(self.applyDPS.bind(self), 1);
+        self.totalCostLab.string = DataCenter.getGoldStr();
     },
 
     onGoldChange () {

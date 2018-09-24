@@ -71,22 +71,34 @@ cc.Class({
         }
     },
 
-    buySkill(index){
-        let skill = this.skills[index];
-        let isSuccess = false;
-        if (this.level >= skill.level) {
-            isSuccess = UserData.spendGold(skill.cost);
-            // 刷新全局点击附加
-            // 刷新全局DPS倍数
-            // 刷新全局金币倍数
-            // 刷新点击伤害
-            // 刷新DPS伤害
-            // 刷新暴击倍数
-            // 刷新暴击倍率
-            this.refresh();
-            GameData.refresh();
+    buySkill(skillID){
+        if (this.skills) {
+            let skill = this.skills[skillID];
+            if (this.level >= skill.level && skill.isBuy == false) {
+                var cost = new BigNumber(skill.cost);
+                var isCanBuy = DataCenter.isGoldEnough(cost);
+                if (isCanBuy) {
+                    this.skills[skillID].isBuy = true;
+                    // 刷新全局点击附加
+                    // 刷新全局DPS倍数
+                    // 刷新全局金币倍数
+                    // 刷新点击伤害
+                    // 刷新DPS伤害
+                    // 刷新暴击倍数
+                    // 刷新暴击倍率
+                    this.refresh();
+                    GameData.refresh();
+
+                    DataCenter.consumeGold(cost);
+                    Events.emit(Events.ON_UPGRADE_HERO_SKILLS, {
+                        heroID: this.id,
+                        skillID: skillID,
+                    });
+                    return true;
+                }
+            }
         }
-        return isSuccess;
+        return false;
     },
 
     refresh() {
@@ -103,41 +115,49 @@ cc.Class({
     // DPS倍数
     getDPSTimes(){
         let times = 1;
-        this.skills.forEach(skill => {
-            if (skill.isBuy&&skill.heroDPS) {
-                time *= skill.heroDPS;
-            }
-        });
+        if (this.skills) {
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.heroDPS) {
+                    times *= skill.heroDPS;
+                }
+            });
+        }
         return times;
     },
     // 全局DPS倍数
     getGlobalDPSTimes(){
         let times = 1;
-        this.skills.forEach(skill => {
-            if (skill.isBuy&&skill.globalDPS) {
-                times *= skill.globalDPS;
-            }
-        });
+        if (this.skills) {
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.globalDPS) {
+                    times *= skill.globalDPS;
+                }
+            });
+        }
         return times;
     },
     // 全局金币倍数
     getGlobalGoldTimes(){
         let times = 1;
-        this.skills.forEach(skill => {
-            if (skill.isBuy&&skill.gold) {
-                times *= skill.gold;
-            }
-        });
+        if (this.skills) {
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.gold) {
+                    times *= skill.gold;
+                }
+            });
+        }
         return times;
     },
     // 附加点击伤害倍数
     getDPSClickTimes(){
         let times = 0;
-        this.skills.forEach(skill => {
-            if (skill.isBuy&&skill.bjDamage) {
-                times += skill.bjDamage;
-            }
-        });
+        if (this.skills) { 
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.bjDamage) {
+                    times += skill.bjDamage;
+                }
+            });
+        }
         return times;
     },
 });
