@@ -17,6 +17,7 @@ cc.Class({
         _gold: 0, // 掉落金币 bignumber
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
+        _isTreasureChest: false, // 是否是宝箱怪
 
         damageAnim: cc.Prefab,
         monsterSprf: [cc.SpriteFrame],
@@ -26,7 +27,7 @@ cc.Class({
 
     ctor () {
         const self = this;
-
+        
     },
 
     onLoad () {
@@ -66,11 +67,17 @@ cc.Class({
         const self = this;
         self._lv = lv;
         self._num = num;
+        if (self._lv%5 != 0) {
+            self._isTreasureChest = Formulas.isHitRandom(1);
+        }
         self._totalHP = Formulas.getMonsterHP(lv);
         self._curHP = new BigNumber(self._totalHP);
         self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[num];
-        
         self._gold = Formulas.getMonsterGold(lv, self._totalHP);
+        if (self._isTreasureChest) {
+            self._gold = self._gold.times(10);
+        }
+        
         self._onMonsterDestroy = onMonsterDestroy;
     },
 
@@ -78,9 +85,15 @@ cc.Class({
         const self = this;
         self._lv = lv;
         self._num = num;
+        if (self._lv%5 != 0) {
+            self._isTreasureChest = Formulas.isHitRandom(1);
+        }
         self._totalHP = new BigNumber(totalHP);
         self._curHP = new BigNumber(curHP);
         self._gold = Formulas.getMonsterGold(lv, self._totalHP);
+        if (self._isTreasureChest) {
+            self._gold = self._gold.times(10);
+        }
         self._onMonsterDestroy = onMonsterDestroy;
     },
 

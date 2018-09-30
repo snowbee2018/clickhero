@@ -29,7 +29,7 @@ cc.Class({
     // 读取本地用户数据之后用来初始化
     init () {
         const self = this;
-        self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+10")))
+        self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
     },
 
     setDataByKey (key, params) {

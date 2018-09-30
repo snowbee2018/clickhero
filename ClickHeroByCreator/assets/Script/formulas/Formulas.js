@@ -98,7 +98,7 @@ cc.Class({
         // "1.1234e+14"  "11234b"
         // "1.1234e+15"  "1.1234c" 1c = 1e+15
         formatBigNumber (bigNumber) {
-            if (BigNumber.isBigNumber(gold)) {
+            if (BigNumber.isBigNumber(bigNumber)) {
                 var c = 5;
                 var str = bigNumber.toExponential(4);
                 var arr = str.split("e+");
@@ -110,12 +110,29 @@ cc.Class({
                     var unit = unitArr[int];
                     var num = Math.pow(10, rem) * number;
                     var result = num.toFixed(c-1-rem) + unit;
-                    console.log(str + " = " + result);
+                    // console.log(str + " = " + result);
                     return result;
                 } else {
                     return str;
                 }
             }
         },
+        
+        // 在 rate 概率下是否命中随机事件，rate 为百分数，大于等于0，小于100
+        isHitRandom (rate) {
+            if (rate >= 100) {
+                return true;
+            } else if (rate >= 0) {
+                if (Math.random()*100 < rate) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            
+        },
+        
     },
 });
