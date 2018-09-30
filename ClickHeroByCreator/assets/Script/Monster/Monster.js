@@ -122,7 +122,7 @@ cc.Class({
                 self.goDie();
             }
             // console.log("cur hp : " + self._curHP.toString());
-            self.playDamage(damage);
+            self.playDamage(Formulas.formatBigNumber(damage));
         } else {
             self.goDie();
         }
