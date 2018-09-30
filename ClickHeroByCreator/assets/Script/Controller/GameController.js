@@ -82,6 +82,29 @@ cc.Class({
         self.totalCostLab.string = DataCenter.getGoldStr();
     },
 
+    formatLocalGameData () {
+        const self = this;
+        var map = DataCenter.KeyMap;
+        var monsterInfo = self.monsterController.getCurMonsterInfo();
+        var curGold = self.getDataByKey(map.curGold);
+
+        var obj = {}
+        obj[map.lastTime] = Date.now().toString();
+        obj[map.monsterInfo] = self.monsterController.formatMonsterInfo();
+        // obj[map.curDiamond] = 
+        obj[map.curGold] = curGold.toExponential(4);
+        // obj[map.curSoul] = 
+        // obj[map.additionalSoul] = 
+        obj[map.heroList] = HeroDatas.formatHeroList();
+        // obj[map.skillList] = 
+        // obj[map.achievementList] = 
+        // obj[map.equipmentList] = 
+        // obj[map.shopList] = 
+        // obj[map.lansquenetList] = 
+        // obj[map.curSetting] = 
+        WeChatUtil.setLocalStorage(JSON.stringify(obj));
+    },
+
     onGoldChange () {
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
@@ -92,8 +115,9 @@ cc.Class({
         let info = self.monsterController.getCurMonsterInfo();
         self.lvLab.string = info.lv;
         self.numLab.string = info.num;
-        self.hpLab.string = info.hp.toExponential(3);
-        self.costLab.string = info.gold.toExponential(3);
+        
+        self.hpLab.string = Formulas.formatBigNumber(info.hp);
+        self.costLab.string = Formulas.formatBigNumber(info.gold);
     },
 
     onTouchStart (event) {

@@ -87,9 +87,9 @@ cc.Class({
         self.heroName.string = hero.heroName;
         self.heroLevel.string = "等级:" + hero.level;
         if (self._heroID == 0) {
-            self.heroDPS.string = "点击伤害:" + hero.DPS.toExponential(2);
+            self.heroDPS.string = "点击伤害:" + Formulas.formatBigNumber(hero.DPS);
         } else {
-            self.heroDPS.string = "DPS伤害:" + hero.DPS.toExponential(2);
+            self.heroDPS.string = "DPS伤害:" + Formulas.formatBigNumber(hero.DPS);
         }
         
         for (let index = 0; index < self.skillItem.length; index++) {

@@ -27,8 +27,16 @@ cc.Class({
         return this;
     },
 
-    onGoldChange () {
-
+    formatHeroInfo () {
+        var obj = {}
+        obj.id = this.id;
+        obj.isBuy = this.isBuy;
+        obj.skills = [];
+        for (let skillID = 0; skillID < this.skills.length; skillID++) {
+            const skill = this.skills[skillID];
+            obj.skills.push(skill.isBuy);
+        }
+        return obj;
     },
 
     buy(){

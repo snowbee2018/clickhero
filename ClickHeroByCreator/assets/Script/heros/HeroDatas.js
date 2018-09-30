@@ -38,5 +38,16 @@ cc.Class({
         getHero(id){
             return this.heroList[id];
         },
+        formatHeroList () {
+            var arr = []
+            for (let heroID = 0; heroID < this.heroList.length; heroID++) {
+                const hero = this.heroList[heroID];
+                if (hero.isBuy) {
+                    var heroInfo = hero.formatHeroInfo();
+                    arr.push(heroInfo);
+                }
+            }
+            return JSON.stringify(arr);
+        },
     }
 });

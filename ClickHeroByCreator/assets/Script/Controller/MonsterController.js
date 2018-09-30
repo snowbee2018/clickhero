@@ -30,6 +30,17 @@ cc.Class({
 
     // update (dt) {},
 
+    formatMonsterInfo () {
+        const self = this;
+        var map = DataCenter.KeyMap;
+        var monsterInfo = self.getCurMonsterInfo();
+        var obj = {}
+        obj.lv = monsterInfo.lv;
+        obj.num = monsterInfo.num;
+        obj.hp = monsterInfo.hp.toExponential(4);
+        return JSON.stringify(obj);
+    },
+
     makeMonster (lv, num) {
         const self = this;
         let monsterNode = cc.instantiate(self.monsterPrefab);

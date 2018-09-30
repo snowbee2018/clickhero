@@ -130,20 +130,20 @@ cc.Class({
         
         if (hero.isBuy) {
             self.btnTitle.string = "升级";
-            self.upgradeCost.string = hero.cost.toExponential(2) + " 金币";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.cost) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = hero.baseCost.toExponential(2) + " 金币";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.baseCost) + " 金币";
             self.btn.interactable = self.isCanBuy();
         }
         self.nameLab.string = hero.heroName;
         self.level.string = "等级:" + hero.level;
         
         if (self._heroID == 0) {
-            self.dps.string = "点击伤害:" + hero.DPS.toExponential(2);
+            self.dps.string = "点击伤害:" + Formulas.formatBigNumber(hero.DPS);
         } else {
-            self.dps.string = "DPS伤害:" + hero.DPS.toExponential(2);
+            self.dps.string = "DPS伤害:" + Formulas.formatBigNumber(hero.DPS);
         }
 
         for (let skillID = 0; skillID < self.skillIcon.length; skillID++) {
