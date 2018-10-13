@@ -140,6 +140,8 @@ cc.Class({
         self.nameLab.string = hero.heroName;
         self.level.string = "等级:" + hero.level;
         
+        hero.DPS = hero.DPS ? hero.DPS : 0;
+        hero.DPS = new BigNumber(hero.DPS);
         if (self._heroID == 0) {
             self.dps.string = "点击伤害:" + Formulas.formatBigNumber(hero.DPS);
         } else {

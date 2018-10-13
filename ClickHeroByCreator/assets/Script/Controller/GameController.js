@@ -14,7 +14,6 @@ cc.Class({
 
         totalCostLab: cc.Label,
         lvLab: cc.Label,
-        numLab: cc.Label,
         hpLab: cc.Label,
         costLab: cc.Label,
 
@@ -72,7 +71,7 @@ cc.Class({
         HeroDatas.init();
         GameData.refresh();
         self.heroListControl.setHeroList();
-        self.monsterController.makeMonster(1, 1);
+        self.monsterController.makeMonster(1);
 
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
@@ -114,7 +113,6 @@ cc.Class({
         const self = this;
         let info = self.monsterController.getCurMonsterInfo();
         self.lvLab.string = info.lv;
-        self.numLab.string = info.num;
         
         self.hpLab.string = Formulas.formatBigNumber(info.hp);
         self.costLab.string = Formulas.formatBigNumber(info.gold);

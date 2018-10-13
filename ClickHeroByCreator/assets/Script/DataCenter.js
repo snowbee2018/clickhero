@@ -6,6 +6,7 @@ cc.Class({
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量，存json
+            passLavel: "passLavel", // 已通过的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
             curSoul: "curSoul", // 当前英魂数量
@@ -96,5 +97,25 @@ cc.Class({
         var key = self.KeyMap.curGold;
         var curGold = self.getDataByKey(key);
         return Formulas.formatBigNumber(curGold);
+    },
+
+    passLevel (level) {
+        const self = this;
+        var key = self.KeyMap.passLavel;
+        var curPassLevel = self.getDataByKey(key);
+        if (curPassLevel) {
+            if (level > curPassLevel) {
+                self.setDataByKey(key, level);
+            }
+        } else {
+            self.setDataByKey(key, level);
+        }
+    },
+
+    isLevelPassed (level) {
+        const self = this;
+        var key = self.KeyMap.passLavel;
+        var curPassLevel = self.getDataByKey(key);
+        return curPassLevel >= level;
     },
 });

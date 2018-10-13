@@ -13,7 +13,6 @@ cc.Class({
 
     properties: {
         _lv: 0, // 怪物等级
-        _num: 0, // 怪物在当前等级的序号，0 ~ 9
         _gold: 0, // 掉落金币 bignumber
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
@@ -56,23 +55,25 @@ cc.Class({
 
     onDestroy () {
         const self = this;
-        if (self._onMonsterDestroy) {
-            self._onMonsterDestroy(self._lv, self._num, self._gold);
+        if (!self._isByeBye) {
+            if (self._onMonsterDestroy) {
+                self._onMonsterDestroy(self._lv, self._gold, self._isBoss);
+            }
         }
     },
 
     // update (dt) {},
 
-    setMonsterByLv (lv, num, onMonsterDestroy) {
+    setMonsterByLv (lv, onMonsterDestroy) {
         const self = this;
         self._lv = lv;
-        self._num = num;
         if (self._lv%5 != 0) {
             self._isTreasureChest = Formulas.isHitRandom(1);
         }
+        self._isBoss = self._lv % 5 == 0;
         self._totalHP = Formulas.getMonsterHP(lv);
         self._curHP = new BigNumber(self._totalHP);
-        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[num];
+        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
         self._gold = Formulas.getMonsterGold(lv, self._totalHP);
         if (self._isTreasureChest) {
             self._gold = self._gold.times(10);
@@ -81,14 +82,14 @@ cc.Class({
         self._onMonsterDestroy = onMonsterDestroy;
     },
 
-    setMonsterByData(lv, num, totalHP, curHP, cost) {
+    setMonsterByData(lv, curHP) {
         const self = this;
         self._lv = lv;
-        self._num = num;
         if (self._lv%5 != 0) {
             self._isTreasureChest = Formulas.isHitRandom(1);
         }
-        self._totalHP = new BigNumber(totalHP);
+        self._isBoss = self._lv % 5 == 0;
+        self._totalHP = Formulas.getMonsterHP(lv);;
         self._curHP = new BigNumber(curHP);
         self._gold = Formulas.getMonsterGold(lv, self._totalHP);
         if (self._isTreasureChest) {
@@ -139,6 +140,12 @@ cc.Class({
 
     onDieAnimEnd () {
         const self = this;
+        self.node.destroy();
+    },
+
+    byebye () { // 上一关下一关调用的，不回调
+        const self= this;
+        self._isByeBye = true;
         self.node.destroy();
     },
 });

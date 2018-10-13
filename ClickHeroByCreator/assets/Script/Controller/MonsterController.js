@@ -14,7 +14,7 @@ cc.Class({
     properties: {
         monsterPos: cc.Node,
         monsterPrefab: cc.Prefab,
-
+        zoneInfoNode: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -22,6 +22,7 @@ cc.Class({
     onLoad () {
         const self = this;
         self.gameController = self.getComponent("GameController");
+        self.zoneInfo = self.zoneInfoNode.getComponent("ZoneInfo");
     },
 
     start () {
@@ -36,18 +37,23 @@ cc.Class({
         var monsterInfo = self.getCurMonsterInfo();
         var obj = {}
         obj.lv = monsterInfo.lv;
-        obj.num = monsterInfo.num;
         obj.hp = monsterInfo.hp.toExponential(4);
         return JSON.stringify(obj);
     },
 
-    makeMonster (lv, num) {
+    makeMonster (lv) {
         const self = this;
         let monsterNode = cc.instantiate(self.monsterPrefab);
         monsterNode.parent = self.monsterPos;
         self.curMonster = monsterNode.getComponent("Monster");
-        self.curMonster.setMonsterByLv(lv, num, self.onCurMonsterDestroy.bind(self));
+        self.curMonster.setMonsterByLv(lv, self.onCurMonsterDestroy.bind(self));
         self.gameController.updataMonsterInfoDisplay();
+        if (!DataCenter.isLevelPassed(lv)) {
+            if (!self.killCount) {
+                self.killCount = 0;
+            }
+        }
+        self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
     },
 
     hit (damage, bDPS) {
@@ -58,13 +64,22 @@ cc.Class({
         }
     },
 
-    onCurMonsterDestroy (lv, num, gold) {
+    onCurMonsterDestroy (lv, gold, isBoss) {
         const self = this;
-        if (lv % 5 == 0) {
-            self.makeMonster(lv + 1, 0);
-        } else {
-            self.makeMonster(num == 9 ? lv + 1 : lv, num == 9 ? 0 : num + 1);
+        if (!DataCenter.isLevelPassed(lv)) {
+            if (isBoss) {
+                DataCenter.passLevel(lv);
+                delete self.killCount;
+            } else {
+                if (self.killCount + 1 >= 10) {
+                    DataCenter.passLevel(lv);
+                    delete self.killCount;
+                } else {
+                    self.killCount++;
+                }
+            }
         }
+        self.makeMonster(lv);
         self.gameController.onMonsterGold(gold);
     },
 
@@ -72,9 +87,26 @@ cc.Class({
         const self = this;
         return {
             lv: self.curMonster._lv,
-            num: self.curMonster._num,
             hp: self.curMonster._curHP,
             gold: self.curMonster._gold,
+        }
+    },
+
+    goToLastLevel () {
+        const self = this;
+        if (self.curMonster._lv > 1) {
+            var targetLv = self.curMonster._lv - 1;
+            self.curMonster.byebye();
+            self.makeMonster(targetLv);
+        }
+    },
+
+    goToNextLevel () {
+        const self = this;
+        if (DataCenter.isLevelPassed(self.curMonster._lv)) {
+            var targetLv = self.curMonster._lv + 1;
+            self.curMonster.byebye();
+            self.makeMonster(targetLv);
         }
     },
 });

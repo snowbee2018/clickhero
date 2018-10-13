@@ -32,6 +32,7 @@ cc.Class({
         window.HeroDatas = require("HeroDatas");
         window.Events = require("Events");
         window.BigNumber = require("BigNumber");
+        window.ZoneArr = require("ZoneCfg");
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
@@ -47,6 +48,7 @@ cc.Class({
         if (window.HeroDatas == undefined) return;
         if (window.Events == undefined) return;
         if (window.BigNumber == undefined) return;
+        if (window.ZoneArr == undefined) return;
         
         // 检查本地配置是否加载完成
         if (window.HerosCfg == undefined) return;
