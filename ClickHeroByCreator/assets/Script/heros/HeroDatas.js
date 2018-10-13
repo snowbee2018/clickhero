@@ -8,7 +8,7 @@ cc.Class({
         init(){
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
-                var hero = new BaseHero().init(heroID, heroCfg.name, heroCfg.baseCost, heroCfg.baseDPS);
+                var hero = new BaseHero().init(heroID, heroCfg.name, heroCfg.baseCost, heroCfg.baseDPS, false);
                 this.heroList.push(hero);
             }
 

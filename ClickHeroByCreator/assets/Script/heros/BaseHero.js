@@ -16,15 +16,29 @@ cc.Class({
         DPS : 0,//当前dps
     },
 
-    init(id,heroName,baseCost,baseDPS){
+    init(id, heroName, baseCost, baseDPS, isBuy) {
         this.isPassive = !(id == 0);
         this.id = id;
         this.heroName = heroName;
-        this.baseCost = baseCost;
-        this.baseDPS = baseDPS;
+        this.baseCost = new BigNumber(baseCost);
+        this.baseDPS = new BigNumber(baseDPS);
+        this.isBuy = isBuy;
         this.skills = CfgMgr.getHeroSkills(id);
+        this.isActive = DataCenter.isGoldEnough(this.baseCost);
         this.refresh();
+        Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
         return this;
+    },
+
+    onGoldChange () {
+        const self = this;
+        if (!self.isActive) {
+            var isCanBy = DataCenter.isGoldEnough(this.baseCost);
+            if (isCanBy) {
+                self.isActive = isCanBy;
+                Events.emit(Events.HERO_ACTIVE, this.id);
+            }
+        }
     },
 
     formatHeroInfo () {
