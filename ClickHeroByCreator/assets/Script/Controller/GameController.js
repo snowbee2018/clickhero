@@ -152,10 +152,10 @@ cc.Class({
         let weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
-        cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "jpg"}, function (err, texture) {
+        cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
             if (texture) {
                 // 不知道为什么远程图片显示不出来，以后来看一下
-                self.headSprite.sreiteFrame = new cc.SpriteFrame(texture);
+                self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
             }
         });
         let str = weChatUserInfo.country;
