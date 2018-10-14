@@ -58,8 +58,15 @@ cc.Class({
         if (self.curMonster._isBoss) {
             if (self.curMonster._curHP.gt(0)) {
                 WeChatUtil.showToast("打Boss失败了");
-                self.goToLastLevel();
-                self.toggle.isChecked = false;
+                if (DataCenter.isLevelPassed(self.curMonster._lv)) {
+                    self.curMonster.recoverHP();
+                    self._countdown = 30;
+                    self.setTimeLabel(self._countdown);
+                } else {
+                    self.goToLastLevel();
+                    self._autoNext = false;
+                    self.toggle.isChecked = self._autoNext;
+                }
             }
         }
     },
@@ -105,11 +112,11 @@ cc.Class({
         if (!DataCenter.isLevelPassed(lv)) {
             if (!self.killCount) {
                 self.killCount = 0;
-                if (self.curMonster._isBoss) { // 开始倒计时
-                    self._countdown = 30;
-                    self.setTimeLabel(self._countdown);
-                }
             }
+        }
+        if (self.curMonster._isBoss) { // 开始倒计时
+            self._countdown = 30;
+            self.setTimeLabel(self._countdown);
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
     },
@@ -137,7 +144,6 @@ cc.Class({
         if (!DataCenter.isLevelPassed(lv)) {
             if (isBoss) {
                 DataCenter.passLevel(lv);
-                delete self.killCount;
                 if (self._autoNext) {
                     self.goToNextLevel();
                 } else {
@@ -146,7 +152,6 @@ cc.Class({
             } else {
                 if (self.killCount + 1 >= 10) {
                     DataCenter.passLevel(lv);
-                    delete self.killCount;
                     if (self._autoNext) {
                         self.goToNextLevel();
                     } else {
@@ -156,6 +161,12 @@ cc.Class({
                     self.killCount++;
                     self.makeMonster(lv);
                 }
+            }
+        } else {
+            if (self._autoNext) {
+                self.goToNextLevel();
+            } else {
+                self.makeMonster(lv);
             }
         }
         
@@ -174,6 +185,8 @@ cc.Class({
     goToLastLevel () {
         const self = this;
         if (self.curMonster._lv > 1) {
+            delete self.killCount;
+            delete self._countdown;
             var targetLv = self.curMonster._lv - 1;
             self.curMonster.byebye();
             self.makeMonster(targetLv);
@@ -183,6 +196,8 @@ cc.Class({
     goToNextLevel () {
         const self = this;
         if (DataCenter.isLevelPassed(self.curMonster._lv)) {
+            delete self.killCount;
+            delete self._countdown;
             var targetLv = self.curMonster._lv + 1;
             self.curMonster.byebye();
             self.makeMonster(targetLv);

@@ -110,6 +110,11 @@ cc.Class({
         self.onHpChange();
     },
 
+    recoverHP () {
+        const self = this;
+        self._curHP = self._totalHP;
+    },
+
     playDamage (damage) {
         const self = this;
         var damageNode = cc.instantiate(self.damageAnim);
