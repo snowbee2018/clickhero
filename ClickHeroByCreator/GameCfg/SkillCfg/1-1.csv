@@ -3,4 +3,4 @@ name,describe,globalDPS,heroDPS,DPSClick,gold,bjDamage,bjProbability,unlock,cost
 荆棘,Treebeast的武器尖锐点，帮助切割敌人。,,2,,,,,,1.25e+3,25
 Megastick,Treebeast真的很棒。,,2,,,,,,5e+3,50
 Ultrastick,森林里最大的棍子。,,2.5,,,,,,4e+4,75
-漆,适用于耐用性和强度的大棒。,,0.005,,,,,,4e+5,100
+漆,适用于耐用性和强度的大棒。,0.005,,,,,,,4e+5,100

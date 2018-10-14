@@ -17,6 +17,7 @@ cc.Class({
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
         _isTreasureChest: false, // 是否是宝箱怪
+        _monsterName: "怪物名字",
 
         damageAnim: cc.Prefab,
         monsterSprf: [cc.SpriteFrame],
@@ -64,7 +65,14 @@ cc.Class({
 
     // update (dt) {},
 
-    setMonsterByLv (lv, onMonsterDestroy) {
+    onHpChange () {
+        const self = this;
+        if (self._hpChangeCallBack) {
+            self._hpChangeCallBack(self._monsterName, self._totalHP, self._curHP);
+        }
+    },
+
+    setMonsterByLv(lv, onMonsterDestroy, hpChangeCallBack) {
         const self = this;
         self._lv = lv;
         if (self._lv%5 != 0) {
@@ -80,9 +88,11 @@ cc.Class({
         }
         
         self._onMonsterDestroy = onMonsterDestroy;
+        self._hpChangeCallBack = hpChangeCallBack;
+        self.onHpChange();
     },
 
-    setMonsterByData(lv, curHP) {
+    setMonsterByData(lv, curHP, onMonsterDestroy, hpChangeCallBack) {
         const self = this;
         self._lv = lv;
         if (self._lv%5 != 0) {
@@ -96,6 +106,8 @@ cc.Class({
             self._gold = self._gold.times(10);
         }
         self._onMonsterDestroy = onMonsterDestroy;
+        self._hpChangeCallBack = hpChangeCallBack;
+        self.onHpChange();
     },
 
     playDamage (damage) {
@@ -117,13 +129,19 @@ cc.Class({
             bDPS = bDPS ? true : false;
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
-                if (!bDPS) self.playAnim("Hurt");
+                if (bDPS) {
+                    
+                } else {
+                    self.playAnim("Hurt");
+                    self.playDamage(Formulas.formatBigNumber(damage));
+                }
             } else {
                 self._curHP = new BigNumber(0);
+                self.playDamage(Formulas.formatBigNumber(damage));
                 self.goDie();
             }
             // console.log("cur hp : " + self._curHP.toString());
-            self.playDamage(Formulas.formatBigNumber(damage));
+            self.onHpChange();
         } else {
             self.goDie();
         }

@@ -15,6 +15,9 @@ cc.Class({
         monsterPos: cc.Node,
         monsterPrefab: cc.Prefab,
         zoneInfoNode: cc.Node,
+        hpBar: cc.ProgressBar,
+        monsterName: cc.Label,
+        hpLabel: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -46,7 +49,11 @@ cc.Class({
         let monsterNode = cc.instantiate(self.monsterPrefab);
         monsterNode.parent = self.monsterPos;
         self.curMonster = monsterNode.getComponent("Monster");
-        self.curMonster.setMonsterByLv(lv, self.onCurMonsterDestroy.bind(self));
+        self.curMonster.setMonsterByLv(
+            lv,
+            self.onCurMonsterDestroy.bind(self),
+            self.onHpChange.bind(self)
+        );
         self.gameController.updataMonsterInfoDisplay();
         if (!DataCenter.isLevelPassed(lv)) {
             if (!self.killCount) {
@@ -62,6 +69,16 @@ cc.Class({
             self.curMonster.hurt(damage, bDPS);
             self.gameController.updataMonsterInfoDisplay();
         }
+    },
+
+    onHpChange (name, totalHp, curHp) {
+        const self = this;
+        self.monsterName = name;
+        var percent = curHp.div(totalHp).toNumber();
+        // console.log("FFFFFFFFFFFFFFFFFFFF");
+        // console.log("percent = " + percent);
+        self.hpLabel.string = Formulas.formatBigNumber(curHp) + " / " + Formulas.formatBigNumber(totalHp);
+        self.hpBar.progress = percent;
     },
 
     onCurMonsterDestroy (lv, gold, isBoss) {

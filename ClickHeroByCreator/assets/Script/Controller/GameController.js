@@ -39,6 +39,7 @@ cc.Class({
     update (dt) {
         const self = this;
         // console.log("dt = " + dt);
+        self.applyDPS(dt);
         if (ClickEnable == false) {
             ClickDt += dt;
             if (ClickDt >= 0.05) {
@@ -77,7 +78,7 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
-        self.schedule(self.applyDPS.bind(self), 1);
+        
         self.totalCostLab.string = DataCenter.getGoldStr();
     },
 
@@ -136,9 +137,9 @@ cc.Class({
         self.monsterController.hit(GameData.clickDamage, false);
     },
 
-    applyDPS() {
+    applyDPS(dt) {
         const self = this;
-        self.monsterController.hit(GameData.dpsDamage, true);
+        self.monsterController.hit(GameData.dpsDamage.times(dt), true);
     },
 
     onMonsterGold (gold) {
