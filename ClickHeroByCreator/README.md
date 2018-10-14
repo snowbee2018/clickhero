@@ -1,6 +1,6 @@
 # Life was like a box of chocolates. You never know what you're going to get.
 
-## click hero wiki
+## WIKI
 地址：http://clickerheroes.wikia.com/wiki/ClickerHeroes_Wiki<br>
 数值：http://clickerheroes.wikia.com/wiki/Formulas<br>
 英雄：http://clickerheroes.wikia.com/wiki/Heroes<br>
