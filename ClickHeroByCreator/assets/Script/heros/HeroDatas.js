@@ -1,10 +1,41 @@
 // 这里管理Hero列表
 var BaseHero = require("BaseHero");
 var CfgMgr = require("LocalCfgMgr");
+
+// 召唤费用和重选需要的魂，按照召唤个数递增
+var buyAncientSouls = [
+    [1,1],
+    [2,1],
+    [4,2],
+    [8,3],
+    [16,6],
+    [35,12],
+    [70,24],
+    [125,42],
+    [250,84],
+    [500,167],
+    [800,267],
+    [1200,400],
+    [1700,567],
+    [2200,734],
+    [2750,917],
+    [3400,1134],
+    [4100,1367],
+    [5000,1667],
+    [6000,2000],
+    [7500,2500],
+    [10000,3334],
+    [12500,4167],
+    [16000,5334],
+    [25000,8334],
+    [35000,11667],
+    [50000,16667],
+    ];
 cc.Class({
     
     statics:{
         heroList : [],
+        ancients : [],
         init(){
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
@@ -34,6 +65,7 @@ cc.Class({
             //     new BaseHero().init(18,"阿蒙",2.400e16,5.335e12),
             //     new BaseHero().init(19,"兽王",3.000e17,4.914e13),
             // ]
+            
         },
         getHero(id){
             return this.heroList[id];
@@ -48,6 +80,16 @@ cc.Class({
                 }
             }
             return JSON.stringify(arr);
+        },
+
+        // buy and reroll Ancient
+        getBuyAncientSoul(){
+            let index = this.ancients.length + 1;
+            return buyAncientCosts[index][0];
+        },
+        getRerollAncientSoul(){
+            let index = this.ancients.length + 1;
+            return buyAncientCosts[index][1];
         },
     }
 });
