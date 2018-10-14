@@ -30,3 +30,4 @@
 英雄：http://clickerheroes.wikia.com/wiki/Heroes<br>
 怪物：http://clickerheroes.wikia.com/wiki/Monsters<br>
 单位：http://clickerheroes.wikia.com/wiki/Units<br>
+古神：http://clickerheroes.wikia.com/wiki/Ancients<br>
