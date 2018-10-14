@@ -9,8 +9,14 @@ cc.Class({
         // ON_UPGRADE_HERO = 'on-upgrade-hero',
         // ON_UPGRADE_HERO = 'on-upgrade-hero',
         // ON_UPGRADE_HERO = 'on-upgrade-hero',
-        emit  = cc.systemEvent.emit,
-        on  = cc.systemEvent.on,
-        off  = cc.systemEvent.off,
+        emit(name,params){
+            cc.systemEvent.emit(name,params);
+        },
+        on(name,callback,target){
+            cc.systemEvent.on(name,callback,target);
+        },
+        off(name, callback, target) {
+            cc.systemEvent.off(name, callback, target);
+        },
     },
 })

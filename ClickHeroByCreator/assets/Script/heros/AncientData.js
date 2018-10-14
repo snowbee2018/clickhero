@@ -1,4 +1,4 @@
-let CfgMgr = require("LocalCfgMgr");
+// 古神
 
 cc.Class({
     // name : "Hero",//用于序列化
@@ -13,20 +13,11 @@ cc.Class({
         skills : [],
         level : 0,
         cost : 0,//升级花费
-        DPS : 0,//当前dps
+        DPS : 0,//当前dps 
     },
 
     init(id, heroName, baseCost, baseDPS, isBuy) {
-        this.isPassive = !(id == 0);
-        this.id = id;
-        this.heroName = heroName;
-        this.baseCost = new BigNumber(baseCost);
-        this.baseDPS = new BigNumber(baseDPS);
-        this.isBuy = isBuy;
-        this.skills = CfgMgr.getHeroSkills(id);
-        this.isActive = DataCenter.isGoldEnough(this.baseCost);
-        this.refresh();
-        Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
+        
         return this;
     },
 
