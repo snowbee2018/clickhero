@@ -35,7 +35,7 @@ cc.Class({
         const self = this;
         for (let heroID = 0; heroID < HeroDatas.heroList.length; heroID++) {
             var flag = false;
-            if (heroID == 0) {
+            if (heroID == 0 || heroID == 1 || heroID == 2) {
                 flag = true;
             } else {
                 var hero = HeroDatas.getHero(heroID);

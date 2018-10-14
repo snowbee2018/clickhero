@@ -18,6 +18,11 @@ cc.Class({
         hpBar: cc.ProgressBar,
         monsterName: cc.Label,
         hpLabel: cc.Label,
+        timeLabel: cc.Label,
+        toggle: cc.Toggle,
+
+        _autoNext: false,
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -32,7 +37,48 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        const self = this;
+        if (self._countdown) {
+            self._countdown -= dt;
+            if (self._countdown <= 0) {
+                delete self._countdown;
+                self.setTimeLabel("");
+                self.onCountdownFinish();
+            } else {
+                self.setTimeLabel(self._countdown);
+            }
+        } else {
+            delete self._countdown;
+        }
+    },
+
+    onCountdownFinish () {
+        const self = this;
+        if (self.curMonster._isBoss) {
+            if (self.curMonster._curHP.gt(0)) {
+                WeChatUtil.showToast("打Boss失败了");
+                self.goToLastLevel();
+                self.toggle.isChecked = false;
+            }
+        }
+    },
+
+    onToggleEvent(toggle, customEventData) {
+        const self = this;
+        // console.log("toggle.isChecked = " + toggle.isChecked);
+        self._autoNext = toggle.isChecked;
+    },
+
+    setTimeLabel (str) {
+        const self = this;
+        str = new String(str);
+        str = str.substring(0, 4)
+        if (str.length > 0) {
+            str += "S";
+        }
+        self.timeLabel.string = str;
+    },
 
     formatMonsterInfo () {
         const self = this;
@@ -55,9 +101,14 @@ cc.Class({
             self.onHpChange.bind(self)
         );
         self.gameController.updataMonsterInfoDisplay();
+        self.setTimeLabel("");
         if (!DataCenter.isLevelPassed(lv)) {
             if (!self.killCount) {
                 self.killCount = 0;
+                if (self.curMonster._isBoss) { // 开始倒计时
+                    self._countdown = 30;
+                    self.setTimeLabel(self._countdown);
+                }
             }
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
@@ -87,16 +138,27 @@ cc.Class({
             if (isBoss) {
                 DataCenter.passLevel(lv);
                 delete self.killCount;
+                if (self._autoNext) {
+                    self.goToNextLevel();
+                } else {
+                    self.makeMonster(lv);
+                }
             } else {
                 if (self.killCount + 1 >= 10) {
                     DataCenter.passLevel(lv);
                     delete self.killCount;
+                    if (self._autoNext) {
+                        self.goToNextLevel();
+                    } else {
+                        self.makeMonster(lv);
+                    }
                 } else {
                     self.killCount++;
+                    self.makeMonster(lv);
                 }
             }
         }
-        self.makeMonster(lv);
+        
         self.gameController.onMonsterGold(gold);
     },
 
