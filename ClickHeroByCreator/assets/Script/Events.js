@@ -6,6 +6,7 @@ cc.Class({
         ON_UPGRADE_HERO : 'on-upgrade-hero', //升级英雄
         ON_UPGRADE_HERO_SKILLS : 'on-upgrade-hero-skills',//升级英雄技能
         HERO_ACTIVE : "hero_active",
+        ON_USER_SKILL_UNLOCK : "on_user_skill_unlock",
         // ON_UPGRADE_HERO = 'on-upgrade-hero',
         // ON_UPGRADE_HERO = 'on-upgrade-hero',
         // ON_UPGRADE_HERO = 'on-upgrade-hero',

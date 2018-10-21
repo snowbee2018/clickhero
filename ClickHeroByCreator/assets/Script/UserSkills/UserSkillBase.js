@@ -17,6 +17,7 @@ cc.Class({
         coolingTime: 0, // 冷却时间，秒
         bSustain: false, // 是否是持续技能
         sustainTime: 0, // 持续时间
+        cost: "",
         heroID: 0,
         skillID: 0,
 
@@ -35,22 +36,72 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    // start () {},
+
+    // update (dt) {},
+
+    isCanUse () {
         const self = this;
+        // console.log("self._isBuy = " + self._isBuy);
+        // console.log("self._isActive = " + self._isActive);
+        // console.log("self.bSustain = " + self.bSustain);
+        // console.log("self._isSustainFinish = " + self._isSustainFinish);
+        var result = self._isBuy && self._isActive && ((self.bSustain && self._isSustainFinish) || !self.bSustain);
+        result = result && DataCenter.isGoldEnough(new BigNumber(self.cost));
+        return result;
+    },
+
+    initUserSkill () {
+        const self = this;
+        // 初始化UI
+        self.skillNameLab.string = self.skillName;
+        self.describeLab.string = self.describe;
+        self.timeLab.string = "";
+
+        // 读取本地存档初始化
+        self._isBuy = false; // 是否已经购买
+        self._lastTimestamp = 0; // 上次使用技能的时间
+
+        // 计算技能当前的状态
+        var nowTime = Date.parse(new Date());
+        var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
+        if (timeCooling > 0) { // 技能还在冷却过程中
+            self._isActive = false;
+            var timeStr = self.dateFormat(timeCooling / 1000);
+            self.onCoolingCountDown(timeCooling / 1000, timeStr);
+        } else { // 技能已经冷却
+            self._isActive = true;
+        }
+        if (self.bSustain) {
+            var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
+            if (timeSustain > 0) { // 技能还在持续过程中
+                self._isSustainFinish = false;
+                self.appply();
+                var timeStr = self.dateFormat(timeSustain / 1000);
+                self.onSustainCountDown(timeSustain / 1000, timeStr);
+            } else {
+                self._isSustainFinish = true;
+            }
+        } else {
+            self._isSustainFinish = true;
+        }
+        self.gray.active = !self.isCanUse();
+
         self.schedule(function () {
             if (!self._isBuy) return;
             if (self._isActive) {
-                
+
             } else {
                 var nowTime = Date.parse(new Date());
-                var time = 1000*self.coolingTime - nowTime + self._lastTimestamp;
-                if (time > 0) {
-                    var timeStr = self.dateFormat(time/1000);
-                    self.onCoolingCountDown(time/1000, timeStr);
+                var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
+                if (timeCooling > 0) {
+                    var timeStr = self.dateFormat(timeCooling / 1000);
+                    self.onCoolingCountDown(timeCooling / 1000, timeStr);
                 } else {
                     self._isActive = true;
                     self.onCoolingDone();
                 }
+                self.gray.active = !self.isCanUse();
             }
 
             if (self.bSustain) {
@@ -58,22 +109,40 @@ cc.Class({
 
                 } else {
                     var nowTime = Date.parse(new Date());
-                    var time = 1000*self.sustainTime - nowTime + self._lastTimestamp;
-                    if (time > 0) {
-                        var timeStr = self.dateFormat(time/1000);
-                        self.onSustainCountDown(time/1000, timeStr);
+                    var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
+                    if (timeSustain > 0) {
+                        var timeStr = self.dateFormat(timeSustain / 1000);
+                        self.onSustainCountDown(timeSustain / 1000, timeStr);
                     } else {
                         self._isSustainFinish = true;
                         self.onSustainDone();
                     }
+                    self.gray.active = !self.isCanUse();
                 }
             }
-        }, 1);
+            
+        }, 0.1);
+        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
     },
 
-    // update (dt) {},
+    onGoldChange () {
+        const self = this;
+        self.gray.active = !self.isCanUse();
+    },
+
+    onSkillUnlock(skillInfo) {
+        const self = this;
+        if (skillInfo.heroID == self.heroID) {
+            if (skillInfo.skillID == self.skillID) {
+                self._isBuy = true;
+                self.gray.active = !self.isCanUse();
+            }
+        }
+    },
 
     dateFormat (second) {
+        const self = this;
         var dd, hh, mm, ss;
         second = typeof second === 'string' ? parseInt(second) : second;
         if (!second || second < 0) {
@@ -99,16 +168,15 @@ cc.Class({
             result += mm + "M";
         }
         //秒
-        ss = Math.round(second) - mm * 60;
+        ss = Math.round(second);
+        // ss = Math.round(second) - mm * 60;
         result += ss + "S";
         return result;
     },
 
     releaseSkill () { // 释放技能
         const self = this;
-        console.log("self._isBuy = " + self._isBuy);
-        
-        if (!self._isBuy) return;
+        if (!self.isCanUse()) return;
         self._lastTimestamp = Date.parse(new Date());
         console.log("self._lastTimestamp = " + self._lastTimestamp);
         
@@ -121,14 +189,34 @@ cc.Class({
         if (self.bSustain) {
             self.onSustainCountDown(self.sustainTime, self.dateFormat(self.sustainTime));
         }
-        
+        DataCenter.consumeGold(new BigNumber(self.cost));
     },
 
-    onItemClick () {},
+    onCoolingCountDown(time, timeStr) {
+        const self = this;
+        // console.log("onCoolingCountDown, timeStr = " + timeStr);
+        self.timeLab.string = timeStr;
+    }, // 冷却倒计时，参数是剩余时间
 
-    onCoolingCountDown (time, timeStr) {}, // 冷却倒计时，参数是剩余时间
-    onCoolingDone() {}, // 冷却完成
-    onSustainCountDown(time, timeStr) {}, // 持续时间倒计时
-    onSustainDone () {}, // 技能持续结束
-    appply() {}, // 应用技能
+    onSustainCountDown(time, timeStr) {
+        // pass
+    }, // 持续时间倒计时
+
+    onItemClick() {
+        const self = this;
+        self.releaseSkill();
+    },
+
+    onCoolingDone() {
+        const self = this;
+        self.timeLab.string = "";
+    }, // 冷却完成
+
+    onSustainDone () {
+        const self = this;
+        self.backout();
+    }, // 技能持续结束
+
+    appply() { }, // 应用技能
+    backout() { }, // 撤销技能效果
 });

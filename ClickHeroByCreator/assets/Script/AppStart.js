@@ -11,6 +11,10 @@ var CfgMgr = require("LocalCfgMgr");
 cc.Class({
     extends: cc.Component,
 
+    properties: {
+        //
+    },
+
     ctor () {
         
     },
@@ -19,6 +23,11 @@ cc.Class({
         const self = this;
         self.node.active = false;
         self.initGame();
+    },
+    
+    start () {
+        const self = this;
+        
     },
 
     initGame () {
