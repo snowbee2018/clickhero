@@ -14,11 +14,8 @@ cc.Class({
         level : 0,
         cost : 0,//升级花费
         DPS : 0,//当前dps
-<<<<<<< HEAD
         golden : 0,//金身等级
-=======
         desc: "",
->>>>>>> 8b70fb845bd4a4d7447186befea784028d020a28
     },
 
     init(id, heroName, baseCost, baseDPS, isBuy, desc) {
@@ -183,7 +180,7 @@ cc.Class({
         }
     },
 
-    refresh() { // 需要加入金身倍数
+    refresh() {
         if (this.isBuy) {
             if (this.isPassive) {
                 this.DPS = Formulas.getDPS(this.baseDPS, this.level, this.getDPSTimes());

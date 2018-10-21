@@ -23,12 +23,16 @@ cc.Class({
         clickCrit : 1,// 暴击倍数
         clickCritOdds : 0,// 暴击概率
 
-        //--------额外的影响--------
+        //--------古神的影响--------
         addGoldenDpsTimes : 0,// 第一个古神 会影响数值 0.02++
+        addPrimalBossOdds : 0,// 增加远古Boss出现几率
         addPowersurgeSecond : 0,// Powersurge秒数增加 2s++
+        addBjTimes : 0,//古神附加暴击倍数
+        addClickstormSecond : 0, //点击风暴秒数增加 2s++
+        addBossTimerSecond : 0,// Boss计时器持续时间
 
         //--------技能的影响--------
-        powersurgeTimes : 1,
+        powersurgeTimes : 1,//能量风暴DPS倍数 触发技能时 改为对应倍数，技能结束要改回为1
 
 
         // 购买技能时触发
@@ -76,7 +80,7 @@ cc.Class({
                     dps = dps.plus(hero.DPS)
                 }
             });
-            this.dpsDamage = dps.times(this.globalDPSTimes);
+            this.dpsDamage = dps.times(this.globalDPSTimes).times(powersurgeTimes);
         },
         // 计算点击附加伤害
         calDPSClickDamage(){
