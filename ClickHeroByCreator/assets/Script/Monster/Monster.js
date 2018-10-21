@@ -92,23 +92,23 @@ cc.Class({
         self.onHpChange();
     },
 
-    setMonsterByData(lv, curHP, onMonsterDestroy, hpChangeCallBack) {
-        const self = this;
-        self._lv = lv;
-        if (self._lv%5 != 0) {
-            self._isTreasureChest = Formulas.isHitRandom(1);
-        }
-        self._isBoss = self._lv % 5 == 0;
-        self._totalHP = Formulas.getMonsterHP(lv);;
-        self._curHP = new BigNumber(curHP);
-        self._gold = Formulas.getMonsterGold(lv, self._totalHP);
-        if (self._isTreasureChest) {
-            self._gold = self._gold.times(10);
-        }
-        self._onMonsterDestroy = onMonsterDestroy;
-        self._hpChangeCallBack = hpChangeCallBack;
-        self.onHpChange();
-    },
+    // setMonsterByData(lv, curHP, onMonsterDestroy, hpChangeCallBack) {
+    //     const self = this;
+    //     self._lv = lv;
+    //     if (self._lv%5 != 0) {
+    //         self._isTreasureChest = Formulas.isHitRandom(1);
+    //     }
+    //     self._isBoss = self._lv % 5 == 0;
+    //     self._totalHP = Formulas.getMonsterHP(lv);;
+    //     self._curHP = new BigNumber(curHP);
+    //     self._gold = Formulas.getMonsterGold(lv, self._totalHP);
+    //     if (self._isTreasureChest) {
+    //         self._gold = self._gold.times(10);
+    //     }
+    //     self._onMonsterDestroy = onMonsterDestroy;
+    //     self._hpChangeCallBack = hpChangeCallBack;
+    //     self.onHpChange();
+    // },
 
     recoverHP () {
         const self = this;
@@ -131,7 +131,7 @@ cc.Class({
         if (!self._curHP.isZero()) {
             if (damage.isZero()) return;
             // console.log("hurt : damage = " + damage.toString());
-            bDPS = bDPS ? true : false;
+            // bDPS = bDPS ? true : false;
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
                 if (bDPS) {
@@ -142,7 +142,11 @@ cc.Class({
                 }
             } else {
                 self._curHP = new BigNumber(0);
-                self.playDamage(Formulas.formatBigNumber(damage));
+                console.log();
+                
+                if (!bDPS) {
+                    self.playDamage(Formulas.formatBigNumber(damage));
+                }
                 self.goDie();
             }
             // console.log("cur hp : " + self._curHP.toString());

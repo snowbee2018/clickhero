@@ -53,6 +53,21 @@ cc.Class({
         }
     },
 
+    init () {
+        const self = this;
+        // 获取本地存档，初始化关卡和怪物
+        var bFirstPlay = true;
+        if (bFirstPlay) {
+            self.makeMonster(1);
+        } else {
+            var lv = 1;
+            var killCount = 0;
+            self.killCount = killCount;
+            self.makeMonster(lv);
+        }
+
+    },
+
     onCountdownFinish () {
         const self = this;
         if (self.curMonster._isBoss) {
@@ -111,7 +126,7 @@ cc.Class({
         self.setTimeLabel("");
         if (!DataCenter.isLevelPassed(lv)) {
             if (!self.killCount) {
-                self.killCount = 0;
+                self.killCount = 1;
             }
         }
         if (self.curMonster._isBoss) { // 开始倒计时
@@ -150,7 +165,7 @@ cc.Class({
                     self.makeMonster(lv);
                 }
             } else {
-                if (self.killCount + 1 >= 10) {
+                if (self.killCount >= 10) {
                     DataCenter.passLevel(lv);
                     if (self._autoNext) {
                         self.goToNextLevel();
