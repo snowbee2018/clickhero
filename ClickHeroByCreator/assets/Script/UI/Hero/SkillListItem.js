@@ -48,7 +48,7 @@ cc.Class({
             self.skillIcon.setIcon(self._heroID, self._skillID);
             self.skillIcon.lightIcon(true);
             self.skillName.string = skillData.name;
-            self.describe.string = skillData.describe;
+            self.describe.string = skillData.describe + "--" + hero.getSkillDesc(self._skillID);
             if (skillData.isBuy) {
                 self.levelLimit.node.active = false;
                 self.btn.node.active = false;

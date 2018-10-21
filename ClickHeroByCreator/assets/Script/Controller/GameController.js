@@ -32,6 +32,7 @@ cc.Class({
 
         self.monsterController = self.getComponent("MonsterController");
         self.heroListControl = self.getComponent("HeroListControl");
+        self.userSkillController = self.getComponent("UserSkillController");
         // self.clickDamage = new BigNumber(1);
     },
 
@@ -70,9 +71,11 @@ cc.Class({
         
         DataCenter.init();
         HeroDatas.init();
+        
         GameData.refresh();
         self.heroListControl.setHeroList();
-        self.monsterController.makeMonster(1);
+        self.monsterController.init();
+        self.userSkillController.initUserSkills();
 
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
@@ -184,7 +187,34 @@ cc.Class({
 
     onHeroBtnClick () {
         const self = this;
-        self.pageNode.active = !self.pageNode.active;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (self.pageNode.active) {
+            var curPageIndex = pageView.getCurrentPageIndex();
+            if (curPageIndex == 0) { // 当前正在英雄列表界面
+                self.pageNode.active = false;
+            } else {
+                pageView.scrollToPage(0);
+            }
+        } else {
+            self.pageNode.active = true;
+            pageView.scrollToPage(0);
+        }
+    },
+
+    onUserSkillBtnClick () {
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (self.pageNode.active) {
+            var curPageIndex = pageView.getCurrentPageIndex();
+            if (curPageIndex == 1) { // 当前正在技能列表界面
+                self.pageNode.active = false;
+            } else {
+                pageView.scrollToPage(1);
+            }
+        } else {
+            self.pageNode.active = true;
+            pageView.scrollToPage(1);
+        }
     },
 
     onLeftBtnClick () {

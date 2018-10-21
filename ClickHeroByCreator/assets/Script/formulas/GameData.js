@@ -23,6 +23,14 @@ cc.Class({
         clickCrit : 1,// 暴击倍数
         clickCritOdds : 0,// 暴击概率
 
+        //--------额外的影响--------
+        addGoldenDpsTimes : 0,// 第一个古神 会影响数值 0.02++
+        addPowersurgeSecond : 0,// Powersurge秒数增加 2s++
+
+        //--------技能的影响--------
+        powersurgeTimes : 1,
+
+
         // 购买技能时触发
         // 刷新全局DPS倍数
         // 刷新全局金币倍数
@@ -94,6 +102,16 @@ cc.Class({
         // 计算点击暴击概率
         calClickCritOdds(){
 
+        },
+
+        //====下面是针对古神的====
+        refreshGoldenHero(){
+            HeroDatas.heroList.forEach(hero => {
+                if (hero.golden > 0) {
+                    hero.refresh();
+                }
+            });
+            this.calDPSDamage();
         },
     }
 })
