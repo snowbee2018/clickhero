@@ -14,6 +14,7 @@ cc.Class({
         level : 0,
         cost : 0,//升级花费
         DPS : 0,//当前dps
+        golden : 0,//金身等级
     },
 
     init(id, heroName, baseCost, baseDPS, isBuy) {
@@ -93,6 +94,28 @@ cc.Class({
         }
     },
 
+    // 升级金身
+    upgradeGolden(){
+        this.golden ++;
+        // 然后计算dps啊
+        this.refresh();
+        GameData.calDPSDamage();
+    },
+    // 回收金身 当转移金身时 使用
+    delGolden(){
+        var g = this.golden;
+        this.golden = 0;
+        this.refresh();
+        GameData.calDPSDamage();
+        return g;
+    },
+    // 增加金身 当转移金身时 使用
+    addGolden(golden){
+        this.golden += golden;
+        this.refresh();
+        GameData.calDPSDamage();
+    },
+
     buySkill(skillID){
         if (this.skills) {
             let skill = this.skills[skillID];
@@ -123,7 +146,7 @@ cc.Class({
         return false;
     },
 
-    refresh() {
+    refresh() { // 需要加入金身倍数
         if (this.isBuy) {
             if (this.isPassive) {
                 this.DPS = Formulas.getDPS(this.baseDPS, this.level, this.getDPSTimes());
@@ -144,6 +167,8 @@ cc.Class({
                 }
             });
         }
+        // 金身
+        times *= (1+this.golden*0.5 + GameData.addGoldenDpsTimes);
         return times;
     },
     // 全局DPS倍数
@@ -175,8 +200,8 @@ cc.Class({
         let times = 0;
         if (this.skills) { 
             this.skills.forEach(skill => {
-                if (skill.isBuy && skill.bjDamage) {
-                    times += skill.bjDamage;
+                if (skill.isBuy && skill.DPSClick) {
+                    times += skill.DPSClick;
                 }
             });
         }
