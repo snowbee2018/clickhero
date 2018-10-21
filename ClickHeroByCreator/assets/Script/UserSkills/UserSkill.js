@@ -41,15 +41,51 @@ cc.Class({
     //     console.log("onSustainDone");
     // }, // 技能持续结束
 
+    skill0_1(flag) {
+        const self = this;
+        console.log("appply, skill0_1");
+        if (flag) {
+            self.sceneRoot.getComponent("AutoClick").createClickStorm(false);
+        } else {
+            self.sceneRoot.getComponent("AutoClick").destroyClickStorm();
+        }
+        
+    },
+
+    skill2_3(flag) {
+        const self = this;
+        console.log("appply, skill2_3");
+        if (flag) {
+            GameData.powersurgeTimes = 2;
+            GameData.calDPSDamage();
+            GameData.calDPSClickDamage();
+            GameData.calClickDamage();
+        } else {
+            GameData.powersurgeTimes = 1;
+            GameData.calDPSDamage();
+            GameData.calDPSClickDamage();
+            GameData.calClickDamage();
+        }
+    },
+
     appply() {
         const self = this;
         console.log("appply");
-        self.sceneRoot.getComponent("AutoClick").createClickStorm(false);
+        if (self.heroID == 0 && self.skillID == 1) {
+            self.skill0_1(true);
+        } else if (self.heroID == 2 && self.skillID == 3) {
+            self.skill2_3(true);
+        }
+        
     }, // 应用技能
 
     backout() {
         const self = this;
         console.log("backout");
-        self.sceneRoot.getComponent("AutoClick").destroyClickStorm();
+        if (self.heroID == 0 && self.skillID == 1) {
+            self.skill0_1(false);
+        } else if (self.heroID == 2 && self.skillID == 3) {
+            self.skill2_3(false);
+        }
     }, // 撤销技能效果
 });

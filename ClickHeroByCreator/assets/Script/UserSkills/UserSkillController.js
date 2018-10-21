@@ -12,7 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        ClickStorm: cc.Node,
+        skillList: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -27,6 +27,11 @@ cc.Class({
 
     initUserSkills () {
         const self = this;
-        self.ClickStorm.getComponent("UserSkill0_1").initUserSkill();
+        console.log(self.skillList);
+        for (let index = 0; index < self.skillList.children.length; index++) {
+            const item = self.skillList.children[index];
+            item.getComponent("UserSkill").initUserSkill();
+        }
+        // self.ClickStorm.getComponent("UserSkill").initUserSkill();
     },
 });

@@ -59,7 +59,7 @@ cc.Class({
         self.timeLab.string = "";
 
         // 读取本地存档初始化
-        self._isBuy = false; // 是否已经购买
+        self._isBuy = true; // 是否已经购买
         self._lastTimestamp = 0; // 上次使用技能的时间
 
         // 计算技能当前的状态
