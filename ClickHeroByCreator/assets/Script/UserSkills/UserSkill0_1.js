@@ -12,74 +12,44 @@ cc.Class({
     extends: require("UserSkillBase"),
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        sceneRoot: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        const self = this;
-        self._isBuy = true; // 是否已经购买
-        // self._lastTimestamp = 0, // 上次使用技能的时间
-        self._isActive = true; // 是否已经冷却完成
-        self.gray.active = !self._isActive;
-        self._isSustainFinish = true; // 技能持续是否结束
-    },
+    // onLoad () {},
 
-    start () {
-        const self = this;
-        self._super()
-    },
+    // start () {,
 
     // update (dt) {},
 
-    onItemClick() {
-        const self = this;
-        console.log("onItemClick");
-        self.releaseSkill();
-    },
+    // onItemClick() {
+    //     const self = this;
+    //     console.log("onItemClick");
+    //     self.releaseSkill();
+    // },
 
-    onCoolingCountDown(sec, timeStr) {
-        const self = this;
-        console.log("onCoolingCountDown, timeStr = " + timeStr);
-        self.timeLab.string = timeStr;
-    }, // 冷却倒计时，参数是剩余时间
+    // onCoolingDone() {
+    //     const self = this;
+    //     console.log("onCoolingDone");
+    //     self.timeLab.string = "";
+    //     self.gray.active = !self._isActive;
+    // }, // 冷却完成
 
-    onCoolingDone() {
-        const self = this;
-        console.log("onCoolingDone");
-        self.timeLab.string = "";
-        self.gray.active = !self._isActive;
-    }, // 冷却完成
-
-    onSustainCountDown(sec, timeStr) {
-        const self = this;
-        console.log("onSustainCountDown, timeStr = " + timeStr);
-        
-    }, // 持续时间倒计时
-
-    onSustainDone() {
-        const self = this;
-        console.log("onSustainDone");
-    }, // 技能持续结束
+    // onSustainDone() {
+    //     const self = this;
+    //     console.log("onSustainDone");
+    // }, // 技能持续结束
 
     appply() {
         const self = this;
         console.log("appply");
-        self.gray.active = !self._isActive;
+        self.sceneRoot.getComponent("AutoClick").createClickStorm(false);
     }, // 应用技能
+
+    backout() {
+        const self = this;
+        console.log("backout");
+        self.sceneRoot.getComponent("AutoClick").destroyClickStorm();
+    }, // 撤销技能效果
 });

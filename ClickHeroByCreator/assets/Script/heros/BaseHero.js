@@ -14,10 +14,14 @@ cc.Class({
         level : 0,
         cost : 0,//升级花费
         DPS : 0,//当前dps
+<<<<<<< HEAD
         golden : 0,//金身等级
+=======
+        desc: "",
+>>>>>>> 8b70fb845bd4a4d7447186befea784028d020a28
     },
 
-    init(id, heroName, baseCost, baseDPS, isBuy) {
+    init(id, heroName, baseCost, baseDPS, isBuy, desc) {
         this.isPassive = !(id == 0);
         this.id = id;
         this.heroName = heroName;
@@ -26,6 +30,7 @@ cc.Class({
         this.isBuy = isBuy;
         this.skills = CfgMgr.getHeroSkills(id);
         this.isActive = DataCenter.isGoldEnough(this.baseCost);
+        this.desc = desc;
         this.refresh();
         Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
         return this;
@@ -133,7 +138,12 @@ cc.Class({
                     // 刷新暴击倍率
                     this.refresh();
                     GameData.refresh();
-
+                    if (this.skills[skillID].unlock) {
+                        Events.emit(Events.ON_USER_SKILL_UNLOCK, {
+                            heroID: this.id,
+                            skillID: skillID,
+                        });
+                    }
                     DataCenter.consumeGold(cost);
                     Events.emit(Events.ON_UPGRADE_HERO_SKILLS, {
                         heroID: this.id,
@@ -144,6 +154,33 @@ cc.Class({
             }
         }
         return false;
+    },
+
+    getSkillDesc (skillID) {
+        // console.log("skillID = " + skillID);
+        // console.log("skillID = " + skillID);
+        if (skillID < this.skills.length) {
+            var skill = this.skills[skillID];
+            var result = "";
+            if (skill.globalDPS) {
+                result = "全局DPS伤害翻" + skill.globalDPS + "倍";
+            } else if (skill.heroDPS) {
+                if (this.isPassive) {
+                    result = this.heroName + "DPS伤害翻" + skill.heroDPS + "倍";
+                } else {
+                    result = "点击伤害翻" + skill.heroDPS + "倍";
+                }
+            } else if (skill.bjDamage) {
+                result = "暴击伤害倍数增加" + skill.bjDamage;
+            } else if (skill.bjProbability) {
+                result = "暴击概率增加" + skill.bjProbability;
+            } else if (skill.unlock) {
+                result = "解锁主动技能" + skill.unlock;
+            } else if (skill.DPSClick) {
+                result = "增加DPS伤害的" + skill.DPSClick + "倍到点击伤害";
+            }
+            return result;
+        }
     },
 
     refresh() { // 需要加入金身倍数
