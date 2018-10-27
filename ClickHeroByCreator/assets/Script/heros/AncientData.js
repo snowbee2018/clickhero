@@ -95,7 +95,8 @@ cc.Class({
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
             GameData.buyHeroDisCount = 99.99999999 * (1 - Math.exp(-0.01*this.level));
         } else if (this.id == 9) {
-            // 	宝箱机会增加
+            // 	宝箱金币倍数增加
+            
         } else if (this.id == 2) {
             
         }

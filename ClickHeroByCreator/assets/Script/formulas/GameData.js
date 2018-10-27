@@ -30,6 +30,7 @@ cc.Class({
         addBjTimes : 0,//古神附加暴击倍数
         addClickstormSecond : 0, //点击风暴秒数增加 2s++
         addBossTimerSecond : 0,// Boss计时器持续时间
+        // add
 
         //--------技能的影响--------
         powersurgeTimes : 1,//能量风暴DPS倍数 触发技能时 改为对应倍数，技能结束要改回为1
