@@ -81,7 +81,7 @@ cc.Class({
                     dps = dps.plus(hero.DPS)
                 }
             });
-            this.dpsDamage = dps.times(this.globalDPSTimes).times(powersurgeTimes);
+            this.dpsDamage = dps.times(this.globalDPSTimes).times(this.powersurgeTimes);
         },
         // 计算点击附加伤害
         calDPSClickDamage(){
