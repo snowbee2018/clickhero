@@ -93,7 +93,7 @@ cc.Class({
             });
             // 伪代码
             // let t = game.isLeave? this.addLeaveGoldTimes : 1; 然后乘上去
-            this.globalGoldTimes = times * this.skGoldTimes * addGoldTimes;
+            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes;
         },
         // 计算总DPS伤害
         calDPSDamage(){

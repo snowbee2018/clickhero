@@ -128,10 +128,11 @@ cc.Class({
         } else if (this.id == 18) {
             // +5% Gold
             GameData.addGoldTimes = this.level * 0.05;
-            // 
+            GameData.calGoldTimes();
         } else if (this.id == 19) {
-            // 加宝箱金币
+            // 宝箱金币倍数
             GameData.addTreasureTimes = 1 + 0.5 * this.level;
+            // 写到了这里 到时候要单独支持++++++++++++++++++++++++++++++
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {
