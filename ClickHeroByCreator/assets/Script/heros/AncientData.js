@@ -74,7 +74,7 @@ cc.Class({
             GameData.addPowersurgeSecond = this.level * 2;
         } else if (this.id == 4) {
             // +15% 暴击伤害 
-            GameData.addCritTimes = this.level * 0.15;
+            GameData.addCritTimes = 1 + this.level * 0.15;
             GameData.calCritTimes();
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
