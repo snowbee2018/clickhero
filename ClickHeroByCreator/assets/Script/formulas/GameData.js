@@ -27,9 +27,10 @@ cc.Class({
         addGoldenDpsTimes : 0,// 第一个古神 会影响数值 0.02++
         addPrimalBossOdds : 0,// 增加远古Boss出现几率
         addPowersurgeSecond : 0,// Powersurge秒数增加 2s++
-        addCritTimes : 0,//古神附加暴击倍数
+        addCritTimes : 1,//古神附加暴击倍数
         addClickstormSecond : 0, //点击风暴秒数增加 2s++
         addBossTimerSecond : 0,// Boss计时器持续时间
+        buyHeroDiscount : 1,// 购买英雄折扣 0~1
         addTreasureOdds : 0.01,// 宝箱出现概率
         addMetalDetectorSecond : 0,// 金币探测器 2s++
         addTenfoldGoldOdds : 0, // 普怪 宝箱 10倍金币的概率
@@ -90,7 +91,9 @@ cc.Class({
                     times*=hero.getGlobalGoldTimes();
                 }
             });
-            this.globalGoldTimes = times * this.skGoldTimes;
+            // 伪代码
+            // let t = game.isLeave? this.addLeaveGoldTimes : 1; 然后乘上去
+            this.globalGoldTimes = times * this.skGoldTimes * addGoldTimes;
         },
         // 计算总DPS伤害
         calDPSDamage(){
@@ -110,7 +113,7 @@ cc.Class({
                     times+=hero.getDPSClickTimes();
                 }
             });
-            this.DPSClickDamage = times;
+            this.DPSClickDamage = this.dpsDamage.times(times + this.addDPSClickDamageTimes);
         },
 
         // 计算总点击伤害
@@ -121,7 +124,7 @@ cc.Class({
         },
         // 计算点击暴击倍数
         calCritTimes(){
-            this.critTimes = this.cskCritTimes * this.addCritTimes;
+            this.critTimes = (2 + this.cskCritTimes) * this.addCritTimes;
         },
         // 计算点击暴击概率
         calCritOdds(){

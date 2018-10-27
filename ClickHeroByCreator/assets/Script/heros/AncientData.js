@@ -51,15 +51,8 @@ cc.Class({
         if (isCanUpgrade) {
             this.level ++;
             this.refresh();
-            // 这里要根据类型去调用，
-            if (this.type == TYPE.DPS) {
-                GameData.calDPSDamage();
-            } else if (this.type == TYPE.CLICK){
-                GameData.calClickDamage();
-            }// 还有很多乱七八糟的 封装到refresh里
-
             DataCenter.consumeSoul(soul);//--
-            Events.emit(Events.ON_BY_ANCIENT, this.id);//--
+            // Events.emit(Events.ON_BUY_ANCIENT, this.id);//--
             return true;
         } else {
             return false;
@@ -79,10 +72,10 @@ cc.Class({
         } else if (this.id == 3) {
             // + 2s Powersurge持续时间
             GameData.addPowersurgeSecond = this.level * 2;
-            GameData.refresh();
         } else if (this.id == 4) {
             // +15% 暴击伤害 
             GameData.addCritTimes = this.level * 0.15;
+            GameData.calCritTimes();
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
             // 感觉太废物了 所以懒得做
@@ -94,9 +87,9 @@ cc.Class({
             GameData.addBossTimerSecond = 30 * (1 - Math.exp(-0.034*this.level));
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
-            GameData.buyHeroDisCount = 99.99999999 * (1 - Math.exp(-0.01*this.level));
+            GameData.buyHeroDiscount = 1 - 0.9999999999 * (1 - Math.exp(-0.01*this.level));
         } else if (this.id == 9) {
-            // 	宝箱金币倍数增加 9900×(1-e^-0.002n)
+            // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
             GameData.addTreasureOdds = 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
@@ -114,6 +107,7 @@ cc.Class({
         } else if (this.id == 14) {
             // 附加DPS点击伤害倍数
             GameData.addDPSClickDamageTimes = 0.0001*this.level;
+            GameData.refresh();
             // 计算点击伤害
         } else if (this.id == 15) {
             // +2s Golden Clicks duration
