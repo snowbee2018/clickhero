@@ -124,15 +124,14 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveGoldTimes = this.level*0.25 - diff*0.01;
+            GameData.addLeaveGoldTimes = this.level*0.25 - diff*0.01;//需要判断闲置
         } else if (this.id == 18) {
             // +5% Gold
             GameData.addGoldTimes = this.level * 0.05;
             GameData.calGoldTimes();
         } else if (this.id == 19) {
             // 宝箱金币倍数
-            GameData.addTreasureTimes = 1 + 0.5 * this.level;
-            // 写到了这里 到时候要单独支持++++++++++++++++++++++++++++++
+            GameData.addTreasureTimes = 1 + 0.5 * this.level;//直接使用
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {
@@ -152,7 +151,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveDPSTimes = this.level*0.25 - diff*0.01;
+            GameData.addLeaveDPSTimes = this.level*0.25 - diff*0.01;//需要判断闲置
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;
