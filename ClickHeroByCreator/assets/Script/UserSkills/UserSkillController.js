@@ -70,4 +70,23 @@ cc.Class({
             }
         }
     },
+
+    getLastReleaseSkill () {
+        const self = this;
+        var tempArr = [];
+        for (let index = 0; index < self.skillList.children.length; index++) {
+            const skillNode = self.skillList.children[index];
+            var skill = skillNode.getComponent("UserSkill");
+            tempArr.push(skill);
+        }
+        tempArr.sort(function (left, right) {
+            return left._lastTimestamp - right._lastTimestamp;
+        });
+        // console.log(tempArr);
+        // console.log(tempArr[tempArr.length]);
+        
+        if (tempArr[tempArr.length - 1]._lastTimestamp > 0) {
+            return tempArr[tempArr.length - 1];
+        }
+    },
 });
