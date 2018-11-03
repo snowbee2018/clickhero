@@ -59,15 +59,11 @@ cc.Class({
         self.schedule(self.applyAutoClick, time);
     },
 
-    createClickStorm (bDouble) {
+    createClickStorm(clickCount) {
         const self = this;
         self.unschedule(self.applyClickStorm);
         var time;
-        if (bDouble) {
-            time = 1/20;
-        } else {
-            time = 1/10;
-        }
+        time = 1 / clickCount;
         self.schedule(self.applyClickStorm, time);
     },
 

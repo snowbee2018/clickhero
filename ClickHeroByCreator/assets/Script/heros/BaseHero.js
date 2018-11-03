@@ -160,12 +160,12 @@ cc.Class({
             var skill = this.skills[skillID];
             var result = "";
             if (skill.globalDPS) {
-                result = "全局DPS伤害翻" + skill.globalDPS + "倍";
+                result = "全局DPS伤害×" + skill.globalDPS;
             } else if (skill.heroDPS) {
                 if (this.isPassive) {
-                    result = this.heroName + "DPS伤害翻" + skill.heroDPS + "倍";
+                    result = this.heroName + "DPS伤害×" + skill.heroDPS;
                 } else {
-                    result = "点击伤害翻" + skill.heroDPS + "倍";
+                    result = "点击伤害×" + skill.heroDPS;
                 }
             } else if (skill.bjDamage) {
                 result = "暴击伤害倍数增加" + skill.bjDamage;
@@ -174,7 +174,7 @@ cc.Class({
             } else if (skill.unlock) {
                 result = "解锁主动技能" + skill.unlock;
             } else if (skill.DPSClick) {
-                result = "增加DPS伤害的" + skill.DPSClick + "倍到点击伤害";
+                result = "将DPS伤害的" + skill.DPSClick * 100 + "%增加到点击伤害";
             }
             return result;
         }

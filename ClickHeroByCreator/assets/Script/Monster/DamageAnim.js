@@ -27,9 +27,13 @@ cc.Class({
 
     // update (dt) {},
 
-    setDamage (damage) {
+    setDamage(damage, bCrit) {
         const self = this;
-        self.content.string = "-" + damage;
+        if (bCrit) {
+            self.content.string = "暴击!!! -" + damage;
+        } else {
+            self.content.string = "-" + damage;
+        }
     },
 
     onAnimEnd () {

@@ -13,7 +13,7 @@ cc.Class({
 
     properties: {
         skillName: "", // 技能名称
-        describe: "", // 技能描述
+        baseValue: 1, // 加成数值
         coolingTime: 0, // 冷却时间，秒
         bSustain: false, // 是否是持续技能
         sustainTime: 0, // 持续时间
@@ -51,11 +51,20 @@ cc.Class({
         return result;
     },
 
+    getSkillDesStr () {
+        return "";
+    },
+
+    setSkillDes () {
+        const self = this;
+        self.describeLab.string = self.getSkillDesStr();
+    },
+
     initUserSkill () {
         const self = this;
         // 初始化UI
         self.skillNameLab.string = self.skillName;
-        self.describeLab.string = self.describe;
+        self.setSkillDes();
         self.timeLab.string = "";
 
         // 读取本地存档初始化
@@ -153,24 +162,27 @@ cc.Class({
         dd = second / (24 * 3600) | 0;
         if (dd > 0) {
             second = Math.round(second) - dd * 3600;
-            result += dd + "D";
+            result += dd + "天";
         }
         //小时
         hh = second / 3600 | 0;
         if (hh > 0) {
             second = Math.round(second) - hh * 3600;
-            result += hh + "H";
+            result += hh + "小时";
         }
         //分
         mm = second / 60 | 0;
         if (mm > 0) {
             second = Math.round(second) - mm * 60;
-            result += mm + "M";
+            result += mm + "分钟";
         }
         //秒
         ss = Math.round(second);
-        // ss = Math.round(second) - mm * 60;
-        result += ss + "S";
+        if (ss > 0) {
+            // ss = Math.round(second) - mm * 60;
+            result += ss + "秒";
+        }
+        
         return result;
     },
 
@@ -178,7 +190,7 @@ cc.Class({
         const self = this;
         if (!self.isCanUse()) return;
         self._lastTimestamp = Date.parse(new Date());
-        console.log("self._lastTimestamp = " + self._lastTimestamp);
+        // console.log("self._lastTimestamp = " + self._lastTimestamp);
         
         self._isActive = false;
         if (self.bSustain) {

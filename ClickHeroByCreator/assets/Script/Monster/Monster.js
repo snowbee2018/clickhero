@@ -72,7 +72,7 @@ cc.Class({
         }
     },
 
-    setMonsterByLv(lv, onMonsterDestroy, hpChangeCallBack) {
+    setMonsterByLv(lv, onMonsterDestroy, hpChangeCallBack, clickHertCallBack) {
         const self = this;
         self._lv = lv;
         if (self._lv%5 != 0) {
@@ -89,6 +89,7 @@ cc.Class({
         
         self._onMonsterDestroy = onMonsterDestroy;
         self._hpChangeCallBack = hpChangeCallBack;
+        self._clickHertCallBack = clickHertCallBack;
         self.onHpChange();
     },
 
@@ -115,17 +116,17 @@ cc.Class({
         self._curHP = self._totalHP;
     },
 
-    playDamage (damage) {
+    playDamage(damage, bCrit) {
         const self = this;
         var damageNode = cc.instantiate(self.damageAnim);
         damageNode.parent = self.node.parent;
         damageNode.zIndex = 100;
         damageNode.x = 100;
         damageNode.y = 100;
-        damageNode.getComponent("DamageAnim").setDamage(damage);
+        damageNode.getComponent("DamageAnim").setDamage(damage, bCrit);
     },
 
-    hurt (damage, bDPS) {
+    hurt(damage, bDPS, bCrit) {
         const self = this;
         if (!self._alive) return;
         if (!self._curHP.isZero()) {
@@ -138,14 +139,20 @@ cc.Class({
                     
                 } else {
                     self.playAnim("Hurt");
-                    self.playDamage(Formulas.formatBigNumber(damage));
+                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                    if (self._clickHertCallBack) {
+                        self._clickHertCallBack(self._lv, self._gold, self._isBoss);
+                    }
                 }
             } else {
                 self._curHP = new BigNumber(0);
                 console.log();
                 
                 if (!bDPS) {
-                    self.playDamage(Formulas.formatBigNumber(damage));
+                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                    if (self._clickHertCallBack) {
+                        self._clickHertCallBack(self._lv, self._gold, self._isBoss);
+                    }
                 }
                 self.goDie();
             }
