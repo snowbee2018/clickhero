@@ -32,6 +32,7 @@ cc.Class({
         const self = this;
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber("99999999999999")));
         // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
+        this.setDataByKey(this.KeyMap.curSoul , new BigNumber("99999999999999"));
     },
 
     setDataByKey (key, params) {
@@ -58,6 +59,19 @@ cc.Class({
             var oldGold = self.getDataByKey(key);
             self.setDataByKey(key, oldGold.plus(gold));
             Events.emit(Events.ON_GOLD_CHANGE);
+        } else {
+            console.error("type error, 'gold' must be a BigNumber.");
+        }
+    },
+
+    // 英魂增加
+    addSoul (soul) {
+        const self = this;
+        if (BigNumber.isBigNumber(soul)) {
+            var key = self.KeyMap.curSoul;
+            var old = self.getDataByKey(key);
+            self.setDataByKey(key, old.plus(soul));
+            Events.emit(Events.ON_SOUL_CHANGE);
         } else {
             console.error("type error, 'gold' must be a BigNumber.");
         }
