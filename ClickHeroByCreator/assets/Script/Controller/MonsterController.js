@@ -68,6 +68,12 @@ cc.Class({
 
     },
 
+    goldClick (bGoldClick, goldClickValue) {
+        const self = this;
+        self._bGoldClick = bGoldClick;
+        self._goldClickValue = goldClickValue;
+    },
+
     onCountdownFinish () {
         const self = this;
         if (self.curMonster._isBoss) {
@@ -120,7 +126,8 @@ cc.Class({
         self.curMonster.setMonsterByLv(
             lv,
             self.onCurMonsterDestroy.bind(self),
-            self.onHpChange.bind(self)
+            self.onHpChange.bind(self),
+            self.onClickHert.bind(self)
         );
         self.gameController.updataMonsterInfoDisplay();
         self.setTimeLabel("");
@@ -136,11 +143,19 @@ cc.Class({
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
     },
 
-    hit (damage, bDPS) {
+    hit(damage, bDPS, bCrit) {
         const self = this;
         if (cc.isValid(self.curMonster)) {
-            self.curMonster.hurt(damage, bDPS);
+            self.curMonster.hurt(damage, bDPS, bCrit);
             self.gameController.updataMonsterInfoDisplay();
+        }
+    },
+
+    onClickHert(lv, gold, isBoss) {
+        const self = this;
+        if (self._bGoldClick == true) {
+            // "3.2e+16"
+            self.gameController.onMonsterGold(gold.times(self._goldClickValue));
         }
     },
 

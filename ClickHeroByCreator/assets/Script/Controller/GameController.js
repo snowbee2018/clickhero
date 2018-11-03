@@ -136,8 +136,13 @@ cc.Class({
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));
+        var bCrit = Formulas.isHitRandom(GameData.critOdds * 100); // 是否是暴击
+        if (bCrit) {
+            self.monsterController.hit(GameData.clickDamage.times(GameData.critTimes), false, true);
+        } else {
+            self.monsterController.hit(GameData.clickDamage, false, false);
+        }
         
-        self.monsterController.hit(GameData.clickDamage, false);
     },
 
     applyDPS(dt) {
