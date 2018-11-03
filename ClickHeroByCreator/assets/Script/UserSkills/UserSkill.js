@@ -95,7 +95,7 @@ cc.Class({
         }
     },
 
-    skill4 () {
+    skill4 (flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
         console.log("user skill " + str + "--金属探测器");
