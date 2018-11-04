@@ -81,7 +81,7 @@ cc.Class({
         if (self.isWeChatPlatform) {
             return canvas.toTempFilePathSync({
                 destWidth: screenWidth,
-                destHeight: screenWidth * (5 / 4),
+                destHeight: screenWidth,
             });
         }
     },
@@ -93,7 +93,7 @@ cc.Class({
             
             cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
             return {
-                title: "点一下，玩一年，我在测试被动小游戏转发",
+                title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
                 imageUrl: self.getShareImage(),
                 // query: // 查询参数
             }      
@@ -106,7 +106,7 @@ cc.Class({
             
             try {
                 var result = wx.shareAppMessage({
-                    title: '点一下，玩一年，我在测试主动小游戏转发',
+                    title: '点一下，玩一年，斩妖除魔，重温经典西行路。',
                     imageUrl: self.getShareImage(),
                     // query: // 查询参数
                 });

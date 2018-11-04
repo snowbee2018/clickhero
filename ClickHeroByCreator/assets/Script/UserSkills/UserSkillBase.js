@@ -103,7 +103,7 @@ cc.Class({
             } else {
                 var nowTime = Date.parse(new Date());
                 var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
-                if (timeCooling > 0) {
+                if (timeCooling - self.coolingCurtail > 0) {
                     var timeStr = self.dateFormat(timeCooling / 1000);
                     self.onCoolingCountDown(timeCooling / 1000, timeStr);
                 } else {
@@ -186,17 +186,24 @@ cc.Class({
         return result;
     },
 
+    setCoolingCurtail (value) {
+        const self = this;
+        if (value > 0) {
+            self.coolingCurtail = value;
+        }
+    },
+
     releaseSkill () { // 释放技能
         const self = this;
         if (!self.isCanUse()) return;
-        self._lastTimestamp = Date.parse(new Date());
-        // console.log("self._lastTimestamp = " + self._lastTimestamp);
-        
         self._isActive = false;
         if (self.bSustain) {
             self._isSustainFinish = false;
         }
+        self.coolingCurtail = 0;
         self.appply();
+        self._lastTimestamp = Date.parse(new Date());
+        // console.log("self._lastTimestamp = " + self._lastTimestamp);
         self.onCoolingCountDown(self.coolingTime, self.dateFormat(self.coolingTime));
         if (self.bSustain) {
             self.onSustainCountDown(self.sustainTime, self.dateFormat(self.sustainTime));

@@ -95,7 +95,7 @@ cc.Class({
         }
     },
 
-    skill4 () {
+    skill4 (flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
         console.log("user skill " + str + "--金属探测器");
@@ -183,12 +183,15 @@ cc.Class({
     skill9(flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
-        console.log("user skill " + str + "--充能");
+        console.log("user skill " + str + "--刷新");
         if (flag) {
-            // 增加下个技能的效果
-            self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(true);
+            // 将使用的最后一项技能的冷却时间缩短1小时
+            var skill = self.sceneRoot.getComponent("UserSkillController").getLastReleaseSkill();
+            if (skill) {
+                skill.setCoolingCurtail(3600 * 1000);
+            }
         } else {
-
+            
         }
     },
 
