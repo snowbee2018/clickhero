@@ -45,6 +45,7 @@ cc.Class({
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
+        CfgMgr.loadAncientCfg();
     },
 
     checkReady() {

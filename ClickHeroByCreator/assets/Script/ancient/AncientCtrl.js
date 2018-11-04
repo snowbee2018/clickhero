@@ -6,54 +6,45 @@ cc.Class({
     properties: {
         sv : cc.ScrollView,
         itemPrefab: cc.Prefab,
+        dialogPrefab : cc.Prefab,
+        body : cc.Node,
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
 
     start () {
 
     },
-    setHeroList () {
-        const self = this;
-        for (let heroID = 0; heroID < HeroDatas.heroList.length; heroID++) {
-            var flag = false;
-            if (heroID == 0 || heroID == 1 || heroID == 2) {
-                flag = true;
-            } else {
-                var hero = HeroDatas.getHero(heroID);
-                if (hero.isActive) {
-                    flag = true;
-                } else {
-                    var isCanBy = DataCenter.isGoldEnough(hero.baseCost);
-                    if (isCanBy) {
-                        flag = true;
-                    }
-                }
-            }
-            if (flag) {
-                self.addHeroItem(heroID);
-            }
-        }
-        Events.on(Events.HERO_ACTIVE, self.onHeroActive, self);
+
+    onClickSummon () {
+        // 显示出 ChooseAncientDialog
+        let dialog = cc.instantiate(this.dialogPrefab);
+        dialog.getComponent("ChooseAncientDialog").setCallback(this.addItem.bind(this));
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 
-    addHeroItem(heroID) {
-        const self = this;
-        var listItemNode = cc.instantiate(self.heroItemPrefab);
-        listItemNode.parent = self.heroList.content;
-        listItemNode.getComponent("HeroListItem").setItem(heroID);
-        self._heroItemMap[heroID] = true;
+    onClickDisband() {
+        // 进贡
+    },
+
+    addItem(ancient) {
+        console.log(ancient);
+        console.log(HeroDatas.myAncients);
+        console.log(HeroDatas.selAncients);
+        console.log(HeroDatas.otherAncients);
+        
+        var listItemNode = cc.instantiate(this.itemPrefab);
+        listItemNode.parent = this.body;
+        // listItemNode.getComponent("AncientItem").setItem(id);
+        // this._heroItemMap[id] = true;
     },
 
     onHeroActive (heroID) {
-        const self = this;
         if (heroID != 0) {
             var hero = HeroDatas.getHero(heroID);
             if (hero.isActive) {
-                if (!self._heroItemMap[heroID]) {
-                    self.addHeroItem(heroID);
+                if (!this._heroItemMap[heroID]) {
+                    this.addItem(heroID);
                 }
             }
         }

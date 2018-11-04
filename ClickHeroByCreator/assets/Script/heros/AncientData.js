@@ -3,44 +3,52 @@
 cc.Class({
     properties: {
         id : 0,
-        isActive : false,
-        isBuy : false,
+        isActive : false,// 是否被随机选中
+        isBuy : false,// 是否被购买
         name : "",
         // skills : [],
         level : 0,
         // cost : 0,//升级花费
+        desc : "",
     },
 
-    init(id,isActive,isBuy,name,level){
+    init(id,isActive,isBuy,name,level,desc){
         this.id = id;
         this.isActive = isActive;
         this.isBuy = isBuy;
         this.name = name;
         this.level = level;
+        this.desc = desc;
+        return this;
     },
 
     buy(){
-        let soul = HeroDatas.getBuyAncientSoul();
-        // 伪代码
-        var isCanBy = DataCenter.isSoulEnough(soul);//--
-        soul = new BigNumber(soul);
-        if (isCanBy) {
-            this.level ++;
-            this.isBuy = true;
-            this.refresh();//？？？
-            // 这里要根据类型去调用，
-            if (this.type == TYPE.DPS) {
-                GameData.calDPSDamage();
-            } else if (this.type == TYPE.CLICK){
-                GameData.calClickDamage();
-            }// 还有很多乱七八糟的 封装到refresh里
+        this.level ++;
+        this.isBuy = true;
+        HeroDatas.myAncients.push(this);
+        this.refresh();
+        return true;
+        // let soul = HeroDatas.getBuyAncientSoul();
+        // // 伪代码
+        // var isCanBy = DataCenter.isSoulEnough(soul);//--
+        // soul = new BigNumber(soul);
+        // if (isCanBy) {
+        //     this.level ++;
+        //     this.isBuy = true;
+        //     this.refresh();//？？？
+        //     // 这里要根据类型去调用，
+        //     if (this.type == TYPE.DPS) {
+        //         GameData.calDPSDamage();
+        //     } else if (this.type == TYPE.CLICK){
+        //         GameData.calClickDamage();
+        //     }// 还有很多乱七八糟的 封装到refresh里
 
-            DataCenter.consumeSoul(soul);//--
-            Events.emit(Events.ON_BY_ANCIENT, this.id);//--
-            return true;
-        } else {
-            return false;
-        }
+        //     DataCenter.consumeSoul(soul);//--
+        //     Events.emit(Events.ON_BY_ANCIENT, this.id);//--
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     },
 
     upgrade(){

@@ -1,5 +1,6 @@
 // 这里管理Hero列表
 var BaseHero = require("BaseHero");
+var AncientData = require("AncientData");
 var CfgMgr = require("LocalCfgMgr");
 
 // 召唤费用和重选需要的魂，按照召唤个数递增
@@ -35,7 +36,9 @@ cc.Class({
     
     statics:{
         heroList : [],
-        ancients : [],
+        myAncients : [],// 拥有的
+        selAncients : [],// 选中的
+        otherAncients : [],// 剩余的
         init() {
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
@@ -65,7 +68,37 @@ cc.Class({
             //     new BaseHero().init(18,"阿蒙",2.400e16,5.335e12),
             //     new BaseHero().init(19,"兽王",3.000e17,4.914e13),
             // ]
-            
+
+            this.otherAncients = [
+                new AncientData().init(1,false,false,"金身",0,"desc0"),
+                new AncientData().init(2,false,false,"远古Bos几率",0,"desc1"),
+                new AncientData().init(3,false,false,"能量风暴2s",0,"desc2"),
+                new AncientData().init(4,false,false,"暴击哥",0,"desc3"),
+                new AncientData().init(5,false,false,"削弱Boss",0,"desc4"),
+                new AncientData().init(6,false,false,"点击风暴2s",0,"desc5"),
+                new AncientData().init(7,false,false,"计时器++",0,"desc6"),
+                new AncientData().init(8,false,false,"英雄减费",0,"desc7"),
+                new AncientData().init(9,false,false,"宝箱概率",0,"desc8"),
+                new AncientData().init(10,false,false,"金币探测器2s",0,"desc9"),
+                new AncientData().init(11,false,false,"非Boss十倍",0,"desc10"),
+                new AncientData().init(12,false,false,"20%点击伤害",0,"desc11"),
+                new AncientData().init(13,false,false,"超级点击2s",0,"desc12"),
+                new AncientData().init(14,false,false,"jugg剑圣",0,"desc13"),
+                new AncientData().init(15,false,false,"点金手2s",0,"desc14"),
+                // new AncientData().init(16,false,false,"Argaiv",0),
+                new AncientData().init(17,false,false,"加闲置金币",0,"desc15"),
+                new AncientData().init(18,false,false,"+5%Gold",0,"desc16"),
+                new AncientData().init(19,false,false,"宝箱金币50%",0,"desc17"),
+                // new AncientData().init(20,false,false,"Argaiv",0),
+                // new AncientData().init(21,false,false,"Argaiv",0),
+                new AncientData().init(22,false,false,"30%点金手",0,"desc18"),
+                // new AncientData().init(23,false,false,"Argaiv",0),
+                new AncientData().init(24,false,false,"加闲置DPS伤害",0,"desc19"),
+                new AncientData().init(25,false,false,"暴击风暴2s",0,"desc20"),
+                new AncientData().init(26,false,false,"技能冷却哥",0,"desc21"),
+            ];
+            // 首次随机生成4个选中的古神
+            this.initSelAncients();
         },
         getHero(id){
             return this.heroList[id];
@@ -82,13 +115,32 @@ cc.Class({
             return JSON.stringify(arr);
         },
 
+        initSelAncients(){
+            this.addSelAncient();
+            this.addSelAncient();
+            this.addSelAncient();
+            this.addSelAncient();
+            console.log("4个随机的古神产生了！");
+            console.log(this.selAncients);
+            console.log(new AncientData());
+            
+        },
+        addSelAncient(){
+            let count = this.otherAncients.length;
+            if (count==0) {
+                return;
+            }
+            let i = Math.floor(Math.random()*count);
+            let data = this.otherAncients.splice(i,1)[0];
+            this.selAncients.push(data);
+        },
         // buy and reroll Ancient
         getBuyAncientSoul(){
-            let index = this.ancients.length + 1;
+            let index = this.myAncients.length + 1;
             return buyAncientCosts[index][0];
         },
         getRerollAncientSoul(){
-            let index = this.ancients.length + 1;
+            let index = this.myAncients.length + 1;
             return buyAncientCosts[index][1];
         },
     }

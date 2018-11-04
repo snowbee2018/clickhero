@@ -107,6 +107,12 @@ cc.Class({
             });
         },
 
+        // 初始化古神
+        loadAncientCfg(){
+            console.log("开始加载古神配置");
+            // 暂时预留
+
+        },
 
         // globalDPS // 全局DPS加成
         // gold // 金币加成
