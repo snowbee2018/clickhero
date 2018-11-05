@@ -1,32 +1,13 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        lbName : cc.Label,
+        lbDesc : cc.Label,
+        sp : cc.Sprite,
+        lbLv : cc.Label,
+        lbSoul : cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -37,5 +18,20 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    bind(data){
+        data = data?data:this.data;
+        this.data = data;
+        this.lbName.string = data.name;
+        this.lbLv.string = "等级"+data.level;
+        this.lbSoul.string = "soul"+data.soul;
+        // 这个要根据不同的 id和等级 写描述
+        this.lbDesc.string = data.level + "temp";
+    },
+
+    onUpgradeClick(){
+        let result = this.data.upgrade();
+        if (result) {
+            this.bind();
+        }
+    },
 });

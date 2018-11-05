@@ -29,14 +29,9 @@ cc.Class({
 
     addItem(ancient) {
         console.log(ancient);
-        console.log(HeroDatas.myAncients);
-        console.log(HeroDatas.selAncients);
-        console.log(HeroDatas.otherAncients);
-        
-        var listItemNode = cc.instantiate(this.itemPrefab);
-        listItemNode.parent = this.body;
-        // listItemNode.getComponent("AncientItem").setItem(id);
-        // this._heroItemMap[id] = true;
+        var node = cc.instantiate(this.itemPrefab);
+        node.parent = this.body;
+        node.getComponent("AncientItem").bind(ancient);
     },
 
     onHeroActive (heroID) {

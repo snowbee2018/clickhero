@@ -10,6 +10,7 @@ cc.Class({
         level : 0,
         // cost : 0,//升级花费
         desc : "",
+        soul : 0,
     },
 
     init(id,isActive,isBuy,name,level,desc){
@@ -19,11 +20,15 @@ cc.Class({
         this.name = name;
         this.level = level;
         this.desc = desc;
+        if (level > 0 ) {
+            this.calUpgradeSoul();
+        }
         return this;
     },
 
     buy(){
         this.level ++;
+        this.calUpgradeSoul();
         this.isBuy = true;
         HeroDatas.myAncients.push(this);
         this.refresh();
@@ -52,20 +57,23 @@ cc.Class({
     },
 
     upgrade(){
-        // 伪代码
-        var soul = this.calUpgradeSoul();
-        var isCanUpgrade = DataCenter.isSoulEnough(soul);
-        soul = new BigNumber(soul);
-        if (isCanUpgrade) {
-            this.level ++;
-            this.refresh();
-            DataCenter.consumeSoul(soul);//--
-            // Events.emit(Events.ON_BUY_ANCIENT, this.id);//--
-            return true;
-        } else {
-            return false;
-        }
-
+        this.level ++;
+        this.calUpgradeSoul();
+        this.refresh();
+        return true;
+        // // 伪代码
+        // var soul = this.calUpgradeSoul();
+        // var isCanUpgrade = DataCenter.isSoulEnough(soul);
+        // soul = new BigNumber(soul);
+        // if (isCanUpgrade) {
+        //     this.level ++;
+        //     this.refresh();
+        //     DataCenter.consumeSoul(soul);//--
+        //     // Events.emit(Events.ON_BUY_ANCIENT, this.id);//--
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     },
 
     refresh(){
@@ -183,6 +191,7 @@ cc.Class({
         } else {
             soul = 1;
         }
+        this.soul = soul;
         return soul;
     },
 })

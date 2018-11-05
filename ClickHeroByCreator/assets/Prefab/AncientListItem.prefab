@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "HeroListItem",
+    "_name": "item",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -32,24 +32,27 @@
         "__id__": 18
       },
       {
-        "__id__": 33
+        "__id__": 29
       },
       {
-        "__id__": 37
+        "__id__": 33
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 36
       },
       {
-        "__id__": 42
+        "__id__": 37
+      },
+      {
+        "__id__": 38
       }
     ],
     "_prefab": {
-      "__id__": 44
+      "__id__": 40
     },
     "_opacity": 255,
     "_color": {
@@ -227,7 +230,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "dps",
+    "_name": "desc",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -256,18 +259,18 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
+      "width": 100,
       "height": 20
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0.5
+      "y": 1
     },
     "_position": {
       "__type__": "cc.Vec3",
       "x": -229,
-      "y": 15,
+      "y": 25,
       "z": 0
     },
     "_scale": {
@@ -310,10 +313,10 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_N$overflow": 3,
     "_id": ""
   },
   {
@@ -395,8 +398,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 35,
-      "y": 44,
+      "x": 92,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -456,9 +459,9 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 395,
+    "_left": 452,
     "_right": 0,
-    "_top": 7,
+    "_top": 51,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -628,26 +631,20 @@
       },
       {
         "__id__": 22
-      },
-      {
-        "__id__": 25
       }
     ],
     "_active": true,
     "_level": 2,
     "_components": [
       {
-        "__id__": 28
+        "__id__": 25
       },
       {
-        "__id__": 29
-      },
-      {
-        "__id__": 31
+        "__id__": 26
       }
     ],
     "_prefab": {
-      "__id__": 32
+      "__id__": 28
     },
     "_opacity": 255,
     "_color": {
@@ -733,7 +730,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 34,
+      "y": 20,
       "z": 0
     },
     "_scale": {
@@ -795,7 +792,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "damageAdd",
+    "_name": "soul",
     "_objFlags": 0,
     "_parent": {
       "__id__": 18
@@ -832,7 +829,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 1,
+      "y": -20,
       "z": 0
     },
     "_scale": {
@@ -867,107 +864,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "升级增加的伤害",
-    "_N$string": "升级增加的伤害",
-    "_fontSize": 20,
-    "_lineHeight": 20,
-    "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 2,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "f810c9b9-14f2-41da-84e3-28e78c484fb5"
-    },
-    "fileId": "08azhHJRZOYYWPXhtV3+7s",
-    "sync": false
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "cost",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 18
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 3,
-    "_components": [
-      {
-        "__id__": 26
-      }
-    ],
-    "_prefab": {
-      "__id__": 27
-    },
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 160,
-      "height": 20
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -32,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_zIndex": 0,
-    "groupIndex": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Label",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 25
-    },
-    "_enabled": true,
-    "_srcBlendFactor": 1,
-    "_dstBlendFactor": 771,
-    "_useOriginalSize": false,
-    "_string": "cost:100",
-    "_N$string": "cost:100",
+    "_string": "soul:100",
+    "_N$string": "soul:100",
     "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": false,
@@ -1046,7 +944,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 30
+        "__id__": 27
       }
     ],
     "_N$interactable": true,
@@ -1093,19 +991,9 @@
     "target": {
       "__id__": 1
     },
-    "component": "HeroListItem",
-    "handler": "onUpgradeBtnClick",
+    "component": "AncientItem",
+    "handler": "onUpgradeClick",
     "customEventData": ""
-  },
-  {
-    "__type__": "cc.BlockInputEvents",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 18
-    },
-    "_enabled": true,
-    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1130,14 +1018,14 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 34
+        "__id__": 30
       },
       {
-        "__id__": 35
+        "__id__": 31
       }
     ],
     "_prefab": {
-      "__id__": 36
+      "__id__": 32
     },
     "_opacity": 255,
     "_color": {
@@ -1189,7 +1077,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 33
+      "__id__": 29
     },
     "_enabled": true,
     "_layoutSize": {
@@ -1221,7 +1109,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 33
+      "__id__": 29
     },
     "_enabled": true,
     "alignMode": 1,
@@ -1266,14 +1154,11 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 38
-      },
-      {
-        "__id__": 39
+        "__id__": 34
       }
     ],
     "_prefab": {
-      "__id__": 40
+      "__id__": 35
     },
     "_opacity": 255,
     "_color": {
@@ -1325,7 +1210,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 37
+      "__id__": 33
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -1349,16 +1234,6 @@
     "_id": ""
   },
   {
-    "__type__": "a8187njt4lIqrxkDkSQV4J3",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 37
-    },
-    "_enabled": true,
-    "_id": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -1368,6 +1243,31 @@
     },
     "fileId": "aadpTdmvZCz7IVVbsegewV",
     "sync": false
+  },
+  {
+    "__type__": "abf03FE9/NBoYRVmHcIbe/v",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "lbName": {
+      "__id__": 3
+    },
+    "lbDesc": {
+      "__id__": 7
+    },
+    "sp": {
+      "__id__": 34
+    },
+    "lbLv": {
+      "__id__": 11
+    },
+    "lbSoul": {
+      "__id__": 23
+    },
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -1423,7 +1323,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 43
+        "__id__": 39
       }
     ],
     "_N$interactable": true,
