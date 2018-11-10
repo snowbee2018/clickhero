@@ -13,6 +13,10 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        this.refresh();
+    },
+
+    refresh(){
         this.selIndex = -1;
         // 用选好的AncientList遍历初始化
         this.selAncients = HeroDatas.selAncients;
@@ -24,6 +28,10 @@ cc.Class({
             const ancient = this.selAncients[i];
             this.items[i].node.bean = ancient;
             this.items[i].node.children[0].getComponent(cc.Label).string = ancient.name;
+            this.items[i].node.color = new cc.Color(0xff,0xff,0xff);
+            this.sign.active = false;
+            this.btnAccept.active = false;
+            this.desc.string = "";
         }
     },
 
@@ -53,12 +61,17 @@ cc.Class({
             return;
         }
         this.selAncients.splice(this.selIndex,1);
-        HeroDatas.addSelAncient();
+        HeroDatas.initSelAncients();
         this._cb(this.ancient);
-        this.node.destroy();
+        this.finish();
     },
 
-    onCancal(){
+    onReroll(){
+        HeroDatas.initSelAncients();
+        this.refresh();
+    },
+
+    finish(){
         this.node.destroy();
     },
 });

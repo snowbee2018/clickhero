@@ -32,6 +32,8 @@ cc.Class({
         this.isBuy = true;
         HeroDatas.myAncients.push(this);
         this.refresh();
+        Events.emit(Events.ON_BUY_ANCIENT,this.id);
+        Events.emit(Events.ON_UPGRADE_ANCIENT,this.id);
         return true;
         // let soul = HeroDatas.getBuyAncientSoul();
         // // 伪代码
@@ -60,6 +62,7 @@ cc.Class({
         this.level ++;
         this.calUpgradeSoul();
         this.refresh();
+        Events.emit(Events.ON_UPGRADE_ANCIENT,this.id);
         return true;
         // // 伪代码
         // var soul = this.calUpgradeSoul();

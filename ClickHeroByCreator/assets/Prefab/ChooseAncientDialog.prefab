@@ -1941,8 +1941,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "拒绝",
-    "_N$string": "拒绝",
+    "_string": "重选",
+    "_N$string": "重选",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2069,7 +2069,7 @@
       "__id__": 1
     },
     "component": "ChooseAncientDialog",
-    "handler": "onCancal",
+    "handler": "onReroll",
     "customEventData": ""
   },
   {
@@ -2431,7 +2431,7 @@
       "__id__": 1
     },
     "component": "ChooseAncientDialog",
-    "handler": "onCancal",
+    "handler": "finish",
     "customEventData": ""
   },
   {

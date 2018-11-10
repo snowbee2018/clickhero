@@ -74,7 +74,7 @@ cc.Class({
                 new AncientData().init(2,false,false,"远古Bos几率",0,"desc1"),
                 new AncientData().init(3,false,false,"能量风暴2s",0,"desc2"),
                 new AncientData().init(4,false,false,"暴击哥",0,"desc3"),
-                new AncientData().init(5,false,false,"削弱Boss",0,"desc4"),
+                // new AncientData().init(5,false,false,"削弱Boss",0,"desc4"),
                 new AncientData().init(6,false,false,"点击风暴2s",0,"desc5"),
                 new AncientData().init(7,false,false,"计时器++",0,"desc6"),
                 new AncientData().init(8,false,false,"英雄减费",0,"desc7"),
@@ -116,6 +116,8 @@ cc.Class({
         },
 
         initSelAncients(){
+            this.otherAncients=this.otherAncients.concat(this.selAncients);
+            this.selAncients = [];
             this.addSelAncient();
             this.addSelAncient();
             this.addSelAncient();

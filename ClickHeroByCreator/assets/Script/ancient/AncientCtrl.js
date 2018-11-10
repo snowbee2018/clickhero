@@ -11,7 +11,9 @@ cc.Class({
     },
 
     start () {
-
+        Events.on(Events.ON_UPGRADE_ANCIENT,function(id) {
+            console.log("ancient.id:" + id);
+        },this);
     },
 
     onClickSummon () {
