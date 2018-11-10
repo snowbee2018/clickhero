@@ -24,6 +24,7 @@ cc.Class({
         critOdds : 0,// 暴击概率
 
         //--------古神的影响--------
+        //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]
         addGoldenDpsTimes : 0,      //1- 所有金身加成倍数2% 0.02++
         addPrimalBossOdds : 0,      //2* 增加远古Boss出现几率 0-0.75
         addPowersurgeSecond : 0,    //3*- Powersurge秒数增加 2s++
