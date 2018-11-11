@@ -83,7 +83,7 @@ cc.Class({
                 new AncientData().init(11,false,false,"非Boss十倍",0,"desc10"),
                 new AncientData().init(12,false,false,"20%点击伤害",0,"desc11"),
                 new AncientData().init(13,false,false,"超级点击2s",0,"desc12"),
-                new AncientData().init(14,false,false,"jugg剑圣",0,"desc13"),
+                // new AncientData().init(14,false,false,"jugg剑圣",0,"desc13"),
                 new AncientData().init(15,false,false,"点金手2s",0,"desc14"),
                 // new AncientData().init(16,false,false,"Argaiv",0),
                 new AncientData().init(17,false,false,"加闲置金币",0,"desc15"),
@@ -123,9 +123,6 @@ cc.Class({
             this.addSelAncient();
             this.addSelAncient();
             console.log("4个随机的古神产生了！");
-            console.log(this.selAncients);
-            console.log(new AncientData());
-            
         },
         addSelAncient(){
             let count = this.otherAncients.length;
@@ -138,12 +135,14 @@ cc.Class({
         },
         // buy and reroll Ancient
         getBuyAncientSoul(){
-            let index = this.myAncients.length + 1;
-            return buyAncientCosts[index][0];
+            let index = this.myAncients.length;
+            let soul = buyAncientSouls[index][0];
+            return new BigNumber(soul);
         },
         getRerollAncientSoul(){
-            let index = this.myAncients.length + 1;
-            return buyAncientCosts[index][1];
+            let index = this.myAncients.length;
+            let soul = buyAncientSouls[index][1];
+            return new BigNumber(soul);
         },
     }
 });

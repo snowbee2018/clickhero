@@ -32,7 +32,7 @@ cc.Class({
         const self = this;
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+99")));
         // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-        this.setDataByKey(this.KeyMap.curSoul , new BigNumber("99999999999999"));
+        this.setDataByKey(this.KeyMap.curSoul , new BigNumber("30"));
     },
 
     setDataByKey (key, params) {
@@ -73,7 +73,7 @@ cc.Class({
             self.setDataByKey(key, old.plus(soul));
             Events.emit(Events.ON_SOUL_CHANGE);
         } else {
-            console.error("type error, 'gold' must be a BigNumber.");
+            console.error("type error, 'soul' must be a BigNumber.");
         }
     },
 
@@ -94,6 +94,24 @@ cc.Class({
         }
     },
 
+    // 消费英魂
+    consumeSoul (soul) {
+        const self = this;
+        if (BigNumber.isBigNumber(soul)) {
+            var key = self.KeyMap.curSoul;
+            var oldSoul = self.getDataByKey(key);
+            console.log("consumeSoul oldSoul:"+oldSoul);
+            if (oldSoul.isGreaterThanOrEqualTo(soul)) {
+                self.setDataByKey(key, oldSoul.minus(soul));
+                Events.emit(Events.ON_SOUL_CHANGE);
+            } else {
+                console.error("soul is not enough.");
+            }
+        } else {
+            console.error("type error, 'soul' must be a BigNumber.");
+        }
+    },
+
     // 金币是否足够
     isGoldEnough(price) {
         const self = this;
@@ -106,12 +124,33 @@ cc.Class({
             return false;
         }
     },
+    
+    // 英魂是否足够
+    isSoulEnough(soul) {
+        const self = this;
+        if (BigNumber.isBigNumber(soul)) {
+            var key = self.KeyMap.curSoul;
+            var curSoul = self.getDataByKey(key);
+            console.log("isSoulEnough curSoul:"+curSoul);
+            return curSoul.isGreaterThanOrEqualTo(soul);
+        } else {
+            console.error("type error, 'soul' must be a BigNumber.");
+            return false;
+        }
+    },
 
     getGoldStr () {
         const self = this;
         var key = self.KeyMap.curGold;
         var curGold = self.getDataByKey(key);
         return Formulas.formatBigNumber(curGold);
+    },
+
+    getSoulStr () {
+        const self = this;
+        var key = self.KeyMap.curSoul;
+        var curSoul = self.getDataByKey(key);
+        return Formulas.formatBigNumber(curSoul);
     },
 
     passLevel (level) {

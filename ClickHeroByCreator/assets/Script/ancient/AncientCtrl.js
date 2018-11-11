@@ -30,7 +30,6 @@ cc.Class({
     },
 
     addItem(ancient) {
-        console.log(ancient);
         var node = cc.instantiate(this.itemPrefab);
         node.parent = this.body;
         node.getComponent("AncientItem").bind(ancient);

@@ -8,6 +8,8 @@ cc.Class({
         container : cc.Node,
         btnAccept : cc.Node,
         sign : cc.Node,
+        lbSoul : cc.Label,
+        lbRerollSoul : cc.Label,
     },
 
     // onLoad () {},
@@ -32,6 +34,11 @@ cc.Class({
             this.sign.active = false;
             this.btnAccept.active = false;
             this.desc.string = "";
+
+            let soul = HeroDatas.getBuyAncientSoul();
+            this.lbSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
+            soul = HeroDatas.getRerollAncientSoul();
+            this.lbRerollSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
         }
     },
 
@@ -67,6 +74,12 @@ cc.Class({
     },
 
     onReroll(){
+        let csoul = HeroDatas.getRerollAncientSoul();
+        if (!DataCenter.isSoulEnough(csoul)) {
+            console.log("英魂不够");
+            return;
+        }
+        DataCenter.consumeSoul(csoul);
         HeroDatas.initSelAncients();
         this.refresh();
     },
