@@ -28,15 +28,18 @@ cc.Class({
         this.skills = CfgMgr.getHeroSkills(id);
 
         // 从云端数据恢复英雄技能列表
-        if (cloudHeroInfo && ) {
+        if (cloudHeroInfo) {
+            this.level = cloudHeroInfo.level?cloudHeroInfo.level:0;
+            this.golden = cloudHeroInfo.golden?cloudHeroInfo.golden:0;
             if (cloudHeroInfo.skills) {
                 for (let skillID = 0; skillID < this.skills.length; skillID++) {
                     if (cloudHeroInfo.skills[skillID]) {
                         this.skills[skillID].isBuy = true;
                     
+                    }
                 }
-            }
             // todo
+            }
         }
 
         this.isActive = DataCenter.isGoldEnough(this.baseCost);
@@ -61,6 +64,8 @@ cc.Class({
         var obj = {}
         obj.id = this.id;
         obj.isBuy = this.isBuy;
+        obj.level = this.level;
+        obj.golden = this.golden;
         obj.skills = [];
         for (let skillID = 0; skillID < this.skills.length; skillID++) {
             const skill = this.skills[skillID];
