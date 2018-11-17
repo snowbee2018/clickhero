@@ -19,6 +19,11 @@ cc.Class({
         list: cc.ScrollView,
         skillItemPrefab: cc.Prefab,
         descLab: cc.Label,
+
+        goldenBar : cc.Node,
+        lbGolden : cc.Label,
+        lbGoldenTimes : cc.Label,
+        lbRuby: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -61,11 +66,12 @@ cc.Class({
     setDialog (heroID) {
         const self = this;
         self._heroID = heroID;
+        self._hero = HeroDatas.getHero(self._heroID);
     },
 
     addSkillItem () {
         const self = this;
-        var hero = HeroDatas.getHero(self._heroID);
+        var hero = self._hero;
         var skillArr = hero.skills;
         self.skillItem = [];
         if (skillArr) {
@@ -82,22 +88,37 @@ cc.Class({
 
     setDisplay () {
         const self = this;
-        var hero = HeroDatas.getHero(self._heroID);
+        var hero = this._hero;
         var skillArr = hero.skills;
         self.heroIcon.setIcon(self._heroID);
         self.heroName.string = hero.heroName;
         self.heroLevel.string = "等级:" + hero.level;
         self.descLab.string = hero.desc;
+        this.fullView();
+        for (let index = 0; index < self.skillItem.length; index++) {
+            const item = self.skillItem[index];
+            item.setDisplay();
+        }
+
+    },
+
+    fullView(){
+        const self = this;
+        var hero = this._hero;
         if (self._heroID == 0) {
             self.heroDPS.string = "点击伤害:" + Formulas.formatBigNumber(hero.DPS);
         } else {
             self.heroDPS.string = "DPS伤害:" + Formulas.formatBigNumber(hero.DPS);
         }
-        
-        for (let index = 0; index < self.skillItem.length; index++) {
-            const item = self.skillItem[index];
-            item.setDisplay();
-        }
+        // golden
+        this.goldenBar.active = true; // 通过金身等级 为0 不显示
+        this.lbGolden.string = "金身等级："+hero.golden;
+        this.lbGoldenTimes.string = "伤害加成：+"+(hero.golden*50)+"%"
+    },
+
+    onClickUpGolden(){
+        this._hero.upgradeGolden();
+        this.fullView();
     },
 
     close () {
