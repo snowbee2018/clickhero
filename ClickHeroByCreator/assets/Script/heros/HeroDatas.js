@@ -103,7 +103,8 @@ cc.Class({
         getHero(id){
             return this.heroList[id];
         },
-        formatHeroList () {
+
+        formatHeroList() { // 格式化存档数据，用于存储到云端和从云端恢复数据
             var arr = []
             for (let heroID = 0; heroID < this.heroList.length; heroID++) {
                 const hero = this.heroList[heroID];
@@ -112,7 +113,7 @@ cc.Class({
                     arr.push(heroInfo);
                 }
             }
-            return JSON.stringify(arr);
+            return arr;
         },
 
         initSelAncients(){

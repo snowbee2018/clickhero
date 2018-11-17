@@ -5,18 +5,18 @@ cc.Class({
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
-            monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量，存json
+            monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
             passLavel: "passLavel", // 已通过的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
             curSoul: "curSoul", // 当前英魂数量
             additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
-            heroList: "heroList", // 用户所有英雄的状态，用json存起来
-            skillList: "skillList", // 所有主动技能的状态，同样存json,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
-            achievementList: "achievementList", // 成就列表，存json，转生次数也在这里
-            equipmentList: "equipmentList", // 装备列表，存json，圣遗物和神器都存这里
-            shopList: "shopList", // 钻石商店商品列表，存json，用户的购买状态也存里面
-            lansquenetList: "lansquenetList", // 雇佣兵列表，存json，任务的完成状态也存里面
+            heroList: "heroList", // 用户所有英雄的状态，存起来
+            skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
+            achievementList: "achievementList", // 成就列表，转生次数也在这里
+            equipmentList: "equipmentList", // 装备列表，圣遗物和神器都存这里
+            shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
+            lansquenetList: "lansquenetList", // 雇佣兵列表，任务的完成状态也存里面
 
             curSetting: "curSetting", // 当前设置信息
         }

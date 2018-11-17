@@ -110,12 +110,11 @@ cc.Class({
 
     formatMonsterInfo () {
         const self = this;
-        var map = DataCenter.KeyMap;
         var monsterInfo = self.getCurMonsterInfo();
         var obj = {}
         obj.lv = monsterInfo.lv;
         obj.hp = monsterInfo.hp.toExponential(4);
-        return JSON.stringify(obj);
+        return obj;
     },
 
     makeMonster (lv) {
