@@ -110,6 +110,7 @@ cc.Class({
                                             name: "taojh"
                                         });
                                     }
+                                    self.gameController.setWeChatUser();
                                     self.startGame();
                                 }
                             });
@@ -131,7 +132,6 @@ cc.Class({
         console.log("开始游戏逻辑");
         self.bg.zIndex = 0;
         self.uiRoot.active = true;
-        self.gameController.setWeChatUser();
         self.gameController.onGameStart();
     },
 });
