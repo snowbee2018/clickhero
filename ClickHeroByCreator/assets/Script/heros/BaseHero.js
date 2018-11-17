@@ -18,7 +18,7 @@ cc.Class({
         desc: "",
     },
 
-    init(id, heroName, baseCost, baseDPS, isBuy, desc) {
+    init(id, heroName, baseCost, baseDPS, isBuy, desc, cloudHeroInfo) {
         this.isPassive = !(id == 0);
         this.id = id;
         this.heroName = heroName;
@@ -26,6 +26,19 @@ cc.Class({
         this.baseDPS = new BigNumber(baseDPS);
         this.isBuy = isBuy;
         this.skills = CfgMgr.getHeroSkills(id);
+
+        // 从云端数据恢复英雄技能列表
+        if (cloudHeroInfo && ) {
+            if (cloudHeroInfo.skills) {
+                for (let skillID = 0; skillID < this.skills.length; skillID++) {
+                    if (cloudHeroInfo.skills[skillID]) {
+                        this.skills[skillID].isBuy = true;
+                    
+                }
+            }
+            // todo
+        }
+
         this.isActive = DataCenter.isGoldEnough(this.baseCost);
         this.desc = desc;
         this.refresh();

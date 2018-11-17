@@ -40,10 +40,32 @@ cc.Class({
         selAncients : [],// 选中的
         otherAncients : [],// 剩余的
         init() {
+            var map = DataCenter.KeyMap;
+            var herosCloudInfo = DataCenter.getCloudDataByKey(map.heroList);
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
-                var hero = new BaseHero().init(heroID, heroCfg.name, heroCfg.baseCost, heroCfg.baseDPS, false, heroCfg.desc);
-                this.heroList.push(hero);
+                if (herosCloudInfo && herosCloudInfo[heroID]) {
+                    // 从云端数据恢复英雄数据
+                    var hero = new BaseHero().init(
+                        heroID, heroCfg.name,
+                        heroCfg.baseCost,
+                        heroCfg.baseDPS,
+                        true,
+                        heroCfg.desc,
+                        herosCloudInfo[heroID]
+                    );
+                    this.heroList.push(hero);
+                } else {
+                    var hero = new BaseHero().init(
+                        heroID, heroCfg.name,
+                        heroCfg.baseCost,
+                        heroCfg.baseDPS,
+                        false,
+                        heroCfg.desc
+                    );
+                    this.heroList.push(hero);
+                }
+
             }
 
             // this.heroList = [

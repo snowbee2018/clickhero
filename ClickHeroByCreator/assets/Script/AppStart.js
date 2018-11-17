@@ -88,7 +88,6 @@ cc.Class({
                     // 成功回调
                     complete: res => {
                         console.log('callFunction test result: ', res);
-                        console.log("AAAAAAAAAAAAAAAA");
                         console.log(res);
                         if (res.result) {
                             var openID = res.result.OPENID;
@@ -104,11 +103,10 @@ cc.Class({
                                         var data = dataArr[0];
                                         CloudDB.saveDBID(data._id);
                                         console.log(data);
+                                        DataCenter.saveCloudData(data);
                                     } else {
                                         console.log("未获取到用户数据，用户第一次进入游戏");
-                                        CloudDB.add({
-                                            name: "taojh"
-                                        });
+                                        CloudDB.add({});
                                     }
                                     self.gameController.setWeChatUser();
                                     self.startGame();
@@ -123,6 +121,9 @@ cc.Class({
                 
             });
         } else {
+            // DataCenter.saveCloudData({
+            //     gamedata: { curGold: 100, monsterInfo: { lv: 2, killCount: 1 } }
+            // });
             self.startGame();
         }
     },

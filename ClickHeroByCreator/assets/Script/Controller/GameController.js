@@ -76,10 +76,12 @@ cc.Class({
         DataCenter.init();
         HeroDatas.init();
         
-        GameData.refresh();
+        
         self.heroListControl.setHeroList();
         self.monsterController.init();
         self.userSkillController.initUserSkills();
+
+        GameData.refresh();
 
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
@@ -95,7 +97,7 @@ cc.Class({
         const self = this;
         var map = DataCenter.KeyMap;
         // 获取存档数据，并存储到云端
-        var curGold = self.getDataByKey(map.curGold);
+        var curGold = DataCenter.getDataByKey(map.curGold);
 
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来

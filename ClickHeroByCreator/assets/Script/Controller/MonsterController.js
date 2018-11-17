@@ -55,17 +55,30 @@ cc.Class({
 
     init () {
         const self = this;
-        // 获取本地存档，初始化关卡和怪物
-        var bFirstPlay = true;
-        if (bFirstPlay) {
-            self.makeMonster(1);
-        } else {
-            var lv = 1;
-            var killCount = 0;
-            self.killCount = killCount;
+        // 获取存档，初始化关卡和怪物
+        var map = DataCenter.KeyMap;
+        var monsterCloudInfo = DataCenter.getCloudDataByKey(map.monsterInfo);
+        console.log(monsterCloudInfo);
+        
+        if (monsterCloudInfo) {
+            // 云端有数据
+            var lv = parseInt(monsterCloudInfo.lv);
+            self.killCount = monsterCloudInfo.killCount;
             self.makeMonster(lv);
+        } else {
+            // 云端无数据
+            self.makeMonster(1);
         }
 
+    },
+
+    formatMonsterInfo() { // 格式化存档数据，用于存储到云端和从云端恢复数据
+        const self = this;
+        var monsterInfo = self.getCurMonsterInfo();
+        var obj = {}
+        obj.lv = monsterInfo.lv;
+        obj.killCount = self.killCount;
+        return obj;
     },
 
     goldClick (bGoldClick, goldClickValue) {
@@ -106,15 +119,6 @@ cc.Class({
             str += "S";
         }
         self.timeLabel.string = str;
-    },
-
-    formatMonsterInfo () {
-        const self = this;
-        var monsterInfo = self.getCurMonsterInfo();
-        var obj = {}
-        obj.lv = monsterInfo.lv;
-        obj.hp = monsterInfo.hp.toExponential(4);
-        return obj;
     },
 
     makeMonster (lv) {

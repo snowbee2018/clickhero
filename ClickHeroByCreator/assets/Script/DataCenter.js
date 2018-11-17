@@ -28,12 +28,18 @@ cc.Class({
         
     },
 
-    // 读取本地用户数据之后用来初始化
+    // 读取存档之后用来初始化
     init () {
         const self = this;
-        self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+99")));
+        var cloudGold = self.getCloudDataByKey(self.KeyMap.curGold);
+        if (cloudGold) {
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
+        } else {
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+99")));
+        }
+        
         // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-        this.setDataByKey(this.KeyMap.curSoul , new BigNumber("30"));
+        self.setDataByKey(self.KeyMap.curSoul , new BigNumber("30"));
     },
 
     setDataByKey (key, params) {
@@ -172,5 +178,20 @@ cc.Class({
         var key = self.KeyMap.passLavel;
         var curPassLevel = self.getDataByKey(key);
         return curPassLevel >= level;
+    },
+
+    saveCloudData (data) {
+        const self = this;
+        if (data) {
+            self.setDataByKey("CloudData", data);
+        }
+    },
+
+    getCloudDataByKey (key) {
+        const self = this;
+        var cloudData = self.getDataByKey("CloudData");
+        if (key && cloudData && cloudData.gamedata && cloudData.gamedata[key]) {
+            return cloudData.gamedata[key];
+        }
     },
 });
