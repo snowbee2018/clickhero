@@ -23,6 +23,7 @@ cc.Class({
         self.ContentData = {}
         self.DataMap = {
             WXUserInfo: "WXUserInfo", // 当前用户微信信息
+            OPENID: "OPENID",
         }
         
     },

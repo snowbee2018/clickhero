@@ -42,10 +42,16 @@ cc.Class({
         window.Events = require("Events");
         window.BigNumber = require("BigNumber");
         window.ZoneArr = require("ZoneCfg");
+        window.CloudDB = require("CloudDB");
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
+        if (window.WeChatUtil.isWeChatPlatform) {
+            wx.cloud.init({
+                env: 'test-72db6b'
+            })
+        }
     },
 
     checkReady() {
@@ -77,7 +83,39 @@ cc.Class({
                 let launchOpt = WeChatUtil.getLaunchOptionsSync();
                 console.log(launchOpt);
                 self.getComponent("GameController").setWeChatUser();
-                self.startGame();
+                wx.cloud.callFunction({
+                    // 需调用的云函数名
+                    name: 'login',
+                    // 传给云函数的参数
+                    data: userData,
+                    // 成功回调
+                    complete: res => {
+                        console.log('callFunction test result: ', res);
+                        console.log("AAAAAAAAAAAAAAAA");
+                        console.log(res);
+                        if (res.result) {
+                            var openID = res.result.OPENID;
+                            console.log("openID = " + openID);
+                            DataCenter.setDataByKey(DataMap.OPENID, openID);
+
+                            // 从云数据库中获取用户数据
+                            console.log("使用openID从云数据库中获取用户数据");
+                            CloudDB.getUserData(openID, function (err, data) {
+                                if (!err) {
+                                    console.log("获取到了用户数据");
+                                    console.log(data);
+                                } else {
+                                    console.log("未获取到用户数据，用户第一次进入游戏");
+                                }
+                                self.startGame();
+                            });
+
+                        } else {
+                            console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
+                        }
+                    },
+                })
+                
             });
         } else {
             self.startGame();
