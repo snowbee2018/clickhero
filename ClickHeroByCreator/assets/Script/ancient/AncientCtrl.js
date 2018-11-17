@@ -11,7 +11,9 @@ cc.Class({
     },
 
     start () {
-
+        Events.on(Events.ON_UPGRADE_ANCIENT,function(id) {
+            console.log("ancient.id:" + id);
+        },this);
     },
 
     onClickSummon () {
@@ -28,7 +30,6 @@ cc.Class({
     },
 
     addItem(ancient) {
-        console.log(ancient);
         var node = cc.instantiate(this.itemPrefab);
         node.parent = this.body;
         node.getComponent("AncientItem").bind(ancient);

@@ -14,6 +14,7 @@ cc.Class({
 
         totalCostLab: cc.Label,
         lvLab: cc.Label,
+        totalSoulLab: cc.Label,
         hpLab: cc.Label,
         costLab: cc.Label,
 
@@ -63,6 +64,7 @@ cc.Class({
     onDisable() {
         const self = this;
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.off(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
     },
 
     onGameStart () {
@@ -81,8 +83,10 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.on(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
         
         self.totalCostLab.string = DataCenter.getGoldStr();
+        self.totalSoulLab.string = DataCenter.getSoulStr();
     },
 
     formatLocalGameData () {
@@ -111,6 +115,11 @@ cc.Class({
     onGoldChange () {
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
+    },
+
+    onSoulChange(){
+        const self = this;
+        self.totalSoulLab.string = DataCenter.getSoulStr();
     },
 
     updataMonsterInfoDisplay () {

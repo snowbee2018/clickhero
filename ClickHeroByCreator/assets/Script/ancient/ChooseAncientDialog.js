@@ -8,11 +8,17 @@ cc.Class({
         container : cc.Node,
         btnAccept : cc.Node,
         sign : cc.Node,
+        lbSoul : cc.Label,
+        lbRerollSoul : cc.Label,
     },
 
     // onLoad () {},
 
     start () {
+        this.refresh();
+    },
+
+    refresh(){
         this.selIndex = -1;
         // 用选好的AncientList遍历初始化
         this.selAncients = HeroDatas.selAncients;
@@ -24,6 +30,15 @@ cc.Class({
             const ancient = this.selAncients[i];
             this.items[i].node.bean = ancient;
             this.items[i].node.children[0].getComponent(cc.Label).string = ancient.name;
+            this.items[i].node.color = new cc.Color(0xff,0xff,0xff);
+            this.sign.active = false;
+            this.btnAccept.active = false;
+            this.desc.string = "";
+
+            let soul = HeroDatas.getBuyAncientSoul();
+            this.lbSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
+            soul = HeroDatas.getRerollAncientSoul();
+            this.lbRerollSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
         }
     },
 
@@ -53,12 +68,23 @@ cc.Class({
             return;
         }
         this.selAncients.splice(this.selIndex,1);
-        HeroDatas.addSelAncient();
+        HeroDatas.initSelAncients();
         this._cb(this.ancient);
-        this.node.destroy();
+        this.finish();
     },
 
-    onCancal(){
+    onReroll(){
+        let csoul = HeroDatas.getRerollAncientSoul();
+        if (!DataCenter.isSoulEnough(csoul)) {
+            console.log("英魂不够");
+            return;
+        }
+        DataCenter.consumeSoul(csoul);
+        HeroDatas.initSelAncients();
+        this.refresh();
+    },
+
+    finish(){
         this.node.destroy();
     },
 });
