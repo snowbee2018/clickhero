@@ -30,6 +30,8 @@ cc.Class({
         _lastTimestamp: 0, // 上次使用技能的时间
         _isActive: true, // 是否已经冷却完成
         _isSustainFinish: true, // 技能持续是否结束
+        _coolingCurtail: 0, // 刷新技能曹成的冷却缩减
+        // _sustainAdd: 0, // 增加的持续时间
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -60,40 +62,62 @@ cc.Class({
         self.describeLab.string = self.getSkillDesStr();
     },
 
-    initUserSkill () {
+    formatUserSkillInfo () {
+        const self = this;
+        return {
+            heroID: self.heroID,
+            skillID: self.skillID,
+            lastTimestamp: self._lastTimestamp,
+            coolingCurtail: self._coolingCurtail
+        }
+    },
+
+    initUserSkill(cloudSkillInfo) {
         const self = this;
         // 初始化UI
         self.skillNameLab.string = self.skillName;
         self.setSkillDes();
         self.timeLab.string = "";
 
-        // 读取本地存档初始化
-        self._isBuy = true; // 是否已经购买
-        self._lastTimestamp = 0; // 上次使用技能的时间
+        if (cloudSkillInfo) {
+            // 用存档初始化
+            self._isBuy = true; // 是否已经购买
+            self._coolingCurtail = cloudSkillInfo.coolingCurtail;
+            self._lastTimestamp = cloudSkillInfo.lastTimestamp ? parseInt(cloudSkillInfo.lastTimestamp) : 0; // 上次使用技能的时间            
+        } else {
+            self._isBuy = false;
+            self._lastTimestamp = 0;
+        }
 
         // 计算技能当前的状态
         var nowTime = Date.parse(new Date());
+        // self._isBuy = true;
+        // self._lastTimestamp = nowTime;
         var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
-        if (timeCooling > 0) { // 技能还在冷却过程中
+        if (timeCooling - self._coolingCurtail > 0) { // 技能还在冷却过程中
             self._isActive = false;
             var timeStr = self.dateFormat(timeCooling / 1000);
             self.onCoolingCountDown(timeCooling / 1000, timeStr);
         } else { // 技能已经冷却
             self._isActive = true;
+            self._coolingCurtail = 0;
+            self.onCoolingDone();
         }
-        if (self.bSustain) {
-            var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
-            if (timeSustain > 0) { // 技能还在持续过程中
-                self._isSustainFinish = false;
-                self.appply();
-                var timeStr = self.dateFormat(timeSustain / 1000);
-                self.onSustainCountDown(timeSustain / 1000, timeStr);
-            } else {
-                self._isSustainFinish = true;
-            }
-        } else {
-            self._isSustainFinish = true;
-        }
+        // if (self.bSustain) {
+        //     var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
+        //     if (timeSustain > 0) { // 技能还在持续过程中
+        //         self._isSustainFinish = false;
+        //         self.appply();
+        //         var timeStr = self.dateFormat(timeSustain / 1000);
+        //         self.onSustainCountDown(timeSustain / 1000, timeStr);
+        //     } else {
+        //         self._isSustainFinish = true;
+        //     }
+        // } else {
+        //     self._isSustainFinish = true;
+        // }
+        // 重新打开游戏的时候默认技能持续已经结束，不保留技能使用效果
+        self._isSustainFinish = true;
         self.gray.active = !self.isCanUse();
 
         self.schedule(function () {
@@ -103,11 +127,13 @@ cc.Class({
             } else {
                 var nowTime = Date.parse(new Date());
                 var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
-                if (timeCooling - self.coolingCurtail > 0) {
+                if (timeCooling - self._coolingCurtail > 0) {
                     var timeStr = self.dateFormat(timeCooling / 1000);
+                    // console.log("timeStr = " + timeStr);
                     self.onCoolingCountDown(timeCooling / 1000, timeStr);
                 } else {
                     self._isActive = true;
+                    self._coolingCurtail = 0;
                     self.onCoolingDone();
                 }
                 self.gray.active = !self.isCanUse();
@@ -119,7 +145,7 @@ cc.Class({
                 } else {
                     var nowTime = Date.parse(new Date());
                     var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
-                    if (timeSustain > 0) {
+                    if (timeSustain + self.getSustainAdd() > 0) {
                         var timeStr = self.dateFormat(timeSustain / 1000);
                         self.onSustainCountDown(timeSustain / 1000, timeStr);
                     } else {
@@ -133,6 +159,11 @@ cc.Class({
         }, 0.1);
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
+    },
+
+    getSustainAdd() { // 获取技能持续附加值
+        const self = this;
+        return 0;
     },
 
     onGoldChange () {
@@ -189,7 +220,7 @@ cc.Class({
     setCoolingCurtail (value) {
         const self = this;
         if (value > 0) {
-            self.coolingCurtail = value;
+            self._coolingCurtail = value;
         }
     },
 
@@ -200,7 +231,7 @@ cc.Class({
         if (self.bSustain) {
             self._isSustainFinish = false;
         }
-        self.coolingCurtail = 0;
+        self._coolingCurtail = 0;
         self.appply();
         self._lastTimestamp = Date.parse(new Date());
         // console.log("self._lastTimestamp = " + self._lastTimestamp);

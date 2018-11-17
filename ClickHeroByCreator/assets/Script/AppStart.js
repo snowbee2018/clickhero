@@ -106,7 +106,16 @@ cc.Class({
                                         DataCenter.saveCloudData(data);
                                     } else {
                                         console.log("未获取到用户数据，用户第一次进入游戏");
-                                        CloudDB.add({});
+                                        // weChatUserInfo.avatarUrl
+                                        // weChatUserInfo.country
+                                        // weChatUserInfo.province
+                                        // weChatUserInfo.city
+                                        // weChatUserInfo.gender
+                                        // weChatUserInfo.nickName
+                                        CloudDB.add({
+                                            gamedata: {},
+                                            WeChatUserInfo: userData.userInfo,
+                                        });
                                     }
                                     self.gameController.setWeChatUser();
                                     self.startGame();

@@ -62,14 +62,15 @@ cc.Class({
         
         if (monsterCloudInfo) {
             // 云端有数据
-            var lv = parseInt(monsterCloudInfo.lv);
-            self.killCount = monsterCloudInfo.killCount;
+            var lv = monsterCloudInfo.lv?parseInt(monsterCloudInfo.lv):1;
+            self.killCount = monsterCloudInfo.killCount ? monsterCloudInfo.killCount : 0;
+            self.toggle.isChecked = monsterCloudInfo.autoNext ? true : false;
+            self._autoNext = self.toggle.isChecked;
             self.makeMonster(lv);
         } else {
             // 云端无数据
             self.makeMonster(1);
         }
-
     },
 
     formatMonsterInfo() { // 格式化存档数据，用于存储到云端和从云端恢复数据
@@ -78,6 +79,7 @@ cc.Class({
         var obj = {}
         obj.lv = monsterInfo.lv;
         obj.killCount = self.killCount;
+        obj.autoNext = self.toggle.isChecked;
         return obj;
     },
 

@@ -52,12 +52,42 @@ cc.Class({
 
     initUserSkills () {
         const self = this;
+        // 获取存档，初始化关卡和怪物
+        var map = DataCenter.KeyMap;
+        var userSkillsCloudInfo = DataCenter.getCloudDataByKey(map.skillList);
+        console.log(userSkillsCloudInfo);
+        var getCloudSkillInfo = function (heroid, skillid) {
+            if (userSkillsCloudInfo) {
+                for (let index = 0; index < userSkillsCloudInfo.length; index++) {
+                    const element = userSkillsCloudInfo[index];
+                    if (element.heroID == heroid && element.skillID == skillid) {
+                        return userSkillsCloudInfo[index];
+                    }
+                }
+            }
+
+        }
         // console.log(self.skillList);
         for (let index = 0; index < self.skillList.children.length; index++) {
             const item = self.skillList.children[index];
-            item.getComponent("UserSkill").initUserSkill();
+            var component = item.getComponent("UserSkill");
+            component.initUserSkill(getCloudSkillInfo(component.heroID, component.skillID));
         }
         // self.ClickStorm.getComponent("UserSkill").initUserSkill();
+    },
+
+    formatUserSkillsInfo () {
+        const self = this;
+        var obj = []
+        for (let index = 0; index < self.skillList.children.length; index++) {
+            const item = self.skillList.children[index];
+            var component = item.getComponent("UserSkill");
+            if (component._isBuy) {
+                var info = component.formatUserSkillInfo();
+                obj.push(info);
+            }
+        }
+        return obj;
     },
 
     getUserSkill (heroID, skillID) {
