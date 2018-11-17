@@ -35,6 +35,8 @@ cc.Class({
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
         // self.clickDamage = new BigNumber(1);
+
+        WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
     },
 
     // called every frame
@@ -89,17 +91,18 @@ cc.Class({
         self.totalSoulLab.string = DataCenter.getSoulStr();
     },
 
-    formatLocalGameData () {
+    formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
         const self = this;
         var map = DataCenter.KeyMap;
-        var monsterInfo = self.monsterController.getCurMonsterInfo();
+        // 获取存档数据，并存储到云端
         var curGold = self.getDataByKey(map.curGold);
 
         var obj = {}
+        // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.lastTime] = Date.now().toString();
-        obj[map.monsterInfo] = self.monsterController.formatMonsterInfo();
+        obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
         // obj[map.curDiamond] = 
-        obj[map.curGold] = curGold.toExponential(4);
+        obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
         // obj[map.curSoul] = 
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList();
@@ -109,7 +112,8 @@ cc.Class({
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
-        WeChatUtil.setLocalStorage(JSON.stringify(obj));
+
+        return obj;
     },
 
     onGoldChange () {
@@ -161,30 +165,21 @@ cc.Class({
 
     onShareBtnClick () {
         const self = this;
-        // WeChatUtil.showModal({
-        //     title: "分享给好友",
-        //     content: "点一下，玩一年，把快乐分享给好友吧",
-        //     callBack: function (res) {
-        //         console.log("模态对话框用户操作返回");
-        //         console.log(res);
-        //         if (res.confirm) {
-        //             console.log("点击了确定");
-        //             WeChatUtil.shareAppMessage();
-        //             self.showOpenDataView();
-        //         } else if (res.cancel) {
-        //             console.log("点击了取消");
-        //             self.showOpenDataView();
-        //             WeChatUtil.showToast("取消了分享");
-        //         }
-        //     }
-        // });
-        CloudDB.update({
-            name: "hahaha",
-            test1: true,
-            test2: 321,
-            test3: {
-                a: false,
-                b: ["1", 2, "3", true, false]
+        WeChatUtil.showModal({
+            title: "分享给好友",
+            content: "点一下，玩一年，把快乐分享给好友吧",
+            callBack: function (res) {
+                console.log("模态对话框用户操作返回");
+                console.log(res);
+                if (res.confirm) {
+                    console.log("点击了确定");
+                    WeChatUtil.shareAppMessage();
+                    self.showOpenDataView();
+                } else if (res.cancel) {
+                    console.log("点击了取消");
+                    self.showOpenDataView();
+                    WeChatUtil.showToast("取消了分享");
+                }
             }
         });
     },

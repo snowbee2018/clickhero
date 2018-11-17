@@ -414,19 +414,26 @@ cc.Class({
         
     },
 
+    setCloudDataFormat (func) {
+        const self = this;
+        self.cloudDataFormatFunc = func;
+    },
+
     // 从后台返回，参数同 getLaunchOptionsSync 的返回
     onShow(res) {
         const self = this;
         console.log("on game back");
-        console.log(res);
-        
+        // console.log(res);
     },
 
     // 切换到后台
     onHide() {
         const self = this;
         console.log("on game hide");
-        
+        if (self.cloudDataFormatFunc) {
+            var data = self.cloudDataFormatFunc();
+            CloudDB.update(data);
+        }
     },
 
     // 模态对话框，有取消和确定两个按钮，分享和播广告时可以先弹这个

@@ -44,7 +44,7 @@ cc.Class({
         }
     },
 
-    formatHeroInfo () {
+    formatHeroInfo() { // 格式化存档数据，用于存储到云端和从云端恢复数据
         var obj = {}
         obj.id = this.id;
         obj.isBuy = this.isBuy;
