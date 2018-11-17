@@ -55,6 +55,11 @@ cc.Class({
             wx.onShow(self.onShow.bind(self));
             wx.onHide(self.onHide.bind(self));
 
+            wx.cloud.init({
+                env: 'test-72db6b',
+                traceUser: true
+            });
+
             // 显示设置中的被动转发选项
             wx.showShareMenu({
                 success: function () {

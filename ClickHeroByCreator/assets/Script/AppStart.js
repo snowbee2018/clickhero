@@ -12,7 +12,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //
+        bg: cc.Node,
+        uiRoot: cc.Node,
     },
 
     ctor () {
@@ -21,7 +22,9 @@ cc.Class({
 
     onLoad () {
         const self = this;
-        self.node.active = false;
+        self.bg.zIndex = 1000;
+        self.uiRoot.active = false;
+        self.gameController = self.uiRoot.getComponent("GameController")
         self.initGame();
     },
     
@@ -47,11 +50,6 @@ cc.Class({
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
-        if (window.WeChatUtil.isWeChatPlatform) {
-            wx.cloud.init({
-                env: 'test-72db6b'
-            })
-        }
     },
 
     checkReady() {
@@ -80,9 +78,8 @@ cc.Class({
                 console.log(userData);
                 let DataMap = DataCenter.DataMap;
                 DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
-                let launchOpt = WeChatUtil.getLaunchOptionsSync();
-                console.log(launchOpt);
-                self.getComponent("GameController").setWeChatUser();
+                // let launchOpt = WeChatUtil.getLaunchOptionsSync();
+                // console.log(launchOpt);
                 wx.cloud.callFunction({
                     // 需调用的云函数名
                     name: 'login',
@@ -100,14 +97,21 @@ cc.Class({
 
                             // 从云数据库中获取用户数据
                             console.log("使用openID从云数据库中获取用户数据");
-                            CloudDB.getUserData(openID, function (err, data) {
+                            CloudDB.getUserData(function (err, dataArr) {
                                 if (!err) {
-                                    console.log("获取到了用户数据");
-                                    console.log(data);
-                                } else {
-                                    console.log("未获取到用户数据，用户第一次进入游戏");
+                                    if (dataArr.length > 0) {
+                                        console.log("获取到了用户数据");
+                                        var data = dataArr[0];
+                                        CloudDB.saveDBID(data._id);
+                                        console.log(data);
+                                    } else {
+                                        console.log("未获取到用户数据，用户第一次进入游戏");
+                                        CloudDB.add({
+                                            name: "taojh"
+                                        });
+                                    }
+                                    self.startGame();
                                 }
-                                self.startGame();
                             });
 
                         } else {
@@ -125,7 +129,9 @@ cc.Class({
     startGame () {
         const self = this;
         console.log("开始游戏逻辑");
-        self.node.active = true;
-        self.getComponent("GameController").onGameStart();
+        self.bg.zIndex = 0;
+        self.uiRoot.active = true;
+        self.gameController.setWeChatUser();
+        self.gameController.onGameStart();
     },
 });
