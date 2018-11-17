@@ -114,7 +114,8 @@ cc.Class({
         this.golden ++;
         // 然后计算dps啊
         this.refresh();
-        GameData.calDPSDamage();
+        this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+        Events.emit(Events.ON_UPGRADE_HERO, this.id);
     },
     // 回收金身 当转移金身时 使用
     delGolden(){
