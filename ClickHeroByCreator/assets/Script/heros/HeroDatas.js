@@ -137,6 +137,16 @@ cc.Class({
             }
             return arr;
         },
+        formatAicentList() {
+            var arr = [[],[]];
+            this.myAncients.forEach(ancient => {
+                arr[0].push(ancient.formatInfo());
+            });
+            this.selAncients.forEach(ancient => {
+                arr[1].push(ancient.formatInfo());
+            });
+            return arr;
+        },
 
         initSelAncients(){
             this.otherAncients=this.otherAncients.concat(this.selAncients);

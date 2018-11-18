@@ -108,6 +108,7 @@ cc.Class({
         // obj[map.curSoul] = 
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList();
+        obj[map.acientList] = HeroDatas.formatAicentList();
         // obj[map.skillList] = 
         // obj[map.achievementList] = 
         // obj[map.equipmentList] = 

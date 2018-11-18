@@ -26,18 +26,18 @@ cc.Class({
         return this;
     },
 
+    formatInfo(){
+        var obj = {}
+        obj.id = this.id;
+        obj.isActive = this.isActive;
+        obj.isBuy = this.isBuy;
+        obj.level = this.level;
+        return obj;
+    },
+
     buy(){
-        // this.level ++;
-        // this.calUpgradeSoul();
-        // this.isBuy = true;
-        // HeroDatas.myAncients.push(this);
-        // this.refresh();
-        // Events.emit(Events.ON_BUY_ANCIENT,this.id);
-        // Events.emit(Events.ON_UPGRADE_ANCIENT,this.id);
-        // return true;
         let soul = HeroDatas.getBuyAncientSoul();
         soul = new BigNumber(soul);
-        // 伪代码
         var isCanBy = DataCenter.isSoulEnough(soul);
         if (isCanBy) {
             DataCenter.consumeSoul(soul);
@@ -55,12 +55,6 @@ cc.Class({
     },
 
     upgrade(){
-        // this.level ++;
-        // this.calUpgradeSoul();
-        // this.refresh();
-        // Events.emit(Events.ON_UPGRADE_ANCIENT,this.id);
-        // return true;
-        // 伪代码
         var soul = this.calUpgradeSoul();
         var isCanUpgrade = DataCenter.isSoulEnough(soul);
         soul = new BigNumber(soul);
