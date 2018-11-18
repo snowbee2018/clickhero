@@ -95,12 +95,11 @@ cc.Class({
         const self = this;
         if (self.isWeChatPlatform) {
             console.log("用户点击了设置中的“转发”按钮");
-            
-            cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
+            // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
             return {
                 title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
                 imageUrl: self.getShareImage(),
-                // query: // 查询参数
+                query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
             }      
         }
     },
@@ -108,20 +107,16 @@ cc.Class({
     shareAppMessage () {
         const self = this;
         if (self.isWeChatPlatform) {
-            
             try {
                 var result = wx.shareAppMessage({
-                    title: '点一下，玩一年，斩妖除魔，重温经典西行路。',
+                    title: '这个牛魔王太难打了，兄弟们快来帮我砍他！',
                     imageUrl: self.getShareImage(),
-                    // query: // 查询参数
+                    query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
                 });
-                console.log(result);
-                
-                cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
+                // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
             } catch (error) {
                 console.log(error);
             }
-            
         }
     },
 
@@ -411,7 +406,6 @@ cc.Class({
         if (self.isWeChatPlatform) {
             return wx.getLaunchOptionsSync();    
         }
-        
     },
 
     setCloudDataFormat (func) {

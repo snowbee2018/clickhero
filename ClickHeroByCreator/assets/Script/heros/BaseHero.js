@@ -25,7 +25,8 @@ cc.Class({
         this.baseCost = new BigNumber(baseCost);
         this.baseDPS = new BigNumber(baseDPS);
         this.isBuy = isBuy;
-        this.skills = CfgMgr.getHeroSkills(id);
+        var skills = CfgMgr.getHeroSkills(id);
+        this.skills = skills ? skills : [];
 
         // 从云端数据恢复英雄技能列表
         if (cloudHeroInfo) {

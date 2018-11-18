@@ -69,65 +69,126 @@ cc.Class({
         if (window.SkillCfg == undefined) return;
 
         console.log("所有本地配置加载完成");
+        self.login();
+    },
 
-        WeChatUtil.sayHello();
-        
+    onChildUserData(dataArr) {
+        const self = this;
+        console.log("onChildUserData");
+        console.log(dataArr);
+        if (dataArr && dataArr.length > 0) {
+            var childUserArr = [];
+            for (let index = 0; index < dataArr.length; index++) {
+                const childUserCloudData = dataArr[index];
+                childUserArr.push(childUserCloudData._openid);
+            }
+            var cloudInfo = DataCenter.getCloudData();
+            var cloudChildUsers = cloudInfo.ChildUsers;
+            console.log(cloudChildUsers);
+            console.log(childUserArr);
+            if (cloudChildUsers) {
+                if (cloudChildUsers.length != childUserArr.length) {
+                    CloudDB.updataChildUsers(childUserArr);
+                }
+            } else {
+                CloudDB.updataChildUsers(childUserArr);
+            }
+        }
+        self.gameController.setWeChatUser();
+        self.startGame();
+    },
+
+    onCloudGameData(dataArr) {
+        const self = this;
+        console.log("onCloudGameData");
+        if (dataArr.length > 0) {
+            console.log("获取到了用户游戏数据");
+            var data = dataArr[0];
+            CloudDB.saveDBID(data._id);
+            console.log(data);
+            DataCenter.saveCloudData(data);
+            // 获取子用户
+            CloudDB.getChildUserData(function (err, dataArr) {
+                if (!err) {
+                    self.onChildUserData(dataArr);
+                }
+            });
+        } else {
+            console.log("未获取到用户数据，用户第一次进入游戏");
+            var launchOptions = WeChatUtil.getLaunchOptionsSync();
+            var referrer;
+            switch (launchOptions.scene) {
+                case 1007:
+                case 1008:
+                    if (launchOptions.query && launchOptions.query.openid) {
+                        // 推荐人
+                        if (launchOptions.query.openid != openID) {
+                            referrer = launchOptions.query.openid;
+                        } else {
+                            console.log("点击自己分享的卡片进入游戏");
+                        }
+                    } else {
+                        console.log("没有推荐人");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            CloudDB.add({
+                gamedata: {},
+                WeChatUserInfo: userData.userInfo,
+                referrer: referrer
+            });
+            self.gameController.setWeChatUser();
+            self.startGame();
+        }
+    },
+
+    onOpenID(openID) {
+        const self = this;
+        console.log("onOpenID");
+        let DataMap = DataCenter.DataMap;
+        DataCenter.setDataByKey(DataMap.OPENID, openID);
+        // 从云数据库中获取用户数据
+        console.log("使用openID从云数据库中获取用户数据");
+        CloudDB.getUserData(function (err, dataArr) {
+            if (!err) {
+                self.onCloudGameData(dataArr);
+            }
+        });
+    },
+
+    onWeChatUserInfo(userData) {
+        const self = this;
+        console.log("onWeChatUserInfo");
+        let DataMap = DataCenter.DataMap;
+        DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
+        wx.cloud.callFunction({
+            name: 'login', // 需调用的云函数名
+            data: userData, // 传给云函数的参数
+            complete: res => { // 成功回调
+                if (res.result) {
+                    var openID = res.result.OPENID;
+                    console.log("openID = " + openID);
+                    if (openID) {
+                        self.onOpenID(openID);
+                    }
+                } else {
+                    console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
+                }
+            },
+        })
+    },
+
+    login () {
+        const self = this;
+        console.log("login");
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             WeChatUtil.getUserInfo(function (bSuccess, userData) {
-                console.log("bSuccess = " + bSuccess);
                 console.log(userData);
-                let DataMap = DataCenter.DataMap;
-                DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
-                // let launchOpt = WeChatUtil.getLaunchOptionsSync();
-                // console.log(launchOpt);
-                wx.cloud.callFunction({
-                    // 需调用的云函数名
-                    name: 'login',
-                    // 传给云函数的参数
-                    data: userData,
-                    // 成功回调
-                    complete: res => {
-                        console.log('callFunction test result: ', res);
-                        console.log(res);
-                        if (res.result) {
-                            var openID = res.result.OPENID;
-                            console.log("openID = " + openID);
-                            DataCenter.setDataByKey(DataMap.OPENID, openID);
-
-                            // 从云数据库中获取用户数据
-                            console.log("使用openID从云数据库中获取用户数据");
-                            CloudDB.getUserData(function (err, dataArr) {
-                                if (!err) {
-                                    if (dataArr.length > 0) {
-                                        console.log("获取到了用户数据");
-                                        var data = dataArr[0];
-                                        CloudDB.saveDBID(data._id);
-                                        console.log(data);
-                                        DataCenter.saveCloudData(data);
-                                    } else {
-                                        console.log("未获取到用户数据，用户第一次进入游戏");
-                                        // weChatUserInfo.avatarUrl
-                                        // weChatUserInfo.country
-                                        // weChatUserInfo.province
-                                        // weChatUserInfo.city
-                                        // weChatUserInfo.gender
-                                        // weChatUserInfo.nickName
-                                        CloudDB.add({
-                                            gamedata: {},
-                                            WeChatUserInfo: userData.userInfo,
-                                        });
-                                    }
-                                    self.gameController.setWeChatUser();
-                                    self.startGame();
-                                }
-                            });
-
-                        } else {
-                            console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
-                        }
-                    },
-                })
-                
+                if (userData) {
+                    self.onWeChatUserInfo(userData);
+                }
             });
         } else {
             // DataCenter.saveCloudData({

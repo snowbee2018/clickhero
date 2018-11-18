@@ -188,6 +188,14 @@ cc.Class({
         }
     },
 
+    getCloudData () {
+        const self = this;
+        var cloudData = self.getDataByKey("CloudData");
+        if (cloudData) {
+            return cloudData;
+        }
+    },
+
     getCloudDataByKey (key) {
         const self = this;
         var cloudData = self.getDataByKey("CloudData");

@@ -33,26 +33,34 @@ cc.Class({
 
     setHeroList () {
         const self = this;
+        var id = 0;
         for (let heroID = 0; heroID < HeroDatas.heroList.length; heroID++) {
-            var flag = false;
             if (heroID == 0 || heroID == 1 || heroID == 2) {
-                flag = true;
+                id = heroID;
             } else {
                 var hero = HeroDatas.getHero(heroID);
-                if (hero.isActive) {
-                    flag = true;
-                } else {
-                    var isCanBy = DataCenter.isGoldEnough(hero.baseCost);
-                    if (isCanBy) {
-                        flag = true;
-                    }
+                if (hero.isBuy) {
+                    id = heroID;
                 }
             }
-            if (flag) {
-                self.addHeroItem(heroID);
-            }
         }
-        Events.on(Events.HERO_ACTIVE, self.onHeroActive, self);
+        for (let heroID = 0; heroID <= id; heroID++) {
+            self.addHeroItem(heroID);
+        }
+        var mapKeys = Object.keys(self._heroItemMap);
+        var id = parseInt(mapKeys[mapKeys.length - 1]);
+        var h = HeroDatas.getHero(id + 1);
+        console.log(h);
+        if (h) {
+            self.addHeroItem(id + 1);
+        }
+        var h1 = HeroDatas.getHero(id + 2);
+        console.log(h);
+        if (h1) {
+            self.addHeroItem(id + 2);
+        }
+        
+        Events.on(Events.ON_BY_HERO, self.onBuyHero, self);
     },
 
     addHeroItem(heroID) {
@@ -63,17 +71,17 @@ cc.Class({
         self._heroItemMap[heroID] = true;
     },
 
-    onHeroActive (heroID) {
+    onBuyHero (heroID) {
         const self = this;
         if (heroID != 0) {
-            var hero = HeroDatas.getHero(heroID);
-            if (hero.isActive) {
-                if (!self._heroItemMap[heroID]) {
-                    self.addHeroItem(heroID);
-                }
+            var h = HeroDatas.getHero(heroID + 1);
+            if (h && !self._heroItemMap[heroID + 1]) {
+                self.addHeroItem(heroID + 1);
+            }
+            var h1 = HeroDatas.getHero(heroID + 2);
+            if (h1 && !self._heroItemMap[heroID + 2]) {
+                self.addHeroItem(heroID + 2);
             }
         }
-        
-        
     },
 });

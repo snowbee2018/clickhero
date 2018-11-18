@@ -44,7 +44,7 @@ cc.Class({
             var herosCloudInfo = DataCenter.getCloudDataByKey(map.heroList);
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
-                if (herosCloudInfo && herosCloudInfo[heroID]) {
+                if (herosCloudInfo && herosCloudInfo[heroID] && herosCloudInfo[heroID].isBuy == true) {
                     // 从云端数据恢复英雄数据
                     var hero = new BaseHero().init(
                         heroID, heroCfg.name,
@@ -65,7 +65,6 @@ cc.Class({
                     );
                     this.heroList.push(hero);
                 }
-
             }
 
             // this.heroList = [
@@ -130,10 +129,8 @@ cc.Class({
             var arr = []
             for (let heroID = 0; heroID < this.heroList.length; heroID++) {
                 const hero = this.heroList[heroID];
-                if (hero.isBuy) {
-                    var heroInfo = hero.formatHeroInfo();
-                    arr.push(heroInfo);
-                }
+                var heroInfo = hero.formatHeroInfo();
+                arr.push(heroInfo);
             }
             return arr;
         },

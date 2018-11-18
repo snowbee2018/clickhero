@@ -45,15 +45,39 @@ cc.Class({
             }
         },
 
+        getChildUserData(callBack) {
+            const self = this;
+            if (WeChatUtil.isWeChatPlatform) {
+                self.getDB().where({
+                    referrer: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
+                }).get({
+                    success: function (res) {
+                        // res.data 包含该记录的数据
+                        // console.log(res);
+                        callBack(false, res.data);
+                    },
+                    fail: function (params) {
+                        console.log("获取子用户数据发生错误");
+                        console.log(params);
+                        callBack(true);
+                    }
+                });
+            }
+        },
+
         add (data) {
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
+                var params = {
+                    WeChatUserInfo: data.WeChatUserInfo,
+                    gamedata: data.gamedata,
+                }
+                if (data.referrer) {
+                    params.referrer = data.referrer;
+                }
                 self.getDB().add({
                     // data 字段表示需新增的 JSON 数据
-                    data: {
-                        WeChatUserInfo: data.WeChatUserInfo,
-                        gamedata: data.gamedata
-                    },
+                    data: params,
                     success: function (res) {
                         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
                         console.log(res)
@@ -72,6 +96,22 @@ cc.Class({
                         // 表示将 done 字段置为 true
                         gamedata: gamedata,
                         WeChatUserInfo: DataCenter.getDataByKey(DataCenter.DataMap.WXUserInfo)
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            }
+        },
+
+        updataChildUsers (usersArr) {
+            const self = this;
+            if (WeChatUtil.isWeChatPlatform) {
+                self.getDB().doc(self.id).update({
+                    // data 传入需要局部更新的数据
+                    data: {
+                        // 表示将 done 字段置为 true
+                        ChildUsers: usersArr
                     },
                     success: function (res) {
                         console.log(res);

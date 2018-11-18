@@ -115,7 +115,6 @@ cc.Class({
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
-
         return obj;
     },
 
@@ -185,6 +184,7 @@ cc.Class({
                 }
             }
         });
+        // console.log(self.formatCloudGameData());
     },
 
     onMonsterGold (gold) {
@@ -199,8 +199,7 @@ cc.Class({
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
         cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
-            if (texture) {
-                // 不知道为什么远程图片显示不出来，以后来看一下
+            if (!err && texture) {
                 self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
             }
         });
