@@ -45,14 +45,14 @@ cc.Class({
             }
         },
 
-        add (gamedata) {
+        add (data) {
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
                 self.getDB().add({
                     // data 字段表示需新增的 JSON 数据
                     data: {
-                        // openid: DataCenter.getDataByKey(DataCenter.DataMap.OPENID),
-                        gamedata: gamedata
+                        WeChatUserInfo: data.WeChatUserInfo,
+                        gamedata: data.gamedata
                     },
                     success: function (res) {
                         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
@@ -70,7 +70,8 @@ cc.Class({
                     // data 传入需要局部更新的数据
                     data: {
                         // 表示将 done 字段置为 true
-                        gamedata: gamedata
+                        gamedata: gamedata,
+                        WeChatUserInfo: DataCenter.getDataByKey(DataCenter.DataMap.WXUserInfo)
                     },
                     success: function (res) {
                         console.log(res);

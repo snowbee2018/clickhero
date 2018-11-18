@@ -5066,6 +5066,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -5825,6 +5826,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -6584,6 +6586,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -7343,6 +7346,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -8102,6 +8106,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -8861,6 +8866,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -9620,6 +9626,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -10379,6 +10386,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },
@@ -11138,6 +11146,7 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
+    "_coolingCurtail": 0,
     "sceneRoot": {
       "__id__": 6
     },

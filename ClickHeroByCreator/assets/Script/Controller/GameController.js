@@ -76,7 +76,6 @@ cc.Class({
         DataCenter.init();
         HeroDatas.init();
         
-        
         self.heroListControl.setHeroList();
         self.monsterController.init();
         self.userSkillController.initUserSkills();
@@ -101,7 +100,7 @@ cc.Class({
 
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
-        obj[map.lastTime] = Date.now().toString();
+        obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
@@ -110,6 +109,7 @@ cc.Class({
         obj[map.heroList] = HeroDatas.formatHeroList();
         obj[map.acientList] = HeroDatas.formatAicentList();
         // obj[map.skillList] = 
+        obj[map.skillList] = self.userSkillController.formatUserSkillsInfo();
         // obj[map.achievementList] = 
         // obj[map.equipmentList] = 
         // obj[map.shopList] = 

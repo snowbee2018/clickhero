@@ -38,7 +38,6 @@ cc.Class({
                     
                     }
                 }
-            // todo
             }
         }
 
