@@ -107,7 +107,7 @@ cc.Class({
         // obj[map.curSoul] = 
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList();
-        obj[map.acientList] = HeroDatas.formatAicentList();
+        obj[map.ancientList] = HeroDatas.formatAncientList();
         // obj[map.skillList] = 
         obj[map.skillList] = self.userSkillController.formatUserSkillsInfo();
         // obj[map.achievementList] = 

@@ -118,11 +118,68 @@ cc.Class({
                 new AncientData().init(25,false,false,"暴击风暴2s",0,"desc20"),
                 new AncientData().init(26,false,false,"技能冷却哥",0,"desc21"),
             ];
-            // 首次随机生成4个选中的古神
-            this.initSelAncients();
+
+
+            let cAncients = DataCenter.getCloudDataByKey(map.ancientList);
+            if (cAncients) {
+                let my = cAncients[0]?cAncients[0]:[];
+                let sel = cAncients[1]?cAncients[1]:[];
+                for (let i = 0; i < my.length; i++) {
+                    const e = my[i];
+                    for (let j = 0; j < this.otherAncients.length;j++ ) {
+                        const ancient = this.otherAncients[j];
+                        if (ancient.id = e.id) {
+                            ancient.isActive = e.isActive;
+                            ancient.isBuy = e.isBuy;
+                            ancient.level = e.level;
+                            this.otherAncients.splice(j,1);
+                            this.myAncients.push(ancient);
+                            ancient.refresh();
+                            break;
+                        }
+                    }
+                }
+                for (let i = 0; i < sel.length; i++) {
+                    const e = sel[i];
+                    for (let j = 0; j < this.otherAncients.length;j++ ) {
+                        const ancient = this.otherAncients[j];
+                        if (ancient.id = e.id) {
+                            ancient.isActive = e.isActive;
+                            ancient.isBuy = e.isBuy;
+                            ancient.level = e.level;
+                            this.otherAncients.splice(j,1);
+                            this.selAncients.push(ancient);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (this.selAncients.length==0) {
+                // 首次随机生成4个选中的古神
+                this.initSelAncients();
+            }
         },
         getHero(id){
             return this.heroList[id];
+        },
+        getAncient(id){
+            this.otherAncients.forEach(e => {
+                if (id == e.id) {
+                    return e;
+                }
+            });
+            this.myAncients.forEach(e => {
+                if (id == e.id) {
+                    return e;
+                }
+            });
+            this.selAncients.forEach(e => {
+                if (id == e.id) {
+                    return e;
+                }
+            });
+            console.error("getAncient(id) 错误 找不到");
+            return null;
         },
 
         formatHeroList() { // 格式化存档数据，用于存储到云端和从云端恢复数据
@@ -134,7 +191,7 @@ cc.Class({
             }
             return arr;
         },
-        formatAicentList() {
+        formatAncientList() {
             var arr = [[],[]];
             this.myAncients.forEach(ancient => {
                 arr[0].push(ancient.formatInfo());

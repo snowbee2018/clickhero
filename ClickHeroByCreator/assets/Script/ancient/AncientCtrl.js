@@ -14,6 +14,14 @@ cc.Class({
         Events.on(Events.ON_UPGRADE_ANCIENT,function(id) {
             console.log("ancient.id:" + id);
         },this);
+        this.fullViews();
+    },
+
+    fullViews(){
+        let list = HeroDatas.myAncients;
+        list.forEach(e => {
+            this.addItem(e);
+        });
     },
 
     onClickSummon () {
@@ -35,17 +43,5 @@ cc.Class({
         node.getComponent("AncientItem").bind(ancient);
     },
 
-    onHeroActive (heroID) {
-        if (heroID != 0) {
-            var hero = HeroDatas.getHero(heroID);
-            if (hero.isActive) {
-                if (!this._heroItemMap[heroID]) {
-                    this.addItem(heroID);
-                }
-            }
-        }
-        
-        
-    },
     // update (dt) {},
 });
