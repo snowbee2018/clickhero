@@ -115,6 +115,7 @@ cc.Class({
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
+        console.log(obj);
         return obj;
     },
 

@@ -125,10 +125,10 @@ cc.Class({
                 let my = cAncients[0]?cAncients[0]:[];
                 let sel = cAncients[1]?cAncients[1]:[];
                 for (let i = 0; i < my.length; i++) {
-                    const e = my[i];
+                    let e = my[i];
                     for (let j = 0; j < this.otherAncients.length;j++ ) {
-                        const ancient = this.otherAncients[j];
-                        if (ancient.id = e.id) {
+                        let ancient = this.otherAncients[j];
+                        if (ancient.id == e.id) {
                             ancient.isActive = e.isActive;
                             ancient.isBuy = e.isBuy;
                             ancient.level = e.level;
@@ -141,10 +141,10 @@ cc.Class({
                     }
                 }
                 for (let i = 0; i < sel.length; i++) {
-                    const e = sel[i];
+                    let e = sel[i];
                     for (let j = 0; j < this.otherAncients.length;j++ ) {
-                        const ancient = this.otherAncients[j];
-                        if (ancient.id = e.id) {
+                        let ancient = this.otherAncients[j];
+                        if (ancient.id == e.id) {
                             ancient.isActive = e.isActive;
                             ancient.isBuy = e.isBuy;
                             ancient.level = e.level;
