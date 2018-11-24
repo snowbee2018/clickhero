@@ -23,6 +23,8 @@ cc.Class({
         critTimes : 1,// 暴击倍数
         critOdds : 0,// 暴击概率
 
+        playerStatus : 0,// 玩家状态 0:蒙蔽 1:闲置 2:combo
+
         //--------古神的影响--------
         //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]
         addGoldenDpsTimes : 0,      //1- 所有金身加成倍数2% 0.02++
