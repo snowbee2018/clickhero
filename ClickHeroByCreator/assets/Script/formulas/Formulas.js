@@ -138,6 +138,24 @@ cc.Class({
             }
             
         },
-        
+
+        getAncientSoul(id,lv){
+            var soul;
+            if ([1,4,12,17,18,19,22,24].indexOf(id)>=0) {
+                soul = new BigNumber(lv*(lv+1)/2-1);
+            } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(id)>=0) {
+                soul = new BigNumber(2).pow(lv+1).minus(4);
+            } else if([14,21].indexOf(id)>=0) {
+            } else if(id == 20) {
+            } else {
+                soul = new BigNumber(0);
+            }
+            this.soul = soul.integerValue(); 
+            return this.soul;
+        },
+        // 获得远古boss英魂数，floor关卡
+        getPrimalBossSoul(floor){
+            return new BigNumber(Math.pow((floor-80)/25,1.3)+1).integerValue();
+        },
     },
 });
