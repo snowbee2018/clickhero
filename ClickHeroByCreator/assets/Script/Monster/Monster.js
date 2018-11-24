@@ -109,7 +109,7 @@ cc.Class({
         } else {
             self._isBoss = self._lv % 5 == 0;
             if (!self._isBoss) {
-                var odds = Math.min((1 + GamwData.addTreasureOdds * 100), 100);
+                var odds = Math.min((1 + GameData.addTreasureOdds * 100), 100);
                 self._isTreasureChest = Formulas.isHitRandom(odds);
             } else {
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
