@@ -182,7 +182,7 @@ cc.Class({
         self.hpBar.progress = percent;
     },
 
-    onCurMonsterDestroy (lv, gold, isBoss) {
+    onCurMonsterDestroy (lv, gold, isBoss, soul) {
         const self = this;
         if (!DataCenter.isLevelPassed(lv)) {
             if (isBoss) {
@@ -214,6 +214,10 @@ cc.Class({
         }
         
         self.gameController.onMonsterGold(gold);
+        
+        if (soul && soul.isGreaterThan(0)) {
+            self.gameController.onMonsterSoul(soul);
+        }
     },
 
     getCurMonsterInfo () {

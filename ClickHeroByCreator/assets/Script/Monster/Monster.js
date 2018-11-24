@@ -62,7 +62,7 @@ cc.Class({
         const self = this;
         if (!self._isByeBye) {
             if (self._onMonsterDestroy) {
-                self._onMonsterDestroy(self._lv, self._gold, self._isBoss);
+                self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
             }
         }
     },
@@ -103,8 +103,7 @@ cc.Class({
                 self._soul = monsterCloudInfo.soul;
             } else {
                 if (self._isPrimalBoss) {
-                    // todo 计算 soul
-                    self._soul = new BigNumber(0);
+                    self._soul = Formulas.getPrimalBossSoul(self._lv);
                 }
             }
         } else {
@@ -118,8 +117,7 @@ cc.Class({
                     var realOdds = Math.min((baseOdds + addPrimalBossOdds), 1);
                     self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
                     if (self._isPrimalBoss) {
-                        // todo 计算 soul
-                        self._soul = new BigNumber(0);
+                        self._soul = Formulas.getPrimalBossSoul(self._lv);
                     }
                 }
             }

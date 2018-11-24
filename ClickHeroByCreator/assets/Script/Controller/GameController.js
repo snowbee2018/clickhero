@@ -193,6 +193,11 @@ cc.Class({
         DataCenter.addGold(gold.times(GameData.globalGoldTimes));
     },
 
+    onMonsterSoul (soul) {
+        self = this;
+        DataCenter.addSoul(soul);
+    },
+
     setWeChatUser () {
         const self = this;
         var DataMap = DataCenter.DataMap;
