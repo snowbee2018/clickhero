@@ -6,7 +6,7 @@ cc.Class({
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
-            passLavel: "passLavel", // 已通过的最高关卡
+            passLavel: "passLavel", // 当前世界已通过的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
             curSoul: "curSoul", // 当前英魂数量
@@ -32,21 +32,27 @@ cc.Class({
     // 读取存档之后用来初始化
     init () {
         const self = this;
+        // 初始化金币
         var cloudGold = self.getCloudDataByKey(self.KeyMap.curGold);
         if (cloudGold) {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+99")));
         }
+        // 初始化英魂
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
         if (cloudSoul) {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
         }
-        
-        // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-        // self.setDataByKey(self.KeyMap.curSoul , new BigNumber("30"));
+        // 初始化当前世界最大通关数
+        var passedLevel = self.getCloudDataByKey(self.KeyMap.passLavel);
+        if (passedLevel) {
+            self.setDataByKey(self.KeyMap.passLavel, passedLevel);
+        } else {
+            self.setDataByKey(self.KeyMap.passLavel, 0);
+        }
     },
 
     setDataByKey (key, params) {

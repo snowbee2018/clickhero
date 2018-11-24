@@ -88,10 +88,10 @@ cc.Class({
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
             }
             GameData.skCritOdds = baseValue;
-            GameData.refresh();
+            GameData.calCritOdds();
         } else {
             GameData.skCritOdds = 0;
-            GameData.refresh();
+            GameData.calCritOdds();
         }
     },
 
@@ -107,10 +107,10 @@ cc.Class({
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
             }
             GameData.skGoldTimes = baseValue;
-            GameData.refresh();
+            GameData.calGoldTimes();
         } else {
             GameData.skGoldTimes = 1;
-            GameData.refresh();
+            GameData.calGoldTimes();
         }
     },
 
@@ -161,10 +161,10 @@ cc.Class({
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
             }
             GameData.skClickTimes = baseValue;
-            GameData.refresh();
+            GameData.calClickDamage();
         } else {
             GameData.skClickTimes = 1;
-            GameData.refresh();
+            GameData.calClickDamage();
         }
     },
 

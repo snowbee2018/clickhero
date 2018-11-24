@@ -121,48 +121,50 @@ cc.Class({
         self._isSustainFinish = true;
         self.gray.active = !self.isCanUse();
 
-        self.schedule(function () {
-            if (!self._isBuy) return;
-            if (self._isActive) {
-
-            } else {
-                var nowTime = Date.parse(new Date());
-                var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
-                var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
-                if (timeCooling - self._coolingCurtail > 0) {
-                    var timeStr = self.dateFormat(timeCooling / 1000);
-                    // console.log("timeStr = " + timeStr);
-                    self.onCoolingCountDown(timeCooling / 1000, timeStr);
-                } else {
-                    self._isActive = true;
-                    self._coolingCurtail = 0;
-                    self.onCoolingDone();
-                }
-                self.gray.active = !self.isCanUse();
-            }
-
-            if (self.bSustain) {
-                if (self._isSustainFinish) {
-
-                } else {
-                    var nowTime = Date.parse(new Date());
-                    var realSustainTime = self.sustainTime + self.getSustainTimeAdded();
-                    var timeSustain = 1000 * realSustainTime - nowTime + self._lastTimestamp;
-                    if (timeSustain > 0) {
-                        var timeStr = self.dateFormat(timeSustain / 1000);
-                        self.onSustainCountDown(timeSustain / 1000, timeStr);
-                    } else {
-                        self._isSustainFinish = true;
-                        self.onSustainDone();
-                    }
-                    self.gray.active = !self.isCanUse();
-                }
-            }
-            
-        }, 0.1);
         // Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
         Events.on(Events.ON_UPGRADE_ANCIENT, self.onUpgrandAncient, self);
+    },
+
+    skillScheduleCallBack () {
+        const self = this;
+        if (!self._isBuy) return;
+        if (self._isActive) {
+            self.unschedule(self.skillScheduleCallBack);
+        } else {
+            var nowTime = Date.parse(new Date());
+            var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
+            var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
+            if (timeCooling - self._coolingCurtail > 0) {
+                var timeStr = self.dateFormat(timeCooling / 1000);
+                // console.log("timeStr = " + timeStr);
+                self.onCoolingCountDown(timeCooling / 1000, timeStr);
+            } else {
+                self._isActive = true;
+                self._coolingCurtail = 0;
+                self.onCoolingDone();
+                self.gray.active = !self.isCanUse();
+                self.unschedule(self.skillScheduleCallBack);
+            }
+        }
+
+        if (self.bSustain) {
+            if (self._isSustainFinish) {
+
+            } else {
+                var nowTime = Date.parse(new Date());
+                var realSustainTime = self.sustainTime + self.getSustainTimeAdded();
+                var timeSustain = 1000 * realSustainTime - nowTime + self._lastTimestamp;
+                if (timeSustain > 0) {
+                    var timeStr = self.dateFormat(timeSustain / 1000);
+                    self.onSustainCountDown(timeSustain / 1000, timeStr);
+                } else {
+                    self._isSustainFinish = true;
+                    self.onSustainDone();
+                    self.gray.active = !self.isCanUse();
+                }
+            }
+        }
     },
 
     onUpgrandAncient(id) {
@@ -173,8 +175,9 @@ cc.Class({
             case (id == 25 && self.heroID == 9 && self.skillID == 4): // 幸运星(暴击风暴)
             case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
             case (id == 15 && self.heroID == 15 && self.skillID == 4): // 金手指(点金手)
+            case (id == 22 && self.heroID == 15 && self.skillID == 4): // 金手指倍数
             case (id == 13 && self.heroID == 22 && self.skillID == 4): // 超级点击
-            case (id == 22 || id == 26): // 点金手倍数或技能冷却减少
+            case (id == 26): // 技能冷却减少
                 self.setSkillDes();
                 break;
             default:
@@ -280,6 +283,7 @@ cc.Class({
             self.onSustainCountDown(self.sustainTime, self.dateFormat(self.sustainTime));
         }
         // DataCenter.consumeGold(new BigNumber(self.cost));
+        self.schedule(self.skillScheduleCallBack, 0.1);
     },
 
     onCoolingCountDown(time, timeStr) {

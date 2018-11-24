@@ -62,11 +62,13 @@ cc.Class({
         
         if (monsterCloudInfo) {
             // 云端有数据
-            var lv = monsterCloudInfo.lv?parseInt(monsterCloudInfo.lv):1;
+            monsterCloudInfo.lv = monsterCloudInfo.lv?parseInt(monsterCloudInfo.lv):1;
+            monsterCloudInfo.gold = monsterCloudInfo.gold ? (new BigNumber(monsterCloudInfo.gold)) : false;
+            monsterCloudInfo.soul = monsterCloudInfo.soul ? (new BigNumber(monsterCloudInfo.soul)) : false;
             self.killCount = monsterCloudInfo.killCount ? monsterCloudInfo.killCount : 0;
             self.toggle.isChecked = monsterCloudInfo.autoNext ? true : false;
             self._autoNext = self.toggle.isChecked;
-            self.makeMonster(lv);
+            self.makeMonster(monsterCloudInfo.lv, monsterCloudInfo);
         } else {
             // 云端无数据
             self.makeMonster(1);
@@ -78,6 +80,12 @@ cc.Class({
         var monsterInfo = self.getCurMonsterInfo();
         var obj = {}
         obj.lv = monsterInfo.lv;
+        obj.isTreasureChest = monsterInfo.isTreasureChest;
+        obj.isBoss = monsterInfo.isBoss;
+        obj.isPrimalBoss = monsterInfo.isPrimalBoss;
+        obj.gold = monsterInfo.gold.toExponential(4);
+        obj.soul = monsterInfo.soul.toExponential(4);
+
         obj.killCount = self.killCount;
         obj.autoNext = self.toggle.isChecked;
         return obj;
@@ -96,7 +104,7 @@ cc.Class({
                 WeChatUtil.showToast("打Boss失败了");
                 if (DataCenter.isLevelPassed(self.curMonster._lv)) {
                     self.curMonster.recoverHP();
-                    self._countdown = 30;
+                    self._countdown = 30 + GameData.addBossTimerSecond;
                     self.setTimeLabel(self._countdown);
                 } else {
                     self.goToLastLevel();
@@ -123,13 +131,13 @@ cc.Class({
         self.timeLabel.string = str;
     },
 
-    makeMonster (lv) {
+    makeMonster(lv, cloudMonsterInfo) {
         const self = this;
         let monsterNode = cc.instantiate(self.monsterPrefab);
         monsterNode.parent = self.monsterPos;
         self.curMonster = monsterNode.getComponent("Monster");
         self.curMonster.setMonsterByLv(
-            lv,
+            lv, cloudMonsterInfo,
             self.onCurMonsterDestroy.bind(self),
             self.onHpChange.bind(self),
             self.onClickHert.bind(self)
@@ -142,7 +150,7 @@ cc.Class({
             }
         }
         if (self.curMonster._isBoss) { // 开始倒计时
-            self._countdown = 30;
+            self._countdown = 30 + GameData.addBossTimerSecond;
             self.setTimeLabel(self._countdown);
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
@@ -166,7 +174,7 @@ cc.Class({
 
     onHpChange (name, totalHp, curHp) {
         const self = this;
-        self.monsterName = name;
+        self.monsterName.string = name;
         var percent = curHp.div(totalHp).toNumber();
         // console.log("FFFFFFFFFFFFFFFFFFFF");
         // console.log("percent = " + percent);
@@ -214,6 +222,10 @@ cc.Class({
             lv: self.curMonster._lv,
             hp: self.curMonster._curHP,
             gold: self.curMonster._gold,
+            soul: self.curMonster._soul,
+            isTreasureChest: self.curMonster._isTreasureChest,
+            isBoss: self.curMonster._isBoss,
+            isPrimalBoss: self.curMonster._isPrimalBoss,
         }
     },
 

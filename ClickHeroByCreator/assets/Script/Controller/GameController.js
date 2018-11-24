@@ -102,6 +102,7 @@ cc.Class({
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
+        obj[map.passLavel] = DataCenter.getDataByKey(map.passLavel);
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
         obj[map.curSoul] = curSoul.toExponential(4); // 当前英魂总数
