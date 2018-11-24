@@ -176,10 +176,8 @@ cc.Class({
         var soul;
         // 每个英雄都不一样哦，根据id去区分 by level
         if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
-            // soul = this.level + 1;
             soul = new BigNumber(this.level + 1);
         } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
-            // soul = Math.pow(2,this.level + 1);
             soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
         } else if([14,21].indexOf(this.id)>=0) {
             // soul = Math.pow(this.level + 1,1.5);
@@ -193,4 +191,5 @@ cc.Class({
         this.soul = soul.integerValue(); 
         return this.soul;
     },
+
 })

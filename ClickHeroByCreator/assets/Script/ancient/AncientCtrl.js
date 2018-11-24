@@ -35,6 +35,13 @@ cc.Class({
 
     onClickDisband() {
         // 进贡
+        // 遍历 调 Formulas.getAncientSoul 获得soul总和
+        // for  += buyAncientSouls[i][1]
+        // 乘以0.75 加到 我的soul里
+        // reInit HeroDatas ancients
+        // roll selAncients
+
+        // 再写英雄升级的公式 批量升级哦
     },
 
     addItem(ancient) {
