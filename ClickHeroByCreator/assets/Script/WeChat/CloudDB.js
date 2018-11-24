@@ -45,7 +45,7 @@ cc.Class({
             }
         },
 
-        getChildUserData(callBack) {
+        getChildUserData(callBack) { // 获取被自己推荐的用户
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
                 self.getDB().where({
@@ -71,6 +71,7 @@ cc.Class({
                 var params = {
                     WeChatUserInfo: data.WeChatUserInfo,
                     gamedata: data.gamedata,
+                    ChildUsers: [],
                 }
                 if (data.referrer) {
                     params.referrer = data.referrer;
@@ -110,7 +111,6 @@ cc.Class({
                 self.getDB().doc(self.id).update({
                     // data 传入需要局部更新的数据
                     data: {
-                        // 表示将 done 字段置为 true
                         ChildUsers: usersArr
                     },
                     success: function (res) {
