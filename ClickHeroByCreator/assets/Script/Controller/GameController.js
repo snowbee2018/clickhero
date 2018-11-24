@@ -78,9 +78,9 @@ cc.Class({
         
         self.heroListControl.setHeroList();
         self.monsterController.init();
-        self.userSkillController.initUserSkills();
-
+        
         GameData.refresh();
+        self.userSkillController.initUserSkills();
 
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);

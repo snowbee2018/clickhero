@@ -247,66 +247,69 @@ cc.Class({
             self.skill9(false); // 刷新
         }
         
-    }, // 撤销技能效果
+    }, // 撤销技能效果    
 
     getSkillDesStr () {
         const self = this;
-        var baseSustainTime = self.sustainTime;
-        var baseCoolingTime = self.coolingTime;
+        var sustainTimeAdded = self.getSustainTimeAdded(); // 持续附加
+        var coolingTimeReduction = self.getCoolingTimeReduction(); // 冷却缩减
+        var sustainTime = self.sustainTime + sustainTimeAdded;
+        var coolingTime = self.coolingTime * (1 - coolingTimeReduction);
         var baseValue = self.baseValue;
         if (self.heroID == 0 && self.skillID == 1) {
             // 点击风暴
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "自动点击器，每秒执行" + baseValue + "次点击，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 2 && self.skillID == 3) {
             // 能量风暴
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "DPS伤害×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 9 && self.skillID == 4) {
             // 幸运星
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "暴击概率增加" + baseValue * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 13 && self.skillID == 4) {
             // 金属探测器
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "金币掉落×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 15 && self.skillID == 4) {
             // 金手指
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
-            return "每次点击获得怪物金币的" + baseValue * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
+            var value = baseValue * GameData.addGoldClickTimes; // 古神点金手倍数
+            return "每次点击获得怪物金币的" + value * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 17 && self.skillID == 3) {
             // 黑暗仪式
             // 处理效果加成，持续时间和冷却时间的加成
-            // var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            // var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "当前DPS伤害×" + baseValue + "，可无限叠加，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 22 && self.skillID == 4) {
             // 超级点击
             // 处理效果加成，持续时间和冷却时间的加成
-            var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "点击伤害×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 24 && self.skillID == 3) {
-            // 超级点击
+            // 充能
             // 处理效果加成，持续时间和冷却时间的加成
-            // var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            // var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "增加下一个使用用的技能的效果，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 25 && self.skillID == 4) {
-            // 超级点击
+            // 刷新
             // 处理效果加成，持续时间和冷却时间的加成
-            // var sustainTimeStr = self.dateFormat(baseSustainTime);
-            var coolingTimeStr = self.dateFormat(baseCoolingTime);
+            // var sustainTimeStr = self.dateFormat(sustainTime);
+            var coolingTimeStr = self.dateFormat(coolingTime);
             return "将使用的最后一项技能的冷却时间缩短1小时，冷却时间" + coolingTimeStr;
         } else {
             return "";
