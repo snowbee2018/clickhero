@@ -213,5 +213,24 @@ cc.Class({
             let soul = buyAncientSouls[index][1];
             return new BigNumber(soul);
         },
+        calAncientSoulByLevel(id,fromLv,toLv){
+            var soul;
+            var lv = this.level;
+            if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
+                soul = new BigNumber(lv*(lv+1)/2-1);
+            } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
+                soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
+            } else if([14,21].indexOf(this.id)>=0) {
+                // soul = Math.pow(this.level + 1,1.5);
+                // BigNumber只支持整数指数运行
+                soul = new BigNumber(this.level + 1).pow(new BigNumber(1.5));
+            } else if(this.id == 20) {
+                soul = new BigNumber(1);
+            } else {
+                soul = new BigNumber(0);
+            }
+            this.soul = soul.integerValue(); 
+            return this.soul;
+        },
     }
 });

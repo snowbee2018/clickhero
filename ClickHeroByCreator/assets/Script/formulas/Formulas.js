@@ -138,7 +138,9 @@ cc.Class({
             }
             
         },
+        //!!!!!写到这里了，这里要一个计算从0到n级的的英雄升级金币计算方法
 
+        // 计算古神从0到n级的总花费soul
         getAncientSoul(id,lv){
             var soul;
             if ([1,4,12,17,18,19,22,24].indexOf(id)>=0) {
@@ -146,7 +148,9 @@ cc.Class({
             } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(id)>=0) {
                 soul = new BigNumber(2).pow(lv+1).minus(4);
             } else if([14,21].indexOf(id)>=0) {
+                // 剑圣的计算暂时放一放
             } else if(id == 20) {
+                soul = new BigNumber(lv-1);
             } else {
                 soul = new BigNumber(0);
             }
