@@ -87,7 +87,10 @@ cc.Class({
             console.log(cloudChildUsers);
             console.log(childUserArr);
             if (cloudChildUsers) {
-                if (cloudChildUsers.length != childUserArr.length) {
+                if (cloudChildUsers.length < childUserArr.length) {
+                    var added = childUserArr.length - cloudChildUsers.length;
+                    console.log("新增了added = " + added + "个子用户");
+                    WeChatUtil.showToast("新增" + added + "个子用户");
                     CloudDB.updataChildUsers(childUserArr);
                 }
             } else {
@@ -110,6 +113,8 @@ cc.Class({
             // 获取子用户
             CloudDB.getChildUserData(function (err, dataArr) {
                 if (!err) {
+                    console.log(dataArr);
+                    
                     self.onChildUserData(dataArr);
                 }
             });
@@ -117,6 +122,9 @@ cc.Class({
             console.log("未获取到用户数据，用户第一次进入游戏");
             var launchOptions = WeChatUtil.getLaunchOptionsSync();
             var referrer;
+            console.log(launchOptions);
+            let DataMap = DataCenter.DataMap;
+            var openID = DataCenter.getDataByKey(DataMap.OPENID);
             switch (launchOptions.scene) {
                 case 1007:
                 case 1008:
@@ -124,8 +132,8 @@ cc.Class({
                         // 推荐人
                         if (launchOptions.query.openid != openID) {
                             referrer = launchOptions.query.openid;
+                            console.log("推荐人referrer = " + referrer);
                         } else {
-                            console.log("点击自己分享的卡片进入游戏");
                         }
                     } else {
                         console.log("没有推荐人");
@@ -134,10 +142,13 @@ cc.Class({
                 default:
                     break;
             }
+            
+            var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
+            console.log(weChatUserInfo);
             CloudDB.add({
                 gamedata: {},
-                WeChatUserInfo: userData.userInfo,
-                referrer: referrer
+                WeChatUserInfo: weChatUserInfo,
+                referrer: referrer,
             });
             self.gameController.setWeChatUser();
             self.startGame();

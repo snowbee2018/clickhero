@@ -115,7 +115,6 @@ cc.Class({
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
-        console.log(obj);
         return obj;
     },
 
@@ -195,8 +194,8 @@ cc.Class({
 
     setWeChatUser () {
         const self = this;
-        let DataMap = DataCenter.DataMap;
-        let weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
+        var DataMap = DataCenter.DataMap;
+        var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
         cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
@@ -204,7 +203,7 @@ cc.Class({
                 self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
             }
         });
-        let str = weChatUserInfo.country;
+        var str = weChatUserInfo.country;
         str += " " + weChatUserInfo.province;
         str += " " + weChatUserInfo.city;
         self.location.string = str;
