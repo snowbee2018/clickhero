@@ -97,14 +97,14 @@ cc.Class({
         var map = DataCenter.KeyMap;
         // 获取存档数据，并存储到云端
         var curGold = DataCenter.getDataByKey(map.curGold);
-
+        var curSoul = DataCenter.getDataByKey(map.curSoul);
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
-        // obj[map.curSoul] = 
+        obj[map.curSoul] = curSoul.toExponential(4); // 当前英魂总数
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList();
         obj[map.ancientList] = HeroDatas.formatAncientList();

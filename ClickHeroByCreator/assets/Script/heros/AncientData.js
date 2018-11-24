@@ -98,6 +98,7 @@ cc.Class({
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
             GameData.buyHeroDiscount = 1 - 0.9999999999 * (1 - Math.exp(-0.01*this.level));
+            Events.emit(Events.REFRESH_HERO_BUYCOST);
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
             GameData.addTreasureOdds = 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);

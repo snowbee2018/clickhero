@@ -42,17 +42,25 @@ cc.Class({
             }
         }
 
-        this.isActive = DataCenter.isGoldEnough(this.baseCost);
+        this.isActive = DataCenter.isGoldEnough(this.getBaseCost());
         this.desc = desc;
         this.refresh();
         Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
         return this;
     },
+    // 折后购买价
+    getBaseCost(){
+        return this.baseCost.times(GameData.buyHeroDiscount).integerValue();
+    },
+    // 折后升级价
+    getCost(){
+        return this.cost.times(GameData.buyHeroDiscount).integerValue();
+    },
 
     onGoldChange () {
         const self = this;
         if (!self.isActive) {
-            var isCanBy = DataCenter.isGoldEnough(this.baseCost);
+            var isCanBy = DataCenter.isGoldEnough(this.getBaseCost());
             if (isCanBy) {
                 self.isActive = isCanBy;
                 Events.emit(Events.HERO_ACTIVE, this.id);
@@ -77,8 +85,8 @@ cc.Class({
     buy(){
         // 伪代码
         // let isSuccess = UserData.spendGold(this.baseCost);
-        var isCanBy = DataCenter.isGoldEnough(this.baseCost);
-        var cost = new BigNumber(this.baseCost);
+        var isCanBy = DataCenter.isGoldEnough(this.getBaseCost());
+        var cost = new BigNumber(this.getBaseCost());
         // let isSuccess = true;
         if (isCanBy) {
             this.level ++;
@@ -97,10 +105,8 @@ cc.Class({
     // 升级
     upgrade(){
         // 伪代码
-        var isCanUpgrade = DataCenter.isGoldEnough(this.cost);
-        var cost = new BigNumber(this.cost);
-        // let isSuccess = true;
-        // let isSuccess = UserData.spendGold(this.cost);
+        var isCanUpgrade = DataCenter.isGoldEnough(this.getCost());
+        var cost = new BigNumber(this.getCost());
         if (isCanUpgrade) {
             this.level ++;
             this.refresh();

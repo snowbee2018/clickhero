@@ -54,6 +54,7 @@ cc.Class({
         Events.off(Events.ON_BY_HERO, self.onHeroChange, self);
         Events.off(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
         Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
+        Events.off(Events.REFRESH_HERO_BUYCOST,self.refreshBuyCost,self);
     },
 
     onGoldChange () {
@@ -87,19 +88,34 @@ cc.Class({
         Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
         Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
         Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
+        Events.on(Events.REFRESH_HERO_BUYCOST,self.refreshBuyCost,self);
+    },
+
+    refreshBuyCost(){
+        const self = this;
+        var hero = HeroDatas.getHero(this._heroID);
+        if (hero.isBuy) {
+            self.btnTitle.string = "升级";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
+            self.btn.interactable = self.isCanUpgrade();
+        } else {
+            self.btnTitle.string = "购买";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
+            self.btn.interactable = self.isCanBuy();
+        }
     },
 
     isCanBuy () {
         const self = this;
         var hero = HeroDatas.getHero(self._heroID);
-        return DataCenter.isGoldEnough(hero.baseCost);
+        return DataCenter.isGoldEnough(hero.getBaseCost());
     },
 
     isCanUpgrade () {
         const self = this;
         var hero = HeroDatas.getHero(self._heroID);
         
-        return DataCenter.isGoldEnough(hero.cost);
+        return DataCenter.isGoldEnough(hero.getCost());
     },
 
     addSkillIcon () {
@@ -130,11 +146,11 @@ cc.Class({
         
         if (hero.isBuy) {
             self.btnTitle.string = "升级";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.cost) + " 金币";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.baseCost) + " 金币";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
             self.btn.interactable = self.isCanBuy();
         }
         self.nameLab.string = hero.heroName;
