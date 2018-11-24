@@ -49,7 +49,7 @@ cc.Class({
         // console.log("self.bSustain = " + self.bSustain);
         // console.log("self._isSustainFinish = " + self._isSustainFinish);
         var result = self._isBuy && self._isActive && ((self.bSustain && self._isSustainFinish) || !self.bSustain);
-        result = result && DataCenter.isGoldEnough(new BigNumber(self.cost));
+        // result = result && DataCenter.isGoldEnough(new BigNumber(self.cost));
         return result;
     },
 
@@ -93,7 +93,8 @@ cc.Class({
         var nowTime = Date.parse(new Date());
         // self._isBuy = true;
         // self._lastTimestamp = nowTime;
-        var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
+        var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
+        var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
         if (timeCooling - self._coolingCurtail > 0) { // 技能还在冷却过程中
             self._isActive = false;
             var timeStr = self.dateFormat(timeCooling / 1000);
@@ -126,7 +127,8 @@ cc.Class({
 
             } else {
                 var nowTime = Date.parse(new Date());
-                var timeCooling = 1000 * self.coolingTime - nowTime + self._lastTimestamp;
+                var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
+                var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
                 if (timeCooling - self._coolingCurtail > 0) {
                     var timeStr = self.dateFormat(timeCooling / 1000);
                     // console.log("timeStr = " + timeStr);
@@ -144,8 +146,9 @@ cc.Class({
 
                 } else {
                     var nowTime = Date.parse(new Date());
-                    var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
-                    if (timeSustain + self.getSustainAdd() > 0) {
+                    var realSustainTime = self.sustainTime + self.getSustainTimeAdded();
+                    var timeSustain = 1000 * realSustainTime - nowTime + self._lastTimestamp;
+                    if (timeSustain > 0) {
                         var timeStr = self.dateFormat(timeSustain / 1000);
                         self.onSustainCountDown(timeSustain / 1000, timeStr);
                     } else {
@@ -157,19 +160,32 @@ cc.Class({
             }
             
         }, 0.1);
-        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        // Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
+        Events.on(Events.ON_UPGRADE_ANCIENT, self.onUpgrandAncient, self);
     },
 
-    getSustainAdd() { // 获取技能持续附加值
+    onUpgrandAncient(id) {
         const self = this;
-        return 0;
+        switch (true) {
+            case (id == 6 && self.heroID == 0 && self.skillID == 1): // 点击风暴
+            case (id == 3 && self.heroID == 2 && self.skillID == 3): // 能量风暴
+            case (id == 25 && self.heroID == 9 && self.skillID == 4): // 幸运星(暴击风暴)
+            case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
+            case (id == 15 && self.heroID == 15 && self.skillID == 4): // 金手指(点金手)
+            case (id == 13 && self.heroID == 22 && self.skillID == 4): // 超级点击
+            case (id == 22 || id == 26): // 点金手倍数或技能冷却减少
+                self.setSkillDes();
+                break;
+            default:
+                break;
+        }
     },
 
-    onGoldChange () {
-        const self = this;
-        self.gray.active = !self.isCanUse();
-    },
+    // onGoldChange () {
+    //     const self = this;
+    //     self.gray.active = !self.isCanUse();
+    // },
 
     onSkillUnlock(skillInfo) {
         const self = this;
@@ -224,6 +240,30 @@ cc.Class({
         }
     },
 
+    getSustainTimeAdded() { // 获取技能持续附加时间
+        const self = this;
+        switch (true) {
+            case (self.heroID == 0 && self.skillID == 1): // 点击风暴
+                return GameData.addClickstormSecond;
+            case (self.heroID == 2 && self.skillID == 3): // 能量风暴
+                return GameData.addPowersurgeSecond;
+            case (self.heroID == 9 && self.skillID == 4): // 幸运星(暴击风暴)
+                return GameData.addCritStormSecond;
+            case (self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
+                return GameData.addMetalDetectorSecond;
+            case (self.heroID == 15 && self.skillID == 4): // 金手指(点金手)
+                return GameData.addGoldClickSecond;
+            case (self.heroID == 22 && self.skillID == 4): // 超级点击
+                return GameData.addSuperClickSecond;
+            default:
+                return 0;
+        }
+    },
+
+    getCoolingTimeReduction () { // 获取技能冷却附加时间
+        return GameData.addSkillCoolReduction;
+    },
+
     releaseSkill () { // 释放技能
         const self = this;
         if (!self.isCanUse()) return;
@@ -239,7 +279,7 @@ cc.Class({
         if (self.bSustain) {
             self.onSustainCountDown(self.sustainTime, self.dateFormat(self.sustainTime));
         }
-        DataCenter.consumeGold(new BigNumber(self.cost));
+        // DataCenter.consumeGold(new BigNumber(self.cost));
     },
 
     onCoolingCountDown(time, timeStr) {
