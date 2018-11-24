@@ -135,6 +135,7 @@ cc.Class({
                             this.otherAncients.splice(j,1);
                             this.myAncients.push(ancient);
                             ancient.refresh();
+                            ancient.calUpgradeSoul();
                             break;
                         }
                     }
