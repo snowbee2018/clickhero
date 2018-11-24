@@ -11,6 +11,8 @@ cc.Class({
         ON_USER_SKILL_UNLOCK : "on_user_skill_unlock",
         ON_BUY_ANCIENT : 'on-buy-ancient',// 购买古神
         ON_UPGRADE_ANCIENT : 'on-upgrade-ancient',// 升级古神
+        ON_IDLE_STATE: "ON_IDLE_STATE", // 闲置状态改变
+        ON_COMBO_CHANGE: "ON_COMBO_CHANGE", // 连击次数改变
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         emit(name,params){
             cc.systemEvent.emit(name,params);

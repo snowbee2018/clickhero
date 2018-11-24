@@ -5,6 +5,8 @@ cc.Class({
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
+            totalClick: "totalClick", // 历史总点击数
+            maxCombo: "maxCombo", // 历史最大连击数
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
             passLavel: "passLavel", // 当前世界已通过的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
@@ -13,7 +15,7 @@ cc.Class({
             additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
             heroList: "heroList", // 用户所有英雄的状态，存起来
             skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
-            ancientList: "ancientList",// 用户所拥有的古神
+            ancientList: "ancientList", // 用户所拥有的古神
             achievementList: "achievementList", // 成就列表，转生次数也在这里
             equipmentList: "equipmentList", // 装备列表，圣遗物和神器都存这里
             shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
@@ -53,12 +55,27 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.passLavel, 0);
         }
+
+        // 初始化历史总点击数
+        var cloudTotalClick = self.getCloudDataByKey(self.KeyMap.totalClick);
+        if (cloudTotalClick) {
+            self.setDataByKey(self.KeyMap.totalClick, cloudTotalClick);
+        } else {
+            self.setDataByKey(self.KeyMap.totalClick, 0);
+        }
+        // 初始化历史最大连击数
+        var cloudMaxCombo = self.getCloudDataByKey(self.KeyMap.maxCombo);
+        if (cloudMaxCombo) {
+            self.setDataByKey(self.KeyMap.maxCombo, cloudMaxCombo);
+        } else {
+            self.setDataByKey(self.KeyMap.maxCombo, 0);
+        }
     },
 
     setDataByKey (key, params) {
         const self = this;
         // console.info("key = " + key);
-        if (params && key) {
+        if ((!!params || params === 0) && key) {
             self.ContentData[key] = params;
         }
     },
