@@ -38,9 +38,15 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+99")));
         }
+        var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
+        if (cloudSoul) {
+            self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
+        } else {
+            self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
+        }
         
         // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-        self.setDataByKey(self.KeyMap.curSoul , new BigNumber("30"));
+        // self.setDataByKey(self.KeyMap.curSoul , new BigNumber("30"));
     },
 
     setDataByKey (key, params) {
