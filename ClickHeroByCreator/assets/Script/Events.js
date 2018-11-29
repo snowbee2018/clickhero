@@ -6,10 +6,13 @@ cc.Class({
         ON_BY_HERO: "on_by_hero", // 购买英雄
         ON_UPGRADE_HERO : 'on-upgrade-hero', //升级英雄
         ON_UPGRADE_HERO_SKILLS : 'on-upgrade-hero-skills',//升级英雄技能
+        REFRESH_HERO_BUYCOST : 'refresh-hero-buycost',//刷新购买英雄金币UI
         HERO_ACTIVE : "hero_active",
         ON_USER_SKILL_UNLOCK : "on_user_skill_unlock",
         ON_BUY_ANCIENT : 'on-buy-ancient',// 购买古神
         ON_UPGRADE_ANCIENT : 'on-upgrade-ancient',// 升级古神
+        ON_IDLE_STATE: "ON_IDLE_STATE", // 闲置状态改变
+        ON_COMBO_CHANGE: "ON_COMBO_CHANGE", // 连击次数改变
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         emit(name,params){
             cc.systemEvent.emit(name,params);

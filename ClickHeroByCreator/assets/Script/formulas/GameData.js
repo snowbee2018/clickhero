@@ -23,29 +23,31 @@ cc.Class({
         critTimes : 1,// 暴击倍数
         critOdds : 0,// 暴击概率
 
+        playerStatus : 0,// 玩家状态 0:蒙蔽 1:闲置 2:combo
+
         //--------古神的影响--------
         //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]
         addGoldenDpsTimes : 0,      //1- 所有金身加成倍数2% 0.02++
         addPrimalBossOdds : 0,      //2* 增加远古Boss出现几率 0~0.75
-        addPowersurgeSecond : 0,    //3*- Powersurge秒数增加 2s++
+        addPowersurgeSecond: 0,    //3*- Powersurge秒数增加 2s++ √
         addCritTimes : 1,           //4 古神附加暴击倍数
-        addClickstormSecond : 0,    //6*- 点击风暴秒数增加 2s++
-        addBossTimerSecond : 0,     //7* Boss计时器持续时间 0~30.0s
+        addClickstormSecond: 0,    //6*- 点击风暴秒数增加 2s++ √
+        addBossTimerSecond: 0,     //7* Boss计时器持续时间 0~30.0s √
         buyHeroDiscount : 1,        //8- 购买英雄折扣 0~1
-        addTreasureOdds : 0.01,     //9* 宝箱出现概率 0~1
-        addMetalDetectorSecond : 0, //10*- 金币探测器 2s++
-        addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1
+        addTreasureOdds: 0.01,     //9* 宝箱出现概率 0~1 √
+        addMetalDetectorSecond: 0, //10*- 金币探测器 2s++ √
+        addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1 √
         addClickDamageTimes : 1,    //12- 点击伤害倍数 每级+20%
-        addSuperClickSecond : 0,    //13*- 超级点击时间 2s++
+        addSuperClickSecond: 0,    //13*- 超级点击时间 2s++ √
         addDPSClickDamageTimes : 0, //14- 附加DPS点击伤害倍数
-        addGoldClickSecond : 0,     //15*- 点金手时间 2s++
+        addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
         addLeaveGoldTimes : 1,      //17- 闲置金币倍数
-        addGoldTimes : 1,           //18* +5% Gold
-        addTreasureTimes : 1,       //19* 宝箱金币倍数
-        addGoldClickTimes : 1,      //22*- 点金手倍数 +30% gold from Golden Clicks 
+        addGoldTimes: 1,           //18* +5% Gold √
+        addTreasureTimes: 1,       //19* 宝箱金币倍数 √
+        addGoldClickTimes: 1,      //22*- 点金手倍数 +30% gold from Golden Clicks √
         addLeaveDPSTimes : 1,       //24- 加闲置DPS伤害
-        addCritStormSecond : 0,     //25*- 增加暴击风暴时间 +2s
-        addSkillCoolReduction : 0,  //26*- 技能冷却减少 0~1
+        addCritStormSecond: 0,     //25*- 增加暴击风暴时间 +2s √
+        addSkillCoolReduction: 0,  //26*- 技能冷却减少 0~1 √
 
         //--------被动技能的影响--------
         cskCritTimes : 1, // 暴击倍数 :calCritTimes()

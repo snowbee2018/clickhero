@@ -16,8 +16,11 @@ cc.Class({
         _gold: 0, // 掉落金币 bignumber
         _totalHP: 0, // 总血量 bignumber
         _curHP: 0, // 当前血量 bignumber
+        _soul: 0, // 当前英魂
         _isTreasureChest: false, // 是否是宝箱怪
         _monsterName: "怪物名字",
+        _isBoss: false,
+        _isPrimalBoss: false,
 
         damageAnim: cc.Prefab,
         monsterSprf: [cc.SpriteFrame],
@@ -35,6 +38,7 @@ cc.Class({
         self._gold = new BigNumber(0);
         self._totalHP = new BigNumber(0);
         self._curHP = new BigNumber(0);
+        self._soul = new BigNumber(0);
         self.anim = self.getComponent(cc.Animation);
     },
 
@@ -58,7 +62,7 @@ cc.Class({
         const self = this;
         if (!self._isByeBye) {
             if (self._onMonsterDestroy) {
-                self._onMonsterDestroy(self._lv, self._gold, self._isBoss);
+                self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
             }
         }
     },
@@ -72,21 +76,65 @@ cc.Class({
         }
     },
 
-    setMonsterByLv(lv, onMonsterDestroy, hpChangeCallBack, clickHertCallBack) {
+    setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack) {
         const self = this;
         self._lv = lv;
-        if (self._lv%5 != 0) {
-            self._isTreasureChest = Formulas.isHitRandom(1);
-        }
-        self._isBoss = self._lv % 5 == 0;
         self._totalHP = Formulas.getMonsterHP(lv);
         self._curHP = new BigNumber(self._totalHP);
-        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
-        self._gold = Formulas.getMonsterGold(lv, self._totalHP);
-        if (self._isTreasureChest) {
-            self._gold = self._gold.times(10);
+        if (monsterCloudInfo) {
+            self._isTreasureChest = !!monsterCloudInfo.isTreasureChest;
+            if (self._isTreasureChest) self._monsterName = "宝箱";
+            self._isBoss = !!monsterCloudInfo.isBoss;
+            self._isPrimalBoss = !!monsterCloudInfo.isPrimalBoss;
+            if (monsterCloudInfo.gold) {
+                self._gold = monsterCloudInfo.gold;
+            } else {
+                self._gold = Formulas.getMonsterGold(lv, self._totalHP);
+                if (self._isTreasureChest) {
+                    self._gold = self._gold.times(10 * GameData.addTreasureTimes);
+                }
+                if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
+                    if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds * 100)) {
+                        self._gold = self._gold.times(10);
+                    }
+                }
+            }
+            if (monsterCloudInfo.soul) {
+                self._soul = monsterCloudInfo.soul;
+            } else {
+                if (self._isPrimalBoss) {
+                    self._soul = Formulas.getPrimalBossSoul(self._lv);
+                }
+            }
+        } else {
+            self._isBoss = self._lv % 5 == 0;
+            if (!self._isBoss) {
+                var odds = Math.min((1 + GameData.addTreasureOdds * 100), 100);
+                self._isTreasureChest = Formulas.isHitRandom(odds);
+            } else {
+                if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
+                    var baseOdds = 0.25;
+                    var realOdds = Math.min((baseOdds + addPrimalBossOdds), 1);
+                    self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
+                    if (self._isPrimalBoss) {
+                        self._soul = Formulas.getPrimalBossSoul(self._lv);
+                    }
+                }
+            }
+            self._gold = Formulas.getMonsterGold(lv, self._totalHP);
+            if (self._isTreasureChest) {
+                self._gold = self._gold.times(10 * GameData.addTreasureTimes);
+                self._monsterName = "宝箱";
+            }
+            if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
+                if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds * 100)) {
+                    self._gold = self._gold.times(10);
+                }
+            }
         }
-        
+
+        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
+
         self._onMonsterDestroy = onMonsterDestroy;
         self._hpChangeCallBack = hpChangeCallBack;
         self._clickHertCallBack = clickHertCallBack;

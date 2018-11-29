@@ -72,15 +72,17 @@ cc.Class({
     onGameStart () {
         const self = this;
         // console.log(HeroDatas);
-        
+        self.isIdle = false; // 是否为闲置状态
+        self.combo = 0; // 当前连击数
+
         DataCenter.init();
         HeroDatas.init();
         
         self.heroListControl.setHeroList();
         self.monsterController.init();
-        self.userSkillController.initUserSkills();
-
+        
         GameData.refresh();
+        self.userSkillController.initUserSkills();
 
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
@@ -90,6 +92,8 @@ cc.Class({
         
         self.totalCostLab.string = DataCenter.getGoldStr();
         self.totalSoulLab.string = DataCenter.getSoulStr();
+
+        self.scheduleOnce(self.handleIdle, 60);
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
@@ -97,24 +101,29 @@ cc.Class({
         var map = DataCenter.KeyMap;
         // 获取存档数据，并存储到云端
         var curGold = DataCenter.getDataByKey(map.curGold);
-
+        var curSoul = DataCenter.getDataByKey(map.curSoul);
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
+        obj[map.maxCombo] = DataCenter.getDataByKey(map.maxCombo); // 历史最大连击数
+        obj[map.totalClick] = DataCenter.getDataByKey(map.totalClick); // 历史总点击数
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
+        obj[map.passLavel] = DataCenter.getDataByKey(map.passLavel); // 当前世界已通过的最高关卡
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
-        // obj[map.curSoul] = 
+        obj[map.curSoul] = curSoul.toExponential(4); // 当前英魂总数
         // obj[map.additionalSoul] = 
-        obj[map.heroList] = HeroDatas.formatHeroList();
-        obj[map.ancientList] = HeroDatas.formatAncientList();
+        obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
+        obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
         // obj[map.skillList] = 
-        obj[map.skillList] = self.userSkillController.formatUserSkillsInfo();
+        obj[map.skillList] = self.userSkillController.formatUserSkillsInfo(); // 所有主动技能的状态
         // obj[map.achievementList] = 
         // obj[map.equipmentList] = 
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
+        console.log(obj);
+        
         return obj;
     },
 
@@ -140,11 +149,17 @@ cc.Class({
     onTouchStart (event) {
         const self = this;
         if (ClickEnable == true) {
-            let pos = event.getLocation();
+            // let pos = event.getLocation();
             self.clickHit();
+            var map = DataCenter.KeyMap;
+            DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
+            self.combo++;
+            Events.emit(Events.ON_COMBO_CHANGE, self.combo);
+            if (self.combo > DataCenter.getDataByKey(map.maxCombo)) {
+                DataCenter.setDataByKey(map.maxCombo, self.combo);
+            }
             ClickEnable = false;
         }
-        
     },
 
     clickHit () {
@@ -158,6 +173,24 @@ cc.Class({
             self.monsterController.hit(GameData.clickDamage, false, false);
         }
         
+        if (self.isIdle === true) {
+            self.isIdle = false;
+            // 转为非闲置状态
+            console.log("转为非闲置状态");
+            Events.emit(Events.ON_IDLE_STATE, self.isIdle);
+        }
+        self.unschedule(self.handleIdle);
+        self.scheduleOnce(self.handleIdle, 60);
+    },
+
+    handleIdle () {
+        const self = this;
+        self.isIdle = true;
+        // 转为闲置状态
+        console.log("转为闲置状态");
+        self.combo = 0;
+        Events.emit(Events.ON_IDLE_STATE, self.isIdle);
+        Events.emit(Events.ON_COMBO_CHANGE, self.combo);
     },
 
     applyDPS(dt) {
@@ -192,10 +225,15 @@ cc.Class({
         DataCenter.addGold(gold.times(GameData.globalGoldTimes));
     },
 
+    onMonsterSoul (soul) {
+        self = this;
+        DataCenter.addSoul(soul);
+    },
+
     setWeChatUser () {
         const self = this;
-        let DataMap = DataCenter.DataMap;
-        let weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
+        var DataMap = DataCenter.DataMap;
+        var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
         
         cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
@@ -203,7 +241,7 @@ cc.Class({
                 self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
             }
         });
-        let str = weChatUserInfo.country;
+        var str = weChatUserInfo.country;
         str += " " + weChatUserInfo.province;
         str += " " + weChatUserInfo.city;
         self.location.string = str;

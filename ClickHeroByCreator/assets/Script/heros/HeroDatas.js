@@ -40,6 +40,10 @@ cc.Class({
         selAncients : [],// 选中的
         otherAncients : [],// 剩余的
         init() {
+            this.initAncient();
+            this.initHeros();
+        },
+        initHeros(){
             var map = DataCenter.KeyMap;
             var herosCloudInfo = DataCenter.getCloudDataByKey(map.heroList);
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
@@ -66,30 +70,9 @@ cc.Class({
                     this.heroList.push(hero);
                 }
             }
-
-            // this.heroList = [
-            //     new BaseHero().init(0,"冒险家",5,1),
-            //     new BaseHero().init(1,"树妖",50,5),
-            //     new BaseHero().init(2,"亦凡",250,22),
-            //     new BaseHero().init(3,"沙滩公主",1000,74),
-            //     new BaseHero().init(4,"厨子",20000,976),
-            //     new BaseHero().init(5,"蒙面武士",1e+5,3725),
-            //     new BaseHero().init(6,"里昂",4e+5,10859),
-            //     new BaseHero().init(7,"大森林先知",2.5e+6,47143),
-            //     new BaseHero().init(8,"刺客",1.5e+7,1.869e5),
-            //     new BaseHero().init(9,"冰箱学徒",1.000e8,7.820e5),
-            //     new BaseHero().init(10,"利刃女公爵",8.000e8,3.721e6),
-            //     new BaseHero().init(11,"赏金猎人",6.500e9,1.701e7),
-            //     new BaseHero().init(12,"火法师",5.000e10,6.948e7),
-            //     new BaseHero().init(13,"国王护卫",4.500e11,4.607e8),
-            //     new BaseHero().init(14,"国王",4.000e12,3.017e9),
-            //     new BaseHero().init(15,"冰箱法师",3.600e13,2.000e10),
-            //     new BaseHero().init(16,"阿巴顿",3.200e14,1.310e11),
-            //     new BaseHero().init(17,"马祖",2.700e15,8.147e11),
-            //     new BaseHero().init(18,"阿蒙",2.400e16,5.335e12),
-            //     new BaseHero().init(19,"兽王",3.000e17,4.914e13),
-            // ]
-
+        },
+        initAncient(){
+            var map = DataCenter.KeyMap;
             this.otherAncients = [
                 new AncientData().init(1,false,false,"金身",0,"desc0"),
                 new AncientData().init(2,false,false,"远古Bos几率",0,"desc1"),
@@ -118,8 +101,6 @@ cc.Class({
                 new AncientData().init(25,false,false,"暴击风暴2s",0,"desc20"),
                 new AncientData().init(26,false,false,"技能冷却哥",0,"desc21"),
             ];
-
-
             let cAncients = DataCenter.getCloudDataByKey(map.ancientList);
             if (cAncients) {
                 let my = cAncients[0]?cAncients[0]:[];
@@ -135,6 +116,7 @@ cc.Class({
                             this.otherAncients.splice(j,1);
                             this.myAncients.push(ancient);
                             ancient.refresh();
+                            ancient.calUpgradeSoul();
                             break;
                         }
                     }
@@ -230,6 +212,25 @@ cc.Class({
             let index = this.myAncients.length;
             let soul = buyAncientSouls[index][1];
             return new BigNumber(soul);
+        },
+        calAncientSoulByLevel(id,fromLv,toLv){
+            var soul;
+            var lv = this.level;
+            if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
+                soul = new BigNumber(lv*(lv+1)/2-1);
+            } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
+                soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
+            } else if([14,21].indexOf(this.id)>=0) {
+                // soul = Math.pow(this.level + 1,1.5);
+                // BigNumber只支持整数指数运行
+                soul = new BigNumber(this.level + 1).pow(new BigNumber(1.5));
+            } else if(this.id == 20) {
+                soul = new BigNumber(1);
+            } else {
+                soul = new BigNumber(0);
+            }
+            this.soul = soul.integerValue(); 
+            return this.soul;
         },
     }
 });

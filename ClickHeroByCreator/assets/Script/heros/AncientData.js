@@ -98,6 +98,7 @@ cc.Class({
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
             GameData.buyHeroDiscount = 1 - 0.9999999999 * (1 - Math.exp(-0.01*this.level));
+            Events.emit(Events.REFRESH_HERO_BUYCOST);
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
             GameData.addTreasureOdds = 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
@@ -175,10 +176,8 @@ cc.Class({
         var soul;
         // 每个英雄都不一样哦，根据id去区分 by level
         if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
-            // soul = this.level + 1;
             soul = new BigNumber(this.level + 1);
         } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
-            // soul = Math.pow(2,this.level + 1);
             soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
         } else if([14,21].indexOf(this.id)>=0) {
             // soul = Math.pow(this.level + 1,1.5);
@@ -192,4 +191,5 @@ cc.Class({
         this.soul = soul.integerValue(); 
         return this.soul;
     },
+
 })
