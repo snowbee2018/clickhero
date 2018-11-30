@@ -138,7 +138,29 @@ cc.Class({
             }
             
         },
-        //!!!!!写到这里了，这里要一个计算从0到n级的的英雄升级金币计算方法
+        //计算从0到n级的的点击英雄总升级金币
+        getClickHeroSumCost(lv){
+            var lv1 = lv > 15?15:lv;
+            var lv2 = lv - 15;
+            var sum = new BigNumber(0);
+            for (let i = 1; i <= lv1; i++) {
+                sum = sum.plus(this.getClickHeroCost(i))
+            }
+            if (lv2 > 0) {
+                sum = sum.plus(this.sumGP(20,1.07,lv).minus(this.sumGP(20,1.07,15)))
+            }
+            return sum.integerValue()
+        },
+        //计算从0到n级的的英雄总升级金币
+        getHeroSumCost(baseCost,lv){
+            // baseCost * ( 1 - 1.07^lv ) / -0.07
+            return this.sumGP(baseCost,1.07,lv).integerValue()
+        },
+
+        //等比数列求和 a1首项 q公比 n尾索引
+        sumGP(a1,q,n){
+            return new BigNumber(a1).times(new BigNumber(1).minus(new BigNumber(q).pow(n))).div(-q+1)
+        },
 
         // 计算古神从0到n级的总花费soul
         getAncientSoul(id,lv){
