@@ -141,12 +141,11 @@ cc.Class({
         //计算从0到n级的的点击英雄总升级金币
         getClickHeroSumCost(lv){
             var lv1 = lv > 15?15:lv;
-            var lv2 = lv - 15;
             var sum = new BigNumber(0);
             for (let i = 1; i <= lv1; i++) {
                 sum = sum.plus(this.getClickHeroCost(i))
             }
-            if (lv2 > 0) {
+            if (lv > 15) {
                 sum = sum.plus(this.sumGP(20,1.07,lv).minus(this.sumGP(20,1.07,15)))
             }
             return sum.integerValue()
