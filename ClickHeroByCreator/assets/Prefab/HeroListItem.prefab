@@ -191,7 +191,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "c3ANMDfnFNLa44trXhe466"
+    "_id": "f4E10LtQ9Bep0y4tICZo6d"
   },
   {
     "__type__": "cc.Widget",
@@ -218,7 +218,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "40ZJg3rtpBw77RSHJrl5kk"
+    "_id": "22N94DZJVLpo8ArH/c8nfe"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -320,7 +320,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "74BDbm9f1Hq71rZtGnhe6n"
+    "_id": "d7OaP7x1pMTrEFwg7ns14V"
   },
   {
     "__type__": "cc.Widget",
@@ -347,7 +347,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "dbJGKtsfVG6b87yNGPmHeb"
+    "_id": "74aLitnHBOFrz0wtWM9Raw"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -449,7 +449,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "68HPRgFy5GapLBf0stIesY"
+    "_id": "35jY7pPdpGz5CPNx3IYTOl"
   },
   {
     "__type__": "cc.Widget",
@@ -476,7 +476,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "503816pCNOmKpqfLJ+c96o"
+    "_id": "02b5L9W8RC4oRd9Vv8aJ3I"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -581,7 +581,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "04ImdhBMVCwo+FlOsADSd3"
+    "_id": "29s15yj21H0LKTu8K7YVnX"
   },
   {
     "__type__": "cc.Widget",
@@ -608,7 +608,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 100,
     "_originalHeight": 100,
-    "_id": "00AFwAP2ZJNZb4C8svCEr5"
+    "_id": "7baSoTNgJDpLpJsUzdXKc3"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -789,7 +789,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "6e/TwBzBZI7bMmuBcLLpAG"
+    "_id": "9eThjxrL1CF5rFkq/DpVKB"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -876,8 +876,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "升级增加的伤害",
-    "_N$string": "升级增加的伤害",
+    "_string": "增加的伤害",
+    "_N$string": "增加的伤害",
     "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": false,
@@ -888,7 +888,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "99fzV/i8hOhq6q467HhvZn"
+    "_id": "ea0zxhUxFDF6qfBlTXq8at"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -975,8 +975,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "cost:100",
-    "_N$string": "cost:100",
+    "_string": "消耗:100",
+    "_N$string": "消耗:100",
     "_fontSize": 20,
     "_lineHeight": 20,
     "_enableWrapText": false,
@@ -987,7 +987,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "e9JW1YYdxOlbxPzxewd5+z"
+    "_id": "2bn9asq15M4Y1WOEJxga+Z"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1026,7 +1026,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "e6UBKMGP1JRIDE1M/RHKSV"
+    "_id": "88CjuJUJBGDp1ZAt/S5829"
   },
   {
     "__type__": "cc.Button",
@@ -1095,7 +1095,7 @@
     "_N$target": {
       "__id__": 18
     },
-    "_id": "fdfqbsz6tAkIkpKMrWRicr"
+    "_id": "98HZdqYI5IZaIjDSq/7INI"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1114,7 +1114,7 @@
       "__id__": 18
     },
     "_enabled": true,
-    "_id": "c95Er9mdBOH4gl0i0cP7Ht"
+    "_id": "e7JHVnwTZK97JKwCJRbgF9"
   },
   {
     "__type__": "cc.Widget",
@@ -1141,7 +1141,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "14Z5utJEdHxp3G7OUnh0SN"
+    "_id": "620Su2aptOl5wQ5C/O06A7"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1250,7 +1250,7 @@
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
-    "_id": "c5MLtJRxRNs7K+zQ/jtmG8"
+    "_id": "42GdHA9WNBN7woZbdburYY"
   },
   {
     "__type__": "cc.Widget",
@@ -1277,7 +1277,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "a2xLRV4GBPjobz0qIwazZE"
+    "_id": "beVAbKunZIFp44c2Nz2MMY"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1385,7 +1385,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "e3CtV+a3xLnbiT+Ccn26H3"
+    "_id": "a4FLxb6gtDXrIEr+6tWZNS"
   },
   {
     "__type__": "a8187njt4lIqrxkDkSQV4J3",
@@ -1395,7 +1395,7 @@
       "__id__": 38
     },
     "_enabled": true,
-    "_id": "19SPqL7F9NVKB9sTGVOQqM"
+    "_id": "32gHcoKhJMBoqGAtp1eB0U"
   },
   {
     "__type__": "cc.Widget",
@@ -1422,7 +1422,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "122LQmHp9A6IsOPUrUQh6s"
+    "_id": "8f4RhgJ8hJs75S03hf49vJ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1460,7 +1460,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 131.33,
     "_originalHeight": 0,
-    "_id": "acCgvOvWZETZaBvpTgASuZ"
+    "_id": "9dCtcCn3tLKJ3NyNlQAluv"
   },
   {
     "__type__": "98f889NNiFCEqdDajXlsfOo",
@@ -1506,7 +1506,7 @@
     "skillDialogPrefab": {
       "__uuid__": "0ffbf868-1ef3-4b00-9515-68ede7cf8cdb"
     },
-    "_id": "49sjJRyqJM1ZzS+cN67S/w"
+    "_id": "47AofsFc5LC4lZP/6aUIqV"
   },
   {
     "__type__": "cc.Button",
@@ -1563,7 +1563,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "e234q1G/1NU4VXAkrPZdNb"
+    "_id": "dbFOy6JlxHT4DkC4YiUNsb"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1600,7 +1600,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "a5Qn2bZfhI87hVwTp0aEyR"
+    "_id": "d4ruiw7mRGqqRMF9nNnk44"
   },
   {
     "__type__": "cc.PrefabInfo",

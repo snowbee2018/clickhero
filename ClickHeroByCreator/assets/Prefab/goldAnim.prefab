@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "damage",
+    "_name": "goldAnim",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -99,9 +99,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 197,
-      "g": 29,
-      "b": 29,
+      "r": 226,
+      "g": 241,
+      "b": 43,
       "a": 255
     },
     "_contentSize": {
@@ -111,7 +111,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 1,
+      "x": 0.5,
       "y": 0.5
     },
     "_position": {
@@ -164,7 +164,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "364OZPfcNKAZg8YNMM4EyG"
+    "_id": "88YP1T6+BNJIbhkzFjqmgP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -172,13 +172,13 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cba380f5-173e-48fb-8ce7-0987819caf9c"
+      "__uuid__": "7ed0dbd0-6859-4a77-9e41-2622503e0984"
     },
     "fileId": "6ftXXxl1RB545O+tal/VDO",
     "sync": false
   },
   {
-    "__type__": "0d6b5yn3XVGqo1diAjuhmJ2",
+    "__type__": "1f8de9VNDhIX4g1uA5stbhy",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -188,7 +188,7 @@
     "content": {
       "__id__": 3
     },
-    "_id": "51nW6FmF1OqoB0LIxakL2C"
+    "_id": "61yjuOyQFP4rdYpo0LyVqF"
   },
   {
     "__type__": "cc.Animation",
@@ -199,15 +199,15 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "768dcaaf-44e3-4eb4-ab5d-aac8a8afdf40"
+      "__uuid__": "54c4322d-8afa-4879-b45b-d51934bb7972"
     },
     "_clips": [
       {
-        "__uuid__": "768dcaaf-44e3-4eb4-ab5d-aac8a8afdf40"
+        "__uuid__": "54c4322d-8afa-4879-b45b-d51934bb7972"
       }
     ],
     "playOnLoad": true,
-    "_id": "acFI63vghBvbhyOtmuuTBt"
+    "_id": "56dcf/du5Lv4h2hyO2xDTF"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -215,7 +215,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cba380f5-173e-48fb-8ce7-0987819caf9c"
+      "__uuid__": "7ed0dbd0-6859-4a77-9e41-2622503e0984"
     },
     "fileId": "bdVLu6HoFLSYMi12OdW9i2",
     "sync": false

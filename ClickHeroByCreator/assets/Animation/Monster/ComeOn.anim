@@ -3,7 +3,7 @@
   "_name": "ComeOn",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.55,
+  "_duration": 0.525,
   "sample": 40,
   "speed": 1,
   "wrapMode": 1,
@@ -14,36 +14,12 @@
           "frame": 0,
           "value": {
             "__type__": "cc.Vec2",
-            "x": 2.32,
-            "y": 0.05
+            "x": 2,
+            "y": 0.3
           }
         },
         {
-          "frame": 0.05,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 1.72,
-            "y": 0.2
-          }
-        },
-        {
-          "frame": 0.1,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 1.21,
-            "y": 0.7
-          }
-        },
-        {
-          "frame": 0.15,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 0.66,
-            "y": 1.41
-          }
-        },
-        {
-          "frame": 0.225,
+          "frame": 0.25,
           "value": {
             "__type__": "cc.Vec2",
             "x": 0.5,
@@ -51,39 +27,16 @@
           }
         },
         {
-          "frame": 0.35,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 0.69,
-            "y": 1.52
-          }
-        },
-        {
-          "frame": 0.4,
+          "frame": 0.375,
           "value": {
             "__type__": "cc.Vec2",
             "x": 2.23,
             "y": 0.51
-          }
+          },
+          "curve": "cubicInOut"
         },
         {
-          "frame": 0.45,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 0.86,
-            "y": 1.33
-          }
-        },
-        {
-          "frame": 0.5,
-          "value": {
-            "__type__": "cc.Vec2",
-            "x": 1.46,
-            "y": 0.8
-          }
-        },
-        {
-          "frame": 0.55,
+          "frame": 0.525,
           "value": {
             "__type__": "cc.Vec2",
             "x": 1,
@@ -93,28 +46,14 @@
       ],
       "position": [
         {
-          "frame": 0.15,
+          "frame": 0.125,
           "value": [
             0,
             0
           ]
         },
         {
-          "frame": 0.175,
-          "value": [
-            0,
-            266
-          ]
-        },
-        {
-          "frame": 0.225,
-          "value": [
-            0,
-            431
-          ]
-        },
-        {
-          "frame": 0.3,
+          "frame": 0.25,
           "value": [
             0,
             431
