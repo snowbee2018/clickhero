@@ -118,6 +118,11 @@ cc.Class({
                     // console.log(str + " = " + result);
                     return result;
                 } else {
+                    // if (bigNumber.isLessThan(1)) {
+                    //     return "0";
+                    // } else {
+                    //     return str;
+                    // }
                     return str;
                 }
             }

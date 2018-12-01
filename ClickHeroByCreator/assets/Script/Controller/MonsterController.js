@@ -160,6 +160,14 @@ cc.Class({
         const self = this;
         if (cc.isValid(self.curMonster)) {
             self.curMonster.hurt(damage, bDPS, bCrit);
+            // self.gameController.updataMonsterInfoDisplay();
+        }
+    },
+
+    bleed (damage) {
+        const self = this;
+        if (cc.isValid(self.curMonster)) {
+            self.curMonster.bleed(damage);
             self.gameController.updataMonsterInfoDisplay();
         }
     },
