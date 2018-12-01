@@ -45,7 +45,7 @@ cc.Class({
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
         window.BigNumber.config({
-            DECIMAL_PLACES: 0,
+            DECIMAL_PLACES: 2,
             POW_PRECISION: 4,
         });
         window.ZoneArr = require("ZoneCfg");
