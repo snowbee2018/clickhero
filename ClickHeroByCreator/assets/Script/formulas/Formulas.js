@@ -188,6 +188,9 @@ cc.Class({
             this.soul = soul.integerValue(); 
             return this.soul;
         },
+        getAncientSoulByLevel(id,start,count){
+
+        },
         // 获得远古boss英魂数，floor关卡
         getPrimalBossSoul(floor){
             return new BigNumber(Math.pow((floor-80)/25,1.3)+1).integerValue();

@@ -278,4 +278,12 @@ cc.Class({
         }
         return times;
     },
+    // 获得下一级DPS增益
+    getNextAddDPS(){
+        if (this.isPassive) {
+            return Formulas.getDPS(this.baseDPS, this.level+1, this.getDPSTimes()).minus(this.DPS);
+        } else {
+            return Formulas.getClickDPS(this.level+1, this.getDPSTimes()).minus(this.DPS);
+        }
+    },
 });

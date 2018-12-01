@@ -41,7 +41,13 @@ cc.Class({
         // reInit HeroDatas ancients
         // roll selAncients
 
-        // 再写英雄升级的公式 批量升级哦
+        var soul = new BigNumber();
+        HeroDatas.myAncients.forEach(e => {
+            soul = soul.plus(Formulas.getAncientSoul(e.id,e.level));
+        });
+        for (let i = 0; i < HeroDatas.myAncients.length; i++) {
+            soul = soul.plus(HeroDatas.buyAncientSouls[i][1]);
+        }
     },
 
     addItem(ancient) {

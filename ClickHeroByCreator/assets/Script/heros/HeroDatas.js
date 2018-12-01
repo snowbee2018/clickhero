@@ -40,6 +40,7 @@ cc.Class({
         selAncients : [],// 选中的
         otherAncients : [],// 剩余的
         init() {
+            this.buyAncientSouls = buyAncientSouls;
             this.initAncient();
             this.initHeros();
         },
@@ -237,7 +238,9 @@ cc.Class({
         setHeroLvUnit(unit){
             GameData.heroLvUnit = unit;
             this.heroList.forEach(hero => {
-                hero.calGoldByLvUnit();
+                // if (hero.isActive) {
+                    hero.calGoldByLvUnit();
+                // }
             });
         },
     },
