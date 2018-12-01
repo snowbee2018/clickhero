@@ -14,6 +14,7 @@ cc.Class({
         Events.on(Events.ON_UPGRADE_ANCIENT,function(id) {
             console.log("ancient.id:" + id);
         },this);
+        Events.on(Events.ON_IDLE_STATE,this.onIdleState,this);
         this.fullViews();
     },
 
@@ -56,5 +57,10 @@ cc.Class({
         node.getComponent("AncientItem").bind(ancient);
     },
 
-    // update (dt) {},
+    onIdleState(isIdle){
+        console.log("isIdle:" + String(isIdle));
+        GameData.playerStatus = isIdle?1:0;
+        GameData.refresh();
+        // 更新主面板
+    },
 });

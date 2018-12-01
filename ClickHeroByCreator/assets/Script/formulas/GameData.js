@@ -23,7 +23,7 @@ cc.Class({
         critTimes : 1,// 暴击倍数
         critOdds : 0,// 暴击概率
 
-        playerStatus : 0,// 玩家状态 0:蒙蔽 1:闲置 2:combo
+        playerStatus : 0,// 玩家状态 0:combo 1:闲置
 
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
         ancientLvUnit: 1,// 古神等级单位
@@ -87,7 +87,9 @@ cc.Class({
                     times*=hero.getGlobalDPSTimes();
                 }
             });
-            this.globalDPSTimes = times * this.skDPSTimes;
+            let idleTimes = this.playerStatus==1?this.addLeaveDPSTimes:1;
+            console.log("idleTimes:" + idleTimes);
+            this.globalDPSTimes = times * this.skDPSTimes * idleTimes;
         },
         // 计算全局金币倍数
         calGoldTimes(){
@@ -97,9 +99,8 @@ cc.Class({
                     times*=hero.getGlobalGoldTimes();
                 }
             });
-            // 伪代码
-            // let t = game.isLeave? this.addLeaveGoldTimes : 1; 然后乘上去
-            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes;
+            let idleTimes = this.playerStatus==1?this.addLeaveGoldTimes:1;
+            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes * idleTimes;
         },
         // 计算总DPS伤害
         calDPSDamage(){

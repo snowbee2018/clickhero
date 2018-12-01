@@ -135,7 +135,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveGoldTimes = this.level*0.25 - diff*0.01;//需要判断闲置
+            GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断闲置
         } else if (this.id == 18) {
             // +5% Gold
             GameData.addGoldTimes = this.level * 0.05;
@@ -162,7 +162,9 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveDPSTimes = this.level*0.25 - diff*0.01;//需要判断闲置
+            GameData.addLeaveDPSTimes = 1 + this.level*0.25 - diff*0.01;//需要判断闲置
+            console.log("GameData.addLeaveDPSTimes:" + GameData.addLeaveDPSTimes);
+            GameData.refresh()
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;
