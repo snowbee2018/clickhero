@@ -174,7 +174,22 @@ cc.Class({
         damageNode.getComponent("DamageAnim").setDamage(damage, bCrit);
     },
 
-    hurt(damage, bDPS, bCrit) {
+    hurt(damage, bDPS, bCrit) { // 受伤(播放受伤动画)
+        const self = this;
+        if (!self._alive) return;
+        if (!self._curHP.isZero()) {
+            if (damage.isZero()) return;
+            if (!bDPS) {
+                self.playAnim("Hurt");
+                self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                if (self._clickHertCallBack) {
+                    self._clickHertCallBack(self._lv, self._gold, self._isBoss);
+                }
+            }
+        }
+    },
+
+    bleed(damage) { // 流血(血量减少)
         const self = this;
         if (!self._alive) return;
         if (!self._curHP.isZero()) {
@@ -183,33 +198,30 @@ cc.Class({
             // bDPS = bDPS ? true : false;
             if (self._curHP.isGreaterThan(damage)) {
                 self._curHP = self._curHP.minus(damage);
-                if (bDPS) {
-                    
-                } else {
-                    self.playAnim("Hurt");
-                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
-                    if (self._clickHertCallBack) {
-                        self._clickHertCallBack(self._lv, self._gold, self._isBoss);
-                    }
-                }
+                // if (bDPS) {
+
+                // } else {
+                //     self.playAnim("Hurt");
+                //     self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                //     if (self._clickHertCallBack) {
+                //         self._clickHertCallBack(self._lv, self._gold, self._isBoss);
+                //     }
+                // }
             } else {
                 self._curHP = new BigNumber(0);
-                console.log();
-                
-                if (!bDPS) {
-                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
-                    if (self._clickHertCallBack) {
-                        self._clickHertCallBack(self._lv, self._gold, self._isBoss);
-                    }
-                }
-                self.goDie();
+                // if (!bDPS) {
+                //     self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                //     if (self._clickHertCallBack) {
+                //         self._clickHertCallBack(self._lv, self._gold, self._isBoss);
+                //     }
+                // }
+                // self.goDie();
             }
             // console.log("cur hp : " + self._curHP.toString());
             self.onHpChange();
         } else {
             self.goDie();
         }
-        
     },
 
     goDie () {

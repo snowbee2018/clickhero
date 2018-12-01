@@ -1,12 +1,4 @@
 {
-  "android-instant": {
-    "REMOTE_SERVER_ROOT": "",
-    "host": "",
-    "pathPattern": "",
-    "recordPath": "",
-    "scheme": "https",
-    "skipRecord": false
-  },
   "appKey": "",
   "appSecret": "",
   "encryptJs": true,
