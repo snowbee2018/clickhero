@@ -45,11 +45,12 @@ cc.Class({
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
         window.BigNumber.config({
-            DECIMAL_PLACES: 0,
-            POW_PRECISION: 4,
+            DECIMAL_PLACES: 2,
+            POW_PRECISION: 3,
         });
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
+        window.CloudRes = require("CloudRes");
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
