@@ -43,7 +43,11 @@ cc.Class({
         window.GameData = require("GameData");
         window.HeroDatas = require("HeroDatas");
         window.Events = require("Events");
-        window.BigNumber = require("BigNumber");
+        window.BigNumber = (require("BigNumber")).clone();
+        window.BigNumber.config({
+            DECIMAL_PLACES: 0,
+            POW_PRECISION: 4,
+        });
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
 

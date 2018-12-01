@@ -114,7 +114,7 @@ cc.Class({
             } else {
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
                     var baseOdds = 0.25;
-                    var realOdds = Math.min((baseOdds + addPrimalBossOdds), 1);
+                    var realOdds = Math.min((baseOdds + GameData.addPrimalBossOdds), 1);
                     self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
@@ -169,8 +169,8 @@ cc.Class({
         var damageNode = cc.instantiate(self.damageAnim);
         damageNode.parent = self.node.parent;
         damageNode.zIndex = 100;
-        damageNode.x = 100;
-        damageNode.y = 100;
+        damageNode.x = Math.random() * 100 - 50;
+        damageNode.y = Math.random() * 100 - 50;
         damageNode.getComponent("DamageAnim").setDamage(damage, bCrit);
     },
 
@@ -181,7 +181,11 @@ cc.Class({
             if (damage.isZero()) return;
             if (!bDPS) {
                 self.playAnim("Hurt");
-                self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                if (self._curHP.isGreaterThan(damage)) {
+                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                } else {
+                    self.playDamage(Formulas.formatBigNumber(self._curHP), bCrit);
+                }
                 if (self._clickHertCallBack) {
                     self._clickHertCallBack(self._lv, self._gold, self._isBoss);
                 }
@@ -215,7 +219,7 @@ cc.Class({
                 //         self._clickHertCallBack(self._lv, self._gold, self._isBoss);
                 //     }
                 // }
-                // self.goDie();
+                self.goDie();
             }
             // console.log("cur hp : " + self._curHP.toString());
             self.onHpChange();

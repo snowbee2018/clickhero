@@ -19,6 +19,9 @@ cc.Class({
         costLab: cc.Label,
 
         pageNode: cc.Node,
+
+        upgrageSelectBtn: cc.Node,
+        upgrageSelectBtnLab: cc.Label,
     },
     
     // use this for initialization
@@ -88,6 +91,8 @@ cc.Class({
         
         self.totalCostLab.string = DataCenter.getGoldStr();
         self.totalSoulLab.string = DataCenter.getSoulStr();
+
+        self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
 
         self.scheduleOnce(self.handleIdle, 60);
     },
@@ -215,7 +220,9 @@ cc.Class({
 
     onMonsterGold (gold) {
         const self = this;
-        DataCenter.addGold(gold.times(GameData.globalGoldTimes));
+        var realGold = gold.times(GameData.globalGoldTimes);
+        DataCenter.addGold(realGold);
+        self.monsterController.playGoldAnim(Formulas.formatBigNumber(realGold));
     },
 
     onMonsterSoul (soul) {
@@ -266,10 +273,12 @@ cc.Class({
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(0);
+                self.upgrageSelectBtn.active = true;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(0);
+            self.upgrageSelectBtn.active = true;
         }
     },
 
@@ -282,14 +291,16 @@ cc.Class({
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(1);
+                self.upgrageSelectBtn.active = false;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(1);
+            self.upgrageSelectBtn.active = false;
         }
     },
 
-    onAncientBtnClick(){
+    onAncientBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (self.pageNode.active) {
@@ -298,11 +309,43 @@ cc.Class({
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(2);
+                self.upgrageSelectBtn.active = false;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(2);
+            self.upgrageSelectBtn.active = false;
         }
+    },
+
+    onUpgradeSelectClick() { // 1 10 25 100 1000 10000
+        const self = this;
+        var unit = GameData.heroLvUnit;
+        switch (GameData.heroLvUnit) {
+            case 1:
+                unit = 10;
+                break;
+            case 10:
+                unit = 25;
+                break;
+            case 25:
+                unit = 100;
+                break;
+            case 100:
+                unit = 1000;
+                break;
+            case 1000:
+                unit = 10000;
+                break;
+            case 10000:
+                unit = 1;
+                break;
+            default:
+                break;
+        }
+        HeroDatas.setHeroLvUnit(unit);
+        self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
+        Events.emit(Events.ON_HEROLVUNIT_CHANGE);
     },
 
     // onLeftBtnClick () {

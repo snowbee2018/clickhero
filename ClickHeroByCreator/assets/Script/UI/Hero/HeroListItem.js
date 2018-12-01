@@ -55,6 +55,7 @@ cc.Class({
         Events.off(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
         Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
         Events.off(Events.REFRESH_HERO_BUYCOST,self.refreshBuyCost,self);
+        Events.off(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
     },
 
     onGoldChange () {
@@ -88,20 +89,34 @@ cc.Class({
         Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
         Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
         Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
-        Events.on(Events.REFRESH_HERO_BUYCOST,self.refreshBuyCost,self);
+        Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
+        Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
     },
 
-    refreshBuyCost(){
+    refreshBuyCost() {
         const self = this;
         var hero = HeroDatas.getHero(this._heroID);
         if (hero.isBuy) {
-            self.btnTitle.string = "升级";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
+            self.btnTitle.string = "升" + GameData.heroLvUnit + "级";
+            self.upgradeCost.string = "消耗" + Formulas.formatBigNumber(hero.getCost()) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
+            self.upgradeCost.string = "消耗" + Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
             self.btn.interactable = self.isCanBuy();
+        }
+
+        var hero = HeroDatas.getHero(self._heroID);
+        var added = Formulas.formatBigNumber(hero.getNextAddDPS());
+        if (hero.isPassive) {
+            self.damageAdd.string = "DPS+" + added;
+        } else {
+            self.damageAdd.string = "点击伤害+" + added;
+        }
+        if (GameData.heroLvUnit > 1) {
+            self.damageAdd.node.active = false;
+        } else {
+            self.damageAdd.node.active = true;
         }
     },
 
@@ -145,14 +160,29 @@ cc.Class({
         self.grayBg.active = !hero.isBuy;
         
         if (hero.isBuy) {
-            self.btnTitle.string = "升级";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
+            self.btnTitle.string = "升" + GameData.heroLvUnit + "级";
+            self.upgradeCost.string = "消耗" + Formulas.formatBigNumber(hero.getCost()) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
+            self.upgradeCost.string = "消耗" + Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
             self.btn.interactable = self.isCanBuy();
         }
+
+        var hero = HeroDatas.getHero(self._heroID);
+        var added = Formulas.formatBigNumber(hero.getNextAddDPS());
+        if (hero.isPassive) {
+            self.damageAdd.string = "DPS+" + added;
+        } else {
+            self.damageAdd.string = "点击伤害+" + added;
+        }
+        if (GameData.heroLvUnit > 1) {
+            self.damageAdd.node.active = false;
+        } else {
+            self.damageAdd.node.active = true;
+        }
+        
+
         self.nameLab.string = hero.heroName;
         self.level.string = "等级:" + hero.level;
         

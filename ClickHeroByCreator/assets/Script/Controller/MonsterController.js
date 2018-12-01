@@ -22,7 +22,7 @@ cc.Class({
         toggle: cc.Toggle,
 
         _autoNext: false,
-        
+        goldAnimFb: cc.Prefab,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -31,6 +31,16 @@ cc.Class({
         const self = this;
         self.gameController = self.getComponent("GameController");
         self.zoneInfo = self.zoneInfoNode.getComponent("ZoneInfo");
+    },
+
+    playGoldAnim(numStr) {
+        const self = this;
+        var node = cc.instantiate(self.goldAnimFb);
+        node.parent = self.monsterPos;
+        node.zIndex = 100;
+        node.x = Math.random() * 100 - 50;
+        node.y = Math.random() * 200;
+        node.getComponent("GoldAnim").setNum(numStr);
     },
 
     start () {
