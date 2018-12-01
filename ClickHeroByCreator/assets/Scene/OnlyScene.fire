@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3072426220750259,
-      "y": 0.3072426220750259,
+      "x": 0.42578125,
+      "y": 0.42578125,
       "z": 1
     },
     "_quat": {
@@ -4389,9 +4389,6 @@
       "__id__": 90
     },
     "_enabled": true,
-    "content": {
-      "__id__": 92
-    },
     "horizontal": false,
     "vertical": true,
     "inertia": true,
@@ -4400,6 +4397,12 @@
     "bounceDuration": 0.1,
     "scrollEvents": [],
     "cancelInnerEvents": true,
+    "_N$content": {
+      "__id__": 92
+    },
+    "content": {
+      "__id__": 92
+    },
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": null,
     "_id": "fc31BGNLtJSqRxp6FDmchz"
@@ -11577,9 +11580,6 @@
       "__id__": 98
     },
     "_enabled": true,
-    "content": {
-      "__id__": 100
-    },
     "horizontal": false,
     "vertical": true,
     "inertia": true,
@@ -11588,6 +11588,12 @@
     "bounceDuration": 0.1,
     "scrollEvents": [],
     "cancelInnerEvents": true,
+    "_N$content": {
+      "__id__": 100
+    },
+    "content": {
+      "__id__": 100
+    },
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": null,
     "_id": "60ZyxdWChAS4sXBzGKyM3G"
@@ -12527,9 +12533,6 @@
       "__id__": 303
     },
     "_enabled": true,
-    "content": {
-      "__id__": 305
-    },
     "horizontal": false,
     "vertical": true,
     "inertia": true,
@@ -12538,6 +12541,12 @@
     "bounceDuration": 0.1,
     "scrollEvents": [],
     "cancelInnerEvents": true,
+    "_N$content": {
+      "__id__": 305
+    },
+    "content": {
+      "__id__": 305
+    },
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": null,
     "_id": "5913868c1I2LSfZhOL8XRI"
@@ -12766,9 +12775,6 @@
       "__id__": 79
     },
     "_enabled": true,
-    "content": {
-      "__id__": 89
-    },
     "horizontal": true,
     "vertical": true,
     "inertia": true,
@@ -12777,6 +12783,12 @@
     "bounceDuration": 0.5,
     "scrollEvents": [],
     "cancelInnerEvents": true,
+    "_N$content": {
+      "__id__": 89
+    },
+    "content": {
+      "__id__": 89
+    },
     "scrollThreshold": 0.5,
     "autoPageTurningThreshold": 100,
     "pageTurningEventTiming": 0.1,
@@ -15281,6 +15293,9 @@
     },
     "dialogPrefab": {
       "__uuid__": "5ab18ce9-d6b5-46e3-9ebc-3876b5e925cc"
+    },
+    "disbandDialogPrefab": {
+      "__uuid__": "186a9c83-ebf5-494b-b6b0-a01db426c1b2"
     },
     "body": {
       "__id__": 312

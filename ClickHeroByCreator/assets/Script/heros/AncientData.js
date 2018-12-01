@@ -101,7 +101,7 @@ cc.Class({
             Events.emit(Events.REFRESH_HERO_BUYCOST);
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
-            GameData.addTreasureOdds = 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
+            GameData.addTreasureOdds = 0.01 + 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
             GameData.addMetalDetectorSecond = this.level * 2;
@@ -138,7 +138,7 @@ cc.Class({
             GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断闲置
         } else if (this.id == 18) {
             // +5% Gold
-            GameData.addGoldTimes = this.level * 0.05;
+            GameData.addGoldTimes = 1 + this.level * 0.05;
             GameData.calGoldTimes();
         } else if (this.id == 19) {
             // 宝箱金币倍数

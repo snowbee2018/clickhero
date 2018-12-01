@@ -7,6 +7,7 @@ cc.Class({
         sv : cc.ScrollView,
         itemPrefab: cc.Prefab,
         dialogPrefab : cc.Prefab,
+        disbandDialogPrefab : cc.Prefab,
         body : cc.Node,
     },
 
@@ -34,21 +35,37 @@ cc.Class({
         dialog.y = cc.winSize.height / 2;
     },
 
+    // 进贡
     onClickDisband() {
-        // 进贡
-        // 遍历 调 Formulas.getAncientSoul 获得soul总和
-        // for  += buyAncientSouls[i][1]
-        // 乘以0.75 加到 我的soul里
-        // reInit HeroDatas ancients
-        // roll selAncients
-
-        var soul = new BigNumber();
+        if (HeroDatas.myAncients.length==0) {
+            return;
+        }
+        let dialog = cc.instantiate(this.disbandDialogPrefab);
+        var soul = new BigNumber(0);
         HeroDatas.myAncients.forEach(e => {
             soul = soul.plus(Formulas.getAncientSoul(e.id,e.level));
         });
         for (let i = 0; i < HeroDatas.myAncients.length; i++) {
-            soul = soul.plus(HeroDatas.buyAncientSouls[i][1]);
+            soul = soul.plus(HeroDatas.buyAncientSouls[i][0]);
         }
+        soul = soul.times(0.75).integerValue()
+        dialog.getComponent("DisbandDialog").setCallback(function(result) {
+            if (result) {
+                HeroDatas.myAncients.forEach(e => {
+                    e.level = 0;
+                    e.refresh();
+                });
+                this.body.removeAllChildren();
+                this.body.height = 0;
+                DataCenter.addSoul(soul);
+                HeroDatas.initAncient(false);
+                GameData.refresh();
+            }
+        }.bind(this));
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        dialog.getComponent("DisbandDialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"英魂");
     },
 
     addItem(ancient) {

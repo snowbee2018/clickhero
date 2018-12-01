@@ -41,7 +41,7 @@ cc.Class({
         otherAncients : [],// 剩余的
         init() {
             this.buyAncientSouls = buyAncientSouls;
-            this.initAncient();
+            this.initAncient(true);
             this.initHeros();
         },
         initHeros(){
@@ -72,8 +72,10 @@ cc.Class({
                 }
             }
         },
-        initAncient(){
+        initAncient(resumeCloud){
             var map = DataCenter.KeyMap;
+            this.myAncients = []
+            this.selAncients = []
             this.otherAncients = [
                 new AncientData().init(1,false,false,"金身",0,"desc0"),
                 new AncientData().init(2,false,false,"远古Bos几率",0,"desc1"),
@@ -102,37 +104,39 @@ cc.Class({
                 new AncientData().init(25,false,false,"暴击风暴2s",0,"desc20"),
                 new AncientData().init(26,false,false,"技能冷却哥",0,"desc21"),
             ];
-            let cAncients = DataCenter.getCloudDataByKey(map.ancientList);
-            if (cAncients) {
-                let my = cAncients[0]?cAncients[0]:[];
-                let sel = cAncients[1]?cAncients[1]:[];
-                for (let i = 0; i < my.length; i++) {
-                    const e = my[i];
-                    for (let j = 0; j < this.otherAncients.length;j++ ) {
-                        const ancient = this.otherAncients[j];
-                        if (ancient.id = e.id) {
-                            ancient.isActive = e.isActive;
-                            ancient.isBuy = e.isBuy;
-                            ancient.level = e.level;
-                            this.otherAncients.splice(j,1);
-                            this.myAncients.push(ancient);
-                            ancient.refresh();
-                            ancient.calUpgradeSoul();
-                            break;
+            if (resumeCloud) {
+                let cAncients = DataCenter.getCloudDataByKey(map.ancientList);
+                if (cAncients) {
+                    let my = cAncients[0]?cAncients[0]:[];
+                    let sel = cAncients[1]?cAncients[1]:[];
+                    for (let i = 0; i < my.length; i++) {
+                        const e = my[i];
+                        for (let j = 0; j < this.otherAncients.length;j++ ) {
+                            const ancient = this.otherAncients[j];
+                            if (ancient.id = e.id) {
+                                ancient.isActive = e.isActive;
+                                ancient.isBuy = e.isBuy;
+                                ancient.level = e.level;
+                                this.otherAncients.splice(j,1);
+                                this.myAncients.push(ancient);
+                                ancient.refresh();
+                                ancient.calUpgradeSoul();
+                                break;
+                            }
                         }
                     }
-                }
-                for (let i = 0; i < sel.length; i++) {
-                    const e = sel[i];
-                    for (let j = 0; j < this.otherAncients.length;j++ ) {
-                        const ancient = this.otherAncients[j];
-                        if (ancient.id = e.id) {
-                            ancient.isActive = e.isActive;
-                            ancient.isBuy = e.isBuy;
-                            ancient.level = e.level;
-                            this.otherAncients.splice(j,1);
-                            this.selAncients.push(ancient);
-                            break;
+                    for (let i = 0; i < sel.length; i++) {
+                        const e = sel[i];
+                        for (let j = 0; j < this.otherAncients.length;j++ ) {
+                            const ancient = this.otherAncients[j];
+                            if (ancient.id = e.id) {
+                                ancient.isActive = e.isActive;
+                                ancient.isBuy = e.isBuy;
+                                ancient.level = e.level;
+                                this.otherAncients.splice(j,1);
+                                this.selAncients.push(ancient);
+                                break;
+                            }
                         }
                     }
                 }
