@@ -50,6 +50,7 @@ cc.Class({
         });
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
+        window.CloudRes = require("CloudRes");
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));

@@ -44,5 +44,14 @@ cc.Class({
 
     setIcon(heroID) {
         const self = this;
+        CloudRes.getHeroUrl(heroID, function (url) {
+            if (url) {
+                cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+                    if (!err && texture) {
+                        self.spr.spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                });
+            }
+        });
     },
 });
