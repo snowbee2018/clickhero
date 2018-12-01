@@ -147,20 +147,25 @@ cc.Class({
         getClickHeroSumCost(lv){
             var lv1 = lv > 15?15:lv;
             var sum = new BigNumber(0);
-            for (let i = 1; i <= lv1; i++) {
+            for (let i = 0; i < lv1; i++) {
                 sum = sum.plus(this.getClickHeroCost(i))
             }
             if (lv > 15) {
-                sum = sum.plus(this.sumGP(20,1.07,lv).minus(this.sumGP(20,1.07,15)))
+                sum = sum.plus(this.sumGP(20,1.07,lv-1).minus(this.sumGP(20,1.07,14)))
             }
             return sum.integerValue()
+        },
+        getClickHeroCostByLevel(start,count){
+            return this.getClickHeroSumCost(start+count).minus(this.getClickHeroSumCost(start));
         },
         //计算从0到n级的的英雄总升级金币
         getHeroSumCost(baseCost,lv){
             // baseCost * ( 1 - 1.07^lv ) / -0.07
             return this.sumGP(baseCost,1.07,lv).integerValue()
         },
-
+        getHeroCostByLevel(baseCost,start,count){
+            return this.getHeroSumCost(baseCost,start+count).minus(this.getHeroSumCost(baseCost,start));
+        },
         //等比数列求和 a1首项 q公比 n尾索引
         sumGP(a1,q,n){
             return new BigNumber(a1).times(new BigNumber(1).minus(new BigNumber(q).pow(n))).div(-q+1)

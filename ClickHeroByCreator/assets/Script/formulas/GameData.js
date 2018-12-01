@@ -25,8 +25,8 @@ cc.Class({
 
         playerStatus : 0,// 玩家状态 0:蒙蔽 1:闲置 2:combo
 
-        heroLvUnit: 1, // 
-        ancientLvUnit: 1,
+        heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
+        ancientLvUnit: 1,// 古神等级单位
 
         //--------古神的影响--------
         //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]

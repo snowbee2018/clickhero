@@ -232,5 +232,13 @@ cc.Class({
             this.soul = soul.integerValue(); 
             return this.soul;
         },
-    }
+
+        // 设置英雄升级单位 1 10 25 100 1000 10000
+        setHeroLvUnit(unit){
+            GameData.heroLvUnit = unit;
+            this.heroList.forEach(hero => {
+                hero.calGoldByLvUnit();
+            });
+        },
+    },
 });
