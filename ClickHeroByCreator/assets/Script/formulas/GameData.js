@@ -44,11 +44,11 @@ cc.Class({
         addSuperClickSecond: 0,    //13*- 超级点击时间 2s++ √
         addDPSClickDamageTimes : 0, //14- 附加DPS点击伤害倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
-        addLeaveGoldTimes : 1,      //17- 闲置金币倍数 ?
+        addLeaveGoldTimes : 1,      //17- 闲置金币倍数 √
         addGoldTimes: 1,           //18* +5% Gold √
         addTreasureTimes: 1,       //19* 宝箱金币倍数 √
         addGoldClickTimes: 1,      //22*- 点金手倍数 +30% gold from Golden Clicks √
-        addLeaveDPSTimes : 1,       //24- 加闲置DPS伤害 ?
+        addLeaveDPSTimes : 1,       //24- 加闲置DPS伤害 √
         addCritStormSecond: 0,     //25*- 增加暴击风暴时间 +2s √
         addSkillCoolReduction: 0,  //26*- 技能冷却减少 0~1 √
 
