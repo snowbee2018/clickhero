@@ -46,7 +46,7 @@ cc.Class({
         window.BigNumber = (require("BigNumber")).clone();
         window.BigNumber.config({
             DECIMAL_PLACES: 2,
-            POW_PRECISION: 4,
+            POW_PRECISION: 3,
         });
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
