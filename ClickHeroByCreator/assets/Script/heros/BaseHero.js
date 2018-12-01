@@ -41,20 +41,31 @@ cc.Class({
                 }
             }
         }
-
+        this.calGoldByLvUnit();
         this.isActive = DataCenter.isGoldEnough(this.getBaseCost());
         this.desc = desc;
         this.refresh();
         Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
+        // Events.on(Events.ON_HERO_LVUNIT_CHANGE, this.calGoldByLvUnit, this);
         return this;
     },
     // 折后购买价
     getBaseCost(){
-        return this.baseCost.times(GameData.buyHeroDiscount).integerValue();
+        // return this.baseCost.times(GameData.buyHeroDiscount).integerValue();
+        return this.cost.times(GameData.buyHeroDiscount).integerValue();
     },
     // 折后升级价
     getCost(){
         return this.cost.times(GameData.buyHeroDiscount).integerValue();
+    },
+
+    calGoldByLvUnit(){
+        var unit = GameData.heroLvUnit;
+        if (this.isPassive) {
+            this.cost = Formulas.getHeroCostByLevel(this.baseCost,this.level,unit);
+        } else {
+            this.cost = Formulas.getClickHeroCostByLevel(this.level,unit);
+        }
     },
 
     onGoldChange () {
@@ -89,7 +100,7 @@ cc.Class({
         var cost = new BigNumber(this.getBaseCost());
         // let isSuccess = true;
         if (isCanBy) {
-            this.level ++;
+            this.level += GameData.heroLvUnit;
             this.isBuy = true;
             this.refresh();
             this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
@@ -108,7 +119,7 @@ cc.Class({
         var isCanUpgrade = DataCenter.isGoldEnough(this.getCost());
         var cost = new BigNumber(this.getCost());
         if (isCanUpgrade) {
-            this.level ++;
+            this.level += GameData.heroLvUnit;
             this.refresh();
             this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
@@ -209,12 +220,13 @@ cc.Class({
         if (this.isBuy) {
             if (this.isPassive) {
                 this.DPS = Formulas.getDPS(this.baseDPS, this.level, this.getDPSTimes());
-                this.cost = Formulas.getHeroCost(this.baseCost, this.level + 1);
+                // this.cost = Formulas.getHeroCost(this.baseCost, this.level + 1);
             } else {
                 this.DPS = Formulas.getClickDPS(this.level, this.getDPSTimes());
-                this.cost = Formulas.getClickHeroCost(this.level);
+                // this.cost = Formulas.getClickHeroCost(this.level);
             }
         }
+        this.calGoldByLvUnit();
     },
     // DPS倍数
     getDPSTimes(){
