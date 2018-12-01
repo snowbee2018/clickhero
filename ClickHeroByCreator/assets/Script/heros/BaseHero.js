@@ -52,7 +52,7 @@ cc.Class({
     // 折后购买价
     getBaseCost(){
         // return this.baseCost.times(GameData.buyHeroDiscount).integerValue();
-        return this.cost.times(GameData.buyHeroDiscount).integerValue();
+        return this.getCost();
     },
     // 折后升级价
     getCost(){
