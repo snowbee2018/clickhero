@@ -21,7 +21,7 @@ cc.Class({
         this.level = level;
         this.desc = desc;
         if (level > 0 ) {
-            this.calUpgradeSoul();
+            this.calSoulByLvUnit();
         }
         return this;
     },
@@ -43,7 +43,7 @@ cc.Class({
             DataCenter.consumeSoul(soul);
             this.isBuy = true;
             this.level ++;
-            this.calUpgradeSoul();
+            this.calSoulByLvUnit();
             HeroDatas.myAncients.push(this);
             this.refresh();
             Events.emit(Events.ON_BUY_ANCIENT,this.id);
@@ -54,14 +54,24 @@ cc.Class({
         }
     },
 
+    calSoulByLvUnit(){
+        var unit = GameData.ancientLvUnit;
+        this.soul = Formulas.getAncientSoulByLevel(this.id,this.level,unit);
+    },
+
+    // 获得升级花费
+    getSoul(){
+        return this.soul;//这里到时候会要加折扣
+    },
+
     upgrade(){
-        var soul = this.calUpgradeSoul();
+        var soul = this.getSoul();
         var isCanUpgrade = DataCenter.isSoulEnough(soul);
         soul = new BigNumber(soul);
         if (isCanUpgrade) {
-            this.level ++;
+            this.level += GameData.ancientLvUnit;
             DataCenter.consumeSoul(soul);
-            this.calUpgradeSoul();
+            this.calSoulByLvUnit();
             this.refresh();
             Events.emit(Events.ON_UPGRADE_ANCIENT,this.id);
             return true;
@@ -174,25 +184,25 @@ cc.Class({
         }
     },
 
-    calUpgradeSoul(){
-        var soul;
-        // 每个英雄都不一样哦，根据id去区分 by level
-        if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
-            soul = new BigNumber(this.level + 1);
-        } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
-            soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
-        } else if([14,21].indexOf(this.id)>=0) {
-            // soul = Math.pow(this.level + 1,1.5);
-            // BigNumber只支持整数指数运行
-            soul = new BigNumber(this.level + 1).pow(new BigNumber(1.5));
-        } else if(this.id == 20) {
-            soul = new BigNumber(1);
-        } else {
-            soul = new BigNumber(1);
-        }
-        this.soul = soul.integerValue(); 
-        return this.soul;
-    },
+    // calUpgradeSoul(){
+    //     var soul;
+    //     // 每个英雄都不一样哦，根据id去区分 by level
+    //     if ([1,4,12,17,18,19,22,24].indexOf(this.id)>=0) {
+    //         soul = new BigNumber(this.level + 1);
+    //     } else if([2,3,5,6,7,8,9,10,11,13,15,16,23,25,26].indexOf(this.id)>=0) {
+    //         soul = new BigNumber(2).pow(new BigNumber(this.level + 1));
+    //     } else if([14,21].indexOf(this.id)>=0) {
+    //         // soul = Math.pow(this.level + 1,1.5);
+    //         // BigNumber只支持整数指数运行
+    //         soul = new BigNumber(this.level + 1).pow(new BigNumber(1.5));
+    //     } else if(this.id == 20) {
+    //         soul = new BigNumber(1);
+    //     } else {
+    //         soul = new BigNumber(1);
+    //     }
+    //     this.soul = soul.integerValue(); 
+    //     return this.soul;
+    // },
 
     getDesc(){
         let desc = ""

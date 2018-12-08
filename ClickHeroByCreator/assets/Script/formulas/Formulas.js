@@ -189,7 +189,7 @@ cc.Class({
             return this.soul;
         },
         getAncientSoulByLevel(id,start,count){
-
+            return this.getAncientSoul(id,start+count).minus(this.getAncientSoul(id,start));
         },
         // 获得远古boss英魂数，floor关卡
         getPrimalBossSoul(floor){

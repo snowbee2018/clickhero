@@ -277,13 +277,13 @@ cc.Class({
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(0);
-                self.upgrageSelectBtn.active = true;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(0);
-            self.upgrageSelectBtn.active = true;
         }
+        self.upgrageSelectBtn.active = true;
+        self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
     },
 
     onUserSkillBtnClick () {
@@ -295,13 +295,12 @@ cc.Class({
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(1);
-                self.upgrageSelectBtn.active = false;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(1);
-            self.upgrageSelectBtn.active = false;
         }
+        self.upgrageSelectBtn.active = false;
     },
 
     onAncientBtnClick() {
@@ -309,47 +308,80 @@ cc.Class({
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
-            if (curPageIndex == 2) { // 当前正在技能列表界面
+            if (curPageIndex == 2) { // 当前正在古神列表界面
                 self.pageNode.active = false;
             } else {
                 pageView.scrollToPage(2);
-                self.upgrageSelectBtn.active = false;
             }
         } else {
             self.pageNode.active = true;
             pageView.scrollToPage(2);
-            self.upgrageSelectBtn.active = false;
         }
+        self.upgrageSelectBtn.active = true;
+        self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
     },
 
     onUpgradeSelectClick() { // 1 10 25 100 1000 10000
         const self = this;
-        var unit = GameData.heroLvUnit;
-        switch (GameData.heroLvUnit) {
-            case 1:
-                unit = 10;
-                break;
-            case 10:
-                unit = 25;
-                break;
-            case 25:
-                unit = 100;
-                break;
-            case 100:
-                unit = 1000;
-                break;
-            case 1000:
-                unit = 10000;
-                break;
-            case 10000:
-                unit = 1;
-                break;
-            default:
-                break;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (self.pageNode.active) {
+            var curPageIndex = pageView.getCurrentPageIndex();
+            if (curPageIndex == 0) {
+                var unit = GameData.heroLvUnit;
+                switch (GameData.heroLvUnit) {
+                    case 1:
+                        unit = 10;
+                        break;
+                    case 10:
+                        unit = 25;
+                        break;
+                    case 25:
+                        unit = 100;
+                        break;
+                    case 100:
+                        unit = 1000;
+                        break;
+                    case 1000:
+                        unit = 10000;
+                        break;
+                    case 10000:
+                        unit = 1;
+                        break;
+                    default:
+                        break;
+                }
+                HeroDatas.setHeroLvUnit(unit);
+                self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
+                Events.emit(Events.ON_HEROLVUNIT_CHANGE);
+            } else if(curPageIndex == 2){
+                var unit = GameData.ancientLvUnit;
+                switch (GameData.ancientLvUnit) {
+                    case 1:
+                        unit = 10;
+                        break;
+                    case 10:
+                        unit = 25;
+                        break;
+                    case 25:
+                        unit = 100;
+                        break;
+                    case 100:
+                        unit = 1000;
+                        break;
+                    case 1000:
+                        unit = 10000;
+                        break;
+                    case 10000:
+                        unit = 1;
+                        break;
+                    default:
+                        break;
+                }
+                HeroDatas.setAncientLvUnit(unit);//
+                self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
+                Events.emit(Events.ON_ANCIENT_LVUNIT_CHANGE);//
+            }
         }
-        HeroDatas.setHeroLvUnit(unit);
-        self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
-        Events.emit(Events.ON_HEROLVUNIT_CHANGE);
     },
 
     // onLeftBtnClick () {

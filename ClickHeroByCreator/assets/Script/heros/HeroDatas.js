@@ -248,6 +248,14 @@ cc.Class({
             });
         },
 
+        // 设置古神升级单位
+        setAncientLvUnit(unit){
+            GameData.ancientLvUnit = unit;
+            this.myAncients.forEach(ancient => {
+                ancient.calSoulByLvUnit();
+            });
+        },
+
         // 转身时调用
         rebirth(){
             // 重置英雄，不重置金身

@@ -17,14 +17,16 @@ cc.Class({
 
     start () {
         Events.on(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
+        Events.on(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
     },
 
     onDestroy(){
         Events.off(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
+        Events.off(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
     },
 
     onSoulChange(){
-        let result = DataCenter.isSoulEnough(this.data.soul);
+        let result = DataCenter.isSoulEnough(this.data.getSoul());
         this.btn.interactable = result;
     },
 
@@ -33,7 +35,7 @@ cc.Class({
         this.data = data;
         this.lbName.string = data.name;
         this.lbLv.string = "等级"+data.level;
-        this.lbSoul.string = "soul"+data.soul;
+        this.lbSoul.string = "soul"+Formulas.formatBigNumber(data.getSoul())
         // 这个要根据不同的 id和等级 写描述
         this.lbDesc.string = data.getDesc();
         this.onSoulChange();
