@@ -35,7 +35,7 @@ cc.Class({
         this.lbLv.string = "等级"+data.level;
         this.lbSoul.string = "soul"+data.soul;
         // 这个要根据不同的 id和等级 写描述
-        this.lbDesc.string = data.level + "temp";
+        this.lbDesc.string = data.getDesc();
         this.onSoulChange();
     },
 

@@ -107,7 +107,7 @@ cc.Class({
             GameData.addMetalDetectorSecond = this.level * 2;
         } else if (this.id == 11) {
             // 普怪 宝箱 10倍金币的概率
-            GameData.addTenfoldGoldOdds = 100 * (1 - Math.exp(-0.0025*this.level));
+            GameData.addTenfoldGoldOdds = 1 - Math.exp(-0.0025*this.level);
         } else if (this.id == 12) {
             // +20% click damage
             GameData.addClickDamageTimes = 1 + 0.2 * this.level;
@@ -194,4 +194,84 @@ cc.Class({
         return this.soul;
     },
 
+    getDesc(){
+        let desc = ""
+        if (this.id == 1) {
+            // 所有金身倍数 加 2%
+            desc = "+" + (this.level * 2) + "%金身伤害" // 需要bigNumber
+        } else if (this.id == 2) {
+            // 增加远古boss出现几率
+            desc = "+" + (GameData.addPrimalBossOdds*100) + "%的妖王出现概率"
+        } else if (this.id == 3) {
+            // + 2s Powersurge持续时间
+            desc = "+" + (this.level * 2) + "s能量风暴持续时间"
+        } else if (this.id == 4) {
+            // +15% 暴击伤害 
+            desc = "+" + (this.level * 15) + "%暴击伤害" // 需要bigNumber
+        } else if (this.id == 5) {
+            // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
+            // 感觉太废物了 所以懒得做
+        } else if (this.id == 6) {
+            // + 2s Clickstorm持续时间
+            desc = "+" + (this.level * 2) + "s点击风暴持续时间"
+        } else if (this.id == 7) {
+            // boss计时器 增加 30×(1-e^-0.034n)  需要bigNumber
+            desc = "+" + GameData.addBossTimerSecond + "秒Boss战时长"
+        } else if (this.id == 8) {
+            // 英雄费用降低 99.99999999×(1-e^-0.01n)
+            desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))) + "%召唤和升级神仙花费"
+        } else if (this.id == 9) {
+            // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
+            desc = "+" + (GameData.addTreasureOdds*100-1) + "%的宝箱出现概率"
+        } else if (this.id == 10) {
+            // 增加金币探测器持续时间2s MetalDetector
+            desc = "+" + (this.level * 2) + "s金属探测器持续时间"
+        } else if (this.id == 11) {
+            // 普怪 宝箱 10倍金币的概率
+            desc = "+" + (GameData.addTenfoldGoldOdds*100) + "%的小妖和葫芦妖10倍妖丹概率"
+        } else if (this.id == 12) {
+            // +20% click damage
+            desc = "+" + (2 * this.level) + "%点击伤害" // 需要bigNumber
+        } else if (this.id == 13) {
+            // 	+2s Super Clicks duration
+            desc = "+" + (this.level * 2) + "s超级点击持续时间"
+        } else if (this.id == 14) {
+            // 附加DPS点击伤害倍数
+            desc = "+" + (0.01*this.level) + "%附加DPS点击伤害"
+        } else if (this.id == 15) {
+            // +2s Golden Clicks duration
+            desc = "+" + (this.level * 2) + "s金手指持续时间"
+        } else if (this.id == 16) {
+            // 减少每关怪物数量 暂时不要
+        } else if (this.id == 17) {
+            // 加闲置金币
+            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100) + "%闲置时金币"
+        } else if (this.id == 18) {
+            // +5% Gold
+            desc = "+" + (5*this.level) + "%金币倍数"
+        } else if (this.id == 19) {
+            // 宝箱金币倍数
+            desc = "+" + (50*this.level) + "%宝箱金币倍数"
+        } else if (this.id == 20) {
+            // soul dps 不做
+        } else if (this.id == 21) {
+            // 	空闲时每个未分配的自动点击器+ 10％Gold（没有点击60秒）。 放弃。。
+        } else if (this.id == 22) {
+            // +30% gold from Golden Clicks 
+            desc = "+" + (30*this.level) + "%金手指倍数"
+        } else if (this.id == 23) {
+            // 红宝石掉落后可点击双重红宝石的机会增加
+        } else if (this.id == 24) {
+            // 加闲置DPS伤害
+            desc = "+" + ((GameData.addLeaveDPSTimes-1)*100) + "%闲置时DPS伤害"
+        } else if (this.id == 25) {
+            // 增加暴击风暴时间 +2s
+            GameData.addCritStormSecond = this.level * 2;
+            desc = "+" + (this.level * 2) + "s暴击风暴持续时间"
+        } else if (this.id == 26) {
+            // 技能冷却减少 75×(1-e-0.026n)
+            desc = "-" + (GameData.addSkillCoolReduction*100) + "%技能冷却时间"
+        }
+        return desc;
+    },
 })

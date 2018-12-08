@@ -49,7 +49,7 @@ cc.Class({
             soul = soul.plus(HeroDatas.buyAncientSouls[i][0]);
         }
         soul = soul.times(0.75).integerValue()
-        dialog.getComponent("DisbandDialog").setCallback(function(result) {
+        dialog.getComponent("Dialog").setCallback(function(result) {
             if (result) {
                 HeroDatas.myAncients.forEach(e => {
                     e.level = 0;
@@ -65,7 +65,7 @@ cc.Class({
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
-        dialog.getComponent("DisbandDialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"英魂");
+        dialog.getComponent("Dialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"英魂");
     },
 
     addItem(ancient) {
