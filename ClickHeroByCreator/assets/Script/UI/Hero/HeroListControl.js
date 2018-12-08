@@ -84,4 +84,11 @@ cc.Class({
             }
         }
     },
+
+    rebirth () {
+        const self = this;
+        self.heroList.content.removeAllChildren();
+        Events.off(Events.ON_BY_HERO, self.onBuyHero, self);
+        self.setHeroList();
+    },
 });

@@ -71,6 +71,7 @@ cc.Class({
     onGameStart () {
         const self = this;
         // console.log(HeroDatas);
+        
         self.isIdle = false; // 是否为闲置状态
         self.combo = 0; // 当前连击数
 
@@ -103,6 +104,7 @@ cc.Class({
         // 获取存档数据，并存储到云端
         var curGold = DataCenter.getDataByKey(map.curGold);
         var curSoul = DataCenter.getDataByKey(map.curSoul);
+        var rebirthSoul = DataCenter.getDataByKey(map.rebirthSoul);
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
@@ -112,7 +114,8 @@ cc.Class({
         obj[map.passLavel] = DataCenter.getDataByKey(map.passLavel); // 当前世界已通过的最高关卡
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
-        obj[map.curSoul] = curSoul.toExponential(4); // 当前英魂总数
+        obj[map.curSoul] = curSoul.toExponential(4); // 当前可用英魂总数
+        obj[map.rebirthSoul] = rebirthSoul.toExponential(4); // 转生英魂
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
@@ -227,7 +230,8 @@ cc.Class({
 
     onMonsterSoul (soul) {
         self = this;
-        DataCenter.addSoul(soul);
+        // DataCenter.addSoul(soul);
+        DataCenter.addRebirthSoul(soul);
     },
 
     setWeChatUser () {

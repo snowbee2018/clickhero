@@ -89,34 +89,27 @@ cc.Class({
             self._lastTimestamp = 0;
         }
 
-        // 计算技能当前的状态
-        var nowTime = Date.parse(new Date());
-        // self._isBuy = true;
-        // self._lastTimestamp = nowTime;
-        var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
-        var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
-        if (timeCooling - self._coolingCurtail > 0) { // 技能还在冷却过程中
+        if (self._isBuy) {
+            // 计算技能当前的状态
+            var nowTime = Date.parse(new Date());
+            // self._isBuy = true;
+            // self._lastTimestamp = nowTime;
+            var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
+            var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
+            if (timeCooling - self._coolingCurtail > 0) { // 技能还在冷却过程中
+                self._isActive = false;
+                var timeStr = self.dateFormat(timeCooling / 1000);
+                self.onCoolingCountDown(timeCooling / 1000, timeStr);
+            } else { // 技能已经冷却
+                self._isActive = true;
+                self._coolingCurtail = 0;
+                self.onCoolingDone();
+            }
+        } else {
             self._isActive = false;
-            var timeStr = self.dateFormat(timeCooling / 1000);
-            self.onCoolingCountDown(timeCooling / 1000, timeStr);
-        } else { // 技能已经冷却
-            self._isActive = true;
             self._coolingCurtail = 0;
-            self.onCoolingDone();
         }
-        // if (self.bSustain) {
-        //     var timeSustain = 1000 * self.sustainTime - nowTime + self._lastTimestamp;
-        //     if (timeSustain > 0) { // 技能还在持续过程中
-        //         self._isSustainFinish = false;
-        //         self.appply();
-        //         var timeStr = self.dateFormat(timeSustain / 1000);
-        //         self.onSustainCountDown(timeSustain / 1000, timeStr);
-        //     } else {
-        //         self._isSustainFinish = true;
-        //     }
-        // } else {
-        //     self._isSustainFinish = true;
-        // }
+
         // 重新打开游戏的时候默认技能持续已经结束，不保留技能使用效果
         self._isSustainFinish = true;
         self.gray.active = !self.isCanUse();
@@ -313,4 +306,14 @@ cc.Class({
 
     appply() { }, // 应用技能
     backout() { }, // 撤销技能效果
+
+    rebirth () {
+        const self = this;
+        self.unscheduleAllCallbacks();
+        if (self.bSustain && !self._isSustainFinish) self.backout();
+        self.onCoolingDone();
+        Events.off(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
+        Events.off(Events.ON_UPGRADE_ANCIENT, self.onUpgrandAncient, self);
+        self.initUserSkill();
+    },
 });

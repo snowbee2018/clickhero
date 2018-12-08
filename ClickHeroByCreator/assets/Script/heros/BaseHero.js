@@ -162,9 +162,16 @@ cc.Class({
                 var isCanBuy = DataCenter.isGoldEnough(cost);
                 if (isCanBuy) {
                     if (this.id == 19 && skillID == 3) {
-                        // 处理转生逻辑
                         // 弹出对话框
-                        
+                        PublicFunc.popDialog({
+                            contentStr: "般若波罗蜜，开启月光宝盒，穿越时空回到500年前，这将重新开始你的游戏之旅，并获得仙丹，你愿意回到500年前吗？",
+                            onTap: function (bSure) {
+                                if (bSure) {
+                                    DataCenter.consumeGold(cost);
+                                    PublicFunc.rebirth(); // 处理转生逻辑
+                                }
+                            }
+                        });
                     } else {
                         this.skills[skillID].isBuy = true;
                         // 刷新全局点击附加

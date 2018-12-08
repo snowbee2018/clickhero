@@ -11,7 +11,8 @@ cc.Class({
             passLavel: "passLavel", // 当前世界已通过的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
-            curSoul: "curSoul", // 当前英魂数量
+            curSoul: "curSoul", // 当前可用英魂数量
+            rebirthSoul: "rebirthSoul", // 转生英魂
             additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
             heroList: "heroList", // 用户所有英雄的状态，存起来
             skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
@@ -47,6 +48,12 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
+        }
+        var cloudRebirthSoul = self.getCloudDataByKey(self.KeyMap.rebirthSoul);
+        if (cloudRebirthSoul) {
+            self.setDataByKey(self.KeyMap.rebirthSoul, (new BigNumber(cloudRebirthSoul)));
+        } else {
+            self.setDataByKey(self.KeyMap.rebirthSoul, (new BigNumber(0)));
         }
         // 初始化当前世界最大通关数
         var passedLevel = self.getCloudDataByKey(self.KeyMap.passLavel);
@@ -113,6 +120,17 @@ cc.Class({
             console.error("type error, 'soul' must be a BigNumber.");
         }
     },
+    addRebirthSoul(soul) {
+        const self = this;
+        if (BigNumber.isBigNumber(soul)) {
+            var key = self.KeyMap.rebirthSoul;
+            var old = self.getDataByKey(key);
+            self.setDataByKey(key, old.plus(soul));
+            Events.emit(Events.ON_SOUL_CHANGE);
+        } else {
+            console.error("type error, 'soul' must be a BigNumber.");
+        }
+    },
 
     // 消费金币
     consumeGold (gold) {
@@ -147,6 +165,13 @@ cc.Class({
         } else {
             console.error("type error, 'soul' must be a BigNumber.");
         }
+    },
+    consumeRebirthSoul() {
+        const self = this;
+        var key = self.KeyMap.curSoul;
+        var oldSoul = self.getDataByKey(key);
+        self.setDataByKey(key, (new BigNumber(0)));
+        return oldSoul;
     },
 
     // 金币是否足够
@@ -231,5 +256,13 @@ cc.Class({
         if (key && cloudData && cloudData.gamedata && cloudData.gamedata[key]) {
             return cloudData.gamedata[key];
         }
+    },
+
+    rebirth () {
+        const self = this;
+        var rebirthSoul = self.consumeRebirthSoul();
+        self.addSoul(rebirthSoul);
+        self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
+        self.setDataByKey(self.KeyMap.passLavel, 0);
     },
 });

@@ -119,4 +119,13 @@ cc.Class({
             return tempArr[tempArr.length - 1];
         }
     },
+
+    rebirth () {
+        const self = this;
+        for (let index = 0; index < self.skillList.children.length; index++) {
+            const item = self.skillList.children[index];
+            var component = item.getComponent("UserSkill");
+            component.rebirth();
+        }
+    },
 });

@@ -272,4 +272,12 @@ cc.Class({
             self.makeMonster(targetLv);
         }
     },
+
+    rebirth () {
+        const self = this;
+        delete self.killCount;
+        delete self._countdown;
+        self.curMonster.byebye();
+        self.makeMonster(1);
+    },
 });

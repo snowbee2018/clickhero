@@ -35,6 +35,8 @@ cc.Class({
 
     initGame () {
         const self = this;
+        var root = cc.find("root", self.node);
+        window.PublicFunc = root.getComponent("PublicFunc");
         window.WeChatUtil = new (require("WeChatUtils"))();
         window.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
@@ -60,6 +62,7 @@ cc.Class({
     checkReady() {
         const self = this;
         // 检查全局工具类是否加载完成
+        if (window.PublicFunc == undefined) return;
         if (window.WeChatUtil == undefined) return;
         if (window.DataCenter == undefined) return;
         if (window.Formulas == undefined) return;
