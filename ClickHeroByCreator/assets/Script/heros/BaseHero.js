@@ -161,28 +161,34 @@ cc.Class({
                 var cost = new BigNumber(skill.cost);
                 var isCanBuy = DataCenter.isGoldEnough(cost);
                 if (isCanBuy) {
-                    this.skills[skillID].isBuy = true;
-                    // 刷新全局点击附加
-                    // 刷新全局DPS倍数
-                    // 刷新全局金币倍数
-                    // 刷新点击伤害
-                    // 刷新DPS伤害
-                    // 刷新暴击倍数
-                    // 刷新暴击倍率
-                    this.refresh();
-                    GameData.refresh();
-                    if (this.skills[skillID].unlock) {
-                        Events.emit(Events.ON_USER_SKILL_UNLOCK, {
+                    if (this.id == 19 && skillID == 3) {
+                        // 处理转生逻辑
+                        // 弹出对话框
+                        
+                    } else {
+                        this.skills[skillID].isBuy = true;
+                        // 刷新全局点击附加
+                        // 刷新全局DPS倍数
+                        // 刷新全局金币倍数
+                        // 刷新点击伤害
+                        // 刷新DPS伤害
+                        // 刷新暴击倍数
+                        // 刷新暴击倍率
+                        this.refresh();
+                        GameData.refresh();
+                        if (this.skills[skillID].unlock) {
+                            Events.emit(Events.ON_USER_SKILL_UNLOCK, {
+                                heroID: this.id,
+                                skillID: skillID,
+                            });
+                        }
+                        DataCenter.consumeGold(cost);
+                        Events.emit(Events.ON_UPGRADE_HERO_SKILLS, {
                             heroID: this.id,
                             skillID: skillID,
                         });
+                        return true;
                     }
-                    DataCenter.consumeGold(cost);
-                    Events.emit(Events.ON_UPGRADE_HERO_SKILLS, {
-                        heroID: this.id,
-                        skillID: skillID,
-                    });
-                    return true;
                 }
             }
         }
