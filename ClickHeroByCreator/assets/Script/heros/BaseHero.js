@@ -18,6 +18,18 @@ cc.Class({
         desc: "",
     },
 
+    // 重置英雄，转身时使用
+    clear(){
+        this.isActive = false;
+        this.isBuy = false;
+        this.level = 0;
+        this.cost = 0;
+        this.DPS = 0;
+        this.skills.forEach(sk => {
+            sk.isBuy = false;
+        });
+    },
+
     init(id, heroName, baseCost, baseDPS, isBuy, desc, cloudHeroInfo) {
         this.isPassive = !(id == 0);
         this.id = id;
@@ -49,6 +61,7 @@ cc.Class({
         // Events.on(Events.ON_HERO_LVUNIT_CHANGE, this.calGoldByLvUnit, this);
         return this;
     },
+
     // 折后购买价
     getBaseCost(){
         // return this.baseCost.times(GameData.buyHeroDiscount).integerValue();

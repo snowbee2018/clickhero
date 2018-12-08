@@ -250,7 +250,11 @@ cc.Class({
 
         // 转身时调用
         rebirth(){
-
+            // 重置英雄，不重置金身
+            this.heroList.forEach(hero => {
+                hero.clear();
+            });
+            GameData.refresh();
         },
     },
 });
