@@ -44,6 +44,7 @@ cc.Class({
         // window.HeroDatas = new (require("HeroDatas"))();
         window.GameData = require("GameData");
         window.HeroDatas = require("HeroDatas");
+        window.GoodsDatas = require("GoodsDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
         window.BigNumber.config({

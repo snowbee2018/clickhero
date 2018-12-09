@@ -321,6 +321,23 @@ cc.Class({
         self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
     },
 
+    onStoreBtnClick() {
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (self.pageNode.active) {
+            var curPageIndex = pageView.getCurrentPageIndex();
+            if (curPageIndex == 3) { // 当前正在技能列表界面
+                self.pageNode.active = false;
+            } else {
+                pageView.scrollToPage(3);
+            }
+        } else {
+            self.pageNode.active = true;
+            pageView.scrollToPage(3);
+        }
+        self.upgrageSelectBtn.active = false;
+    },
+
     onUpgradeSelectClick() { // 1 10 25 100 1000 10000
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
