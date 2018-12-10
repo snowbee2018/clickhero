@@ -141,5 +141,3 @@ cc.Class({
         }
     },
 })
-// 商店页面 顶上要加当前拥有的仙丹 paddingTop 在content同级加个显示就行
-// 点击购买按钮后 调buy 为true时 要改变相应的数值和UI

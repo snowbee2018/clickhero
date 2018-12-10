@@ -7,10 +7,18 @@ cc.Class({
         sv : cc.ScrollView,
         itemPrefab: cc.Prefab,
         dialogPrefab : cc.Prefab,
+        lbRuby : cc.Label,
     },
 
     start () {
+        Events.on(Events.ON_RUBY_CHANGE,this.showRuby,this);
         this.fullViews();
+        this.showRuby();
+    },
+
+    showRuby(){
+        var ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
+        this.lbRuby.string = "蟠桃："+ruby
     },
 
     fullViews(){

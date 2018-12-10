@@ -22,27 +22,27 @@ Datas.init = function() {
 }
 
 Datas.addBuyCount = function(id) {
-    var goods
-    Datas.myGoods.forEach(e => {
-        if (i.id == id) {
-            goods = e
-            break
+    var bc
+    Datas.buyCounts.forEach(e => {
+        if (e.id == id) {
+            bc = e
         }
     })
-    if (!goods) {
-        goods = {id : id,count : 0}
-        Datas.myGoods.push(goods)
+    if (!bc) {
+        bc = {id : id,count : 0}
+        Datas.buyCounts.push(bc)
     }
-    goods.count ++
+    bc.count ++
 }
 
 Datas.getBuyCount = function(id){
-    Datas.myGoods.forEach(e => {
-        if (i.id == id) {
-            return e.count
+    var count = 0
+    Datas.buyCounts.forEach(e => {
+        if (e.id == id) {
+            count = e.count
         }
     })
-    return 0
+    return count
 }
 
 module.exports = Datas

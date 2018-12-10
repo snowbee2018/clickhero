@@ -40,8 +40,6 @@ cc.Class({
         window.WeChatUtil = new (require("WeChatUtils"))();
         window.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
-        // window.GameData = new (require("GameData"))();
-        // window.HeroDatas = new (require("HeroDatas"))();
         window.GameData = require("GameData");
         window.HeroDatas = require("HeroDatas");
         window.GoodsDatas = require("GoodsDatas");
