@@ -12,11 +12,13 @@ cc.Class({
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
             curSoul: "curSoul", // 当前可用英魂数量
+            ruby : "ruby", // 当前可用宝石仙丹数量
             rebirthSoul: "rebirthSoul", // 转生英魂
             additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
             heroList: "heroList", // 用户所有英雄的状态，存起来
             skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
             ancientList: "ancientList", // 用户所拥有的古神
+            goodsList: "goodsList",     // 用户拥有的商店道具
             achievementList: "achievementList", // 成就列表，转生次数也在这里
             equipmentList: "equipmentList", // 装备列表，圣遗物和神器都存这里
             shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
@@ -48,6 +50,13 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
+        }
+        // 初始化仙丹
+        var cloudSoul = self.getCloudDataByKey(self.KeyMap.ruby);
+        if (cloudSoul) {
+            self.setDataByKey(self.KeyMap.ruby, Number(cloudSoul));
+        } else {
+            self.setDataByKey(self.KeyMap.ruby, 3000);
         }
         var cloudRebirthSoul = self.getCloudDataByKey(self.KeyMap.rebirthSoul);
         if (cloudRebirthSoul) {
@@ -120,6 +129,13 @@ cc.Class({
             console.error("type error, 'soul' must be a BigNumber.");
         }
     },
+    // 仙丹增加
+    addRuby (ruby) {
+        var key = this.KeyMap.ruby;
+        var old = this.getDataByKey(key);
+        this.setDataByKey(key, (old+ruby) );
+        Events.emit(Events.ON_RUBY_CHANGE);
+    },
     addRebirthSoul(soul) {
         const self = this;
         if (BigNumber.isBigNumber(soul)) {
@@ -166,6 +182,13 @@ cc.Class({
             console.error("type error, 'soul' must be a BigNumber.");
         }
     },
+    // 消费仙丹
+    consumeRuby (ruby) {
+        var key = this.KeyMap.ruby;
+        var old = this.getDataByKey(key);
+        this.setDataByKey(key, (old-ruby) );
+        Events.emit(Events.ON_RUBY_CHANGE);
+    },
     consumeRebirthSoul() {
         const self = this;
         var key = self.KeyMap.curSoul;
@@ -199,6 +222,13 @@ cc.Class({
             console.error("type error, 'soul' must be a BigNumber.");
             return false;
         }
+    },
+    
+    // 仙丹是否足够
+    isRubyEnough(ruby) {
+        var key = self.KeyMap.ruby;
+        var old = self.getDataByKey(key);
+        return old > ruby
     },
 
     getGoldStr () {

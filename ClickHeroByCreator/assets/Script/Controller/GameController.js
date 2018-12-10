@@ -77,6 +77,7 @@ cc.Class({
 
         DataCenter.init();
         HeroDatas.init();
+        GoodsDatas.init();
         
         self.heroListControl.setHeroList();
         self.monsterController.init();
@@ -119,6 +120,7 @@ cc.Class({
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
+        obj[map.goodsList] = GoodsDatas.buyCounts; // 用户所拥有的商品
         // obj[map.skillList] = 
         obj[map.skillList] = self.userSkillController.formatUserSkillsInfo(); // 所有主动技能的状态
         // obj[map.achievementList] = 
