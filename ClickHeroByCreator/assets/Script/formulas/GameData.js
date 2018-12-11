@@ -52,6 +52,19 @@ cc.Class({
         addCritStormSecond: 0,     //25*- 增加暴击风暴时间 +2s √
         addSkillCoolReduction: 0,  //26*- 技能冷却减少 0~1 √
 
+        //--------商店的影响--------
+        gdDayDPSTimes : 1, //1 每天叠一次的永久伤害叠加
+        gdDoubleGold : 1, //2 双倍金币
+        gdDoubleDPS : 1, //3 双倍DPS
+        gdAutoClick : 0,//4 自动点击数量
+        gdLeaveTimes : 1,//7 挂机效力倍数
+        gdAncientSale : 1,//8 古神升级折扣*
+        gdDPSTimes : 1,//9 DPS倍数
+        gdSoulTimes : 1,//10 英魂获取倍数*
+        gdPBossTimes : 1,//11 addPrimalBossOdds倍数
+        gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
+        gdTreasureOddsTimes : 1,//13 addTreasureOdds倍数
+
         //--------被动技能的影响--------
         cskCritTimes : 1, // 暴击倍数 :calCritTimes()
         cskCritOdds : 0, // 附加暴击概率 :calCritOdds()
@@ -87,9 +100,10 @@ cc.Class({
                     times*=hero.getGlobalDPSTimes();
                 }
             });
-            let idleTimes = this.playerStatus==1?this.addLeaveDPSTimes:1;
+            let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes:1)*this.gdLeaveTimes;
             console.log("idleTimes:" + idleTimes);
-            this.globalDPSTimes = times * this.skDPSTimes * idleTimes;
+            this.globalDPSTimes = times * this.skDPSTimes * idleTimes
+                *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS;
         },
         // 计算全局金币倍数
         calGoldTimes(){
@@ -99,8 +113,8 @@ cc.Class({
                     times*=hero.getGlobalGoldTimes();
                 }
             });
-            let idleTimes = this.playerStatus==1?this.addLeaveGoldTimes:1;
-            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes * idleTimes;
+            let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
+            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes * idleTimes * this.gdDoubleGold;
         },
         // 计算总DPS伤害
         calDPSDamage(){
@@ -110,7 +124,7 @@ cc.Class({
                     dps = dps.plus(hero.DPS)
                 }
             });
-            this.dpsDamage = dps.times(this.globalDPSTimes).times(this.powersurgeTimes);
+            this.dpsDamage = dps.times(this.globalDPSTimes).times(this.powersurgeTimes)
         },
         // 计算点击附加伤害
         calDPSClickDamage(){
@@ -148,6 +162,20 @@ cc.Class({
                 }
             });
             this.refresh();
+        },
+
+        //====下面是游戏区的====
+        // 获得增加的远古Boss出现几率（原为0-0.75 现可能大于0.75）
+        getPrimalBossOdds() {
+            return this.addPrimalBossOdds * this.gdPBossTimes;
+        },
+        // 获得Boss计时增加时间
+        getPrimalBossOdds() {
+            return this.addBossTimerSecond * this.gdPBossTSTimes;
+        },
+        // 获得宝箱出现概率
+        getPrimalBossOdds() {
+            return this.addTreasureOdds * this.gdTreasureOddsTimes;
         },
     }
 })

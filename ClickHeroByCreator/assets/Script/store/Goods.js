@@ -22,14 +22,15 @@ cc.Class({
         switch (this.id) {
             case 0:
                 name = "一袋妖丹"
-                desc = "立即获得10个Boss的妖丹"
+                desc = "立即获得10个Boss的妖丹" // 封装个方法去获取数量
                 state = "状态描述"
                 ruby = 50
                 break;
             case 1:
-                name = "大开杀戒"
-                desc = "+10倍DPS伤害，持续60秒"
-                state = "剩余xxx秒"
+                name = "苦海无涯" // 这个功能有点冲突 考虑换成每天跌一次的加10%dps
+                desc = "永久增加20%的DPS伤害，每天一次"
+                var num = (Math.pow(1.2,count)-1)*100
+                state = "购买次数：" + count + "  当前增益：" + num +"%"
                 ruby = 30
                 cd = 60*10
                 break;

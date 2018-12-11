@@ -23,6 +23,36 @@ Datas.init = function() {
         new Goods().init(12),
         new Goods().init(13),
     ]
+    Datas.refresh()
+}
+
+Datas.refresh = function(){
+    Datas.buyCounts.forEach(e => {
+        var count = e.count
+        if (e.id == 1) {
+            GameData.gdDayDPSTimes = Math.pow(1.2,count)
+        } else if (e.id == 2) {
+            GameData.gdDoubleGold = count>0?2:1
+        } else if (e.id == 3) {
+            GameData.gdDoubleDPS = count>0?2:1
+        } else if (e.id == 4) {
+            GameData.gdAutoClick = count
+        } else if (e.id == 7) {
+            GameData.gdLeaveTimes = 1 + count*0.5
+        } else if (e.id == 8) {
+            GameData.gdAncientSale = Math.pow(0.95,count)
+        } else if (e.id == 9) {
+            GameData.gdDPSTimes = 1 + count
+        } else if (e.id == 10) {
+            GameData.gdSoulTimes = 1 + count*10
+        } else if (e.id == 11) {
+            GameData.gdPBossTimes = count*0.25 + 1
+        } else if (e.id == 12) {
+            GameData.gdPBossTSTimes = count*0.75 + 1
+        } else if (e.id == 13) {
+            GameData.gdTreasureOddsTimes = count + 1
+        }
+    });
 }
 
 Datas.addBuyCount = function(id) {
@@ -37,6 +67,8 @@ Datas.addBuyCount = function(id) {
         Datas.buyCounts.push(bc)
     }
     bc.count ++
+    Datas.refresh()
+    GameData.refresh()
 }
 
 Datas.getBuyCount = function(id){
