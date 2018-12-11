@@ -14,10 +14,14 @@ Datas.init = function() {
         new Goods().init(3),
         new Goods().init(4),
         new Goods().init(5),
-        new Goods().init(6),
+        // new Goods().init(6), // 回到未来暂时不要
         new Goods().init(7),
         new Goods().init(8),
         new Goods().init(9),
+        new Goods().init(10),
+        new Goods().init(11),
+        new Goods().init(12),
+        new Goods().init(13),
     ]
 }
 

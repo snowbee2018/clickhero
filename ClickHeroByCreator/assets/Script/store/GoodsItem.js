@@ -5,7 +5,7 @@ cc.Class({
     properties: {
         lbName : cc.Label,
         lbDesc : cc.Label,
-        lbDesc2 : cc.Label,
+        lbState : cc.Label,
         btn:cc.Node,
         lbBtn : cc.Label,
         lbBought : cc.Node,
@@ -19,7 +19,7 @@ cc.Class({
         this.data = goods||this.data
         this.lbName.string = this.data.name
         this.lbDesc.string = this.data.desc
-        this.lbDesc2.string = "desc"+this.data.id
+        this.lbState.string = this.data.state
         this.lbBtn.string = "ruby:" + this.data.ruby
 
         var bc = GoodsDatas.getBuyCount(this.data.id)

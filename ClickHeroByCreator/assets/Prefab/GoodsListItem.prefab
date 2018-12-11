@@ -356,7 +356,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "desc2",
+    "_name": "state",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1177,7 +1177,7 @@
     "lbDesc": {
       "__id__": 7
     },
-    "lbDesc2": {
+    "lbState": {
       "__id__": 11
     },
     "btn": {

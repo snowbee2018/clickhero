@@ -229,7 +229,7 @@ cc.Class({
     isRubyEnough(ruby) {
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
-        return old > ruby
+        return old >= ruby
     },
 
     getGoldStr () {
