@@ -10,11 +10,11 @@ Datas.init = function() {
     Datas.datas = [
         new Goods().init(0),
         new Goods().init(1),
+        new Goods().init(6),
         new Goods().init(2),
         new Goods().init(3),
         new Goods().init(4),
         new Goods().init(5),
-        // new Goods().init(6), // 回到未来暂时不要
         new Goods().init(7),
         new Goods().init(8),
         new Goods().init(9),
@@ -68,7 +68,6 @@ Datas.addBuyCount = function(id) {
     }
     bc.count ++
     Datas.refresh()
-    GameData.refresh()
 }
 
 Datas.getBuyCount = function(id){

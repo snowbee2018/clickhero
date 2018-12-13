@@ -57,6 +57,7 @@ cc.Class({
         gdDoubleGold : 1, //2 双倍金币
         gdDoubleDPS : 1, //3 双倍DPS
         gdAutoClick : 0,//4 自动点击数量
+        gd10xDpsTimes : 1,//6 10倍DPS
         gdLeaveTimes : 1,//7 挂机效力倍数
         gdAncientSale : 1,//8 古神升级折扣*
         gdDPSTimes : 1,//9 DPS倍数
@@ -103,7 +104,7 @@ cc.Class({
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes:1)*this.gdLeaveTimes;
             console.log("idleTimes:" + idleTimes);
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes
-                *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS;
+                *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS*this.gd10xDpsTimes;
         },
         // 计算全局金币倍数
         calGoldTimes(){

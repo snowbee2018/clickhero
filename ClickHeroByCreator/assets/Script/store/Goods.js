@@ -60,9 +60,9 @@ cc.Class({
                 ruby = 300
                 break;
             case 6:
-                name = "回到未来"
-                desc = ""
-                ruby = 300
+                name = "大开杀戒"
+                desc = "附加10倍DPS伤害，持续60秒"
+                ruby = 30
                 break;
             // 下面是超越了
             case 7:
@@ -142,7 +142,6 @@ cc.Class({
             // 然后 要个动画 在点击回调里调用 播放
             DataCenter.addGold(gold)
         } else if(this.id == 1){
-            // 大开杀戒 搞个计时器 改变GameData 数值
         } else if(this.id == 2){
             // 双倍金币 GameData 提供支持 改变值 就改变数值了
         } else if(this.id == 3){
@@ -153,7 +152,13 @@ cc.Class({
             // 平行时空 立即拿到括号里的英魂 为什么比括号多还不晓得
             DataCenter.addSoul(new BigNumber(10000))
         } else if(this.id == 6){
-            // 回到未来 得到8个小时后的数值
+            // 大开杀戒 搞个计时器 改变GameData 数值
+            GameData.gd10xDpsTimes+=10
+            setTimeout(function() {
+                GameData.gd10xDpsTimes-=10
+                GameData.gd10xDpsTimes=Math.max(GameData.gd10xDpsTimes,1)
+                GameData.refresh()
+            },60000)
         } else if(this.id == 7){
             // 挂机加强 GameData里提供个支持数值 GoodsDatas刷新
         } else if(this.id == 8){
@@ -163,5 +168,6 @@ cc.Class({
         } else if(this.id == 7){
             // 仙丹多多 GameData里提供个支持数值 GoodsDatas刷新
         }
+        GameData.refresh()
     },
 })
