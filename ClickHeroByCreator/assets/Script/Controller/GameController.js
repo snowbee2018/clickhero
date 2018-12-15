@@ -8,15 +8,13 @@ cc.Class({
         // openDataNode : cc.Node,
 
         headSprite : cc.Sprite,
-        location : cc.Label,
-        nickaName : cc.Label,
-        gender : cc.Label,
 
         totalCostLab: cc.Label,
-        lvLab: cc.Label,
         totalSoulLab: cc.Label,
-        hpLab: cc.Label,
-        costLab: cc.Label,
+        clickDamageLab: cc.Label,
+        dpsDamageLab: cc.Label,
+        comboTypeLab: cc.Label,
+        comboCount: cc.Label,
 
         pageNode: cc.Node,
 
@@ -148,16 +146,21 @@ cc.Class({
 
     onSoulChange(){
         const self = this;
-        self.totalSoulLab.string = DataCenter.getSoulStr();
+        var str = DataCenter.getSoulStr();
+        var rebirthSoul = DataCenter.getDataByKey(DataCenter.KeyMap.rebirthSoul);
+        if (rebirthSoul && !rebirthSoul.isZero()) {
+            str += "(" + Formulas.formatBigNumber(rebirthSoul) + ")";
+        }
+        self.totalSoulLab.string = str;
     },
 
     updataMonsterInfoDisplay () {
-        const self = this;
-        let info = self.monsterController.getCurMonsterInfo();
-        self.lvLab.string = info.lv;
+        // const self = this;
+        // let info = self.monsterController.getCurMonsterInfo();
+        // self.lvLab.string = info.lv;
         
-        self.hpLab.string = Formulas.formatBigNumber(info.hp);
-        self.costLab.string = Formulas.formatBigNumber(info.gold);
+        // self.hpLab.string = Formulas.formatBigNumber(info.hp);
+        // self.costLab.string = Formulas.formatBigNumber(info.gold);
     },
 
     onTouchStart (event) {
@@ -256,16 +259,16 @@ cc.Class({
                 self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
             }
         });
-        var str = weChatUserInfo.country;
-        str += " " + weChatUserInfo.province;
-        str += " " + weChatUserInfo.city;
-        self.location.string = str;
-        switch (weChatUserInfo.gender) {
-            case 1: self.gender.string = "男"; break;
-            case 2: self.gender.string = "女"; break;
-            default: self.gender.string = "未知"; break;
-        }
-        self.nickaName.string = weChatUserInfo.nickName;
+        // var str = weChatUserInfo.country;
+        // str += " " + weChatUserInfo.province;
+        // str += " " + weChatUserInfo.city;
+        // self.location.string = str;
+        // switch (weChatUserInfo.gender) {
+        //     case 1: self.gender.string = "男"; break;
+        //     case 2: self.gender.string = "女"; break;
+        //     default: self.gender.string = "未知"; break;
+        // }
+        // self.nickaName.string = weChatUserInfo.nickName;
     },
 
     // showOpenDataView () {

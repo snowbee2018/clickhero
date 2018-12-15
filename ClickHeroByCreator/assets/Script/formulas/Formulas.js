@@ -105,7 +105,7 @@ cc.Class({
         formatBigNumber (bigNumber) {
             if (BigNumber.isBigNumber(bigNumber)) {
                 var c = 5;
-                var str = bigNumber.toExponential(4);
+                var str = bigNumber.toExponential(0);
                 var arr = str.split("e+");
                 var number = new Number(arr[0]);
                 var power = new Number(arr[1]);
@@ -114,7 +114,7 @@ cc.Class({
                     var rem = power%c;
                     var unit = unitArr[int];
                     var num = Math.pow(10, rem) * number;
-                    var result = num.toFixed(c-1-rem) + unit;
+                    var result = num.toFixed(0) + unit;
                     // console.log(str + " = " + result);
                     return result;
                 } else {
