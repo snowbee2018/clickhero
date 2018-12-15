@@ -10,7 +10,11 @@ cc.Class({
         lbRuby : cc.Label,
     },
 
-    start () {
+    onLoad(){
+        Events.on(Events.ON_GAME_START,this.onStart,this);
+    },
+
+    onStart () {
         Events.on(Events.ON_RUBY_CHANGE,this.showRuby,this);
         this.fullViews();
         this.showRuby();

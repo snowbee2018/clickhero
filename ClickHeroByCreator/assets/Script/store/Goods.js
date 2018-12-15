@@ -27,11 +27,11 @@ cc.Class({
                 ruby = 50
                 break;
             case 1:
-                name = "苦海无涯" // 这个功能有点冲突 考虑换成每天跌一次的加10%dps
-                desc = "永久增加20%的DPS伤害，每天一次"
+                name = "苦海无涯"
+                desc = "DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
-                state = "购买次数：" + count + "  当前增益：" + num +"%"
-                ruby = 30
+                state = "购买次数：" + count + "  当前增益：" + num.toFixed(2) +"%"
+                ruby = 20
                 cd = 60*10
                 break;
             case 2:
@@ -62,7 +62,7 @@ cc.Class({
             case 6:
                 name = "大开杀戒"
                 desc = "附加10倍DPS伤害，持续60秒"
-                ruby = 30
+                ruby = 20
                 break;
             // 下面是超越了
             case 7:
