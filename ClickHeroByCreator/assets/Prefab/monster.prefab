@@ -105,7 +105,7 @@
     "_atlas": {
       "__uuid__": "10d6a18a-9027-4801-b9da-1c014d53fa88"
     },
-    "_id": "ee1EQHdG5JCZtLEsEtOYkr"
+    "_id": ""
   },
   {
     "__type__": "f629d3ER3BIK7Dw0+EVW3Ao",
@@ -116,10 +116,14 @@
     },
     "_enabled": true,
     "_lv": 0,
-    "_num": 0,
-    "_cost": null,
+    "_gold": 0,
     "_totalHP": null,
     "_curHP": null,
+    "_soul": 0,
+    "_isTreasureChest": false,
+    "_monsterName": "怪物名字",
+    "_isBoss": false,
+    "_isPrimalBoss": false,
     "damageAnim": {
       "__uuid__": "cba380f5-173e-48fb-8ce7-0987819caf9c"
     },
@@ -155,7 +159,7 @@
         "__uuid__": "0f7fcf81-b8cd-488a-8334-dcc86d80b7ff"
       }
     ],
-    "_id": "1cNin1gxFH3IdvRoYQeTOc"
+    "_id": ""
   },
   {
     "__type__": "cc.Animation",
@@ -178,7 +182,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "10CQMepAVDeaGsGGYJy5qH"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

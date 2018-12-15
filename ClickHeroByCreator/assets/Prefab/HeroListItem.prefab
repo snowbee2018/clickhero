@@ -191,7 +191,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "a1ShJM6QhOhLyD4ZplkObh"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -218,7 +218,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "d6DqRFYVpE1JXmx+ye5N18"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -320,7 +320,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "ddZGfwzW1MzayOsCslGS0T"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -347,7 +347,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "dfmWFfn9RH1JLajNy4WGbk"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -449,7 +449,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "c1AkPHWKFC644Ei8CVBeDE"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -476,7 +476,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "1efLyU7yVJbZxk4c0Rzm/1"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -581,7 +581,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "c5HnQ/Co1GkILcb6YExYpX"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -608,7 +608,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 100,
     "_originalHeight": 100,
-    "_id": "d5YeVk0/NEgaxby3oo2p92"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -789,7 +789,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "f2SVJ8dmlGzKCsSH52/2QN"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -888,7 +888,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "86U9nEinVLaI3KoMcCsHoF"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -987,7 +987,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "ebhPVSF2ZDsbYKJPNFBvY6"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1026,7 +1026,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "e5xQp8SJFAN63Ks9DaDgg4"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -1095,7 +1095,7 @@
     "_N$target": {
       "__id__": 18
     },
-    "_id": "3dyf2kO0ZC14f83D7jW5eR"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1114,7 +1114,7 @@
       "__id__": 18
     },
     "_enabled": true,
-    "_id": "451QbNJH5AsIkwipA4CBA/"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -1141,7 +1141,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "69VzNHaBtLb4FgPDtbQhQC"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1250,7 +1250,7 @@
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
-    "_id": "09GKgSXQFP+4W/sz7BojAg"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -1277,7 +1277,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "9cTFbr4bJPl7jinULJ8xtJ"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1383,7 +1383,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "08HLCtWqtFrZWc8pIvnpBD"
+    "_id": ""
   },
   {
     "__type__": "a8187njt4lIqrxkDkSQV4J3",
@@ -1393,7 +1393,7 @@
       "__id__": 38
     },
     "_enabled": true,
-    "_id": "bfOHYVctJKX50oh09/HNM/"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -1420,7 +1420,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "30BRtxbPFOYpOt0u1ofy6Z"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1458,7 +1458,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 131.33,
     "_originalHeight": 0,
-    "_id": "7d1HkKdwxFOoiMoGqx0O4K"
+    "_id": ""
   },
   {
     "__type__": "98f889NNiFCEqdDajXlsfOo",
@@ -1504,7 +1504,7 @@
     "skillDialogPrefab": {
       "__uuid__": "0ffbf868-1ef3-4b00-9515-68ede7cf8cdb"
     },
-    "_id": "6bl3uayP1O/7grzvMTC+a1"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -1561,7 +1561,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "eeoasLiKZD/qbJyuUAHtgE"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1598,7 +1598,7 @@
     "_isTrimmedMode": false,
     "_state": 0,
     "_atlas": null,
-    "_id": "64Awm1guVKu7d0iTtzSS4I"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

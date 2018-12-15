@@ -97,6 +97,7 @@ cc.Class({
         self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
 
         self.scheduleOnce(self.handleIdle, 60);
+        Events.emit(Events.ON_GAME_START);
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据

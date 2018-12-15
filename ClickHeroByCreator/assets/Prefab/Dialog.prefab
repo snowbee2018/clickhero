@@ -243,7 +243,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 3,
-    "_id": "b2dPUSXXlFnptzJS7AmZs/"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -415,7 +415,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_id": "5eDPIT8BlEsaqkc2fPJiUh"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -454,7 +454,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "edNp5r3QNILIq6PjfJZZ9W"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -523,7 +523,7 @@
     "_N$target": {
       "__id__": 6
     },
-    "_id": "6bVb8dwghPnLD88VwbcGsi"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -559,7 +559,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "fckEZNollE3IJF6UCZLs2Q"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -731,7 +731,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_id": "6ecxtNYRtIVqBqhN+v4175"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -770,7 +770,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "5fzz8sxohDdbJfe1XsaG0f"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -839,7 +839,7 @@
     "_N$target": {
       "__id__": 15
     },
-    "_id": "a7ZHlmCcVBgamkD11H84L1"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -875,7 +875,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0,
-    "_id": "02D27YQVxCyKg0cFWL/lzL"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -914,7 +914,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "68vkxKeYZFsIXwWme0Dp44"
+    "_id": ""
   },
   {
     "__type__": "cc.Layout",
@@ -946,7 +946,7 @@
     "_N$spacingY": 0,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
-    "_id": "0buIVsWc1OtJ23sfJeNerR"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -999,7 +999,7 @@
     "_N$target": {
       "__id__": 2
     },
-    "_id": "88MOHyPiJMfpknRC6OCgTZ"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1067,7 +1067,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "64Nq+HxP1OxKLswFPdu7zp"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1095,7 +1095,7 @@
     "lbCancel": {
       "__id__": 8
     },
-    "_id": "c8kcHnJ9RA177bQ/kZkg1u"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

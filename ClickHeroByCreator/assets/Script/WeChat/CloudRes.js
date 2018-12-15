@@ -15,11 +15,11 @@ var imgRoot = "cloud://test-72db6b.7465-test-72db6b/img";
 // cloud://test-72db6b.7465-test-72db6b/hero/3.png
 cc.Class({
     statics: {
-        getHeroUrl (heroID, callBack) {
+        getUrlByPath (path, callBack) {
             const self = this;
-            if (!WeChatUtil.isWeChatPlatform) return;
+            if (!WeChatUtil.isWeChatPlatform || !path) return;
             if (!self.urlList) self.urlList = {}
-            var path = imgRoot + "/hero/" + heroID + ".png";
+            console.log("CloudRes getUrlByPath path: " + path);
             if (self.urlList[path]) {
                 callBack(self.urlList[path]);
             } else {
@@ -42,6 +42,21 @@ cc.Class({
                     fail: console.error
                 });
             }
+        },
+
+        getHeroUrl (heroID, callBack) {
+            const self = this;
+            // if (!WeChatUtil.isWeChatPlatform) return;
+            // if (!self.urlList) self.urlList = {}
+            var path = imgRoot + "/hero/" + heroID + ".png";
+            self.getUrlByPath(path, callBack);
+        },
+
+        getLoginBtn(callBack) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            var path = imgRoot + "/loginBtn.png";
+            self.getUrlByPath(path, callBack);
         },
     }
 });

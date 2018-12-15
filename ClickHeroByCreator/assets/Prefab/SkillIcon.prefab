@@ -170,7 +170,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "282YuXmF9AZbZ/U1RpgaKz"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -197,7 +197,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 100,
     "_originalHeight": 100,
-    "_id": "b2en3DQV5BBYjt4UEUGC0N"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -236,7 +236,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "c0m29rQ/hJ2IFmP+o6J4PD"
+    "_id": ""
   },
   {
     "__type__": "5c9db6gFr1FWpHZK/v/McZj",
@@ -249,7 +249,7 @@
     "gray": {
       "__id__": 2
     },
-    "_id": "1aaVy8hHdKT6Z6BLxRoJ9H"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

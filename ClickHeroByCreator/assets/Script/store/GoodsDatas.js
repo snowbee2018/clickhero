@@ -23,6 +23,10 @@ Datas.init = function() {
         new Goods().init(12),
         new Goods().init(13),
     ]
+    console.log("FFFFFFFFFFFFFFFFFFFFFFFF");
+    
+    console.log(Datas.datas);
+    
     Datas.refresh()
 }
 

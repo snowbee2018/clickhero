@@ -32,7 +32,9 @@ cc.Class({
     // update (dt) {},
 
     applyAutoClick () {
-
+        const self = this;
+        // console.log("applyClickStorm");
+        self.getComponent("GameController").clickHit();
     },
 
     applyClickStorm () {
