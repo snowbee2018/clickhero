@@ -47,6 +47,7 @@ cc.Class({
         self.getComponent("MonsterController").rebirth();
         GameData.refresh();
         self.getComponent("UserSkillController").rebirth();
+        DataCenter.addRebirthCount()
         Events.emit(Events.ON_GOLD_CHANGE);
         Events.emit(Events.ON_SOUL_CHANGE);
         WeChatUtil.onHide();

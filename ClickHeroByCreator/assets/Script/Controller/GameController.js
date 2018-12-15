@@ -119,7 +119,9 @@ cc.Class({
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
         obj[map.curSoul] = curSoul.toExponential(4); // 当前可用英魂总数
+        obj[map.ruby] = DataCenter.getDataByKey(map.ruby);
         obj[map.rebirthSoul] = rebirthSoul.toExponential(4); // 转生英魂
+        obj[map.rebirthCount] = DataCenter.getDataByKey(map.rebirthCount); // 当前可用英魂总数
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神

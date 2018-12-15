@@ -26,6 +26,8 @@ cc.Class({
             lansquenetList: "lansquenetList", // 雇佣兵列表，任务的完成状态也存里面
 
             curSetting: "curSetting", // 当前设置信息
+
+            rebirthCount:"rebirthCount",
         }
         self.ContentData = {}
         self.DataMap = {
@@ -53,7 +55,7 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
         }
-        // 初始化仙丹
+        // 初始化宝石
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.ruby);
         if (cloudSoul) {
             self.setDataByKey(self.KeyMap.ruby, Number(cloudSoul));
@@ -87,6 +89,13 @@ cc.Class({
             self.setDataByKey(self.KeyMap.maxCombo, cloudMaxCombo);
         } else {
             self.setDataByKey(self.KeyMap.maxCombo, 0);
+        }
+        // 初始化转生次数
+        var count = self.getCloudDataByKey(self.KeyMap.rebirthCount);
+        if (count) {
+            self.setDataByKey(self.KeyMap.rebirthCount, Number(count));
+        } else {
+            self.setDataByKey(self.KeyMap.rebirthCount, 0);
         }
     },
 
@@ -131,12 +140,18 @@ cc.Class({
             console.error("type error, 'soul' must be a BigNumber.");
         }
     },
-    // 仙丹增加
+    // 宝石增加
     addRuby (ruby) {
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
         this.setDataByKey(key, (old+ruby) );
         Events.emit(Events.ON_RUBY_CHANGE);
+    },
+    // 转身次数增加
+    addRebirthCount () {
+        var key = this.KeyMap.rebirthCount;
+        var old = this.getDataByKey(key);
+        this.setDataByKey(key, (old+1) );
     },
     addRebirthSoul(soul) {
         const self = this;
