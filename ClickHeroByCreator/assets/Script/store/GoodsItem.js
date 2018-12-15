@@ -67,6 +67,7 @@ cc.Class({
             console.log("购买成功")
             if (this.data.id == 1) {
                 cc.sys.localStorage.setItem("buyGoods1Date",this.getDateStr())
+                this.bind()
             }else if(this.data.id == 6){
                 this.dur = 60;
                 if (!this.callback) {
@@ -81,6 +82,7 @@ cc.Class({
                         this.lbState.string = "剩余:"+this.dur+"秒"
                     }
                     this.schedule(this.callback, 1);
+                    this.lbState.string = "剩余:"+this.dur+"秒"
                 }
             }
         }
