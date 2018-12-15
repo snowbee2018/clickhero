@@ -22,12 +22,18 @@ cc.Class({
     },
 
     fullViews(){
-        let list = GoodsDatas.datas;
-        console.log(list);
-        
-        list.forEach(e => {
-            this.addItem(e);
-        });
+        try {
+            let list = GoodsDatas.datas;
+            console.log(list);
+
+            list.forEach(e => {
+                this.addItem(e);
+            });
+        } catch (error) {
+            console.error(error);
+            
+        }
+
     },
 
     addItem(goods) {

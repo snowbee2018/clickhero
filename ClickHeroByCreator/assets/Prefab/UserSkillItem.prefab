@@ -246,7 +246,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "ceg4D5ZpRGoLb0p2LY17sC"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -285,7 +285,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "f5qr05qUhAWojOFDozP52s"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -384,7 +384,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "95gYAmPStFzKI9DXqvRhbc"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -483,7 +483,7 @@
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "b8PbPT1H9GwbOfSR13uR0/"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -582,7 +582,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "8eVNQ/7aNCroQfFLL1o9b8"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -621,7 +621,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "45T2AGtRpNgZEntzFc+PPC"
+    "_id": ""
   },
   {
     "__type__": "03684W90G9P5a7hKeDEv55Z",
@@ -632,10 +632,11 @@
     },
     "_enabled": true,
     "skillName": "Clickstorm",
-    "describe": "自动点击器，每秒执行10次点击，持续30秒",
+    "baseValue": 1,
     "coolingTime": 10,
     "bSustain": true,
     "sustainTime": 5,
+    "cost": "",
     "heroID": 0,
     "skillID": 1,
     "gray": {
@@ -654,7 +655,9 @@
     "_lastTimestamp": 0,
     "_isActive": true,
     "_isSustainFinish": true,
-    "_id": "edjX0IWppL9rAT4fCb3t4Z"
+    "_coolingCurtail": 0,
+    "sceneRoot": null,
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -711,7 +714,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "2egcwXEwFKq6J0nu7rwXEf"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",

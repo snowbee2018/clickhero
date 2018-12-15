@@ -14,6 +14,7 @@ cc.Class({
     properties: {
         bg: cc.Node,
         uiRoot: cc.Node,
+        loginBtn: cc.Sprite,
     },
 
     ctor () {
@@ -202,9 +203,25 @@ cc.Class({
         const self = this;
         console.log("login");
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-            WeChatUtil.getUserInfo(function (bSuccess, userData) {
+            WeChatUtil.getUserInfo(function (err, userData) {
                 console.log(userData);
-                if (userData) {
+                if (err) {
+                    if (err == 1) {
+                        // 显示按钮
+                        CloudRes.getLoginBtn(function (url) {
+                            if (url) {
+                                cc.loader.load({url:url,type:"png"}, function (err, textrue) {
+                                    if (!err && textrue) {
+                                        self.loginBtn.node.active = true;
+                                        self.loginBtn.spriteFrame = new cc.SpriteFrame(textrue);
+                                        self.loginBtn.node.width = textrue.width;
+                                        self.loginBtn.node.height = textrue.height;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                } else if (userData && userData.userInfo) {
                     self.onWeChatUserInfo(userData);
                 }
             });
@@ -214,6 +231,11 @@ cc.Class({
             // });
             self.startGame();
         }
+    },
+
+    onLoginBtnClick () {
+        self.loginBtn.node.active = false;
+        self.login();
     },
 
     startGame () {

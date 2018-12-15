@@ -27,26 +27,7 @@ cc.Class({
         self.scope.invoiceTitle = "scope.record"; // wx.startRecord	录音功能
         self.scope.invoiceTitle = "scope.writePhotosAlbum"; // wx.saveImageToPhotosAlbum, wx.saveVideoToPhotosAlbum	保存到相册
         self.scope.invoiceTitle = "scope.camera"; // < camera /> 组件	摄像头
-        
-        self.UserInfoBtnStyle = {
-            type : "text",
-            text : "为了您更好的体验，请先同意授权，点我点我",
-            withCredentials : false,
-            lang : "zh_CN",
-        }
-        let style = {
-            lineHeight : 40,
-            backgroundColor: '#ff0000',
-            color: '#ffffff',
-            textAlign: 'center',
-            fontSize: 16,
-            borderRadius: 4,
-        }
-        style.left = 10;
-        style.top = 20;
-        style.width = screenWidth - style.left * 2;
-        style.height = screenHeight - style.top * 2;
-        self.UserInfoBtnStyle.style = style;
+
 
         if (self.isWeChatPlatform) {
             self.fs = wx.getFileSystemManager();
@@ -171,26 +152,75 @@ cc.Class({
                             console.log("wx.getUserInfo success");
                             callBack(false, params);
                         },
-                        fail : function () {
+                        fail : function (err) {
                             console.log("wx.getUserInfo fail");
-                            callBack(false);
+                            callBack(1);
                         },
                     });
                 } else {
                     if (!self.userInfoBtn) {
-                        console.log("wx.getUserInfo createUserInfoButton");
-                        console.log(self.UserInfoBtnStyle);
-                        
-                        self.userInfoBtn = wx.createUserInfoButton(self.UserInfoBtnStyle);
-                        console.log(self.userInfoBtn);
-                        
-                        self.userInfoBtn.show();
-                        self.userInfoBtn.onTap(function (params) {
-                            console.log("wx.getUserInfo ontap userInfoBtn");
-                            callBack(true, params);
-                            self.userInfoBtn.destroy();
-                            delete self.userInfoBtn;
-                        });
+                        if (wx.createUserInfoButton) {
+                            CloudRes.getLoginBtn(function (url) {
+                                if (url) {
+                                    var UserInfoBtnStyle = {
+                                        type: "image",
+                                        image: url,
+                                        withCredentials: false,
+                                        lang: "zh_CN",
+                                        style: {
+                                            lineHeight: 48,
+                                            backgroundColor: '#ff0000',
+                                            color: '#000000',
+                                            borderColor: "#ffffff",
+                                            textAlign: 'center',
+                                            fontSize: 24,
+                                            borderRadius: 24,
+                                            borderWidth: 0,
+                                        }
+                                    }
+                                    var scale = screenWidth / 720;
+                                    UserInfoBtnStyle.style.width = 515 * scale;
+                                    UserInfoBtnStyle.style.height = 170 * scale;
+                                    UserInfoBtnStyle.style.left = (screenWidth - UserInfoBtnStyle.style.width) / 2;
+                                    UserInfoBtnStyle.style.top = screenHeight * 0.65 + UserInfoBtnStyle.style.height / 2;
+                                    console.log("wx.getUserInfo createUserInfoButton");
+                                    console.log(UserInfoBtnStyle);
+                                    self.userInfoBtn = wx.createUserInfoButton(UserInfoBtnStyle);
+                                    console.log(self.userInfoBtn);
+                                    self.userInfoBtn.show();
+                                    self.userInfoBtn.onTap(function (params) {
+                                        console.log("wx.getUserInfo ontap userInfoBtn");
+                                        if (params.userInfo) {
+                                            callBack(false, params);
+                                            self.userInfoBtn.destroy();
+                                            delete self.userInfoBtn;
+                                        } else {
+                                            callBack(2);
+                                        }
+                                    });
+                                }
+                            });
+
+                        } else {
+                            self.authorize(self.scope.userInfo, function (err) {
+                                if (err) {
+                                    callBack(err);
+                                } else {
+                                    wx.getUserInfo({
+                                        lang: "zh_CN",
+                                        withCredentials: false,
+                                        success: function (params) {
+                                            console.log("wx.getUserInfo success");
+                                            callBack(false, params);
+                                        },
+                                        fail: function (err) {
+                                            console.log("wx.getUserInfo fail");
+                                            callBack(1);
+                                        },
+                                    });
+                                }
+                            });
+                        }
                     }
                 }
             });
@@ -210,11 +240,11 @@ cc.Class({
                         scope : scope,
                         success: function () {
                             console.log("wx.authorize success");
-                            callBack(true);
-                        },
-                        fail: function () {
-                            console.log("wx.authorize fail");
                             callBack(false);
+                        },
+                        fail: function (err) {
+                            console.log("wx.authorize fail");
+                            callBack(err);
                         },
                         // complete: function () {
                         //     console.log("authorize complete");

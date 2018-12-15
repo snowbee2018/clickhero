@@ -243,7 +243,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "27wNY7B7BOPpIRY1oZMpwJ"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -342,7 +342,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "e7ARo2oIVB97vH3Tj0WToA"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -381,7 +381,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "3772MtNuZAkJfPnIstS/aR"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -450,7 +450,7 @@
     "_N$target": {
       "__id__": 2
     },
-    "_id": "24YWsgZItB57m7JPW+LDyN"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -558,7 +558,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "3ahVjjK95FELYxULLUTInX"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -657,7 +657,7 @@
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "b1yGqdQZxDfZTydy0hE62T"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -835,7 +835,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "203VeGoI1KN7C1elpDXjQt"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -862,7 +862,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 100,
     "_originalHeight": 100,
-    "_id": "afnYnGOflJJKo4PZ1hg9Hb"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -964,7 +964,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_id": "e3EsdbVvRMw7OU9m4Qr8sk"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -991,7 +991,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 97.87,
     "_originalHeight": 40,
-    "_id": "51dBwCCQtM87qb39j+OwOu"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1030,7 +1030,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "7fujXYJDdA5qzNtdpfwZXt"
+    "_id": ""
   },
   {
     "__type__": "5c9db6gFr1FWpHZK/v/McZj",
@@ -1043,7 +1043,7 @@
     "gray": {
       "__id__": 20
     },
-    "_id": "569okk4SlEC57pwo8CWnla"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1082,7 +1082,7 @@
     "cost": {
       "__id__": 7
     },
-    "_id": "20I7IMJpNKDqlA5NKqxOEs"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -164,7 +164,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "364OZPfcNKAZg8YNMM4EyG"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -188,7 +188,7 @@
     "content": {
       "__id__": 3
     },
-    "_id": "51nW6FmF1OqoB0LIxakL2C"
+    "_id": ""
   },
   {
     "__type__": "cc.Animation",
@@ -207,7 +207,7 @@
       }
     ],
     "playOnLoad": true,
-    "_id": "acFI63vghBvbhyOtmuuTBt"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

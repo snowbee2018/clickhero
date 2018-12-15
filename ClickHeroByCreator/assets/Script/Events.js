@@ -1,6 +1,7 @@
 
 cc.Class({
     statics: {
+        ON_GAME_START: "on_game_start",
         ON_GOLD_CHANGE : "on_gold_change", // 金币变化
         ON_SOUL_CHANGE : "on_soul_change", // 魂变化
         ON_RUBY_CHANGE : "on_ruby_change", // 仙丹变化
