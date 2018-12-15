@@ -43,7 +43,7 @@ cc.Class({
         this.lbState.string = this.data.state
         this.lbBtn.string = "ruby:" + this.data.ruby
 
-        console.log(maxfloor + "," + this.data.unlockLv);
+        // console.log(maxfloor + "," + this.data.unlockLv);
         
         if (maxfloor < this.data.unlockLv) {
             this.lbBought.active = true

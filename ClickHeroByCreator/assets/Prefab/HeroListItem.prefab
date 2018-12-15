@@ -134,7 +134,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 68.51,
-      "height": 28
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -182,7 +182,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 28,
-    "_lineHeight": 28,
+    "_lineHeight": 32,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -206,7 +206,7 @@
     "_alignFlags": 9,
     "_left": 131,
     "_right": 0,
-    "_top": 7,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -263,7 +263,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 48.94,
-      "height": 20
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -311,7 +311,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -335,7 +335,7 @@
     "_alignFlags": 9,
     "_left": 131,
     "_right": 0,
-    "_top": 40,
+    "_top": 38,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -392,7 +392,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 68.51,
-      "height": 28
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -440,7 +440,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 28,
-    "_lineHeight": 28,
+    "_lineHeight": 32,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -464,7 +464,7 @@
     "_alignFlags": 9,
     "_left": 350,
     "_right": 0,
-    "_top": 7,
+    "_top": 5,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -732,7 +732,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 40,
-      "height": 20
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -780,7 +780,7 @@
     "_string": "升级",
     "_N$string": "升级",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -879,7 +879,7 @@
     "_string": "增加的伤害",
     "_N$string": "增加的伤害",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -978,7 +978,7 @@
     "_string": "消耗:100",
     "_N$string": "消耗:100",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,

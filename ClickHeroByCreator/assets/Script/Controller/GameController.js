@@ -67,13 +67,15 @@ cc.Class({
         const self = this;
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.off(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
+        Events.off(Events.ON_CLICK_DAMAGE_CHANGE, self.onClickDamageChange, self);
+        Events.off(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
     },
 
     onGameStart () {
         const self = this;
         console.log("onGameStart");
         
-        self.isIdle = false; // 是否为闲置状态
+        self.isIdle = true; // 是否为闲置状态
         self.combo = 0; // 当前连击数
         DataCenter.init();
         HeroDatas.init();
@@ -87,6 +89,10 @@ cc.Class({
         self._totalClickCount = new BigNumber(0);
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
+        Events.on(Events.ON_CLICK_DAMAGE_CHANGE, self.onClickDamageChange, self);
+        Events.on(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
+        Events.on(Events.ON_IDLE_STATE, self.onIdleState, self);
+        Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
         
         self.totalCostLab.string = DataCenter.getGoldStr();
         self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -97,6 +103,8 @@ cc.Class({
         self.scheduleOnce(self.handleIdle, 60);
         Events.emit(Events.ON_GAME_START);
         self.isGameStart = true;
+
+        self.pageNode.getComponent("HideOtherPage").handler();
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
@@ -154,6 +162,31 @@ cc.Class({
         self.totalSoulLab.string = str;
     },
 
+    onClickDamageChange () {
+        const self = this;
+        self.clickDamageLab.string = Formulas.formatBigNumber(GameData.clickDamage);
+    },
+
+    onDPSChange () {
+        const self = this;
+        self.dpsDamageLab.string = Formulas.formatBigNumber(GameData.dpsDamage);
+    },
+
+    onIdleState (event) {
+        const self = this;
+        var isIdle = !!event;
+        self.comboCount.node.active = !isIdle;
+        self.comboTypeLab.string = isIdle ? "(闲置)" : "(combo)";
+        if (!isIdle) {
+            self.comboCount.string = self.combo;
+        }
+    },
+
+    onComboChange (event) {
+        const self = this;
+        self.comboCount.string = self.combo;
+    },
+
     updataMonsterInfoDisplay () {
         // const self = this;
         // let info = self.monsterController.getCurMonsterInfo();
@@ -172,11 +205,6 @@ cc.Class({
         self.clickHit();
         var map = DataCenter.KeyMap;
         DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
-        self.combo++;
-        Events.emit(Events.ON_COMBO_CHANGE, self.combo);
-        if (self.combo > DataCenter.getDataByKey(map.maxCombo)) {
-            DataCenter.setDataByKey(map.maxCombo, self.combo);
-        }
     },
 
     clickHit () {
@@ -190,6 +218,12 @@ cc.Class({
         } else {
             self.monsterController.hit(GameData.clickDamage, false, false);
             self.damageArr.push(GameData.clickDamage);
+        }
+
+        self.combo++;
+        Events.emit(Events.ON_COMBO_CHANGE, self.combo);
+        if (self.combo > DataCenter.getDataByKey(DataCenter.KeyMap.maxCombo)) {
+            DataCenter.setDataByKey(DataCenter.KeyMap.maxCombo, self.combo);
         }
         
         if (self.isIdle === true) {

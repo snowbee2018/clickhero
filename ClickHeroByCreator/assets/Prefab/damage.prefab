@@ -107,7 +107,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 97.87,
-      "height": 40
+      "height": 44
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -155,7 +155,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 44,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

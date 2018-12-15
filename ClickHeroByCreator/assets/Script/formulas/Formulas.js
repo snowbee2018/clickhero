@@ -106,26 +106,31 @@ cc.Class({
         formatBigNumber (bigNumber) {
             if (BigNumber.isBigNumber(bigNumber)) {
                 var c = 5;
-                var str = bigNumber.toExponential(0);
+                var str = bigNumber.toExponential(2);
                 var arr = str.split("e+");
                 var number = new Number(arr[0]);
                 var power = new Number(arr[1]);
-                var int = Math.floor(power/c);
-                if (int < unitArr.length) {                
-                    var rem = power%c;
-                    var unit = unitArr[int];
-                    var num = Math.pow(10, rem) * number;
-                    var result = num.toFixed(0) + unit;
-                    // console.log(str + " = " + result);
-                    return result;
+                if (power >= 0) {
+                    var int = Math.floor(power / c);
+                    if (int < unitArr.length) {
+                        var rem = power % c;
+                        var unit = unitArr[int];
+                        var num = Math.pow(10, rem) * number;
+                        var result = num.toFixed(0) + unit;
+                        // console.log(str + " = " + result);
+                        return result;
+                    } else {
+                        // if (bigNumber.isLessThan(1)) {
+                        //     return "0";
+                        // } else {
+                        //     return str;
+                        // }
+                        return str;
+                    }
                 } else {
-                    // if (bigNumber.isLessThan(1)) {
-                    //     return "0";
-                    // } else {
-                    //     return str;
-                    // }
-                    return str;
+                    return "0";
                 }
+
             }
         },
         

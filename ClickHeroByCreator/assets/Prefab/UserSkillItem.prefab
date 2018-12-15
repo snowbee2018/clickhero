@@ -327,7 +327,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 61.17,
-      "height": 25
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -375,7 +375,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 25,
-    "_lineHeight": 25,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -474,7 +474,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 18,
-    "_lineHeight": 18,
+    "_lineHeight": 22,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -525,7 +525,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 61.17,
-      "height": 25
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -573,7 +573,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 25,
-    "_lineHeight": 25,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

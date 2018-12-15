@@ -17,7 +17,7 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
+    handler () {
         const self = this;
         var pageView = self.getComponent(cc.PageView);
         if (pageView) {
@@ -39,15 +39,6 @@ cc.Class({
 
     // update (dt) {},
     onPageEvent (sender) {
-        const self = this;
-        var pageIndex = Number(sender.getCurrentPageIndex());
-        for (let i = 0; i < self.pageArr.length; i++) {
-            const page = self.pageArr[i];
-            if (i == pageIndex) {
-                page.active = true;
-            } else {
-                page.active = false;
-            }
-        }
+        this.handler();
     },
 });

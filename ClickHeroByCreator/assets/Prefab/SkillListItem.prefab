@@ -186,7 +186,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 44,
-      "height": 24
+      "height": 26
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -234,7 +234,7 @@
     "_string": "购买",
     "_N$string": "购买",
     "_fontSize": 22,
-    "_lineHeight": 24,
+    "_lineHeight": 26,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -285,7 +285,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 38.34,
-      "height": 18
+      "height": 20
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -333,7 +333,7 @@
     "_string": "1金币",
     "_N$string": "1金币",
     "_fontSize": 15,
-    "_lineHeight": 18,
+    "_lineHeight": 20,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -501,7 +501,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 68.51,
-      "height": 28
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -549,7 +549,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 28,
-    "_lineHeight": 28,
+    "_lineHeight": 32,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -955,7 +955,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 30,
-    "_lineHeight": 30,
+    "_lineHeight": 34,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

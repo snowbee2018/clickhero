@@ -341,7 +341,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 65.04,
-      "height": 26
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -389,7 +389,7 @@
     "_string": "name",
     "_N$string": "name",
     "_fontSize": 26,
-    "_lineHeight": 26,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -714,7 +714,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 65.04,
-      "height": 26
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -762,7 +762,7 @@
     "_string": "name",
     "_N$string": "name",
     "_fontSize": 26,
-    "_lineHeight": 26,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -988,7 +988,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 65.04,
-      "height": 26
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1036,7 +1036,7 @@
     "_string": "name",
     "_N$string": "name",
     "_fontSize": 26,
-    "_lineHeight": 26,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1262,7 +1262,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 65.04,
-      "height": 26
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1310,7 +1310,7 @@
     "_string": "name",
     "_N$string": "name",
     "_fontSize": 26,
-    "_lineHeight": 26,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

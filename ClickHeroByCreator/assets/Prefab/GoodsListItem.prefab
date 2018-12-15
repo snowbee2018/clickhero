@@ -128,7 +128,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 68.51,
-      "height": 28
+      "height": 32
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -176,7 +176,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 28,
-    "_lineHeight": 28,
+    "_lineHeight": 32,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -200,7 +200,7 @@
     "_alignFlags": 9,
     "_left": 131,
     "_right": 0,
-    "_top": 21,
+    "_top": 19,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -257,7 +257,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 48.94,
-      "height": 20
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -305,7 +305,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -386,7 +386,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 48.94,
-      "height": 20
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -434,7 +434,7 @@
     "_string": "Label",
     "_N$string": "Label",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -585,7 +585,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 40,
-      "height": 20
+      "height": 24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -633,7 +633,7 @@
     "_string": "购买",
     "_N$string": "购买",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -732,7 +732,7 @@
     "_string": "仙丹：100",
     "_N$string": "仙丹：100",
     "_fontSize": 20,
-    "_lineHeight": 20,
+    "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,

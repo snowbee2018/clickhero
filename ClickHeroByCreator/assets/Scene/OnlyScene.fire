@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.13947436663503998,
-      "y": 0.13947436663503998,
+      "x": 0.22973967099940665,
+      "y": 0.22973967099940665,
       "z": 1
     },
     "_quat": {
@@ -513,7 +513,7 @@
   {
     "__type__": "cc.Node",
     "_name": "shareBtn",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 10
     },
@@ -605,7 +605,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 60,
-      "height": 30
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -653,7 +653,7 @@
     "_string": "分享",
     "_N$string": "分享",
     "_fontSize": 30,
-    "_lineHeight": 30,
+    "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1202,7 +1202,7 @@
   {
     "__type__": "cc.Node",
     "_name": "eliteBattleSelect",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 25
     },
@@ -1358,7 +1358,7 @@
       "__id__": 27
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 6,
     "_components": [
       {
@@ -1495,7 +1495,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80.68,
+      "width": 58.65,
       "height": 28
     },
     "_anchorPoint": {
@@ -1541,8 +1541,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "(combo)",
-    "_N$string": "(combo)",
+    "_string": "(闲置)",
+    "_N$string": "(闲置)",
     "_fontSize": 22,
     "_lineHeight": 28,
     "_enableWrapText": true,
@@ -1566,7 +1566,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 8,
-    "_left": 458.46,
+    "_left": 469.47499999999997,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -3504,7 +3504,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 160,
-      "height": 40
+      "height": 42
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3552,7 +3552,7 @@
     "_string": "怪物名字",
     "_N$string": "怪物名字",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 42,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -3676,7 +3676,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 64.49,
-      "height": 40
+      "height": 42
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3724,7 +3724,7 @@
     "_string": "30s",
     "_N$string": "30s",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 42,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -3821,7 +3821,7 @@
         "__id__": 353
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -13214,7 +13214,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 78,
-      "height": 28
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -13262,7 +13262,7 @@
     "_string": "仙丹：",
     "_N$string": "仙丹：",
     "_fontSize": 26,
-    "_lineHeight": 28,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -15469,7 +15469,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 90,
-      "height": 30
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15517,7 +15517,7 @@
     "_string": "花果山",
     "_N$string": "花果山",
     "_fontSize": 30,
-    "_lineHeight": 30,
+    "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -15555,7 +15555,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 85.02,
-      "height": 30
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15603,7 +15603,7 @@
     "_string": "等级 1",
     "_N$string": "等级 1",
     "_fontSize": 30,
-    "_lineHeight": 30,
+    "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -15641,7 +15641,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 58.39,
-      "height": 30
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15689,7 +15689,7 @@
     "_string": "1/10",
     "_N$string": "1/10",
     "_fontSize": 30,
-    "_lineHeight": 30,
+    "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -16389,7 +16389,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 147.78,
-      "height": 28
+      "height": 30
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16399,7 +16399,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 217,
-      "y": 394,
+      "y": 397,
       "z": 0
     },
     "_scale": {
@@ -16437,7 +16437,7 @@
     "_string": "自动下一关:",
     "_N$string": "自动下一关:",
     "_fontSize": 28,
-    "_lineHeight": 28,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
