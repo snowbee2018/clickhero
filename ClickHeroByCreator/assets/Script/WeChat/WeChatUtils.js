@@ -77,11 +77,12 @@ cc.Class({
         if (self.isWeChatPlatform) {
             console.log("用户点击了设置中的“转发”按钮");
             // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
+            Events.emit(Events.ON_SHARE_CLICK);
             return {
                 title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
                 imageUrl: self.getShareImage(),
                 query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
-            }      
+            }     
         }
     },
 

@@ -211,24 +211,25 @@ cc.Class({
 
     onShareBtnClick () {
         const self = this;
-        WeChatUtil.showModal({
-            title: "分享给好友",
-            content: "点一下，玩一年，把快乐分享给好友吧",
-            callBack: function (res) {
-                console.log("模态对话框用户操作返回");
-                console.log(res);
-                if (res.confirm) {
-                    console.log("点击了确定");
-                    WeChatUtil.shareAppMessage();
-                    // self.showOpenDataView();
-                } else if (res.cancel) {
-                    console.log("点击了取消");
-                    // self.showOpenDataView();
-                    WeChatUtil.showToast("取消了分享");
-                }
-            }
-        });
-        // console.log(self.formatCloudGameData());
+        WeChatUtil.shareAppMessage();
+        Events.emit(Events.ON_SHARE_CLICK);
+        // WeChatUtil.showModal({
+        //     title: "分享给好友",
+        //     content: "点一下，玩一年，把快乐分享给好友吧",
+        //     callBack: function (res) {
+        //         console.log("模态对话框用户操作返回");
+        //         console.log(res);
+        //         if (res.confirm) {
+        //             console.log("点击了确定");
+        //             WeChatUtil.shareAppMessage();
+        //             // self.showOpenDataView();
+        //         } else if (res.cancel) {
+        //             console.log("点击了取消");
+        //             // self.showOpenDataView();
+        //             WeChatUtil.showToast("取消了分享");
+        //         }
+        //     }
+        // });
     },
 
     onMonsterGold (gold) {
