@@ -106,6 +106,7 @@ cc.Class({
         var map = DataCenter.KeyMap;
         // 获取存档数据，并存储到云端
         var curGold = DataCenter.getDataByKey(map.curGold);
+        var historyTotalGold = DataCenter.getDataByKey(map.historyTotalGold);
         var curSoul = DataCenter.getDataByKey(map.curSoul);
         var rebirthSoul = DataCenter.getDataByKey(map.rebirthSoul);
         var obj = {}
@@ -116,12 +117,14 @@ cc.Class({
         obj[map.totalClick] = DataCenter.getDataByKey(map.totalClick); // 历史总点击数
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
         obj[map.passLavel] = DataCenter.getDataByKey(map.passLavel); // 当前世界已通过的最高关卡
+        obj[map.maxPassLavel] = DataCenter.getDataByKey(map.maxPassLavel); // 历史最高通过关卡
         // obj[map.curDiamond] = 
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
+        obj[map.historyTotalGold] = historyTotalGold.toExponential(4); // 历史获得的所有金币
         obj[map.curSoul] = curSoul.toExponential(4); // 当前可用英魂总数
         obj[map.ruby] = DataCenter.getDataByKey(map.ruby);
         obj[map.rebirthSoul] = rebirthSoul.toExponential(4); // 转生英魂
-        obj[map.rebirthCount] = DataCenter.getDataByKey(map.rebirthCount); // 当前可用英魂总数
+        obj[map.rebirthCount] = DataCenter.getDataByKey(map.rebirthCount); // 已转生次数
         // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神

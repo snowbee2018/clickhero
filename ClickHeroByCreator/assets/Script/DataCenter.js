@@ -6,7 +6,7 @@ cc.Class({
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
             rebirthCount: "rebirthCount", // 已转生次数
-            bAutoClickOpen: "bAutoClickOpen",
+            bAutoClickOpen: "bAutoClickOpen", // 商店购买的自动点击是否开启
             totalClick: "totalClick", // 历史总点击数
             maxCombo: "maxCombo", // 历史最大连击数
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
@@ -51,6 +51,12 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+9999")));
             // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000")));
         }
+        var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
+        if (historyTotalGold) {
+            self.setDataByKey(self.KeyMap.historyTotalGold, (new BigNumber(historyTotalGold)));
+        } else {
+            self.setDataByKey(self.KeyMap.historyTotalGold, (new BigNumber(self.getDataByKey(self.KeyMap.curGold))));
+        }
         // 初始化英魂
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
         if (cloudSoul) {
@@ -74,11 +80,17 @@ cc.Class({
         // 初始化当前世界最大通关数
         var passedLevel = self.getCloudDataByKey(self.KeyMap.passLavel);
         if (passedLevel) {
-            self.setDataByKey(self.KeyMap.passLavel, passedLevel);
+            self.setDataByKey(self.KeyMap.passLavel, Number(passedLevel));
         } else {
             self.setDataByKey(self.KeyMap.passLavel, 0);
         }
-
+        // 初始化历史最大通关数
+        var maxPassLavel = self.getCloudDataByKey(self.KeyMap.maxPassLavel);
+        if (maxPassLavel) {
+            self.setDataByKey(self.KeyMap.maxPassLavel, Number(maxPassLavel));
+        } else {
+            self.setDataByKey(self.KeyMap.maxPassLavel, self.getDataByKey(self.KeyMap.passLavel));
+        }
         // 初始化历史总点击数
         var cloudTotalClick = self.getCloudDataByKey(self.KeyMap.totalClick);
         if (cloudTotalClick) {
@@ -118,6 +130,17 @@ cc.Class({
         }
     },
 
+    addHistoryTotalGold(gold) {
+        const self = this;
+        if (BigNumber.isBigNumber(gold)) {
+            var key = self.KeyMap.historyTotalGold;
+            var oldGold = self.getDataByKey(key);
+            self.setDataByKey(key, oldGold.plus(gold));
+        } else {
+            console.error("type error, 'gold' must be a BigNumber.");
+        }
+    },
+
     // 金币增加
     addGold (gold) {
         const self = this;
@@ -125,6 +148,7 @@ cc.Class({
             var key = self.KeyMap.curGold;
             var oldGold = self.getDataByKey(key);
             self.setDataByKey(key, oldGold.plus(gold));
+            self.addHistoryTotalGold(gold);
             Events.emit(Events.ON_GOLD_CHANGE);
         } else {
             console.error("type error, 'gold' must be a BigNumber.");
@@ -265,6 +289,21 @@ cc.Class({
         return Formulas.formatBigNumber(curSoul);
     },
 
+    updataMaxPassLevel(level) {
+        const self = this;
+        var key = self.KeyMap.maxPassLavel;
+        var curPassLevel = self.getDataByKey(key);
+        if (curPassLevel) {
+            if (level > curPassLevel) {
+                self.setDataByKey(key, level);
+                Events.emit(Events.ON_MAXLEVEL_UPDATE);
+            }
+        } else {
+            self.setDataByKey(key, level);
+            Events.emit(Events.ON_MAXLEVEL_UPDATE);
+        }
+    },
+
     passLevel (level) {
         const self = this;
         var key = self.KeyMap.passLavel;
@@ -272,9 +311,11 @@ cc.Class({
         if (curPassLevel) {
             if (level > curPassLevel) {
                 self.setDataByKey(key, level);
+                self.updataMaxPassLevel(level);
             }
         } else {
             self.setDataByKey(key, level);
+            self.updataMaxPassLevel(level);
         }
     },
 
