@@ -311,10 +311,12 @@ cc.Class({
         if (curPassLevel) {
             if (level > curPassLevel) {
                 self.setDataByKey(key, level);
+                Events.emit(Events.ON_LEVEL_PASSED);
                 self.updataMaxPassLevel(level);
             }
         } else {
             self.setDataByKey(key, level);
+            Events.emit(Events.ON_LEVEL_PASSED);
             self.updataMaxPassLevel(level);
         }
     },

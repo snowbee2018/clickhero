@@ -5,6 +5,7 @@ cc.Class({
         ON_GOLD_CHANGE : "on_gold_change", // 金币变化
         ON_SOUL_CHANGE : "on_soul_change", // 魂变化
         ON_RUBY_CHANGE : "on_ruby_change", // 仙丹变化
+        ON_LEVEL_PASSED: "on_level_passed", // 当前世界初次通过关卡
         ON_BY_HERO: "on_by_hero", // 购买英雄
         ON_UPGRADE_HERO : 'on-upgrade-hero', //升级英雄
         ON_UPGRADE_HERO_SKILLS : 'on-upgrade-hero-skills',//升级英雄技能
@@ -20,6 +21,7 @@ cc.Class({
         ON_ANCIENT_LVUNIT_CHANGE: "ON_ANCIENT_LVUNIT_CHANGE",// 古神升级单位改变
         ON_HEROLVUNIT_CHANGE: "ON_HEROLVUNIT_CHANGE", // 英雄升级单位改变
         ON_MAXLEVEL_UPDATE: "ON_MAXLEVEL_UPDATE", // 历史最高通过关卡更新
+        
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         emit(name,params){
             cc.systemEvent.emit(name,params);
