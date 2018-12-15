@@ -171,11 +171,11 @@ cc.Class({
             return this.addPrimalBossOdds * this.gdPBossTimes;
         },
         // 获得Boss计时增加时间
-        getPrimalBossOdds() {
+        getBossTimerSecond() {
             return this.addBossTimerSecond * this.gdPBossTSTimes;
         },
         // 获得宝箱出现概率
-        getPrimalBossOdds() {
+        getTreasureOdds() {
             return this.addTreasureOdds * this.gdTreasureOddsTimes;
         },
     }
