@@ -8,7 +8,7 @@ cc.Class({
         state : "",
         ruby : 0,
         only : false, // 是否不可以反复购买
-        cd : 0, // 冷却时间
+        unlockLv : 0, // 冷却时间
     },
     init(id){
         this.id = (id === undefined)? this.id : id;
@@ -18,12 +18,15 @@ cc.Class({
         let ruby = 0
         let only = false
         let cd = 0
+        let unlockLv = 0
         let count = this.getCount();
         switch (this.id) {
             case 0:
                 name = "一袋妖丹"
-                desc = "立即获得10个Boss的妖丹" // 封装个方法去获取数量
-                state = "状态描述"
+                var gold = this.getBagGold()
+                var str = Formulas.formatBigNumber(gold)
+                desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
+                state = ""
                 ruby = 50
                 break;
             case 1:
@@ -31,8 +34,9 @@ cc.Class({
                 desc = "DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "购买次数：" + count + "  当前增益：" + num.toFixed(2) +"%"
-                ruby = 20
+                ruby = 30
                 cd = 60*10
+                unlockLv = 10
                 break;
             case 2:
                 name = "双倍妖丹"
@@ -40,6 +44,7 @@ cc.Class({
                 state = "仅可购买一次"
                 ruby = 500
                 only = true;
+                unlockLv = 50
                 break;
             case 3:
                 name = "双倍DPS"
@@ -47,22 +52,28 @@ cc.Class({
                 state = "仅可购买一次"
                 ruby = 700
                 only = true;
+                unlockLv = 50
                 break;
             case 4:
                 name = "自动点击"
                 desc = "(+10每秒轻击)"
                 state = "当前拥有数:" + this.getCount()
                 ruby = 1000 + 500 * this.getCount()// + 已拥有数*500
+                unlockLv = 80
                 break;
             case 5:
-                name = "平行时空"
-                desc = ""
+                name = "月光宝盒の平行时空"
+                desc = "在平行时空穿梭，什么都不会失去"
+                var str = Formulas.formatBigNumber(this.getBagSoul())
+                state = "穿越次数+1，立即获得" + str + "仙丹"
                 ruby = 300
+                unlockLv = 130
                 break;
             case 6:
                 name = "大开杀戒"
                 desc = "附加10倍DPS伤害，持续60秒"
-                ruby = 20
+                ruby = 30
+                unlockLv = 30
                 break;
             // 下面是超越了
             case 7:
@@ -70,6 +81,7 @@ cc.Class({
                 desc = "每次购买+50%的闲置型上古神器收益"
                 state = "挂机收益增加:+" + (this.getCount()*50)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
             case 8:
                 name = "神器打个折"
@@ -77,36 +89,42 @@ cc.Class({
                 var num = ((1 - Math.pow(0.95,this.getCount())) * 100)
                 state = "上古神器升级费用:-" + num +"%" 
                 ruby = 200
+                unlockLv = 300
                 break;
             case 9:
                 name = "伤害高又高"
                 desc = "每次购买+100%的DPS"
                 state = "DPS增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
             case 10:
                 name = "仙丹多又多"
                 desc = "每次购买+1000%的仙丹加成"
                 state = "仙丹加成:+" + (this.getCount()*1000)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
             case 11:
                 name = "远古bos几率"
                 desc = "每次购买+25%的远古bos几率神器效力"
                 state = "远古bos几率神器效力增加:+" + (this.getCount()*25)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
             case 12:
                 name = "bos计时器哥加强"
                 desc = "每次购买+75%的bos计时器效力"
                 state = "bos计时器效力增加:+" + (this.getCount()*75)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
             case 13:
                 name = "宝箱神器加强"
                 desc = "每次购买+100%的宝箱神器效力"
                 state = "宝箱神器效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
+                unlockLv = 300
                 break;
         }
         this.name = name
@@ -115,6 +133,7 @@ cc.Class({
         this.ruby = ruby
         this.only = only // 是否不可以反复购买
         this.cd = cd
+        this.unlockLv = unlockLv
         return this
     },
 
@@ -138,7 +157,7 @@ cc.Class({
 
     onBuy(){
         if (this.id == 0) {
-            var gold = new BigNumber(1000000) // 这里要找家恒要当前关卡数 计算 10个Boss金币
+            var gold = this.getBagGold()
             // 然后 要个动画 在点击回调里调用 播放
             DataCenter.addGold(gold)
         } else if(this.id == 1){
@@ -169,5 +188,26 @@ cc.Class({
             // 仙丹多多 GameData里提供个支持数值 GoodsDatas刷新
         }
         GameData.refresh()
+    },
+
+    // 一袋金币的数额
+    getBagGold(){
+        var key = DataCenter.KeyMap.passLavel
+        var lv = DataCenter.getDataByKey(key) + 1
+        lv = Math.ceil(lv / 5) * 5
+        var gold = Formulas.getMonsterGold(lv).times(10)
+        return gold
+    },
+    // 快速转生能获得的英魂
+    getBagSoul(){
+        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+        var soul = new BigNumber(0)
+        for (let lv = 0; lv <= maxlv; lv++) {
+            if (lv >= 100 && (lv % 5) == 0) {
+                soul = soul.plus(Formulas.getPrimalBossSoul(lv))
+            }
+        }
+        soul = soul.times(GameData.getPrimalBossOdds() + 1).integerValue()
+        return soul
     },
 })

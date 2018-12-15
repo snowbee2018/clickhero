@@ -13,38 +13,65 @@ cc.Class({
 
     start () {
         Events.on(Events.ON_BUY_GOODS,this.onBuy,this)
+        Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxFloor, this)
+        Events.on(Events.ON_LEVEL_PASSED, this.onFloor, this)
+    },
+
+    onMaxFloor(){
+        var maxfloor = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+        if (this.data.unlockLv == maxfloor) {
+            this.bind()
+        }
+    },
+
+    onFloor(){
+        console.log("onFloor");
+        var floor = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel) + 1
+        if (this.data.id == 0 || this.data.id == 6) {
+            // 买金币 和 英魂 每关都刷新下
+            this.data.init()
+            this.bind()
+        }
     },
 
     bind(goods){
+        var maxfloor = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+
         this.data = goods||this.data
         this.lbName.string = this.data.name
         this.lbDesc.string = this.data.desc
         this.lbState.string = this.data.state
         this.lbBtn.string = "ruby:" + this.data.ruby
 
-        var bc = GoodsDatas.getBuyCount(this.data.id)
-        if (bc>0&& this.data.only) {
+        console.log(maxfloor + "," + this.data.unlockLv);
+        
+        if (maxfloor < this.data.unlockLv) {
             this.lbBought.active = true
             this.btn.active = false
+            this.lbBought.getComponent(cc.Label).string = this.data.unlockLv+"关解锁"
         } else {
-            this.lbBought.active = false
-            this.btn.active = true
-        }
-        
-        if (this.data.id == 1) {
-            var dateStr = cc.sys.localStorage.getItem("buyGoods1Date")
-            console.log(dateStr);
-            console.log(this.getDateStr());
-            
-            if (dateStr == this.getDateStr()) {
-                console.log("两个一样");
+            var bc = GoodsDatas.getBuyCount(this.data.id)
+            if (bc>0&& this.data.only) {
                 this.lbBought.active = true
-                this.lbBought.getComponent(cc.Label).string = "明天再来"
                 this.btn.active = false
-            }else {
-                console.log("不一样");
+            } else {
                 this.lbBought.active = false
                 this.btn.active = true
+            }
+            
+            if (this.data.id == 1) {
+                var dateStr = cc.sys.localStorage.getItem("buyGoods1Date")
+                console.log(dateStr);
+                console.log(this.getDateStr());
+                
+                if (dateStr == this.getDateStr()) {
+                    this.lbBought.active = true
+                    this.lbBought.getComponent(cc.Label).string = "明天再来"
+                    this.btn.active = false
+                }else {
+                    this.lbBought.active = false
+                    this.btn.active = true
+                }
             }
         }
     },
