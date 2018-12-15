@@ -20,6 +20,7 @@ cc.Class({
         this.name = name;
         this.level = level;
         this.desc = desc;
+        this.soul = new BigNumber(this.soul);
         if (level > 0 ) {
             this.calSoulByLvUnit();
         }
