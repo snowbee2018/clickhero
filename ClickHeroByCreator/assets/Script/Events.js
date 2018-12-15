@@ -22,6 +22,9 @@ cc.Class({
         ON_HEROLVUNIT_CHANGE: "ON_HEROLVUNIT_CHANGE", // 英雄升级单位改变
         ON_MAXLEVEL_UPDATE: "ON_MAXLEVEL_UPDATE", // 历史最高通过关卡更新
         ON_SHARE_CLICK: "ON_SHARE_CLICK", // 点击了分享按钮，但是是否分享成功无从得知
+
+        ON_CLICK_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
+        ON_DPS_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
         
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         emit(name,params){
