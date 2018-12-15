@@ -5,13 +5,16 @@ cc.Class({
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
+            rebirthCount: "rebirthCount", // 已转生次数
             bAutoClickOpen: "bAutoClickOpen",
             totalClick: "totalClick", // 历史总点击数
             maxCombo: "maxCombo", // 历史最大连击数
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
             passLavel: "passLavel", // 当前世界已通过的最高关卡
+            maxPassLavel: "maxPassLavel", // 历史最高通过关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
+            historyTotalGold: "historyTotalGold", // 历史获得的所有金币
             curSoul: "curSoul", // 当前可用英魂数量
             ruby : "ruby", // 当前可用宝石仙丹数量
             rebirthSoul: "rebirthSoul", // 转生英魂
@@ -27,7 +30,7 @@ cc.Class({
 
             curSetting: "curSetting", // 当前设置信息
 
-            rebirthCount:"rebirthCount",
+            
         }
         self.ContentData = {}
         self.DataMap = {

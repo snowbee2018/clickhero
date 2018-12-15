@@ -84,16 +84,22 @@ cc.Class({
         const self = this;
         console.log("onChildUserData");
         console.log(dataArr);
+        var childUserArr = [];
+        var rebirthChildArr = [];
         if (dataArr && dataArr.length > 0) {
-            var childUserArr = [];
             for (let index = 0; index < dataArr.length; index++) {
                 const childUserCloudData = dataArr[index];
                 childUserArr.push(childUserCloudData._openid);
+                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                if (rebirthCount && rebirthCount > 0) {
+                    rebirthChildArr.push(childUserCloudData._openid);
+                }
             }
             var cloudInfo = DataCenter.getCloudData();
             var cloudChildUsers = cloudInfo.ChildUsers;
             console.log(cloudChildUsers);
             console.log(childUserArr);
+            var added = 0;
             if (cloudChildUsers) {
                 if (cloudChildUsers.length < childUserArr.length) {
                     var added = childUserArr.length - cloudChildUsers.length;
@@ -102,9 +108,17 @@ cc.Class({
                     CloudDB.updataChildUsers(childUserArr);
                 }
             } else {
+                added = childUserArr.length;
                 CloudDB.updataChildUsers(childUserArr);
             }
         }
+        
+        var inviteInfo = {
+            allChild: childUserArr.length,
+            addedChild: added,
+            allRebirthChild: rebirthChildArr.length,
+        }
+        DataCenter.setDataByKey("UsetInviteInfo", inviteInfo);
         self.gameController.setWeChatUser();
         self.startGame();
     },
@@ -122,7 +136,6 @@ cc.Class({
             CloudDB.getChildUserData(function (err, dataArr) {
                 if (!err) {
                     console.log(dataArr);
-                    
                     self.onChildUserData(dataArr);
                 }
             });
@@ -158,6 +171,12 @@ cc.Class({
                 WeChatUserInfo: weChatUserInfo,
                 referrer: referrer,
             });
+            var inviteInfo = {
+                allChild: 0,
+                addedChild: 0,
+                allRebirthChild: 0,
+            }
+            DataCenter.setDataByKey("UsetInviteInfo", inviteInfo);
             self.gameController.setWeChatUser();
             self.startGame();
         }
