@@ -44,6 +44,7 @@ cc.Class({
                 }
             }
         }
+        
         for (let heroID = 0; heroID <= id; heroID++) {
             self.addHeroItem(heroID);
         }
@@ -87,6 +88,7 @@ cc.Class({
 
     rebirth () {
         const self = this;
+        self._heroItemMap = {}
         self.heroList.content.removeAllChildren();
         Events.off(Events.ON_BY_HERO, self.onBuyHero, self);
         self.setHeroList();

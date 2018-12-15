@@ -23,8 +23,8 @@ cc.Class({
         this.isActive = false;
         this.isBuy = false;
         this.level = 0;
-        this.cost = 0;
-        this.DPS = 0;
+        this.cost = new BigNumber(0);
+        this.DPS = new BigNumber(0);
         this.skills.forEach(sk => {
             sk.isBuy = false;
         });
@@ -181,8 +181,12 @@ cc.Class({
                             contentStr: "般若波罗蜜，开启月光宝盒，穿越时空回到500年前，这将重新开始你的游戏之旅，并获得仙丹，你愿意回到500年前吗？",
                             onTap: function (bSure) {
                                 if (bSure) {
-                                    DataCenter.consumeGold(cost);
-                                    PublicFunc.rebirth(); // 处理转生逻辑
+                                    try {
+                                        DataCenter.consumeGold(cost);
+                                        PublicFunc.rebirth(); // 处理转生逻辑
+                                    } catch (error) {
+                                        console.error(error);
+                                    }
                                 }
                             }
                         });
