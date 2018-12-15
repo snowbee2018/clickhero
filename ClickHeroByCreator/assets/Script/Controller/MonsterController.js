@@ -194,8 +194,6 @@ cc.Class({
         const self = this;
         self.monsterName.string = name;
         var percent = curHp.div(totalHp).toNumber();
-        // console.log("FFFFFFFFFFFFFFFFFFFF");
-        // console.log("percent = " + percent);
         self.hpLabel.string = Formulas.formatBigNumber(curHp) + " / " + Formulas.formatBigNumber(totalHp);
         self.hpBar.progress = percent;
     },
