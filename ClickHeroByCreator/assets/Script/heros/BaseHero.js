@@ -28,6 +28,7 @@ cc.Class({
         this.skills.forEach(sk => {
             sk.isBuy = false;
         });
+        this.calGoldByLvUnit();
     },
 
     init(id, heroName, baseCost, baseDPS, isBuy, desc, cloudHeroInfo) {
