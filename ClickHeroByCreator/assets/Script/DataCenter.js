@@ -5,6 +5,7 @@ cc.Class({
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
+            bAutoClickOpen: "bAutoClickOpen",
             totalClick: "totalClick", // 历史总点击数
             maxCombo: "maxCombo", // 历史最大连击数
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量

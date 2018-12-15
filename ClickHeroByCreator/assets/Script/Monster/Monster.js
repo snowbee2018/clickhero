@@ -109,12 +109,12 @@ cc.Class({
         } else {
             self._isBoss = self._lv % 5 == 0;
             if (!self._isBoss) {
-                var odds = Math.min((1 + GameData.addTreasureOdds * 100), 100);
+                var odds = Math.min((1 + GameData.getTreasureOdds() * 100), 100);
                 self._isTreasureChest = Formulas.isHitRandom(odds);
             } else {
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
                     var baseOdds = 0.25;
-                    var realOdds = Math.min((baseOdds + GameData.addPrimalBossOdds), 1);
+                    var realOdds = Math.min((baseOdds + GameData.getPrimalBossOdds()), 1);
                     self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);

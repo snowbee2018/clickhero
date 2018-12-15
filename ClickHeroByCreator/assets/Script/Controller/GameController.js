@@ -39,17 +39,20 @@ cc.Class({
     // called every frame
     lateUpdate (dt) {
         const self = this;
-        var totalDamage = new BigNumber(0);
-        if (self.damageArr && self.damageArr.length > 0) {
-            for (let i = 0; i < self.damageArr.length; i++) {
-                totalDamage = totalDamage.plus(self.damageArr[i]);
+        if (self.isGameStart == true) {
+            var totalDamage = new BigNumber(0);
+            if (self.damageArr && self.damageArr.length > 0) {
+                for (let i = 0; i < self.damageArr.length; i++) {
+                    totalDamage = totalDamage.plus(self.damageArr[i]);
+                }
+                self.damageArr = [];
             }
-            self.damageArr = [];
+            totalDamage = totalDamage.plus(GameData.dpsDamage.times(dt));
+            if (!totalDamage.isZero()) {
+                self.monsterController.bleed(totalDamage);
+            }
         }
-        totalDamage = totalDamage.plus(GameData.dpsDamage.times(dt));
-        if (!totalDamage.isZero()) {
-            self.monsterController.bleed(totalDamage);
-        }
+        
     },
 
     start () {
@@ -70,24 +73,20 @@ cc.Class({
 
     onGameStart () {
         const self = this;
-        // console.log(HeroDatas);
+        console.log("onGameStart");
         
         self.isIdle = false; // 是否为闲置状态
         self.combo = 0; // 当前连击数
-
         DataCenter.init();
         HeroDatas.init();
         GoodsDatas.init();
-        
+        self.getComponent("AutoClick").init();
         self.heroListControl.setHeroList();
         self.monsterController.init();
-        
         GameData.refresh();
         self.userSkillController.initUserSkills();
-
         self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
         self._totalClickCount = new BigNumber(0);
-        
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
         
@@ -96,8 +95,10 @@ cc.Class({
 
         self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
 
+
         self.scheduleOnce(self.handleIdle, 60);
         Events.emit(Events.ON_GAME_START);
+        self.isGameStart = true;
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
@@ -109,6 +110,7 @@ cc.Class({
         var rebirthSoul = DataCenter.getDataByKey(map.rebirthSoul);
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
+        obj[map.bAutoClickOpen] = self.getComponent("AutoClick").bAutoClickOpen; // 商店购买的自动点击是否开启
         obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
         obj[map.maxCombo] = DataCenter.getDataByKey(map.maxCombo); // 历史最大连击数
         obj[map.totalClick] = DataCenter.getDataByKey(map.totalClick); // 历史总点击数

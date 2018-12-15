@@ -230,6 +230,7 @@ cc.Class({
             //     gamedata: { curGold: 100, monsterInfo: { lv: 2, killCount: 1 } }
             // });
             self.startGame();
+            
         }
     },
 

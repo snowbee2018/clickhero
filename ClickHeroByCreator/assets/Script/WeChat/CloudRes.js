@@ -19,7 +19,7 @@ cc.Class({
             const self = this;
             if (!WeChatUtil.isWeChatPlatform || !path) return;
             if (!self.urlList) self.urlList = {}
-            console.log("CloudRes getUrlByPath path: " + path);
+            // console.log("CloudRes getUrlByPath path: " + path);
             if (self.urlList[path]) {
                 callBack(self.urlList[path]);
             } else {
@@ -32,7 +32,7 @@ cc.Class({
                         //    tempFileURL: '', // 临时文件网络链接
                         //    maxAge: 120 * 60 * 1000, // 有效期
                         // }]
-                        console.log(res.fileList)
+                        // console.log(res.fileList)
                         if (res.fileList && res.fileList.length == 1) {
                             var file = res.fileList[0];
                             self.urlList[file.fileID] = file.tempFileURL;

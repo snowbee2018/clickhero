@@ -109,6 +109,7 @@ cc.Class({
                 if (cAncients) {
                     let my = cAncients[0]?cAncients[0]:[];
                     let sel = cAncients[1]?cAncients[1]:[];
+                    
                     for (let i = 0; i < my.length; i++) {
                         const e = my[i];
                         for (let j = 0; j < this.otherAncients.length;j++ ) {
@@ -120,7 +121,7 @@ cc.Class({
                                 this.otherAncients.splice(j,1);
                                 this.myAncients.push(ancient);
                                 ancient.refresh();
-                                ancient.calUpgradeSoul();
+                                ancient.calSoulByLvUnit();
                                 break;
                             }
                         }

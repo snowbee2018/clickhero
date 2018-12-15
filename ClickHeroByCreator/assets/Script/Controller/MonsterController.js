@@ -160,7 +160,7 @@ cc.Class({
             }
         }
         if (self.curMonster._isBoss) { // 开始倒计时
-            self._countdown = 30 + GameData.addBossTimerSecond;
+            self._countdown = 30 + GameData.getBossTimerSecond();
             self.setTimeLabel(self._countdown);
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);

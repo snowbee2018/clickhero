@@ -4,61 +4,79 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        btnNode: cc.Node,
+        btnLabel: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
-    start () {
-
-    },
-
     // update (dt) {},
+
+    onBuyGoods (event) {
+        const self = this;
+        if (event == 4) { // 购买了自动点击
+            self.showAutoBtn(true);
+        }
+    },
 
     applyAutoClick () {
         const self = this;
-        // console.log("applyClickStorm");
-        self.getComponent("GameController").clickHit();
+        if (GameData.gdAutoClick && GameData.gdAutoClick > 0) {
+            for (let i = 0; i < GameData.gdAutoClick; i++) {
+                self.getComponent("GameController").clickHit();
+            }
+        }
     },
 
     applyClickStorm () {
         const self = this;
         // console.log("applyClickStorm");
         self.getComponent("GameController").clickHit();
-        
+    },
+
+    onAutoClickBtnClick () {
+        const self = this;
+        if (self.bAutoClickOpen) { // 当前是开启的状态
+            self.destroyAutoClick();
+        } else {
+            self.createAutoClick();
+        }
+        self.showAutoBtn(true);
+    },
+
+    showAutoBtn (bShow) {
+        const self = this;
+        bShow = !!bShow;
+        self.btnNode.active = bShow;
+        if (bShow) {
+            self.btnLabel.string = "×" + GameData.gdAutoClick + (!!self.bAutoClickOpen ? "开启" : "关闭");
+        }
     },
 
     init () {
         const self = this;
-        // 读取配置，是否购买自动点击，以及点击的频率  
-        var bAutoClick = false;
-        var clickCount = 10; // 每秒点击的次数
-        if (bAutoClick) {
-            self.createAutoClick(clickCount);
+        // 读取配置，是否购买自动点击，以及点击的频率
+        self.bAutoClickOpen = DataCenter.getCloudDataByKey(DataCenter.KeyMap.bAutoClickOpen) == true;
+        if (self.bAutoClickOpen) {
+            self.createAutoClick();
         }
+        self.showAutoBtn(GameData.gdAutoClick > 0);
+        Events.on(Events.ON_BUY_GOODS, self.onBuyGoods, self);
     },
 
-    createAutoClick(clickCount) {
+    createAutoClick() {
         const self = this;
         self.unschedule(self.applyAutoClick);
-        var time = 1/clickCount;
-        self.schedule(self.applyAutoClick, time);
+        self.schedule(self.applyAutoClick, 0.1);
+        self.bAutoClickOpen = true;
+    },
+
+    destroyAutoClick () {
+        const self = this;
+        self.unschedule(self.applyAutoClick);
+        self.bAutoClickOpen = false;
     },
 
     createClickStorm(clickCount) {
