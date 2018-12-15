@@ -27,6 +27,8 @@ cc.Class({
             var dialogNode = cc.instantiate(self.dialog);
             var curScene = cc.director.getScene();
             dialogNode.parent = curScene;
+            dialogNode.x = cc.winSize.width/2;
+            dialogNode.y = cc.winSize.height/2;
             var dialogComponent = dialogNode.getComponent("Dialog");
             dialogComponent.setDesc(params.contentStr);
             dialogComponent.setBtnText(params.leftBtnStr, params.rightStr);
@@ -47,6 +49,6 @@ cc.Class({
         self.getComponent("UserSkillController").rebirth();
         Events.emit(Events.ON_GOLD_CHANGE);
         Events.emit(Events.ON_SOUL_CHANGE);
-        WeChatUtils.onHide();
+        WeChatUtil.onHide();
     },
 });

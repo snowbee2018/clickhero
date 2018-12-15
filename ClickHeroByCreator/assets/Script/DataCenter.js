@@ -42,8 +42,8 @@ cc.Class({
         if (cloudGold) {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
         } else {
-            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+9999")));
-            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000")));
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+9999")));
+            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000")));
         }
         // 初始化英魂
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
