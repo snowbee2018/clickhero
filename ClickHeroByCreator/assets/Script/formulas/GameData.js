@@ -23,6 +23,9 @@ cc.Class({
         critTimes : 1,// 暴击倍数
         critOdds : 0,// 暴击概率
 
+        _tempClickDamage : 1,
+        _tempDpsDamage : 0,
+
         playerStatus : 0,// 玩家状态 0:combo 1:闲置
 
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
@@ -126,6 +129,10 @@ cc.Class({
                 }
             });
             this.dpsDamage = dps.times(this.globalDPSTimes).times(this.powersurgeTimes)
+            if (!this.dpsDamage.eq(this._tempDpsDamage)) {
+                this._tempDpsDamage = this.dpsDamage
+                Events.emit(Events.ON_DPS_DAMAGE_CHANGE);
+            }
         },
         // 计算点击附加伤害
         calDPSClickDamage(){
@@ -143,7 +150,11 @@ cc.Class({
             var baseClickDamage = new BigNumber(HeroDatas.getHero(0).DPS);
             this.clickDamage = baseClickDamage.plus(1).plus(this.DPSClickDamage)
                 .times(this.skClickTimes).times(this.addClickDamageTimes);
-            // this.clickDamage = HeroDatas.getHero(0).DPS + 1 + this.DPSClickDamage;
+            if (!this.clickDamage.eq(this._tempClickDamage)) {
+                this._tempClickDamage = this.clickDamage
+                Events.emit(Events.ON_CLICK_DAMAGE_CHANGE);
+            }
+            
         },
         // 计算点击暴击倍数
         calCritTimes(){

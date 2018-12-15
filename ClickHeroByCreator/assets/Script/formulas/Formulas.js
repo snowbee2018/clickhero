@@ -81,6 +81,7 @@ cc.Class({
         // 计算怪物金币 for monster
         // hp = getMonsterHP(lv);
         getMonsterGold(lv, hp) {
+            hp = hp || this.getMonsterHP(lv)
             let result = hp.div(15).times(bigMin(3, bigPow(1.025, lv)));
             return result.integerValue();
             // return Math.ceil(hp / 15 * Math.min(3,Math.pow(1.025,lv)));
