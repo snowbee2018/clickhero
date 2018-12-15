@@ -13,7 +13,7 @@ cc.Class({
         ON_USER_SKILL_UNLOCK : "on_user_skill_unlock",
         ON_BUY_ANCIENT : 'on-buy-ancient',// 购买古神
         ON_UPGRADE_ANCIENT : 'on-upgrade-ancient',// 升级古神
-        ON_BUY_GOODS : 'on-buy-goods',// 购买商品
+        ON_BUY_GOODS : 'on-buy-goods',// 购买商品 id 4 为自动点击数修改 GameData.gdAutoClick
         ON_IDLE_STATE: "ON_IDLE_STATE", // 闲置状态改变
         ON_COMBO_CHANGE: "ON_COMBO_CHANGE", // 连击次数改变
         // ON_HERO_LVUNIT_CHANGE: "ON_HERO_LVUNIT_CHANGE",// 英雄升级单位改变
