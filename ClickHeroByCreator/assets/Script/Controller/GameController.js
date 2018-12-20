@@ -386,6 +386,23 @@ cc.Class({
         self.upgrageSelectBtn.active = false;
     },
 
+    onTaskBtnClick() {
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (self.pageNode.active) {
+            var curPageIndex = pageView.getCurrentPageIndex();
+            if (curPageIndex == 4) { // 当前正在任务列表界面
+                self.pageNode.active = false;
+            } else {
+                pageView.scrollToPage(4);
+            }
+        } else {
+            self.pageNode.active = true;
+            pageView.scrollToPage(4);
+        }
+        self.upgrageSelectBtn.active = false;
+    },
+
     onUpgradeSelectClick() { // 1 10 25 100 1000 10000
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
