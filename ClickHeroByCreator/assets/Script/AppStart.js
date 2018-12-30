@@ -260,9 +260,19 @@ cc.Class({
 
     startGame () {
         const self = this;
-        console.log("开始游戏逻辑");
-        self.bg.zIndex = 0;
-        self.uiRoot.active = true;
-        self.gameController.onGameStart();
+        var start = function () {
+            console.log("开始游戏逻辑");
+            self.bg.zIndex = 0;
+            self.uiRoot.active = true;
+            self.gameController.onGameStart();
+        }
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            CloudRes.initUrl(function () {
+                start()
+            });
+        } else {
+            start();
+        }
+
     },
 });

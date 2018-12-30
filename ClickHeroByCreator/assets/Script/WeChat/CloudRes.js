@@ -65,5 +65,51 @@ cc.Class({
             var path = imgRoot + "/skill/" + heroID + "_" + skillID + ".png";
             self.getUrlByPath(path, callBack);
         },
+
+        getBDSkillIconUrl(name, callBack) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            if (self.bdSkillUrls) {
+                var path = imgRoot + "/beidong/" + name + ".png";
+                if (self.bdSkillUrls[path]) {
+                    callBack(self.bdSkillUrls[path]);
+                } else {
+                    self.getUrlByPath(path, callBack);
+                }
+            }
+        },
+
+        initUrl (onSuccess) {
+            const self = this;
+            if (!self.bdSkillUrls) {
+                var list = []
+                var iconLen = 40
+                for (let i = 0; i < iconLen; i++) {
+                    list.push(imgRoot + "/beidong/" + i + ".png")
+                }
+                // list.push(imgRoot + "/beidong/yueguang.png")
+                wx.cloud.getTempFileURL({
+                    fileList: list,
+                    success: res => {
+                        // fileList 是一个有如下结构的对象数组
+                        // [{
+                        //    fileID: 'cloud://xxx.png', // 文件 ID
+                        //    tempFileURL: '', // 临时文件网络链接
+                        //    maxAge: 120 * 60 * 1000, // 有效期
+                        // }]
+                        console.log(res.fileList)
+                        if (res.fileList && res.fileList.length == iconLen) {
+                            self.bdSkillUrls = {}
+                            for (let i = 0; i < res.fileList.length; i++) {
+                                const file = res.fileList[i];
+                                self.bdSkillUrls[file.fileID] = file.tempFileURL;
+                            }
+                            if (onSuccess) onSuccess();
+                        }
+                    },
+                    fail: console.error
+                });
+            }
+        },
     }
 });

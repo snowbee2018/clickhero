@@ -101,11 +101,12 @@ cc.Class({
             let times = 1;
             HeroDatas.heroList.forEach(hero => {
                 if (hero.isBuy) {
-                    times*=hero.getGlobalDPSTimes();
+                    var a = hero.getGlobalDPSTimes();
+                    times *= a;
+                    
                 }
             });
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes:1)*this.gdLeaveTimes;
-            console.log("idleTimes:" + idleTimes);
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes
                 *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS*this.gd10xDpsTimes;
         },
@@ -125,6 +126,8 @@ cc.Class({
             let dps = new BigNumber(0);
             HeroDatas.heroList.forEach(hero => {
                 if (hero.isBuy&&hero.isPassive) {
+                    console.log("hero dps = " + hero.DPS.toExponential(4));
+                    
                     dps = dps.plus(hero.DPS)
                 }
             });

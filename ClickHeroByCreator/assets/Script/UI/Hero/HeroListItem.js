@@ -146,7 +146,8 @@ cc.Class({
                 var skillNode = cc.instantiate(self.skillIconPrefab);
                 skillNode.parent = self.skillList;
                 var component = skillNode.getComponent("SkillIcon");
-                component.setIcon(self._heroID, skillID);
+                var skillData = skillArr[skillID];
+                component.setIcon(self._heroID, skillID, skillData.icon);
                 self.skillIcon.push(component);
             }
             

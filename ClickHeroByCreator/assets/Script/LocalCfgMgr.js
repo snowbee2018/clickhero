@@ -43,6 +43,8 @@ cc.Class({
             console.log("开始加载英雄技能配置");
             cc.loader.loadResDir("SkillCfg", function (err, assets) {
                 // console.log(assets);
+                var iconLen = 60
+                var curIconIndex = 0
                 window.SkillCfg = {};
                 for (let index = 0; index < assets.length; index++) {
                     const textAsset = assets[index];
@@ -97,6 +99,13 @@ cc.Class({
                                         break;
                                 }
                             }
+                            if (curIconIndex >= iconLen) curIconIndex = 0;
+                            if (index == 19 && i == 4) {
+                                skillCfgObj.icon = "yueguang";
+                            } else {
+                                skillCfgObj.icon = String(curIconIndex);
+                            }
+                            curIconIndex++;
                             SkillCfg[index].push(skillCfgObj);
                         }
                     }
