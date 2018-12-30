@@ -35,4 +35,8 @@ var ZoneCfg = [
     "黯黮林",
 ]
 
+var obj = [
+    { zone: "花果山", bossName: "", des:"", resNum:1 },
+]
+
 module.exports = ZoneCfg;
