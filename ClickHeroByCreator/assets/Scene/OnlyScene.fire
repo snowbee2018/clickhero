@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.42578125,
-      "y": 0.42578125,
+      "x": 0.26171874999999994,
+      "y": 0.26171874999999994,
       "z": 1
     },
     "_quat": {
@@ -5072,9 +5072,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -5602,7 +5602,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
     "_id": "0aPNdedVFB3KdB210oITaG"
@@ -5615,7 +5615,7 @@
       "__id__": 109
     },
     "_enabled": true,
-    "skillName": "点击风暴",
+    "skillName": "毫毛变化",
     "baseValue": 10,
     "coolingTime": 600,
     "bSustain": true,
@@ -5634,6 +5634,9 @@
     },
     "timeLab": {
       "__id__": 124
+    },
+    "icon": {
+      "__id__": 114
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -5832,9 +5835,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -6362,7 +6365,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
     "_id": "87s9Mk+SdETJQG3R2BDc9s"
@@ -6375,7 +6378,7 @@
       "__id__": 131
     },
     "_enabled": true,
-    "skillName": "能量风暴",
+    "skillName": "三头六臂",
     "baseValue": 2,
     "coolingTime": 600,
     "bSustain": true,
@@ -6394,6 +6397,9 @@
     },
     "timeLab": {
       "__id__": 146
+    },
+    "icon": {
+      "__id__": 136
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -6592,9 +6598,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -7135,7 +7141,7 @@
       "__id__": 153
     },
     "_enabled": true,
-    "skillName": "幸运星",
+    "skillName": "鸿运灌顶",
     "baseValue": 0.5,
     "coolingTime": 1800,
     "bSustain": true,
@@ -7154,6 +7160,9 @@
     },
     "timeLab": {
       "__id__": 168
+    },
+    "icon": {
+      "__id__": 158
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -7352,9 +7361,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -7895,7 +7904,7 @@
       "__id__": 175
     },
     "_enabled": true,
-    "skillName": "金属探测器",
+    "skillName": "火眼金睛",
     "baseValue": 2,
     "coolingTime": 1800,
     "bSustain": true,
@@ -7914,6 +7923,9 @@
     },
     "timeLab": {
       "__id__": 190
+    },
+    "icon": {
+      "__id__": 180
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -8112,9 +8124,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -8655,7 +8667,7 @@
       "__id__": 197
     },
     "_enabled": true,
-    "skillName": "金手指",
+    "skillName": "点石成金",
     "baseValue": 0.01,
     "coolingTime": 3600,
     "bSustain": true,
@@ -8674,6 +8686,9 @@
     },
     "timeLab": {
       "__id__": 212
+    },
+    "icon": {
+      "__id__": 202
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -8872,9 +8887,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -9415,7 +9430,7 @@
       "__id__": 219
     },
     "_enabled": true,
-    "skillName": "黑暗仪式",
+    "skillName": "阿弥陀佛",
     "baseValue": 1.05,
     "coolingTime": 28800,
     "bSustain": false,
@@ -9434,6 +9449,9 @@
     },
     "timeLab": {
       "__id__": 234
+    },
+    "icon": {
+      "__id__": 224
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -9632,9 +9650,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -10175,7 +10193,7 @@
       "__id__": 241
     },
     "_enabled": true,
-    "skillName": "超级点击",
+    "skillName": "如意金箍",
     "baseValue": 3,
     "coolingTime": 3600,
     "bSustain": true,
@@ -10194,6 +10212,9 @@
     },
     "timeLab": {
       "__id__": 256
+    },
+    "icon": {
+      "__id__": 246
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -10392,9 +10413,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -10935,7 +10956,7 @@
       "__id__": 263
     },
     "_enabled": true,
-    "skillName": "充能",
+    "skillName": "观音赐福",
     "baseValue": 1,
     "coolingTime": 3600,
     "bSustain": false,
@@ -10954,6 +10975,9 @@
     },
     "timeLab": {
       "__id__": 278
+    },
+    "icon": {
+      "__id__": 268
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -11152,9 +11176,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 158,
-      "g": 41,
-      "b": 135,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -11695,7 +11719,7 @@
       "__id__": 285
     },
     "_enabled": true,
-    "skillName": "刷新",
+    "skillName": "筋斗云",
     "baseValue": 1,
     "coolingTime": 3600,
     "bSustain": false,
@@ -11714,6 +11738,9 @@
     },
     "timeLab": {
       "__id__": 300
+    },
+    "icon": {
+      "__id__": 290
     },
     "_isBuy": false,
     "_lastTimestamp": 0,
@@ -14120,6 +14147,9 @@
       },
       {
         "__id__": 334
+      },
+      {
+        "__id__": 349
       }
     ],
     "_id": "3a/Q4qVUxFooT2RawBacGE"

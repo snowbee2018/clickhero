@@ -46,7 +46,7 @@ cc.Class({
 
         getHeroUrl (heroID, callBack) {
             const self = this;
-            // if (!WeChatUtil.isWeChatPlatform) return;
+            if (!WeChatUtil.isWeChatPlatform) return;
             // if (!self.urlList) self.urlList = {}
             var path = imgRoot + "/hero/" + heroID + ".png";
             self.getUrlByPath(path, callBack);
@@ -56,6 +56,13 @@ cc.Class({
             const self = this;
             if (!WeChatUtil.isWeChatPlatform) return;
             var path = imgRoot + "/loginBtn.png";
+            self.getUrlByPath(path, callBack);
+        },
+
+        getSkillIconUrl(heroID, skillID, callBack) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            var path = imgRoot + "/skill/" + heroID + "_" + skillID + ".png";
             self.getUrlByPath(path, callBack);
         },
     }

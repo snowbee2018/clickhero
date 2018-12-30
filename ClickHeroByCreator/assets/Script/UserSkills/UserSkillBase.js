@@ -25,6 +25,7 @@ cc.Class({
         skillNameLab: cc.Label,
         describeLab: cc.Label,
         timeLab: cc.Label,
+        icon: cc.Sprite,
         
         _isBuy: false, // 是否已经购买
         _lastTimestamp: 0, // 上次使用技能的时间
@@ -36,7 +37,18 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        const self = this;
+        CloudRes.getSkillIconUrl(self.heroID, self.skillID, function (url) {
+            if (url) {
+                cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+                    if (!err && texture) {
+                        self.icon.spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                });
+            }
+        });
+    },
 
     // start () {},
 
@@ -106,7 +118,7 @@ cc.Class({
                 self.onCoolingDone();
             }
         } else {
-            self._isActive = false;
+            self._isActive = true;
             self._coolingCurtail = 0;
         }
 
@@ -184,7 +196,7 @@ cc.Class({
     // },
 
     onSkillUnlock(skillInfo) {
-        const self = this;
+        const self = this;        
         if (skillInfo.heroID == self.heroID) {
             if (skillInfo.skillID == self.skillID) {
                 self._isBuy = true;
