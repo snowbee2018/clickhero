@@ -87,4 +87,4 @@ var obj = [
     // { zone: "天竺国", bossName: "玉兔精", des:"", resNum:"0001" },
 ]
 
-module.exports = ZoneCfg;
+module.exports = obj;

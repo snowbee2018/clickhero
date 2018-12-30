@@ -34,9 +34,18 @@ cc.Class({
         self.gray.active = !bLight;
     },
 
-    setIcon (heroID, skillID) {
+    setIcon (heroID, skillID, icon) {
         const self = this;
         self._heroID = heroID;
         self._skillID = skillID;
+        CloudRes.getBDSkillIconUrl(icon, function (url) {
+            if (url) {
+                cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+                    if (!err && texture) {
+                        self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                });
+            }
+        });
     },
 });
