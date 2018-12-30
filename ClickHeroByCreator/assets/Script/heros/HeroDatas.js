@@ -41,8 +41,8 @@ cc.Class({
         otherAncients : [],// 剩余的
         init() {
             this.buyAncientSouls = buyAncientSouls;
-            this.initAncient(true);
             this.initHeros();
+            this.initAncient(true);
         },
         initHeros(){
             var map = DataCenter.KeyMap;
