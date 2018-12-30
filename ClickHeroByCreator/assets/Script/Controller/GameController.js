@@ -74,37 +74,45 @@ cc.Class({
     onGameStart () {
         const self = this;
         console.log("onGameStart");
+        try {
+            self.isIdle = true; // 是否为闲置状态
+            self.combo = 0; // 当前连击数
+            DataCenter.init();
+            HeroDatas.init();
+            GoodsDatas.init();
+            self.getComponent("AutoClick").init();
+            self.heroListControl.setHeroList();
+            self.monsterController.init();
+            GameData.refresh();
+            self.userSkillController.initUserSkills();
+            self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
+            self._totalClickCount = new BigNumber(0);
+            Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+            Events.on(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
+            Events.on(Events.ON_CLICK_DAMAGE_CHANGE, self.onClickDamageChange, self);
+            Events.on(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
+            Events.on(Events.ON_IDLE_STATE, self.onIdleState, self);
+            Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
+
+            self.totalCostLab.string = DataCenter.getGoldStr();
+            self.totalSoulLab.string = DataCenter.getSoulStr();
+            self.clickDamageLab.string = Formulas.formatBigNumber(GameData.clickDamage);
+            self.dpsDamageLab.string = Formulas.formatBigNumber(GameData.dpsDamage);
+
+
+            self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
+
+
+            self.scheduleOnce(self.handleIdle, 60);
+            Events.emit(Events.ON_GAME_START);
+            self.isGameStart = true;
+
+            self.pageNode.getComponent("HideOtherPage").handler();
+        } catch (error) {
+            console.error(error)
+        }
         
-        self.isIdle = true; // 是否为闲置状态
-        self.combo = 0; // 当前连击数
-        DataCenter.init();
-        HeroDatas.init();
-        GoodsDatas.init();
-        self.getComponent("AutoClick").init();
-        self.heroListControl.setHeroList();
-        self.monsterController.init();
-        GameData.refresh();
-        self.userSkillController.initUserSkills();
-        self.node.on(cc.Node.EventType.TOUCH_START, self.onTouchStart.bind(self));
-        self._totalClickCount = new BigNumber(0);
-        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
-        Events.on(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
-        Events.on(Events.ON_CLICK_DAMAGE_CHANGE, self.onClickDamageChange, self);
-        Events.on(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
-        Events.on(Events.ON_IDLE_STATE, self.onIdleState, self);
-        Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
-        
-        self.totalCostLab.string = DataCenter.getGoldStr();
-        self.totalSoulLab.string = DataCenter.getSoulStr();
 
-        self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
-
-
-        self.scheduleOnce(self.handleIdle, 60);
-        Events.emit(Events.ON_GAME_START);
-        self.isGameStart = true;
-
-        self.pageNode.getComponent("HideOtherPage").handler();
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
