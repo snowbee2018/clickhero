@@ -79,6 +79,13 @@ cc.Class({
             }
         },
 
+        getBossUrl(id, callBack) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            var path = imgRoot + "/boss/boss" + id + ".png";
+            self.getUrlByPath(path, callBack);
+        },
+
         initUrl (onSuccess) {
             const self = this;
             if (!self.bdSkillUrls) {

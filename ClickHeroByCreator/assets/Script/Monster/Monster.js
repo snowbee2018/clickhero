@@ -7,6 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var zoneCfg = require("ZoneCfg")
 
 cc.Class({
     extends: cc.Component,
@@ -133,7 +134,37 @@ cc.Class({
             }
         }
 
-        self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
+        var len = zoneCfg.length;
+        var lv = self._lv;
+        var inedx = parseInt((lv - 1) / 5);
+        var flag = inedx < len;
+        inedx = inedx % len;
+        var zoneObj = zoneCfg[inedx];
+        if (self._isBoss) {
+            self._monsterName = zoneObj.bossName;
+            CloudRes.getBossUrl(zoneObj.resNum, function (url) {
+                if (url) {
+                    cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+                        if (!err && texture && cc.isValid(self.node)) {
+                            self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                        }
+                    });
+                }
+            });
+            if (flag && zoneObj.des.length > 0) {
+                // 放剧情
+                // zoneObj.des
+            }
+        } else {
+            // self._isTreasureChest
+            if (!self._isTreasureChest) {
+                self._monsterName = zoneObj.zone + "小妖";
+            }
+            self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
+        }
+
+        
+        // zoneCfg
 
         self._onMonsterDestroy = onMonsterDestroy;
         self._hpChangeCallBack = hpChangeCallBack;

@@ -1,12 +1,4 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var zoneCfg = require("ZoneCfg")
 
 cc.Class({
     extends: cc.Component,
@@ -31,13 +23,22 @@ cc.Class({
 
     setZonrInfo (level, killCount, isBoss) {
         const self = this;
-        var yu = level % ZoneArr.length;
-        if (yu == 0) {
-            self.zoneName.string = ZoneArr[ZoneArr.length - 1];
-        } else {
-            var zheng = Math.floor((yu - 1) / 5);
-            self.zoneName.string = ZoneArr[zheng];
-        }
+        // var yu = level % ZoneArr.length;
+        // if (yu == 0) {
+        //     self.zoneName.string = ZoneArr[ZoneArr.length - 1];
+        // } else {
+        //     var zheng = Math.floor((yu - 1) / 5);
+        //     self.zoneName.string = ZoneArr[zheng];
+        // }
+
+        var len = zoneCfg.length;
+        var lv = level;
+        var inedx = parseInt((lv - 1) / 5);
+        inedx = inedx % len;
+        var zoneObj = zoneCfg[inedx];
+        self.zoneName.string = zoneObj.zone;
+
+
         self.level.string = "等级 " + level;
         if (DataCenter.isLevelPassed(level)) {
             self.percent.string = "已通关";
