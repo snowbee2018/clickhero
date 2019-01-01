@@ -5,6 +5,14 @@ cc.Class({
     properties: {
         sv : cc.ScrollView,
         dialogPrefab : cc.Prefab,
+        SigninDialog : cc.Prefab,
+    },
+
+    showSigninDialog(){
+        let dialog = cc.instantiate(this.SigninDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 
 })

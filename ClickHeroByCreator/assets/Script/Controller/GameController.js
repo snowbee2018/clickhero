@@ -150,6 +150,9 @@ cc.Class({
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
+        obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
+        console.log("obj[map.signinData]:" + obj[map.signinData]);
+        
         console.log(obj);
         
         return obj;

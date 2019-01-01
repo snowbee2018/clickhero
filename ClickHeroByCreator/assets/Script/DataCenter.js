@@ -30,7 +30,7 @@ cc.Class({
 
             curSetting: "curSetting", // 当前设置信息
 
-            
+            signinData: "signinData", // 签到数据{times:0,date:"yyyy/MM/dd"}
         }
         self.ContentData = {}
         self.DataMap = {
@@ -111,6 +111,12 @@ cc.Class({
             self.setDataByKey(self.KeyMap.rebirthCount, Number(count));
         } else {
             self.setDataByKey(self.KeyMap.rebirthCount, 0);
+        }
+        // 初始化签到数据
+        var signinData = self.getCloudDataByKey(self.KeyMap.signinData);
+        console.log("signinData:" + signinData);
+        if (signinData) {
+            self.setDataByKey(self.KeyMap.signinData, signinData);
         }
     },
 
