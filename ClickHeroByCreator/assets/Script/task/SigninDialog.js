@@ -2,9 +2,9 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-01-01 22:45:54
+ * @Last Modified time: 2019-03-02 12:02:02
  */
-
+ 
 cc.Class({
     extends: cc.Component,
 

@@ -6,6 +6,7 @@ cc.Class({
         sv : cc.ScrollView,
         dialogPrefab : cc.Prefab,
         SigninDialog : cc.Prefab,
+        ShareDialog : cc.Prefab,
     },
 
     showSigninDialog(){
@@ -15,7 +16,22 @@ cc.Class({
         dialog.y = cc.winSize.height / 2;
     },
 
+    showShareDialog () {
+        console.log("showShareDialog");
+        let dialog = cc.instantiate(this.ShareDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+    },
 })
+
+/**19.3.2
+ * 分享框，模拟子用户列表数据
+ * 模拟 已领取子用户列表数据
+ * bind ShareItem
+ * --200后每25级*4 1000级*10
+ * --
+ */
 
 /**签到：
  * 需要一个签到框，显示7天
