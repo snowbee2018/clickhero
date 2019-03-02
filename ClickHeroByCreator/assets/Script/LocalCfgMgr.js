@@ -77,7 +77,6 @@ cc.Class({
                                 switch (key) {
                                     case "globalDPS":
                                     case "gold":
-                                    case "heroDPS":
                                     case "bjDamage":
                                     case "bjProbability":
                                     case "DPSClick":
@@ -86,6 +85,7 @@ cc.Class({
                                             skillCfgObj[key] = Number(value);
                                         }
                                         break;
+                                    case "heroDPS":
                                     case "cost":
                                         skillCfgObj[key] = new BigNumber(value);
                                         break;
