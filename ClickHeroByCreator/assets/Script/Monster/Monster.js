@@ -77,7 +77,7 @@ cc.Class({
         }
     },
 
-    setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack) {
+    setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack, onMonsterTalk) {
         const self = this;
         self._lv = lv;
         self._totalHP = Formulas.getMonsterHP(lv);
@@ -154,6 +154,12 @@ cc.Class({
             if (flag && zoneObj.des.length > 0) {
                 // 放剧情
                 // zoneObj.des
+                // console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+                // console.log(zoneObj);
+                
+                // console.log(zoneObj.des);
+                
+                onMonsterTalk(zoneObj.des);
             }
         } else {
             // self._isTreasureChest
@@ -161,6 +167,10 @@ cc.Class({
                 self._monsterName = zoneObj.zone + "小妖";
             }
             self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
+            if (lv%5 == 4) {
+                let i = parseInt((lv + 1)/5)
+                CloudRes.preloadBoosRes(i);
+            }
         }
 
         

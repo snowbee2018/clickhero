@@ -72,6 +72,7 @@ cc.Class({
                     WeChatUserInfo: data.WeChatUserInfo,
                     gamedata: data.gamedata,
                     ChildUsers: [],
+                    registerTime: data.registerTime
                 }
                 if (data.referrer) {
                     params.referrer = data.referrer;
@@ -81,7 +82,7 @@ cc.Class({
                     data: params,
                     success: function (res) {
                         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                        console.log(res)
+                        // console.log(res)
                         self.saveDBID(res._id);
                     }
                 });
@@ -99,7 +100,7 @@ cc.Class({
                         WeChatUserInfo: DataCenter.getDataByKey(DataCenter.DataMap.WXUserInfo)
                     },
                     success: function (res) {
-                        console.log(res);
+                        // console.log(res);
                     }
                 });
             }

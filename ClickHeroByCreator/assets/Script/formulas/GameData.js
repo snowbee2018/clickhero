@@ -126,8 +126,6 @@ cc.Class({
             let dps = new BigNumber(0);
             HeroDatas.heroList.forEach(hero => {
                 if (hero.isBuy&&hero.isPassive) {
-                    console.log("hero dps = " + hero.DPS.toExponential(4));
-                    
                     dps = dps.plus(hero.DPS)
                 }
             });

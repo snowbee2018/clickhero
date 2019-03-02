@@ -51,12 +51,12 @@ cc.Class({
         var mapKeys = Object.keys(self._heroItemMap);
         var id = parseInt(mapKeys[mapKeys.length - 1]);
         var h = HeroDatas.getHero(id + 1);
-        console.log(h);
+        // console.log(h);
         if (h) {
             self.addHeroItem(id + 1);
         }
         var h1 = HeroDatas.getHero(id + 2);
-        console.log(h);
+        // console.log(h);
         if (h1) {
             self.addHeroItem(id + 2);
         }

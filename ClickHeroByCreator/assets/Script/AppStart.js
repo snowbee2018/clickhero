@@ -46,10 +46,10 @@ cc.Class({
         window.GoodsDatas = require("GoodsDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
-        window.BigNumber.config({
-            DECIMAL_PLACES: 4,
-            POW_PRECISION: 4,
-        });
+        // window.BigNumber.config({
+        //     DECIMAL_PLACES: 4,
+        //     POW_PRECISION: 4,
+        // });
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
         window.CloudRes = require("CloudRes");
@@ -85,40 +85,51 @@ cc.Class({
         console.log("onChildUserData");
         console.log(dataArr);
         var childUserArr = [];
-        var rebirthChildArr = [];
+        // var rebirthChildArr = [];
         if (dataArr && dataArr.length > 0) {
             for (let index = 0; index < dataArr.length; index++) {
                 const childUserCloudData = dataArr[index];
-                childUserArr.push(childUserCloudData._openid);
                 var rebirthCount = childUserCloudData.gamedata.rebirthCount;
-                if (rebirthCount && rebirthCount > 0) {
-                    rebirthChildArr.push(childUserCloudData._openid);
-                }
+                childUserArr.push({
+                    weChatUserInfo: childUserCloudData.WeChatUserInfo,
+                    isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
+                    registerTime: childUserCloudData.registerTime
+                });
             }
-            var cloudInfo = DataCenter.getCloudData();
-            var cloudChildUsers = cloudInfo.ChildUsers;
-            console.log(cloudChildUsers);
-            console.log(childUserArr);
-            var added = 0;
-            if (cloudChildUsers) {
-                if (cloudChildUsers.length < childUserArr.length) {
-                    var added = childUserArr.length - cloudChildUsers.length;
-                    console.log("新增了added = " + added + "个子用户");
-                    WeChatUtil.showToast("新增" + added + "个子用户");
-                    CloudDB.updataChildUsers(childUserArr);
-                }
-            } else {
-                added = childUserArr.length;
-                CloudDB.updataChildUsers(childUserArr);
-            }
+            // for (let index = 0; index < dataArr.length; index++) {
+            //     const childUserCloudData = dataArr[index];
+            //     childUserArr.push(childUserCloudData._openid);
+            //     var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+            //     if (rebirthCount && rebirthCount > 0) {
+            //         rebirthChildArr.push(childUserCloudData._openid);
+            //     }
+            // }
+            // var cloudInfo = DataCenter.getCloudData();
+            // var cloudChildUsers = cloudInfo.ChildUsers;
+            // console.log(cloudChildUsers);
+            // console.log(childUserArr);
+            // var added = 0;
+            // if (cloudChildUsers) {
+            //     if (cloudChildUsers.length < childUserArr.length) {
+            //         var added = childUserArr.length - cloudChildUsers.length;
+            //         console.log("新增了added = " + added + "个子用户");
+            //         WeChatUtil.showToast("新增" + added + "个子用户");
+            //         CloudDB.updataChildUsers(childUserArr);
+            //     }
+            // } else {
+            //     added = childUserArr.length;
+            //     CloudDB.updataChildUsers(childUserArr);
+            // }
         }
         
-        var inviteInfo = {
-            allChild: childUserArr.length,
-            addedChild: added,
-            allRebirthChild: rebirthChildArr.length,
-        }
-        DataCenter.setDataByKey("UsetInviteInfo", inviteInfo);
+        // var inviteInfo = {
+        //     allChild: childUserArr.length,
+        //     addedChild: added,
+        //     allRebirthChild: rebirthChildArr.length,
+        // }
+        
+        DataCenter.setDataByKey("ChildUserArr", childUserArr);
+        
         self.gameController.setWeChatUser();
         self.startGame();
     },
@@ -170,6 +181,7 @@ cc.Class({
                 gamedata: {},
                 WeChatUserInfo: weChatUserInfo,
                 referrer: referrer,
+                registerTime: new Date().getTime()
             });
             var inviteInfo = {
                 allChild: 0,

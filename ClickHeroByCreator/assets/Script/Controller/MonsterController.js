@@ -145,12 +145,14 @@ cc.Class({
         const self = this;
         let monsterNode = cc.instantiate(self.monsterPrefab);
         monsterNode.parent = self.monsterPos;
+        self.hideTalkBubble();
         self.curMonster = monsterNode.getComponent("Monster");
         self.curMonster.setMonsterByLv(
             lv, cloudMonsterInfo,
             self.onCurMonsterDestroy.bind(self),
             self.onHpChange.bind(self),
-            self.onClickHert.bind(self)
+            self.onClickHert.bind(self),
+            self.talk.bind(self)
         );
         self.gameController.updataMonsterInfoDisplay();
         self.setTimeLabel("");
@@ -164,6 +166,9 @@ cc.Class({
             self.setTimeLabel(self._countdown);
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
+        if (self.curMonster._isBoss) {
+            self.monsterPos.scale = 1.5;
+        }
     },
 
     hit(damage, bDPS, bCrit) {
@@ -277,5 +282,66 @@ cc.Class({
         delete self._countdown;
         self.curMonster.byebye();
         self.makeMonster(1);
+    },
+
+    moveUp () {
+        const self = this;
+        if (cc.isValid(self.monsterPos)) {
+            self.monsterPos.parent.stopAllActions();
+            self.monsterPos.parent.runAction(cc.moveTo(0.15, cc.v2(0, 0)));
+        }
+    },
+
+    moveDown() {
+        const self = this;
+        if (cc.isValid(self.monsterPos)) {
+            self.monsterPos.parent.stopAllActions();
+            self.monsterPos.parent.runAction(cc.moveTo(0.15, cc.v2(0, -220)));
+        }
+    },
+
+    talk (contentStr) {
+        const self = this;
+        var arr = contentStr.split(" ");
+        var lStr = arr[1];
+        var rStr = arr[0];
+        var bubbleLeft = self.monsterPos.parent.getChildByName('BubbleLeft');
+        var contentLabLeft = bubbleLeft.getChildByName('contentLab');
+        contentLabLeft.getComponent(cc.Label).string = lStr;
+        var bubbleRight = self.monsterPos.parent.getChildByName('BubbleRight');
+        var contentLabRight = bubbleRight.getChildByName('contentLab');
+        contentLabRight.getComponent(cc.Label).string = rStr;
+
+        bubbleLeft.stopAllActions();
+        bubbleRight.stopAllActions();
+        bubbleLeft.active = true;
+        bubbleLeft.scale = 0;
+        bubbleRight.active = true;
+        bubbleRight.scale = 0;
+        bubbleLeft.runAction(cc.sequence(
+            cc.delayTime(0.2),
+            cc.scaleTo(0.15, 1),
+            cc.delayTime(4),
+            cc.scaleTo(0.15, 0),
+            cc.callFunc(function () {
+                self.hideTalkBubble();
+            })
+        ));
+        bubbleRight.runAction(cc.sequence(
+            cc.scaleTo(0.15, 1),
+            cc.delayTime(4),
+            cc.scaleTo(0.15, 0),
+            cc.callFunc(function () {
+                self.hideTalkBubble();
+            })
+        ));
+    },
+
+    hideTalkBubble () {
+        const self = this;
+        let bubbleLeft = self.monsterPos.parent.getChildByName('BubbleLeft');
+        var bubbleRight = self.monsterPos.parent.getChildByName('BubbleRight');
+        bubbleLeft.active = false;
+        bubbleRight.active = false;
     },
 });

@@ -28,7 +28,7 @@ cc.Class({
     fullViews(){
         try {
             let list = GoodsDatas.datas;
-            console.log(list);
+            // console.log(list);
 
             list.forEach(e => {
                 this.addItem(e);

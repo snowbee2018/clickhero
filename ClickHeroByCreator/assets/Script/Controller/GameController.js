@@ -31,7 +31,19 @@ cc.Class({
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
 
+        self.setPageNodeActive(true);
+
         WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
+    },
+
+    setPageNodeActive (bActive) {
+        const self = this;
+        self.pageNode.active = bActive;
+        if (bActive) {
+            self.monsterController.moveUp();
+        } else {
+            self.monsterController.moveDown();
+        }
     },
 
     // called every frame
@@ -75,6 +87,18 @@ cc.Class({
         const self = this;
         console.log("onGameStart");
         try {
+            var lv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (lv >= 300) {
+                BigNumber.config({
+                    DECIMAL_PLACES: 4,
+                    POW_PRECISION: 4,
+                });
+            } else {
+                BigNumber.config({
+                    DECIMAL_PLACES: 5,
+                    POW_PRECISION: 5,
+                });
+            }
             self.isIdle = true; // 是否为闲置状态
             self.combo = 0; // 当前连击数
             DataCenter.init();
@@ -333,12 +357,12 @@ cc.Class({
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 0) { // 当前正在英雄列表界面
-                self.pageNode.active = false;
+                self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(0);
             }
         } else {
-            self.pageNode.active = true;
+            self.setPageNodeActive(true);
             pageView.scrollToPage(0);
         }
         self.upgrageSelectBtn.active = true;
@@ -351,12 +375,12 @@ cc.Class({
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 1) { // 当前正在技能列表界面
-                self.pageNode.active = false;
+                self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(1);
             }
         } else {
-            self.pageNode.active = true;
+            self.setPageNodeActive(true);
             pageView.scrollToPage(1);
         }
         self.upgrageSelectBtn.active = false;
@@ -368,12 +392,12 @@ cc.Class({
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 2) { // 当前正在古神列表界面
-                self.pageNode.active = false;
+                self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(2);
             }
         } else {
-            self.pageNode.active = true;
+            self.setPageNodeActive(true);
             pageView.scrollToPage(2);
         }
         self.upgrageSelectBtn.active = true;
@@ -386,12 +410,12 @@ cc.Class({
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 3) { // 当前正在技能列表界面
-                self.pageNode.active = false;
+                self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(3);
             }
         } else {
-            self.pageNode.active = true;
+            self.setPageNodeActive(true);
             pageView.scrollToPage(3);
         }
         self.upgrageSelectBtn.active = false;
@@ -403,12 +427,12 @@ cc.Class({
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 4) { // 当前正在任务列表界面
-                self.pageNode.active = false;
+                self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(4);
             }
         } else {
-            self.pageNode.active = true;
+            self.setPageNodeActive(true);
             pageView.scrollToPage(4);
         }
         self.upgrageSelectBtn.active = false;

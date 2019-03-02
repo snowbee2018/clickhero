@@ -82,8 +82,19 @@ cc.Class({
         getBossUrl(id, callBack) {
             const self = this;
             if (!WeChatUtil.isWeChatPlatform) return;
-            var path = imgRoot + "/boss/boss" + id + ".png";
+            var path = imgRoot + "/boss/boss_" + id + ".png";
             self.getUrlByPath(path, callBack);
+        },
+
+        preloadBoosRes(id) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            var path = imgRoot + "/boss/boss_" + id + ".png";
+            self.getUrlByPath(path, function (url) {
+                if (url) {
+                    cc.loader.load({ url: url, type: 'png' });
+                }
+            });
         },
 
         initUrl (onSuccess) {
