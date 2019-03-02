@@ -231,6 +231,7 @@ cc.Class({
                             if (url) {
                                 cc.loader.load({url:url,type:"png"}, function (err, textrue) {
                                     if (!err && textrue) {
+                                        cc.find('Canvas/tip').active = false
                                         self.loginBtn.node.active = true;
                                         self.loginBtn.spriteFrame = new cc.SpriteFrame(textrue);
                                         self.loginBtn.node.width = textrue.width;
@@ -255,6 +256,7 @@ cc.Class({
 
     onLoginBtnClick () {
         self.loginBtn.node.active = false;
+        cc.find('Canvas/tip').active = true
         self.login();
     },
 
@@ -273,6 +275,6 @@ cc.Class({
         } else {
             start();
         }
-
+        cc.find('Canvas/tip').active = false
     },
 });
