@@ -287,6 +287,6 @@ cc.Class({
         } else {
             start();
         }
-        cc.find('Canvas/tip').active = false
+        // cc.find('Canvas/tip').active = false
     },
 });
