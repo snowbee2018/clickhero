@@ -167,7 +167,9 @@ cc.Class({
         }
         self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
         if (self.curMonster._isBoss) {
-            self.monsterPos.scale = 1.5;
+            self.monsterPos.scale = 1.8;
+        } else {
+            self.monsterPos.scale = 1;
         }
     },
 

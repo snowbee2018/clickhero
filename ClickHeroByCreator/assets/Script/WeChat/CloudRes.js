@@ -15,6 +15,10 @@ var imgRoot = "cloud://test-72db6b.7465-test-72db6b/img";
 // cloud://test-72db6b.7465-test-72db6b/hero/3.png
 cc.Class({
     statics: {
+        init () {
+            const self = this;
+            self.urlList = {}
+        },
         getUrlByPath (path, callBack) {
             const self = this;
             if (!WeChatUtil.isWeChatPlatform || !path) return;
@@ -95,6 +99,93 @@ cc.Class({
                     cc.loader.load({ url: url, type: 'png' });
                 }
             });
+        },
+
+        preloadMonsterRes (finishCallBack) {
+            const self = this;
+            if (!WeChatUtil.isWeChatPlatform) return;
+            let count = 56;
+            let count1 = 50;
+            let pathArr1 = [];
+            let pathArr2 = [];
+            for (let index = 1; index <= count1; index++) {
+                let path = imgRoot + "/monster/monster" + index + ".png";
+                pathArr1.push(path);
+            }
+            for (let index = count1 + 1; index <= count; index++) {
+                let path = imgRoot + "/monster/monster" + index + ".png";
+                pathArr2.push(path);
+            }
+
+            var loadCount = 0;
+            var loadFinish = function () {
+                loadCount += 1;
+                console.log('loadCount = ' + loadCount);
+                
+                if (loadCount == 2) {
+                    finishCallBack();
+                }
+            }
+            wx.cloud.getTempFileURL({
+                fileList: pathArr1,
+                success: res => {
+                    // fileList 是一个有如下结构的对象数组
+                    // [{
+                    //    fileID: 'cloud://xxx.png', // 文件 ID
+                    //    tempFileURL: '', // 临时文件网络链接
+                    //    maxAge: 120 * 60 * 1000, // 有效期
+                    // }]
+                    if (res.fileList && res.fileList.length == count1) {
+                        for (let index = 0; index < res.fileList.length; index++) {
+                            const file = res.fileList[index];
+                            cc.loader.load({ url: file.tempFileURL, type: 'png' });
+                            self.urlList[file.fileID] = file.tempFileURL;
+                        }
+                        loadFinish();
+                    }
+                },
+                fail: console.error
+            });
+
+            wx.cloud.getTempFileURL({
+                fileList: pathArr2,
+                success: res => {
+                    // fileList 是一个有如下结构的对象数组
+                    // [{
+                    //    fileID: 'cloud://xxx.png', // 文件 ID
+                    //    tempFileURL: '', // 临时文件网络链接
+                    //    maxAge: 120 * 60 * 1000, // 有效期
+                    // }]
+                    if (res.fileList && res.fileList.length == count - count1) {
+                        for (let index = 0; index < res.fileList.length; index++) {
+                            const file = res.fileList[index];
+                            cc.loader.load({ url: file.tempFileURL, type: 'png' });
+                            self.urlList[file.fileID] = file.tempFileURL;
+                        }
+                        loadFinish();
+                    }
+                },
+                fail: console.error
+            });
+
+            // var path = imgRoot + "/monster/monster" + id + ".png";
+            // self.getUrlByPath(path, function (url) {
+            //     if (url) {
+            //         cc.loader.load({ url: url, type: 'png' });
+            //     }
+            // });
+        },
+
+        getMonsterRes (callBack) {
+            const self = this;
+            let start = 1;
+            let count = 56;
+            let index = Math.floor(Math.random() * (count - start + 1) + start);
+            var path = imgRoot + "/monster/monster" + index + ".png";
+            let url = self.urlList[path];
+            if (url) {
+                cc.loader.load({ url: url, type: 'png' }, callBack);
+            }
         },
 
         initUrl (onSuccess) {

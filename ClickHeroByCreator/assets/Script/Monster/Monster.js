@@ -166,7 +166,12 @@ cc.Class({
             if (!self._isTreasureChest) {
                 self._monsterName = zoneObj.zone + "小妖";
             }
-            self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
+            CloudRes.getMonsterRes(function (err, texture) {
+                if (!err && texture && cc.isValid(self.node)) {
+                    self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                }
+            });
+            // self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
             if (lv%5 == 4) {
                 let i = parseInt((lv + 1)/5)
                 CloudRes.preloadBoosRes(i);

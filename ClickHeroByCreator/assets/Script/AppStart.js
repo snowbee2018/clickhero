@@ -57,6 +57,13 @@ cc.Class({
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
+        
+        CloudRes.init();
+        console.log('加载怪物资源');
+        CloudRes.preloadMonsterRes(function () {
+            self.monsterResDone = true;
+            self.showGame();
+        });
     },
 
     checkReady() {
@@ -272,13 +279,23 @@ cc.Class({
         self.login();
     },
 
-    startGame () {
+    showGame () {
         const self = this;
-        var start = function () {
+        // console.log('self.monsterResDone = ' + self.monsterResDone);
+        // console.log('self.loginDone = ' + self.loginDone);
+        if (self.monsterResDone == true && self.loginDone == true) {
             console.log("开始游戏逻辑");
             self.bg.zIndex = 0;
             self.uiRoot.active = true;
             self.gameController.onGameStart();
+        }
+    },
+
+    startGame () {
+        const self = this;
+        var start = function () {
+            self.loginDone = true
+            self.showGame();
         }
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.initUrl(function () {
