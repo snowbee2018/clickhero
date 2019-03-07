@@ -12,10 +12,11 @@ cc.Class({
 
     bind(index,data){
         // temp 需要持久化 从datacenter拿哦
-        this.shareReceiveDatas = [[true,true],[true,false]]
+        this.shareReceiveData = DataCenter.getDataByKey(DataCenter.KeyMap.shareReceiveData)
+        // this.shareReceiveData = [[true,true],[true,false]]
         this.lbBtn = this.btnGet.node.children[0].getComponent(cc.Label)
         this.lbBtn1 = this.btnGet1.node.children[0].getComponent(cc.Label)
-
+        this.data = data
         this.index = index
         let i = index+1
         this.lbNo.string = "第" + i + "位"
@@ -56,7 +57,7 @@ cc.Class({
     },
     // type 0 share 1 Rebirth
     isReceived(type){
-        let rec = this.shareReceiveDatas[this.index]
+        let rec = this.shareReceiveData[this.index]
         if (rec) {
             return rec[type]
         }else {
@@ -64,11 +65,22 @@ cc.Class({
         }
     },
 
+    saveReceived(type){
+        this.shareReceiveData = this.shareReceiveData || []
+        this.shareReceiveData[this.index] = this.shareReceiveData[this.index] || []
+        this.shareReceiveData[this.index][type] = true
+        DataCenter.setDataByKey(DataCenter.KeyMap.shareReceiveData,this.shareReceiveData)
+    },
+
     receive(){
-        
+        DataCenter.addRuby(this.shareRuby)
+        this.saveReceived(0)
+        this.bind(this.index,this.data)
     },
 
     receive1(){
-        
+        DataCenter.addRuby(200)
+        this.saveReceived(1)
+        this.bind(this.index,this.data)
     },
 })

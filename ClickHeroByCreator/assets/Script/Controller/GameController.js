@@ -175,7 +175,8 @@ cc.Class({
         // obj[map.lansquenetList] = 
         // obj[map.curSetting] = 
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
-        console.log("obj[map.signinData]:" + obj[map.signinData]);
+        obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
+        console.log("obj[map.shareReceiveData]:" + obj[map.shareReceiveData]);
         
         console.log(obj);
         

@@ -31,6 +31,7 @@ cc.Class({
             curSetting: "curSetting", // 当前设置信息
 
             signinData: "signinData", // 签到数据{times:0,date:"yyyy/MM/dd"}
+            shareReceiveData: "shareReceiveData", // 分享任务 领取信息[[true,true],[true,false]]
         }
         self.ContentData = {}
         self.DataMap = {
@@ -117,6 +118,14 @@ cc.Class({
         console.log("signinData:" + signinData);
         if (signinData) {
             self.setDataByKey(self.KeyMap.signinData, signinData);
+        }
+        // 初始化签到数据
+        var shareReceiveData = self.getCloudDataByKey(self.KeyMap.shareReceiveData);
+        console.log("signinData:" + shareReceiveData);
+        if (shareReceiveData) {
+            self.setDataByKey(self.KeyMap.shareReceiveData, shareReceiveData);
+        } else {
+            self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         }
     },
 

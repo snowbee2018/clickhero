@@ -8,6 +8,7 @@ cc.Class({
     start(){
         // 这里从DataCenter拿到datas
         // 模拟数据
+        // this.datas = DataCenter.getDataByKey(DataCenter.KeyMap.xxxxx)
         this.datas = [{
                 isRebirth : false,
                 registerTime : 123,
