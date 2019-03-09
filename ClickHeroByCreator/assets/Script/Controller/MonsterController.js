@@ -111,7 +111,27 @@ cc.Class({
         const self = this;
         if (self.curMonster._isBoss) {
             if (self.curMonster._curHP.gt(0)) {
-                WeChatUtil.showToast("打Boss失败了");
+                // WeChatUtil.showToast("打Boss失败了");
+                if (!this.noMoreReminders) {
+                    // 弹出对话框
+                    PublicFunc.popDialog({
+                        contentStr: '温馨提示，你未在时限内击败妖怪，回到之前的关卡，打小怪，得妖丹，升级你的英雄，提高他们的攻击力，再回来挑战Boss吧。',
+                        btnStrs: {
+                            mid: '确 定',
+                        },
+                        toggle: {
+                            bShow: true,
+                            str: '不再提醒',
+                            checked: false,
+                        },
+                        onTap: function (dialog, bSure) {
+                            let isChecked = dialog.toggle.isChecked;
+                            console.log('isChecked = ' + isChecked);
+                            this.noMoreReminders = isChecked;
+                        }.bind(this),
+                    });
+                }
+                
                 if (DataCenter.isLevelPassed(self.curMonster._lv)) {
                     self.curMonster.recoverHP();
                     self._countdown = 30 + GameData.addBossTimerSecond;

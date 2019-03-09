@@ -5,20 +5,38 @@ cc.Class({
 
     properties: {
         desc : cc.Label,
+        btnConfirm: cc.Node,
         lbConfirm : cc.Label,
+        btnCancel: cc.Node,
         lbCancel : cc.Label,
+        btnOK: cc.Node,
+        lbOK: cc.Label,
+        toggle: cc.Toggle,
+        togLab: cc.Label,
     },
 
     setDesc(str){
         this.desc.string = str;
     },
 
-    setBtnText(txt0,txt1){
-        if (txt0) {
-            this.lbConfirm.string = txt0
+    setBtnText(btnStrs) {
+        if (btnStrs.left) {
+            this.btnConfirm.active = true;
+            this.lbConfirm.string = btnStrs.left;
+        } else {
+            this.btnConfirm.active = false;
         }
-        if (txt1) {
-            this.lbCancel.string = txt1
+        if (btnStrs.mid) {
+            this.btnOK.active = true;
+            this.lbOK.string = btnStrs.mid;
+        } else {
+            this.btnOK.active = false;
+        }
+        if (btnStrs.right) {
+            this.btnCancel.active = true;
+            this.lbCancel.string = btnStrs.right;
+        } else {
+            this.btnCancel.active = false;
         }
     },
 
@@ -28,15 +46,22 @@ cc.Class({
 
     confirm(){
         if (this.callback) {
-            this.callback(true);
+            this.callback(this, true);
         }
         this.node.destroy();
     },
 
     cancel(){
         if (this.callback) {
-            this.callback(false);
+            this.callback(this, false);
         }
         this.node.destroy();
+    },
+
+    setToggle(bShow, str, checked) {
+        this.toggle.node.active = !!bShow;
+        this.toggle.isChecked = !!checked;
+        this.togLab.node.active = !!bShow;
+        this.togLab.string = str;
     },
 })

@@ -31,8 +31,13 @@ cc.Class({
             dialogNode.y = cc.winSize.height/2;
             var dialogComponent = dialogNode.getComponent("Dialog");
             dialogComponent.setDesc(params.contentStr);
-            dialogComponent.setBtnText(params.leftBtnStr, params.rightStr);
+            if (params.btnStrs) {
+                dialogComponent.setBtnText(params.btnStrs);
+            }
             dialogComponent.setCallback(params.onTap);
+            if (params.toggle) {
+                dialogComponent.setToggle(params.toggle.bShow, params.toggle.str, params.toggle.checked);
+            }
         } catch (error) {
             console.error(error);
         }
