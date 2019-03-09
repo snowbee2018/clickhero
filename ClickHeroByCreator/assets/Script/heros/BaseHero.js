@@ -179,7 +179,11 @@ cc.Class({
                         // 弹出对话框
                         PublicFunc.popDialog({
                             contentStr: "般若波罗蜜，开启月光宝盒，穿越时空回到500年前，这将重新开始你的游戏之旅，并获得仙丹，你愿意回到500年前吗？",
-                            onTap: function (bSure) {
+                            btnStrs: {
+                                left: '是 的',
+                                right: '不，谢谢'
+                            },
+                            onTap: function (dialog, bSure) {
                                 if (bSure) {
                                     try {
                                         DataCenter.consumeGold(cost);
