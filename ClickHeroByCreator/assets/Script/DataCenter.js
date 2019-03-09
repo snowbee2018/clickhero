@@ -124,9 +124,10 @@ cc.Class({
         console.log("signinData:" + shareReceiveData);
         if (shareReceiveData) {
             self.setDataByKey(self.KeyMap.shareReceiveData, shareReceiveData);
-        } else {
-            self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         }
+        //  else {
+        //     self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
+        // }
     },
 
     setDataByKey (key, params) {
