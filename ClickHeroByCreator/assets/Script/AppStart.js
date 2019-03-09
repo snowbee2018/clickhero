@@ -58,12 +58,17 @@ cc.Class({
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
         
-        CloudRes.init();
-        console.log('加载怪物资源');
-        CloudRes.preloadMonsterRes(function () {
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            CloudRes.init();
+            console.log('加载怪物资源');
+            CloudRes.preloadMonsterRes(function () {
+                self.monsterResDone = true;
+                self.showGame();
+            });
+        } else {
             self.monsterResDone = true;
-            self.showGame();
-        });
+        }
+        
     },
 
     checkReady() {

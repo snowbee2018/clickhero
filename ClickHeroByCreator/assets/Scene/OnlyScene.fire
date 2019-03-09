@@ -18138,6 +18138,12 @@
     "heroItemPrefab": {
       "__uuid__": "ceacda27-5e63-4fe6-92d4-83c26bbcbce8"
     },
+    "heroRes": {
+      "__uuid__": "b6e114aa-ba47-4cd6-abd8-2a2baa79dbc0"
+    },
+    "skillRes": {
+      "__uuid__": "9d71237d-01ae-4398-b5ac-c5332200d966"
+    },
     "_id": "72V9UClctCyYQrsxcBu7Kd"
   },
   {

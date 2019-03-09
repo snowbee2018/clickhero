@@ -33,8 +33,9 @@ cc.Class({
 
     // update (dt) {},
 
-    setItem (heroID, skillID) {
+    setItem(heroListCtor, heroID, skillID) {
         const self = this;
+        self._heroListCtor = heroListCtor;
         self._heroID = heroID;
         self._skillID = skillID;
     },
@@ -45,7 +46,7 @@ cc.Class({
         var skillArr = hero.skills;
         if (skillArr) {
             var skillData = skillArr[self._skillID];
-            self.skillIcon.setIcon(self._heroID, self._skillID, skillData.icon);
+            self.skillIcon.setIcon(self._heroListCtor, self._heroID, self._skillID, skillData.icon);
             self.skillIcon.lightIcon(true);
             self.skillName.string = skillData.name;
             self.describe.string = skillData.describe + "--" + hero.getSkillDesc(self._skillID);

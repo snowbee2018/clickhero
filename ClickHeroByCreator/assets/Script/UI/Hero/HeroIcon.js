@@ -42,16 +42,17 @@ cc.Class({
 
     // update (dt) {},
 
-    setIcon(heroID) {
+    setIcon(heroListCtor, heroID) {
         const self = this;
-        CloudRes.getHeroUrl(heroID, function (url) {
-            if (url) {
-                cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
-                    if (!err && texture) {
-                        self.spr.spriteFrame = new cc.SpriteFrame(texture);
-                    }
-                });
-            }
-        });
+        self.spr.spriteFrame = heroListCtor.getHeroIconSprf(heroID);
+        // CloudRes.getHeroUrl(heroID, function (url) {
+        //     if (url) {
+        //         cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+        //             if (!err && texture) {
+        //                 self.spr.spriteFrame = new cc.SpriteFrame(texture);
+        //             }
+        //         });
+        //     }
+        // });
     },
 });

@@ -36,7 +36,7 @@ cc.Class({
 
     start () {
         const self = this;
-        self.heroIcon.setIcon(self._heroID);
+        self.heroIcon.setIcon(self._heroListCtor, self._heroID);
         self.addSkillIcon();
         self.setDisplay();
         
@@ -82,8 +82,9 @@ cc.Class({
         }
     },
 
-    setItem (heroID) {
+    setItem (heroListCtor, heroID) {
         const self = this;
+        self._heroListCtor = heroListCtor;
         self._heroID = heroID;
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
@@ -140,17 +141,21 @@ cc.Class({
         var skillArr = hero.skills;
         self.skillIcon = [];
         if (skillArr) {
-            
             for (let skillID = 0; skillID < skillArr.length; skillID++) {
                 // const skillData = skillArr[skillID];
                 var skillNode = cc.instantiate(self.skillIconPrefab);
                 skillNode.parent = self.skillList;
                 var component = skillNode.getComponent("SkillIcon");
                 var skillData = skillArr[skillID];
-                component.setIcon(self._heroID, skillID, skillData.icon);
+                let iconName
+                if (skillData.icon == 'yueguang') {
+                    iconName = skillData.icon;
+                } else {
+                    iconName = 'b' + skillData.icon;
+                }
+                component.setIcon(self._heroListCtor, self._heroID, skillID, skillData.icon);
                 self.skillIcon.push(component);
             }
-            
         }
     },
 
@@ -208,7 +213,7 @@ cc.Class({
         // if (!cc.isValid(self.dialog)) {
             self.dialog = cc.instantiate(self.skillDialogPrefab);
             self.dialog.parent = cc.director.getScene();
-            self.dialog.getComponent("SkillDialog").setDialog(self._heroID);
+            self.dialog.getComponent("SkillDialog").setDialog(self._heroListCtor, self._heroID);
         }
     },
 

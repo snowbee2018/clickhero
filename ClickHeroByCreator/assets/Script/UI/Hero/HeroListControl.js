@@ -14,6 +14,8 @@ cc.Class({
     properties: {
         heroList: cc.ScrollView,
         heroItemPrefab: cc.Prefab,
+        heroRes: cc.SpriteAtlas,
+        skillRes: cc.SpriteAtlas,
     },
 
     ctor () {
@@ -26,7 +28,28 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        console.log('aaaaaaaaaa');
+        
+        console.log(this.heroRes);
+        
+    },
 
+    getHeroIconSprf(heroID) {
+        let result = this.heroRes.getSpriteFrame(String(heroID));
+        if (!result) {
+            console.error('找不到英雄图片，heriID = ' + heroID);
+        } else {
+            return result;
+        }
+    },
+
+    getSkillIconSprf(iconName) {
+        let result = this.skillRes.getSpriteFrame(iconName);
+        if (!result) {
+            console.error('找不到被动技能图片，iconName = ' + iconName);
+        } else {
+            return result;
+        }
     },
 
     // update (dt) {},
@@ -68,7 +91,7 @@ cc.Class({
         const self = this;
         var listItemNode = cc.instantiate(self.heroItemPrefab);
         listItemNode.parent = self.heroList.content;
-        listItemNode.getComponent("HeroListItem").setItem(heroID);
+        listItemNode.getComponent("HeroListItem").setItem(this, heroID);
         self._heroItemMap[heroID] = true;
     },
 

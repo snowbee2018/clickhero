@@ -63,9 +63,10 @@ cc.Class({
         self.setDisplay();
     },
 
-    setDialog (heroID) {
+    setDialog(heroListCtor, heroID) {
         const self = this;
         self._heroID = heroID;
+        self._heroListCtor = heroListCtor;
         self._hero = HeroDatas.getHero(self._heroID);
     },
 
@@ -80,7 +81,7 @@ cc.Class({
                 var itemNode = cc.instantiate(self.skillItemPrefab);
                 itemNode.parent = self.list.content;
                 var component = itemNode.getComponent("SkillListItem");
-                component.setItem(self._heroID, skillID);
+                component.setItem(self._heroListCtor, self._heroID, skillID);
                 self.skillItem.push(component);
             }
         }
@@ -90,7 +91,7 @@ cc.Class({
         const self = this;
         var hero = this._hero;
         var skillArr = hero.skills;
-        self.heroIcon.setIcon(self._heroID);
+        self.heroIcon.setIcon(self._heroListCtor, self._heroID);
         self.heroName.string = hero.heroName;
         self.heroLevel.string = "等级:" + hero.level;
         self.descLab.string = hero.desc;

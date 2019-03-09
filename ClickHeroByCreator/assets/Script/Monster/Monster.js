@@ -24,7 +24,6 @@ cc.Class({
         _isPrimalBoss: false,
 
         damageAnim: cc.Prefab,
-        monsterSprf: [cc.SpriteFrame],
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -166,16 +165,18 @@ cc.Class({
             if (!self._isTreasureChest) {
                 self._monsterName = zoneObj.zone + "小妖";
             }
-            CloudRes.getMonsterRes(function (err, texture) {
-                if (!err && texture && cc.isValid(self.node)) {
-                    self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+            if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+                CloudRes.getMonsterRes(function (err, texture) {
+                    if (!err && texture && cc.isValid(self.node)) {
+                        self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                });
+                if (lv % 5 == 4) {
+                    let i = parseInt((lv + 1) / 5)
+                    CloudRes.preloadBoosRes(i);
                 }
-            });
-            // self.getComponent(cc.Sprite).spriteFrame = self.monsterSprf[parseInt(Math.random() * 10)];
-            if (lv%5 == 4) {
-                let i = parseInt((lv + 1)/5)
-                CloudRes.preloadBoosRes(i);
             }
+            
         }
 
         
