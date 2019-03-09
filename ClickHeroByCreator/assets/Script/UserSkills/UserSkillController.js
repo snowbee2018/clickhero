@@ -40,7 +40,7 @@ cc.Class({
         const self = this;
     },
 
-    setDoubleSkill (bDouble) { // 设置充能标志
+    setDoubleSkill (bDouble) { // 设置神之祝福标志
         const self = this;
         self._bDoubleSkill = bDouble;
     },

@@ -215,7 +215,7 @@ cc.Class({
             desc = "+" + (GameData.addPrimalBossOdds*100) + "%的妖王出现概率"
         } else if (this.id == 3) {
             // + 2s Powersurge持续时间
-            desc = "+" + (this.level * 2) + "s能量风暴持续时间"
+            desc = "+" + (this.level * 2) + "s三头六臂持续时间"
         } else if (this.id == 4) {
             // +15% 暴击伤害 
             desc = "+" + (this.level * 15) + "%暴击伤害" // 需要bigNumber
@@ -224,7 +224,7 @@ cc.Class({
             // 感觉太废物了 所以懒得做
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
-            desc = "+" + (this.level * 2) + "s点击风暴持续时间"
+            desc = "+" + (this.level * 2) + "s毫毛变化持续时间"
         } else if (this.id == 7) {
             // boss计时器 增加 30×(1-e^-0.034n)  需要bigNumber
             desc = "+" + GameData.addBossTimerSecond + "秒Boss战时长"
@@ -236,7 +236,7 @@ cc.Class({
             desc = "+" + (GameData.addTreasureOdds*100-1) + "%的宝箱出现概率"
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
-            desc = "+" + (this.level * 2) + "s金属探测器持续时间"
+            desc = "+" + (this.level * 2) + "s火眼金睛持续时间"
         } else if (this.id == 11) {
             // 普怪 宝箱 10倍金币的概率
             desc = "+" + (GameData.addTenfoldGoldOdds*100) + "%的小妖和葫芦妖10倍妖丹概率"
@@ -245,31 +245,31 @@ cc.Class({
             desc = "+" + (2 * this.level) + "%点击伤害" // 需要bigNumber
         } else if (this.id == 13) {
             // 	+2s Super Clicks duration
-            desc = "+" + (this.level * 2) + "s超级点击持续时间"
+            desc = "+" + (this.level * 2) + "s如意金箍持续时间"
         } else if (this.id == 14) {
             // 附加DPS点击伤害倍数
             desc = "+" + (0.01*this.level) + "%附加DPS点击伤害"
         } else if (this.id == 15) {
             // +2s Golden Clicks duration
-            desc = "+" + (this.level * 2) + "s金手指持续时间"
+            desc = "+" + (this.level * 2) + "s点石成金持续时间"
         } else if (this.id == 16) {
             // 减少每关怪物数量 暂时不要
         } else if (this.id == 17) {
             // 加闲置金币
-            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100) + "%闲置时金币"
+            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100) + "%闲置时妖丹"
         } else if (this.id == 18) {
             // +5% Gold
-            desc = "+" + (5*this.level) + "%金币倍数"
+            desc = "+" + (5*this.level) + "%妖丹倍数"
         } else if (this.id == 19) {
             // 宝箱金币倍数
-            desc = "+" + (50*this.level) + "%宝箱金币倍数"
+            desc = "+" + (50*this.level) + "%葫芦妖丹倍数"
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {
             // 	空闲时每个未分配的自动点击器+ 10％Gold（没有点击60秒）。 放弃。。
         } else if (this.id == 22) {
             // +30% gold from Golden Clicks 
-            desc = "+" + (30*this.level) + "%金手指倍数"
+            desc = "+" + (30*this.level) + "%点石成金倍数"
         } else if (this.id == 23) {
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {

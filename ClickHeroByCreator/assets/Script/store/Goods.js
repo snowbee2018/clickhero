@@ -120,9 +120,9 @@ cc.Class({
                 unlockLv = 300
                 break;
             case 13:
-                name = "宝箱神器加强"
-                desc = "每次购买+100%的宝箱神器效力"
-                state = "宝箱神器效力增加:+" + (this.getCount()*100)+"%"
+                name = "葫芦神器加强"
+                desc = "每次购买+100%的葫芦神器效力"
+                state = "葫芦神器效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;

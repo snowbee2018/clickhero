@@ -37,14 +37,14 @@ cc.Class({
         addPrimalBossOdds : 0,      //2* 增加远古Boss出现几率 0~0.75 ?
         addPowersurgeSecond: 0,    //3*- Powersurge秒数增加 2s++ √
         addCritTimes : 1,           //4 古神附加暴击倍数 √
-        addClickstormSecond: 0,    //6*- 点击风暴秒数增加 2s++ √
+        addClickstormSecond: 0,    //6*- 毫毛变化秒数增加 2s++ √
         addBossTimerSecond: 0,     //7* Boss计时器持续时间 0~30.0s √
         buyHeroDiscount : 1,        //8- 购买英雄折扣 0~1 √
         addTreasureOdds: 0.01,     //9* 宝箱出现概率 0~1 √
         addMetalDetectorSecond: 0, //10*- 金币探测器 2s++ √
         addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1 √
         addClickDamageTimes : 1,    //12- 点击伤害倍数 每级+20% √
-        addSuperClickSecond: 0,    //13*- 超级点击时间 2s++ √
+        addSuperClickSecond: 0,    //13*- 如意金箍时间 2s++ √
         addDPSClickDamageTimes : 0, //14- 附加DPS点击伤害倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
         addLeaveGoldTimes : 1,      //17- 闲置金币倍数 √
@@ -73,11 +73,11 @@ cc.Class({
         cskCritTimes : 1, // 暴击倍数 :calCritTimes()
         cskCritOdds : 0, // 附加暴击概率 :calCritOdds()
         //--------主动技能的影响--------
-        powersurgeTimes : 1,//能量风暴DPS倍数 触发技能时 改为对应倍数，技能结束要改回为1 :refresh()
+        powersurgeTimes : 1,//三头六臂DPS倍数 触发技能时 改为对应倍数，技能结束要改回为1 :refresh()
         skCritOdds : 0,// 当开启暴击风暴时 设置为0.5 结束改回0 :calCritOdds()
         skGoldTimes : 1,// 当开启金币探测器时 改为2 结束为1 :calGoldTimes()
-        skDPSTimes : 1,// 当使用一次黑暗仪式，乘以1.05 :refresh()
-        skClickTimes : 1,// 开启超级点击 改为相应倍数 结束改为1 :calClickDamage()
+        skDPSTimes : 1,// 当使用一次祭天大典，乘以1.05 :refresh()
+        skClickTimes : 1,// 开启如意金箍 改为相应倍数 结束改为1 :calClickDamage()
 
         // 购买技能时触发
         // 刷新全局DPS倍数

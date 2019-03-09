@@ -28,9 +28,6 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        console.log('aaaaaaaaaa');
-        
-        console.log(this.heroRes);
         
     },
 

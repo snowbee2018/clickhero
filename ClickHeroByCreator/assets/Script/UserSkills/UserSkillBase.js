@@ -31,7 +31,7 @@ cc.Class({
         _lastTimestamp: 0, // 上次使用技能的时间
         _isActive: true, // 是否已经冷却完成
         _isSustainFinish: true, // 技能持续是否结束
-        _coolingCurtail: 0, // 刷新技能曹成的冷却缩减
+        _coolingCurtail: 0, // 时光穿越技能曹成的冷却缩减
         // _sustainAdd: 0, // 增加的持续时间
     },
 
@@ -175,13 +175,13 @@ cc.Class({
     onUpgrandAncient(id) {
         const self = this;
         switch (true) {
-            case (id == 6 && self.heroID == 0 && self.skillID == 1): // 点击风暴
-            case (id == 3 && self.heroID == 2 && self.skillID == 3): // 能量风暴
-            case (id == 25 && self.heroID == 9 && self.skillID == 4): // 幸运星(暴击风暴)
+            case (id == 6 && self.heroID == 0 && self.skillID == 1): // 毫毛变化
+            case (id == 3 && self.heroID == 2 && self.skillID == 3): // 三头六臂
+            case (id == 25 && self.heroID == 9 && self.skillID == 4): // 鸿运灌顶(暴击风暴)
             case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
-            case (id == 15 && self.heroID == 15 && self.skillID == 4): // 金手指(点金手)
-            case (id == 22 && self.heroID == 15 && self.skillID == 4): // 金手指倍数
-            case (id == 13 && self.heroID == 22 && self.skillID == 4): // 超级点击
+            case (id == 15 && self.heroID == 15 && self.skillID == 4): // 点石成金(点金手)
+            case (id == 22 && self.heroID == 15 && self.skillID == 4): // 点石成金倍数
+            case (id == 13 && self.heroID == 22 && self.skillID == 4): // 如意金箍
             case (id == 26): // 技能冷却减少
                 self.setSkillDes();
                 break;
@@ -251,17 +251,17 @@ cc.Class({
     getSustainTimeAdded() { // 获取技能持续附加时间
         const self = this;
         switch (true) {
-            case (self.heroID == 0 && self.skillID == 1): // 点击风暴
+            case (self.heroID == 0 && self.skillID == 1): // 毫毛变化
                 return GameData.addClickstormSecond;
-            case (self.heroID == 2 && self.skillID == 3): // 能量风暴
+            case (self.heroID == 2 && self.skillID == 3): // 三头六臂
                 return GameData.addPowersurgeSecond;
-            case (self.heroID == 9 && self.skillID == 4): // 幸运星(暴击风暴)
+            case (self.heroID == 9 && self.skillID == 4): // 鸿运灌顶(暴击风暴)
                 return GameData.addCritStormSecond;
             case (self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
                 return GameData.addMetalDetectorSecond;
-            case (self.heroID == 15 && self.skillID == 4): // 金手指(点金手)
+            case (self.heroID == 15 && self.skillID == 4): // 点石成金(点金手)
                 return GameData.addGoldClickSecond;
-            case (self.heroID == 22 && self.skillID == 4): // 超级点击
+            case (self.heroID == 22 && self.skillID == 4): // 如意金箍
                 return GameData.addSuperClickSecond;
             default:
                 return 0;

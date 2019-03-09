@@ -64,7 +64,7 @@ cc.Class({
         // 够了就扣掉
         let result = this.ancient.buy();
         if (!result) {
-            console.log("英魂不够");
+            console.log("仙丹不够");
             return;
         }
         this.selAncients.splice(this.selIndex,1);
@@ -76,7 +76,7 @@ cc.Class({
     onReroll(){
         let csoul = HeroDatas.getRerollAncientSoul();
         if (!DataCenter.isSoulEnough(csoul)) {
-            console.log("英魂不够");
+            console.log("仙丹不够");
             return;
         }
         DataCenter.consumeSoul(csoul);
