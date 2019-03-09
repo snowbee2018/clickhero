@@ -39,15 +39,15 @@ cc.Class({
 
     onLoad () {
         const self = this;
-        CloudRes.getSkillIconUrl(self.heroID, self.skillID, function (url) {
-            if (url) {
-                cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
-                    if (!err && texture) {
-                        self.icon.spriteFrame = new cc.SpriteFrame(texture);
-                    }
-                });
-            }
-        });
+        // CloudRes.getSkillIconUrl(self.heroID, self.skillID, function (url) {
+        //     if (url) {
+        //         cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+        //             if (!err && texture) {
+        //                 self.icon.spriteFrame = new cc.SpriteFrame(texture);
+        //             }
+        //         });
+        //     }
+        // });
     },
 
     // start () {},
