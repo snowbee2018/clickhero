@@ -147,12 +147,6 @@ cc.Class({
                 skillNode.parent = self.skillList;
                 var component = skillNode.getComponent("SkillIcon");
                 var skillData = skillArr[skillID];
-                let iconName
-                if (skillData.icon == 'yueguang') {
-                    iconName = skillData.icon;
-                } else {
-                    iconName = 'b' + skillData.icon;
-                }
                 component.setIcon(self._heroListCtor, self._heroID, skillID, skillData.icon);
                 self.skillIcon.push(component);
             }
