@@ -23,7 +23,7 @@ cc.Class({
 
     onLoad () {
         const self = this;
-        self.bg.zIndex = 1000;
+        self.bg.zIndex = 0;
         self.uiRoot.active = false;
         self.gameController = self.uiRoot.getComponent("GameController")
         self.initGame();
@@ -61,6 +61,12 @@ cc.Class({
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.init();
             console.log('加载怪物资源');
+            CloudRes.getMp3Url('login', function (url) {
+                cc.loader.load(url, function (err, clip) {
+                    cc.audioEngine.setVolume(0.5);
+                    cc.audioEngine.playMusic(clip, true);
+                }.bind(this));
+            }.bind(this));
             CloudRes.preloadMonsterRes(function () {
                 self.monsterResDone = true;
                 self.showGame();

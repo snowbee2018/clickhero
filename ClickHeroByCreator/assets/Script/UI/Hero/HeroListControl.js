@@ -88,7 +88,18 @@ cc.Class({
         const self = this;
         var listItemNode = cc.instantiate(self.heroItemPrefab);
         listItemNode.parent = self.heroList.content;
-        listItemNode.getComponent("HeroListItem").setItem(this, heroID);
+
+        let wPos = self.heroList.content.parent.convertToWorldSpaceAR(cc.v2(0, 0));
+        let view = self.heroList.content.parent;
+        let viewSize = cc.size(view.width, view.height);
+        let viewRect = cc.rect(
+            wPos.x - viewSize.width/2,
+            wPos.y - viewSize.height / 2,
+            viewSize.width,
+            viewSize.height
+        );
+
+        listItemNode.getComponent("HeroListItem").setItem(this, heroID, viewRect);
         self._heroItemMap[heroID] = true;
     },
 

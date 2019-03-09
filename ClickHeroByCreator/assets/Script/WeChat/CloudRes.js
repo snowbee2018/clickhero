@@ -9,6 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var envID = 'test-72db6b';
 var imgRoot = "cloud://test-72db6b.7465-test-72db6b/img";
+var mp3Root = "cloud://test-72db6b.7465-test-72db6b/mp3";
 // var dbName = 'release';
 // cloud://test-72db6b.7465-test-72db6b/img/hero/0.png
 // cloud://test-72db6b.7465-test-72db6b/img/hero/1.png
@@ -46,6 +47,12 @@ cc.Class({
                     fail: console.error
                 });
             }
+        },
+
+        getMp3Url(resName, callBack) {
+            if (!WeChatUtil.isWeChatPlatform) return;
+            var path = mp3Root + "/" + resName + ".mp3";
+            this.getUrlByPath(path, callBack);
         },
 
         getHeroUrl (heroID, callBack) {

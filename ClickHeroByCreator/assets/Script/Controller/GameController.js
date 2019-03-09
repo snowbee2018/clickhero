@@ -132,6 +132,8 @@ cc.Class({
             self.isGameStart = true;
 
             self.pageNode.getComponent("HideOtherPage").handler();
+
+            
         } catch (error) {
             console.error(error)
         }

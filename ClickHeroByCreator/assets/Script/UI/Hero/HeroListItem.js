@@ -25,6 +25,8 @@ cc.Class({
         heroNode: cc.Node,
         skillIconPrefab: cc.Prefab,
         skillDialogPrefab: cc.Prefab,
+
+        contentNode: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -82,8 +84,14 @@ cc.Class({
         }
     },
 
-    setItem (heroListCtor, heroID) {
+    setItem(heroListCtor, heroID, viewRect) {
         const self = this;
+        self.viewRect = viewRect;
+        self.checkPointTop = cc.v2(0, this.node.height / 2);
+        self.checkPointBotm = cc.v2(0, -this.node.height / 2);
+        
+
+
         self._heroListCtor = heroListCtor;
         self._heroID = heroID;
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
@@ -92,6 +100,24 @@ cc.Class({
         Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
         Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
         Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
+
+        this.node.parent.on(cc.Node.EventType.POSITION_CHANGED, this.onPosChange.bind(this), this);
+    },
+
+    onPosChange() {
+        // console.log('ppppppppppp');
+        
+        let topPos = this.node.convertToWorldSpaceAR(this.checkPointTop);
+        let botmPos = this.node.convertToWorldSpaceAR(this.checkPointBotm);
+        
+        // console.log(this);
+        // console.log(this.viewRect);
+        // console.log();
+        
+        
+        this.contentNode.active = this.viewRect.contains(topPos) || this.viewRect.contains(botmPos);
+        // console.log('self._heroID = ' + self._heroID + ', this.node.active = ' + this.node.active);
+        
     },
 
     refreshBuyCost() {
