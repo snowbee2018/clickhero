@@ -31,7 +31,7 @@ cc.Class({
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
 
-        self.setPageNodeActive(true);
+        self.setPageNodeActive(false);
 
         WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
     },
