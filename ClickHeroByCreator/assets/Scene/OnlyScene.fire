@@ -530,7 +530,7 @@
   {
     "__type__": "cc.Node",
     "_name": "shareBtn",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 10
     },
@@ -1197,8 +1197,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 150,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1207,8 +1207,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -288,
-      "y": 326,
+      "x": -257,
+      "y": 320,
       "z": 0
     },
     "_scale": {
@@ -1264,8 +1264,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 150,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1317,15 +1317,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 150,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1369,7 +1369,7 @@
     "_useOriginalSize": false,
     "_string": "签到",
     "_N$string": "签到",
-    "_fontSize": 20,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
     "_N$file": null,
@@ -1392,7 +1392,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "6f9bbbfd-31a7-4f25-997a-4048cddd7c82"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1406,7 +1406,9 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_state": 0,
-    "_atlas": null,
+    "_atlas": {
+      "__uuid__": "b8066faa-3ec8-401b-86a7-3eb8f71445ab"
+    },
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_id": "6a20/Tg0tI7IQKb3RI0tYO"
@@ -1500,7 +1502,7 @@
       "a": 200
     },
     "_N$normalSprite": {
-      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
+      "__uuid__": "6f9bbbfd-31a7-4f25-997a-4048cddd7c82"
     },
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
@@ -17470,8 +17472,8 @@
     "target": {
       "__id__": 10
     },
-    "component": "GameController",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "280c3rsZJJKnZ9RqbALVwtK",
     "handler": "onTaskBtnClick",
     "customEventData": ""
   },
