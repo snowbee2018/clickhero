@@ -49,7 +49,10 @@ cc.Class({
             this.lbBought.active = true
             this.btn.active = false
             this.lbBought.getComponent(cc.Label).string = this.data.unlockLv+"关解锁"
+            this.node.color = new cc.Color(0xCF,0xCB,0xBA)
         } else {
+            this.node.color = new cc.Color(0xEC,0xE0,0xB0)
+            
             var bc = GoodsDatas.getBuyCount(this.data.id)
             if (bc>0&& this.data.only) {
                 this.lbBought.active = true
