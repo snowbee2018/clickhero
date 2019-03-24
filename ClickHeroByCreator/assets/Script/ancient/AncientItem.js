@@ -9,6 +9,7 @@ cc.Class({
         lbLv : cc.Label,
         lbSoul : cc.Label,
         btn : cc.Button,
+        imgs : cc.SpriteAtlas,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -33,6 +34,7 @@ cc.Class({
     bind(data){
         data = data?data:this.data;
         this.data = data;
+        this.sp.spriteFrame = this.imgs.getSpriteFrame("ancient_" + data.id)
         this.lbName.string = data.name;
         this.lbLv.string = "等级"+data.level;
         this.lbSoul.string = "soul"+Formulas.formatBigNumber(data.getSoul())

@@ -609,8 +609,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "ChooseAncientDialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "51fdbyfm59Oq67w6jZCOxhn",
     "handler": "onSelItem",
     "customEventData": "0"
   },
@@ -897,8 +897,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "ChooseAncientDialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "51fdbyfm59Oq67w6jZCOxhn",
     "handler": "onSelItem",
     "customEventData": "1"
   },
@@ -1185,8 +1185,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "ChooseAncientDialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "51fdbyfm59Oq67w6jZCOxhn",
     "handler": "onSelItem",
     "customEventData": "2"
   },
@@ -1473,8 +1473,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "ChooseAncientDialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "51fdbyfm59Oq67w6jZCOxhn",
     "handler": "onSelItem",
     "customEventData": "3"
   },
@@ -2629,6 +2629,9 @@
         "__id__": 35
       }
     ],
+    "imgs": {
+      "__uuid__": "40a6a949-0350-406a-9ae4-f97f1ac94060"
+    },
     "desc": {
       "__id__": 65
     },

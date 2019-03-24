@@ -57,4 +57,8 @@ cc.Class({
         Events.emit(Events.ON_SOUL_CHANGE);
         WeChatUtil.onHide();
     },
+
+    bindAncientSprite () {
+        
+    }
 });
