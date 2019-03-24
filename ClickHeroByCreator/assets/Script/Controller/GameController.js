@@ -20,6 +20,9 @@ cc.Class({
 
         upgrageSelectBtn: cc.Node,
         upgrageSelectBtnLab: cc.Label,
+        dialogPrefab : cc.Prefab,
+        SigninDialog : cc.Prefab,
+        ShareDialog : cc.Prefab,
     },
     
     // use this for initialization
@@ -502,6 +505,21 @@ cc.Class({
                 Events.emit(Events.ON_ANCIENT_LVUNIT_CHANGE);//
             }
         }
+    },
+
+    showSigninDialog(){
+        let dialog = cc.instantiate(this.SigninDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+    },
+
+    showShareDialog () {
+        console.log("showShareDialog");
+        let dialog = cc.instantiate(this.ShareDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 
     // onLeftBtnClick () {
