@@ -11,18 +11,20 @@ cc.Class({
     },
 
     onLoad(){
+        console.log("StoreCtrl:ctor");
         Events.on(Events.ON_GAME_START,this.onStart,this);
-    },
-
-    onStart () {
         Events.on(Events.ON_RUBY_CHANGE,this.showRuby,this);
         this.fullViews();
         this.showRuby();
     },
 
+    onStart () {
+        // console.log("StoreCtrl:onStart");
+    },
+
     showRuby(){
         var ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
-        this.lbRuby.string = "蟠桃："+ruby
+        this.lbRuby.string = ""+ruby
     },
 
     fullViews(){
