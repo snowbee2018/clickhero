@@ -291,6 +291,7 @@ cc.Class({
         const self = this;
         WeChatUtil.shareAppMessage();
         Events.emit(Events.ON_SHARE_CLICK);
+        this.showShareDialog()
         // WeChatUtil.showModal({
         //     title: "分享给好友",
         //     content: "点一下，玩一年，把快乐分享给好友吧",
