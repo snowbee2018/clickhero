@@ -45,6 +45,7 @@ cc.Class({
     },
 
     confirm(){
+        AudioMgr.playBtn();
         if (this.callback) {
             this.callback(this, true);
         }
@@ -52,6 +53,7 @@ cc.Class({
     },
 
     cancel(){
+        AudioMgr.playBtn();
         if (this.callback) {
             this.callback(this, false);
         }

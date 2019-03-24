@@ -55,6 +55,7 @@ cc.Class({
         for (let j = 0; j < this.selAncients.length; j++) {
             this.items[j].node.color = (j == i)? new cc.Color(0xff,0xff,0xff):new cc.Color(0xc0,0xc0,0xc0);
         }
+        AudioMgr.playBtn();
     },
 
     setCallback(cb){
@@ -73,6 +74,7 @@ cc.Class({
         HeroDatas.initSelAncients();
         this._cb(this.ancient);
         this.finish();
+        AudioMgr.playBtn();
     },
 
     onReroll(){
@@ -84,6 +86,7 @@ cc.Class({
         DataCenter.consumeSoul(csoul);
         HeroDatas.initSelAncients();
         this.refresh();
+        AudioMgr.playBtn();
     },
 
     finish(){

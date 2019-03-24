@@ -53,20 +53,17 @@ cc.Class({
         window.ZoneArr = require("ZoneCfg");
         window.CloudDB = require("CloudDB");
         window.CloudRes = require("CloudRes");
+        window.AudioMgr = new (require('AudioMgr'))();
 
         CfgMgr.loadHeroCfg(self.checkReady.bind(self));
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
         
+        
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.init();
             console.log('加载怪物资源');
-            CloudRes.getMp3Url('login', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    cc.audioEngine.setVolume(0.5);
-                    cc.audioEngine.playMusic(clip, true);
-                }.bind(this));
-            }.bind(this));
+            AudioMgr.init();
             CloudRes.preloadMonsterRes(function () {
                 self.monsterResDone = true;
                 self.showGame();

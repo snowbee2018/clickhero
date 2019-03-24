@@ -48,5 +48,6 @@ cc.Class({
         if (result) {
             this.bind();
         }
+        AudioMgr.playBtn();
     },
 });

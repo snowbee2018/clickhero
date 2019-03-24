@@ -191,6 +191,20 @@ cc.Class({
         } else {
             self.monsterPos.scale = 1;
         }
+        if (!self.lastMonsterType) {
+            if (self.curMonster._isBoss) {
+                AudioMgr.playBoss();
+            } else {
+                AudioMgr.playBG();
+            }
+        } else {
+            if (self.lastMonsterType == 'boss' && !self.curMonster._isBoss) {
+                AudioMgr.playBG();
+            } else if (self.lastMonsterType == 'normal' && self.curMonster._isBoss) {
+                AudioMgr.playBoss();
+            }
+        }
+        self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
     },
 
     hit(damage, bDPS, bCrit) {
@@ -278,6 +292,7 @@ cc.Class({
 
     goToLastLevel () {
         const self = this;
+        AudioMgr.playBtn();
         if (self.curMonster._lv > 1) {
             delete self.killCount;
             delete self._countdown;
@@ -289,6 +304,7 @@ cc.Class({
 
     goToNextLevel () {
         const self = this;
+        AudioMgr.playBtn();
         if (DataCenter.isLevelPassed(self.curMonster._lv)) {
             delete self.killCount;
             delete self._countdown;

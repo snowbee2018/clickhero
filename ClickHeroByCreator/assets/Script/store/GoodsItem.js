@@ -89,6 +89,7 @@ cc.Class({
     },
 
     click(){
+        AudioMgr.playBtn();
         var result = this.data.buy()
         if (result) {
             console.log("购买成功")
