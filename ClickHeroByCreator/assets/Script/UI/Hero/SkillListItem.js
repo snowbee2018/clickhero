@@ -76,6 +76,7 @@ cc.Class({
 
     onBuyBtnClick () {
         const self = this;
+        AudioMgr.playBtn();
         var hero = HeroDatas.getHero(self._heroID);
         var skillArr = hero.skills;
         if (skillArr) {

@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.4352752816480617,
-      "y": 0.4352752816480617,
+      "x": 0.28759765625,
+      "y": 0.28759765625,
       "z": 1
     },
     "_quat": {
@@ -15826,8 +15826,8 @@
     "target": {
       "__id__": 102
     },
-    "component": "HideOtherPage",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "1f0630FYHpOuoDeNdCGdOkv",
     "handler": "onPageEvent",
     "customEventData": ""
   },

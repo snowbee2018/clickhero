@@ -303,6 +303,7 @@ cc.Class({
 
     onItemClick() {
         const self = this;
+        AudioMgr.playBtn();
         self.releaseSkill();
     },
 

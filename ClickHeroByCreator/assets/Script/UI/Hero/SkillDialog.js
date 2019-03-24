@@ -120,6 +120,7 @@ cc.Class({
     onClickUpGolden(){
         this._hero.upgradeGolden();
         this.fullView();
+        AudioMgr.playBtn();
     },
 
     close () {

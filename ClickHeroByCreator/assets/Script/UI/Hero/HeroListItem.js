@@ -228,6 +228,7 @@ cc.Class({
 
     onItemClick () {
         const self = this;
+        AudioMgr.playBtn();
         var hero = HeroDatas.getHero(self._heroID);
         if (!cc.isValid(self.dialog) && hero.isBuy) {
         // if (!cc.isValid(self.dialog)) {
@@ -239,6 +240,7 @@ cc.Class({
 
     onUpgradeBtnClick () {
         const self = this;
+        AudioMgr.playBtn();
         var hero = HeroDatas.getHero(self._heroID);
         if (hero.isBuy) {
             hero.upgrade();

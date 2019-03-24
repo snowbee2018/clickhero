@@ -136,7 +136,7 @@ cc.Class({
 
             self.pageNode.getComponent("HideOtherPage").handler();
 
-            
+            AudioMgr.playBG();
         } catch (error) {
             console.error(error)
         }
@@ -256,9 +256,11 @@ cc.Class({
         if (bCrit) {
             self.monsterController.hit(GameData.clickDamage.times(GameData.critTimes), false, true);
             self.damageArr.push(GameData.clickDamage.times(GameData.critTimes));
+            AudioMgr.playBigHit();
         } else {
             self.monsterController.hit(GameData.clickDamage, false, false);
             self.damageArr.push(GameData.clickDamage);
+            AudioMgr.playHit();
         }
 
         self.combo++;
@@ -291,7 +293,8 @@ cc.Class({
         const self = this;
         WeChatUtil.shareAppMessage();
         Events.emit(Events.ON_SHARE_CLICK);
-        this.showShareDialog()
+        this.showShareDialog();
+        AudioMgr.playBtn();
         // WeChatUtil.showModal({
         //     title: "分享给好友",
         //     content: "点一下，玩一年，把快乐分享给好友吧",
@@ -316,6 +319,7 @@ cc.Class({
         var realGold = gold.times(GameData.globalGoldTimes);
         DataCenter.addGold(realGold);
         self.monsterController.playGoldAnim(Formulas.formatBigNumber(realGold));
+        AudioMgr.playGetGoin();
     },
 
     onMonsterSoul (soul) {
@@ -357,7 +361,15 @@ cc.Class({
     //     //     self.openDataNode.runAction(self._hide);
     //     // }
     // },
-
+    setPageActive(curPageIndex) {
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        let children = pageView.content.getChildren();
+        for (let i = 0; i < children.length; i++) {
+            const page = children[i];
+            page.active = i == curPageIndex;
+        }
+    },
     onHeroBtnClick () {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
@@ -367,13 +379,16 @@ cc.Class({
                 self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(0);
+                self.setPageActive(0);
             }
         } else {
             self.setPageNodeActive(true);
             pageView.scrollToPage(0);
+            self.setPageActive(0);
         }
         self.upgrageSelectBtn.active = true;
         self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
+        AudioMgr.playBtn();
     },
 
     onUserSkillBtnClick () {
@@ -385,12 +400,15 @@ cc.Class({
                 self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(1);
+                self.setPageActive(1);
             }
         } else {
             self.setPageNodeActive(true);
             pageView.scrollToPage(1);
+            self.setPageActive(1);
         }
         self.upgrageSelectBtn.active = false;
+        AudioMgr.playBtn();
     },
 
     onAncientBtnClick() {
@@ -402,13 +420,16 @@ cc.Class({
                 self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(2);
+                self.setPageActive(2);
             }
         } else {
             self.setPageNodeActive(true);
             pageView.scrollToPage(2);
+            self.setPageActive(2);
         }
         self.upgrageSelectBtn.active = true;
         self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
+        AudioMgr.playBtn();
     },
 
     onStoreBtnClick() {
@@ -420,12 +441,15 @@ cc.Class({
                 self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(3);
+                self.setPageActive(3);
             }
         } else {
             self.setPageNodeActive(true);
             pageView.scrollToPage(3);
+            self.setPageActive(3);
         }
         self.upgrageSelectBtn.active = false;
+        AudioMgr.playBtn();
     },
 
     onTaskBtnClick() {
@@ -437,16 +461,20 @@ cc.Class({
                 self.setPageNodeActive(false);
             } else {
                 pageView.scrollToPage(4);
+                self.setPageActive(4);
             }
         } else {
             self.setPageNodeActive(true);
             pageView.scrollToPage(4);
+            self.setPageActive(4);
         }
         self.upgrageSelectBtn.active = false;
+        AudioMgr.playBtn();
     },
 
     onUpgradeSelectClick() { // 1 10 25 100 1000 10000
         const self = this;
+        AudioMgr.playBtn();
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
@@ -513,6 +541,7 @@ cc.Class({
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     showShareDialog () {
