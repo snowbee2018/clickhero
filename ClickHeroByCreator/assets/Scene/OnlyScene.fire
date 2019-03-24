@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.28759765625,
-      "y": 0.28759765625,
+      "x": 0.4352752816480617,
+      "y": 0.4352752816480617,
       "z": 1
     },
     "_quat": {
@@ -16010,7 +16010,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 132,
+      "width": 167.5,
       "height": 60
     },
     "_anchorPoint": {
@@ -16020,7 +16020,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -284,
+      "x": -266.25,
       "y": -10,
       "z": 0
     },
@@ -16316,7 +16316,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 132,
+      "width": 167.5,
       "height": 60
     },
     "_anchorPoint": {
@@ -16326,7 +16326,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -142,
+      "x": -88.75,
       "y": -10,
       "z": 0
     },
@@ -16622,7 +16622,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 132,
+      "width": 167.5,
       "height": 60
     },
     "_anchorPoint": {
@@ -16632,7 +16632,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": 88.75,
       "y": -10,
       "z": 0
     },
@@ -16928,7 +16928,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 132,
+      "width": 167.5,
       "height": 60
     },
     "_anchorPoint": {
@@ -16938,7 +16938,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 142,
+      "x": 266.25,
       "y": -10,
       "z": 0
     },
@@ -17166,8 +17166,8 @@
     "target": {
       "__id__": 10
     },
-    "component": "GameController",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "280c3rsZJJKnZ9RqbALVwtK",
     "handler": "onStoreBtnClick",
     "customEventData": ""
   },
@@ -17210,7 +17210,7 @@
         "__id__": 436
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 3,
     "_components": [
       {
