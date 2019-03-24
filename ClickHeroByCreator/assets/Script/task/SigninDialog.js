@@ -56,9 +56,9 @@ cc.Class({
                 lbCount.string = "✖"+this.rubys[i]
             }
             if (i == this.today) {
-                view.color = new cc.Color(0xaa,0x99,0xff)
+                view.color = new cc.Color(0xFC,0xFF,0x9D)
             } else {
-                view.color = new cc.Color(0xff,0xff,0xff)
+                view.color = new cc.Color(0xFB,0xE1,0xAC)
             }
             this.viewHolders[i] = {}
             this.viewHolders[i].view = view
