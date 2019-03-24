@@ -37,7 +37,7 @@ cc.Class({
         this.sp.spriteFrame = this.imgs.getSpriteFrame("ancient_" + data.id)
         this.lbName.string = data.name;
         this.lbLv.string = "等级"+data.level;
-        this.lbSoul.string = "soul"+Formulas.formatBigNumber(data.getSoul())
+        this.lbSoul.string = ""+Formulas.formatBigNumber(data.getSoul())
         // 这个要根据不同的 id和等级 写描述
         this.lbDesc.string = data.getDesc();
         this.onSoulChange();

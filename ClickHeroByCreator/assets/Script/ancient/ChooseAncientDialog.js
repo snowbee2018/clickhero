@@ -38,9 +38,9 @@ cc.Class({
             this.desc.string = "";
 
             let soul = HeroDatas.getBuyAncientSoul();
-            this.lbSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
+            this.lbSoul.string = "" + Formulas.formatBigNumber(soul);
             soul = HeroDatas.getRerollAncientSoul();
-            this.lbRerollSoul.string = "Soul:" + Formulas.formatBigNumber(soul);
+            this.lbRerollSoul.string = "" + Formulas.formatBigNumber(soul);
         }
     },
 
