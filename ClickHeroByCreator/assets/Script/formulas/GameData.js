@@ -31,6 +31,8 @@ cc.Class({
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
         ancientLvUnit: 1,// 古神等级单位
 
+        upGoldenRuby : 30,
+
         //--------古神的影响--------
         //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]
         addGoldenDpsTimes : 0,      //1- 所有金身加成倍数2% 0.02++ √

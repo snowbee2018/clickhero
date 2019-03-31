@@ -147,11 +147,17 @@ cc.Class({
 
     // 升级金身
     upgradeGolden(){
-        this.golden ++;
-        // 然后计算dps啊
-        this.refresh();
-        this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
-        Events.emit(Events.ON_UPGRADE_HERO, this.id);
+        var isCanUpgrade = DataCenter.isRubyEnough(GameData.upGoldenRuby);
+        if (isCanUpgrade) {
+            DataCenter.consumeRuby(GameData.upGoldenRuby)
+            this.golden ++;
+            this.refresh();
+            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+            Events.emit(Events.ON_UPGRADE_HERO, this.id);
+            return true
+        } else {
+            return false
+        }
     },
     // 回收金身 当转移金身时 使用
     delGolden(){

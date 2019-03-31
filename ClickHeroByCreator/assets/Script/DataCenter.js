@@ -49,7 +49,7 @@ cc.Class({
         if (cloudGold) {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
         } else {
-            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9e+9999")));
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
             // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
@@ -63,14 +63,14 @@ cc.Class({
         if (cloudSoul) {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
         } else {
-            self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("3000")));
+            self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("0")));
         }
         // 初始化宝石
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.ruby);
         if (cloudSoul) {
             self.setDataByKey(self.KeyMap.ruby, Number(cloudSoul));
         } else {
-            self.setDataByKey(self.KeyMap.ruby, 3000);
+            self.setDataByKey(self.KeyMap.ruby, 0);
         }
         var cloudRebirthSoul = self.getCloudDataByKey(self.KeyMap.rebirthSoul);
         if (cloudRebirthSoul) {
@@ -284,7 +284,7 @@ cc.Class({
         }
     },
     
-    // 仙丹是否足够
+    // 蟠桃是否足够
     isRubyEnough(ruby) {
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);

@@ -24,6 +24,7 @@ cc.Class({
         lbGolden : cc.Label,
         lbGoldenTimes : cc.Label,
         lbRuby: cc.Label,
+        btnGolden : cc.Button,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -100,7 +101,7 @@ cc.Class({
             const item = self.skillItem[index];
             item.setDisplay();
         }
-
+        self.btnGolden.interactable = DataCenter.isRubyEnough(GameData.upGoldenRuby)
     },
 
     fullView(){
@@ -118,9 +119,11 @@ cc.Class({
     },
 
     onClickUpGolden(){
-        this._hero.upgradeGolden();
-        this.fullView();
-        AudioMgr.playBtn();
+        var result = this._hero.upgradeGolden();
+        if (result) {
+            this.fullView();
+            AudioMgr.playBtn();
+        }
     },
 
     close () {
