@@ -26,14 +26,29 @@ cc.Class({
         //计算点击伤害 for hero
         getClickDPS(lv, times){
             // let DPS = baseDPS * lv;
-            let DPS = new BigNumber(lv * times);
+            let lvTimes = this.getDamageTimesByLv(lv)
+            let DPS = new BigNumber(lv * times).times(lvTimes);
             return DPS;
         },
         // 计算DPS for hero
         getDPS(baseDPS,lv,times){
             // let DPS = baseDPS * lv;
-            let DPS = baseDPS.times(lv * times);
+            let lvTimes = this.getDamageTimesByLv(lv)
+            let DPS = baseDPS.times(lv * times ).times(lvTimes);
             return DPS;
+        },
+        getDamageTimesByLv(lv){
+            let times = 1
+            if (lv >= 225) {
+                times = bigPow(4,Math.floor((lv - 200) / 25))
+                // times = Math.floor((lv - 200) / 25) * 4
+                if (lv >= 1000) {
+                    times = bigPow(2.5,Math.floor(lv /1000)).times(times)
+                    // times = Math.floor(lv /1000) * 2.5 * times
+                }
+                console.log("getDamageTimesByLv lv = " + lv+",times="+times.toString());
+            }
+            return times
         },
         // 升级点击英雄金币 for hero
         getClickHeroCost(lv){
