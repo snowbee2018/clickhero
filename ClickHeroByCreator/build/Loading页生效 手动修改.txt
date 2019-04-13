@@ -1,0 +1,3 @@
+解决第一次下载res时间长，黑屏不好看，搞个loading画面放那
+
+把本文档同目录的main.js 覆盖到：CocosCreator安装目录\resources\static\build-templates\shares\
