@@ -73,9 +73,9 @@ window.boot = function () {
         root.parent = scene;
         canvas.fitHeight = false
         canvas.fitWidth = true
-        canvas.designResolution = new cc.Size(720 ,1280);
-        root.height = 1280
-        root.width = 720
+        canvas.designResolution = new cc.Size(1920 ,1080);
+        root.height = 1080
+        root.width = 1920
         // 健康游戏忠告
         var node = new cc.Node();
         var label = node.addComponent(cc.Label);
@@ -91,18 +91,18 @@ window.boot = function () {
         label.fontSize = 42
         label.lineHeight = 60;
         node.parent = root;
-        // 版权
-        var node = new cc.Node();
-        var label = node.addComponent(cc.Label);
-        label.string = "批准文号:新广出审[2017]82号        出版物号:ISBN 978-7-7979-3656-9\n文网游备字[2016]M-CBG 0083号\n著作权人:深圳市金环天朗信息技术服务有限公司\n出版单位:北京艺术与科学电子出版社";
-        label.fontSize = 20
-        label.lineHeight = 32;
-        label.horizontalAlign = cc.Label.HorizontalAlign.CENTER
-        node.parent = root;
-        node.anchorY = 0
-        var widget = node.addComponent(cc.Widget);
-        widget.isAlignBottom = true;
-        widget.bottom = 30
+        // // 版权
+        // var node = new cc.Node();
+        // var label = node.addComponent(cc.Label);
+        // label.string = "批准文号:新广出审[2017]82号        出版物号:ISBN 978-7-7979-3656-9\n文网游备字[2016]M-CBG 0083号\n著作权人:深圳市金环天朗信息技术服务有限公司\n出版单位:北京艺术与科学电子出版社";
+        // label.fontSize = 20
+        // label.lineHeight = 32;
+        // label.horizontalAlign = cc.Label.HorizontalAlign.CENTER
+        // node.parent = root;
+        // node.anchorY = 0
+        // var widget = node.addComponent(cc.Widget);
+        // widget.isAlignBottom = true;
+        // widget.bottom = 30
     }
 
     var onStart = function () {
@@ -142,15 +142,6 @@ window.boot = function () {
                 cc.macro.DOWNLOAD_MAX_CONCURRENT = 2;
             }
         }
-
-        // init assets
-        cc.AssetLibrary.init({
-            libraryPath: 'res/import',
-            rawAssetsBase: 'res/raw-',
-            rawAssets: settings.rawAssets,
-            packedAssets: settings.packedAssets,
-            md5AssetsMap: settings.md5AssetsMap
-        });
 
         var launchScene = settings.launchScene;
         var timeout = 0
@@ -207,6 +198,16 @@ window.boot = function () {
         collisionMatrix: settings.collisionMatrix,
     }
 
+    // init assets
+    cc.AssetLibrary.init({
+        libraryPath: 'res/import',
+        rawAssetsBase: 'res/raw-',
+        rawAssets: settings.rawAssets,
+        packedAssets: settings.packedAssets,
+        md5AssetsMap: settings.md5AssetsMap,
+        subpackages: settings.subpackages
+    });
+
     cc.game.run(option, onStart);
 };
 
@@ -230,12 +231,20 @@ if (<%=isQQPlay%>) {
     qqPlayDownloader.REMOTE_SERVER_ROOT = "";
     var prevPipe = cc.loader.md5Pipe || cc.loader.assetLoader;
     cc.loader.insertPipeAfter(prevPipe, qqPlayDownloader);
-
+    <Inject plugin code>
     window.boot();
 }
 else if (window.jsb) {
-    require('src/settings.js');
-    require('src/cocos2d-jsb.js');
-    require('jsb-adapter/engine/index.js');
+    var isRuntime = (typeof loadRuntime === 'function');
+    if (isRuntime) {
+        require('src/settings.js');
+        require('src/cocos2d-runtime.js');
+        require('jsb-adapter/engine/index.js');
+    }
+    else {
+        require('src/settings.js');
+        require('src/cocos2d-jsb.js');
+        require('jsb-adapter/jsb-engine.js');
+    }
     window.boot();
 }
