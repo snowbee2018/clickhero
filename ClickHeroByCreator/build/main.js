@@ -146,7 +146,7 @@ window.boot = function () {
         var launchScene = settings.launchScene;
         var timeout = 0
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-            timeout = 1000
+            timeout = 3000
         }
         setTimeout(function () {
             // load scene
