@@ -73,9 +73,9 @@ window.boot = function () {
         root.parent = scene;
         canvas.fitHeight = false
         canvas.fitWidth = true
-        canvas.designResolution = new cc.Size(1920 ,1080);
-        root.height = 1080
-        root.width = 1920
+        canvas.designResolution = new cc.Size(1280 ,720);
+        root.height = 720
+        root.width = 1280
         // 健康游戏忠告
         var node = new cc.Node();
         var label = node.addComponent(cc.Label);
