@@ -248,7 +248,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 3,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -418,7 +418,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -750,7 +750,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -1082,7 +1082,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -1700,7 +1700,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
