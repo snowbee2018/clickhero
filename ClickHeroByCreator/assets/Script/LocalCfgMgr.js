@@ -46,6 +46,19 @@ cc.Class({
                 var iconLen = 60
                 var curIconIndex = 0
                 window.SkillCfg = {};
+                // 因为md5后 这里的顺序会乱 做个冒泡
+                const len = assets.length
+                for (let i = 0; i < len - 1; i++) {
+                    for (let j = 0; j < len - i -1; j++) {
+                        const temp = assets[j];
+                        const id0 = Number(assets[j]._name)
+                        const id1 = Number(assets[j+1]._name)
+                        if (id0>id1) {
+                            assets[j] = assets[j+1]
+                            assets[j+1] = temp
+                        }
+                    }
+                }
                 for (let index = 0; index < assets.length; index++) {
                     const textAsset = assets[index];
                     var str = textAsset.text.trim();
