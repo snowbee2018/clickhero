@@ -23,6 +23,10 @@ cc.Class({
         dialogPrefab : cc.Prefab,
         SigninDialog : cc.Prefab,
         ShareDialog : cc.Prefab,
+
+        tabs : [cc.Node],
+        shareBtn : cc.Node,
+        btnSignin : cc.Node,
     },
     
     // use this for initialization
@@ -37,6 +41,25 @@ cc.Class({
         self.setPageNodeActive(false);
 
         WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
+
+        this.initTabsVisible()
+    },
+
+    initTabsVisible(){
+        // tabs[0].active = true
+        // tabs[1].active = true
+        // if 
+        
+        let curSoul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul);
+        let v0 = BigNumber.isBigNumber(curSoul)&&curSoul.gt(0)&&this.tabs[2].active==false
+        this.tabs[2].active = v0
+        let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+        console.log("xxxxj "+maxPassLavel);
+        
+        let v1 = Boolean(maxPassLavel && maxPassLavel >= 10)
+        this.tabs[3].active = v1
+        this.shareBtn.active = v1
+        this.btnSignin.active = v1
     },
 
     setPageNodeActive (bActive) {
@@ -120,6 +143,7 @@ cc.Class({
             Events.on(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
             Events.on(Events.ON_IDLE_STATE, self.onIdleState, self);
             Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
+            Events.on(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -201,6 +225,10 @@ cc.Class({
             str += "(" + Formulas.formatBigNumber(rebirthSoul) + ")";
         }
         self.totalSoulLab.string = str;
+        let curSoul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul);
+        if (BigNumber.isBigNumber(curSoul)&&curSoul.gt(0)&&this.tabs[2].active==false) {
+            this.tabs[2].active=true
+        }
     },
 
     onClickDamageChange () {
@@ -226,6 +254,16 @@ cc.Class({
     onComboChange (event) {
         const self = this;
         self.comboCount.string = self.combo;
+    },
+
+    onMaxLvChange(event){
+        let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+        let v1 = maxPassLavel >= 10
+        if (!this.tabs[3].active) {
+            this.tabs[3].active = v1
+            this.shareBtn.active = v1
+            this.btnSignin.active = v1
+        }
     },
 
     updataMonsterInfoDisplay () {
