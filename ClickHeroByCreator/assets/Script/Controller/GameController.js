@@ -42,24 +42,27 @@ cc.Class({
 
         WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
 
-        this.initTabsVisible()
     },
 
-    initTabsVisible(){
-        // tabs[0].active = true
-        // tabs[1].active = true
-        // if 
-        
+    initGuide(){
+        // 这些是判断隐藏一些没达到关卡 需要隐藏的元素
         let curSoul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul);
-        let v0 = BigNumber.isBigNumber(curSoul)&&curSoul.gt(0)&&this.tabs[2].active==false
-        this.tabs[2].active = v0
         let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
-        console.log("xxxxj "+maxPassLavel);
-        
+        let v0 = BigNumber.isBigNumber(curSoul)&&curSoul.gt(0)&&this.tabs[2].active==false
+        if (Boolean(maxPassLavel && maxPassLavel >= 100)) {
+            this.tabs[2].active = true
+        }else{
+            this.tabs[2].active = v0
+        }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 10)
         this.tabs[3].active = v1
         this.shareBtn.active = v1
         this.btnSignin.active = v1
+
+        if(!Boolean(maxPassLavel)){
+            console.log("加个点击手引导");
+            this.createClickGuide()
+        } 
     },
 
     setPageNodeActive (bActive) {
@@ -161,6 +164,9 @@ cc.Class({
             self.pageNode.getComponent("HideOtherPage").handler();
 
             AudioMgr.playBG();
+
+            
+            this.initGuide()
         } catch (error) {
             console.error(error)
         }
@@ -215,6 +221,12 @@ cc.Class({
     onGoldChange () {
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
+
+        if (Boolean(historyTotalGold&&historyTotalGold>5)) {
+            // if heropage.active==false {
+            //      加个感叹号，给至尊宝的购买按钮加个感叹号
+            // }
+        }
     },
 
     onSoulChange(){
@@ -315,6 +327,13 @@ cc.Class({
         }
         self.unschedule(self.handleIdle);
         self.scheduleOnce(self.handleIdle, 60);
+    },
+
+    createClickGuide(){
+        // 这里在self.monsterController里加个手指动画node
+        // 在clickHit里 移除掉
+        // 目前需要图片资源
+        // xjmark
     },
 
     handleIdle () {
