@@ -12,14 +12,21 @@ cc.Class({
 
     onLoad(){
         console.log("StoreCtrl:ctor");
+        this.items = new Array();
         Events.on(Events.ON_GAME_START,this.onStart,this);
         Events.on(Events.ON_RUBY_CHANGE,this.showRuby,this);
         this.fullViews();
         this.showRuby();
+        this.onMaxPassLavelChange()
     },
 
     onStart () {
         // console.log("StoreCtrl:onStart");
+        Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
+    },
+
+    onDestroy (){
+        Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
     },
 
     showRuby(){
@@ -42,9 +49,22 @@ cc.Class({
 
     },
 
+    onMaxPassLavelChange(){
+        let lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) || 0
+        lv = lv + 50
+        this.items.forEach(node => {
+            let data = node.getComponent("GoodsItem").data
+            let active = Boolean(data.unlockLv <= lv)
+            if (node.active != active){
+                node.active = active
+            }
+        });
+    },
+
     addItem(goods) {
         var node = cc.instantiate(this.itemPrefab);
         node.parent = this.sv.content;
         node.getComponent("GoodsItem").bind(goods);
+        this.items.push(node)
     },
 });

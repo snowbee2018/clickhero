@@ -17,6 +17,12 @@ cc.Class({
         Events.on(Events.ON_LEVEL_PASSED, this.onFloor, this)
     },
 
+    onDestroy (){
+        Events.off(Events.ON_BUY_GOODS,this.onBuy,this)
+        Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxFloor, this)
+        Events.off(Events.ON_LEVEL_PASSED, this.onFloor, this)
+    },
+
     onMaxFloor(){
         var maxfloor = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
         if (this.data.unlockLv == maxfloor) {
