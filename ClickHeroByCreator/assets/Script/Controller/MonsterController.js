@@ -21,7 +21,7 @@ cc.Class({
         timeLabel: cc.Label,
         toggle: cc.Toggle,
 
-        _autoNext: false,
+        _autoNext: true,
         goldAnimFb: cc.Prefab,
     },
 

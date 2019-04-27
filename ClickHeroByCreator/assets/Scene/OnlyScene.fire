@@ -18976,7 +18976,7 @@
       "__id__": 472
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [
       {
@@ -19122,7 +19122,7 @@
     "_N$target": {
       "__id__": 473
     },
-    "_N$isChecked": false,
+    "_N$isChecked": true,
     "toggleGroup": null,
     "checkMark": {
       "__id__": 476
@@ -19363,7 +19363,7 @@
     "toggle": {
       "__id__": 477
     },
-    "_autoNext": false,
+    "_autoNext": true,
     "goldAnimFb": {
       "__uuid__": "7ed0dbd0-6859-4a77-9e41-2622503e0984"
     },
