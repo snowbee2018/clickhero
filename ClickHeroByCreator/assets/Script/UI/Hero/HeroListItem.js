@@ -27,6 +27,8 @@ cc.Class({
         skillDialogPrefab: cc.Prefab,
 
         contentNode: cc.Node,
+        sTips : cc.SpriteFrame,
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -67,6 +69,24 @@ cc.Class({
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btn.interactable = self.isCanBuy();
+        }
+        if (this._heroID == 0 && !hero.isBuy) {
+            let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
+            if (Boolean(historyTotalGold&&historyTotalGold.eq(5))) {
+                console.log("加个感叹号2");
+                this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
+                this.nodeOpenTabTips.color = new cc.Color(0xee,0x33,0x66)
+                var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
+                sp.spriteFrame = this.sTips
+                this.nodeOpenTabTips.parent = this.btn.node
+                this.nodeOpenTabTips.setPosition(cc.v2(50,0))
+                this.nodeOpenTabTips.opacity = 0
+                this.nodeOpenTabTips.runAction(
+                    cc.repeatForever(
+                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                    )
+                )
+            }
         }
     },
 
@@ -247,6 +267,9 @@ cc.Class({
         } else {
             hero.buy();
         }
-        
+        if (this.nodeOpenTabTips) {
+            this.nodeOpenTabTips.removeFromParent()
+            this.nodeOpenTabTips = null
+        }
     },
 });

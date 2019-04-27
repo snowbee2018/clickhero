@@ -27,6 +27,9 @@ cc.Class({
         tabs : [cc.Node],
         shareBtn : cc.Node,
         btnSignin : cc.Node,
+
+        sFinger : cc.SpriteFrame,
+        sTips : cc.SpriteFrame,
     },
     
     // use this for initialization
@@ -222,11 +225,25 @@ cc.Class({
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
 
-        // if (Boolean(historyTotalGold&&historyTotalGold>5)) {
-        //     // if heropage.active==false {
-        //     //      加个感叹号，给至尊宝的购买按钮加个感叹号
-        //     // }
-        // }
+        let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
+        if (Boolean(historyTotalGold&&historyTotalGold.eq(5))&&!HeroDatas.getHero(0).isBuy) {
+            if (this.pageNode.active==false) {
+                console.log("加个感叹号1");
+                this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
+                this.nodeOpenTabTips.color = new cc.Color(0xee,0x88,0x55)
+                var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
+                sp.spriteFrame = this.sTips
+                this.nodeOpenTabTips.parent = this.tabs[0]
+                this.nodeOpenTabTips.setPosition(cc.v2(80,0))
+                this.nodeOpenTabTips.opacity = 0
+                this.nodeOpenTabTips.runAction(
+                    cc.repeatForever(
+                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                    )
+                )
+            }
+            // ，给至尊宝的购买按钮加个感叹号
+        }
     },
 
     onSoulChange(){
@@ -327,13 +344,27 @@ cc.Class({
         }
         self.unschedule(self.handleIdle);
         self.scheduleOnce(self.handleIdle, 60);
+        if (this.nodeFinger) {
+            this.nodeFinger.removeFromParent()
+            this.nodeFinger = null
+        }
     },
 
     createClickGuide(){
-        // 这里在self.monsterController里加个手指动画node
-        // 在clickHit里 移除掉
-        // 目前需要图片资源
-        // xjmark
+        this.scheduleOnce(function() {
+            this.nodeFinger = new cc.Node("nodeFinger")
+            this.nodeFinger.color = new cc.Color(0xf4,0xea,0x2a)
+            const sp = this.nodeFinger.addComponent(cc.Sprite);
+            sp.spriteFrame = this.sFinger
+            this.nodeFinger.parent = this.monsterController.monsterPos
+            this.nodeFinger.setPosition(cc.v2(0,80))
+            this.nodeFinger.opacity = 0
+            this.nodeFinger.runAction(
+                cc.repeatForever(
+                    cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                )
+            )
+        }, 1);
     },
 
     handleIdle () {
@@ -446,6 +477,10 @@ cc.Class({
         self.upgrageSelectBtn.active = true;
         self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
         AudioMgr.playBtn();
+        if(this.nodeOpenTabTips){
+            this.nodeOpenTabTips.removeFromParent()
+            this.nodeOpenTabTips = null
+        }
     },
 
     onUserSkillBtnClick () {

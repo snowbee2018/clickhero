@@ -19323,6 +19323,12 @@
     "btnSignin": {
       "__id__": 25
     },
+    "sFinger": {
+      "__uuid__": "61083e80-7c9e-4d82-aa18-e04831da61e2"
+    },
+    "sTips": {
+      "__uuid__": "08354bd0-a2ec-4aa0-aec9-0655c7012909"
+    },
     "_id": "37MjEl2pFNvJKMOTw5zYX1"
   },
   {
