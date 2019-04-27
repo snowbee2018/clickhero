@@ -222,11 +222,11 @@ cc.Class({
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
 
-        if (Boolean(historyTotalGold&&historyTotalGold>5)) {
-            // if heropage.active==false {
-            //      加个感叹号，给至尊宝的购买按钮加个感叹号
-            // }
-        }
+        // if (Boolean(historyTotalGold&&historyTotalGold>5)) {
+        //     // if heropage.active==false {
+        //     //      加个感叹号，给至尊宝的购买按钮加个感叹号
+        //     // }
+        // }
     },
 
     onSoulChange(){
