@@ -49,7 +49,35 @@ cc.Class({
             self.skillIcon.setIcon(self._heroListCtor, self._heroID, self._skillID, skillData.icon);
             self.skillIcon.lightIcon(true);
             self.skillName.string = skillData.name;
-            self.describe.string = skillData.describe + "--" + hero.getSkillDesc(self._skillID);
+            if (skillData.unlock) {
+                if (skillData.unlock=="ClickStorm") {
+                    self.describe.string = "解锁[毫毛变化]技能"
+                }else if (skillData.unlock=="Powersurge") {
+                    self.describe.string = "解锁[三头六臂]技能"
+                }else if (skillData.unlock=="Lucky Strikes") {
+                    self.describe.string = "解锁[鸿运灌顶]技能"
+                }else if (skillData.unlock=="火眼金睛") {
+                    self.describe.string = "解锁[火眼金睛]技能"
+                }else if (skillData.unlock=="Golden Clicks") {
+                    self.describe.string = "解锁[点石成金]技能"
+                }else if (skillData.unlock=="The Dark Ritual") {
+                    self.describe.string = "解锁[阿弥陀佛]技能"
+                }else if (skillData.unlock=="如意金箍") {
+                    self.describe.string = "解锁[如意金箍]技能"
+                }else if (skillData.unlock=="Energize") {
+                    self.describe.string = "解锁[观音赐福]技能"
+                }else if (skillData.unlock=="筋斗云") {
+                    self.describe.string = "解锁[筋斗云]技能"
+                }
+            } else if(skillData.bjProbability) {
+                self.describe.string = "增加" + (skillData.bjProbability*100) + "%暴击概率"
+            } else if(skillData.bjDamage) {
+                self.describe.string = "增加" + skillData.bjDamage + "倍暴击伤害"
+            } else if(skillData.DPSClick) {
+                self.describe.string = "增加" + (skillData.DPSClick*100) + "%DPS点击伤害"
+            } else{
+                self.describe.string = skillData.describe + "--" + hero.getSkillDesc(self._skillID);
+            }
             if (skillData.isBuy) {
                 self.levelLimit.node.active = false;
                 self.btn.node.active = false;
