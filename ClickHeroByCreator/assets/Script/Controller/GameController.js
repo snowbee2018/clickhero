@@ -230,12 +230,13 @@ cc.Class({
             if (this.pageNode.active==false) {
                 console.log("加个感叹号1");
                 this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
-                this.nodeOpenTabTips.color = new cc.Color(0xee,0x88,0x55)
+                this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
                 var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
-                sp.spriteFrame = this.sTips
+                sp.spriteFrame = this.sFinger
                 this.nodeOpenTabTips.parent = this.tabs[0]
                 this.nodeOpenTabTips.setPosition(cc.v2(80,0))
                 this.nodeOpenTabTips.opacity = 0
+                this.nodeOpenTabTips.scale = 0.5
                 this.nodeOpenTabTips.runAction(
                     cc.repeatForever(
                         cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))

@@ -75,12 +75,13 @@ cc.Class({
             if (Boolean(historyTotalGold&&historyTotalGold.eq(5))) {
                 console.log("加个感叹号2");
                 this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
-                this.nodeOpenTabTips.color = new cc.Color(0xee,0x33,0x66)
+                this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
                 var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
                 sp.spriteFrame = this.sTips
                 this.nodeOpenTabTips.parent = this.btn.node
                 this.nodeOpenTabTips.setPosition(cc.v2(50,0))
                 this.nodeOpenTabTips.opacity = 0
+                this.nodeOpenTabTips.scale = 0.5
                 this.nodeOpenTabTips.runAction(
                     cc.repeatForever(
                         cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
