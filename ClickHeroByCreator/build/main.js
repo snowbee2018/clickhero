@@ -87,7 +87,7 @@ window.boot = function () {
         // 八荣八耻
         var node = new cc.Node();
         var label = node.addComponent(cc.Label);
-        label.string = "抵制不良游戏，拒绝盗版游戏\n注意自我保护，谨防上当受骗\n适度游戏益脑，沉迷游戏伤身\n合理安排时间，享受健康生活";
+        label.string = "抵制不良游戏，拒绝盗版游戏\n注意自我保护，谨防受骗上当\n适度游戏益脑，沉迷游戏伤身\n合理安排时间，享受健康生活";
         label.fontSize = 42
         label.lineHeight = 60;
         node.parent = root;
