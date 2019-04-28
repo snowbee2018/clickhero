@@ -75,41 +75,43 @@ cc.Class({
                             var skillCfgObj = {}
                             for (let j = 0; j < lArr.length; j++) {
                                 const value = lArr[j];
-                                var key = keyArr[j];
-                                // globalDPS // 全局DPS加成
-                                // gold // 金币加成
-                                // heroDPS // 英雄DPS加成
-                                // bjDamage // 暴击伤害加成
-                                // bjProbability // 暴击概率加成
-                                // unlock // 解锁主动技能
-                                // cost // 解锁技能的花费
-                                // level // 解锁技能的等级
-                                // name // 技能显示的名字
-                                // describe // 技能描述
-                                // DPSClick // 附加DPS点击
-                                switch (key) {
-                                    case "globalDPS":
-                                    case "gold":
-                                    case "bjDamage":
-                                    case "bjProbability":
-                                    case "DPSClick":
-                                    case "level":
-                                        if (value.length > 0) {
-                                            skillCfgObj[key] = Number(value);
-                                        }
-                                        break;
-                                    case "heroDPS":
-                                    case "cost":
-                                        skillCfgObj[key] = new BigNumber(value);
-                                        break;
-                                    case "unlock":
-                                        if (value.length > 0) {
+                                if (value.length > 0) {
+                                    var key = keyArr[j];
+                                    // globalDPS // 全局DPS加成
+                                    // gold // 金币加成
+                                    // heroDPS // 英雄DPS加成
+                                    // bjDamage // 暴击伤害加成
+                                    // bjProbability // 暴击概率加成
+                                    // unlock // 解锁主动技能
+                                    // cost // 解锁技能的花费
+                                    // level // 解锁技能的等级
+                                    // name // 技能显示的名字
+                                    // describe // 技能描述
+                                    // DPSClick // 附加DPS点击
+                                    switch (key) {
+                                        case "globalDPS":
+                                        case "gold":
+                                        case "bjDamage":
+                                        case "bjProbability":
+                                        case "DPSClick":
+                                        case "level":
+                                            if (value.length > 0) {
+                                                skillCfgObj[key] = Number(value);
+                                            }
+                                            break;
+                                        case "heroDPS":
+                                        case "cost":
+                                            skillCfgObj[key] = new BigNumber(value);
+                                            break;
+                                        case "unlock":
+                                            if (value.length > 0) {
+                                                skillCfgObj[key] = value;
+                                            }
+                                            break;
+                                        default:
                                             skillCfgObj[key] = value;
-                                        }
-                                        break;
-                                    default:
-                                        skillCfgObj[key] = value;
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
                             if (curIconIndex >= iconLen) curIconIndex = 0;
