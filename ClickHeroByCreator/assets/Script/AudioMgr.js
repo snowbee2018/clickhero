@@ -12,11 +12,11 @@ cc.Class({
     init() {
         this.openMusic(true);
         this.openEffect(true);
-        CloudRes.getMp3Url('login', function (url) {
-            cc.loader.load(url, function (err, clip) {
-                cc.audioEngine.playMusic(clip, true);
-            }.bind(this));
-        }.bind(this));
+        // CloudRes.getMp3Url('login', function (url) {
+        //     cc.loader.load(url, function (err, clip) {
+        //         cc.audioEngine.playMusic(clip, true);
+        //     }.bind(this));
+        // }.bind(this));
         // CloudRes.getMp3Url('bg', function (url) {
         //     cc.loader.load(url, function (err, clip) {
         //         this.bgAudioClip = clip;
