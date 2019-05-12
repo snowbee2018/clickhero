@@ -77,7 +77,8 @@ cc.Class({
         }
         const self = this;
         self.pageNode.isVisible = bActive
-        self.pageNode.opacity = bActive ? 255:0
+        // self.pageNode.opacity = bActive ? 255:0
+        self.pageNode.scale = bActive ? 1:0
         // self.pageNode.active = bActive;
         if (bActive) {
             self.monsterController.moveUp();
