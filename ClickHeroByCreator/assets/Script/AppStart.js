@@ -63,11 +63,11 @@ cc.Class({
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.init();
             console.log('加载怪物资源');
-            AudioMgr.init();
             CloudRes.preloadMonsterRes(function () {
                 self.monsterResDone = true;
                 self.showGame();
             });
+            AudioMgr.init();
         } else {
             self.monsterResDone = true;
         }
