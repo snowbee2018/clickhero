@@ -343,6 +343,10 @@ cc.Class({
         var arr = contentStr.split(" ");
         var lStr = arr[1];
         var rStr = arr[0];
+        if(!lStr || !rStr)  
+        {
+
+        }
         var bubbleLeft = self.monsterPos.parent.getChildByName('BubbleLeft');
         var contentLabLeft = bubbleLeft.getChildByName('contentLab');
         contentLabLeft.getComponent(cc.Label).string = lStr;
