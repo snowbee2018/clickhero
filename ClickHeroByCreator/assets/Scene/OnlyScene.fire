@@ -16494,8 +16494,8 @@
     "target": {
       "__id__": 10
     },
-    "component": "GameController",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "280c3rsZJJKnZ9RqbALVwtK",
     "handler": "onHeroBtnClick",
     "customEventData": ""
   },
@@ -19302,6 +19302,9 @@
     },
     "ShareDialog": {
       "__uuid__": "3c5130f6-e0e9-489c-9ef0-76bacaeab04f"
+    },
+    "offlineDialog": {
+      "__uuid__": "15fcaa4d-1ff3-4eb3-977c-5c7e8e332541"
     },
     "tabs": [
       {

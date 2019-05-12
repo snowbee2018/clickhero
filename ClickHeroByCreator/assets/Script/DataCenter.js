@@ -44,6 +44,10 @@ cc.Class({
     // 读取存档之后用来初始化
     init () {
         const self = this;
+        var cloudTime = self.getCloudDataByKey(self.KeyMap.lastTime);
+        if (cloudTime) {
+            self.setDataByKey(self.KeyMap.lastTime, Number(cloudTime));
+        }
         // 初始化金币
         var cloudGold = self.getCloudDataByKey(self.KeyMap.curGold);
         if (cloudGold) {

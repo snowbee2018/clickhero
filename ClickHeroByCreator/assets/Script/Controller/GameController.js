@@ -23,6 +23,7 @@ cc.Class({
         dialogPrefab : cc.Prefab,
         SigninDialog : cc.Prefab,
         ShareDialog : cc.Prefab,
+        offlineDialog : cc.Prefab,
 
         tabs : [cc.Node],
         shareBtn : cc.Node,
@@ -177,11 +178,24 @@ cc.Class({
 
             
             this.initGuide()
+            this.checkOfflineGold()
         } catch (error) {
             console.error(error)
         }
         
 
+    },
+
+    // 检查离线收益
+    checkOfflineGold(){
+        var lastTime = DataCenter.getDataByKey(DataCenter.KeyMap.lastTime)
+        if (lastTime) {
+            // show dialog
+            let dialog = cc.instantiate(this.offlineDialog)
+            dialog.parent = cc.director.getScene();
+            dialog.x = cc.winSize.width / 2;
+            dialog.y = cc.winSize.height / 2;
+        }
     },
 
     formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据

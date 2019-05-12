@@ -299,7 +299,7 @@ cc.Class({
         }
     },
 
-    startGame () {
+    startGame() {
         const self = this;
         var start = function () {
             self.loginDone = true
