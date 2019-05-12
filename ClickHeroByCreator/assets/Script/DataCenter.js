@@ -50,7 +50,7 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000")));
+            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000000000000000000000000000000000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
         if (historyTotalGold) {
@@ -251,7 +251,7 @@ cc.Class({
     },
     consumeRebirthSoul() {
         const self = this;
-        var key = self.KeyMap.curSoul;
+        var key = self.KeyMap.rebirthSoul;
         var oldSoul = self.getDataByKey(key);
         self.setDataByKey(key, (new BigNumber(0)));
         return oldSoul;
@@ -374,4 +374,5 @@ cc.Class({
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
         self.setDataByKey(self.KeyMap.passLavel, 0);
     },
+
 });

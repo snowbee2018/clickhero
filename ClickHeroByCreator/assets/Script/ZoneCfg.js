@@ -56,7 +56,7 @@ var obj = [
     { zone: "车迟国", bossName: "鹿力大仙", des:"", resNum:"17" },
     { zone: "车迟国", bossName: "羊力大仙", des:"", resNum:"18" },
 
-    { zone: "通天河", bossName: "灵感大王", des:"圣僧夜阻通天水金木垂慈救小童", resNum:"19" },
+    { zone: "通天河", bossName: "灵感大王", des:"圣僧夜阻通天水 金木垂慈救小童", resNum:"19" },
     { zone: "金兜山", bossName: "青牛精兕怪", des:"情乱性从因爱欲 神昏心动遇魔头", resNum:"20" },
     { zone: "女儿国", bossName: "如意真仙", des:"禅主吞餐怀鬼孕 黄婆运水解邪胎", resNum:"21" },
     { zone: "琵琶洞", bossName: "蝎子精", des:"色邪淫戏唐三藏 性正修持不坏身", resNum:"22" },
