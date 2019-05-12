@@ -253,9 +253,13 @@ cc.Class({
             } else if (skill.DPSClick) {
                 result = "将DPS伤害的" + skill.DPSClick * 100 + "%增加到点击伤害";
             }
+            else if(skill.gold)
+            {
+                result = "获得的妖丹增加" + (skill.gold -1)*100+"%";
+            }
             return result;
         }
-    },
+    },  
 
     refresh() {
         if (this.isBuy) {
