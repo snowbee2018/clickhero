@@ -27,7 +27,7 @@ cc.Class({
                 if (i == pageIndex) {
                     page.active = true;
                 } else {
-                    page.active = false;
+                    // page.active = false;
                 }
             }
         }

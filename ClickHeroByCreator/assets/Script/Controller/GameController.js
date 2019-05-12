@@ -41,7 +41,9 @@ cc.Class({
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
 
-        self.setPageNodeActive(false);
+        // self.setPageNodeActive(false);
+        self.pageNode.active = false
+        self.pageNode.isVisible = false
 
         WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
 
@@ -69,8 +71,13 @@ cc.Class({
     },
 
     setPageNodeActive (bActive) {
+        if (!this.pageNode.active) {
+            this.pageNode.active = true
+        }
         const self = this;
-        self.pageNode.active = bActive;
+        self.pageNode.isVisible = bActive
+        self.pageNode.opacity = bActive ? 255:0
+        // self.pageNode.active = bActive;
         if (bActive) {
             self.monsterController.moveUp();
         } else {
@@ -227,7 +234,7 @@ cc.Class({
 
         let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
         if (Boolean(historyTotalGold&&historyTotalGold.eq(5))&&!HeroDatas.getHero(0).isBuy) {
-            if (this.pageNode.active==false) {
+            if (this.pageNode.isVisible==false) {
                 console.log("加个感叹号1");
                 this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
                 this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
@@ -456,23 +463,26 @@ cc.Class({
         let children = pageView.content.getChildren();
         for (let i = 0; i < children.length; i++) {
             const page = children[i];
-            page.active = i == curPageIndex;
+            // page.active = i == curPageIndex;
+            page.active = true
+            console.log("page active"+i + " " +page.active);
+            
         }
     },
     onHeroBtnClick () {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 0) { // 当前正在英雄列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.scrollToPage(0);
+                pageView.setCurrentPageIndex(0);
                 self.setPageActive(0);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.scrollToPage(0);
+            pageView.setCurrentPageIndex(0);
             self.setPageActive(0);
         }
         self.upgrageSelectBtn.active = true;
@@ -487,17 +497,17 @@ cc.Class({
     onUserSkillBtnClick () {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 1) { // 当前正在技能列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.scrollToPage(1);
+                pageView.setCurrentPageIndex(1);
                 self.setPageActive(1);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.scrollToPage(1);
+            pageView.setCurrentPageIndex(1);
             self.setPageActive(1);
         }
         self.upgrageSelectBtn.active = false;
@@ -507,17 +517,17 @@ cc.Class({
     onAncientBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 2) { // 当前正在古神列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.scrollToPage(2);
+                pageView.setCurrentPageIndex(2);
                 self.setPageActive(2);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.scrollToPage(2);
+            pageView.setCurrentPageIndex(2);
             self.setPageActive(2);
         }
         self.upgrageSelectBtn.active = true;
@@ -528,17 +538,17 @@ cc.Class({
     onStoreBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 3) { // 当前正在技能列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.scrollToPage(3);
+                pageView.setCurrentPageIndex(3);
                 self.setPageActive(3);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.scrollToPage(3);
+            pageView.setCurrentPageIndex(3);
             self.setPageActive(3);
         }
         self.upgrageSelectBtn.active = false;
@@ -548,17 +558,17 @@ cc.Class({
     onTaskBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 4) { // 当前正在任务列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.scrollToPage(4);
+                pageView.setCurrentPageIndex(4);
                 self.setPageActive(4);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.scrollToPage(4);
+            pageView.setCurrentPageIndex(4);
             self.setPageActive(4);
         }
         self.upgrageSelectBtn.active = false;
@@ -569,7 +579,7 @@ cc.Class({
         const self = this;
         AudioMgr.playBtn();
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.active) {
+        if (self.pageNode.isVisible) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 0) {
                 var unit = GameData.heroLvUnit;
