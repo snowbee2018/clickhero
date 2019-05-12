@@ -122,9 +122,7 @@ cc.Class({
         // 初始化签到数据
         var shareReceiveData = self.getCloudDataByKey(self.KeyMap.shareReceiveData);
         console.log("signinData:" + shareReceiveData);
-        if (shareReceiveData) {
-            self.setDataByKey(self.KeyMap.shareReceiveData, shareReceiveData);
-        }
+        self.setDataByKey(self.KeyMap.shareReceiveData, shareReceiveData || []);
         //  else {
         //     self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         // }
