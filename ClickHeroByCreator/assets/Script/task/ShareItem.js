@@ -10,6 +10,10 @@ cc.Class({
         btnGet1 : cc.Button,
     },
 
+    onLoad(){
+        this.frameHead = this.spHead.spriteFrame
+    },
+
     bind(index,data){
         // temp 需要持久化 从datacenter拿哦
         this.shareReceiveData = DataCenter.getDataByKey(DataCenter.KeyMap.shareReceiveData)
@@ -54,6 +58,7 @@ cc.Class({
             }
         } else {
             // this.spHead 设为默认图
+            this.spHead.spriteFrame = this.frameHead
             this.btnGet.interactable = false
             this.lbBtn.string = "领取"
             this.btnGet1.interactable = false
