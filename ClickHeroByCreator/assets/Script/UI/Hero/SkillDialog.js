@@ -46,12 +46,14 @@ cc.Class({
         const self = this;
         Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onBuySkill, self);
+        Events.on(Events.CLOSE_DIALOG, self.close, self);
     },
 
     onDisable () {
-            const self = this;
+        const self = this;
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onBuySkill, self);
+        Events.off(Events.CLOSE_DIALOG, self.close, self);
     },
     
     onGoldChange () {

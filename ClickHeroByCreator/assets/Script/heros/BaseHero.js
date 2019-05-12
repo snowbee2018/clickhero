@@ -192,6 +192,7 @@ cc.Class({
                             onTap: function (dialog, bSure) {
                                 if (bSure) {
                                     try {
+                                        Events.emit(Events.CLOSE_DIALOG)
                                         DataCenter.consumeGold(cost);
                                         PublicFunc.rebirth(); // 处理转生逻辑
                                     } catch (error) {
