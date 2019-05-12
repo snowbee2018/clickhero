@@ -44,8 +44,13 @@ cc.Class({
                 this.btnGet1.interactable = false
                 this.lbBtn1.string = "已领取"
             } else {
-                this.btnGet1.interactable = true
-                this.lbBtn1.string = "领取"
+                if (data.isRebirth) {
+                    this.btnGet1.interactable = true
+                    this.lbBtn1.string = "领取"
+                } else {
+                    this.btnGet1.interactable = false
+                    this.lbBtn1.string = "未完成"
+                }
             }
         } else {
             // this.spHead 设为默认图
