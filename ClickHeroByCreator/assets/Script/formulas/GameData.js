@@ -151,8 +151,9 @@ cc.Class({
         // 计算总点击伤害
         calClickDamage() {
             var baseClickDamage = new BigNumber(HeroDatas.getHero(0).DPS);
+            const soul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul) || 0
             this.clickDamage = baseClickDamage.plus(1).plus(this.DPSClickDamage)
-                .times(this.skClickTimes).times(this.addClickDamageTimes);
+                .plus(soul).times(this.skClickTimes).times(this.addClickDamageTimes);
             if (!this.clickDamage.eq(this._tempClickDamage)) {
                 this._tempClickDamage = this.clickDamage
                 Events.emit(Events.ON_CLICK_DAMAGE_CHANGE);
