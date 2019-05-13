@@ -46,6 +46,8 @@ cc.Class({
         window.GoodsDatas = require("GoodsDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
+        cc.game.setFrameRate(30)
+        cc.debug.setDisplayStats(true);
         // window.BigNumber.config({
         //     DECIMAL_PLACES: 4,
         //     POW_PRECISION: 4,
