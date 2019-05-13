@@ -229,8 +229,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "每日签到奖励",
-    "_N$string": "每日签到奖励",
+    "_string": "每周签到奖励",
+    "_N$string": "每周签到奖励",
     "_fontSize": 60,
     "_lineHeight": 80,
     "_enableWrapText": true,
@@ -626,7 +626,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 79.54,
+      "width": 79.53,
       "height": 32
     },
     "_anchorPoint": {
@@ -1115,7 +1115,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 99.43,
+      "width": 99.41,
       "height": 40
     },
     "_anchorPoint": {
