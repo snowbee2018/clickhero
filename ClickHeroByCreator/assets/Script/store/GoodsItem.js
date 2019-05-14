@@ -63,6 +63,7 @@ cc.Class({
             if (bc>0&& this.data.only) {
                 this.lbBought.active = true
                 this.btn.active = false
+                this.lbBought.getComponent(cc.Label).string = "已拥有"
             } else {
                 this.lbBought.active = false
                 this.btn.active = true

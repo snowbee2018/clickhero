@@ -70,9 +70,9 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("0")));
         }
         // 初始化宝石
-        var cloudSoul = self.getCloudDataByKey(self.KeyMap.ruby);
-        if (cloudSoul) {
-            self.setDataByKey(self.KeyMap.ruby, Number(cloudSoul));
+        var cloudRuby = self.getCloudDataByKey(self.KeyMap.ruby);
+        if (cloudRuby) {
+            self.setDataByKey(self.KeyMap.ruby, Number(cloudRuby));
         } else {
             self.setDataByKey(self.KeyMap.ruby, 0);
         }
@@ -258,6 +258,10 @@ cc.Class({
         self.setDataByKey(key, (new BigNumber(0)));
         return oldSoul;
     },
+    getRealRebirthSoul() {
+        var num = DataCenter.getDataByKey(this.KeyMap.rebirthSoul);
+        return num.plus(2)
+    },
 
     // 金币是否足够
     isGoldEnough(price) {
@@ -372,7 +376,7 @@ cc.Class({
     rebirth () {
         const self = this;
         var rebirthSoul = self.consumeRebirthSoul();
-        self.addSoul(rebirthSoul);
+        self.addSoul(rebirthSoul.plus(2));
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
         self.setDataByKey(self.KeyMap.passLavel, 0);
     },

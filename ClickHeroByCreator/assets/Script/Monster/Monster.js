@@ -115,7 +115,13 @@ cc.Class({
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
                     var baseOdds = 0.25;
                     var realOdds = Math.min((baseOdds + GameData.getPrimalBossOdds()), 1);
-                    self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
+                    if (lv <= 100 && lv % 100 == 0) {
+                        self._isPrimalBoss = true; // 百夫长
+                    } else if (lv >= 110 && lv <= 130 && lv%10 == 0) {
+                        self._isPrimalBoss = true; // 百夫长
+                    } else {
+                        self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
+                    }
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
                     }

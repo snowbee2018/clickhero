@@ -70,8 +70,8 @@ cc.Class({
                     self.describe.string = "解锁[筋斗云]技能"
                 }
                 else if (skillData.unlock=="转生") {
-                    var map = DataCenter.KeyMap;
-                    var num = DataCenter.getDataByKey(map.rebirthSoul);
+                    // var map = DataCenter.KeyMap;
+                    var num = DataCenter.getRealRebirthSoul();
                     self.describe.string = "般若波罗蜜，穿越时空，回到500年前，获得"+ num + "仙丹";
                 }
             } else if(skillData.bjProbability) {

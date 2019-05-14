@@ -13,15 +13,10 @@ cc.Class({
     onLoad(){
         console.log("StoreCtrl:ctor");
         this.items = new Array();
-        Events.on(Events.ON_GAME_START,this.onStart,this);
         Events.on(Events.ON_RUBY_CHANGE,this.showRuby,this);
         this.fullViews();
         this.showRuby();
         this.onMaxPassLavelChange()
-    },
-
-    onStart () {
-        // console.log("StoreCtrl:onStart");
         Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
     },
 
