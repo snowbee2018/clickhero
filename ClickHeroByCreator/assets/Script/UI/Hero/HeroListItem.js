@@ -122,7 +122,7 @@ cc.Class({
         Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
         Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
 
-        this.node.parent.on(cc.Node.EventType.POSITION_CHANGED, this.onPosChange.bind(this), this);
+        // this.node.parent.on(cc.Node.EventType.POSITION_CHANGED, this.onPosChange.bind(this), this);
     },
 
     onPosChange() {
@@ -136,7 +136,7 @@ cc.Class({
         // console.log();
         
         
-        this.contentNode.active = this.viewRect.contains(topPos) || this.viewRect.contains(botmPos);
+        // this.contentNode.active = this.viewRect.contains(topPos) || this.viewRect.contains(botmPos);
         // console.log('self._heroID = ' + self._heroID + ', this.node.active = ' + this.node.active);
         
     },
