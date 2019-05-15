@@ -47,7 +47,7 @@ cc.Class({
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
         cc.game.setFrameRate(40)
-        cc.debug.setDisplayStats(true);
+        // cc.debug.setDisplayStats(true);
         // window.BigNumber.config({
         //     DECIMAL_PLACES: 4,
         //     POW_PRECISION: 4,
