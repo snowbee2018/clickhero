@@ -54,9 +54,10 @@ cc.Class({
 
     cancel(){
         AudioMgr.playBtn();
-        if (this.callback) {
-            this.callback(this, false);
-        }
+        //应该是不要的， by voss
+        // if (this.callback) {
+        //     this.callback(this, false);
+        // }
         this.node.destroy();
     },
 

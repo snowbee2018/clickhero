@@ -65,6 +65,7 @@ cc.Class({
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
+        dialog.getComponent("Dialog").setBtnText({left: '是 的',right: '不，谢谢'})                      
         dialog.getComponent("Dialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"英魂");
     },
 

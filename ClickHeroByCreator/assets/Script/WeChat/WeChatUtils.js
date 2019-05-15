@@ -193,8 +193,12 @@ cc.Class({
                                         console.log("wx.getUserInfo ontap userInfoBtn");
                                         if (params.userInfo) {
                                             callBack(false, params);
-                                            self.userInfoBtn.destroy();
-                                            delete self.userInfoBtn;
+                                            if (self.userInfoBtn)
+                                            {
+                                                self.userInfoBtn.destroy();
+                                                delete self.userInfoBtn;
+                                            }
+
                                         } else {
                                             callBack(2);
                                         }
