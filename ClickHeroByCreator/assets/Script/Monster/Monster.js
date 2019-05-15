@@ -218,6 +218,13 @@ cc.Class({
     },
 
     playDamage(damage, bCrit) {
+        const curtime = new Date().getTime();
+        this.lastCheckTime = this.lastCheckTime || 0
+        if (curtime - this.lastCheckTime < 50) {
+            return;
+        }
+        this.lastCheckTime = curtime;
+
         const self = this;
         var damageNode = cc.instantiate(self.damageAnim);
         damageNode.parent = self.node.parent;
