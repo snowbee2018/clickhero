@@ -612,11 +612,11 @@ cc.Class({
                         unit = 1000;
                         break;
                     case 1000:
-                        unit = 10000;
-                        break;
-                    case 10000:
                         unit = 1;
                         break;
+                    // case 10000:
+                    //     unit = 1;
+                    //     break;
                     default:
                         break;
                 }
@@ -639,11 +639,11 @@ cc.Class({
                         unit = 1000;
                         break;
                     case 1000:
-                        unit = 10000;
-                        break;
-                    case 10000:
                         unit = 1;
                         break;
+                    // case 10000:
+                    //     unit = 1;
+                    //     break;
                     default:
                         break;
                 }
