@@ -202,7 +202,8 @@ cc.Class({
 
     appply() {
         const self = this;
-        // console.log("appply");
+        console.log("appply");
+        
         if (self.heroID == 0 && self.skillID == 1) {
             self.skill1(true); // 毫毛变化
         } else if (self.heroID == 2 && self.skillID == 3) {

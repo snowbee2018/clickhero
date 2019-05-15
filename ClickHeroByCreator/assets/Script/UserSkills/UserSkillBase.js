@@ -97,8 +97,16 @@ cc.Class({
             self._coolingCurtail = cloudSkillInfo.coolingCurtail;
             self._lastTimestamp = cloudSkillInfo.lastTimestamp ? parseInt(cloudSkillInfo.lastTimestamp) : 0; // 上次使用技能的时间            
         } else {
-            self._isBuy = false;
-            self._lastTimestamp = 0;
+            console.log(HeroDatas.getHero(20).skills[4]);
+            
+            if (this.skillName=="如意金箍" && HeroDatas.getHero(20).skills[4].isBuy) {
+                self._isBuy = true;
+                self._coolingCurtail = 0;
+                self._lastTimestamp = 0;
+            }else{
+                self._isBuy = false;
+                self._lastTimestamp = 0;
+            }
         }
 
         if (self._isBuy) {
