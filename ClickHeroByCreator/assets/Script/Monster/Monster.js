@@ -176,7 +176,7 @@ cc.Class({
                     if (!err && texture && cc.isValid(self.node)) {
                         self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
                     }
-                });
+                },self._isTreasureChest);
                 if (lv % 5 == 4) {
                     let i = parseInt((lv + 1) / 5)
                     CloudRes.preloadBoosRes(i);

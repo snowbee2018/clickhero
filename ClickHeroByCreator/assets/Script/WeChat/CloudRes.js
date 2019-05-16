@@ -111,7 +111,7 @@ cc.Class({
         preloadMonsterRes (finishCallBack) {
             const self = this;
             if (!WeChatUtil.isWeChatPlatform) return;
-            let count = 56;
+            let count = 57;
             let count1 = 50;
             let pathArr1 = [];
             let pathArr2 = [];
@@ -183,11 +183,11 @@ cc.Class({
             // });
         },
 
-        getMonsterRes (callBack) {
+        getMonsterRes (callBack,isTreasureChest) {
             const self = this;
             let start = 1;
             let count = 56;
-            let index = Math.floor(Math.random() * (count - start + 1) + start);
+            let index = isTreasureChest ? 57:Math.floor(Math.random() * (count - start + 1) + start);
             var path = imgRoot + "/monster/monster" + index + ".png";
             let url = self.urlList[path];
             if (url) {
