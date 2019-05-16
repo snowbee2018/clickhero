@@ -103,6 +103,14 @@ cc.Class({
                 self._isBuy = true;
                 self._coolingCurtail = 0;
                 self._lastTimestamp = 0;
+            }else if (this.skillName=="观音赐福" && HeroDatas.getHero(22).skills[3].isBuy){
+                self._isBuy = true;
+                self._coolingCurtail = 0;
+                self._lastTimestamp = 0;
+            }else if (this.skillName=="筋斗云" && HeroDatas.getHero(23).skills[4].isBuy){
+                self._isBuy = true;
+                self._coolingCurtail = 0;
+                self._lastTimestamp = 0;
             }else{
                 self._isBuy = false;
                 self._lastTimestamp = 0;
@@ -189,7 +197,7 @@ cc.Class({
             case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
             case (id == 15 && self.heroID == 15 && self.skillID == 4): // 点石成金(点金手)
             case (id == 22 && self.heroID == 15 && self.skillID == 4): // 点石成金倍数
-            case (id == 13 && self.heroID == 22 && self.skillID == 4): // 如意金箍
+            case (id == 13 && self.heroID == 20 && self.skillID == 4): // 如意金箍
             case (id == 26): // 技能冷却减少
                 self.setSkillDes();
                 break;
@@ -204,6 +212,10 @@ cc.Class({
     // },
 
     onSkillUnlock(skillInfo) {
+        console.log("onSkillUnlock");
+        console.log(skillInfo);
+        console.log(this.heroID + " " + this.skillID);
+        
         const self = this;        
         if (skillInfo.heroID == self.heroID) {
             if (skillInfo.skillID == self.skillID) {
@@ -269,7 +281,7 @@ cc.Class({
                 return GameData.addMetalDetectorSecond;
             case (self.heroID == 15 && self.skillID == 4): // 点石成金(点金手)
                 return GameData.addGoldClickSecond;
-            case (self.heroID == 22 && self.skillID == 4): // 如意金箍
+            case (self.heroID == 20 && self.skillID == 4): // 如意金箍
                 return GameData.addSuperClickSecond;
             default:
                 return 0;

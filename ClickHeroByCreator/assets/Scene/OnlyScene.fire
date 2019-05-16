@@ -10738,8 +10738,8 @@
     "target": {
       "__id__": 244
     },
-    "component": "UserSkill",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "03684W90G9P5a7hKeDEv55Z",
     "handler": "onItemClick",
     "customEventData": ""
   },
@@ -11442,7 +11442,7 @@
     "bSustain": true,
     "sustainTime": 30,
     "cost": "2.4e+21",
-    "heroID": 22,
+    "heroID": 20,
     "skillID": 4,
     "gray": {
       "__id__": 281
@@ -11546,8 +11546,8 @@
     "target": {
       "__id__": 267
     },
-    "component": "UserSkill",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "03684W90G9P5a7hKeDEv55Z",
     "handler": "onItemClick",
     "customEventData": ""
   },
@@ -12250,7 +12250,7 @@
     "bSustain": false,
     "sustainTime": 30,
     "cost": "2.799e+23",
-    "heroID": 24,
+    "heroID": 22,
     "skillID": 3,
     "gray": {
       "__id__": 304
@@ -12354,8 +12354,8 @@
     "target": {
       "__id__": 290
     },
-    "component": "UserSkill",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "03684W90G9P5a7hKeDEv55Z",
     "handler": "onItemClick",
     "customEventData": ""
   },
@@ -13058,7 +13058,7 @@
     "bSustain": false,
     "sustainTime": 30,
     "cost": "1.12e+26",
-    "heroID": 25,
+    "heroID": 23,
     "skillID": 4,
     "gray": {
       "__id__": 327
@@ -13162,8 +13162,8 @@
     "target": {
       "__id__": 313
     },
-    "component": "UserSkill",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "03684W90G9P5a7hKeDEv55Z",
     "handler": "onItemClick",
     "customEventData": ""
   },

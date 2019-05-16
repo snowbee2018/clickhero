@@ -216,11 +216,11 @@ cc.Class({
             self.skill5(true); // 点石成金
         } else if (self.heroID == 17 && self.skillID == 3) {
             self.skill6(true); // 祭天大典
-        } else if (self.heroID == 22 && self.skillID == 4) {
+        } else if (self.heroID == 20 && self.skillID == 4) {
             self.skill7(true); // 如意金箍
-        } else if (self.heroID == 24 && self.skillID == 3) {
+        } else if (self.heroID == 22 && self.skillID == 3) {
             self.skill8(true); // 神之祝福
-        } else if (self.heroID == 25 && self.skillID == 4) {
+        } else if (self.heroID == 23 && self.skillID == 4) {
             self.skill9(true); // 时光穿越
         }
     }, // 应用技能
@@ -240,11 +240,11 @@ cc.Class({
             self.skill5(false); // 点石成金
         } else if (self.heroID == 17 && self.skillID == 3) {
             self.skill6(false); // 祭天大典
-        } else if (self.heroID == 22 && self.skillID == 4) {
+        } else if (self.heroID == 20 && self.skillID == 4) {
             self.skill7(false); // 如意金箍
-        } else if (self.heroID == 24 && self.skillID == 3) {
+        } else if (self.heroID == 22 && self.skillID == 3) {
             self.skill8(false); // 神之祝福
-        } else if (self.heroID == 25 && self.skillID == 4) {
+        } else if (self.heroID == 23 && self.skillID == 4) {
             self.skill9(false); // 时光穿越
         }
         
@@ -294,19 +294,19 @@ cc.Class({
             // var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
             return "当前DPS伤害×" + baseValue + "，可无限叠加，冷却时间" + coolingTimeStr;
-        } else if (self.heroID == 22 && self.skillID == 4) {
+        } else if (self.heroID == 20 && self.skillID == 4) {
             // 如意金箍
             // 处理效果加成，持续时间和冷却时间的加成
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
             return "点击伤害×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
-        } else if (self.heroID == 24 && self.skillID == 3) {
+        } else if (self.heroID == 22 && self.skillID == 3) {
             // 神之祝福
             // 处理效果加成，持续时间和冷却时间的加成
             // var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
             return "增加下一个使用用的技能的效果，冷却时间" + coolingTimeStr;
-        } else if (self.heroID == 25 && self.skillID == 4) {
+        } else if (self.heroID == 23 && self.skillID == 4) {
             // 时光穿越
             // 处理效果加成，持续时间和冷却时间的加成
             // var sustainTimeStr = self.dateFormat(sustainTime);
