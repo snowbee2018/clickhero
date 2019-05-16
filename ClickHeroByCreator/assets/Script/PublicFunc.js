@@ -13,6 +13,7 @@ cc.Class({
 
     properties: {
         dialog: cc.Prefab,
+        goldDialog: cc.Prefab,
     },
 
     // params = {
@@ -42,6 +43,14 @@ cc.Class({
             console.error(error);
         }
         
+    },
+
+    popGoldDialog (type,num,title,disDouble){
+        let dialog = cc.instantiate(this.goldDialog)
+        dialog.getComponent("GoldDialog").setDatas(type,num,title,disDouble)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 
     rebirth () {

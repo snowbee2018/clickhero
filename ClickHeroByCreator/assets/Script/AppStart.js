@@ -71,6 +71,14 @@ cc.Class({
                 self.showGame();
             });
             AudioMgr.init();
+            
+            // 创建激励视频广告实例，提前初始化
+            window.videoAd = wx.createRewardedVideoAd({
+                adUnitId: 'adunit-dfc42f6bd90a644c'
+            })
+            videoAd.onError(function(errMsg,errCode) {
+                console.log("Video广告error，errMsg:"+errMsg+" code:"+errCode);
+            })
         } else {
             self.monsterResDone = true;
         }

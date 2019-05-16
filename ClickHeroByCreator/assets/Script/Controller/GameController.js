@@ -192,10 +192,19 @@ cc.Class({
         var lastTime = DataCenter.getDataByKey(DataCenter.KeyMap.lastTime)
         if (lastTime) {
             // show dialog
-            let dialog = cc.instantiate(this.offlineDialog)
-            dialog.parent = cc.director.getScene();
-            dialog.x = cc.winSize.width / 2;
-            dialog.y = cc.winSize.height / 2;
+            var diff = Date.now() - Number(lastTime)
+            console.log("离线时间："+diff);
+            var totalDamage = GameData.dpsDamage.times(diff/1000)
+            console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
+            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
+            var gold = Formulas.getMonsterGold(lv,totalDamage)
+            if (gold.gt(0)) {
+                PublicFunc.popGoldDialog(0,gold,"离线收益")
+            }
+            // let dialog = cc.instantiate(this.offlineDialog)
+            // dialog.parent = cc.director.getScene();
+            // dialog.x = cc.winSize.width / 2;
+            // dialog.y = cc.winSize.height / 2;
         }
     },
 

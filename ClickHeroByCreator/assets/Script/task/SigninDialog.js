@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-03-07 20:49:25
+ * @Last Modified time: 2019-05-16 23:49:13
  */
  
 cc.Class({
@@ -70,19 +70,16 @@ cc.Class({
     signinClick(){
         if (this.isSignin()) {
             console.log("今天已经签到过了");
-            
             return
         }
         // 得到钻石,
         let ruby = this.rubys[this.times]
         console.log("得到ruby：" + ruby);
-        
-        DataCenter.addRuby(ruby)
+        PublicFunc.popGoldDialog(2,ruby)
+        // DataCenter.addRuby(ruby)
         // 更改data和ui
         let dateStr = new Date().toLocaleDateString()
-        console.log("toLocaleDateString():"  + dateStr)
         this.data = {times:this.times+1,date:dateStr}
-        console.log(this.data);
         DataCenter.setDataByKey(DataCenter.KeyMap.signinData,this.data)
         this.viewHolders[this.today].lbCount.string = "已领取"
     },
