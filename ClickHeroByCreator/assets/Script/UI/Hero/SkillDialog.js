@@ -99,6 +99,10 @@ cc.Class({
         self.heroLevel.string = "等级:" + hero.level;
         self.descLab.string = hero.desc;
         this.fullView();
+        if (!self.skillItem)
+        {
+            return
+        }
         for (let index = 0; index < self.skillItem.length; index++) {
             const item = self.skillItem[index];
             item.setDisplay();
