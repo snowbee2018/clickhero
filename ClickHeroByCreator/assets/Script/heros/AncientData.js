@@ -227,13 +227,13 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s猴子猴孙持续时间"
         } else if (this.id == 7) {
             // boss计时器 增加 30×(1-e^-0.034n)  需要bigNumber
-            desc = "+" + GameData.addBossTimerSecond + "秒Boss战时长"
+            desc = "+" + GameData.addBossTimerSecond.toFixed(4) + "秒Boss战时长"
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
             desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))).toFixed(4) + "%解锁和升级神仙花费"
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
-            desc = "+" + (GameData.addTreasureOdds*100-1).toFixed(4) + "%的葫芦妖怪出现概率"
+            desc = "+" + (GameData.addTreasureOdds*100-1).toFixed(4) + "%的葫芦妖出现概率"
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
             desc = "+" + (this.level * 2) + "s火眼金睛持续时间"
@@ -242,7 +242,7 @@ cc.Class({
             desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的小妖和葫芦妖10倍妖丹概率"
         } else if (this.id == 12) {
             // +20% click damage
-            desc = "+" + (2 * this.level) + "%点击伤害" // 需要bigNumber
+            desc = "+" + (20 * this.level) + "%点击伤害" // 需要bigNumber
         } else if (this.id == 13) {
             // 	+2s Super Clicks duration
             desc = "+" + (this.level * 2) + "s如意金箍持续时间"

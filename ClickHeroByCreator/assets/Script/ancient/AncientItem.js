@@ -32,7 +32,10 @@ cc.Class({
     },
 
     bind(data){
+        console.log("bind ancient");
+        
         data = data?data:this.data;
+        console.log(data);
         this.data = data;
         this.sp.spriteFrame = this.imgs.getSpriteFrame("ancient_" + data.id)
         this.lbName.string = data.name;

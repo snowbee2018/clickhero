@@ -55,7 +55,7 @@ cc.Class({
                 }else if (skillData.unlock=="Powersurge") {
                     self.describe.string = "解锁[三头六臂]技能"
                 }else if (skillData.unlock=="Lucky Strikes") {
-                    self.describe.string = "解锁[鸿运灌顶]技能"
+                    self.describe.string = "解锁[暴击风暴]技能"
                 }else if (skillData.unlock=="火眼金睛") {
                     self.describe.string = "解锁[火眼金睛]技能"
                 }else if (skillData.unlock=="Golden Clicks") {

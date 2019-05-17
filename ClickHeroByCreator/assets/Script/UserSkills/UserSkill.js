@@ -79,7 +79,7 @@ cc.Class({
     skill3 (flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
-        console.log("user skill " + str + "--鸿运灌顶");
+        console.log("user skill " + str + "--暴击风暴");
         if (flag) {
             // 暴击几率增加50%
             var baseValue = self.baseValue;
@@ -209,7 +209,7 @@ cc.Class({
         } else if (self.heroID == 2 && self.skillID == 3) {
             self.skill2(true); // 三头六臂
         } else if (self.heroID == 9 && self.skillID == 4) {
-            self.skill3(true); // 鸿运灌顶
+            self.skill3(true); // 暴击风暴
         } else if (self.heroID == 13 && self.skillID == 4) {
             self.skill4(true); // 火眼金睛
         } else if (self.heroID == 15 && self.skillID == 4) {
@@ -233,7 +233,7 @@ cc.Class({
         } else if (self.heroID == 2 && self.skillID == 3) {
             self.skill2(false); // 三头六臂
         } else if (self.heroID == 9 && self.skillID == 4) {
-            self.skill3(false); // 鸿运灌顶
+            self.skill3(false); // 暴击风暴
         } else if (self.heroID == 13 && self.skillID == 4) {
             self.skill4(false); // 火眼金睛
         } else if (self.heroID == 15 && self.skillID == 4) {
@@ -270,7 +270,7 @@ cc.Class({
             var coolingTimeStr = self.dateFormat(coolingTime);
             return "DPS伤害×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 9 && self.skillID == 4) {
-            // 鸿运灌顶
+            // 暴击风暴
             // 处理效果加成，持续时间和冷却时间的加成
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);

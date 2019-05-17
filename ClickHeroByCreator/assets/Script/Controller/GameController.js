@@ -55,7 +55,7 @@ cc.Class({
         let curSoul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul);
         let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
         let v0 = BigNumber.isBigNumber(curSoul)&&curSoul.gt(0)&&this.tabs[2].active==false
-        if (Boolean(maxPassLavel && maxPassLavel >= 100)) {
+        if (Boolean(maxPassLavel && maxPassLavel >= 90)) {
             this.tabs[2].active = true
         }else{
             this.tabs[2].active = v0
