@@ -197,7 +197,8 @@ cc.Class({
             var totalDamage = GameData.dpsDamage.times(diff/1000)
             console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
             var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
-            var gold = Formulas.getMonsterGold(lv,totalDamage)
+            console.log("全局金币倍数："+GameData.globalGoldTimes);
+            var gold = Formulas.getMonsterGold(lv,totalDamage).times(GameData.globalGoldTimes)
             if (gold.gt(0)) {
                 PublicFunc.popGoldDialog(0,gold,"离线收益")
             }

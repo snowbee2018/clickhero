@@ -39,7 +39,7 @@ cc.Class({
         addPrimalBossOdds : 0,      //2* 增加远古Boss出现几率 0~0.75 ?
         addPowersurgeSecond: 0,    //3*- Powersurge秒数增加 2s++ √
         addCritTimes : 1,           //4 古神附加暴击倍数 √
-        addClickstormSecond: 0,    //6*- 毫毛变化秒数增加 2s++ √
+        addClickstormSecond: 0,    //6*- 猴子猴孙秒数增加 2s++ √
         addBossTimerSecond: 0,     //7* Boss计时器持续时间 0~30.0s √
         buyHeroDiscount : 1,        //8- 购买英雄折扣 0~1 √
         addTreasureOdds: 0.01,     //9* 宝箱出现概率 0~1 √

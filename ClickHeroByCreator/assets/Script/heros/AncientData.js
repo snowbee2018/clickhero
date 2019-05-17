@@ -224,7 +224,7 @@ cc.Class({
             // 感觉太废物了 所以懒得做
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
-            desc = "+" + (this.level * 2) + "s毫毛变化持续时间"
+            desc = "+" + (this.level * 2) + "s猴子猴孙持续时间"
         } else if (this.id == 7) {
             // boss计时器 增加 30×(1-e^-0.034n)  需要bigNumber
             desc = "+" + GameData.addBossTimerSecond + "秒Boss战时长"

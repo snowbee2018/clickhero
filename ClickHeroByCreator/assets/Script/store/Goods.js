@@ -195,7 +195,8 @@ cc.Class({
         var key = DataCenter.KeyMap.passLavel
         var lv = DataCenter.getDataByKey(key) + 1
         lv = Math.ceil(lv / 5) * 5
-        var gold = Formulas.getMonsterGold(lv).times(10)
+        console.log("全局金币倍数："+GameData.globalGoldTimes);
+        var gold = Formulas.getMonsterGold(lv).times(100).times(GameData.globalGoldTimes)
         return gold
     },
     // 快速转生能获得的英魂

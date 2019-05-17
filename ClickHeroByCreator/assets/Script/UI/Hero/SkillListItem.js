@@ -51,7 +51,7 @@ cc.Class({
             self.skillName.string = skillData.name;
             if (skillData.unlock) {
                 if (skillData.unlock=="ClickStorm") {
-                    self.describe.string = "解锁[毫毛变化]技能"
+                    self.describe.string = "解锁[猴子猴孙]技能"
                 }else if (skillData.unlock=="Powersurge") {
                     self.describe.string = "解锁[三头六臂]技能"
                 }else if (skillData.unlock=="Lucky Strikes") {

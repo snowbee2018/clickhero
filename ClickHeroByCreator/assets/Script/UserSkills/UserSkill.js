@@ -44,7 +44,7 @@ cc.Class({
     skill1(flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
-        console.log("user skill " + str + "--毫毛变化");
+        console.log("user skill " + str + "--猴子猴孙");
         if (flag) {
             var baseValue = self.baseValue;
             if (self.getDoubleSkill() == true) {
@@ -205,7 +205,7 @@ cc.Class({
         console.log("appply");
         
         if (self.heroID == 0 && self.skillID == 1) {
-            self.skill1(true); // 毫毛变化
+            self.skill1(true); // 猴子猴孙
         } else if (self.heroID == 2 && self.skillID == 3) {
             self.skill2(true); // 三头六臂
         } else if (self.heroID == 9 && self.skillID == 4) {
@@ -229,7 +229,7 @@ cc.Class({
         const self = this;
         // console.log("backout");
         if (self.heroID == 0 && self.skillID == 1) {
-            self.skill1(false); // 毫毛变化
+            self.skill1(false); // 猴子猴孙
         } else if (self.heroID == 2 && self.skillID == 3) {
             self.skill2(false); // 三头六臂
         } else if (self.heroID == 9 && self.skillID == 4) {
@@ -258,7 +258,7 @@ cc.Class({
         var coolingTime = self.coolingTime * (1 - coolingTimeReduction);
         var baseValue = self.baseValue;
         if (self.heroID == 0 && self.skillID == 1) {
-            // 毫毛变化
+            // 猴子猴孙
             // 处理效果加成，持续时间和冷却时间的加成
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);

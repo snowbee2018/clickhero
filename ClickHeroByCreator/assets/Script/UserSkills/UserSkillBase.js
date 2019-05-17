@@ -191,7 +191,7 @@ cc.Class({
     onUpgrandAncient(id) {
         const self = this;
         switch (true) {
-            case (id == 6 && self.heroID == 0 && self.skillID == 1): // 毫毛变化
+            case (id == 6 && self.heroID == 0 && self.skillID == 1): // 猴子猴孙
             case (id == 3 && self.heroID == 2 && self.skillID == 3): // 三头六臂
             case (id == 25 && self.heroID == 9 && self.skillID == 4): // 鸿运灌顶(暴击风暴)
             case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
@@ -271,7 +271,7 @@ cc.Class({
     getSustainTimeAdded() { // 获取技能持续附加时间
         const self = this;
         switch (true) {
-            case (self.heroID == 0 && self.skillID == 1): // 毫毛变化
+            case (self.heroID == 0 && self.skillID == 1): // 猴子猴孙
                 return GameData.addClickstormSecond;
             case (self.heroID == 2 && self.skillID == 3): // 三头六臂
                 return GameData.addPowersurgeSecond;
