@@ -29,6 +29,7 @@ cc.Class({
                 continue;
             }
             const ancient = this.selAncients[i];
+            console.log(ancient);
             this.items[i].node.bean = ancient;
             this.items[i].spriteFrame = this.imgs.getSpriteFrame("ancient_" + ancient.id)
             this.items[i].node.children[0].getComponent(cc.Label).string = ancient.name;

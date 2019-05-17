@@ -113,7 +113,7 @@ cc.Class({
                         const e = my[i];
                         for (let j = 0; j < this.otherAncients.length;j++ ) {
                             const ancient = this.otherAncients[j];
-                            if (ancient.id = e.id) {
+                            if (ancient.id == e.id) {
                                 ancient.isActive = e.isActive;
                                 ancient.isBuy = e.isBuy;
                                 ancient.level = e.level;
@@ -206,6 +206,8 @@ cc.Class({
             let i = Math.floor(Math.random()*count);
             let data = this.otherAncients.splice(i,1)[0];
             this.selAncients.push(data);
+            console.log(data);
+            
         },
         // buy and reroll Ancient
         getBuyAncientSoul(){

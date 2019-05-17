@@ -193,7 +193,7 @@ cc.Class({
         switch (true) {
             case (id == 6 && self.heroID == 0 && self.skillID == 1): // 猴子猴孙
             case (id == 3 && self.heroID == 2 && self.skillID == 3): // 三头六臂
-            case (id == 25 && self.heroID == 9 && self.skillID == 4): // 鸿运灌顶(暴击风暴)
+            case (id == 25 && self.heroID == 9 && self.skillID == 4): // 暴击风暴(暴击风暴)
             case (id == 10 && self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
             case (id == 15 && self.heroID == 15 && self.skillID == 4): // 点石成金(点金手)
             case (id == 22 && self.heroID == 15 && self.skillID == 4): // 点石成金倍数
@@ -275,7 +275,7 @@ cc.Class({
                 return GameData.addClickstormSecond;
             case (self.heroID == 2 && self.skillID == 3): // 三头六臂
                 return GameData.addPowersurgeSecond;
-            case (self.heroID == 9 && self.skillID == 4): // 鸿运灌顶(暴击风暴)
+            case (self.heroID == 9 && self.skillID == 4): // 暴击风暴(暴击风暴)
                 return GameData.addCritStormSecond;
             case (self.heroID == 13 && self.skillID == 4): // 金属(金币)探测器
                 return GameData.addMetalDetectorSecond;
