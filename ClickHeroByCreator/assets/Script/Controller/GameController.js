@@ -444,7 +444,6 @@ cc.Class({
     },
 
     onMonsterSoul (soul) {
-        self = this;
         // DataCenter.addSoul(soul);
         DataCenter.addRebirthSoul(soul);
     },
