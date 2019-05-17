@@ -410,12 +410,42 @@ cc.Class({
         Events.emit(Events.ON_COMBO_CHANGE, self.combo);
     },
 
+    
+    onUploadResponse(event, response){
+
+        console.log("onUploadResponse"+event);
+        
+        // if (event == "success") {
+        //     console.log("上传图片请求成功！");
+        //     let res = JSON.parse(response);
+        //     console.log(JSON.stringify(res));
+        //     if (res.code == 1) {
+        //         console.log("上传图片成功");
+        //         this.fnames = this.fnames?this.fnames:[];
+        //         this.fnames.push(res.data);
+        //         if (this.fnames.length == this.imagePaths.length) {
+        //             console.log(JSON.stringify(this.fnames));
+        //             this.pubPosts();
+        //         }
+        //     } else {
+        //         console.log("上传图片失败");
+        //     }
+        // } else if (event == "error") {
+        //     console.log("上传图片请求出错");
+        // } else if (event == "timeout") {
+        //     console.log("上传图片超时");
+        // }
+    },
+
     onShareBtnClick () {
         const self = this;
+
         WeChatUtil.shareAppMessage();
         Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();
+
+
         // WeChatUtil.showModal({
         //     title: "分享给好友",
         //     content: "点一下，玩一年，把快乐分享给好友吧",
@@ -494,6 +524,15 @@ cc.Class({
         }
     },
     onHeroBtnClick () {
+
+        console.log("请求http");
+           
+        // PublicFunc.httpRequest({
+        //     url : "https://www.shenguigame.com/",
+        //     handler : this.onUploadResponse.bind(this),
+        //     method : "GET",
+        // });
+
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (self.pageNode.isVisible) {

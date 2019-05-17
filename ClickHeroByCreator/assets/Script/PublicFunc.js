@@ -69,5 +69,60 @@ cc.Class({
 
     bindAncientSprite () {
         
-    }
+    },
+
+        /**
+     * Http请求
+     * @param {Object} params - 参数表
+     * @param {String} params.method - 请求模式 : "GET", "POST", "PUT", "DELETE"，默认为 "GET"
+     * @param {String} params.url - 请求url
+     * @param {Function} params.handler - 回调函数，当请求成功、发生错误、请求超时的时候会回调
+     * @param {String} params.responseType - 指定返回response的数据类型，"arraybuffer" "blob" "document" "json" "text"，默认为 "text"
+     * @param {Number} params.timeout - 指定请求超时时间，单位毫秒
+     * @param {ArrayBuffer} params.uploadData - 需要发送的数据，可以为空，也可以是ArrayBuffer
+     */
+    httpRequest (params) {
+        // method, url, handler, responseType, timeout, uploadData
+        if (!params || !params.hasOwnProperty("url")) {
+            console.error("url must not null");
+            return;
+        }
+        var logTag = "[HttpRequest]";
+        var xhr = new XMLHttpRequest();
+        // Simple events
+        ['loadstart', 'progress', 'abort', 'error', 'load', 'loadend', 'timeout'].forEach(function (eventname) {
+            xhr["on" + eventname] = function (progressEvent) {
+                console.info(logTag + "eventName = " + eventname + ", url = " + params.url);
+                if (eventname == 'error' || eventname == 'timeout') {
+                    if (params.hasOwnProperty("handler")) {
+                        params.handler(eventname);
+                    } else {
+                        console.log(logTag + "callback handler is null.");
+                    }
+                }
+            }
+        });
+        // Special event
+        xhr.onreadystatechange = function (event) {
+            if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
+                console.log(logTag + "httpRequest Success.");
+                if (params.hasOwnProperty("handler")) {
+                    params.handler("success", xhr.response);
+                } else {
+                    console.log(logTag + "callback handler is null.");
+                }
+            }
+        }
+
+        if (!params.hasOwnProperty("method")) params.method = "GET";
+        if (!params.hasOwnProperty("timeout")) params.timeout = 10000;
+        if (params.hasOwnProperty("responseType")) xhr.responseType = params.responseType;
+        xhr.timeout = params.timeout;
+        xhr.open(params.method, params.url, true);
+        if (params.hasOwnProperty("uploadData")) {
+            xhr.send(params.uploadData);
+        } else {
+            xhr.send();
+        }
+    },
 });
