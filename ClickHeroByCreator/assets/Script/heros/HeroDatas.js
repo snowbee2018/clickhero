@@ -78,12 +78,12 @@ cc.Class({
             this.selAncients = []
             this.otherAncients = [
                 new AncientData().init(1,false,false,"金刚琢",0,"每级增加所有金身2%伤害"),
-                new AncientData().init(2,false,false,"催泪铃",0,"增加精英boss出现几率"),
+                new AncientData().init(2,false,false,"催泪铃",0,"增加妖王boss出现几率"),
                 new AncientData().init(3,false,false,"鬼手刀",0,"增加三头六臂持续时间2秒"),
                 new AncientData().init(4,false,false,"莫邪宝剑",0,"增加暴击伤害2%暴击伤害"),
                 new AncientData().init(6,false,false,"不须鞭",0,"增加猴子猴孙持续时间2秒"),
                 new AncientData().init(7,false,false,"昊天塔",0,"增加boss战通关时间"),
-                new AncientData().init(8,false,false,"神农鼎",0,"降低解锁和升级神仙花费"),
+                new AncientData().init(8,false,false,"神农鼎",0,"降低解锁和升级英雄花费"),
                 new AncientData().init(9,false,false,"伏羲琴",0,"增加葫芦妖概率"),
                 new AncientData().init(10,false,false,"夺魂箫",0,"增加火眼金睛持续时间2秒"),
                 new AncientData().init(11,false,false,"九曲珠",0,"增加怪物10倍妖丹概率"),

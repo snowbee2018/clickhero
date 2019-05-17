@@ -230,7 +230,7 @@ cc.Class({
             desc = "+" + GameData.addBossTimerSecond.toFixed(4) + "秒Boss战时长"
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
-            desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))).toFixed(4) + "%解锁和升级神仙花费"
+            desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))).toFixed(4) + "%解锁和升级英雄花费"
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
             desc = "+" + (GameData.addTreasureOdds*100-1).toFixed(4) + "%的葫芦妖出现概率"

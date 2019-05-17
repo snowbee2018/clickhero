@@ -31,12 +31,18 @@ cc.Class({
                 break;
             case 1:
                 name = "苦海无涯"
-                desc = "DPS伤害×1.2，每天可购一次"
+                desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "购买次数：" + count + "  当前增益：" + num.toFixed(2) +"%"
                 ruby = 30
                 cd = 60*10
                 unlockLv = 10
+                break;
+            case 6:
+                name = "大开杀戒"
+                desc = "附加10倍DPS伤害，持续60秒"
+                ruby = 30
+                unlockLv = 30
                 break;
             case 2:
                 name = "双倍妖丹"
@@ -63,17 +69,11 @@ cc.Class({
                 break;
             case 5:
                 name = "月光宝盒の平行时空"
-                desc = "在平行时空穿梭，什么都不会失去"
+                desc = "在平行时空穿梭，什么都不会失去（固定1w的bug已修改）"
                 var str = Formulas.formatBigNumber(this.getBagSoul())
                 state = "穿越次数+1，立即获得" + str + "仙丹"
                 ruby = 300
                 unlockLv = 130
-                break;
-            case 6:
-                name = "大开杀戒"
-                desc = "附加10倍DPS伤害，持续60秒"
-                ruby = 30
-                unlockLv = 30
                 break;
             // 下面是超越了
             case 7:
@@ -170,7 +170,7 @@ cc.Class({
             // 家恒支持，让他能获取到count就行
         } else if(this.id == 5){
             // 平行时空 立即拿到括号里的英魂 为什么比括号多还不晓得
-            DataCenter.addSoul(new BigNumber(10000))
+            DataCenter.addSoul(this.getBagSoul())
         } else if(this.id == 6){
             // 大开杀戒 搞个计时器 改变GameData 数值
             GameData.gd10xDpsTimes+=10
@@ -209,7 +209,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 1).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds() + 1).plus(100).integerValue()
         return soul
     },
 })
