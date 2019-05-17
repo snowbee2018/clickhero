@@ -33,7 +33,7 @@ cc.Class({
     onFloor(){
         console.log("onFloor");
         var floor = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel) + 1
-        if (this.data.id == 0 || this.data.id == 6) {
+        if (this.data.id == 0 || this.data.id == 5) {
             // 买金币 和 英魂 每关都刷新下
             this.data.init()
             this.bind()
