@@ -525,13 +525,19 @@ cc.Class({
     },
     onHeroBtnClick () {
 
-        console.log("请求http");
+        // console.log("请求http");
            
         // PublicFunc.httpRequest({
-        //     url : "https://www.shenguigame.com/",
+        //     url : "https://www.baidu.com/",
+        //     // url : "https://www.shenguigame.com/",
         //     handler : this.onUploadResponse.bind(this),
         //     method : "GET",
         // });
+
+        // if(true)
+        // {
+        //     return;
+        // }
 
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
