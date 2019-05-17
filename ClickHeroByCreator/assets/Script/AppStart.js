@@ -78,7 +78,6 @@ cc.Class({
             })
             videoAd.onError(function(errMsg,errCode) {
                 console.log("Video广告error，errMsg:"+errMsg+" code:"+errCode);
-                // window.videoAd = null
             })
         } else {
             self.monsterResDone = true;
