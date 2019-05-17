@@ -31,7 +31,7 @@ cc.Class({
             num = Math.min(num,rubys.length-1)
             this.shareRuby = rubys[num]
         }
-        this.lbRuby.string = String(this.shareRuby) + "蟠桃"
+        this.lbRuby.string = String(this.shareRuby) + "仙桃"
         if (data) {
             cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
                 texture = texture || this.defaultCover

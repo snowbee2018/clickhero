@@ -29,6 +29,8 @@ cc.Class({
         if (disDouble||!window.videoAd) {
             this.btnAd.active = false
             this.lbTips.node.active = false
+            this.btn.x = 0
+            console.log("this.btn.x = 0");
         }
     },
 
@@ -44,8 +46,7 @@ cc.Class({
     },
 
     onAdClick(){
-        const self = this
-        if (videoAd) {
+        if (window.videoAd) {
             this.callback = this.onCloseAd.bind(this)
             videoAd.onClose(this.callback)
             videoAd.show().catch(() => {
