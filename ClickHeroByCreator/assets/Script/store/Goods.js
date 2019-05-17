@@ -158,8 +158,9 @@ cc.Class({
     onBuy(){
         if (this.id == 0) {
             var gold = this.getBagGold()
+            PublicFunc.popGoldDialog(0,gold)
             // 然后 要个动画 在点击回调里调用 播放
-            DataCenter.addGold(gold)
+            // DataCenter.addGold(gold)
         } else if(this.id == 1){
         } else if(this.id == 2){
             // 双倍金币 GameData 提供支持 改变值 就改变数值了

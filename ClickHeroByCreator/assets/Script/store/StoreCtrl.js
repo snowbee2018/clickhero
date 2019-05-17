@@ -8,6 +8,7 @@ cc.Class({
         itemPrefab: cc.Prefab,
         dialogPrefab : cc.Prefab,
         lbRuby : cc.Label,
+        btnAd : cc.Node,
     },
 
     onLoad(){
@@ -18,7 +19,35 @@ cc.Class({
         this.showRuby();
         this.onMaxPassLavelChange()
         Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
+
+        if (!window.videoAd) {
+            this.btnAd.active = false
+        }
     },
+
+    onAdClick(){
+        if (window.videoAd) {
+            this.callback = this.onCloseAd.bind(this)
+            videoAd.onClose(this.callback)
+            videoAd.show().catch(() => {
+                // 失败重试
+                videoAd.load()
+                .then(() => videoAd.show())
+                .catch(err => {
+                    console.log('激励视频 广告显示失败')
+                })
+            })
+        }
+    },
+
+    onCloseAd(res){
+        console.log("Video广告关闭，是否播放完成："+res.isEnded);
+        if (res.isEnded) {
+            PublicFunc.popGoldDialog(2,20,null,true)
+        }
+        videoAd.offClose(this.callback)
+    },
+
 
     onDestroy (){
         Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)

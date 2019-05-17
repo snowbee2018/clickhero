@@ -290,7 +290,7 @@ cc.Class({
         }
     },
     
-    // 蟠桃是否足够
+    // 仙桃是否足够
     isRubyEnough(ruby) {
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
