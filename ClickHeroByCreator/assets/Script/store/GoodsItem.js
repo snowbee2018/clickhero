@@ -47,7 +47,7 @@ cc.Class({
         this.lbName.string = this.data.name
         this.lbDesc.string = this.data.desc
         this.lbState.string = this.data.state
-        this.lbBtn.string = "蟠桃:" + this.data.ruby
+        this.lbBtn.string = "仙桃:" + this.data.ruby
 
         // console.log(maxfloor + "," + this.data.unlockLv);
         

@@ -1,4 +1,5 @@
 const rubys = [100,200,400,800,1500] // 每邀请5个给的奖励
+const rebirthRuby = 200
 cc.Class({
     extends: cc.Component,
 
@@ -30,7 +31,7 @@ cc.Class({
             num = Math.min(num,rubys.length-1)
             this.shareRuby = rubys[num]
         }
-        this.lbRuby.string = String(this.shareRuby) + "蟠桃"
+        this.lbRuby.string = String(this.shareRuby) + "仙桃"
         if (data) {
             cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
                 texture = texture || this.defaultCover
@@ -83,14 +84,16 @@ cc.Class({
     },
 
     receive(){
-        DataCenter.addRuby(this.shareRuby)
+        // DataCenter.addRuby(this.shareRuby)
         this.saveReceived(0)
         this.bind(this.index,this.data)
+        PublicFunc.popGoldDialog(2,this.shareRuby)
     },
 
     receive1(){
-        DataCenter.addRuby(200)
+        // DataCenter.addRuby(200)
         this.saveReceived(1)
         this.bind(this.index,this.data)
+        PublicFunc.popGoldDialog(2,rebirthRuby)
     },
 })
