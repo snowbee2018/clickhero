@@ -28,53 +28,63 @@ cc.Class({
         getUserData (callBack) {
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
-                self.getDB().where({
-                    _openid: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
-                }).get({
-                    success: function (res) {
-                        // res.data 包含该记录的数据
-                        // console.log(res);
-                        callBack(false, res.data);
-                    },
-                    fail: function (params) {
-                        console.log("获取用户数据发生错误");
-                        console.log(params);
-                        callBack(true);
-                    }
-                });
+                let userData = DataCenter.readGameData()
+                if (userData) {
+                    console.log("使用本地UserData数据");
+                    callBack(false, [userData]);
+                } else {
+                    self.getDB().where({
+                        _openid: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
+                    }).get({
+                        success: function (res) {
+                            // res.data 包含该记录的数据
+                            // console.log(res);
+                            callBack(false, res.data);
+                        },
+                        fail: function (params) {
+                            console.log("获取用户数据发生错误");
+                            console.log(params);
+                            callBack(true);
+                        }
+                    });
+                }
             }
         },
 
-        getChildUserData(callBack) { // 获取被自己推荐的用户
+        getChildUserData(callBack,isNew) { // 获取被自己推荐的用户
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
                 let childDatas = []
                 let db = self.getDB()
-                var query = function() {
-                    db.where({
-                        referrer: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
-                    }).skip(childDatas.length).limit(20).get({
-                        success: function (res) {
-                            // res.data 包含该记录的数据
-                            childDatas = childDatas.concat(res.data)
-                            if (res.data.length < 20) {
+                let time = cc.sys.localStorage.getItem("savechildtime") || 0
+                if (time == 0||(isNew&&Date.now()-time > 5*60*1000)) {
+                    var query = function() {
+                        db.where({
+                            referrer: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
+                        }).skip(childDatas.length).limit(20).get({
+                            success: function (res) {
+                                // res.data 包含该记录的数据
+                                childDatas = childDatas.concat(res.data)
+                                if (res.data.length < 20) {
+                                    DataCenter.saveChildUserData(childDatas)
+                                    callBack(false, childDatas);
+                                } else {
+                                    query()
+                                }
+                            },
+                            fail: function (params) {
+                                console.log("获取子用户数据发生错误，使用本地的ChildUserData");
+                                childDatas = DataCenter.readChildUserData() || childDatas
                                 callBack(false, childDatas);
-                            } else {
-                                query()
                             }
-                        },
-                        fail: function (params) {
-                            if (childDatas.length==0) {
-                                console.log("获取子用户数据发生错误");
-                                console.log(params);
-                                callBack(true);
-                            } else {
-                                callBack(false, childDatas);
-                            }
-                        }
-                    });
+                        });
+                    }
+                    query()
+                } else {
+                    console.log("使用本地的ChildUserData");
+                    childDatas = DataCenter.readChildUserData() || childDatas
+                    callBack(false, childDatas);
                 }
-                query()
             }
         },
 

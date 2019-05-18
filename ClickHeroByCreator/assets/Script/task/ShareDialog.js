@@ -6,9 +6,46 @@ cc.Class({
     },
 
     start(){
+        // this.refreshView()
+        CloudDB.getChildUserData(this.onChildData.bind(this),true)
+    },
+
+    refreshView(){
         // 这里从DataCenter拿到datas
         // 模拟数据
         this.datas = DataCenter.getDataByKey("ChildUserArr") || []
+        for (let i = 0; i < this.datas.length-1; i++) {
+            for (let j = 0; j < this.datas.length-1-i; j++) {
+                const ele = this.datas[j];
+                if (ele.registerTime>this.datas[j+1].registerTime) {
+                    this.datas[j] = this.datas[j+1]
+                    this.datas[j+1] = ele
+                }
+            }
+        }
+        this.refresh()
+    },
+
+    onChildData(){
+        if (this.node.isValid) {
+            this.refreshView()
+        }
+    },
+
+    getItemCount () {
+        return 100;
+    },
+
+    onBindView (view, index) {
+        view.getComponent('ShareItem').bind(index,this.datas[index])
+    },
+
+
+    finish(){
+        this.node.destroy()
+    },
+})
+
         // this.datas = [{
         //         isRebirth : false,
         //         registerTime : 123,
@@ -32,28 +69,3 @@ cc.Class({
         //         }
         //     },
         // ]
-        for (let i = 0; i < this.datas.length-1; i++) {
-            for (let j = 0; j < this.datas.length-1-i; j++) {
-                const ele = this.datas[j];
-                if (ele.registerTime>this.datas[j+1].registerTime) {
-                    this.datas[j] = this.datas[j+1]
-                    this.datas[j+1] = ele
-                }
-            }
-        }
-        this.refresh()
-    },
-
-    getItemCount () {
-        return 100;
-    },
-
-    onBindView (view, index) {
-        view.getComponent('ShareItem').bind(index,this.datas[index])
-    },
-
-
-    finish(){
-        this.node.destroy()
-    },
-})
