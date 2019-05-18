@@ -554,8 +554,9 @@ cc.Class({
         // console.log("请求http");
            
         // PublicFunc.httpRequest({
-        //     url : "https://www.baidu.com/",
+        //     url : "https://www.magicfun.xyz/",
         //     // url : "https://www.shenguigame.com/",
+        // // url : "https://39.97.176.206",
         //     handler : this.onUploadResponse.bind(this),
         //     method : "GET",
         // });
