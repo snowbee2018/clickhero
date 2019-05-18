@@ -161,7 +161,8 @@ cc.Class({
             Events.on(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
-            self.totalSoulLab.string = DataCenter.getSoulStr();
+            // self.totalSoulLab.string = DataCenter.getSoulStr();
+            this.onSoulChange()
             self.clickDamageLab.string = Formulas.formatBigNumber(GameData.clickDamage);
             self.dpsDamageLab.string = Formulas.formatBigNumber(GameData.dpsDamage);
 
@@ -307,7 +308,7 @@ cc.Class({
         const self = this;
         var isIdle = !!event;
         self.comboCount.node.active = !isIdle;
-        self.comboTypeLab.string = isIdle ? "(闲置)" : "(combo)";
+        self.comboTypeLab.string = isIdle ? "(闲置)" : "(连击)";
         if (!isIdle) {
             self.comboCount.string = self.combo;
         }
