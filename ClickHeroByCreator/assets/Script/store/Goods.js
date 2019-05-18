@@ -31,7 +31,7 @@ cc.Class({
                 break;
             case 14:
                 name = "聚宝盆"
-                desc = "永久妖丹掉落×1.2，每天可购一次，指数增长"
+                desc = "永久妖丹掉落×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
                 ruby = 20
@@ -40,7 +40,7 @@ cc.Class({
                 break;
             case 1:
                 name = "苦海无涯"
-                desc = "永久DPS伤害×1.2，每天可购一次，指数增长"
+                desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
                 ruby = 30
