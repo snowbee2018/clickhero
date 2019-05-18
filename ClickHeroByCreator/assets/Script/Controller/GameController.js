@@ -98,7 +98,6 @@ cc.Class({
         }
         this.lastCheckTime = curtime;
 
-        console.log(this.dt);
         const self = this;
         if (self.isGameStart == true) {
             var totalDamage = new BigNumber(0);

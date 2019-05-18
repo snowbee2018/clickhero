@@ -70,11 +70,11 @@ cc.Class({
             }
             
             if (this.data.id == 1 || this.data.id == 14) {
-                var dateStr = cc.sys.localStorage.getItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date")
-                console.log(dateStr);
-                console.log(this.getDateStr());
-                
-                if (dateStr == this.getDateStr()) {
+                // var dateStr = cc.sys.localStorage.getItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date")
+                // console.log(dateStr);
+                // console.log(this.getDateStr());
+                if (GoodsDatas.todayHasBuy(this.data.id)) {
+                // if (dateStr == this.getDateStr()) {
                     this.lbBought.active = true
                     this.lbBought.getComponent(cc.Label).string = "明天再来"
                     this.btn.active = false
@@ -104,8 +104,8 @@ cc.Class({
         if (result) {
             console.log("购买成功")
             if (this.data.id == 1||this.data.id == 14) {
-                cc.sys.localStorage.setItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date"
-                    ,this.getDateStr())
+                // cc.sys.localStorage.setItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date"
+                //     ,this.getDateStr())
                 this.bind()
             }else if(this.data.id == 6){
                 this.dur = 60;

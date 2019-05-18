@@ -70,6 +70,7 @@ Datas.addBuyCount = function(id) {
         Datas.buyCounts.push(bc)
     }
     bc.count ++
+    bc.lastBuyDate = Datas.getTodayStr()
     Datas.refresh()
 }
 
@@ -81,6 +82,24 @@ Datas.getBuyCount = function(id){
         }
     })
     return count
+}
+Datas.todayHasBuy = function(id){
+    console.log("todayHasBuy"+id);
+    let result = false
+    Datas.buyCounts.forEach(e => {
+        if (e.id == id) {
+            console.log(e);
+            console.log(String(e.lastBuyDate) +" " + Datas.getTodayStr());
+            result = Datas.getTodayStr() == String(e.lastBuyDate)
+        }
+    })
+    console.log("result:"+result);
+    return result
+}
+Datas.getTodayStr = function(){
+    let date = new Date()
+    let str = date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate()
+    return str
 }
 
 module.exports = Datas
