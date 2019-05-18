@@ -461,7 +461,12 @@ cc.Class({
         console.log("on game hide");
         if (self.cloudDataFormatFunc) {
             var data = self.cloudDataFormatFunc();
-            CloudDB.update(data);
+            let time = cc.sys.localStorage.getItem("savetime") || 0
+            if (Date.now() - time > 10*60*1000) {
+                // 每10分钟保存一次
+                CloudDB.update(data);
+                cc.sys.localStorage.setItem("savetime",Date.now())
+            }
         }
     },
 

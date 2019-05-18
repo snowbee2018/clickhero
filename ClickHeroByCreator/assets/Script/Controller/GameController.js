@@ -46,7 +46,7 @@ cc.Class({
         self.pageNode.active = false
         self.pageNode.isVisible = false
 
-        WeChatUtil.setCloudDataFormat(self.formatCloudGameData.bind(self));
+        WeChatUtil.setCloudDataFormat(self.cacheGameData.bind(self));
 
     },
 
@@ -122,6 +122,10 @@ cc.Class({
         Events.off(Events.ON_SOUL_CHANGE, self.onSoulChange, self);
         Events.off(Events.ON_CLICK_DAMAGE_CHANGE, self.onClickDamageChange, self);
         Events.off(Events.ON_DPS_DAMAGE_CHANGE, self.onDPSChange, self);
+        Events.off(Events.ON_IDLE_STATE, self.onIdleState, self);
+        Events.off(Events.ON_COMBO_CHANGE, self.onComboChange, self);
+        Events.off(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
+        Events.off(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
     },
 
     onGameStart () {
@@ -159,6 +163,7 @@ cc.Class({
             Events.on(Events.ON_IDLE_STATE, self.onIdleState, self);
             Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
             Events.on(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
+            Events.on(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             // self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -210,7 +215,7 @@ cc.Class({
         }
     },
 
-    formatCloudGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
+    cacheGameData() { // 格式化存档数据，用于存储到云端和从云端恢复数据
         const self = this;
         var map = DataCenter.KeyMap;
         // 获取存档数据，并存储到云端
@@ -247,10 +252,8 @@ cc.Class({
         // obj[map.curSetting] = 
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
         obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
-        console.log("obj[map.shareReceiveData]:" + obj[map.shareReceiveData]);
-        
         console.log(obj);
-        
+        DataCenter.saveGameData(obj)
         return obj;
     },
 
@@ -326,6 +329,14 @@ cc.Class({
             this.tabs[3].active = v1
             this.shareBtn.active = v1
             this.btnSignin.active = v1
+        }
+    },
+
+    onlvPassed(e){
+        let lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel);
+        if (lv%5==0) {
+            console.log("每通过5关 保存一下数据");
+            this.cacheGameData()
         }
     },
 

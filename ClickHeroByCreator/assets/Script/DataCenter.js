@@ -132,6 +132,58 @@ cc.Class({
         // }
     },
 
+    // 保存数据
+    saveGameData(data){
+        let cdata = this.getDataByKey("CloudData");
+        // console.log(cdata.gamedata);
+        // console.log(data);
+        cdata.gamedata = data
+        cc.sys.localStorage.setItem("GameData",JSON.stringify(cdata))
+    },
+
+    readGameData(){
+        let json = cc.sys.localStorage.getItem('GameData')
+        if (json&&json.length>0) {
+            let data = JSON.parse(json);
+            return data
+        }
+        return null
+    },
+
+    saveChildUserData(data){
+        console.log("保存子用户数据");
+        this.setChildUserArr(data)
+        cc.sys.localStorage.setItem("ChildGameData",JSON.stringify(data))
+        cc.sys.localStorage.setItem("savechildtime",Date.now())
+        Events.emit(Events.ON_CHILDUSERDATA)
+    },
+
+    setChildUserArr(data){
+        var childUserArr = [];
+        if (data && data.length > 0) {
+            for (let index = 0; index < data.length; index++) {
+                const childUserCloudData = data[index];
+                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                childUserArr.push({
+                    weChatUserInfo: childUserCloudData.WeChatUserInfo,
+                    isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
+                    registerTime: childUserCloudData.registerTime
+                });
+            }
+        }
+        DataCenter.setDataByKey("ChildUserArr", childUserArr);
+    },
+
+    readChildUserData(){
+        let json = cc.sys.localStorage.getItem('ChildGameData')
+        if (json&&json.length>0) {
+            let data = JSON.parse(json);
+            this.setChildUserArr(data)
+            return data
+        }
+        return null
+    },
+
     setDataByKey (key, params) {
         const self = this;
         // console.info("key = " + key);

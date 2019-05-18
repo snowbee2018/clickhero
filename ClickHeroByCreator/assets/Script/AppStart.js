@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var CfgMgr = require("LocalCfgMgr");
 cc.Class({
     extends: cc.Component,
@@ -30,7 +21,6 @@ cc.Class({
     },
     
     start () {
-        const self = this;
         
     },
 
@@ -111,51 +101,6 @@ cc.Class({
         const self = this;
         console.log("onChildUserData");
         console.log(dataArr);
-        var childUserArr = [];
-        // var rebirthChildArr = [];
-        if (dataArr && dataArr.length > 0) {
-            for (let index = 0; index < dataArr.length; index++) {
-                const childUserCloudData = dataArr[index];
-                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
-                childUserArr.push({
-                    weChatUserInfo: childUserCloudData.WeChatUserInfo,
-                    isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
-                    registerTime: childUserCloudData.registerTime
-                });
-            }
-            // for (let index = 0; index < dataArr.length; index++) {
-            //     const childUserCloudData = dataArr[index];
-            //     childUserArr.push(childUserCloudData._openid);
-            //     var rebirthCount = childUserCloudData.gamedata.rebirthCount;
-            //     if (rebirthCount && rebirthCount > 0) {
-            //         rebirthChildArr.push(childUserCloudData._openid);
-            //     }
-            // }
-            // var cloudInfo = DataCenter.getCloudData();
-            // var cloudChildUsers = cloudInfo.ChildUsers;
-            // console.log(cloudChildUsers);
-            // console.log(childUserArr);
-            // var added = 0;
-            // if (cloudChildUsers) {
-            //     if (cloudChildUsers.length < childUserArr.length) {
-            //         var added = childUserArr.length - cloudChildUsers.length;
-            //         console.log("新增了added = " + added + "个子用户");
-            //         WeChatUtil.showToast("新增" + added + "个子用户");
-            //         CloudDB.updataChildUsers(childUserArr);
-            //     }
-            // } else {
-            //     added = childUserArr.length;
-            //     CloudDB.updataChildUsers(childUserArr);
-            // }
-        }
-        
-        // var inviteInfo = {
-        //     allChild: childUserArr.length,
-        //     addedChild: added,
-        //     allRebirthChild: rebirthChildArr.length,
-        // }
-        
-        DataCenter.setDataByKey("ChildUserArr", childUserArr);
         
         self.gameController.setWeChatUser();
         self.startGame();
@@ -164,6 +109,7 @@ cc.Class({
     onCloudGameData(dataArr) {
         const self = this;
         console.log("onCloudGameData");
+        console.log(dataArr);
         if (dataArr.length > 0) {
             console.log("获取到了用户游戏数据");
             var data = dataArr[0];
