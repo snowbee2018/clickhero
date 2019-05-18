@@ -132,6 +132,30 @@ cc.Class({
         }
     },
 
+    onClickAd(){
+        if (window.videoAd) {
+            this.callback = this.onCloseAd.bind(this)
+            videoAd.onClose(this.callback)
+            videoAd.show().catch(() => {
+                // 失败重试
+                videoAd.load()
+                .then(() => videoAd.show())
+                .catch(err => {
+                    console.log('激励视频 广告显示失败')
+                })
+            })
+        }
+    },
+
+    onCloseAd(res){
+        console.log("Video广告关闭，是否播放完成："+res.isEnded);
+        if (res.isEnded) {
+            DataCenter.addRuby(30)
+            this.onClickUpGolden()
+        }
+        videoAd.offClose(this.callback)
+    },
+
     close () {
         const self = this;
         self.node.destroy();

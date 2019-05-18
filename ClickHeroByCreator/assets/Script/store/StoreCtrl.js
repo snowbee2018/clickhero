@@ -19,6 +19,7 @@ cc.Class({
         this.showRuby();
         this.onMaxPassLavelChange()
         Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
+        Events.on(Events.ON_LEVEL_PASSED, this.onlvPassed, this);
 
         if (!window.videoAd) {
             this.btnAd.active = false
@@ -44,6 +45,7 @@ cc.Class({
         console.log("Video广告关闭，是否播放完成："+res.isEnded);
         if (res.isEnded) {
             PublicFunc.popGoldDialog(2,20,null,true)
+            this.btnAd.active = false
         }
         videoAd.offClose(this.callback)
     },
@@ -83,6 +85,13 @@ cc.Class({
                 node.active = active
             }
         });
+    },
+
+    onlvPassed (){
+        let lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel);
+        if (lv%5==0&&window.videoAd) {
+            this.btnAd.active = true
+        }
     },
 
     addItem(goods) {

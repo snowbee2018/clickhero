@@ -27,7 +27,7 @@ cc.Class({
                 var str = Formulas.formatBigNumber(gold)
                 desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
                 state = ""
-                ruby = 25
+                ruby = 30
                 break;
             case 14:
                 name = "聚宝盆"
@@ -50,7 +50,7 @@ cc.Class({
             case 6:
                 name = "大开杀戒"
                 desc = "附加10倍DPS伤害，持续60秒"
-                ruby = 20
+                ruby = 25
                 unlockLv = 30
                 break;
             case 2:
