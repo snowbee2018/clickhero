@@ -69,8 +69,8 @@ cc.Class({
                 this.btn.active = true
             }
             
-            if (this.data.id == 1) {
-                var dateStr = cc.sys.localStorage.getItem("buyGoods1Date")
+            if (this.data.id == 1 || this.data.id == 14) {
+                var dateStr = cc.sys.localStorage.getItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date")
                 console.log(dateStr);
                 console.log(this.getDateStr());
                 
@@ -103,8 +103,9 @@ cc.Class({
         var result = this.data.buy()
         if (result) {
             console.log("购买成功")
-            if (this.data.id == 1) {
-                cc.sys.localStorage.setItem("buyGoods1Date",this.getDateStr())
+            if (this.data.id == 1||this.data.id == 14) {
+                cc.sys.localStorage.setItem(this.data.id == 1 ?"buyGoods1Date":"buyGoods14Date"
+                    ,this.getDateStr())
                 this.bind()
             }else if(this.data.id == 6){
                 this.dur = 60;

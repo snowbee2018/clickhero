@@ -453,6 +453,7 @@ cc.Class({
         const self = this;
         console.log("on game back");
         // console.log(res);
+        Events.emit(Events.ON_RESUME_GAME)
     },
 
     // 切换到后台

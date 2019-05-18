@@ -26,6 +26,7 @@ cc.Class({
         ON_CLICK_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
         ON_DPS_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
         CLOSE_DIALOG : "CLOSE_DIALOG",
+        ON_RESUME_GAME : "ON_RESUME_GAME", // 恢复游戏，当从后台切换到前台
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         emit(name,params){
             cc.systemEvent.emit(name,params);

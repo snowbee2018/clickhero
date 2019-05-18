@@ -9,6 +9,7 @@ Datas.init = function() {
     Datas.buyCounts = cloudInfo || []
     Datas.datas = [
         new Goods().init(0),
+        new Goods().init(14),
         new Goods().init(1),
         new Goods().init(6),
         new Goods().init(2),
@@ -31,6 +32,8 @@ Datas.refresh = function(){
         var count = e.count
         if (e.id == 1) {
             GameData.gdDayDPSTimes = Math.pow(1.2,count)
+        } else if (e.id == 14) {
+            GameData.gdDayGoldTimes = Math.pow(1.2,count)
         } else if (e.id == 2) {
             GameData.gdDoubleGold = count>0?2:1
         } else if (e.id == 3) {

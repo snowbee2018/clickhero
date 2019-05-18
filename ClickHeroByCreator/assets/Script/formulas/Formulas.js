@@ -131,7 +131,7 @@ cc.Class({
                         var rem = power % c;
                         var unit = unitArr[int];
                         var num = Math.pow(10, rem) * number;
-                        var result = num.toFixed(0) + unit;
+                        var result = Number(num.toFixed(int?2:0)) + unit;
                         // console.log(str + " = " + result);
                         return result;
                     } else {

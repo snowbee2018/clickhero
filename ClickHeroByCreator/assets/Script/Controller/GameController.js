@@ -126,6 +126,7 @@ cc.Class({
         Events.off(Events.ON_COMBO_CHANGE, self.onComboChange, self);
         Events.off(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
         Events.off(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
+        Events.off(Events.ON_RESUME_GAME, self.onResumeGame, self);
     },
 
     onGameStart () {
@@ -164,6 +165,7 @@ cc.Class({
             Events.on(Events.ON_COMBO_CHANGE, self.onComboChange, self);
             Events.on(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
             Events.on(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
+            Events.on(Events.ON_RESUME_GAME, self.onResumeGame, self);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             // self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -193,25 +195,35 @@ cc.Class({
 
     },
 
+    // 从后台切换到前台时
+    onResumeGame(){
+        this.checkOfflineGold()
+    },
+
     // 检查离线收益
     checkOfflineGold(){
         var lastTime = DataCenter.getDataByKey(DataCenter.KeyMap.lastTime)
         if (lastTime) {
             // show dialog
+            console.log(Date.now());
+            console.log(lastTime);
+            
             var diff = Date.now() - Number(lastTime)
             console.log("离线时间："+diff);
-            var totalDamage = GameData.dpsDamage.times(diff/1000)
-            console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
-            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
-            console.log("全局金币倍数："+GameData.globalGoldTimes);
-            var gold = Formulas.getMonsterGold(lv,totalDamage).times(GameData.globalGoldTimes)
-            if (gold.gt(0)) {
-                PublicFunc.popGoldDialog(0,gold,"离线收益")
+            if (diff >= 10*1000) {
+                var totalDamage = GameData.dpsDamage.times(diff/1000)
+                console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
+                var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
+                console.log("全局金币倍数："+GameData.globalGoldTimes);
+                var gold = Formulas.getMonsterGold(lv,totalDamage).times(GameData.globalGoldTimes)
+                if (gold.gt(0)) {
+                    PublicFunc.popGoldDialog(0,gold,"离线收益")
+                }
+                // let dialog = cc.instantiate(this.offlineDialog)
+                // dialog.parent = cc.director.getScene();
+                // dialog.x = cc.winSize.width / 2;
+                // dialog.y = cc.winSize.height / 2;
             }
-            // let dialog = cc.instantiate(this.offlineDialog)
-            // dialog.parent = cc.director.getScene();
-            // dialog.x = cc.winSize.width / 2;
-            // dialog.y = cc.winSize.height / 2;
         }
     },
 
@@ -226,7 +238,9 @@ cc.Class({
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
         obj[map.bAutoClickOpen] = self.getComponent("AutoClick").bAutoClickOpen; // 商店购买的自动点击是否开启
-        obj[map.lastTime] = Date.now().toString(); // 上次存档的时间
+        let lastTime = Date.now()
+        DataCenter.setDataByKey(map.lastTime,lastTime)
+        obj[map.lastTime] = lastTime.toString(); // 上次存档的时间
         obj[map.maxCombo] = DataCenter.getDataByKey(map.maxCombo); // 历史最大连击数
         obj[map.totalClick] = DataCenter.getDataByKey(map.totalClick); // 历史总点击数
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据

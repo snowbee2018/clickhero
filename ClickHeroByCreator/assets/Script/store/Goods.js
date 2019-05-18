@@ -27,13 +27,22 @@ cc.Class({
                 var str = Formulas.formatBigNumber(gold)
                 desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
                 state = ""
-                ruby = 50
+                ruby = 25
+                break;
+            case 14:
+                name = "聚宝盆"
+                desc = "永久妖丹掉落×1.2，每天可购一次，指数增长"
+                var num = (Math.pow(1.2,count)-1)*100
+                state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
+                ruby = 20
+                cd = 60*10
+                unlockLv = 10
                 break;
             case 1:
                 name = "苦海无涯"
-                desc = "永久DPS伤害×1.2，每天可购一次"
+                desc = "永久DPS伤害×1.2，每天可购一次，指数增长"
                 var num = (Math.pow(1.2,count)-1)*100
-                state = "购买次数：" + count + "  当前增益：" + num.toFixed(2) +"%"
+                state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
                 ruby = 30
                 cd = 60*10
                 unlockLv = 10
@@ -41,7 +50,7 @@ cc.Class({
             case 6:
                 name = "大开杀戒"
                 desc = "附加10倍DPS伤害，持续60秒"
-                ruby = 30
+                ruby = 20
                 unlockLv = 30
                 break;
             case 2:

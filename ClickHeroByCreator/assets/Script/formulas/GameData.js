@@ -59,6 +59,7 @@ cc.Class({
 
         //--------商店的影响--------
         gdDayDPSTimes : 1, //1 每天叠一次的永久伤害叠加
+        gdDayGoldTimes : 1, //1 每天叠一次的永久金币
         gdDoubleGold : 1, //2 双倍金币
         gdDoubleDPS : 1, //3 双倍DPS
         gdAutoClick : 0,//4 自动点击数量
@@ -121,7 +122,12 @@ cc.Class({
                 }
             });
             let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
-            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes * idleTimes * this.gdDoubleGold;
+            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
+                 * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes;
+            console.log("金币倍数"+this.globalGoldTimes);
+            console.log(this.gdDayGoldTimes);
+            
+            
         },
         // 计算总DPS伤害
         calDPSDamage(){
