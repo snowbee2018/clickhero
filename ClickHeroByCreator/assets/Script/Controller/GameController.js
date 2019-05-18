@@ -89,6 +89,16 @@ cc.Class({
 
     // called every frame
     lateUpdate (dt) {
+        this.dt = this.dt || 0
+        const curtime = Date.now();
+        this.lastCheckTime = this.lastCheckTime || 0
+        if (curtime - this.lastCheckTime < 100) {
+            this.dt += dt;
+            return;
+        }
+        this.lastCheckTime = curtime;
+
+        console.log(this.dt);
         const self = this;
         if (self.isGameStart == true) {
             var totalDamage = new BigNumber(0);
@@ -98,12 +108,12 @@ cc.Class({
                 }
                 self.damageArr = [];
             }
-            totalDamage = totalDamage.plus(GameData.dpsDamage.times(dt));
+            totalDamage = totalDamage.plus(GameData.dpsDamage.times(this.dt));
             if (!totalDamage.isZero()) {
                 self.monsterController.bleed(totalDamage);
             }
         }
-        
+        this.dt = 0
     },
 
     start () {
