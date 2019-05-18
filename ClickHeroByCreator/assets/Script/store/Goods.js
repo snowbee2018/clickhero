@@ -170,7 +170,8 @@ cc.Class({
             // 家恒支持，让他能获取到count就行
         } else if(this.id == 5){
             // 平行时空 立即拿到括号里的英魂 为什么比括号多还不晓得
-            DataCenter.addSoul(this.getBagSoul())
+            // DataCenter.addSoul(this.getBagSoul())
+            PublicFunc.popGoldDialog(1,this.getBagSoul())
         } else if(this.id == 6){
             // 大开杀戒 搞个计时器 改变GameData 数值
             GameData.gd10xDpsTimes+=10

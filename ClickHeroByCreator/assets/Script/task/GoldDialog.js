@@ -10,6 +10,7 @@ cc.Class({
         btnAd : cc.Node,
         btn : cc.Node,
         lbTips : cc.Label,
+        lbAd : cc.Label,
     },
 
     start () {
@@ -31,6 +32,27 @@ cc.Class({
             this.lbTips.node.active = false
             this.btn.x = 0
             console.log("this.btn.x = 0");
+        } else {
+            let strAd = ""
+            if (type == 0) {
+                strAd = "随机翻2-10倍"
+                let times = Formulas.randomNum(2,10)
+                this.numAd = this.num.times(times)
+                this.lbTips.string = "妖丹×" + times
+            } else if (type == 1) {
+                let add = this.num.times(0.2).integerValue()
+                if (add.lt(2)) {
+                    add = new BigNumber(2)
+                }
+                this.numAd = this.num.plus(add)
+                strAd = "额外获得"+Formulas.formatBigNumber(add) + "仙丹"
+                this.lbTips.string = "已增加"+Formulas.formatBigNumber(add) + "仙丹"
+            } else if (type == 2) {
+                strAd = "翻倍获取仙桃"
+                this.numAd = this.num * 2
+                this.lbTips.string = "仙桃×" + 2
+            }
+            this.lbAd.string = strAd
         }
     },
 
@@ -64,7 +86,7 @@ cc.Class({
         console.log("Video广告关闭，是否播放完成："+res.isEnded);
         if (res.isEnded) {
             this.btnAd.active = false
-            this.num = this.type == 2 ? this.num *2 : this.num.times(2)
+            this.num = this.numAd ? this.numAd : this.num
             this.lbCount.string = this.type == 2?this.num : Formulas.formatBigNumber(this.num)
         }
         videoAd.offClose(this.callback)

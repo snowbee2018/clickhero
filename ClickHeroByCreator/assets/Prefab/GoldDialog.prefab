@@ -967,7 +967,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Label",
+    "_name": "lbAd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1465,6 +1465,9 @@
     },
     "lbTips": {
       "__id__": 22
+    },
+    "lbAd": {
+      "__id__": 26
     },
     "_id": ""
   },

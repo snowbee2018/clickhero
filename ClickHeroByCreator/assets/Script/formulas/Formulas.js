@@ -216,5 +216,9 @@ cc.Class({
         getPrimalBossSoul(floor){
             return new BigNumber(Math.pow((floor-80)/25,1.3)+1).integerValue();
         },
+
+        randomNum(lower, upper){
+            return Math.round(Math.random() * (upper - lower)) + lower
+        },
     },
 });
