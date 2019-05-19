@@ -80,7 +80,7 @@ cc.Class({
             this.spSetting.opacity = 0
             this.spSetting.runAction(
                 cc.repeatForever(
-                    cc.sequence(cc.delayTime(10),cc.fadeIn(1),cc.fadeOut(1))
+                    cc.sequence(cc.delayTime(5),cc.fadeIn(1),cc.fadeOut(1))
                 )
             )
         }else  {
