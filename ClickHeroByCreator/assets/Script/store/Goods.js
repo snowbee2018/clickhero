@@ -129,9 +129,9 @@ cc.Class({
                 unlockLv = 300
                 break;
             case 13:
-                name = "崆峒印加持"
-                desc = "每次购买+增加100%崆峒印效果"
-                state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
+                name = "伏羲琴加持"
+                desc = "每次购买+增加100%伏羲琴效果"
+                state = "伏羲琴效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;
