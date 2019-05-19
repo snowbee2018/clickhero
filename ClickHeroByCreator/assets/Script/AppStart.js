@@ -109,9 +109,9 @@ cc.Class({
     onCloudGameData(dataArr) {
         const self = this;
         console.log("onCloudGameData");
-        console.log(dataArr);
         if (dataArr.length > 0) {
             console.log("获取到了用户游戏数据");
+            console.log(dataArr[0]);
             var data = dataArr[0];
             CloudDB.saveDBID(data._id);
             console.log(data);
@@ -231,9 +231,6 @@ cc.Class({
                 }
             });
         } else {
-            // DataCenter.saveCloudData({
-            //     gamedata: { curGold: 100, monsterInfo: { lv: 2, killCount: 1 } }
-            // });
             self.startGame();
             
         }

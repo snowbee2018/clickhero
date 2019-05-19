@@ -49,13 +49,13 @@ cc.Class({
             var herosCloudInfo = DataCenter.getCloudDataByKey(map.heroList);
             for (let heroID = 0; heroID < HerosCfg.length; heroID++) {
                 const heroCfg = HerosCfg[heroID];
-                if (herosCloudInfo && herosCloudInfo[heroID] && herosCloudInfo[heroID].isBuy == true) {
+                if (herosCloudInfo && herosCloudInfo[heroID]) {
                     // 从云端数据恢复英雄数据
                     var hero = new BaseHero().init(
                         heroID, heroCfg.name,
                         heroCfg.baseCost,
                         heroCfg.baseDPS,
-                        true,
+                        herosCloudInfo[heroID].isBuy,
                         heroCfg.desc,
                         herosCloudInfo[heroID]
                     );

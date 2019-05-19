@@ -76,7 +76,7 @@ cc.Class({
     showSettingAnim(){
         let isUsed = cc.sys.localStorage.getItem("usedSetting")
         if (!isUsed) {
-            // this.spSetting.active = true
+            this.spSetting.active = true
             this.spSetting.opacity = 0
             this.spSetting.runAction(
                 cc.repeatForever(

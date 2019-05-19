@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-05-19
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-19 16:06:37
+ * @Last Modified time: 2019-05-19 18:20:27
  */
  
 cc.Class({
@@ -18,19 +18,19 @@ cc.Class({
 
     start () {
         let bBgm = cc.sys.localStorage.getItem("tgBgm")
-        if (bBgm == null) {
+        if (bBgm == "") {
             bBgm = 1
         }
         let bGold = cc.sys.localStorage.getItem("tgGold")
-        if (bGold == null) {
+        if (bGold == "") {
             bGold = 1
         }
         let bClick = cc.sys.localStorage.getItem("tgClick")
-        if (bClick == null) {
+        if (bClick == "") {
             bClick = 1
         }
         let bClickEffect = cc.sys.localStorage.getItem("tgClickEffect")
-        if (bClickEffect == null) {
+        if (bClickEffect == "") {
             bClickEffect = 1
         }
         

@@ -38,7 +38,7 @@ cc.Class({
                     }).get({
                         success: function (res) {
                             // res.data 包含该记录的数据
-                            // console.log(res);
+                            console.log("使用服务器UserData数据");
                             callBack(false, res.data);
                         },
                         fail: function (params) {
