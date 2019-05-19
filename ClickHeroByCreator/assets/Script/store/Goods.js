@@ -115,23 +115,23 @@ cc.Class({
                 unlockLv = 300
                 break;
             case 11:
-                name = "远古bos几率"
-                desc = "每次购买+25%的远古bos几率神器效力"
-                state = "远古bos几率神器效力增加:+" + (this.getCount()*25)+"%"
+                name = "催泪铃加持"
+                desc = "每次购买+25%的催泪铃的效果"
+                state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;
             case 12:
-                name = "bos计时器哥加强"
-                desc = "每次购买+75%的bos计时器效力"
-                state = "bos计时器效力增加:+" + (this.getCount()*75)+"%"
+                name = "昊天塔加持"
+                desc = "每次购买增加+75%昊天塔"
+                state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;
             case 13:
-                name = "葫芦神器加强"
-                desc = "每次购买+100%的葫芦神器效力"
-                state = "葫芦神器效力增加:+" + (this.getCount()*100)+"%"
+                name = "崆峒印加持"
+                desc = "每次购买+增加100%崆峒印效果"
+                state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;
