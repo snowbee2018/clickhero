@@ -12,19 +12,19 @@ cc.Class({
     init() {
         // this.openMusic(true);
         this.tgBgm = cc.sys.localStorage.getItem("tgBgm")
-        if (this.tgBgm == "") {
+        if (this.tgBgm === "") {
             this.tgBgm = 1
         }
         this.tgGold = cc.sys.localStorage.getItem("tgGold")
-        if (this.tgGold == "") {
+        if (this.tgGold === "") {
             this.tgGold = 1
         }
         this.tgClick = cc.sys.localStorage.getItem("tgClick")
-        if (this.tgClick == "") {
+        if (this.tgClick === "") {
             this.tgClick = 1
         }
         this.tgClickEffect = cc.sys.localStorage.getItem("tgClickEffect")
-        if (this.tgClickEffect == "") {
+        if (this.tgClickEffect === "") {
             this.tgClickEffect = 1
         }
         this.tgBgm = Number(this.tgBgm)
