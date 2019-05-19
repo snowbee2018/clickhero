@@ -1935,7 +1935,7 @@
     },
     "component": "",
     "_componentId": "19afcK4hipAULth+Lcrp0ix",
-    "handler": "confirm",
+    "handler": "cancel",
     "customEventData": ""
   },
   {
