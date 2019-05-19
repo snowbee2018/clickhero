@@ -16,6 +16,19 @@ cc.Class({
         goldDialog: cc.Prefab,
     },
 
+    onLoad(){
+        this.tipsArr = [
+            "英雄200级后，每升级25级伤害会提高4倍！",
+            "英雄每1000级伤害会涨10倍！",
+            "每天买一次苦海无涯伤害会指数增长",
+            "神器对战斗帮助很大，仔细研究研究吧。",
+            "你是想走挂机流还是点击流？好好规划哦。",
+            "100级以后会掉落仙丹哦，越到后面掉的越多！",
+            "邀请好友一起玩游戏，奖励丰厚！",
+            "紫霞的月光宝盒带你回500年前，收获仙丹",
+        ]
+    },
+
     // params = {
     //     contentStr,
     //     leftBtnStr,
@@ -125,4 +138,9 @@ cc.Class({
             xhr.send();
         }
     },
+
+    getTipsStr(){
+        let index = Formulas.randomNum(0,this.tipsArr.length - 1)
+        return "提示："+this.tipsArr[index]
+    }
 });

@@ -10,7 +10,28 @@
 
 cc.Class({
     init() {
-        this.openMusic(true);
+        // this.openMusic(true);
+        this.tgBgm = cc.sys.localStorage.getItem("tgBgm")
+        if (this.tgBgm == null) {
+            this.tgBgm = 1
+        }
+        this.tgGold = cc.sys.localStorage.getItem("tgGold")
+        if (this.tgGold == null) {
+            this.tgGold = 1
+        }
+        this.tgClick = cc.sys.localStorage.getItem("tgClick")
+        if (this.tgClick == null) {
+            this.tgClick = 1
+        }
+        this.tgClickEffect = cc.sys.localStorage.getItem("tgClickEffect")
+        if (this.tgClickEffect == null) {
+            this.tgClickEffect = 1
+        }
+        this.tgBgm = Number(this.tgBgm)
+        this.tgGold = Number(this.tgGold)
+        this.tgClick = Number(this.tgClick)
+        this.tgClickEffect = Number(this.tgClickEffect)
+        this.openMusic(this.tgBgm);
         this.openEffect(true);
         // CloudRes.getMp3Url('login', function (url) {
         //     cc.loader.load(url, function (err, clip) {
@@ -51,70 +72,80 @@ cc.Class({
     },
 
     openMusic(bool) {
-        cc.audioEngine.setVolume(bool ? 0.1 : 0);
+        cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
+
     },
 
     openEffect(bool) {
-        cc.audioEngine.setEffectsVolume(bool ? 0.5 : 0);
+        cc.audioEngine.setEffectsVolume(bool ? 0.2 : 0);
     },
 
     playBG() {
-        if (this.bgAudioClip) {
-            cc.audioEngine.playMusic(this.bgAudioClip, true);
-        }
-        else
-        {
-            CloudRes.getMp3Url('bg', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    this.bgAudioClip = clip;
-                    cc.audioEngine.playMusic(this.bgAudioClip, true);
+        // if (this.tgBgm) {
+            if (this.bgAudioClip) {
+                cc.audioEngine.playMusic(this.bgAudioClip, true);
+            }
+            else
+            {
+                CloudRes.getMp3Url('bg', function (url) {
+                    cc.loader.load(url, function (err, clip) {
+                        this.bgAudioClip = clip;
+                        cc.audioEngine.playMusic(this.bgAudioClip, true);
+                    }.bind(this));
                 }.bind(this));
-            }.bind(this));
-        }
+            }
+            
+        // }
     },
 
     playHit() {
-        if (this.hitAudioClip) {
-            cc.audioEngine.playEffect(this.hitAudioClip, false);
-        }
-        else
-        {
-            CloudRes.getMp3Url('hit', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    this.hitAudioClip = clip;
-                    cc.audioEngine.playEffect(this.hitAudioClip, false);
+        if (this.tgClick) {
+            if (this.hitAudioClip) {
+                cc.audioEngine.playEffect(this.hitAudioClip, false);
+            }
+            else
+            {
+                CloudRes.getMp3Url('hit', function (url) {
+                    cc.loader.load(url, function (err, clip) {
+                        this.hitAudioClip = clip;
+                        cc.audioEngine.playEffect(this.hitAudioClip, false);
+                    }.bind(this));
                 }.bind(this));
-            }.bind(this));
+            }
         }
     },
 
     playBigHit() {
-        if (this.bighitAudioClip) {
-            cc.audioEngine.playEffect(this.bighitAudioClip, false);
-        }
-        else
-        {
-            CloudRes.getMp3Url('bighit', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    this.bighitAudioClip = clip;
-                    cc.audioEngine.playEffect(this.bighitAudioClip, false);
+        if (this.tgClick) {
+            if (this.bighitAudioClip) {
+                cc.audioEngine.playEffect(this.bighitAudioClip, false);
+            }
+            else
+            {
+                CloudRes.getMp3Url('bighit', function (url) {
+                    cc.loader.load(url, function (err, clip) {
+                        this.bighitAudioClip = clip;
+                        cc.audioEngine.playEffect(this.bighitAudioClip, false);
+                    }.bind(this));
                 }.bind(this));
-            }.bind(this));
+            }
         }
     },
 
     playGetGoin() {
-        if (this.getGoinAudioClip) {
-            cc.audioEngine.playEffect(this.getGoinAudioClip, false);
-        }
-        else
-        {
-            CloudRes.getMp3Url('getGoin', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    this.getGoinAudioClip = clip;
-                    cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+        if (this.tgGold) {
+            if (this.getGoinAudioClip) {
+                cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+            }
+            else
+            {
+                CloudRes.getMp3Url('getGoin', function (url) {
+                    cc.loader.load(url, function (err, clip) {
+                        this.getGoinAudioClip = clip;
+                        cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+                    }.bind(this));
                 }.bind(this));
-            }.bind(this));
+            }
         }
     },
 
@@ -132,17 +163,19 @@ cc.Class({
     },
 
     playBoss() {
-        if (this.bossAudioClip) {
-            cc.audioEngine.playMusic(this.bossAudioClip, true);
-        }
-        else
-        {
-            CloudRes.getMp3Url('bg_boss', function (url) {
-                cc.loader.load(url, function (err, clip) {
-                    this.bossAudioClip = clip;
-                    cc.audioEngine.playMusic(this.bossAudioClip, true);
+        // if (this.tgBgm) {
+            if (this.bossAudioClip) {
+                cc.audioEngine.playMusic(this.bossAudioClip, true);
+            }
+            else
+            {
+                CloudRes.getMp3Url('bg_boss', function (url) {
+                    cc.loader.load(url, function (err, clip) {
+                        this.bossAudioClip = clip;
+                        cc.audioEngine.playMusic(this.bossAudioClip, true);
+                    }.bind(this));
                 }.bind(this));
-            }.bind(this));
-        }
+            }
+        // }
     },
 });

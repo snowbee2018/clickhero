@@ -207,10 +207,10 @@ cc.Class({
         self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
     },
 
-    hit(damage, bDPS, bCrit) {
+    hit(damage, bDPS, bCrit, isAuto) {
         const self = this;
         if (cc.isValid(self.curMonster)) {
-            self.curMonster.hurt(damage, bDPS, bCrit);
+            self.curMonster.hurt(damage, bDPS, bCrit , isAuto);
             // self.gameController.updataMonsterInfoDisplay();
         }
     },
