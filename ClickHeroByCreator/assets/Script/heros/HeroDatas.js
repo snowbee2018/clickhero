@@ -129,7 +129,7 @@ cc.Class({
                         const e = sel[i];
                         for (let j = 0; j < this.otherAncients.length;j++ ) {
                             const ancient = this.otherAncients[j];
-                            if (ancient.id = e.id) {
+                            if (ancient.id == e.id) {
                                 ancient.isActive = e.isActive;
                                 ancient.isBuy = e.isBuy;
                                 ancient.level = e.level;

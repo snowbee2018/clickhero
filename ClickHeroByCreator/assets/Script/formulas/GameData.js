@@ -123,7 +123,7 @@ cc.Class({
             });
             let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
             this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
-                 * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes;
+                 * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdSoulTimes;
             console.log("金币倍数"+this.globalGoldTimes);
             console.log(this.gdDayGoldTimes);
             

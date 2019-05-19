@@ -1,6 +1,6 @@
 const rubys = [100,200,400,500] // 每邀请5个给的奖励
 const rebirthRuby = 150
-const shareRuby = 30
+const shareRuby = 50
 cc.Class({
     extends: cc.Component,
 

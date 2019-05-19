@@ -24,6 +24,7 @@ cc.Class({
         SigninDialog : cc.Prefab,
         ShareDialog : cc.Prefab,
         offlineDialog : cc.Prefab,
+        settingDialog : cc.Prefab,
 
         tabs : [cc.Node],
         shareBtn : cc.Node,
@@ -31,6 +32,7 @@ cc.Class({
 
         sFinger : cc.SpriteFrame,
         sTips : cc.SpriteFrame,
+        spSetting : cc.Node,
     },
     
     // use this for initialization
@@ -69,6 +71,34 @@ cc.Class({
             console.log("加个点击手引导");
             this.createClickGuide()
         } 
+    },
+
+    showSettingAnim(){
+        let isUsed = cc.sys.localStorage.getItem("usedSetting")
+        if (!isUsed) {
+            this.spSetting.active = true
+            this.spSetting.opacity = 0
+            this.spSetting.runAction(
+                cc.repeatForever(
+                    cc.sequence(cc.delayTime(10),cc.fadeIn(1),cc.fadeOut(1))
+                )
+            )
+        }else  {
+            this.spSetting.active = false
+        }
+    },
+
+    openSetting(){
+        console.log("打开设置界面");
+        let dialog = cc.instantiate(this.settingDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        if (this.spSetting.active) {
+            cc.sys.localStorage.setItem("usedSetting",true)
+            this.spSetting.stopAllActions()
+            this.spSetting.active = false
+        }
     },
 
     setPageNodeActive (bActive) {
@@ -197,6 +227,7 @@ cc.Class({
             
             this.initGuide()
             this.checkOfflineGold()
+            this.showSettingAnim()
         } catch (error) {
             console.error(error)
         }
