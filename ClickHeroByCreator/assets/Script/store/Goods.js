@@ -123,7 +123,7 @@ cc.Class({
                 break;
             case 12:
                 name = "昊天塔加持"
-                desc = "每次购买增加+75%昊天塔"
+                desc = "每次购买增加+75%昊天塔效果"
                 state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
                 ruby = 200
                 unlockLv = 300

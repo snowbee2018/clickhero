@@ -19,6 +19,17 @@ cc.Class({
     start () {
         Events.on(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
         Events.on(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
+        Events.on(Events.ON_BUY_GOODS, this.onBuyGoods, this);
+    },
+
+    onBuyGoods(event){
+        if (event == 11 && this.data.id == 2) { // 购买了自动点击
+            this.bind()
+        }else if (event == 12 && this.data.id == 7){
+            this.bind()
+        }else if (event == 13 && this.data.id == 19){
+            this.bind()
+        }
     },
 
     onDestroy(){

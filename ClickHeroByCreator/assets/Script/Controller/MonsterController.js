@@ -134,7 +134,7 @@ cc.Class({
                 
                 if (DataCenter.isLevelPassed(self.curMonster._lv)) {
                     self.curMonster.recoverHP();
-                    self._countdown = 30 + GameData.addBossTimerSecond;
+                    self._countdown = 30 + GameData.getBossTimerSecond();
                     self.setTimeLabel(self._countdown);
                 } else {
                     self.goToLastLevel();
