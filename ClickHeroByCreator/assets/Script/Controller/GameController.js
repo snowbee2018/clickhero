@@ -74,31 +74,31 @@ cc.Class({
     },
 
     showSettingAnim(){
-        // let isUsed = cc.sys.localStorage.getItem("usedSetting")
-        // if (!isUsed) {
-        //     // this.spSetting.active = true
-        //     this.spSetting.opacity = 0
-        //     this.spSetting.runAction(
-        //         cc.repeatForever(
-        //             cc.sequence(cc.delayTime(10),cc.fadeIn(1),cc.fadeOut(1))
-        //         )
-        //     )
-        // }else  {
-        //     this.spSetting.active = false
-        // }
+        let isUsed = cc.sys.localStorage.getItem("usedSetting")
+        if (!isUsed) {
+            // this.spSetting.active = true
+            this.spSetting.opacity = 0
+            this.spSetting.runAction(
+                cc.repeatForever(
+                    cc.sequence(cc.delayTime(10),cc.fadeIn(1),cc.fadeOut(1))
+                )
+            )
+        }else  {
+            this.spSetting.active = false
+        }
     },
 
     openSetting(){
-        // console.log("打开设置界面");
-        // let dialog = cc.instantiate(this.settingDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // if (this.spSetting.active) {
-        //     cc.sys.localStorage.setItem("usedSetting",true)
-        //     this.spSetting.stopAllActions()
-        //     this.spSetting.active = false
-        // }
+        console.log("打开设置界面");
+        let dialog = cc.instantiate(this.settingDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        if (this.spSetting.active) {
+            cc.sys.localStorage.setItem("usedSetting",true)
+            this.spSetting.stopAllActions()
+            this.spSetting.active = false
+        }
     },
 
     setPageNodeActive (bActive) {
@@ -414,19 +414,17 @@ cc.Class({
         DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
     },
 
-    clickHit () {
+    clickHit (isAuto) {
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));
         var bCrit = Formulas.isHitRandom(GameData.critOdds * 100); // 是否是暴击
         if (bCrit) {
-            self.monsterController.hit(GameData.clickDamage.times(GameData.critTimes), false, true);
+            self.monsterController.hit(GameData.clickDamage.times(GameData.critTimes), false, true,isAuto);
             self.damageArr.push(GameData.clickDamage.times(GameData.critTimes));
-            AudioMgr.playBigHit();
         } else {
-            self.monsterController.hit(GameData.clickDamage, false, false);
+            self.monsterController.hit(GameData.clickDamage, false, false,isAuto);
             self.damageArr.push(GameData.clickDamage);
-            AudioMgr.playHit();
         }
 
         self.combo++;

@@ -220,7 +220,7 @@ cc.Class({
     playDamage(damage, bCrit) {
         const curtime = new Date().getTime();
         this.lastCheckTime = this.lastCheckTime || 0
-        if (curtime - this.lastCheckTime < 50) {
+        if (curtime - this.lastCheckTime < 40) {
             return;
         }
         this.lastCheckTime = curtime;
@@ -234,17 +234,24 @@ cc.Class({
         damageNode.getComponent("DamageAnim").setDamage(damage, bCrit);
     },
 
-    hurt(damage, bDPS, bCrit) { // 受伤(播放受伤动画)
+    hurt(damage, bDPS, bCrit,isAuto) { // 受伤(播放受伤动画)
         const self = this;
         if (!self._alive) return;
         if (!self._curHP.isZero()) {
             if (damage.isZero()) return;
             if (!bDPS) {
-                self.playAnim("Hurt");
-                if (self._curHP.isGreaterThan(damage)) {
-                    self.playDamage(Formulas.formatBigNumber(damage), bCrit);
-                } else {
-                    self.playDamage(Formulas.formatBigNumber(self._curHP), bCrit);
+                if (!isAuto||AudioMgr.tgClickEffect) {
+                    self.playAnim("Hurt");
+                    if (self._curHP.isGreaterThan(damage)) {
+                        self.playDamage(Formulas.formatBigNumber(damage), bCrit);
+                    } else {
+                        self.playDamage(Formulas.formatBigNumber(self._curHP), bCrit);
+                    }
+                    if (bCrit) {
+                        AudioMgr.playBigHit();
+                    } else {
+                        AudioMgr.playHit();
+                    }
                 }
                 if (self._clickHertCallBack) {
                     self._clickHertCallBack(self._lv, self._gold, self._isBoss);

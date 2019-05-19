@@ -25,7 +25,7 @@ cc.Class({
         const self = this;
         if (GameData.gdAutoClick && GameData.gdAutoClick > 0) {
             for (let i = 0; i < GameData.gdAutoClick; i++) {
-                self.getComponent("GameController").clickHit();
+                self.getComponent("GameController").clickHit(true);
             }
         }
     },
@@ -33,7 +33,7 @@ cc.Class({
     applyClickStorm () {
         const self = this;
         // console.log("applyClickStorm");
-        self.getComponent("GameController").clickHit();
+        self.getComponent("GameController").clickHit(true);
     },
 
     onAutoClickBtnClick () {
