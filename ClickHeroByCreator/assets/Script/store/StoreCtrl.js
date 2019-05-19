@@ -27,6 +27,10 @@ cc.Class({
     },
 
     onAdClick(){
+        if (!WeChatUtil.adEnable) {
+            WeChatUtil.popVersionLow()
+            return
+        }
         if (window.videoAd) {
             this.callback = this.onCloseAd.bind(this)
             videoAd.onClose(this.callback)
@@ -36,13 +40,17 @@ cc.Class({
                 .then(() => videoAd.show())
                 .catch(err => {
                     console.log('激励视频 广告显示失败')
+                    wx.showModal({
+                        title: '提示',
+                        content: '广告显示失败，请稍后重试。'
+                    })
                 })
             })
         }
     },
 
     onCloseAd(res){
-        console.log("Video广告关闭，是否播放完成："+res.isEnded);
+        console.log("[StoreCtrl]Video广告关闭，是否播放完成："+res.isEnded);
         if (res.isEnded) {
             PublicFunc.popGoldDialog(2,20,null,true)
             this.btnAd.active = false

@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-16 23:49:13
+ * @Last Modified time: 2019-05-19 22:20:53
  */
  
 cc.Class({
@@ -25,7 +25,7 @@ cc.Class({
                 console.log("是本周哦：" + this.times);
             }
         }
-        this.rubys = [25,50,75,100,125,150,175]
+        this.rubys = [30,40,50,60,70,80,100]
         this.bindViews()
     },
 
