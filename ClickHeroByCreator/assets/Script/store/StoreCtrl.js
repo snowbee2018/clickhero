@@ -31,9 +31,12 @@ cc.Class({
             WeChatUtil.popVersionLow()
             return
         }
+        if (this.adcallback) {
+            return
+        }
         if (window.videoAd) {
-            this.callback = this.onCloseAd.bind(this)
-            videoAd.onClose(this.callback)
+            this.adcallback = this.onCloseAd.bind(this)
+            videoAd.onClose(this.adcallback)
             videoAd.show().catch(() => {
                 // 失败重试
                 videoAd.load()
@@ -44,6 +47,8 @@ cc.Class({
                         title: '提示',
                         content: '广告显示失败，请稍后重试。'
                     })
+                    videoAd.offClose(this.adcallback)
+                    this.adcallback = null
                 })
             })
         }
@@ -55,7 +60,8 @@ cc.Class({
             PublicFunc.popGoldDialog(2,20,null,true)
             this.btnAd.active = false
         }
-        videoAd.offClose(this.callback)
+        videoAd.offClose(this.adcallback)
+        this.adcallback = null
     },
 
 

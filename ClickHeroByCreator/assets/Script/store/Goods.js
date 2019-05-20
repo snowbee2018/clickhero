@@ -78,7 +78,7 @@ cc.Class({
                 break;
             case 5:
                 name = "月光宝盒の平行时空"
-                desc = "在平行时空穿梭，什么都不会失去（固定1w的bug已修改）"
+                desc = "在平行时空穿梭，什么都不会失去"
                 var str = Formulas.formatBigNumber(this.getBagSoul())
                 state = "穿越次数+1，立即获得" + str + "仙丹"
                 ruby = 300
@@ -219,7 +219,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 1).plus(100).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds() + 1).plus(20).integerValue()
         return soul
     },
 })
