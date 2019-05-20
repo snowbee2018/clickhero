@@ -215,8 +215,8 @@ cc.Class({
 
             self.upgrageSelectBtnLab.string = "×" + GameData.heroLvUnit;
 
-
-            self.scheduleOnce(self.handleIdle, 60);
+            this.handleIdle()
+            // self.scheduleOnce(self.handleIdle, 60);
             Events.emit(Events.ON_GAME_START);
             self.isGameStart = true;
 

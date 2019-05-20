@@ -29,6 +29,8 @@ cc.Class({
             this.bind()
         }else if (event == 13 && this.data.id == 9){
             this.bind()
+        }else if (event == 8){
+            this.bind()
         }
     },
 

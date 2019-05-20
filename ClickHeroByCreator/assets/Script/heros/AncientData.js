@@ -62,7 +62,7 @@ cc.Class({
 
     // 获得升级花费
     getSoul(){
-        return this.soul;//这里到时候会要加折扣
+        return this.soul.times(GameData.gdAncientSale).integerValue();//这里到时候会要加折扣
     },
 
     upgrade(){
