@@ -104,6 +104,7 @@ cc.Class({
             } else {
                 if (self._isPrimalBoss) {
                     self._soul = Formulas.getPrimalBossSoul(self._lv);
+                    self._monsterName = "[妖王]" + self._monsterName
                 }
             }
         } else {
@@ -124,6 +125,7 @@ cc.Class({
                     }
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
+                        self._monsterName = "[妖王]" + self._monsterName
                     }
                 }
             }

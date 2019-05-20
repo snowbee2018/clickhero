@@ -17,6 +17,7 @@ cc.Class({
         zoneInfoNode: cc.Node,
         hpBar: cc.ProgressBar,
         monsterName: cc.Label,
+        monsterSoul: cc.Label,
         hpLabel: cc.Label,
         timeLabel: cc.Label,
         toggle: cc.Toggle,
@@ -203,6 +204,12 @@ cc.Class({
             } else if (self.lastMonsterType == 'normal' && self.curMonster._isBoss) {
                 AudioMgr.playBoss();
             }
+        }
+        if (self.curMonster._isPrimalBoss) {
+            this.monsterSoul.node.active = true
+            this.monsterSoul.string = Formulas.formatBigNumber(this.monsterSoul_soul)+"仙丹"
+        } else {
+            this.monsterSoul.node.active = false
         }
         self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
     },
