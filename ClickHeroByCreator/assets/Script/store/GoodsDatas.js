@@ -20,6 +20,7 @@ Datas.init = function() {
         new Goods().init(8),
         new Goods().init(9),
         new Goods().init(10),
+        new Goods().init(15),
         new Goods().init(11),
         new Goods().init(12),
         new Goods().init(13),
@@ -47,7 +48,10 @@ Datas.refresh = function(){
         } else if (e.id == 9) {
             GameData.gdDPSTimes = 1 + count
         } else if (e.id == 10) {
+            GameData.gdGoldTimes = 1 + count*10
+        } else if (e.id == 15) {
             GameData.gdSoulTimes = 1 + count*10
+            console.log("GameData.gdSoulTimes1"+GameData.gdSoulTimes);
         } else if (e.id == 11) {
             GameData.gdPBossTimes = count*0.25 + 1
         } else if (e.id == 12) {

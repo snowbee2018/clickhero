@@ -114,6 +114,13 @@ cc.Class({
                 ruby = 200
                 unlockLv = 300
                 break;
+            case 15:
+                name = "仙丹多又多"
+                desc = "每次购买+1000%的妖丹加成"
+                state = "仙丹加成:+" + (this.getCount()*1000)+"%"
+                ruby = 200
+                unlockLv = 300
+                break;
             case 11:
                 name = "催泪铃加持"
                 desc = "每次购买+25%的催泪铃的效果"

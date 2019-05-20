@@ -87,6 +87,10 @@ cc.Class({
     },
 
     onBuy(id){
+        if (id == 15 && this.data.id == 5) {
+            this.data.init()
+            this.bind()
+        }
         if (id != this.data.id) {
             return
         }

@@ -214,7 +214,7 @@ cc.Class({
         },
         // 获得远古boss英魂数，floor关卡
         getPrimalBossSoul(floor){
-            return new BigNumber(Math.pow((floor-80)/25,1.3)+1).integerValue();
+            return new BigNumber(Math.pow((floor-80)/25,1.3)+1).times(GameData.gdSoulTimes).integerValue();
         },
 
         randomNum(lower, upper){

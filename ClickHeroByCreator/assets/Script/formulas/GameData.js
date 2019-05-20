@@ -67,7 +67,8 @@ cc.Class({
         gdLeaveTimes : 1,//7 挂机效力倍数
         gdAncientSale : 1,//8 古神升级折扣*
         gdDPSTimes : 1,//9 DPS倍数
-        gdSoulTimes : 1,//10 英魂获取倍数*
+        gdGoldTimes : 1,//10 仙丹获取倍数*
+        gdSoulTimes : 1,//15 英魂获取倍数*
         gdPBossTimes : 1,//11 addPrimalBossOdds倍数
         gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
         gdTreasureOddsTimes : 1,//13 addTreasureOdds倍数
@@ -123,7 +124,7 @@ cc.Class({
             });
             let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
             this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
-                 * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdSoulTimes;
+                 * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdGoldTimes;
             console.log("金币倍数"+this.globalGoldTimes);
             console.log(this.gdDayGoldTimes);
             
