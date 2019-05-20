@@ -105,14 +105,14 @@ cc.Class({
                 desc = "每次购买+100%的DPS"
                 state = "DPS增加:+" + (this.getCount()*100)+"%"
                 ruby = 500 
-                unlockLv = 300
+                unlockLv = 200
                 break;
             case 10:
                 name = "妖丹多又多"
                 desc = "每次购买+1000%的妖丹加成"
                 state = "妖丹加成:+" + (this.getCount()*1000)+"%"
                 ruby = 300  + 300 * this.getCount()
-                unlockLv = 300
+                unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多"
