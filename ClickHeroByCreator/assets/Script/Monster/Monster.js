@@ -91,7 +91,7 @@ cc.Class({
             } else {
                 self._gold = Formulas.getMonsterGold(lv, self._totalHP);
                 if (self._isTreasureChest) {
-                    self._gold = self._gold.times(10 * GameData.addTreasureTimes);
+                    self._gold = self._gold.times(10 * GameData.getTreasureTimes());
                 }
                 if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
                     if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds * 100)) {
@@ -129,7 +129,7 @@ cc.Class({
             }
             self._gold = Formulas.getMonsterGold(lv, self._totalHP);
             if (self._isTreasureChest) {
-                self._gold = self._gold.times(10 * GameData.addTreasureTimes);
+                self._gold = self._gold.times(10 * GameData.getTreasureTimes());
                 self._monsterName = "葫芦";
             }
             if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0

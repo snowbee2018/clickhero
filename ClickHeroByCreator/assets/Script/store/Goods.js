@@ -95,7 +95,7 @@ cc.Class({
             case 8:
                 name = "神器打个折"
                 desc = "每次购买-5%的上古神器费用，上限150次"
-                var num = ((1 - Math.pow(0.95,this.getCount())) * 100)
+                var num = ((1 - Math.pow(0.95,this.getCount())) * 100).toFixed(4)
                 state = "上古神器升级费用:-" + num +"%" 
                 ruby = 200
                 unlockLv = 300
@@ -136,9 +136,9 @@ cc.Class({
                 unlockLv = 300
                 break;
             case 13:
-                name = "伏羲琴加持"
-                desc = "每次购买+增加100%伏羲琴效果"
-                state = "伏羲琴效力增加:+" + (this.getCount()*100)+"%"
+                name = "崆峒印加持"
+                desc = "每次购买+增加100%崆峒印效果"
+                state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200
                 unlockLv = 300
                 break;

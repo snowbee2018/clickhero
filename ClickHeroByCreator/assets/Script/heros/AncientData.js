@@ -262,7 +262,7 @@ cc.Class({
             desc = "+" + (5*this.level) + "%妖丹倍数"
         } else if (this.id == 19) {
             // 宝箱金币倍数
-            desc = "+" + (50*this.level) + "%葫芦妖丹倍数"
+            desc = "+" + (50*this.level*GameData.gdTreasureTimes).toFixed(4) + "%葫芦妖丹倍数"
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {

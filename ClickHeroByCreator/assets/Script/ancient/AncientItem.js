@@ -27,7 +27,7 @@ cc.Class({
             this.bind()
         }else if (event == 12 && this.data.id == 7){
             this.bind()
-        }else if (event == 13 && this.data.id == 9){
+        }else if (event == 13 && this.data.id == 19){
             this.bind()
         }else if (event == 8){
             this.bind()

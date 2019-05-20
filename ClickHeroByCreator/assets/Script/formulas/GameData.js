@@ -71,7 +71,7 @@ cc.Class({
         gdSoulTimes : 1,//15 英魂获取倍数*
         gdPBossTimes : 1,//11 addPrimalBossOdds倍数
         gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
-        gdTreasureOddsTimes : 1,//13 addTreasureOdds倍数
+        gdTreasureTimes : 1,//13 addTreasureTimes倍数
 
         //--------被动技能的影响--------
         cskCritTimes : 1, // 暴击倍数 :calCritTimes()
@@ -198,7 +198,12 @@ cc.Class({
         },
         // 获得宝箱出现概率
         getTreasureOdds() {
-            return this.addTreasureOdds * this.gdTreasureOddsTimes;
+            // return this.addTreasureOdds * this.gdTreasureOddsTimes;
+            return this.addTreasureOdds
+        },
+        // 获得宝箱出现概率
+        getTreasureTimes() {
+            return this.addTreasureTimes * this.gdTreasureTimes;
         },
     }
 })
