@@ -73,7 +73,7 @@ cc.Class({
                 name = "自动点击"
                 desc = "(+10每秒轻击)"
                 state = "当前拥有数:" + this.getCount()
-                ruby = 1000 + 500 * this.getCount()// + 已拥有数*500
+                ruby = 400 + 400 * this.getCount()// + 已拥有数*500
                 unlockLv = 80
                 break;
             case 5:
@@ -89,7 +89,7 @@ cc.Class({
                 name = "一动不动是萌萌"
                 desc = "每次购买+50%的闲置型上古神器收益"
                 state = "挂机收益增加:+" + (this.getCount()*50)+"%"
-                ruby = 200
+                ruby = 300  + 300 * this.getCount()
                 unlockLv = 300
                 break;
             case 8:
@@ -97,49 +97,49 @@ cc.Class({
                 desc = "每次购买-5%的上古神器费用，上限150次"
                 var num = ((1 - Math.pow(0.95,this.getCount())) * 100).toFixed(4)
                 state = "上古神器升级费用:-" + num +"%" 
-                ruby = 200
+                ruby = 500  + 500 * this.getCount()
                 unlockLv = 300
                 break;
             case 9:
                 name = "伤害高又高"
                 desc = "每次购买+100%的DPS"
                 state = "DPS增加:+" + (this.getCount()*100)+"%"
-                ruby = 200
+                ruby = 500 
                 unlockLv = 300
                 break;
             case 10:
                 name = "妖丹多又多"
                 desc = "每次购买+1000%的妖丹加成"
                 state = "妖丹加成:+" + (this.getCount()*1000)+"%"
-                ruby = 200
+                ruby = 300  + 300 * this.getCount()
                 unlockLv = 300
                 break;
             case 15:
                 name = "仙丹多又多"
                 desc = "每次购买+1000%的妖丹加成"
                 state = "仙丹加成:+" + (this.getCount()*1000)+"%"
-                ruby = 200
+                ruby = 500  + 500 * this.getCount()
                 unlockLv = 300
                 break;
             case 11:
                 name = "催泪铃加持"
                 desc = "每次购买+25%的催泪铃的效果"
                 state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
-                ruby = 200
+                ruby = 200  + 200 * this.getCount()
                 unlockLv = 300
                 break;
             case 12:
                 name = "昊天塔加持"
                 desc = "每次购买增加+75%昊天塔效果"
                 state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
-                ruby = 200
+                ruby = 200  + 200 * this.getCount()
                 unlockLv = 300
                 break;
             case 13:
                 name = "崆峒印加持"
                 desc = "每次购买+增加100%崆峒印效果"
                 state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
-                ruby = 200
+                ruby = 200  + 200 * this.getCount()
                 unlockLv = 300
                 break;
         }
