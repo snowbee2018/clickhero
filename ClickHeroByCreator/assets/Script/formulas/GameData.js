@@ -74,8 +74,8 @@ cc.Class({
         gdTreasureTimes : 1,//13 addTreasureTimes倍数
 
         //--------被动技能的影响--------
-        cskCritTimes : 1, // 暴击倍数 :calCritTimes()
-        cskCritOdds : 0, // 附加暴击概率 :calCritOdds()
+        // cskCritTimes : 1, // 暴击倍数 :calCritTimes()
+        // cskCritOdds : 0, // 附加暴击概率 :calCritOdds()
         //--------主动技能的影响--------
         powersurgeTimes : 1,//三头六臂DPS倍数 触发技能时 改为对应倍数，技能结束要改回为1 :refresh()
         skCritOdds : 0,// 当开启暴击风暴时 设置为0.5 结束改回0 :calCritOdds()
@@ -169,11 +169,25 @@ cc.Class({
         },
         // 计算点击暴击倍数
         calCritTimes(){
-            this.critTimes = (2 + this.cskCritTimes) * this.addCritTimes;
+            let times = 1;
+            HeroDatas.heroList.forEach(hero => {
+                if (hero.isBuy) {
+                    times+=hero.getBjDamage();
+                }
+            });
+            this.critTimes = times * this.addCritTimes;
+            console.log("暴击倍数"+times);
         },
         // 计算点击暴击概率
         calCritOdds(){
-            this.critOdds = this.cskCritOdds + this.skCritOdds;
+            let odds = 0;
+            HeroDatas.heroList.forEach(hero => {
+                if (hero.isBuy) {
+                    odds+=hero.getBjOdds();
+                }
+            });
+            this.critOdds = odds + this.skCritOdds;
+            console.log("暴击概率"+odds);
         },
 
         //====下面是针对古神的====

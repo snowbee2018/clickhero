@@ -324,6 +324,30 @@ cc.Class({
         }
         return times;
     },
+    // 增加暴击伤害
+    getBjDamage(){
+        let times = 0;
+        if (this.skills) { 
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.bjDamage) {
+                    times += skill.bjDamage;
+                }
+            });
+        }
+        return times;
+    },
+    // 增加暴击概率
+    getBjOdds(){
+        let odds = 0;
+        if (this.skills) { 
+            this.skills.forEach(skill => {
+                if (skill.isBuy && skill.bjProbability) {
+                    odds += skill.bjProbability;
+                }
+            });
+        }
+        return odds;
+    },
     // 获得下一级DPS增益
     getNextAddDPS(){
         if (this.isPassive) {
