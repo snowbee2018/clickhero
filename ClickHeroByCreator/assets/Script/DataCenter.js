@@ -134,11 +134,17 @@ cc.Class({
 
     // 保存数据
     saveGameData(data){
+        if (!data) {
+            return
+        }
         let cdata = this.getDataByKey("CloudData");
         // console.log(cdata.gamedata);
         // console.log(data);
-        cdata.gamedata = data
-        cc.sys.localStorage.setItem("GameData",JSON.stringify(cdata))
+        if (cdata) {
+            cdata.gamedata = data
+            console.log("保存数据到本地");
+            cc.sys.localStorage.setItem("GameData",JSON.stringify(cdata))
+        }
     },
 
     readGameData(){

@@ -475,12 +475,17 @@ cc.Class({
         const self = this;
         console.log("on game hide");
         if (self.cloudDataFormatFunc) {
-            var data = self.cloudDataFormatFunc();
+            var datas = self.cloudDataFormatFunc();
+            var data = datas[0]
+            var result = datas[1]
             let time = cc.sys.localStorage.getItem("savetime") || 0
-            if (Date.now() - time > 10*60*1000) {
-                // 每10分钟保存一次
-                CloudDB.update(data);
-                cc.sys.localStorage.setItem("savetime",Date.now())
+            if (Date.now() - time > 10*60*1000||!result) {
+                if (data&&data.heroList&&data.ancientList) {
+                    // 每10分钟保存一次
+                    console.log("保存数据到服务器");
+                    CloudDB.update(data);
+                    cc.sys.localStorage.setItem("savetime",Date.now())
+                }
             }
         }
     },

@@ -307,8 +307,8 @@ cc.Class({
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
         obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
         console.log(obj);
-        DataCenter.saveGameData(obj)
-        return obj;
+        let result = DataCenter.saveGameData(obj)
+        return [obj,result]
     },
 
     onGoldChange () {
