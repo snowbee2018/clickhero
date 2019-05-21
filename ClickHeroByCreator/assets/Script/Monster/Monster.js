@@ -125,7 +125,6 @@ cc.Class({
                     }
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
-                        self._monsterName = "[妖王]" + self._monsterName
                     }
                 }
             }
@@ -148,7 +147,11 @@ cc.Class({
         inedx = inedx % len;
         var zoneObj = zoneCfg[inedx];
         if (self._isBoss) {
-            self._monsterName = zoneObj.bossName;
+            if (self._isPrimalBoss) {
+                self._monsterName = "[妖王]" + self._monsterName
+            }else{
+                self._monsterName = zoneObj.bossName;
+            }
             CloudRes.getBossUrl(zoneObj.resNum, function (url) {
                 if (url) {
                     cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
