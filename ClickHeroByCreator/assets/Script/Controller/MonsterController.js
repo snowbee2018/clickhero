@@ -207,7 +207,7 @@ cc.Class({
         }
         if (self.curMonster._isPrimalBoss) {
             this.monsterSoul.node.active = true
-            this.monsterSoul.string = Formulas.formatBigNumber(this.monsterSoul_soul)+"仙丹"
+            this.monsterSoul.string = Formulas.formatBigNumber(this.curMonster._soul)+"仙丹"
         } else {
             this.monsterSoul.node.active = false
         }
