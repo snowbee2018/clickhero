@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-19 22:20:53
+ * @Last Modified time: 2019-05-21 22:41:26
  */
  
 cc.Class({
@@ -12,6 +12,7 @@ cc.Class({
         days : cc.Node,
         day1 : cc.Node,
         day7 : cc.Node,
+        lbTips : cc.Label,
     },
 
     start () {
@@ -27,6 +28,7 @@ cc.Class({
         }
         this.rubys = [30,40,50,60,70,80,100]
         this.bindViews()
+        this.lbTips.string = PublicFunc.getTipsStr()
     },
 
     bindViews(){
