@@ -215,7 +215,7 @@ cc.Class({
             // return this.addTreasureOdds * this.gdTreasureOddsTimes;
             return this.addTreasureOdds
         },
-        // 获得宝箱出现概率
+        // 获得宝箱倍数
         getTreasureTimes() {
             return this.addTreasureTimes * this.gdTreasureTimes;
         },

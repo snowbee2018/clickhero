@@ -211,6 +211,12 @@ cc.Class({
         } else {
             this.monsterSoul.node.active = false
         }
+        if (self.curMonster._isTreasureChest) {
+            this.monsterSoul.node.active = true
+            this.monsterSoul.string = (10 * GameData.getTreasureTimes()).toFixed(2) + "倍妖丹"
+        } else {
+            this.monsterSoul.node.active = false
+        }
         self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
     },
 
