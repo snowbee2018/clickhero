@@ -30,7 +30,7 @@ cc.Class({
 
     ctor () {
         const self = this;
-        
+        this.scale = 1
     },
 
     onLoad () {
@@ -53,8 +53,8 @@ cc.Class({
         self.anim.stop();
         self.node.x = 0;
         self.node.y = 0;
-        self.node.scaleX = 1;
-        self.node.scaleY = 1;
+        self.node.scaleX = this.scale;
+        self.node.scaleY = this.scale;
         self.anim.play(name);
     },
 
@@ -155,6 +155,9 @@ cc.Class({
                 if (url) {
                     cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
                         if (!err && texture && cc.isValid(self.node)) {
+                            let scale = 360 / texture.height
+                            texture.width = texture.width * scale
+                            texture.height = texture.height * scale
                             self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
                         }
                     });
@@ -178,6 +181,9 @@ cc.Class({
             if (cc.sys.platform === cc.sys.WECHAT_GAME) {
                 CloudRes.getMonsterRes(function (err, texture) {
                     if (!err && texture && cc.isValid(self.node)) {
+                        let scale = 350 / texture.height
+                        texture.width = texture.width * scale
+                        texture.height = texture.height * scale
                         self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
                     }
                 },self._isTreasureChest);
