@@ -68,6 +68,7 @@ cc.Class({
     },
 
     onAdClick(){
+        const self = this
         if (!WeChatUtil.adEnable) {
             WeChatUtil.popVersionLow()
             return
@@ -84,10 +85,27 @@ cc.Class({
                 .then(() => videoAd.show())
                 .catch(err => {
                     console.log('激励视频 广告显示失败')
-                    wx.showModal({
-                        title: '提示',
-                        content: '广告显示失败，请稍后重试。'
-                    })
+                    let time = cc.sys.localStorage.getItem("sharetime") || 0
+                    if (Date.now() - time > 60*60*1000) {
+                        wx.showModal({
+                            title: '提示',
+                            content: '广告显示失败，本次可以通过分享游戏获得奖励(每小时一次)。',
+                            confirmText: '分享游戏',
+                            success: function(res) {
+                                if (res.confirm) {
+                                    console.log('用户点击分享游戏')
+                                    WeChatUtil.shareAppMessage();
+                                    cc.sys.localStorage.setItem("sharetime",Date.now())
+                                    self.adcallback({isEnded:true})
+                                }
+                            }
+                        })
+                    } else {
+                        wx.showModal({
+                            title: '提示',
+                            content: '广告显示失败，请稍后重试。'
+                        })
+                    }
                     videoAd.offClose(this.adcallback)
                     this.adcallback = null
                 })
