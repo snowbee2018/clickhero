@@ -83,13 +83,14 @@ cc.Class({
                 // 失败重试
                 videoAd.load()
                 .then(() => videoAd.show())
-                .catch(err => {
+                .catch(err => 
+                    {
                     console.log('激励视频 广告显示失败')
                     let time = cc.sys.localStorage.getItem("sharetime") || 0
-                    if (Date.now() - time > 60*60*1000) {
+                    if (Date.now() - time > 30*60*1000) {
                         wx.showModal({
                             title: '提示',
-                            content: '广告显示失败，本次可以通过分享游戏获得奖励(每小时一次)。',
+                            content: '广告显示失败，本次可以通过分享游戏获得奖励(半小时一次)。',
                             confirmText: '分享游戏',
                             success: function(res) {
                                 if (res.confirm) {
