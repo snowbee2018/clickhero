@@ -121,8 +121,10 @@ cc.Class({
             this.num = this.numAd ? this.numAd : this.num
             this.lbCount.string = this.type == 2?this.num : Formulas.formatBigNumber(this.num)
         }
-        videoAd.offClose(this.adcallback)
-        this.adcallback = null
+        if (this.adcallback) {
+            videoAd.offClose(this.adcallback)
+            this.adcallback = null
+        }
     },
 
     // update (dt) {},
