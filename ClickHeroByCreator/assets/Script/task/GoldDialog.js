@@ -97,7 +97,7 @@ cc.Class({
                                     console.log('用户点击分享游戏')
                                     WeChatUtil.shareAppMessage();
                                     cc.sys.localStorage.setItem("sharetime",Date.now())
-                                    self.adcallback({isEnded:true})
+                                    self.onCloseAd({isEnded:true})
                                 }
                             }
                         })
