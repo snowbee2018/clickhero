@@ -18,6 +18,7 @@ cc.Class({
         describe: cc.Label,
         btn: cc.Button,
         cost: cc.Label,
+        sTips : cc.SpriteFrame,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -93,6 +94,25 @@ cc.Class({
                     self.cost.string = Formulas.formatBigNumber(skillData.cost) + " 妖丹";
                     if (DataCenter.isGoldEnough(skillData.cost)) {
                         self.btn.interactable = true;
+                        if (self._heroID == 0 && self._skillID == 0) {
+                            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+                            if (maxPassLavel < 10){
+                                if (!self.nodeFingerTips) {
+                                    self.nodeFingerTips = new cc.Node("nodeFingerTips")
+                                    var sp = self.nodeFingerTips.addComponent(cc.Sprite)
+                                    sp.spriteFrame = self.sTips
+                                    self.nodeFingerTips.parent = self.btn.node
+                                    self.nodeFingerTips.setPosition(cc.v2(50,-20))
+                                    self.nodeFingerTips.opacity = 0
+                                    self.nodeFingerTips.scale = 0.8
+                                    self.nodeFingerTips.runAction(
+                                        cc.repeatForever(
+                                            cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                                        )
+                                    )
+                                }
+                            }
+                        }
                     } else {
                         self.btn.interactable = false;
                     }
@@ -116,6 +136,16 @@ cc.Class({
             var skill = skillArr[self._skillID];
             if (skill.isBuy == false) {
                 hero.buySkill(self._skillID);
+            }
+        }
+        if (this.nodeFingerTips) {
+            this.nodeFingerTips.removeFromParent()
+            this.nodeFingerTips = null
+        }
+        if (self._heroID == 0 && self._skillID == 1) {
+            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (maxPassLavel < 20){
+                Events.emit(Events.SHOW_SKILL_FINGER)
             }
         }
     },

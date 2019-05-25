@@ -70,24 +70,69 @@ cc.Class({
         } else {
             self.btn.interactable = self.isCanBuy();
         }
-        if (this._heroID == 0 && !hero.isBuy) {
-            let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
-            if (Boolean(historyTotalGold&&historyTotalGold.eq(5))) {
-                console.log("加个感叹号2");
-                this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
-                this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
-                var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
-                sp.spriteFrame = this.sTips
-                this.nodeOpenTabTips.parent = this.btn.node
-                this.nodeOpenTabTips.setPosition(cc.v2(50,0))
-                this.nodeOpenTabTips.opacity = 0
-                this.nodeOpenTabTips.scale = 0.5
-                this.nodeOpenTabTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+        if (this._heroID == 0) {
+            let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (maxPassLavel < 10)
+            if (!hero.isBuy) {
+                if (Boolean(curGold&&curGold.gte(5))) {
+                    self.showFinger()
+                }
+            } else if(hero.level == 1){
+                if (Boolean(curGold&&curGold.gte(6))) {
+                    self.showFinger()
+                }
+            } else if(hero.level >= 5) {
+                let skill = hero.skills[0]
+                if (!skill.isBuy&&curGold.gte(10)) {
+                    self.showSkillFinger()
+                }
             }
+        } else if (this._heroID == 1){
+            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (maxPassLavel < 10)
+            if (!hero.isBuy) {
+                let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+                if (Boolean(curGold&&curGold.gte(50))) {
+                    self.showFinger()
+                }
+            }
+        }
+    },
+
+    showSkillFinger(){
+        const self = this;
+        if (!self.nodeSkillTips) {
+            self.nodeSkillTips = new cc.Node("nodeSkillTips")
+            var sp = self.nodeSkillTips.addComponent(cc.Sprite)
+            sp.spriteFrame = self.sTips
+            self.nodeSkillTips.parent = self.node
+            self.nodeSkillTips.setPosition(cc.v2(0,-20))
+            self.nodeSkillTips.opacity = 0
+            self.nodeSkillTips.scale = 0.8
+            self.nodeSkillTips.runAction(
+                cc.repeatForever(
+                    cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                )
+            )
+        }
+    },
+
+    showFinger(){
+        const self = this;
+        if (!self.nodeFingerTips) {
+            self.nodeFingerTips = new cc.Node("nodeFingerTips")
+            var sp = self.nodeFingerTips.addComponent(cc.Sprite)
+            sp.spriteFrame = self.sTips
+            self.nodeFingerTips.parent = self.btn.node
+            self.nodeFingerTips.setPosition(cc.v2(50,-20))
+            self.nodeFingerTips.opacity = 0
+            self.nodeFingerTips.scale = 0.8
+            self.nodeFingerTips.runAction(
+                cc.repeatForever(
+                    cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                )
+            )
         }
     },
 
@@ -256,6 +301,10 @@ cc.Class({
             self.dialog = cc.instantiate(self.skillDialogPrefab);
             self.dialog.parent = cc.director.getScene();
             self.dialog.getComponent("SkillDialog").setDialog(self._heroListCtor, self._heroID);
+            if (self.nodeSkillTips&&this.nodeSkillTips.active) {
+                this.nodeSkillTips.active = false
+                this.nodeSkillTips.removeFromParent()
+            }
         }
     },
 
@@ -268,9 +317,9 @@ cc.Class({
         } else {
             hero.buy();
         }
-        if (this.nodeOpenTabTips) {
-            this.nodeOpenTabTips.removeFromParent()
-            this.nodeOpenTabTips = null
+        if (this.nodeFingerTips) {
+            this.nodeFingerTips.removeFromParent()
+            this.nodeFingerTips = null
         }
     },
 });
