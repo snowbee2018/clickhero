@@ -28,6 +28,8 @@ cc.Class({
         CLOSE_DIALOG : "CLOSE_DIALOG",
         ON_RESUME_GAME : "ON_RESUME_GAME", // 恢复游戏，当从后台切换到前台
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
+        SHOW_SKILL_FINGER : "SHOW_SKILL_FINGER",
+        
         emit(name,params){
             cc.systemEvent.emit(name,params);
         },

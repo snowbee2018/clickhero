@@ -70,24 +70,75 @@ cc.Class({
         } else {
             self.btn.interactable = self.isCanBuy();
         }
-        if (this._heroID == 0 && !hero.isBuy) {
-            let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
-            if (Boolean(historyTotalGold&&historyTotalGold.eq(5))) {
-                console.log("加个感叹号2");
-                this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
-                this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
-                var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
-                sp.spriteFrame = this.sTips
-                this.nodeOpenTabTips.parent = this.btn.node
-                this.nodeOpenTabTips.setPosition(cc.v2(50,0))
-                this.nodeOpenTabTips.opacity = 0
-                this.nodeOpenTabTips.scale = 0.5
-                this.nodeOpenTabTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+        if (this._heroID == 0) {
+            let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (maxPassLavel < 10)
+            if (!hero.isBuy) {
+                if (Boolean(curGold&&curGold.gte(5))) {
+                    self.showFinger("点这里购买英雄，加点击伤害！")
+                }
+            } else if(hero.level == 1){
+                if (Boolean(curGold&&curGold.gte(6))) {
+                    self.showFinger("点这里升级英雄，加点击伤害！")
+                }
+            } else if(hero.level >= 5) {
+                let skill = hero.skills[0]
+                if (!skill.isBuy&&curGold.gte(10)) {
+                    self.showSkillFinger()
+                }
             }
+        } else if (this._heroID == 1){
+            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            if (maxPassLavel < 10)
+            if (!hero.isBuy) {
+                let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+                if (Boolean(curGold&&curGold.gte(50))) {
+                    self.showFinger("点这里购买英雄，加每秒伤害！")
+                }
+            }
+        }
+    },
+
+    showSkillFinger(){
+        const self = this;
+        if (!self.nodeSkillTips) {
+            self.nodeSkillTips = new cc.Node("nodeSkillTips")
+            var sp = self.nodeSkillTips.addComponent(cc.Sprite)
+            sp.spriteFrame = self.sTips
+            self.nodeSkillTips.parent = self.node
+            self.nodeSkillTips.setPosition(cc.v2(20,-30))
+            self.nodeSkillTips.opacity = 0
+            self.nodeSkillTips.scale = 0.8
+            self.nodeSkillTips.runAction(cc.repeatForever(
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-40,20))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-20))),)))
+            this.nodeSkillPop = PublicFunc.createPopTips("点这里进入英雄技能界面！")
+            this.nodeSkillPop.parent = self.node.parent.parent
+            this.nodeSkillPop.setPosition(cc.v2(80,140))
+            this.nodeSkillPop.opacity = 100
+            this.nodeSkillPop.runAction(cc.fadeTo(0.5,255))
+        }
+    },
+
+    showFinger(txt){
+        const self = this;
+        if (!self.nodeFingerTips) {
+            self.nodeFingerTips = new cc.Node("nodeFingerTips")
+            var sp = self.nodeFingerTips.addComponent(cc.Sprite)
+            sp.spriteFrame = self.sTips
+            self.nodeFingerTips.parent = self.btn.node
+            self.nodeFingerTips.setPosition(cc.v2(50,-40))
+            self.nodeFingerTips.opacity = 0
+            self.nodeFingerTips.scale = 0.8
+            self.nodeFingerTips.runAction(cc.repeatForever(
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-30,10))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(30,-10))),)))
+            this.nodePop = PublicFunc.createPopTips(txt)
+            this.nodePop.parent = self.node.parent.parent
+            this.nodePop.setPosition(cc.v2(300,140 - (130 * self._heroID)))
+            this.nodePop.opacity = 100
+            this.nodePop.runAction(cc.fadeTo(0.5,255))
         }
     },
 
@@ -256,6 +307,14 @@ cc.Class({
             self.dialog = cc.instantiate(self.skillDialogPrefab);
             self.dialog.parent = cc.director.getScene();
             self.dialog.getComponent("SkillDialog").setDialog(self._heroListCtor, self._heroID);
+            if (self.nodeSkillTips&&this.nodeSkillTips.active) {
+                this.nodeSkillTips.active = false
+                this.nodeSkillTips.removeFromParent()
+            }
+            if (this.nodeSkillPop) {
+                this.nodeSkillPop.removeFromParent()
+                this.nodeSkillPop = null
+            }
         }
     },
 
@@ -268,9 +327,13 @@ cc.Class({
         } else {
             hero.buy();
         }
-        if (this.nodeOpenTabTips) {
-            this.nodeOpenTabTips.removeFromParent()
-            this.nodeOpenTabTips = null
+        if (this.nodeFingerTips) {
+            this.nodeFingerTips.removeFromParent()
+            this.nodeFingerTips = null
+        }
+        if (this.nodePop) {
+            this.nodePop.removeFromParent()
+            this.nodePop = null
         }
     },
 });

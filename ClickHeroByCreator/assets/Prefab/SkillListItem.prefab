@@ -281,7 +281,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 38.34,
+      "width": 38,
       "height": 20
     },
     "_anchorPoint": {
@@ -1090,6 +1090,9 @@
     },
     "cost": {
       "__id__": 7
+    },
+    "sTips": {
+      "__uuid__": "61083e80-7c9e-4d82-aa18-e04831da61e2"
     },
     "_id": ""
   },

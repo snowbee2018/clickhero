@@ -1442,7 +1442,7 @@
       }
     ],
     "_N$interactable": true,
-    "_N$enableAutoGrayEffect": false,
+    "_N$enableAutoGrayEffect": true,
     "_N$transition": 2,
     "transition": 2,
     "_N$normalColor": {
@@ -1866,6 +1866,9 @@
     },
     "lbTips": {
       "__id__": 47
+    },
+    "btn": {
+      "__id__": 39
     },
     "_id": ""
   },

@@ -62,7 +62,7 @@ cc.Class({
         }else{
             this.tabs[2].active = v0
         }
-        let v1 = Boolean(maxPassLavel && maxPassLavel >= 10)
+        let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
         this.tabs[3].active = v1
         this.shareBtn.active = v1
         this.btnSignin.active = v1
@@ -166,6 +166,7 @@ cc.Class({
         Events.off(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
         Events.off(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
         Events.off(Events.ON_RESUME_GAME, self.onResumeGame, self);
+        Events.off(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
     },
 
     onGameStart () {
@@ -205,6 +206,7 @@ cc.Class({
             Events.on(Events.ON_MAXLEVEL_UPDATE, self.onMaxLvChange, self);
             Events.on(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
             Events.on(Events.ON_RESUME_GAME, self.onResumeGame, self);
+            Events.on(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             // self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -314,26 +316,68 @@ cc.Class({
     onGoldChange () {
         const self = this;
         self.totalCostLab.string = DataCenter.getGoldStr();
-
-        let historyTotalGold = DataCenter.getDataByKey(DataCenter.KeyMap.historyTotalGold);
-        if (Boolean(historyTotalGold&&historyTotalGold.eq(5))&&!HeroDatas.getHero(0).isBuy) {
-            if (this.pageNode.isVisible==false) {
-                console.log("加个感叹号1");
-                this.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
-                this.nodeOpenTabTips.color = new cc.Color(0xf4,0xea,0x2a)
-                var sp = this.nodeOpenTabTips.addComponent(cc.Sprite)
-                sp.spriteFrame = this.sFinger
-                this.nodeOpenTabTips.parent = this.tabs[0]
-                this.nodeOpenTabTips.setPosition(cc.v2(80,0))
-                this.nodeOpenTabTips.opacity = 0
-                this.nodeOpenTabTips.scale = 0.5
-                this.nodeOpenTabTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+        let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+        if (maxPassLavel < 10) {
+            let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+            let hero0 = HeroDatas.getHero(0)
+            if (!hero0.isBuy) {
+                if (Boolean(curGold&&curGold.gte(5))) {
+                    self.showHeroTabFinger()
+                }
+            } else if(hero0.level == 1) {
+                if (Boolean(curGold&&curGold.gte(6))) {
+                    self.showHeroTabFinger()
+                }
+            } else if(hero0.level >= 5) {
+                let skill = hero0.skills[0]
+                if (!skill.isBuy&&curGold.gte(10)) {
+                    self.showHeroTabFinger()
+                }
             }
-            // ，给至尊宝的购买按钮加个感叹号
+            let hero1 = HeroDatas.getHero(1)
+            if (!hero1.isBuy) {
+                if (Boolean(curGold&&curGold.gte(50))) {
+                    self.showHeroTabFinger()
+                }
+            }
+
+        }
+    },
+
+    showHeroTabFinger(){
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (!Boolean(self.nodeOpenTabTips)) {
+            if (this.pageNode.isVisible==false||pageView.getCurrentPageIndex()!=0){
+                self.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
+                var sp = self.nodeOpenTabTips.addComponent(cc.Sprite)
+                sp.spriteFrame = self.sFinger
+                self.nodeOpenTabTips.parent = self.tabs[0]
+                self.nodeOpenTabTips.setPosition(cc.v2(80,-20))
+                self.nodeOpenTabTips.opacity = 0
+                self.nodeOpenTabTips.scale = 0.8
+                self.nodeOpenTabTips.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+            }
+        }
+    },
+    showSkillTabFinger(){
+        const self = this;
+        var pageView = self.pageNode.getComponent(cc.PageView);
+        if (!Boolean(self.nodeSkillTabTips)) {
+            if (this.pageNode.isVisible==false||pageView.getCurrentPageIndex()!=1){
+                self.nodeSkillTabTips = new cc.Node("nodeSkillTabTips")
+                var sp = self.nodeSkillTabTips.addComponent(cc.Sprite)
+                sp.spriteFrame = self.sFinger
+                self.nodeSkillTabTips.parent = self.tabs[1]
+                self.nodeSkillTabTips.setPosition(cc.v2(80,-20))
+                self.nodeSkillTabTips.opacity = 0
+                self.nodeSkillTabTips.scale = 0.8
+                self.nodeSkillTabTips.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+            }
         }
     },
 
@@ -377,12 +421,27 @@ cc.Class({
     },
 
     onMaxLvChange(event){
+        const self = this;
         let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
-        let v1 = maxPassLavel >= 10
+        let v1 = maxPassLavel >= 5
         if (!this.tabs[3].active) {
             this.tabs[3].active = v1
             this.shareBtn.active = v1
             this.btnSignin.active = v1
+            if (!self.nodeSigninTips&&v1) {
+                self.nodeSigninTips = new cc.Node("nodeSigninTips")
+                var sp = self.nodeSigninTips.addComponent(cc.Sprite)
+                sp.spriteFrame = self.sTips
+                self.nodeSigninTips.parent = this.btnSignin
+                self.nodeSigninTips.setPosition(cc.v2(50,-20))
+                self.nodeSigninTips.opacity = 0
+                self.nodeSigninTips.scale = 0.8
+                self.nodeSigninTips.runAction(
+                    cc.repeatForever(
+                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+                    )
+                )
+            }
         }
     },
 
@@ -445,22 +504,28 @@ cc.Class({
             this.nodeFinger.removeFromParent()
             this.nodeFinger = null
         }
+        if (this.nodeClickPop) {
+            this.nodeClickPop.removeFromParent()
+            this.nodeClickPop = null
+        }
     },
 
     createClickGuide(){
         this.scheduleOnce(function() {
             this.nodeFinger = new cc.Node("nodeFinger")
-            this.nodeFinger.color = new cc.Color(0xf4,0xea,0x2a)
             const sp = this.nodeFinger.addComponent(cc.Sprite);
             sp.spriteFrame = this.sFinger
             this.nodeFinger.parent = this.monsterController.monsterPos
-            this.nodeFinger.setPosition(cc.v2(0,80))
-            this.nodeFinger.opacity = 0
-            this.nodeFinger.runAction(
-                cc.repeatForever(
-                    cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                )
-            )
+            this.nodeFinger.setPosition(cc.v2(80,40))
+            this.nodeFinger.opacity = 100
+            this.nodeFinger.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-40,40))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-40))),)))
+            this.nodeClickPop = PublicFunc.createPopTips("快来点一下这个怪试试啊~")
+            this.nodeClickPop.parent = this.monsterController.monsterPos
+            this.nodeClickPop.setPosition(cc.v2(80,20))
+            this.nodeClickPop.opacity = 100
+            this.nodeClickPop.runAction(cc.fadeTo(0.5,255))
         }, 1);
     },
 
@@ -583,8 +648,6 @@ cc.Class({
             const page = children[i];
             // page.active = i == curPageIndex;
             page.active = true
-            console.log("page active"+i + " " +page.active);
-            
         }
     },
     onHeroBtnClick () {
@@ -646,6 +709,10 @@ cc.Class({
         }
         self.upgrageSelectBtn.active = false;
         AudioMgr.playBtn();
+        if(this.nodeSkillTabTips){
+            this.nodeSkillTabTips.removeFromParent()
+            this.nodeSkillTabTips = null
+        }
     },
 
     onAncientBtnClick() {
@@ -779,6 +846,10 @@ cc.Class({
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
         AudioMgr.playBtn();
+        if (this.nodeSigninTips) {
+            this.nodeSigninTips.removeFromParent()
+            this.nodeSigninTips = null
+        }
     },
 
     showShareDialog () {
