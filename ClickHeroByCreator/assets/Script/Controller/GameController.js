@@ -353,14 +353,12 @@ cc.Class({
                 var sp = self.nodeOpenTabTips.addComponent(cc.Sprite)
                 sp.spriteFrame = self.sFinger
                 self.nodeOpenTabTips.parent = self.tabs[0]
-                self.nodeOpenTabTips.setPosition(cc.v2(80,-10))
+                self.nodeOpenTabTips.setPosition(cc.v2(80,-20))
                 self.nodeOpenTabTips.opacity = 0
                 self.nodeOpenTabTips.scale = 0.8
-                self.nodeOpenTabTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+                self.nodeOpenTabTips.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
             }
         }
     },
@@ -373,14 +371,12 @@ cc.Class({
                 var sp = self.nodeSkillTabTips.addComponent(cc.Sprite)
                 sp.spriteFrame = self.sFinger
                 self.nodeSkillTabTips.parent = self.tabs[1]
-                self.nodeSkillTabTips.setPosition(cc.v2(80,-10))
+                self.nodeSkillTabTips.setPosition(cc.v2(80,-20))
                 self.nodeSkillTabTips.opacity = 0
                 self.nodeSkillTabTips.scale = 0.8
-                self.nodeSkillTabTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+                self.nodeSkillTabTips.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
             }
         }
     },
