@@ -516,7 +516,7 @@ cc.Class({
             const sp = this.nodeFinger.addComponent(cc.Sprite);
             sp.spriteFrame = this.sFinger
             this.nodeFinger.parent = this.monsterController.monsterPos
-            this.nodeFinger.setPosition(cc.v2(40,80))
+            this.nodeFinger.setPosition(cc.v2(80,80))
             this.nodeFinger.opacity = 0
             this.nodeFinger.runAction(
                 cc.repeatForever(

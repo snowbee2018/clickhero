@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-21 22:41:26
+ * @Last Modified time: 2019-05-25 17:29:41
  */
  
 cc.Class({
@@ -13,6 +13,7 @@ cc.Class({
         day1 : cc.Node,
         day7 : cc.Node,
         lbTips : cc.Label,
+        btn : cc.Button,
     },
 
     start () {
@@ -29,6 +30,10 @@ cc.Class({
         this.rubys = [30,40,50,60,70,80,100]
         this.bindViews()
         this.lbTips.string = PublicFunc.getTipsStr()
+        
+        if (this.isSignin()) {
+            this.btn.interactable = false
+        }
     },
 
     bindViews(){
