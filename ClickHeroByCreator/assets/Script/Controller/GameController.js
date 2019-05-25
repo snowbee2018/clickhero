@@ -508,6 +508,10 @@ cc.Class({
             this.nodeFinger.removeFromParent()
             this.nodeFinger = null
         }
+        if (this.nodeClickPop) {
+            this.nodeClickPop.removeFromParent()
+            this.nodeClickPop = null
+        }
     },
 
     createClickGuide(){
@@ -516,13 +520,16 @@ cc.Class({
             const sp = this.nodeFinger.addComponent(cc.Sprite);
             sp.spriteFrame = this.sFinger
             this.nodeFinger.parent = this.monsterController.monsterPos
-            this.nodeFinger.setPosition(cc.v2(80,80))
-            this.nodeFinger.opacity = 0
-            this.nodeFinger.runAction(
-                cc.repeatForever(
-                    cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                )
-            )
+            this.nodeFinger.setPosition(cc.v2(80,40))
+            this.nodeFinger.opacity = 100
+            this.nodeFinger.runAction(cc.repeatForever(
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-40,40))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-40))),)))
+            this.nodeClickPop = PublicFunc.createPopTips("快来点一下这个怪试试啊~")
+            this.nodeClickPop.parent = this.monsterController.monsterPos
+            this.nodeClickPop.setPosition(cc.v2(80,20))
+            this.nodeClickPop.opacity = 100
+            this.nodeClickPop.runAction(cc.fadeTo(0.5,255))
         }, 1);
     },
 

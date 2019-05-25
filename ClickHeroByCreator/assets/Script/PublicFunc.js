@@ -14,6 +14,7 @@ cc.Class({
     properties: {
         dialog: cc.Prefab,
         goldDialog: cc.Prefab,
+        popTips : cc.Prefab,
     },
 
     onLoad(){
@@ -142,5 +143,12 @@ cc.Class({
     getTipsStr(){
         let index = Formulas.randomNum(0,this.tipsArr.length - 1)
         return "提示："+this.tipsArr[index]
-    }
+    },
+
+    createPopTips(txt){
+        let popTips = cc.instantiate(this.popTips)
+        let lb = cc.find("label",popTips)
+        lb.getComponent(cc.Label).string = txt
+        return popTips
+    },
 });

@@ -102,14 +102,12 @@ cc.Class({
                                     var sp = self.nodeFingerTips.addComponent(cc.Sprite)
                                     sp.spriteFrame = self.sTips
                                     self.nodeFingerTips.parent = self.btn.node
-                                    self.nodeFingerTips.setPosition(cc.v2(50,-20))
+                                    self.nodeFingerTips.setPosition(cc.v2(50,-40))
                                     self.nodeFingerTips.opacity = 0
                                     self.nodeFingerTips.scale = 0.8
-                                    self.nodeFingerTips.runAction(
-                                        cc.repeatForever(
-                                            cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                                        )
-                                    )
+                                    self.nodeFingerTips.runAction(cc.repeatForever(
+                                        cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                                            cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
                                 }
                             }
                         }
