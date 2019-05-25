@@ -53,7 +53,7 @@ cc.Class({
         if (cloudGold) {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
         } else {
-            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10")));
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
             // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000000000000000000000000000000000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
