@@ -37,26 +37,23 @@ cc.Class({
             if (type == 0) {
                 strAd = "随机翻2-10倍"
                 let times = Formulas.randomNum(2,10)
-                this.numAd = this.num.times(times)
+                this.numAd = this.num.times(times-1)
                 this.lbTips.string = "妖丹×" + times
             } else if (type == 1) {
                 let add = this.num.times(0.2).integerValue()
                 if (add.lt(2)) {
                     add = new BigNumber(2)
                 }
-                this.numAd = this.num.plus(add)
+                this.numAd = add
                 strAd = "额外获得"+Formulas.formatBigNumber(add) + "仙丹"
                 this.lbTips.string = "已增加"+Formulas.formatBigNumber(add) + "仙丹"
             } else if (type == 2) {
                 strAd = "翻倍获取仙桃"
-                this.numAd = this.num * 2
+                this.numAd = this.num
                 this.lbTips.string = "仙桃×" + 2
             }
             this.lbAd.string = strAd
         }
-    },
-
-    onClick(){
         if (this.type == 0) {
             DataCenter.addGold(this.num)
         }else if(this.type == 1){
@@ -64,6 +61,16 @@ cc.Class({
         }else if(this.type == 2){
             DataCenter.addRuby(this.num)
         }
+    },
+
+    onClick(){
+        // if (this.type == 0) {
+        //     DataCenter.addGold(this.num)
+        // }else if(this.type == 1){
+        //     DataCenter.addSoul(this.num)
+        // }else if(this.type == 2){
+        //     DataCenter.addRuby(this.num)
+        // }
         this.node.destroy()
     },
 
@@ -116,10 +123,17 @@ cc.Class({
 
     onCloseAd(res){
         console.log("[GoldDialog]Video广告关闭，是否播放完成："+res.isEnded);
-        if (res.isEnded) {
+        if (res.isEnded && this.numAd) {
             this.btnAd.active = false
-            this.num = this.numAd ? this.numAd : this.num
-            this.lbCount.string = this.type == 2?this.num : Formulas.formatBigNumber(this.num)
+            let num = this.type == 2?this.numAd + this.num :  this.num.plus(this.numAd)
+            this.lbCount.string = this.type == 2?num : Formulas.formatBigNumber(num)
+            if (this.type == 0) {
+                DataCenter.addGold(this.numAd)
+            }else if(this.type == 1){
+                DataCenter.addSoul(this.numAd)
+            }else if(this.type == 2){
+                DataCenter.addRuby(this.numAd)
+            }
         }
         if (this.adcallback) {
             videoAd.offClose(this.adcallback)
