@@ -896,7 +896,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btnSignin",
+    "_name": "btnRank",
     "_objFlags": 0,
     "_parent": {
       "__id__": 10
@@ -20007,7 +20007,7 @@
       "__id__": 23
     },
     "btnSignin": {
-      "__id__": 19
+      "__id__": 27
     },
     "sFinger": {
       "__uuid__": "61083e80-7c9e-4d82-aa18-e04831da61e2"
