@@ -88,14 +88,22 @@ cc.Class({
                 // }
                 // hp = 10 * (139 + Math.pow(1.55,139) * Math.pow(1.145,360)*P)*boss
                 let P = new BigNumber(1);
-                if (this.tempP&&this.tempP.lv == lv - 1) {
-                    p = this.tempP.P.times(1.145 + 0.001 * Math.floor((lv - 2) / 500));
+                if (this.tempP) {
+                    if (this.tempP.lv < lv) {
+                        for (var i = this.tempP.lv; i < lv; i++) {
+                            P = this.tempP.P.times(1.145 + 0.001 * Math.floor((lv - 2) / 500));
+                        }
+                    } else {
+                        for (var i = this.tempP.lv; i > lv; i--) {
+                            P = this.tempP.P.div(1.145 + 0.001 * Math.floor((lv - 2) / 500));
+                        }
+                    }
                 } else {
                     for (var i = 501; i < lv; i++) {
                         P = P.times(1.145 + 0.001 * Math.floor((i - 1) / 500));
                     }
                 }
-                this.tempP = {lv:lv,p:p}
+                this.tempP = {lv:lv,P:P}
                 hp = bigPow(1.55, 139).times(bigPow(1.145, 360)).times(P).plus(139).times(boss * 10);
             } else {
                 // hp = (Math.pow(1.545,lv-200001)*1.24*Math.pow(10,25409)+(lv - 1)*10)
