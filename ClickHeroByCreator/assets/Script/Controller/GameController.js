@@ -821,17 +821,15 @@ cc.Class({
     },
 
     showSigninDialog(){
-        this.lv_ = this.lv_ || 3110
-        Formulas.getMonsterHP(this.lv_++)
-        // let dialog = cc.instantiate(this.SigninDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // AudioMgr.playBtn();
-        // if (this.nodeSigninTips) {
-        //     this.nodeSigninTips.removeFromParent()
-        //     this.nodeSigninTips = null
-        // }
+        let dialog = cc.instantiate(this.SigninDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
+        if (this.nodeSigninTips) {
+            this.nodeSigninTips.removeFromParent()
+            this.nodeSigninTips = null
+        }
     },
 
     showShareDialog () {
