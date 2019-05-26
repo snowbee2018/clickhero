@@ -67,6 +67,12 @@ cc.Class({
         },
         // 计算怪物HP for monster
         getMonsterHP(lv) {
+            if (this.tempMonsterHp&&this.tempMonsterHp.lv == lv) {
+                console.log("xxxj 使用现成的HP")
+                if (this.tempMonsterHp.hp) {
+                    return this.tempMonsterHp.hp
+                }
+            }
             var boss = lv % 5 == 0 ? 10 : 1;
             var hp;
             if (lv <= 140) {
@@ -82,16 +88,22 @@ cc.Class({
                 // }
                 // hp = 10 * (139 + Math.pow(1.55,139) * Math.pow(1.145,360)*P)*boss
                 let P = new BigNumber(1);
-                for (var i = 501; i < lv; i++) {
-                    P = P.times(1.145 + 0.001 * Math.floor((i - 1) / 500));
+                if (this.tempP&&this.tempP.lv == lv - 1) {
+                    p = this.tempP.P.times(1.145 + 0.001 * Math.floor((lv - 2) / 500));
+                } else {
+                    for (var i = 501; i < lv; i++) {
+                        P = P.times(1.145 + 0.001 * Math.floor((i - 1) / 500));
+                    }
                 }
+                this.tempP = {lv:lv,p:p}
                 hp = bigPow(1.55, 139).times(bigPow(1.145, 360)).times(P).plus(139).times(boss * 10);
             } else {
                 // hp = (Math.pow(1.545,lv-200001)*1.24*Math.pow(10,25409)+(lv - 1)*10)
                 hp = bigPow(1.545, lv - 200001).times(bigPow(10, 25409)).times(1.24).plus((lv - 1) * 10);
             }
-            // return Math.ceil(hp);
-            return hp.integerValue();
+            hp = hp.integerValue()
+            this.tempMonsterHp = {lv:lv,hp:hp}
+            return hp
         },
         // 计算怪物金币 for monster
         // hp = getMonsterHP(lv);

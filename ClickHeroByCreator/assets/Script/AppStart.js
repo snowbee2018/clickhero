@@ -243,6 +243,7 @@ cc.Class({
             self.bg.zIndex = 0;
             self.uiRoot.active = true;
             self.gameController.onGameStart();
+            CloudDB.updateMaxLv()
         }
     },
 

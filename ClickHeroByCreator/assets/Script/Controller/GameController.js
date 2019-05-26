@@ -568,14 +568,10 @@ cc.Class({
     },
 
     onShareBtnClick () {
-        // WeChatUtil.shareAppMessage();
-        // Events.emit(Events.ON_SHARE_CLICK);
-        // this.showShareDialog();
-        // AudioMgr.playBtn();
-
-        CloudDB.getRankUsers(function(params) {
-            console.log(params);
-        })
+        WeChatUtil.shareAppMessage();
+        Events.emit(Events.ON_SHARE_CLICK);
+        this.showShareDialog();
+        AudioMgr.playBtn();
     },
 
     onMonsterGold (gold) {
@@ -845,11 +841,12 @@ cc.Class({
     },
 
     showRankDialog () {
-        console.log("showShareDialog");
+        console.log("showRankDialog");
         let dialog = cc.instantiate(this.RankDialog)
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     // onLeftBtnClick () {
