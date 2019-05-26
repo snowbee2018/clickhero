@@ -25,7 +25,11 @@ cc.Class({
         if (this.node.isValid) {
             console.log(datas);
             this.datas = this.datas.concat(datas)
-            this.refresh()
+            if (this.datas.length == datas.length) {
+                this.refresh()
+            }else {
+                this.calContentHeight()
+            }
         }
         this.isloading = false
     },
