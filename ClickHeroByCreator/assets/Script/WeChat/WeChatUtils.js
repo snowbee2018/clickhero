@@ -565,24 +565,25 @@ cc.Class({
     },
     uploadRankScore(){
         if (this.isWeChatPlatform) {
-            let maxPassLavel = String(DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel))
-            console.log("uploadRankScore maxLv " + maxPassLavel);
-            
-            wx.setUserCloudStorage({KVDataList: [{key:'maxLv',value:maxPassLavel}],
-                success: res => {
-                    console.log("setUserCloudStorage success");
-                    console.log(res);
-                    // // 让子域更新当前用户的最高分，因为主域无法得到getUserCloadStorage;
-                    // let openDataContext = wx.getOpenDataContext();
-                    // openDataContext.postMessage({
-                    //     type: 'updateMaxScore',
-                    // });
-                },
-                fail: res => {
-                    console.log("setUserCloudStorage fail");
-                    console.log(res);
-                }
-            })
+            if (this.compareVersion(version, '1.9.92') >= 0) {
+                let maxPassLavel = String(DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel))
+                console.log("uploadRankScore maxLv " + maxPassLavel);
+                wx.setUserCloudStorage({KVDataList: [{key:'maxLv',value:maxPassLavel}],
+                    success: res => {
+                        console.log("setUserCloudStorage success");
+                        console.log(res);
+                        // // 让子域更新当前用户的最高分，因为主域无法得到getUserCloadStorage;
+                        // let openDataContext = wx.getOpenDataContext();
+                        // openDataContext.postMessage({
+                        //     type: 'updateMaxScore',
+                        // });
+                    },
+                    fail: res => {
+                        console.log("setUserCloudStorage fail");
+                        console.log(res);
+                    }
+                })
+            }
         }
     },
 });

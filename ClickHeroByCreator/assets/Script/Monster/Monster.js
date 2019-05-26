@@ -230,7 +230,7 @@ cc.Class({
     playDamage(damage, bCrit) {
         const curtime = new Date().getTime();
         this.lastCheckTime = this.lastCheckTime || 0
-        if (curtime - this.lastCheckTime < 40) {
+        if (curtime - this.lastCheckTime < 30) {
             return;
         }
         this.lastCheckTime = curtime;
