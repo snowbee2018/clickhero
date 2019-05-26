@@ -143,5 +143,37 @@ cc.Class({
                 });
             }
         },
+
+        updateMaxLv (){
+            if (WeChatUtil.isWeChatPlatform) {
+                let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)||0;
+                this.getDB().doc(this.id).update({
+                    // data 传入需要局部更新的数据
+                    data: {
+                        maxLv: maxPassLavel
+                    },
+                    success: function (res) {
+                        console.log("更新maxLv成功");
+                        console.log(res);
+                    }
+                });
+            }
+        },
+
+        getRankUsers(callback,offset){
+            if (WeChatUtil.isWeChatPlatform) {
+                this.getDB().orderBy('maxLv','desc').skip(offset).limit(20).get({
+                    success: function (res) {
+                        console.log("getRankUsers success");
+                        console.log(res);
+                        callback(res.data);
+                    },
+                    fail: function (params) {
+                        console.log("getRankUsers fail");
+                        callback([]);
+                    }
+                });
+            }
+        },
     }
 });

@@ -488,6 +488,7 @@ cc.Class({
                 }
             }
             this.uploadRankScore()
+            CloudDB.updateMaxLv()
         }
     },
 
@@ -565,10 +566,18 @@ cc.Class({
     },
     uploadRankScore(){
         if (this.isWeChatPlatform) {
+            const version = wx.getSystemInfoSync().SDKVersion
             if (this.compareVersion(version, '1.9.92') >= 0) {
-                let maxPassLavel = String(DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel))
+                let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
                 console.log("uploadRankScore maxLv " + maxPassLavel);
-                wx.setUserCloudStorage({KVDataList: [{key:'maxLv',value:maxPassLavel}],
+                const value = JSON.stringify({
+                    "wxgame": {
+                          "score":maxPassLavel,
+                          "update_time": Math.floor(Date.now()/1000)
+                    }
+                });
+                console.log(value);
+                wx.setUserCloudStorage({KVDataList: [{key:'maxLv',value:value}],
                     success: res => {
                         console.log("setUserCloudStorage success");
                         console.log(res);
