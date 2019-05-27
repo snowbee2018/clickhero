@@ -487,6 +487,8 @@ cc.Class({
                     cc.sys.localStorage.setItem("savetime",Date.now())
                 }
             }
+            this.uploadRankScore()
+            CloudDB.updateMaxLv()
         }
     },
 
@@ -560,6 +562,37 @@ cc.Class({
                 title: '提示',
                 content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
             })
+        }
+    },
+    uploadRankScore(){
+        if (this.isWeChatPlatform) {
+            const version = wx.getSystemInfoSync().SDKVersion
+            if (this.compareVersion(version, '1.9.92') >= 0) {
+                let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+                console.log("uploadRankScore maxLv " + maxPassLavel);
+                const value = JSON.stringify({
+                    "wxgame": {
+                          "score":maxPassLavel,
+                          "update_time": Math.floor(Date.now()/1000)
+                    }
+                });
+                console.log(value);
+                wx.setUserCloudStorage({KVDataList: [{key:'maxLv',value:value}],
+                    success: res => {
+                        console.log("setUserCloudStorage success");
+                        console.log(res);
+                        // // 让子域更新当前用户的最高分，因为主域无法得到getUserCloadStorage;
+                        // let openDataContext = wx.getOpenDataContext();
+                        // openDataContext.postMessage({
+                        //     type: 'updateMaxScore',
+                        // });
+                    },
+                    fail: res => {
+                        console.log("setUserCloudStorage fail");
+                        console.log(res);
+                    }
+                })
+            }
         }
     },
 });

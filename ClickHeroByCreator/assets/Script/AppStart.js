@@ -36,7 +36,7 @@ cc.Class({
         window.GoodsDatas = require("GoodsDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
-        cc.game.setFrameRate(34)
+        cc.game.setFrameRate(40)
         // wx.setPreferredFramesPerSecond(34)
         cc.debug.setDisplayStats(false);
         // window.BigNumber.config({
@@ -243,6 +243,7 @@ cc.Class({
             self.bg.zIndex = 0;
             self.uiRoot.active = true;
             self.gameController.onGameStart();
+            CloudDB.updateMaxLv()
         }
     },
 

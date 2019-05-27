@@ -60,7 +60,7 @@ cc.Class({
         if (historyTotalGold) {
             self.setDataByKey(self.KeyMap.historyTotalGold, (new BigNumber(historyTotalGold)));
         } else {
-            self.setDataByKey(self.KeyMap.historyTotalGold, (new BigNumber(self.getDataByKey(self.KeyMap.curGold))));
+            self.setDataByKey(self.KeyMap.historyTotalGold, new BigNumber(0));
         }
         // 初始化英魂
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
@@ -94,7 +94,7 @@ cc.Class({
         if (maxPassLavel) {
             self.setDataByKey(self.KeyMap.maxPassLavel, Number(maxPassLavel));
         } else {
-            self.setDataByKey(self.KeyMap.maxPassLavel, self.getDataByKey(self.KeyMap.passLavel));
+            self.setDataByKey(self.KeyMap.maxPassLavel, 0);
         }
         // 初始化历史总点击数
         var cloudTotalClick = self.getCloudDataByKey(self.KeyMap.totalClick);

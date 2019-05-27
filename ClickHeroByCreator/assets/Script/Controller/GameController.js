@@ -23,6 +23,7 @@ cc.Class({
         dialogPrefab : cc.Prefab,
         SigninDialog : cc.Prefab,
         ShareDialog : cc.Prefab,
+        RankDialog : cc.Prefab,
         offlineDialog : cc.Prefab,
         settingDialog : cc.Prefab,
 
@@ -567,31 +568,10 @@ cc.Class({
     },
 
     onShareBtnClick () {
-        const self = this;
-
         WeChatUtil.shareAppMessage();
         Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();
-
-
-        // WeChatUtil.showModal({
-        //     title: "分享给好友",
-        //     content: "点一下，玩一年，把快乐分享给好友吧",
-        //     callBack: function (res) {
-        //         console.log("模态对话框用户操作返回");
-        //         console.log(res);
-        //         if (res.confirm) {
-        //             console.log("点击了确定");
-        //             WeChatUtil.shareAppMessage();
-        //             // self.showOpenDataView();
-        //         } else if (res.cancel) {
-        //             console.log("点击了取消");
-        //             // self.showOpenDataView();
-        //             WeChatUtil.showToast("取消了分享");
-        //         }
-        //     }
-        // });
     },
 
     onMonsterGold (gold) {
@@ -858,6 +838,15 @@ cc.Class({
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
+    },
+
+    showRankDialog () {
+        console.log("showRankDialog");
+        let dialog = cc.instantiate(this.RankDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     // onLeftBtnClick () {
