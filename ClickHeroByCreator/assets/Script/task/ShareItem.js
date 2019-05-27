@@ -43,9 +43,12 @@ cc.Class({
         this.sp2.node.y = 25
         if (data) {
             cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
-                texture = texture || this.defaultCover
-                var spriteFrame = new cc.SpriteFrame(texture);
-                this.spHead.spriteFrame = spriteFrame;
+                try {
+                    var spriteFrame = texture ? new cc.SpriteFrame(texture) : this.frameHead
+                    this.spHead.spriteFrame = spriteFrame;
+                } catch (error) {
+                    
+                }
             }.bind(this))
             if (this.isReceived(0)) {
                 this.btnGet.interactable = false
@@ -72,7 +75,11 @@ cc.Class({
             }
         } else {
             // this.spHead 设为默认图
-            this.spHead.spriteFrame = this.frameHead
+            try {
+                this.spHead.spriteFrame = this.frameHead
+            } catch (error) {
+                
+            }
             this.btnGet.interactable = false
             this.lbBtn.string = "领取"
             this.btnGet1.interactable = false
