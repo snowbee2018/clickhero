@@ -125,10 +125,12 @@ cc.Class({
     },
 
     onClickUpGolden(){
-        var result = this._hero.upgradeGolden();
-        if (result) {
-            this.fullView();
-            AudioMgr.playBtn();
+        if (this._hero) {
+            var result = this._hero.upgradeGolden();
+            if (result) {
+                this.fullView();
+                AudioMgr.playBtn();
+            }
         }
     },
 
