@@ -12,28 +12,12 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         const self = this;
-        self.spr = self.getComponent(cc.Sprite);
     },
 
     start () {
@@ -43,8 +27,8 @@ cc.Class({
     // update (dt) {},
 
     setIcon(heroListCtor, heroID) {
-        const self = this;
-        self.spr.spriteFrame = heroListCtor.getHeroIconSprf(heroID);
+        let spr = this.getComponent(cc.Sprite);
+        spr.spriteFrame = heroListCtor.getHeroIconSprf(heroID);
         // CloudRes.getHeroUrl(heroID, function (url) {
         //     if (url) {
         //         cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
