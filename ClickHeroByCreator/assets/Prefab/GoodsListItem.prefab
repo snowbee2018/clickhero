@@ -126,7 +126,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 68.5,
+      "width": 68.51,
       "height": 32
     },
     "_anchorPoint": {
@@ -254,7 +254,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.92,
+      "width": 48.94,
       "height": 24
     },
     "_anchorPoint": {
@@ -382,7 +382,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.92,
+      "width": 48.94,
       "height": 24
     },
     "_anchorPoint": {
@@ -1121,6 +1121,9 @@
     },
     "btn": {
       "__id__": 14
+    },
+    "btnTitle": {
+      "__id__": 16
     },
     "lbBtn": {
       "__id__": 19

@@ -29,6 +29,14 @@ cc.Class({
                 state = ""
                 ruby = 30
                 break;
+            case 16:
+                name = "呼朋唤友"
+                desc = "每邀请一个好友，DPS伤害+30%，上限500个"
+                // 这里要取子用户数量
+                const childDatas = DataCenter.readChildUserData() || []
+                count = childDatas.length
+                state = "邀请数量：" + count + "  当前增益：" + (count*30) +"%"
+                break
             case 14:
                 name = "聚宝盆"
                 desc = "永久妖丹掉落×1.2，每天可购一次"
@@ -49,7 +57,7 @@ cc.Class({
                 break;
             case 6:
                 name = "大开杀戒"
-                desc = "附加10倍DPS伤害，持续60秒"
+                desc = "附加10倍DPS伤害，持续60秒，可叠加多个"
                 ruby = 25
                 unlockLv = 30
                 break;

@@ -7,6 +7,7 @@ cc.Class({
         lbDesc : cc.Label,
         lbState : cc.Label,
         btn:cc.Node,
+        btnTitle:cc.Label,
         lbBtn : cc.Label,
         lbBought : cc.Node,
     },
@@ -82,6 +83,10 @@ cc.Class({
                     this.lbBought.active = false
                     this.btn.active = true
                 }
+            } else if (this.data.id == 16) {
+                this.lbBtn.node.active = false
+                this.btnTitle.string = "去邀请"
+                this.btnTitle.node.y = 0
             }
         }
     },
@@ -94,6 +99,12 @@ cc.Class({
         if (id != this.data.id) {
             return
         }
+        console.log("GoodsItem onBuy" + id);
+        if (id == 16) {
+            GoodsDatas.refresh()
+            GameData.refresh()
+            this.data.init()
+        }
         this.bind()
     },
 
@@ -104,6 +115,10 @@ cc.Class({
 
     click(){
         AudioMgr.playBtn();
+        if (this.data.id == 16) {
+            WeChatUtil.shareAppMessage();
+            return
+        }
         var result = this.data.buy()
         if (result) {
             console.log("购买成功")

@@ -68,6 +68,7 @@ cc.Class({
                                 if (res.data.length < 20) {
                                     DataCenter.saveChildUserData(childDatas)
                                     callBack(false, childDatas);
+                                    Events.emit(Events.ON_BUY_GOODS,16)
                                 } else {
                                     query()
                                 }

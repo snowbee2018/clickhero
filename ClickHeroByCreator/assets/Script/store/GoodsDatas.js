@@ -9,6 +9,7 @@ Datas.init = function() {
     Datas.buyCounts = cloudInfo || []
     Datas.datas = [
         new Goods().init(0),
+        new Goods().init(16),
         new Goods().init(14),
         new Goods().init(1),
         new Goods().init(6),
@@ -33,6 +34,8 @@ Datas.refresh = function(){
         var count = e.count
         if (e.id == 1) {
             GameData.gdDayDPSTimes = Math.pow(1.2,count)
+        // } else if (e.id == 16) {
+        //     // 这里要取子用户数量
         } else if (e.id == 14) {
             GameData.gdDayGoldTimes = Math.pow(1.2,count)
         } else if (e.id == 2) {
@@ -60,6 +63,9 @@ Datas.refresh = function(){
             GameData.gdTreasureTimes = count + 1
         }
     });
+    const childDatas = DataCenter.readChildUserData() || []
+    console.log("childDatas.length"+childDatas.length);
+    GameData.gdShareDPSTimes = childDatas.length * 0.3 + 1
 }
 
 Datas.addBuyCount = function(id) {
