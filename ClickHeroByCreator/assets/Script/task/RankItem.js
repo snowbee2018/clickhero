@@ -17,13 +17,15 @@ cc.Class({
         this.lbNo.string = String(index+1)
         this.lbName.string = data.WeChatUserInfo.nickName
         this.lbLevel.string = (data.maxLv||'0')+"级"
-        try {
-            cc.loader.load({url: data.WeChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
+        cc.loader.load({url: data.WeChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
+            try {
                 var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
                 this.spHead.spriteFrame = spriteFrame
-            }.bind(this))
-        } catch (error) {
-            this.spHead.spriteFrame = this.frameHead
-        }
+            } catch (error) {
+                try {
+                    this.spHead.spriteFrame = this.frameHead
+                } catch (error) {}
+            }
+        }.bind(this))
     },
 })

@@ -53,9 +53,7 @@ cc.Class({
                 }
             });
             const version = wx.getSystemInfoSync().SDKVersion
-            console.log(version);
             this.adEnable = this.compareVersion(version, '2.0.4') >= 0
-            console.log("newxxxj adEnable="+this.adEnable)
             if (this.adEnable) {
                 // 创建激励视频广告实例，提前初始化
                 window.videoAd = wx.createRewardedVideoAd({
@@ -466,6 +464,12 @@ cc.Class({
     onShow(res) {
         const self = this;
         console.log("on game back");
+        if (this.isTimeErr) {
+            console.log("系统时间异常");
+            return
+        }
+        // 检查和服务区时间的差异
+        WeChatUtil.checkSystemTime()
         // console.log(res);
         Events.emit(Events.ON_RESUME_GAME)
     },
@@ -474,6 +478,10 @@ cc.Class({
     onHide() {
         const self = this;
         console.log("on game hide");
+        if (this.isTimeErr) {
+            console.log("系统时间异常，不保存任何数据");
+            return
+        }
         if (self.cloudDataFormatFunc) {
             var datas = self.cloudDataFormatFunc();
             var data = datas[0]
@@ -593,6 +601,36 @@ cc.Class({
                     }
                 })
             }
+        }
+    },
+    checkSystemTime(){
+        const self = this
+        if (self.isTimeErr) {
+            return
+        }
+        if (this.isWeChatPlatform) {
+            wx.cloud.callFunction({
+                name: 'test', // 需调用的云函数名
+                complete: res => { // 成功回调
+                    if (res.result&&res.result.time) {
+                        const time = res.result.time;
+                        const cur = Date.now()
+                        const diff = Math.abs(time - cur)
+                        if (diff > 1000*60*60*6) {
+                            console.log("时间差大于6小时");
+                            wx.showModal({
+                                title: '提示',
+                                content: '检测到系统时间异常，本次游戏数据不会保存。',
+                            })
+                            self.isTimeErr = true
+                        } else {
+                            self.isTimeErr = false
+                        }
+                    } else {
+                        console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
+                    }
+                },
+            })
         }
     },
 });

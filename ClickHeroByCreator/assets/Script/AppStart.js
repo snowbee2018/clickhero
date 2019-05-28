@@ -199,6 +199,7 @@ cc.Class({
         const self = this;
         console.log("login");
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            WeChatUtil.checkSystemTime()
             WeChatUtil.getUserInfo(function (err, userData) {
                 console.log(userData);
                 if (err) {

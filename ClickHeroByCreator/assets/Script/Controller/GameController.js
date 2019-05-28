@@ -254,6 +254,7 @@ cc.Class({
             var diff = Date.now() - Number(lastTime)
             console.log("离线时间："+diff);
             if (diff >= 10*1000) {
+                diff = Math.min(diff,1000*86400*30)
                 var totalDamage = GameData.dpsDamage.times(diff/1000)
                 console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
                 var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
