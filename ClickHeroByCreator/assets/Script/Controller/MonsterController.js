@@ -208,10 +208,7 @@ cc.Class({
         if (self.curMonster._isPrimalBoss) {
             this.monsterSoul.node.active = true
             this.monsterSoul.string = Formulas.formatBigNumber(this.curMonster._soul)+"仙丹"
-        } else {
-            this.monsterSoul.node.active = false
-        }
-        if (self.curMonster._isTreasureChest) {
+        } else if(self.curMonster._isTreasureChest){
             this.monsterSoul.node.active = true
             this.monsterSoul.string = (10 * GameData.getTreasureTimes()).toFixed(2) + "倍妖丹"
         } else {

@@ -43,7 +43,7 @@ cc.Class({
                 times = bigPow(4,Math.floor((lv - 200) / 25))
                 // times = Math.floor((lv - 200) / 25) * 4
                 if (lv >= 1000) {
-                    times = bigPow(2.5,Math.floor(lv /1000)).times(times)
+                    times = bigPow(10,Math.floor(lv /1000)).times(times)
                     // times = Math.floor(lv /1000) * 2.5 * times
                 }
                 console.log("getDamageTimesByLv lv = " + lv+",times="+times.toString());
