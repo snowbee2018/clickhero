@@ -330,9 +330,14 @@ cc.Class({
                 if (Boolean(curGold&&curGold.gte(6))) {
                     self.showHeroTabFinger()
                 }
-            } else if(hero0.level >= 5) {
+            } else if(hero0.level >= 5&&hero0.level < 10) {
                 let skill = hero0.skills[0]
                 if (!skill.isBuy&&curGold.gte(10)) {
+                    self.showHeroTabFinger()
+                }
+            } else if(hero0.level >= 10){
+                let skill = hero0.skills[1]
+                if (!skill.isBuy&&curGold.gte(100)) {
                     self.showHeroTabFinger()
                 }
             }
@@ -341,8 +346,12 @@ cc.Class({
                 if (Boolean(curGold&&curGold.gte(50))) {
                     self.showHeroTabFinger()
                 }
+            } else if(hero1.level >= 10){
+                let skill = hero1.skills[0]
+                if (!skill.isBuy&&curGold.gte(500)) {
+                    self.showHeroTabFinger()
+                }
             }
-
         }
     },
 

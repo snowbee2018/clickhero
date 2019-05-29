@@ -70,9 +70,9 @@ cc.Class({
         } else {
             self.btn.interactable = self.isCanBuy();
         }
+        let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
+        let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
         if (this._heroID == 0) {
-            let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
-            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
             if (maxPassLavel < 10)
             if (!hero.isBuy) {
                 if (Boolean(curGold&&curGold.gte(5))) {
@@ -82,28 +82,40 @@ cc.Class({
                 if (Boolean(curGold&&curGold.gte(6))) {
                     self.showFinger("点这里升级英雄，加点击伤害！")
                 }
-            } else if(hero.level >= 5) {
+            } else if(hero.level >= 5&&hero.level < 10) {
                 let skill = hero.skills[0]
                 if (!skill.isBuy&&curGold.gte(10)) {
-                    self.showSkillFinger()
+                    self.showSkillFinger(1)
+                }
+            } else if(hero.level >= 10) {
+                let skill = hero.skills[1]
+                if (!skill.isBuy&&curGold.gte(100)) {
+                    self.showSkillFinger(2)
                 }
             }
         } else if (this._heroID == 1){
-            let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
-            if (maxPassLavel < 10)
+            if (maxPassLavel < 15)
             if (!hero.isBuy) {
-                let curGold = DataCenter.getDataByKey(DataCenter.KeyMap.curGold);
                 if (Boolean(curGold&&curGold.gte(50))) {
                     self.showFinger("点这里购买英雄，加每秒伤害！")
+                }
+            } else if(hero.level >= 10) {
+                let skill = hero.skills[0]
+                if (!skill.isBuy&&curGold.gte(500)) {
+                    self.showSkillFinger(3)
                 }
             }
         }
     },
 
-    showSkillFinger(){
+    showSkillFinger(flag){
         const self = this;
+        if (self.nodeSkillTips&&self.nodeSkillTips.flag != flag) {
+            self.nodeSkillTips = null
+        }
         if (!self.nodeSkillTips) {
             self.nodeSkillTips = new cc.Node("nodeSkillTips")
+            self.nodeSkillTips.flag = flag
             var sp = self.nodeSkillTips.addComponent(cc.Sprite)
             sp.spriteFrame = self.sTips
             self.nodeSkillTips.parent = self.node
@@ -115,7 +127,7 @@ cc.Class({
                     cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-20))),)))
             this.nodeSkillPop = PublicFunc.createPopTips("点这里进入英雄技能界面！")
             this.nodeSkillPop.parent = self.node.parent.parent
-            this.nodeSkillPop.setPosition(cc.v2(80,140))
+            this.nodeSkillPop.setPosition(cc.v2(80,140 - (130 * self._heroID)))
             this.nodeSkillPop.opacity = 100
             this.nodeSkillPop.runAction(cc.fadeTo(0.5,255))
         }
@@ -310,6 +322,7 @@ cc.Class({
             if (self.nodeSkillTips&&this.nodeSkillTips.active) {
                 this.nodeSkillTips.active = false
                 this.nodeSkillTips.removeFromParent()
+                // this.nodeSkillTips = null
             }
             if (this.nodeSkillPop) {
                 this.nodeSkillPop.removeFromParent()

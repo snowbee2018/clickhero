@@ -94,9 +94,10 @@ cc.Class({
                     self.cost.string = Formulas.formatBigNumber(skillData.cost) + " 妖丹";
                     if (DataCenter.isGoldEnough(skillData.cost)) {
                         self.btn.interactable = true;
-                        if (self._heroID == 0 && self._skillID == 0) {
+                        if ((self._heroID == 0 && self._skillID <= 1)||
+                            (self._heroID == 1 && self._skillID == 0)) {
                             let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
-                            if (maxPassLavel < 10){
+                            if (maxPassLavel < 20){
                                 if (!self.nodeFingerTips) {
                                     self.nodeFingerTips = new cc.Node("nodeFingerTips")
                                     var sp = self.nodeFingerTips.addComponent(cc.Sprite)
