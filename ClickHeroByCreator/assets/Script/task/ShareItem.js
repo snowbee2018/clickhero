@@ -29,7 +29,12 @@ cc.Class({
         this.index = index
         let i = index+1
         this.lbNo.string = "第" + i + "位"
-        if (i%5 == 0) {
+        if(i == 1)
+        {
+            this.shareRuby = 200
+        }
+        else if (i%5 == 0)
+        {
             let num = i/5-1
             num = Math.min(num,rubys.length-1)
             this.shareRuby = rubys[num]

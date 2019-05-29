@@ -31,7 +31,7 @@ cc.Class({
                 break;
             case 16:
                 name = "呼朋唤友"
-                desc = "每邀请一个好友，DPS伤害+30%，上限500个"
+                desc = "每邀请一个好友，DPS伤害+30%，还能获得仙桃哦！"
                 // 这里要取子用户数量
                 const childDatas = DataCenter.readChildUserData() || []
                 count = childDatas.length
@@ -124,7 +124,7 @@ cc.Class({
                 break;
             case 15:
                 name = "仙丹多又多"
-                desc = "每次购买+1000%的妖丹加成"
+                desc = "每次购买+1000%的仙丹加成"
                 state = "仙丹加成:+" + (this.getCount()*1000)+"%"
                 ruby = 500  + 500 * this.getCount()
                 unlockLv = 300
