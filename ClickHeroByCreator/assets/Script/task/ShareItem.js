@@ -42,14 +42,16 @@ cc.Class({
         this.sp1.node.y = 68
         this.sp2.node.y = 25
         if (data) {
-            cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
-                try {
-                    var spriteFrame = texture ? new cc.SpriteFrame(texture) : this.frameHead
-                    this.spHead.spriteFrame = spriteFrame;
-                } catch (error) {
-                    
-                }
-            }.bind(this))
+            if (data.weChatUserInfo&&data.weChatUserInfo.avatarUrl) {
+                cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
+                    try {
+                        var spriteFrame = texture ? new cc.SpriteFrame(texture) : this.frameHead
+                        this.spHead.spriteFrame = spriteFrame;
+                    } catch (error) {}
+                }.bind(this))
+            } else {
+                this.spHead.spriteFrame = this.frameHead
+            }
             if (this.isReceived(0)) {
                 this.btnGet.interactable = false
                 this.lbBtn.string = "已领取"
