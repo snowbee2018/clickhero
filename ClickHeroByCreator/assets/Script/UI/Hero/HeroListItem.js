@@ -308,6 +308,19 @@ cc.Class({
             const icon = self.skillIcon[skillID];
             icon.lightIcon(skillArr[skillID].isBuy);
         }
+        this.setSkillsDisplay()
+    },
+
+    setSkillsDisplay(){
+        var hero = HeroDatas.getHero(this._heroID);
+        var skillArr = hero.skills;
+        if (skillArr) {
+            for (let skillID = 0; skillID < skillArr.length; skillID++) {
+                const icon = this.skillIcon[skillID];
+                console.log(hero.level >= skillArr[skillID].level);
+                icon.node.active = hero.level >= skillArr[skillID].level
+            }
+        }
     },
 
     onItemClick () {
