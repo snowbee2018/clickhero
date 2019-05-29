@@ -124,7 +124,7 @@ cc.Class({
                 break;
             case 15:
                 name = "仙丹多又多"
-                desc = "每次购买+1000%的妖丹加成"
+                desc = "每次购买+1000%的仙丹加成"
                 state = "仙丹加成:+" + (this.getCount()*1000)+"%"
                 ruby = 500  + 500 * this.getCount()
                 unlockLv = 300
