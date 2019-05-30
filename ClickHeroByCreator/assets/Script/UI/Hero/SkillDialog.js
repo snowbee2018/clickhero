@@ -25,6 +25,9 @@ cc.Class({
         lbGoldenTimes : cc.Label,
         lbRuby: cc.Label,
         btnGolden : cc.Button,
+
+        btnAd : cc.Node,
+        sTips : cc.SpriteFrame,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -108,6 +111,28 @@ cc.Class({
             item.setDisplay();
         }
         self.btnGolden.interactable = DataCenter.isRubyEnough(GameData.upGoldenRuby)
+        this.showGoldenAdTips()
+    },
+
+    showGoldenAdTips(){
+        // 检查下今天有没有显示
+        var dateStr = cc.sys.localStorage.getItem("showGoldenTipsDate")
+        if (dateStr == PublicFunc.getDateStr()) {
+            return
+        }
+        cc.sys.localStorage.setItem("showGoldenTipsDate",PublicFunc.getDateStr())
+        if (!this.nodeFingerTips) {
+            this.nodeFingerTips = new cc.Node("nodeFingerTips")
+            var sp = this.nodeFingerTips.addComponent(cc.Sprite)
+            sp.spriteFrame = this.sTips
+            this.nodeFingerTips.parent = this.btnAd
+            this.nodeFingerTips.setPosition(cc.v2(40,-40))
+            this.nodeFingerTips.opacity = 100
+            this.nodeFingerTips.scale = 0.8
+            this.nodeFingerTips.runAction(cc.repeatForever(
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+        }
     },
 
     fullView(){
@@ -135,6 +160,10 @@ cc.Class({
     },
 
     onClickAd(){
+        if (this.nodeFingerTips) {
+            this.nodeFingerTips.removeFromParent()
+            this.nodeFingerTips = null
+        }
         if (!WeChatUtil.adEnable) {
             WeChatUtil.popVersionLow()
             return

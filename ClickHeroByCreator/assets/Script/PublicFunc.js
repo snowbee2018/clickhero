@@ -162,9 +162,13 @@ cc.Class({
         return b
     },
     strToDate(value){
-        if (value){
+        if (value&&value.length>0){
             return (new Date(Date.parse(value.replace(/-/g, "/"))));
         }
         return value;
+    },
+    getDateStr(){
+        var d = new Date()
+        return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
     },
 });
