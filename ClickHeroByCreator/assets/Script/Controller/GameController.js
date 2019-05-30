@@ -234,6 +234,7 @@ cc.Class({
             if (!PublicFunc.isSignin()) {
                 this.showBtnSigninTips()
             }
+            this.showBtnShareTips()
         } catch (error) {
             console.error(error)
         }
@@ -465,11 +466,22 @@ cc.Class({
             )
         )
     },
+    getDateStr(){
+        var d = new Date()
+        return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
+    },
 
     showBtnShareTips(){
         if (this.nodeShareTips) {
             return
         }
+        // 检查下今天有没有显示
+        var dateStr = cc.sys.localStorage.getItem("showShareTipsDate")
+        if (dateStr == this.getDateStr()) {
+            return
+        }
+        cc.sys.localStorage.setItem("showShareTipsDate",this.getDateStr())
+
         this.nodeShareTips = new cc.Node("nodeShareTips")
         var sp = this.nodeShareTips.addComponent(cc.Sprite)
         sp.spriteFrame = this.sTips
