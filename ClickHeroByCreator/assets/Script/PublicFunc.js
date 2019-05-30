@@ -151,4 +151,20 @@ cc.Class({
         lb.getComponent(cc.Label).string = txt
         return popTips
     },
+
+    isSignin(){
+        const data = DataCenter.getDataByKey(DataCenter.KeyMap.signinData)
+        if (!data) {
+            return false
+        }
+        let date = this.strToDate(data.date)
+        let b = date.toLocaleDateString() == new Date().toLocaleDateString()
+        return b
+    },
+    strToDate(value){
+        if (value){
+            return (new Date(Date.parse(value.replace(/-/g, "/"))));
+        }
+        return value;
+    },
 });

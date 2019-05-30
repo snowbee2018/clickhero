@@ -231,6 +231,9 @@ cc.Class({
             this.initGuide()
             this.checkOfflineGold()
             this.showSettingAnim()
+            if (!PublicFunc.isSignin()) {
+                this.showBtnSigninTips()
+            }
         } catch (error) {
             console.error(error)
         }
@@ -432,28 +435,53 @@ cc.Class({
     },
 
     onMaxLvChange(event){
-        const self = this;
         let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
         let v1 = maxPassLavel >= 5
         if (!this.tabs[3].active) {
             this.tabs[3].active = v1
             this.shareBtn.active = v1
             this.btnSignin.active = v1
-            if (!self.nodeSigninTips&&v1) {
-                self.nodeSigninTips = new cc.Node("nodeSigninTips")
-                var sp = self.nodeSigninTips.addComponent(cc.Sprite)
-                sp.spriteFrame = self.sTips
-                self.nodeSigninTips.parent = this.btnSignin
-                self.nodeSigninTips.setPosition(cc.v2(50,-20))
-                self.nodeSigninTips.opacity = 0
-                self.nodeSigninTips.scale = 0.8
-                self.nodeSigninTips.runAction(
-                    cc.repeatForever(
-                        cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
-                    )
-                )
+            if (v1) {
+                this.showBtnSigninTips()
+                this.showBtnShareTips()
             }
         }
+    },
+
+    showBtnSigninTips(){
+        if (this.nodeSigninTips) {
+            return
+        }
+        this.nodeSigninTips = new cc.Node("nodeSigninTips")
+        var sp = this.nodeSigninTips.addComponent(cc.Sprite)
+        sp.spriteFrame = this.sTips
+        this.nodeSigninTips.parent = this.btnSignin
+        this.nodeSigninTips.setPosition(cc.v2(50,-20))
+        this.nodeSigninTips.opacity = 0
+        this.nodeSigninTips.scale = 0.8
+        this.nodeSigninTips.runAction(
+            cc.repeatForever(
+                cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+            )
+        )
+    },
+
+    showBtnShareTips(){
+        if (this.nodeShareTips) {
+            return
+        }
+        this.nodeShareTips = new cc.Node("nodeShareTips")
+        var sp = this.nodeShareTips.addComponent(cc.Sprite)
+        sp.spriteFrame = this.sTips
+        this.nodeShareTips.parent = this.shareBtn
+        this.nodeShareTips.setPosition(cc.v2(50,-20))
+        this.nodeShareTips.opacity = 0
+        this.nodeShareTips.scale = 0.8
+        this.nodeShareTips.runAction(
+            cc.repeatForever(
+                cc.sequence(cc.fadeIn(0.5),cc.fadeOut(0.5),cc.delayTime(1))
+            )
+        )
     },
 
     onlvPassed(e){
@@ -848,6 +876,10 @@ cc.Class({
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
+        if (this.nodeShareTips) {
+            this.nodeShareTips.removeFromParent()
+            this.nodeShareTips = null
+        }
     },
 
     showRankDialog () {

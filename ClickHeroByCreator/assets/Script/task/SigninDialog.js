@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-25 17:29:41
+ * @Last Modified time: 2019-05-30 10:52:46
  */
  
 cc.Class({
@@ -89,6 +89,7 @@ cc.Class({
         this.data = {times:this.times+1,date:dateStr}
         DataCenter.setDataByKey(DataCenter.KeyMap.signinData,this.data)
         this.viewHolders[this.today].lbCount.string = "已领取"
+        this.btn.interactable = false
     },
     isSignin(){
         if (!this.data) {
@@ -96,8 +97,6 @@ cc.Class({
         }
         let date = this.strToDate(this.data.date)
         let b = date.toLocaleDateString() == new Date().toLocaleDateString()
-        console.log("isSignin:" + date.toLocaleDateString() + " - " + new Date().toLocaleDateString());
-        console.log(b);
         return b
     },
     isThisWeek(){
