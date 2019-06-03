@@ -100,6 +100,25 @@ cc.Class({
             this.spSetting.stopAllActions()
             this.spSetting.active = false
         }
+        // var datas = {registerTime:1.558077800538e+12,_openid:"zhwwxc",WeChatUserInfo:{gender:1.0,language:"zh_CN",city:"长春",province:"吉林",country:"中国",nickName:"东军"},gamedata:{}}
+        // PublicFunc.httpRequest({
+        //     url : "https://www.magicfun.xyz/add",
+        //                 handler : function (event, response) {
+        //         console.info("http请求返回");
+        //         console.info(event);
+        //         console.info(response);
+        //         if (event == "success") {
+                    
+        //         } else if (event == "error") {
+        //             // 
+        //         } else if (event == "timeout") {
+        //             // 
+        //         }
+        //     }.bind(this),
+        //     method : "POST",
+        //     uploadData : JSON.stringify({doc:"UserGameData",data:datas}),
+        // });
+
     },
 
     setPageNodeActive (bActive) {
@@ -617,6 +636,24 @@ cc.Class({
         Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();
+        // var datas = {_id:"zhwwaaaaaa",registerTime:1.558077800538e+12,_openid:"newopenid",WeChatUserInfo:{gender:1.0,language:"zh_CN",city:"长春",province:"吉林",country:"中国",nickName:"东军"},gamedata:{}}
+        // PublicFunc.httpRequest({
+        //     url : "https://www.magicfun.xyz/update",
+        //                 handler : function (event, response) {
+        //         console.info("http请求返回");
+        //         console.info(event);
+        //         console.info(response);
+        //         if (event == "success") {
+                    
+        //         } else if (event == "error") {
+        //             // 
+        //         } else if (event == "timeout") {
+        //             // 
+        //         }
+        //     }.bind(this),
+        //     method : "POST",
+        //     uploadData : JSON.stringify({doc:"UserGameData",_id:"zhwwaaaaaa",data:datas}),
+        // });
     },
 
     onMonsterGold (gold) {
@@ -875,6 +912,27 @@ cc.Class({
             this.nodeSigninTips.removeFromParent()
             this.nodeSigninTips = null
         }
+
+    //    var datas = {_openid:"zhwwxc"}
+    //         PublicFunc.httpRequest({
+    //             url : "https://www.magicfun.xyz/where",
+                
+    //             handler : function (event, response) {
+    //                 console.info("http请求返回");
+    //                 console.info(event);
+    //                 console.info(response);
+    //                 if (event == "success") {
+                        
+    //                 } else if (event == "error") {
+    //                     // 
+    //                 } else if (event == "timeout") {
+    //                     // 
+    //                 }
+    //             }.bind(this),
+    //             method : "POST",
+                
+    //             uploadData : JSON.stringify({doc:"UserGameData",data:datas}),
+    //     });
     },
 
     showShareDialog () {
