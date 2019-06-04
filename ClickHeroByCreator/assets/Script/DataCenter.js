@@ -130,12 +130,6 @@ cc.Class({
         //  else {
         //     self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         // }
-        var isSuper = self.getCloudDataByKey("isSuper");
-        if (isSuper) {
-            self.setDataByKey("isSuper", isSuper);
-        } else {
-            self.setDataByKey("isSuper", false);
-        }
     },
 
     // 保存数据
@@ -253,17 +247,10 @@ cc.Class({
     },
     // 宝石增加
     addRuby (ruby) {
-        if (this.isSuper()) {
-            ruby = ruby * 10
-        }
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
         this.setDataByKey(key, (old+ruby) );
         Events.emit(Events.ON_RUBY_CHANGE);
-    },
-    isSuper(){
-        const is = this.getDataByKey("isSuper")
-        return is
     },
     // 转身次数增加
     addRebirthCount () {
