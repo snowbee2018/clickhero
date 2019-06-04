@@ -114,6 +114,7 @@ cc.Class({
     },
 
     click(){
+        const self = this
         AudioMgr.playBtn();
         if (this.data.id == 16) {
             WeChatUtil.shareAppMessage();
@@ -130,16 +131,16 @@ cc.Class({
                 this.dur = 60;
                 if (!this.callback) {
                     this.callback = function() {
-                        this.dur--
-                        if (this.dur <= 0) {
-                            this.lbState.string = "没了"
-                            this.unschedule(this.callback);
-                            this.callback = undefined
+                        self.dur--
+                        if (self.dur <= 0) {
+                            self.lbState.string = "用完了"
+                            PublicFunc.unschedule(self.callback);
+                            self.callback = undefined
                             return
                         }
-                        this.lbState.string = "剩余:"+this.dur+"秒"
+                        self.lbState.string = "剩余:"+self.dur+"秒"
                     }
-                    this.schedule(this.callback, 1);
+                    PublicFunc.schedule(this.callback, 1);
                     this.lbState.string = "剩余:"+this.dur+"秒"
                 }
             }

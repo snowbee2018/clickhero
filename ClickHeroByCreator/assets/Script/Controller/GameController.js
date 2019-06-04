@@ -45,9 +45,9 @@ cc.Class({
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
 
-        // self.setPageNodeActive(false);
-        self.pageNode.active = false
-        self.pageNode.isVisible = false
+        self.setPageNodeActive(false);
+        // self.pageNode.active = false
+        // self.pageNode.isVisible = false
 
         WeChatUtil.setCloudDataFormat(self.cacheGameData.bind(self));
 
@@ -122,18 +122,18 @@ cc.Class({
     },
 
     setPageNodeActive (bActive) {
-        if (!this.pageNode.active) {
-            this.pageNode.active = true
-        }
-        const self = this;
-        self.pageNode.isVisible = bActive
+        // if (!this.pageNode.active) {
+        //     this.pageNode.active = true
+        // }
+        // const self = this;
+        // self.pageNode.isVisible = bActive
         // self.pageNode.opacity = bActive ? 255:0
-        self.pageNode.scale = bActive ? 1:0
-        // self.pageNode.active = bActive;
+        // self.pageNode.scale = bActive ? 1:0
+        this.pageNode.active = bActive;
         if (bActive) {
-            self.monsterController.moveUp();
+            this.monsterController.moveUp();
         } else {
-            self.monsterController.moveDown();
+            this.monsterController.moveDown();
         }
     },
 
@@ -382,7 +382,7 @@ cc.Class({
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (!Boolean(self.nodeOpenTabTips)) {
-            if (this.pageNode.isVisible==false||pageView.getCurrentPageIndex()!=0){
+            if (!this.pageNode.active||pageView.getCurrentPageIndex()!=0){
                 self.nodeOpenTabTips = new cc.Node("nodeOpenTabTips")
                 var sp = self.nodeOpenTabTips.addComponent(cc.Sprite)
                 sp.spriteFrame = self.sFinger
@@ -400,7 +400,7 @@ cc.Class({
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
         if (!Boolean(self.nodeSkillTabTips)) {
-            if (this.pageNode.isVisible==false||pageView.getCurrentPageIndex()!=1){
+            if (!this.pageNode.active||pageView.getCurrentPageIndex()!=1){
                 self.nodeSkillTabTips = new cc.Node("nodeSkillTabTips")
                 var sp = self.nodeSkillTabTips.addComponent(cc.Sprite)
                 sp.spriteFrame = self.sFinger
@@ -708,9 +708,9 @@ cc.Class({
         let children = pageView.content.getChildren();
         for (let i = 0; i < children.length; i++) {
             const page = children[i];
-            // page.active = i == curPageIndex;
-            page.active = true
+            page.active = i == curPageIndex;
         }
+        pageView.setCurrentPageIndex(curPageIndex);
     },
     onHeroBtnClick () {
 
@@ -731,17 +731,15 @@ cc.Class({
 
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 0) { // 当前正在英雄列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.setCurrentPageIndex(0);
                 self.setPageActive(0);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.setCurrentPageIndex(0);
             self.setPageActive(0);
         }
         self.upgrageSelectBtn.active = true;
@@ -756,17 +754,15 @@ cc.Class({
     onUserSkillBtnClick () {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 1) { // 当前正在技能列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.setCurrentPageIndex(1);
                 self.setPageActive(1);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.setCurrentPageIndex(1);
             self.setPageActive(1);
         }
         self.upgrageSelectBtn.active = false;
@@ -780,17 +776,15 @@ cc.Class({
     onAncientBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 2) { // 当前正在古神列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.setCurrentPageIndex(2);
                 self.setPageActive(2);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.setCurrentPageIndex(2);
             self.setPageActive(2);
         }
         self.upgrageSelectBtn.active = true;
@@ -801,17 +795,15 @@ cc.Class({
     onStoreBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 3) { // 当前正在技能列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.setCurrentPageIndex(3);
                 self.setPageActive(3);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.setCurrentPageIndex(3);
             self.setPageActive(3);
         }
         self.upgrageSelectBtn.active = false;
@@ -821,17 +813,15 @@ cc.Class({
     onTaskBtnClick() {
         const self = this;
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 4) { // 当前正在任务列表界面
                 self.setPageNodeActive(false);
             } else {
-                pageView.setCurrentPageIndex(4);
                 self.setPageActive(4);
             }
         } else {
             self.setPageNodeActive(true);
-            pageView.setCurrentPageIndex(4);
             self.setPageActive(4);
         }
         self.upgrageSelectBtn.active = false;
@@ -842,7 +832,7 @@ cc.Class({
         const self = this;
         AudioMgr.playBtn();
         var pageView = self.pageNode.getComponent(cc.PageView);
-        if (self.pageNode.isVisible) {
+        if (self.pageNode.active) {
             var curPageIndex = pageView.getCurrentPageIndex();
             if (curPageIndex == 0) {
                 var unit = GameData.heroLvUnit;

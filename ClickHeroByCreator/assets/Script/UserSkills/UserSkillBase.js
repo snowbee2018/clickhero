@@ -151,7 +151,7 @@ cc.Class({
         const self = this;
         if (!self._isBuy) return;
         if (self._isActive) {
-            self.unschedule(self.skillScheduleCallBack);
+            PublicFunc.unschedule(this._scheCallback);
         } else {
             var nowTime = Date.parse(new Date());
             var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
@@ -165,7 +165,7 @@ cc.Class({
                 self._coolingCurtail = 0;
                 self.onCoolingDone();
                 self.gray.active = !self.isCanUse();
-                self.unschedule(self.skillScheduleCallBack);
+                PublicFunc.unschedule(this._scheCallback);
             }
         }
 
@@ -308,7 +308,8 @@ cc.Class({
             self.onSustainCountDown(self.sustainTime, self.dateFormat(self.sustainTime));
         }
         // DataCenter.consumeGold(new BigNumber(self.cost));
-        self.schedule(self.skillScheduleCallBack, 0.1);
+        this._scheCallback = self.skillScheduleCallBack.bind(this)
+        PublicFunc.schedule(this._scheCallback, 0.5);
     },
 
     onCoolingCountDown(time, timeStr) {
@@ -342,7 +343,7 @@ cc.Class({
 
     rebirth () {
         const self = this;
-        self.unscheduleAllCallbacks();
+        PublicFunc.unscheduleAllCallbacks();
         if (self.bSustain && !self._isSustainFinish) self.backout();
         self.onCoolingDone();
         Events.off(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
