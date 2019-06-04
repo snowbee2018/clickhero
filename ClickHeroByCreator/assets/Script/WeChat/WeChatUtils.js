@@ -64,8 +64,8 @@ cc.Class({
                     // window.videoAd = null
                 })
             }
+            this.checkUpdate()
         }
-        this.checkUpdate()
     },
 
     checkUpdate(){
