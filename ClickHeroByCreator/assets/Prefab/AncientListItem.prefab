@@ -313,7 +313,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 68.51,
+      "width": 15.57,
       "height": 32
     },
     "_anchorPoint": {
@@ -323,7 +323,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 158.51,
+      "x": 150,
       "y": 0,
       "z": 0
     },
@@ -356,8 +356,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "Label",
-    "_N$string": "Label",
+    "_string": "0",
+    "_N$string": "0",
     "_fontSize": 28,
     "_lineHeight": 32,
     "_enableWrapText": true,
