@@ -91,7 +91,7 @@ cc.Class({
 
     onMaxPassLavelChange(){
         let lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) || 0
-        lv = lv + 200
+        lv = lv + 100
         this.items.forEach(node => {
             let data = node.getComponent("GoodsItem").data
             let active = Boolean(data.unlockLv <= lv)
