@@ -28,7 +28,7 @@ cc.Class({
         this._b = this._b >= 0 ? this._b : -1
         if (this._t < 0) {
             childs[0].active = true
-            console.log("add 0 第一个哦");
+            // console.log("add 0 第一个哦");
             this._t = 0
             this._b = 0
             return
@@ -39,7 +39,7 @@ cc.Class({
         
         if (this._b > 3 && ty > h / 2 + 140) {
             tv.active = false
-            console.log("del t "+this._t);
+            // console.log("del t "+this._t);
             tv = null
             this._t ++
         }
@@ -47,6 +47,7 @@ cc.Class({
         let by = this.getPositionInView(bv);
         if (this._b > 3 && by < -h / 2 - 140) {
             bv.active = false
+            // console.log("del b "+this._b);
             bv = null
             this._b --
         }
@@ -57,7 +58,7 @@ cc.Class({
             if (ty < h / 2 + 140) {
                 tv.active = true
                 this._t = ti
-                console.log("add t "+this._t);
+                // console.log("add t "+this._t);
             }
         }
         if (bv && this._b < childs.length-1) {
@@ -67,7 +68,7 @@ cc.Class({
             if (by > -h / 2 - 140) {
                 bv.active = true
                 this._b = bi
-                console.log("add b "+this._b);
+                // console.log("add b "+this._b);
             }
         }
     },
