@@ -127,7 +127,7 @@ cc.Class({
             // 	+2s Super Clicks duration
             GameData.addSuperClickSecond = this.level * 2;
         } else if (this.id == 14) {
-            // 附加DPS点击伤害倍数
+            // 连击DPS倍数
             GameData.addDPSClickDamageTimes = 0.0001*this.level;
             GameData.refresh();
             // 计算点击伤害
@@ -248,7 +248,7 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s如意金箍持续时间"
         } else if (this.id == 14) {
             // 附加DPS点击伤害倍数
-            desc = "+" + (0.01*this.level) + "%附加DPS点击伤害"
+            desc = "+" + (0.01*this.level) + "%连击DPS伤害"
         } else if (this.id == 15) {
             // +2s Golden Clicks duration
             desc = "+" + (this.level * 2) + "s点石成金持续时间"

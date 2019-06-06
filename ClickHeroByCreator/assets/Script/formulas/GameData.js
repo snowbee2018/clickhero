@@ -26,7 +26,8 @@ cc.Class({
         _tempClickDamage : 1,
         _tempDpsDamage : 0,
 
-        playerStatus : 0,// 玩家状态 0:combo 1:闲置
+        playerStatus : 1,// 玩家状态 0:combo 1:闲置
+        clickCombo : 0,
 
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
         ancientLvUnit: 1,// 古神等级单位
@@ -47,7 +48,7 @@ cc.Class({
         addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1 √
         addClickDamageTimes : 1,    //12- 点击伤害倍数 每级+20% √
         addSuperClickSecond: 0,    //13*- 如意金箍时间 2s++ √
-        addDPSClickDamageTimes : 0, //14- 附加DPS点击伤害倍数 √
+        addDPSClickDamageTimes : 0, //14- 连击DPS倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
         addLeaveGoldTimes : 1,      //17- 闲置金币倍数 √
         addGoldTimes: 1,           //18* +5% Gold √
@@ -101,6 +102,11 @@ cc.Class({
             this.calCritTimes();
             this.calCritOdds();
         },
+        refreshComboDPS(){
+            if (this.playerStatus == 0&&this.addDPSClickDamageTimes>0) {
+                this.refresh()
+            }
+        },
         // 计算全局DPS倍数
         calGlobalDPSTimes(){
             let times = 1;
@@ -114,6 +120,9 @@ cc.Class({
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes:1)*this.gdLeaveTimes;
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes*this.gdShareDPSTimes
                 *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS*this.gd10xDpsTimes;
+            if (this.playerStatus == 0) {
+                this.globalDPSTimes = this.globalDPSTimes * (1+this.addDPSClickDamageTimes*this.clickCombo)
+            }
         },
         // 计算全局金币倍数
         calGoldTimes(){
@@ -153,7 +162,7 @@ cc.Class({
                     times+=hero.getDPSClickTimes();
                 }
             });
-            this.DPSClickDamage = this.dpsDamage.times(times + this.addDPSClickDamageTimes);
+            this.DPSClickDamage = this.dpsDamage.times(times);
         },
 
         // 计算总点击伤害

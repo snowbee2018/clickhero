@@ -164,6 +164,16 @@ cc.Class({
             }
         }
         this.dt = 0
+        
+        this.dtCombo = this.dtCombo || 0
+        this.lastComboTime = this.lastComboTime || 0
+        if (curtime - this.lastComboTime < 500) {
+            this.dtCombo += dt
+            return;
+        }
+        this.lastComboTime = curtime;
+        GameData.refreshComboDPS()
+        this.dtCombo = 0
     },
 
     start () {
@@ -549,6 +559,7 @@ cc.Class({
         }
 
         self.combo++;
+        GameData.clickCombo = this.combo
         Events.emit(Events.ON_COMBO_CHANGE, self.combo);
         if (self.combo > DataCenter.getDataByKey(DataCenter.KeyMap.maxCombo)) {
             DataCenter.setDataByKey(DataCenter.KeyMap.maxCombo, self.combo);
