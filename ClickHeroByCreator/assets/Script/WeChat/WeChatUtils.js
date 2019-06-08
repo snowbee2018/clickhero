@@ -117,7 +117,9 @@ cc.Class({
             Events.emit(Events.ON_SHARE_CLICK);
             return {
                 title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
-                imageUrl: self.getShareImage(),
+                // imageUrl: self.getShareImage(),
+                imageUrl : 'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',
+                imageUrlId : 'aJjNK7G0QB-XDZRpsQ4t5g',
                 query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
             }     
         }
@@ -129,7 +131,9 @@ cc.Class({
             try {
                 var result = wx.shareAppMessage({
                     title: '这个牛魔王太难打了，兄弟们快来帮我砍他！',
-                    imageUrl: self.getShareImage(),
+                    // imageUrl: self.getShareImage(),
+                    imageUrl : 'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',
+                    imageUrlId : 'aJjNK7G0QB-XDZRpsQ4t5g',
                     query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
                 });
                 // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
