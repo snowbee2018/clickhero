@@ -41,7 +41,7 @@ cc.Class({
     onLoad: function () {
         const self = this;
         self.damageArr = [];
-
+        this.goldArr = []
         self.monsterController = self.getComponent("MonsterController");
         self.heroListControl = self.getComponent("HeroListControl");
         self.userSkillController = self.getComponent("UserSkillController");
@@ -161,6 +161,16 @@ cc.Class({
             totalDamage = totalDamage.plus(GameData.dpsDamage.times(this.dt));
             if (!totalDamage.isZero()) {
                 self.monsterController.bleed(totalDamage);
+            }
+
+            if (this.goldArr&&this.goldArr.length>0) {
+                let totalGold = new BigNumber(0)
+                for (let i = 0; i < this.goldArr.length; i++) {
+                    totalGold = totalGold.plus(this.goldArr[i])
+                }
+                this.goldArr = []
+                DataCenter.addGold(totalGold);
+                this.monsterController.playGoldAnim(Formulas.formatBigNumber(totalGold));
             }
         }
         this.dt = 0
@@ -663,12 +673,10 @@ cc.Class({
         //     uploadData : JSON.stringify({doc:"UserGameData",_id:"zhwwaaaaaa",data:datas}),
         // });
     },
-
+// mark
     onMonsterGold (gold) {
-        const self = this;
         var realGold = gold.times(GameData.globalGoldTimes);
-        DataCenter.addGold(realGold);
-        self.monsterController.playGoldAnim(Formulas.formatBigNumber(realGold));
+        this.goldArr.push(realGold);
         AudioMgr.playGetGoin();
     },
 

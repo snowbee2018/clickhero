@@ -237,6 +237,9 @@ cc.Class({
         const self = this;
         if (self._bGoldClick == true) {
             // "3.2e+16"
+            // if (isBoss) {
+            //     gold = gold.div(10)
+            // }
             self.gameController.onMonsterGold(gold.times(self._goldClickValue));
         }
     },
