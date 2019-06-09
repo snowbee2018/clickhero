@@ -305,7 +305,7 @@ cc.Class({
             // 处理效果加成，持续时间和冷却时间的加成
             // var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
-            return "增加下一个使用用的技能的效果，冷却时间" + coolingTimeStr;
+            return "使下一个技能的效果翻倍，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 23 && self.skillID == 4) {
             // 时光穿越
             // 处理效果加成，持续时间和冷却时间的加成
