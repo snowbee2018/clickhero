@@ -89,7 +89,7 @@ cc.Class({
                 desc = "在平行时空穿梭，什么都不会失去"
                 var str = Formulas.formatBigNumber(this.getBagSoul())
                 state = "穿越次数+1，立即获得" + str + "仙丹"
-                ruby = 300
+                ruby = 400
                 unlockLv = 130
                 break;
             // 下面是超越了
@@ -97,7 +97,7 @@ cc.Class({
                 name = "一动不动是萌萌"
                 desc = "每次购买+50%的闲置型上古神器收益"
                 state = "挂机收益增加:+" + (this.getCount()*50)+"%"
-                ruby = 300  + 300 * this.getCount()
+                ruby = 300
                 unlockLv = 300
                 break;
             case 8:
@@ -105,28 +105,28 @@ cc.Class({
                 desc = "每次购买-5%的上古神器费用，上限150次"
                 var num = ((1 - Math.pow(0.95,this.getCount())) * 100).toFixed(4)
                 state = "上古神器升级费用:-" + num +"%" 
-                ruby = 500  + 500 * this.getCount()
+                ruby = 300
                 unlockLv = 300
                 break;
             case 9:
                 name = "伤害高又高"
                 desc = "每次购买+100%的DPS"
                 state = "DPS增加:+" + (this.getCount()*100)+"%"
-                ruby = 500 
+                ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
                 name = "妖丹多又多"
                 desc = "每次购买+1000%的妖丹加成"
                 state = "妖丹加成:+" + (this.getCount()*1000)+"%"
-                ruby = 300  + 300 * this.getCount()
+                ruby = 500
                 unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多"
                 desc = "每次购买+1000%的仙丹加成"
                 state = "仙丹加成:+" + (this.getCount()*1000)+"%"
-                ruby = 500  + 500 * this.getCount()
+                ruby = 500
                 unlockLv = 300
                 break;
             case 11:
@@ -234,7 +234,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 1).plus(20).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds() + 1).plus(10).integerValue()
         return soul
     },
 })

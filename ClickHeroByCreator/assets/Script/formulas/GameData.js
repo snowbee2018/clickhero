@@ -135,9 +135,6 @@ cc.Class({
             let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
             this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
                  * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdGoldTimes;
-            console.log("金币倍数"+this.globalGoldTimes);
-            console.log(this.gdDayGoldTimes);
-            
             
         },
         // 计算总DPS伤害
@@ -186,7 +183,6 @@ cc.Class({
                 }
             });
             this.critTimes = times * this.addCritTimes;
-            console.log("暴击倍数"+times);
         },
         // 计算点击暴击概率
         calCritOdds(){
@@ -197,7 +193,6 @@ cc.Class({
                 }
             });
             this.critOdds = odds + this.skCritOdds;
-            console.log("暴击概率"+odds);
         },
 
         //====下面是针对古神的====

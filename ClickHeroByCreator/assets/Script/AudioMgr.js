@@ -73,7 +73,7 @@ cc.Class({
 
     openMusic(bool) {
         cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
-
+        cc.audioEngine.setVolume(this.bgAudioClip,bool ? 0.3 : 0)
     },
 
     openEffect(bool) {

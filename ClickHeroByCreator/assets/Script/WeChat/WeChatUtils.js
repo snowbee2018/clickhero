@@ -115,25 +115,37 @@ cc.Class({
             console.log("用户点击了设置中的“转发”按钮");
             // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
             Events.emit(Events.ON_SHARE_CLICK);
+            const img = this.rollShareImage()
             return {
                 title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
                 // imageUrl: self.getShareImage(),
-                imageUrl : 'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',
-                imageUrlId : 'aJjNK7G0QB-XDZRpsQ4t5g',
+                imageUrl : img.url,
+                imageUrlId : img.id,
                 query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
             }     
         }
+    },
+
+    rollShareImage(){
+        this.shareImages = this.shareImages || [
+            {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',id:'aJjNK7G0QB-XDZRpsQ4t5g'},
+            {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EMoN4NpTSuLz6NGUBIgWVrldswNK9HhvBMj3Fyu72ZgHdv8f2y0nPPX/0',id:'GtiFPVFNTRu5Ohgwj4r6eQ'},
+            {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EM8KHANnpeoP0FKdvGP8pHD5ycnqABlTWG9v9d9q8iafWyUPUN9wh7PE/0',id:'PJugG5i6SOqlqh9asng6Iw'},
+        ]
+        const index = Formulas.randomNum(0,this.shareImages.length - 1)
+        return this.shareImages[index]
     },
 
     shareAppMessage () {
         const self = this;
         if (self.isWeChatPlatform) {
             try {
+                const img = this.rollShareImage()
                 var result = wx.shareAppMessage({
                     title: '这个牛魔王太难打了，兄弟们快来帮我砍他！',
                     // imageUrl: self.getShareImage(),
-                    imageUrl : 'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',
-                    imageUrlId : 'aJjNK7G0QB-XDZRpsQ4t5g',
+                    imageUrl : img.url,
+                    imageUrlId : img.id,
                     query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
                 });
                 // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
