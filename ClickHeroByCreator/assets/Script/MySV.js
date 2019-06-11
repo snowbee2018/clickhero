@@ -10,6 +10,12 @@ cc.Class({
         this.items = this.items || []
         this.items.push(item)
     },
+
+    clearItems(){
+        this.items = []
+        this._t = -1
+        this._b = -1
+    },
     
     update (dt) {
         // this._dtt = this._dtt || 0
@@ -73,7 +79,7 @@ cc.Class({
                 }
             }
         } catch (error) {
-            
+            console.log(error);
         }
     },
     // 计算View在ScrollView中的位置

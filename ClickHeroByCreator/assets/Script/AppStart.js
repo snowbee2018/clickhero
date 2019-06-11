@@ -173,6 +173,15 @@ cc.Class({
         });
     },
 
+    checkAddruby(){
+        // console.log("checkAddruby");
+        CloudDB.getAddruby(function (b, ruby) {
+            if (b&&ruby>0) {
+                PublicFunc.popGoldDialog(2,ruby,null,true)
+            }
+        });
+    },
+
     onWeChatUserInfo(userData) {
         const self = this;
         console.log("onWeChatUserInfo");
@@ -257,6 +266,7 @@ cc.Class({
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.initUrl(function () {
                 start()
+                self.checkAddruby()
             });
         } else {
             start();

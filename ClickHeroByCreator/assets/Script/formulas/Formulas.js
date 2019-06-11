@@ -46,7 +46,6 @@ cc.Class({
                     times = bigPow(10,Math.floor(lv /1000)).times(times)
                     // times = Math.floor(lv /1000) * 2.5 * times
                 }
-                console.log("getDamageTimesByLv lv = " + lv+",times="+times.toString());
             }
             return times
         },
@@ -68,7 +67,6 @@ cc.Class({
         // 计算怪物HP for monster
         getMonsterHP(lv) {
             if (this.tempMonsterHp&&this.tempMonsterHp.lv == lv) {
-                console.log("xxxj 使用现成的HP")
                 if (this.tempMonsterHp.hp) {
                     return this.tempMonsterHp.hp
                 }
@@ -106,8 +104,6 @@ cc.Class({
                 }
                 this.tempP = {lv:lv,P:P}
                 hp = bigPow(1.55, 139).times(bigPow(1.145, 360)).times(P).plus(139).times(boss * 10);
-            
-                console.log(lv+"  " + this.formatBigNumber(hp));
             } else {
                 // hp = (Math.pow(1.545,lv-200001)*1.24*Math.pow(10,25409)+(lv - 1)*10)
                 hp = bigPow(1.545, lv - 200001).times(bigPow(10, 25409)).times(1.24).plus((lv - 1) * 10);
@@ -156,7 +152,6 @@ cc.Class({
                         var unit = unitArr[int];
                         var num = Math.pow(10, rem) * number;
                         var result = Number(num.toFixed(int?2:0)) + unit;
-                        // console.log(str + " = " + result);
                         return result;
                     } else {
                         // if (bigNumber.isLessThan(1)) {

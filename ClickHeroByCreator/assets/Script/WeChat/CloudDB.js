@@ -11,18 +11,64 @@ var envID = 'test-72db6b';
 // var dbName = 'release';
 cc.Class({
     statics: {
-        getDB () {
+        getDB (collname) {
             const self = this;
             if (WeChatUtil.isWeChatPlatform) {
                 const db = wx.cloud.database({
                     env: envID
                 });
-                return db.collection('UserGameData');
+                return db.collection(collname || 'UserGameData');
             }
         },
         saveDBID (id) {
             const self = this;
             self.id = id;
+        },
+        
+        getAddruby(callback){
+            const self = this;
+            if (WeChatUtil.isWeChatPlatform) {
+                this.getDB("addruby").where({
+                    _openid: DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
+                }).get({
+                    success : function(res) {
+                        console.log("获取addruby成功");
+                        if (res.data) {
+                            if (res.data.length>0) {
+                                self.addrubyID = res._id
+                                let ruby = res.data[0].ruby
+                                if (ruby>0) {
+                                    self.zeroAddruby(callback,ruby)
+                                }
+                            }else{
+                                self.addAddruby()
+                            }
+                        }
+                    },
+                    fail: function (params) {
+                        console.log("获取addruby失败");
+                        console.log(params);
+                        // callBack(false);
+                    }
+                })
+            }
+        },
+
+        zeroAddruby(callback,ruby){
+            // console.log("zeroAddruby");
+            if (WeChatUtil.isWeChatPlatform) {
+                this.getDB("addruby").doc(this.addrubyID).update({
+                    data: {
+                        // 表示将 done 字段置为 true
+                        ruby: 0,
+                    },
+                    success: function (res) {
+                        // console.log(res);
+                        callback(true,ruby)
+                    }
+                })
+
+            }
         },
 
         getUserData (callBack) {
@@ -111,6 +157,15 @@ cc.Class({
                     }
                 });
             }
+        },
+
+        addAddruby(){
+            // console.log("cloud addAddruby");
+            this.getDB("addruby").add({
+                data: {
+                    ruby : 0
+                }
+            });
         },
 
         update (gamedata) {

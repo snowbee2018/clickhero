@@ -121,7 +121,6 @@ cc.Class({
             //     }
             // }
         }
-        console.log("maxId="+maxId);
         if (maxId) {
             for (let id = 1; id <= maxId; id++) {
                 if (!this._heroItemMap[id]) {
@@ -147,6 +146,7 @@ cc.Class({
     rebirth () {
         const self = this;
         self._heroItemMap = {}
+        this.clearItems()
         self.heroList.content.removeAllChildren();
         // Events.off(Events.ON_BY_HERO, self.onBuyHero, self);
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
