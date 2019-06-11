@@ -40,6 +40,9 @@ cc.Class({
         view.getComponent('ShareItem').bind(index,this.datas[index])
     },
 
+    share(){
+        WeChatUtil.shareAppMessage();
+    },
 
     finish(){
         this.node.destroy()

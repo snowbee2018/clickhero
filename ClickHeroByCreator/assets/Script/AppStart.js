@@ -156,6 +156,9 @@ cc.Class({
             DataCenter.setDataByKey("UsetInviteInfo", inviteInfo);
             self.gameController.setWeChatUser();
             self.startGame();
+            if (referrer) {
+                PublicFunc.popGoldDialog(2,100,"被邀请奖励")
+            }
         }
     },
 

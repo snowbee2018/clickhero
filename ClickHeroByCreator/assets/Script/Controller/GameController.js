@@ -650,7 +650,7 @@ cc.Class({
     },
 
     onShareBtnClick () {
-        WeChatUtil.shareAppMessage();
+        // WeChatUtil.shareAppMessage();
         Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();

@@ -117,7 +117,7 @@ cc.Class({
             Events.emit(Events.ON_SHARE_CLICK);
             const img = this.rollShareImage()
             return {
-                title: "点一下，玩一年，斩妖除魔，重温经典西行路。",
+                title: "点一下玩一年，是兄弟就来戳我啊，进来就送100仙桃！",
                 // imageUrl: self.getShareImage(),
                 imageUrl : img.url,
                 imageUrlId : img.id,
@@ -142,7 +142,7 @@ cc.Class({
             try {
                 const img = this.rollShareImage()
                 var result = wx.shareAppMessage({
-                    title: '这个牛魔王太难打了，兄弟们快来帮我砍他！',
+                    title: '点一下玩一年，是兄弟就来戳我啊，进来就送100仙桃！',
                     // imageUrl: self.getShareImage(),
                     imageUrl : img.url,
                     imageUrlId : img.id,
