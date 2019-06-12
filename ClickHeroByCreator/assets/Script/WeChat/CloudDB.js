@@ -11,13 +11,18 @@ var envID = 'test-72db6b';
 // var dbName = 'release';
 cc.Class({
     statics: {
-        getDB (collname) {
-            const self = this;
+        db(){
             if (WeChatUtil.isWeChatPlatform) {
                 const db = wx.cloud.database({
                     env: envID
                 });
-                return db.collection(collname || 'UserGameData');
+                return db
+            }
+        },
+        getDB (collname) {
+            const self = this;
+            if (WeChatUtil.isWeChatPlatform) {
+                return this.db().collection(collname || 'UserGameData');
             }
         },
         saveDBID (id) {
@@ -218,7 +223,11 @@ cc.Class({
 
         getRankUsers(callback,offset){
             if (WeChatUtil.isWeChatPlatform) {
-                this.getDB().orderBy('maxLv','desc').skip(offset).limit(20).get({
+                const db = this.getDB()
+                const _ = this.db().command
+                db.orderBy('maxLv','desc').where({
+                    isbug: _.neq(true)
+                }).skip(offset).limit(20).get({
                     success: function (res) {
                         console.log("getRankUsers success");
                         console.log(res);

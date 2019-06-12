@@ -92,14 +92,14 @@ cc.Class({
                 new AncientData().init(14,false,false,"轩辕剑",0,"每次连击+0.01%DPS伤害"),
                 new AncientData().init(15,false,false,"炼妖壶",0,"每级+2秒点石成金持续时间"), // 每级+0.01%*DPS的点击伤害
                 // new AncientData().init(16,false,false,"太虚神甲",0,"减少每关"),
-                new AncientData().init(17,false,false,"女蜗补天石",0,"每级+25%闲置妖丹倍数(60秒无点击)"),
+                new AncientData().init(17,false,false,"女蜗补天石",0,"每级+25%挂机妖丹倍数(60秒无点击)"),
                 new AncientData().init(18,false,false,"昆仑镜",0,"每级+5%妖丹倍数"),
                 new AncientData().init(19,false,false,"崆峒印",0,"每级+50%葫芦妖丹倍数"),
                 // new AncientData().init(20,false,false,"Argaiv",0),
                 // new AncientData().init(21,false,false,"神农鼎",0),
                 new AncientData().init(22,false,false,"逐日弓",0,"每级+30%点石成金技能效果"),
                 // new AncientData().init(23,false,false,"Argaiv",0),
-                new AncientData().init(24,false,false,"东皇钟",0,"每级+25%闲置DPS伤害(60秒无点击)"),
+                new AncientData().init(24,false,false,"东皇钟",0,"每级+25%挂机DPS伤害(60秒无点击)"),
                 new AncientData().init(25,false,false,"干将",0,"每级+2s暴击风暴持续时间"),
                 new AncientData().init(26,false,false,"火浣布",0,"每级-1.92%技能冷时间"),
             ];

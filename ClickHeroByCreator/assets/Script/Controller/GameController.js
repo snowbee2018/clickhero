@@ -226,7 +226,7 @@ cc.Class({
                     POW_PRECISION: 5,
                 });
             }
-            self.isIdle = true; // 是否为闲置状态
+            self.isIdle = true; // 是否为挂机状态
             self.combo = 0; // 当前连击数
             DataCenter.init();
             HeroDatas.init();
@@ -460,7 +460,7 @@ cc.Class({
         const self = this;
         var isIdle = !!event;
         self.comboCount.node.active = !isIdle;
-        self.comboTypeLab.string = isIdle ? "(闲置)" : "(连击)";
+        self.comboTypeLab.string = isIdle ? "(挂机)" : "(连击)";
         if (!isIdle) {
             self.comboCount.string = self.combo;
         }
@@ -577,8 +577,8 @@ cc.Class({
         
         if (self.isIdle === true) {
             self.isIdle = false;
-            // 转为非闲置状态
-            console.log("转为非闲置状态");
+            // 转为非挂机状态
+            console.log("转为非挂机状态");
             Events.emit(Events.ON_IDLE_STATE, self.isIdle);
         }
         self.unschedule(self.handleIdle);
@@ -615,8 +615,8 @@ cc.Class({
     handleIdle () {
         const self = this;
         self.isIdle = true;
-        // 转为闲置状态
-        console.log("转为闲置状态");
+        // 转为挂机状态
+        console.log("转为挂机状态");
         self.combo = 0;
         Events.emit(Events.ON_IDLE_STATE, self.isIdle);
         Events.emit(Events.ON_COMBO_CHANGE, self.combo);

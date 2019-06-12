@@ -26,7 +26,7 @@ cc.Class({
         _tempClickDamage : 1,
         _tempDpsDamage : 0,
 
-        playerStatus : 1,// 玩家状态 0:combo 1:闲置
+        playerStatus : 1,// 玩家状态 0:combo 1:挂机
         clickCombo : 0,
 
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
@@ -50,11 +50,11 @@ cc.Class({
         addSuperClickSecond: 0,    //13*- 如意金箍时间 2s++ √
         addDPSClickDamageTimes : 0, //14- 连击DPS倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
-        addLeaveGoldTimes : 1,      //17- 闲置金币倍数 √
+        addLeaveGoldTimes : 1,      //17- 挂机金币倍数 √
         addGoldTimes: 1,           //18* +5% Gold √
         addTreasureTimes: 1,       //19* 宝箱金币倍数 √
         addGoldClickTimes: 1,      //22*- 点金手倍数 +30% gold from Golden Clicks √
-        addLeaveDPSTimes : 1,       //24- 加闲置DPS伤害 √
+        addLeaveDPSTimes : 1,       //24- 加挂机DPS伤害 √
         addCritStormSecond: 0,     //25*- 增加暴击风暴时间 +2s √
         addSkillCoolReduction: 0,  //26*- 技能冷却减少 0~1 √
 

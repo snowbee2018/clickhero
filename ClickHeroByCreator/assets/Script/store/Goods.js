@@ -196,6 +196,7 @@ cc.Class({
             // 平行时空 立即拿到括号里的英魂 为什么比括号多还不晓得
             // DataCenter.addSoul(this.getBagSoul())
             PublicFunc.popGoldDialog(1,this.getBagSoul())
+            DataCenter.addRebirthCount()
         } else if(this.id == 6){
             // 大开杀戒 搞个计时器 改变GameData 数值
             GameData.gd10xDpsTimes+=10

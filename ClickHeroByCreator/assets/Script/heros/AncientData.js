@@ -137,7 +137,7 @@ cc.Class({
         } else if (this.id == 16) {
             // 减少每关怪物数量 暂时不要
         } else if (this.id == 17) {
-            // 加闲置金币
+            // 加挂机金币
             let lv = this.level - 99;//纳税等级'
             let diff = 0;
             if (lv > 0) {
@@ -146,7 +146,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断闲置
+            GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断挂机
         } else if (this.id == 18) {
             // +5% Gold
             GameData.addGoldTimes = 1 + this.level * 0.05;
@@ -164,7 +164,7 @@ cc.Class({
         } else if (this.id == 23) {
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {
-            // 加闲置DPS伤害
+            // 加挂机DPS伤害
             let lv = this.level - 99;//纳税等级'
             let diff = 0;
             if (lv > 0) {
@@ -173,7 +173,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveDPSTimes = 1 + this.level*0.25 - diff*0.01;//需要判断闲置
+            GameData.addLeaveDPSTimes = 1 + this.level*0.25 - diff*0.01;//需要判断挂机
             console.log("GameData.addLeaveDPSTimes:" + GameData.addLeaveDPSTimes);
             GameData.refresh()
         } else if (this.id == 25) {
@@ -255,8 +255,8 @@ cc.Class({
         } else if (this.id == 16) {
             // 减少每关怪物数量 暂时不要
         } else if (this.id == 17) {
-            // 加闲置金币
-            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100).toFixed(4) + "%闲置时妖丹"
+            // 加挂机金币
+            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100).toFixed(4) + "%挂机时妖丹"
         } else if (this.id == 18) {
             // +5% Gold
             desc = "+" + (5*this.level) + "%妖丹倍数"
@@ -273,8 +273,8 @@ cc.Class({
         } else if (this.id == 23) {
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {
-            // 加闲置DPS伤害
-            desc = "+" + ((GameData.addLeaveDPSTimes-1)*100).toFixed(4) + "%闲置时DPS伤害"
+            // 加挂机DPS伤害
+            desc = "+" + ((GameData.addLeaveDPSTimes-1)*100).toFixed(4) + "%挂机时DPS伤害"
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;
