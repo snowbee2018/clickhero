@@ -478,6 +478,7 @@ cc.Class({
         let v1 = maxPassLavel >= 5
         if (!this.tabs[3].active) {
             this.tabs[3].active = v1
+            this.tabs[4].active = v1
             this.shareBtn.active = v1
             this.btnSignin.active = v1
             if (v1) {
