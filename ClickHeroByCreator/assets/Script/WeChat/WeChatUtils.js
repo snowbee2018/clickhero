@@ -110,20 +110,21 @@ cc.Class({
     },
 
     onShareAppMessage () {
-        const self = this;
-        if (self.isWeChatPlatform) {
-            console.log("用户点击了设置中的“转发”按钮");
-            // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
-            Events.emit(Events.ON_SHARE_CLICK);
-            const img = this.rollShareImage()
-            return {
-                title: "点一下玩一年，是兄弟就来戳我啊，进来就送100仙桃！",
-                // imageUrl: self.getShareImage(),
-                imageUrl : img.url,
-                imageUrlId : img.id,
-                query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
-            }     
-        }
+        this.shareAppMessage()
+        // const self = this;
+        // if (self.isWeChatPlatform) {
+        //     console.log("用户点击了设置中的“转发”按钮");
+        //     // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: false });
+        //     Events.emit(Events.ON_SHARE_CLICK);
+        //     const img = this.rollShareImage()
+        //     return {
+        //         title: "点一下玩一年，是兄弟就来戳我啊，进来就送100仙桃！",
+        //         // imageUrl: self.getShareImage(),
+        //         imageUrl : img.url,
+        //         imageUrlId : img.id,
+        //         query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
+        //     }     
+        // }
     },
 
     rollShareImage(){
@@ -148,6 +149,7 @@ cc.Class({
                     imageUrlId : img.id,
                     query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
                 });
+                Events.emit(Events.ON_SHARE_CLICK);
                 // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
             } catch (error) {
                 console.log(error);

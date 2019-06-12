@@ -235,7 +235,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 0.5).plus(4).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds() + 0.25).plus(4).integerValue()
         return soul
     },
 })

@@ -178,6 +178,16 @@ cc.Class({
             }
             return arr;
         },
+        getBuyHeroCount(){
+            let count = 0
+            for (let heroID = 0; heroID < this.heroList.length; heroID++) {
+                const hero = this.heroList[heroID];
+                if (hero.isBuy) {
+                    count ++
+                }
+            }
+            return count
+        },
         formatAncientList() {
             var arr = [[],[]];
             this.myAncients.forEach(ancient => {

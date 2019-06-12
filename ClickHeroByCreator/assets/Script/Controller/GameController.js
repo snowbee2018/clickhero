@@ -231,6 +231,7 @@ cc.Class({
             DataCenter.init();
             HeroDatas.init();
             GoodsDatas.init();
+            TaskDatas.init();
             self.getComponent("AutoClick").init();
             self.heroListControl.setHeroList();
             self.monsterController.init();
@@ -343,15 +344,16 @@ cc.Class({
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
         obj[map.goodsList] = GoodsDatas.buyCounts; // 用户所拥有的商品
+        obj[map.taskTargets] = TaskDatas.datas; // 任务领取列表
         // obj[map.skillList] = 
         obj[map.skillList] = self.userSkillController.formatUserSkillsInfo(); // 所有主动技能的状态
         // obj[map.achievementList] = 
         // obj[map.equipmentList] = 
         // obj[map.shopList] = 
         // obj[map.lansquenetList] = 
-        // obj[map.curSetting] = 
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
         obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
+        obj[map.shareDate] = DataCenter.getDataByKey(map.shareDate); // 分享日期
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
@@ -553,6 +555,7 @@ cc.Class({
         self.clickHit();
         var map = DataCenter.KeyMap;
         DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
+        Events.emit(Events.ON_MANUAL_CLICK)
     },
 
     clickHit (isAuto) {
@@ -651,7 +654,7 @@ cc.Class({
 
     onShareBtnClick () {
         // WeChatUtil.shareAppMessage();
-        Events.emit(Events.ON_SHARE_CLICK);
+        // Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();
         // var datas = {_id:"zhwwaaaaaa",registerTime:1.558077800538e+12,_openid:"newopenid",WeChatUserInfo:{gender:1.0,language:"zh_CN",city:"长春",province:"吉林",country:"中国",nickName:"东军"},gamedata:{}}
@@ -719,7 +722,6 @@ cc.Class({
     //     // }
     // },
     setPageActive(curPageIndex) {
-        const self = this;
         for (let i = 0; i < this.pages.length; i++) {
             const page = this.pages[i];
             page.active = i == curPageIndex;

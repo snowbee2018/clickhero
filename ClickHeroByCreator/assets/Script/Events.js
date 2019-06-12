@@ -29,6 +29,8 @@ cc.Class({
         ON_RESUME_GAME : "ON_RESUME_GAME", // 恢复游戏，当从后台切换到前台
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         SHOW_SKILL_FINGER : "SHOW_SKILL_FINGER",
+        ON_REBIRTH_COUNT : "ON_REBIRTH_COUNT", // 穿越次数改变
+        ON_MANUAL_CLICK : "ON_MANUAL_CLICK", // 手动点击次数
         
         emit(name,params){
             cc.systemEvent.emit(name,params);

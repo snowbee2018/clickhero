@@ -4,24 +4,30 @@ cc.Class({
 
     properties: {
         sv : cc.ScrollView,
-        dialogPrefab : cc.Prefab,
-        SigninDialog : cc.Prefab,
-        ShareDialog : cc.Prefab,
+        itemPrefab : cc.Prefab,
     },
 
-    showSigninDialog(){
-        let dialog = cc.instantiate(this.SigninDialog)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
+    onLoad(){
+        console.log("xxxj task onload");
+        
+        this.items = []
+        try {
+            this.addItem(-1)
+            for (let i = 0; i < TaskDatas.targets.length; i++) {
+                this.addItem(i)
+            }
+        } catch (error) {
+            console.error(error);
+        }
     },
 
-    showShareDialog () {
-        console.log("showShareDialog");
-        let dialog = cc.instantiate(this.ShareDialog)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
+    addItem(i) {
+        console.log("xxxj additem" + i);
+        
+        var node = cc.instantiate(this.itemPrefab);
+        node.parent = this.sv.content;
+        node.getComponent("TaskItem").bind(i);
+        this.items[i] = node
     },
 })
 

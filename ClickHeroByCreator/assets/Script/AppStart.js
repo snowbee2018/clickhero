@@ -34,6 +34,7 @@ cc.Class({
         window.GameData = require("GameData");
         window.HeroDatas = require("HeroDatas");
         window.GoodsDatas = require("GoodsDatas");
+        window.TaskDatas = require("TaskDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
         cc.game.setFrameRate(40)

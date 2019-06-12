@@ -90,6 +90,7 @@ cc.Class({
                         success: function (res) {
                             // res.data 包含该记录的数据
                             console.log("使用服务器UserData数据");
+                            console.log(res.data);
                             callBack(false, res.data);
                         },
                         fail: function (params) {

@@ -28,10 +28,11 @@ cc.Class({
             shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
             lansquenetList: "lansquenetList", // 雇佣兵列表，任务的完成状态也存里面
 
-            curSetting: "curSetting", // 当前设置信息
+            taskTargets: "taskTargets", // 任务领取索引列表
 
             signinData: "signinData", // 签到数据{times:0,date:"yyyy/MM/dd"}
             shareReceiveData: "shareReceiveData", // 分享任务 领取信息[[true,true],[true,false]]
+            shareDate : "shareDate", // 分享日期
         }
         self.ContentData = {}
         self.DataMap = {
@@ -125,8 +126,10 @@ cc.Class({
         }
         // 初始化签到数据
         var shareReceiveData = self.getCloudDataByKey(self.KeyMap.shareReceiveData);
-        console.log("signinData:" + shareReceiveData);
         self.setDataByKey(self.KeyMap.shareReceiveData, shareReceiveData || []);
+
+        var shareDate = self.getCloudDataByKey(self.KeyMap.shareDate);
+        self.setDataByKey(self.KeyMap.shareDate, shareDate);
         //  else {
         //     self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         // }
@@ -257,6 +260,7 @@ cc.Class({
         var key = this.KeyMap.rebirthCount;
         var old = this.getDataByKey(key);
         this.setDataByKey(key, (old+1) );
+        Events.emit(Events.ON_REBIRTH_COUNT)
     },
     addRebirthSoul(soul) {
         const self = this;
