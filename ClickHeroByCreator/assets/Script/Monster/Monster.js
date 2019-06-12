@@ -124,6 +124,8 @@ cc.Class({
                     }
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
+                    } else {
+                        self._soul = new BigNumber(1)
                     }
                 }
             }
