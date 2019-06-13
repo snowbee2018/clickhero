@@ -167,6 +167,9 @@ cc.Class({
                 self._coolingCurtail = 0;
                 self.onCoolingDone();
                 self.gray.active = !self.isCanUse();
+                if (self.gray.active) {
+                    PublicFunc.unschedule(this._scheCallback);
+                }
             }
         }
 
@@ -184,7 +187,6 @@ cc.Class({
                     self._isSustainFinish = true;
                     self.backout();
                     self.gray.active = !self.isCanUse();
-                    PublicFunc.unschedule(this._scheCallback);
                 }
             }
         }
