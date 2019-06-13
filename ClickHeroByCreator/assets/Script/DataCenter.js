@@ -33,6 +33,8 @@ cc.Class({
             signinData: "signinData", // 签到数据{times:0,date:"yyyy/MM/dd"}
             shareReceiveData: "shareReceiveData", // 分享任务 领取信息[[true,true],[true,false]]
             shareDate : "shareDate", // 分享日期
+            totalSoul:"totalSoul", // 历史总仙丹
+            totalRuby: "totalRuby", // 历史总仙桃
         }
         self.ContentData = {}
         self.DataMap = {
@@ -133,6 +135,18 @@ cc.Class({
         //  else {
         //     self.setDataByKey(self.KeyMap.shareReceiveData, [[true,true],[true,false]]);
         // }
+        var totalSoul = self.getCloudDataByKey(self.KeyMap.totalSoul);
+        if (totalSoul) {
+            self.setDataByKey(self.KeyMap.totalSoul, (new BigNumber(totalSoul)));
+        } else {
+            self.setDataByKey(self.KeyMap.totalSoul, new BigNumber(0));
+        }
+        var totalRuby = self.getCloudDataByKey(self.KeyMap.totalRuby);
+        if (totalRuby) {
+            self.setDataByKey(self.KeyMap.totalRuby, Number(totalRuby));
+        } else {
+            self.setDataByKey(self.KeyMap.totalRuby, 0);
+        }
     },
 
     // 保存数据
@@ -243,6 +257,10 @@ cc.Class({
             var key = self.KeyMap.curSoul;
             var old = self.getDataByKey(key);
             self.setDataByKey(key, old.plus(soul));
+            
+            var key = self.KeyMap.totalSoul;
+            var totalSoul = self.getDataByKey(key);
+            self.setDataByKey(key, totalSoul.plus(soul));
             Events.emit(Events.ON_SOUL_CHANGE);
         } else {
             console.error("type error, 'soul' must be a BigNumber.");
@@ -253,6 +271,7 @@ cc.Class({
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
         this.setDataByKey(key, (old+ruby) );
+        this.setDataByKey(this.KeyMap.totalRuby, this.getDataByKey(this.KeyMap.totalRuby)+ruby);
         Events.emit(Events.ON_RUBY_CHANGE);
     },
     // 转身次数增加

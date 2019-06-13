@@ -354,6 +354,8 @@ cc.Class({
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
         obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
         obj[map.shareDate] = DataCenter.getDataByKey(map.shareDate); // 分享日期
+        obj[map.totalSoul] = DataCenter.getDataByKey(map.totalSoul).toExponential(4)
+        obj[map.totalRuby] = DataCenter.getDataByKey(map.totalRuby);
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
