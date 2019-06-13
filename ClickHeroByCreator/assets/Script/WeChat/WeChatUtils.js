@@ -142,18 +142,32 @@ cc.Class({
         if (self.isWeChatPlatform) {
             try {
                 const img = this.rollShareImage()
-                var result = wx.shareAppMessage({
+                wx.shareAppMessage({
                     title: '点一下玩一年，是兄弟就来戳我啊，进来就送100仙桃！',
                     // imageUrl: self.getShareImage(),
                     imageUrl : img.url,
                     imageUrlId : img.id,
                     query: "openid=" + DataCenter.getDataByKey(DataCenter.DataMap.OPENID)
                 });
-                Events.emit(Events.ON_SHARE_CLICK);
+
+                
+                wx.updateShareMenu({
+                    // withShareTicket: true,
+                    success () {
+                        // 这里拿下离线时间
+                        var lastTime = DataCenter.getDataByKey(DataCenter.KeyMap.lastTime)
+                        var diff = Date.now() - Number(lastTime)
+                        if (diff > 2500) {
+                            console.log("xxxxxj onShare success");
+                            Events.emit(Events.ON_SHARE_CLICK);
+                        }
+                    }
+                })
                 // cc.systemEvent.emit(self.Events.ShareAppDone, { bInitiative: true });
             } catch (error) {
                 console.log(error);
             }
+
         }
     },
 
