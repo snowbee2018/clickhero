@@ -135,7 +135,8 @@ cc.Class({
             // +2s Golden Clicks duration
             GameData.addGoldClickSecond = this.level * 2;
         } else if (this.id == 16) {
-            // 减少每关怪物数量 暂时不要
+            // 减少每关怪物数量
+            GameData.addMinusMonsterNum = -8*(1-Math.exp(-.025*this.level))
         } else if (this.id == 17) {
             // 加挂机金币
             let lv = this.level - 99;//纳税等级'
@@ -254,6 +255,7 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s点石成金持续时间"
         } else if (this.id == 16) {
             // 减少每关怪物数量 暂时不要
+            desc = "每关"+GameData.getMinusMonsterNum().toFixed(4)+"个怪数量"
         } else if (this.id == 17) {
             // 加挂机金币
             desc = "+" + ((GameData.addLeaveGoldTimes-1)*100).toFixed(4) + "%挂机时妖丹"

@@ -21,7 +21,7 @@ cc.Class({
 
     // update (dt) {},
 
-    setZonrInfo (level, killCount, isBoss) {
+    setZonrInfo (level, killCount,monsterCount, isBoss) {
         const self = this;
         // var yu = level % ZoneArr.length;
         // if (yu == 0) {
@@ -48,7 +48,7 @@ cc.Class({
                 self.percent.string = "BOSS";
                 self.nextBtn.opacity = 0;
             } else {
-                self.percent.string = killCount + "/10";
+                self.percent.string = killCount + "/" + monsterCount;
                 self.nextBtn.opacity = 0;
             }
         }

@@ -110,22 +110,22 @@ cc.Class({
                 break;
             case 9:
                 name = "伤害高又高"
-                desc = "每次购买+100%的DPS"
-                state = "DPS增加:+" + (this.getCount()*100)+"%"
+                desc = "购买+"+(100+10*this.getCount())+"%的DPS"
+                state = "DPS增加:+" + (PublicFunc.get10TimesByCount(this.getCount())*10)+"%"
                 ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
                 name = "妖丹多又多"
-                desc = "每次购买+1000%的妖丹加成"
-                state = "妖丹加成:+" + (this.getCount()*1000)+"%"
+                desc = "购买+"+(1000+100*this.getCount())+"%的妖丹加成"
+                state = "妖丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 500
                 unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多"
-                desc = "每次购买+1000%的仙丹加成"
-                state = "仙丹加成:+" + (this.getCount()*1000)+"%"
+                desc = "购买+"+(1000+100*this.getCount())+"%的仙丹加成"
+                state = "仙丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 500
                 unlockLv = 300
                 break;

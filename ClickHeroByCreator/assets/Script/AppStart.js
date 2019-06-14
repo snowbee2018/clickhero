@@ -78,6 +78,8 @@ cc.Class({
         if (window.Formulas == undefined) return;
         if (window.GameData == undefined) return;
         if (window.HeroDatas == undefined) return;
+        if (window.GoodsDatas == undefined) return;
+        if (window.TaskDatas == undefined) return;
         if (window.Events == undefined) return;
         if (window.BigNumber == undefined) return;
         if (window.ZoneArr == undefined) return;

@@ -157,7 +157,7 @@ cc.Class({
                         // 这里拿下离线时间
                         var lastTime = DataCenter.getDataByKey(DataCenter.KeyMap.lastTime)
                         var diff = Date.now() - Number(lastTime)
-                        if (diff > 2500) {
+                        if (diff > 2000) {
                             console.log("xxxxxj onShare success");
                             Events.emit(Events.ON_SHARE_CLICK);
                         }
@@ -519,16 +519,28 @@ cc.Class({
 
     // 从后台返回，参数同 getLaunchOptionsSync 的返回
     onShow(res) {
-        const self = this;
-        console.log("on game back");
-        if (this.isTimeErr) {
-            console.log("系统时间异常");
-            return
+        // checkReady
+        if (window.PublicFunc&&window.WeChatUtil &&window.DataCenter &&window.Formulas &&window.GameData 
+            &&window.HeroDatas &&window.GoodsDatas &&window.TaskDatas &&window.Events &&window.BigNumber &&window.ZoneArr) {
+            // 检查本地配置是否加载完成
+            if (window.HerosCfg == undefined) return;
+            if (window.SkillCfg == undefined) return;
+    
+            const self = this;
+            console.log("on game back");
+            if (this.isTimeErr) {
+                console.log("系统时间异常");
+                return
+            }
+            // 检查和服务区时间的差异
+            WeChatUtil.checkSystemTime()
+            // console.log(res);
+            Events.emit(Events.ON_RESUME_GAME)
+        } else {
+            wx.onHide(function(params) {})
+            wx.exitMiniProgram()
         }
-        // 检查和服务区时间的差异
-        WeChatUtil.checkSystemTime()
-        // console.log(res);
-        Events.emit(Events.ON_RESUME_GAME)
+        
     },
 
     // 切换到后台

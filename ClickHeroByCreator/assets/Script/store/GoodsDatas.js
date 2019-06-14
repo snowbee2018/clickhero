@@ -49,11 +49,11 @@ Datas.refresh = function(){
         } else if (e.id == 8) {
             GameData.gdAncientSale = Math.pow(0.95,count)
         } else if (e.id == 9) {
-            GameData.gdDPSTimes = 1 + count
+            GameData.gdDPSTimes = 1 + PublicFunc.get10TimesByCount(count)/10
         } else if (e.id == 10) {
-            GameData.gdGoldTimes = 1 + count*10
+            GameData.gdGoldTimes = 1 + PublicFunc.get10TimesByCount(count)
         } else if (e.id == 15) {
-            GameData.gdSoulTimes = 1 + count*10
+            GameData.gdSoulTimes = 1 + PublicFunc.get10TimesByCount(count)
             console.log("GameData.gdSoulTimes1"+GameData.gdSoulTimes);
         } else if (e.id == 11) {
             GameData.gdPBossTimes = count*0.25 + 1

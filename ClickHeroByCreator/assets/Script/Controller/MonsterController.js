@@ -77,6 +77,7 @@ cc.Class({
             monsterCloudInfo.gold = monsterCloudInfo.gold ? (new BigNumber(monsterCloudInfo.gold)) : false;
             monsterCloudInfo.soul = monsterCloudInfo.soul ? (new BigNumber(monsterCloudInfo.soul)) : false;
             self.killCount = monsterCloudInfo.killCount ? monsterCloudInfo.killCount : 0;
+            self.monsterCount = monsterCloudInfo.monsterCount ? monsterCloudInfo.monsterCount : 10;
             self.toggle.isChecked = monsterCloudInfo.autoNext ? true : false;
             self._autoNext = self.toggle.isChecked;
             self.makeMonster(monsterCloudInfo.lv, monsterCloudInfo);
@@ -98,6 +99,7 @@ cc.Class({
         obj.soul = monsterInfo.soul.toExponential(4);
 
         obj.killCount = self.killCount;
+        obj.monsterCount = self.monsterCount;
         obj.autoNext = self.toggle.isChecked;
         return obj;
     },
@@ -186,7 +188,9 @@ cc.Class({
             self._countdown = 30 + GameData.getBossTimerSecond();
             self.setTimeLabel(self._countdown);
         }
-        self.zoneInfo.setZonrInfo(lv, self.killCount, self.curMonster._isBoss);
+        self.monsterCount = GameData.getZoneMonsterCount(lv);
+        
+        self.zoneInfo.setZonrInfo(lv, self.killCount,this.monsterCount, self.curMonster._isBoss);
         if (self.curMonster._isBoss) {
             self.monsterPos.scale = 1.2;
         } else {
@@ -263,7 +267,7 @@ cc.Class({
                     self.makeMonster(lv);
                 }
             } else {
-                if (self.killCount >= 10) {
+                if (self.killCount >= this.monsterCount) {
                     DataCenter.passLevel(lv);
                     if (self._autoNext) {
                         self.goToNextLevel();
@@ -320,6 +324,7 @@ cc.Class({
         AudioMgr.playBtn();
         if (DataCenter.isLevelPassed(self.curMonster._lv)) {
             delete self.killCount;
+            delete self.monsterCount;
             delete self._countdown;
             var targetLv = self.curMonster._lv + 1;
             self.curMonster.byebye();
@@ -330,6 +335,7 @@ cc.Class({
     rebirth () {
         const self = this;
         delete self.killCount;
+        delete self.monsterCount;
         delete self._countdown;
         self.curMonster.byebye();
         self.makeMonster(1);

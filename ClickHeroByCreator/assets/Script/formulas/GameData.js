@@ -50,6 +50,7 @@ cc.Class({
         addSuperClickSecond: 0,    //13*- 如意金箍时间 2s++ √
         addDPSClickDamageTimes : 0, //14- 连击DPS倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
+        addMinusMonsterNum: 0,     //16   减怪数
         addLeaveGoldTimes : 1,      //17- 挂机金币倍数 √
         addGoldTimes: 1,           //18* +5% Gold √
         addTreasureTimes: 1,       //19* 宝箱金币倍数 √
@@ -74,6 +75,7 @@ cc.Class({
         gdPBossTimes : 1,//11 addPrimalBossOdds倍数
         gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
         gdTreasureTimes : 1,//13 addTreasureTimes倍数
+        gdMinusMonsterTimes : 1,//17
 
         //--------被动技能的影响--------
         // cskCritTimes : 1, // 暴击倍数 :calCritTimes()
@@ -223,6 +225,17 @@ cc.Class({
         // 获得宝箱倍数
         getTreasureTimes() {
             return this.addTreasureTimes * this.gdTreasureTimes;
+        },
+
+        getMinusMonsterNum() {
+            return this.addMinusMonsterNum * this.gdMinusMonsterTimes
+        },
+        // 根据关卡等级 获得怪数
+        getZoneMonsterCount(lv){
+            console.log("xxxxj lvlvlv"+lv + "  "+(10 + lv/500*0.1 + this.getMinusMonsterNum()));
+            
+            let c = Math.floor(10 + lv/500*0.1 + this.getMinusMonsterNum())
+            return Math.max(c,2)
         },
     }
 })

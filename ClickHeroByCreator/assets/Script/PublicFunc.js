@@ -171,4 +171,14 @@ cc.Class({
         var d = new Date()
         return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
     },
+    // 计算10倍仙丹和妖丹 根据购买数 得到的百分比结果
+    get10TimesByCount(c){
+        let result = 0
+        for (let i = 0; i < c; i++) {
+            result += 10+1*i
+        }
+        console.log("xxxj 10times " + c + " " + result);
+        
+        return result
+    },
 });
