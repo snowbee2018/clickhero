@@ -129,9 +129,11 @@ cc.Class({
 
     rollShareImage(){
         this.shareImages = this.shareImages || [
+            {url:'https://mmocgame.qpic.cn/wechatgame/s9JrAYSicy8Bngad95da1OJxFnJnhZKIDXcG9GqhXBzjsDsxEsItZBrVwru01zyCw/0',id:'I8TZRIINTECU_kP2p5NyzQ'},
+            {url:'https://mmocgame.qpic.cn/wechatgame/s9JrAYSicy8BeAgpMPf4FWHx0asAOURmmSdH9UkM8sRlZ0CCPzQgCqJnqP113tl20/0',id:'NeF6c22wRFSdlU9j5e_p1g'},
+            {url:'https://mmocgame.qpic.cn/wechatgame/s9JrAYSicy8DVkibIMqiavibvMGO1yGFicg9ga67rXGcTG1hGaAZTibw2cOGicaHwVXVNB8/0',id:'-rbDbRftSc-mUl4Hia_jrQ'},
             {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EOTvVO631H0Oy5Jiajzsgw3BjhWXctzAkicCPYNDfDChfvIsaQMNq2uFr/0',id:'aJjNK7G0QB-XDZRpsQ4t5g'},
             {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EMoN4NpTSuLz6NGUBIgWVrldswNK9HhvBMj3Fyu72ZgHdv8f2y0nPPX/0',id:'GtiFPVFNTRu5Ohgwj4r6eQ'},
-            {url:'https://mmocgame.qpic.cn/wechatgame/abP3dM7p8EM8KHANnpeoP0FKdvGP8pHD5ycnqABlTWG9v9d9q8iafWyUPUN9wh7PE/0',id:'PJugG5i6SOqlqh9asng6Iw'},
         ]
         const index = Formulas.randomNum(0,this.shareImages.length - 1)
         return this.shareImages[index]

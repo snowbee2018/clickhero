@@ -59,12 +59,12 @@ cc.Class({
     },
 
     onDestroy () {
-        const self = this;
-        if (!self._isByeBye) {
-            if (self._onMonsterDestroy) {
-                self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
-            }
-        }
+        // const self = this;
+        // if (!self._isByeBye) {
+        //     if (self._onMonsterDestroy) {
+        //         self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
+        //     }
+        // }
     },
 
     // update (dt) {},
@@ -313,6 +313,13 @@ cc.Class({
         self._alive = false;
         self.playAnim("Dieing");
 
+        setTimeout(function() {
+            if (!self._isByeBye) {
+                if (self._onMonsterDestroy) {
+                    self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
+                }
+            }
+        },300)
     },
 
     onDieAnimEnd () {
