@@ -135,8 +135,8 @@ cc.Class({
             this.nodeFingerTips.opacity = 100
             this.nodeFingerTips.scale = 0.8
             this.nodeFingerTips.runAction(cc.repeatForever(
-                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
-                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-20,10))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(20,-10))),)))
         }
     },
 
