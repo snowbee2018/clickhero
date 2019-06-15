@@ -65,6 +65,7 @@ cc.Class({
                 })
             }
             this.checkUpdate()
+            this.newBannerAd()
         }
     },
 
@@ -705,30 +706,53 @@ cc.Class({
         }
     },
 
+    newBannerAd(){
+        const self = this
+        if (this.bannerAd) {
+            this.bannerAd.destroy()
+            this.bannerAd = null
+        }
+        let sys = wx.getSystemInfoSync()
+        this.bannerAd = wx.createBannerAd({
+            adUnitId: 'adunit-44843eb83e4ec896',
+            style: {
+                left: 0,
+                top: sys.screenHeight-120,
+                width: sys.screenWidth,
+                height : 120,
+            }
+        })
+        this.bannerAd.onError(function(errMsg,errCode) {
+            console.log("bannerAd.onError");
+            console.log(errCode + ":" + errMsg);
+            
+        })
+        this.bannerAd.onResize(function(res) {
+            console.log("xxxj top" + sys.screenHeight - res.height);
+            self.bannerAd.style.top = sys.screenHeight - res.height
+        })
+        this.bannerAd.showCount = 0
+    },
+
     showBannerAd(){
         if (this.isWeChatPlatform) {
-            let sys = wx.getSystemInfoSync()
-            this.bannerAd = this.bannerAd || wx.createBannerAd({
-                adUnitId: 'adunit-44843eb83e4ec896',
-                style: {
-                    left: 0,
-                    top: sys.screenHeight-80,
-                    width: sys.screenWidth,
-                    height : 80,
-                }
-              })
-              this.bannerAd.onError(function(errMsg,errCode) {
-                  console.log("bannerAd.onError");
-                  console.log(errCode + ":" + errMsg);
-                  
-              })
+            if (!this.bannerAd) {
+                this.newBannerAd()
+            }
+            this.bannerAd.showCount ++
             this.bannerAd.show()
         }
     },
 
     hideBannerAd(){
         if (this.bannerAd) {
-            this.bannerAd.hide()
+            if (this.bannerAd.showCount>=3) {
+                this.newBannerAd()
+            }else{
+                this.bannerAd.hide()
+            }
         }
     },
+
+
 });
