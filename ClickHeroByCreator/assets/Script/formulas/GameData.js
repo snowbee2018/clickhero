@@ -232,8 +232,6 @@ cc.Class({
         },
         // 根据关卡等级 获得怪数
         getZoneMonsterCount(lv){
-            console.log("xxxxj lvlvlv"+lv + "  "+(10 + lv/500*0.1 + this.getMinusMonsterNum()));
-            
             let c = Math.floor(10 + lv/500*0.1 + this.getMinusMonsterNum())
             return Math.max(c,2)
         },

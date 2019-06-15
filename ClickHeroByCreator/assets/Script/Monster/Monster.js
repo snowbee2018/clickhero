@@ -309,27 +309,28 @@ cc.Class({
 
     goDie () {
         const self = this;
-        // console.log("Die");
         self._alive = false;
         self.playAnim("Dieing");
-
+        const func = self._onMonsterDestroy
         setTimeout(function() {
             if (!self._isByeBye) {
-                if (self._onMonsterDestroy) {
-                    self._onMonsterDestroy(self._lv, self._gold, self._isBoss, self._soul);
+                if (func) {
+                    func(self._lv, self._gold, self._isBoss, self._soul);
                 }
             }
         },300)
     },
 
     onDieAnimEnd () {
-        const self = this;
-        self.node.destroy();
+        if (cc.isValid(this.node)) {
+            this.node.destroy();
+        }
     },
 
     byebye () { // 上一关下一关调用的，不回调
-        const self= this;
-        self._isByeBye = true;
-        self.node.destroy();
+        this._isByeBye = true;
+        if (cc.isValid(this.node)) {
+            this.node.destroy();
+        }
     },
 });
