@@ -83,8 +83,7 @@ cc.Class({
     addHeroItem(heroID) {
         const self = this;
         var listItemNode = cc.instantiate(self.heroItemPrefab);
-        listItemNode.getComponent("HeroListItem").setItem(this, heroID, viewRect);
-        listItemNode.parent = self.heroList.content;
+
         listItemNode.y = heroID * -140 - 70
         listItemNode.zIndex = 100 - heroID
         let wPos = self.heroList.content.parent.convertToWorldSpaceAR(cc.v2(0, 0));
@@ -96,7 +95,8 @@ cc.Class({
             viewSize.width,
             viewSize.height
         );
-
+        listItemNode.getComponent("HeroListItem").setItem(this, heroID, viewRect);
+        listItemNode.parent = self.heroList.content;
         self._heroItemMap[heroID] = true;
         listItemNode.active = false
 
