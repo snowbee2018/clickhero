@@ -42,7 +42,7 @@ cc.Class({
                 desc = "永久妖丹掉落×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
-                ruby = 20
+                ruby = 30
                 cd = 60*10
                 unlockLv = 10
                 break;
@@ -51,7 +51,7 @@ cc.Class({
                 desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
-                ruby = 30
+                ruby = 40
                 cd = 60*10
                 unlockLv = 10
                 break;
