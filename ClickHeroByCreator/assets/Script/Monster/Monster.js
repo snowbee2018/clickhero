@@ -312,10 +312,14 @@ cc.Class({
         self._alive = false;
         self.playAnim("Dieing");
         const func = self._onMonsterDestroy
+        const lv = self._lv
+        const gold = this._gold
+        const isBoss = this._isBoss
+        const soul = this._soul
         setTimeout(function() {
             if (!self._isByeBye) {
                 if (func) {
-                    func(self._lv, self._gold, self._isBoss, self._soul);
+                    func(lv, gold, isBoss, soul);
                 }
             }
         },300)
