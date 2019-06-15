@@ -83,6 +83,7 @@ cc.Class({
     addHeroItem(heroID) {
         const self = this;
         var listItemNode = cc.instantiate(self.heroItemPrefab);
+        listItemNode.getComponent("HeroListItem").setItem(this, heroID, viewRect);
         listItemNode.parent = self.heroList.content;
         listItemNode.y = heroID * -140 - 70
         listItemNode.zIndex = 100 - heroID
@@ -96,7 +97,6 @@ cc.Class({
             viewSize.height
         );
 
-        listItemNode.getComponent("HeroListItem").setItem(this, heroID, viewRect);
         self._heroItemMap[heroID] = true;
         listItemNode.active = false
 
