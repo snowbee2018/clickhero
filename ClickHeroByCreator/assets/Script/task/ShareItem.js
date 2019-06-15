@@ -1,5 +1,5 @@
-const rubys = [100,200,400,500] // 每邀请5个给的奖励
-const rebirthRuby = 150
+// const rubys = [100,200,400,500] // 每邀请5个给的奖励
+const rebirthRuby = 300
 const shareRuby = 50
 cc.Class({
     extends: cc.Component,
@@ -36,8 +36,8 @@ cc.Class({
         else if (i%5 == 0)
         {
             let num = i/5-1
-            num = Math.min(num,rubys.length-1)
-            this.shareRuby = rubys[num]
+            // num = Math.min(num,rubys.length-1)
+            this.shareRuby = 100
         } else {
             this.shareRuby = shareRuby
         }

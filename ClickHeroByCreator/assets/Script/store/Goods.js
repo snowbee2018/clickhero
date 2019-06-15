@@ -27,7 +27,7 @@ cc.Class({
                 var str = Formulas.formatBigNumber(gold)
                 desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
                 state = ""
-                ruby = 30
+                ruby = 50
                 break;
             case 16:
                 name = "呼朋唤友"
@@ -42,7 +42,7 @@ cc.Class({
                 desc = "永久妖丹掉落×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
-                ruby = 20
+                ruby = 30
                 cd = 60*10
                 unlockLv = 10
                 break;
@@ -51,14 +51,14 @@ cc.Class({
                 desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
-                ruby = 30
+                ruby = 40
                 cd = 60*10
                 unlockLv = 10
                 break;
             case 6:
                 name = "大开杀戒"
                 desc = "附加10倍DPS伤害，持续60秒，可叠加多个"
-                ruby = 25
+                ruby = 50
                 unlockLv = 30
                 break;
             case 2:
@@ -81,7 +81,7 @@ cc.Class({
                 name = "自动点击"
                 desc = "(+10每秒轻击)"
                 state = "当前拥有数:" + this.getCount()
-                ruby = 400 + 400 * this.getCount()// + 已拥有数*500
+                ruby = 500 + 500 * this.getCount()// + 已拥有数*500
                 unlockLv = 80
                 break;
             case 5:
