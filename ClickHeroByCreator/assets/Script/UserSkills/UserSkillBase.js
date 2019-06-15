@@ -152,8 +152,10 @@ cc.Class({
     skillScheduleCallBack () {
         const self = this;
         if (!self._isBuy) return;
+        console.log("skillScheduleCallBack " + this.skillName);
         if (self._isActive) {
             // PublicFunc.unschedule(this._scheCallback);
+            console.log("skillScheduleCallBack 1");
         } else {
             var nowTime = Date.parse(new Date());
             var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
@@ -167,15 +169,16 @@ cc.Class({
                 self._coolingCurtail = 0;
                 self.onCoolingDone();
                 self.gray.active = !self.isCanUse();
-                if (self.gray.active) {
+                if (!self.gray.active) {
                     PublicFunc.unschedule(this._scheCallback);
                 }
+                console.log("skillScheduleCallBack 2");
             }
         }
 
         if (self.bSustain) {
             if (self._isSustainFinish) {
-
+                console.log("skillScheduleCallBack 3");
             } else {
                 var nowTime = Date.parse(new Date());
                 var realSustainTime = self.sustainTime + self.getSustainTimeAdded();
@@ -183,10 +186,12 @@ cc.Class({
                 if (timeSustain > 0) {
                     // var timeStr = self.dateFormat(timeSustain / 1000);
                     // self.onSustainCountDown(timeSustain / 1000, timeStr);
+            console.log("skillScheduleCallBack 4");
                 } else {
                     self._isSustainFinish = true;
                     self.backout();
                     self.gray.active = !self.isCanUse();
+                    console.log("skillScheduleCallBack 5");
                 }
             }
         }
