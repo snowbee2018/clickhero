@@ -8,8 +8,13 @@ cc.Class({
     start(){
         // this.refreshView()
         CloudDB.getChildUserData(this.onChildData.bind(this),true)
+        WeChatUtil.showBannerAd()
     },
 
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
+    },
+    
     refreshView(){
         // 这里从DataCenter拿到datas
         // 模拟数据

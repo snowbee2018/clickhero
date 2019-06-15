@@ -150,6 +150,7 @@ cc.Class({
     },
 
     playBtn() {
+        if (this.tgClick)
         if (this.btnAudioClip) {
             cc.audioEngine.playEffect(this.btnAudioClip, false);
         }

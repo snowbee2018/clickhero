@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-05-19
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-19 18:30:30
+ * @Last Modified time: 2019-06-15 18:15:38
  */
  
 cc.Class({
@@ -42,6 +42,11 @@ cc.Class({
         this.tgClickEffect.isChecked = Boolean(Number(bClickEffect))
 
         this.lbTips.string = PublicFunc.getTipsStr()
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     onCheckBgm(){

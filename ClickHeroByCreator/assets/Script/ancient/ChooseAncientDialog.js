@@ -17,6 +17,11 @@ cc.Class({
 
     start () {
         this.refresh();
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     refresh(){

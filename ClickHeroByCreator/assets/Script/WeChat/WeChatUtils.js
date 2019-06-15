@@ -704,4 +704,31 @@ cc.Class({
             })
         }
     },
+
+    showBannerAd(){
+        if (this.isWeChatPlatform) {
+            let sys = wx.getSystemInfoSync()
+            this.bannerAd = this.bannerAd || wx.createBannerAd({
+                adUnitId: 'adunit-44843eb83e4ec896',
+                style: {
+                    left: 0,
+                    top: sys.screenHeight-80,
+                    width: sys.screenWidth,
+                    height : 80,
+                }
+              })
+              this.bannerAd.onError(function(errMsg,errCode) {
+                  console.log("bannerAd.onError");
+                  console.log(errCode + ":" + errMsg);
+                  
+              })
+            this.bannerAd.show()
+        }
+    },
+
+    hideBannerAd(){
+        if (this.bannerAd) {
+            this.bannerAd.hide()
+        }
+    },
 });

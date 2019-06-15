@@ -41,6 +41,11 @@ cc.Class({
         const self = this;
         self.addSkillItem();
         self.setDisplay();
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     // update (dt) {},

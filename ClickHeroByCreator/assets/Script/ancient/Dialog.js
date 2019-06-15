@@ -15,6 +15,14 @@ cc.Class({
         togLab: cc.Label,
     },
 
+    start () {
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
+    },
+
     setDesc(str){
         this.desc.string = str;
     },

@@ -112,7 +112,7 @@ cc.Class({
             Events.emit(Events.REFRESH_HERO_BUYCOST);
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
-            GameData.addTreasureOdds = 0.01 + 0.01 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
+            GameData.addTreasureOdds = 0.01 + 0.0001 * (9900 * (1 - Math.exp(-0.02*this.level))/100.0);
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
             GameData.addMetalDetectorSecond = this.level * 2;
@@ -234,7 +234,7 @@ cc.Class({
             desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))).toFixed(4) + "%解锁和升级英雄花费"
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
-            desc = "+" + (GameData.getTreasureOdds()*100-1).toFixed(4) + "%的葫芦妖出现概率"
+            desc = "+" + (GameData.getTreasureOdds()).toFixed(6) + "%的葫芦妖出现概率"
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
             desc = "+" + (this.level * 2) + "s火眼金睛持续时间"

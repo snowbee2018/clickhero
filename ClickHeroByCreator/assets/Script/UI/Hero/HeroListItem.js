@@ -36,13 +36,13 @@ cc.Class({
     onLoad () {
         const self = this;
         self.heroIcon = self.heroNode.getComponent("HeroIcon");
+        self.heroIcon.setIcon(self._heroListCtor, self._heroID);
+        self.addSkillIcon();
+        self.setDisplay();
     },
 
     start () {
         const self = this;
-        self.heroIcon.setIcon(self._heroListCtor, self._heroID);
-        self.addSkillIcon();
-        self.setDisplay();
         
     },
 

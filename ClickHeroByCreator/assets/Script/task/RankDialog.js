@@ -10,6 +10,11 @@ cc.Class({
         this.lbTips.string = PublicFunc.getTipsStr()
         this.datas = []
         this.loadmore()
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     loadmore(){

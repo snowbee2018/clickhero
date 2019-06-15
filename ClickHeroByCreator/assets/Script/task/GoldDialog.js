@@ -14,7 +14,11 @@ cc.Class({
     },
 
     start () {
-        
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     // type: 0 gold, 1 soul, 2 ruby.

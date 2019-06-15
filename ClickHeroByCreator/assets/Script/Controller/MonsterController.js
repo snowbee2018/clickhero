@@ -91,12 +91,16 @@ cc.Class({
         const self = this;
         var monsterInfo = self.getCurMonsterInfo();
         var obj = {}
-        obj.lv = monsterInfo.lv;
+        obj.lv = monsterInfo.lv || DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
         obj.isTreasureChest = monsterInfo.isTreasureChest;
         obj.isBoss = monsterInfo.isBoss;
         obj.isPrimalBoss = monsterInfo.isPrimalBoss;
-        obj.gold = monsterInfo.gold.toExponential(4);
-        obj.soul = monsterInfo.soul.toExponential(4);
+        try {
+            obj.gold = monsterInfo.gold.toExponential(4);
+            obj.soul = monsterInfo.soul.toExponential(4);
+        } catch (error) {
+            
+        }
 
         obj.killCount = self.killCount;
         obj.monsterCount = self.monsterCount;

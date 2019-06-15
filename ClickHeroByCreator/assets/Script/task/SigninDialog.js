@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-05-30 10:52:46
+ * @Last Modified time: 2019-06-15 18:11:16
  */
  
 cc.Class({
@@ -34,6 +34,11 @@ cc.Class({
         if (this.isSignin()) {
             this.btn.interactable = false
         }
+        WeChatUtil.showBannerAd()
+    },
+
+    onDestroy(){
+        WeChatUtil.hideBannerAd()
     },
 
     bindViews(){
