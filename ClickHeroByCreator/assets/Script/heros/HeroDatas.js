@@ -141,7 +141,7 @@ cc.Class({
                     }
                 }
             }
-            if (this.selAncients.length==0) {
+            if (this.selAncients.length < 4) {
                 // 首次随机生成4个选中的古神
                 this.initSelAncients();
             }
