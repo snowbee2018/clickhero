@@ -86,7 +86,7 @@ cc.Class({
                 break;
             case 5:
                 name = "月光宝盒の平行时空"
-                desc = "在平行时空穿梭，什么都不会失去"
+                desc = "在平行时空穿梭，不需要重置游戏"
                 var str = Formulas.formatBigNumber(this.getBagSoul())
                 state = "穿越次数+1，立即获得" + str + "仙丹"
                 ruby = 400
@@ -95,8 +95,8 @@ cc.Class({
             // 下面是超越了
             case 7:
                 name = "一动不动是萌萌"
-                desc = "每次购买+50%的闲置型上古神器收益"
-                state = "挂机收益增加:+" + (this.getCount()*50)+"%"
+                desc = "每次购买+50%的挂机型神器效果"
+                state = "挂机效果增加:+" + (this.getCount()*50)+"%"
                 ruby = 300
                 unlockLv = 300
                 break;
