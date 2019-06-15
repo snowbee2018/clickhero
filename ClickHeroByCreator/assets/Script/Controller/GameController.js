@@ -17,6 +17,7 @@ cc.Class({
         comboCount: cc.Label,
 
         pageNode: cc.Node,
+        nodeBoard: cc.Node,
 
         upgrageSelectBtn: cc.Node,
         upgrageSelectBtnLab: cc.Label,

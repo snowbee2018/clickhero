@@ -16974,12 +16974,6 @@
     "itemPrefab": {
       "__uuid__": "853db992-df2f-446f-aed1-0b15541f63a7"
     },
-    "SigninDialog": {
-      "__uuid__": "5933bb13-ce8b-4b0b-ae29-fc80c7c2bfdf"
-    },
-    "ShareDialog": {
-      "__uuid__": "3c5130f6-e0e9-489c-9ef0-76bacaeab04f"
-    },
     "_id": "2dY+jV2P5BbI0M/RpslBbF"
   },
   {
@@ -18979,6 +18973,9 @@
     },
     "pageNode": {
       "__id__": 139
+    },
+    "nodeBoard": {
+      "__id__": 31
     },
     "upgrageSelectBtn": {
       "__id__": 141

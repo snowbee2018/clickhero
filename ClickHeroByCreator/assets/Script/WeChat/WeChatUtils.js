@@ -713,13 +713,19 @@ cc.Class({
             this.bannerAd = null
         }
         let sys = wx.getSystemInfoSync()
+        console.log(sys);
+        let offset = 0
+        let w = sys.screenWidth * 0.8
+        if (sys.model.indexOf('iPhone X')>-1) {
+            offset = -40
+        }
         this.bannerAd = wx.createBannerAd({
             adUnitId: 'adunit-44843eb83e4ec896',
             style: {
-                left: 0,
-                top: sys.screenHeight-120,
-                width: sys.screenWidth,
-                height : 120,
+                left: (sys.screenWidth-w)/2,
+                top: sys.screenHeight-80 + offset,
+                width: w,
+                height : 80,
             }
         })
         this.bannerAd.onError(function(errMsg,errCode) {
@@ -728,8 +734,7 @@ cc.Class({
             
         })
         this.bannerAd.onResize(function(res) {
-            console.log("xxxj top" + sys.screenHeight - res.height);
-            self.bannerAd.style.top = sys.screenHeight - res.height
+            self.bannerAd.style.top = sys.screenHeight - res.height + offset
         })
         this.bannerAd.showCount = 0
     },
