@@ -84,7 +84,7 @@ cc.Class({
                 new AncientData().init(6,false,false,"不须鞭",0,"每级增加猴子猴孙持续时间2秒"),
                 new AncientData().init(7,false,false,"昊天塔",0,"每级+1秒boss战通关时间"),
                 new AncientData().init(8,false,false,"神农鼎",0,"每级约-0.99%购买和升级英雄花费"),
-                new AncientData().init(9,false,false,"伏羲琴",0,"每级约+0.1978%葫芦妖出现概率"),
+                new AncientData().init(9,false,false,"伏羲琴",0,"每级约+19.78%葫芦妖出现概率"),
                 new AncientData().init(10,false,false,"夺魂箫",0,"增加火眼金睛持续时间2秒"),
                 new AncientData().init(11,false,false,"九曲珠",0,"每级约+0.24%的10倍妖丹概率"),
                 new AncientData().init(12,false,false,"盘古斧",0,"每级增加20%点击伤害"),
