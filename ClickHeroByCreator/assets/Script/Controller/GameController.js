@@ -414,8 +414,8 @@ cc.Class({
                 self.nodeOpenTabTips.opacity = 0
                 self.nodeOpenTabTips.scale = 0.8
                 self.nodeOpenTabTips.runAction(cc.repeatForever(
-                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
-                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(20,-10))),)))
             }
         }
     },
@@ -431,8 +431,8 @@ cc.Class({
                 self.nodeSkillTabTips.opacity = 0
                 self.nodeSkillTabTips.scale = 0.8
                 self.nodeSkillTabTips.runAction(cc.repeatForever(
-                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-20,10))),
-                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(20,-10))),)))
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-20,10))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(20,-10))),)))
             }
         }
     },
@@ -609,8 +609,8 @@ cc.Class({
             this.nodeFinger.setPosition(cc.v2(80,40))
             this.nodeFinger.opacity = 100
             this.nodeFinger.runAction(cc.repeatForever(
-                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-40,40))),
-                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-40))),)))
+                    cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-40,40))),
+                        cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(40,-40))),)))
             this.nodeClickPop = PublicFunc.createPopTips("快来点一下这个怪试试啊~")
             this.nodeClickPop.parent = this.monsterController.monsterPos
             this.nodeClickPop.setPosition(cc.v2(80,20))

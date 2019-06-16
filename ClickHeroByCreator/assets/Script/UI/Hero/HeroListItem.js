@@ -39,6 +39,13 @@ cc.Class({
         self.heroIcon.setIcon(self._heroListCtor, self._heroID);
         self.addSkillIcon();
         self.setDisplay();
+
+        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
+        Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
+        Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
+        Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
+        Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
+        Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
     },
 
     start () {
@@ -123,8 +130,8 @@ cc.Class({
             self.nodeSkillTips.opacity = 0
             self.nodeSkillTips.scale = 0.8
             self.nodeSkillTips.runAction(cc.repeatForever(
-                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-40,20))),
-                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(40,-20))),)))
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-40,20))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(40,-20))),)))
             this.nodeSkillPop = PublicFunc.createPopTips("点这里进入英雄技能界面！")
             this.nodeSkillPop.parent = self.node.parent.parent
             this.nodeSkillPop.setPosition(cc.v2(80,140 - (130 * self._heroID)))
@@ -144,8 +151,8 @@ cc.Class({
             self.nodeFingerTips.opacity = 0
             self.nodeFingerTips.scale = 0.8
             self.nodeFingerTips.runAction(cc.repeatForever(
-                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.p(-30,10))),
-                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.p(30,-10))),)))
+                cc.sequence(cc.spawn(cc.fadeTo(0.5,255),cc.moveBy(0.5,cc.v2(-30,10))),
+                    cc.spawn(cc.fadeTo(0.5,100),cc.moveBy(0.5,cc.v2(30,-10))),)))
             this.nodePop = PublicFunc.createPopTips(txt)
             this.nodePop.parent = self.node.parent.parent
             this.nodePop.setPosition(cc.v2(300,140 - (130 * self._heroID)))
@@ -174,17 +181,9 @@ cc.Class({
         self.checkPointTop = cc.v2(0, this.node.height / 2);
         self.checkPointBotm = cc.v2(0, -this.node.height / 2);
         
-
-
         self._heroListCtor = heroListCtor;
         self._heroID = heroID;
-        Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
-        Events.on(Events.ON_BY_HERO, self.onHeroChange, self);
-        Events.on(Events.ON_UPGRADE_HERO, self.onHeroChange, self);
-        Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
-        Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
-        Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
-
+        
         // this.node.parent.on(cc.Node.EventType.POSITION_CHANGED, this.onPosChange.bind(this), this);
     },
 
@@ -330,8 +329,8 @@ cc.Class({
         if (!cc.isValid(self.dialog) && hero.isBuy) {
         // if (!cc.isValid(self.dialog)) {
             self.dialog = cc.instantiate(self.skillDialogPrefab);
-            self.dialog.parent = cc.director.getScene();
             self.dialog.getComponent("SkillDialog").setDialog(self._heroListCtor, self._heroID);
+            self.dialog.parent = cc.director.getScene();
             if (self.nodeSkillTips&&this.nodeSkillTips.active) {
                 this.nodeSkillTips.active = false
                 this.nodeSkillTips.removeFromParent()

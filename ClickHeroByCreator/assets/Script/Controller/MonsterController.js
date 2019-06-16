@@ -99,7 +99,7 @@ cc.Class({
             obj.gold = monsterInfo.gold.toExponential(4);
             obj.soul = monsterInfo.soul.toExponential(4);
         } catch (error) {
-            
+            console.error(error);
         }
 
         obj.killCount = self.killCount;
