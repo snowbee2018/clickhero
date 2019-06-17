@@ -131,7 +131,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 400
+      "height": 420
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -203,7 +203,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 87,
+      "y": 70,
       "z": 0
     },
     "_scale": {
@@ -311,7 +311,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 123,
-      "y": -121,
+      "y": -126,
       "z": 0
     },
     "_scale": {
@@ -551,8 +551,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "Dialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "19afcK4hipAULth+Lcrp0ix",
     "handler": "cancel",
     "customEventData": ""
   },
@@ -643,7 +643,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -123,
-      "y": -121,
+      "y": -126,
       "z": 0
     },
     "_scale": {
@@ -883,8 +883,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "Dialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "19afcK4hipAULth+Lcrp0ix",
     "handler": "confirm",
     "customEventData": ""
   },
@@ -975,7 +975,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -121,
+      "y": -126,
       "z": 0
     },
     "_scale": {
@@ -1215,8 +1215,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "Dialog",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "19afcK4hipAULth+Lcrp0ix",
     "handler": "confirm",
     "customEventData": ""
   },
@@ -1755,7 +1755,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 400
+      "height": 420
     },
     "_resize": 0,
     "_N$layoutType": 0,

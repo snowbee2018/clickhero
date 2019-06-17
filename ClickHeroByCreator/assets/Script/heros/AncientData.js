@@ -148,6 +148,7 @@ cc.Class({
                 }
             }
             GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断挂机
+            GameData.calGoldTimes()
         } else if (this.id == 18) {
             // +5% Gold
             GameData.addGoldTimes = 1 + this.level * 0.05;
@@ -240,7 +241,7 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s火眼金睛持续时间"
         } else if (this.id == 11) {
             // 普怪 宝箱 10倍金币的概率
-            desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的小妖和葫芦妖10倍妖丹概率"
+            desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的10倍妖丹概率"
         } else if (this.id == 12) {
             // +20% click damage
             desc = "+" + (20 * this.level) + "%点击伤害" // 需要bigNumber
@@ -258,7 +259,7 @@ cc.Class({
             desc = "每关"+GameData.getMinusMonsterNum().toFixed(4)+"个怪数量"
         } else if (this.id == 17) {
             // 加挂机金币
-            desc = "+" + ((GameData.addLeaveGoldTimes-1)*100).toFixed(4) + "%挂机时妖丹"
+            desc = "+" + ((GameData.addLeaveGoldTimes-1)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时妖丹"
         } else if (this.id == 18) {
             // +5% Gold
             desc = "+" + (5*this.level) + "%妖丹倍数"
@@ -276,7 +277,7 @@ cc.Class({
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {
             // 加挂机DPS伤害
-            desc = "+" + ((GameData.addLeaveDPSTimes-1)*100).toFixed(4) + "%挂机时DPS伤害"
+            desc = "+" + ((GameData.addLeaveDPSTimes-1)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时DPS伤害"
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;

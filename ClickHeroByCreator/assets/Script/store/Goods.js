@@ -21,14 +21,6 @@ cc.Class({
         let unlockLv = 0
         let count = this.getCount();
         switch (this.id) {
-            case 0:
-                name = "一袋妖丹"
-                var gold = this.getBagGold()
-                var str = Formulas.formatBigNumber(gold)
-                desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
-                state = ""
-                ruby = 50
-                break;
             case 16:
                 name = "呼朋唤友"
                 desc = "每邀请一个好友，DPS伤害+30%，还能获得仙桃哦！"
@@ -37,11 +29,19 @@ cc.Class({
                 count = childDatas.length
                 state = "邀请数量：" + count + "  当前增益：" + (count*30) +"%"
                 break
+            case 0:
+                name = "一袋妖丹"
+                var gold = this.getBagGold()
+                var str = Formulas.formatBigNumber(gold)
+                desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
+                state = ""
+                ruby = 50
+                break;
             case 14:
                 name = "聚宝盆"
-                desc = "永久妖丹掉落×1.2，每天可购一次"
+                desc = "永久妖丹倍数×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
-                state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
+                state = "等级：" + count + "  妖丹增益：" + num.toFixed(2) +"%"
                 ruby = 30
                 cd = 60*10
                 unlockLv = 10
@@ -50,7 +50,7 @@ cc.Class({
                 name = "苦海无涯"
                 desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
-                state = "等级：" + count + "  当前增益：" + num.toFixed(2) +"%"
+                state = "等级：" + count + "  DPS增益：" + num.toFixed(2) +"%"
                 ruby = 40
                 cd = 60*10
                 unlockLv = 10
@@ -79,7 +79,7 @@ cc.Class({
                 break;
             case 4:
                 name = "自动点击"
-                desc = "(+10每秒轻击)"
+                desc = "(+10每秒点击击)"
                 state = "当前拥有数:" + this.getCount()
                 ruby = 500 + 500 * this.getCount()// + 已拥有数*500
                 unlockLv = 80
@@ -94,14 +94,14 @@ cc.Class({
                 break;
             // 下面是超越了
             case 7:
-                name = "一动不动是萌萌"
+                name = "一动不动是萌萌" + (count>0? " Lv" + count:"")
                 desc = "每次购买+50%的挂机型神器效果"
                 state = "挂机效果增加:+" + (this.getCount()*50)+"%"
                 ruby = 300
                 unlockLv = 300
                 break;
             case 8:
-                name = "神器打个折"
+                name = "神器打个折" + (count>0? " Lv" + count:"")
                 desc = "每次购买-5%的上古神器费用，上限150次"
                 var num = ((1 - Math.pow(0.95,this.getCount())) * 100).toFixed(4)
                 state = "上古神器升级费用:-" + num +"%" 
@@ -109,42 +109,42 @@ cc.Class({
                 unlockLv = 300
                 break;
             case 9:
-                name = "伤害高又高"
+                name = "伤害高又高" + (count>0? " Lv" + count:"")
                 desc = "购买+"+(100+10*this.getCount())+"%的DPS"
                 state = "DPS增加:+" + (PublicFunc.get10TimesByCount(this.getCount())*10)+"%"
                 ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
-                name = "妖丹多又多"
+                name = "妖丹多又多" + (count>0? " Lv" + count:"")
                 desc = "购买+"+(1000+100*this.getCount())+"%的妖丹加成"
                 state = "妖丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 500
                 unlockLv = 200
                 break;
             case 15:
-                name = "仙丹多又多"
+                name = "仙丹多又多" + (count>0? " Lv" + count:"")
                 desc = "购买+"+(1000+100*this.getCount())+"%的仙丹加成"
                 state = "仙丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 500
                 unlockLv = 300
                 break;
             case 11:
-                name = "催泪铃加持"
+                name = "催泪铃加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+25%的催泪铃的效果"
                 state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
                 ruby = 200  + 200 * this.getCount()
                 unlockLv = 300
                 break;
             case 12:
-                name = "昊天塔加持"
+                name = "昊天塔加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买增加+75%昊天塔效果"
                 state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
                 ruby = 200  + 200 * this.getCount()
                 unlockLv = 300
                 break;
             case 13:
-                name = "崆峒印加持"
+                name = "崆峒印加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+增加100%崆峒印效果"
                 state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
                 ruby = 200  + 200 * this.getCount()
@@ -222,8 +222,10 @@ cc.Class({
         var key = DataCenter.KeyMap.passLavel
         var lv = DataCenter.getDataByKey(key) + 1
         lv = Math.ceil(lv / 5) * 5
-        console.log("全局金币倍数："+GameData.globalGoldTimes);
-        var gold = Formulas.getMonsterGold(lv).times(100).times(GameData.globalGoldTimes)
+        let timesTreas = GameData.getTreasureTimes()*GameData.getTreasureOdds()+1
+        let times10x = (10*GameData.addTenfoldGoldOdds+1)
+        let times = GameData.globalGoldTimes*timesTreas*times10x
+        var gold = Formulas.getMonsterGold(lv).times(100).times(times)
         return gold
     },
     // 快速转生能获得的英魂

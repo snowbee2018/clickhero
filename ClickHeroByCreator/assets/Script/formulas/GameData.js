@@ -125,6 +125,7 @@ cc.Class({
             if (this.playerStatus == 0) {
                 this.globalDPSTimes = this.globalDPSTimes * (1+this.addDPSClickDamageTimes*this.clickCombo)
             }
+            this.globalDPSTimes *= 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1)
         },
         // 计算全局金币倍数
         calGoldTimes(){

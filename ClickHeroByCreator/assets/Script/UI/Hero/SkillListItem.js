@@ -73,7 +73,7 @@ cc.Class({
                 else if (skillData.unlock=="转生") {
                     // var map = DataCenter.KeyMap;
                     var num = DataCenter.getRealRebirthSoul();
-                    self.describe.string = "般若波罗蜜，穿越时空，回到500年前，获得"+ num + "仙丹";
+                    self.describe.string = "般若波罗蜜，穿越时空，回到500年前，获得"+ Formulas.formatBigNumber(num) + "仙丹";
                 }
             } else if(skillData.bjProbability) {
                 self.describe.string = "增加" + (skillData.bjProbability*100) + "%暴击概率"

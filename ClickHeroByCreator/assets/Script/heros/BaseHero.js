@@ -183,8 +183,9 @@ cc.Class({
                 if (isCanBuy) {
                     if (this.id == 19 && skillID == 3) {
                         // 弹出对话框
+                        var num = DataCenter.getRealRebirthSoul();
                         PublicFunc.popDialog({
-                            contentStr: "般若波罗蜜，开启月光宝盒，穿越时空回到500年前，这将重新开始你的游戏之旅，并获得仙丹，你愿意回到500年前吗？",
+                            contentStr: "这将清空你的英雄等级和游戏关卡和妖丹，并获得"+Formulas.formatBigNumber(num)+"仙丹，每个仙丹+10%DPS("+Formulas.formatBigNumber(num.div(10))+"%)，你愿意回到500年前吗？",
                             btnStrs: {
                                 left: '是 的',
                                 right: '不，谢谢'

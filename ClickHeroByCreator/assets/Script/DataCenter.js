@@ -262,6 +262,7 @@ cc.Class({
             var totalSoul = self.getDataByKey(key);
             self.setDataByKey(key, totalSoul.plus(soul));
             Events.emit(Events.ON_SOUL_CHANGE);
+            GameData.refresh()
         } else {
             console.error("type error, 'soul' must be a BigNumber.");
         }
@@ -320,6 +321,7 @@ cc.Class({
             if (oldSoul.isGreaterThanOrEqualTo(soul)) {
                 self.setDataByKey(key, oldSoul.minus(soul));
                 Events.emit(Events.ON_SOUL_CHANGE);
+                GameData.refresh()
             } else {
                 console.error("soul is not enough.");
             }
