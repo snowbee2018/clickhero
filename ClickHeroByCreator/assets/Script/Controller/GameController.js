@@ -957,13 +957,12 @@ cc.Class({
     },
 
     showRankDialog () {
-        PublicFunc.popCDKeyDialog()
-        // console.log("showRankDialog");
-        // let dialog = cc.instantiate(this.RankDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // AudioMgr.playBtn();
+        console.log("showRankDialog");
+        let dialog = cc.instantiate(this.RankDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     // onLeftBtnClick () {
