@@ -67,6 +67,7 @@ cc.Class({
         }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
         this.tabs[3].active = v1
+        this.tabs[4].active = v1
         this.shareBtn.active = v1
         this.btnSignin.active = v1
 

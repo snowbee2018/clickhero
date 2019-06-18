@@ -185,10 +185,10 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.每个未使用的仙丹附加10%的DPS伤害",
+        const info = ["1.每个未使用的仙丹增加10%DPS",
             "2.英雄每1000级伤害翻40倍改为翻10倍",
-            "3.解决女娲补天石无效的BUG",
-            "4.离线收益受葫芦和九曲珠影响",
+            "3.离线收益受葫芦和九曲珠影响",
+            "4.一些小问题的修改"
             ].join("\n")
         this.popDialog({
             contentStr: info,
