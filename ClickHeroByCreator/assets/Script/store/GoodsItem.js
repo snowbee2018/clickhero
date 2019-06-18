@@ -35,7 +35,6 @@ cc.Class({
         var floor = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel) + 1
         if (this.data.id == 0 || this.data.id == 5) {
             // 买金币 和 英魂 每关都刷新下
-            this.data.init()
             this.bind()
         }
     },
@@ -44,6 +43,7 @@ cc.Class({
         var maxfloor = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
 
         this.data = goods||this.data
+        this.data.init() // 刷新下
         this.lbName.string = this.data.name
         this.lbDesc.string = this.data.desc
         this.lbState.string = this.data.state
@@ -91,7 +91,6 @@ cc.Class({
 
     onBuy(id){
         if (id == 15 && this.data.id == 5) {
-            this.data.init()
             this.bind()
         }
         if (id != this.data.id) {
@@ -101,7 +100,6 @@ cc.Class({
         if (id == 16) {
             GoodsDatas.refresh()
             GameData.refresh()
-            this.data.init()
         }
         this.bind()
     },

@@ -15,6 +15,7 @@ cc.Class({
         dialog: cc.Prefab,
         goldDialog: cc.Prefab,
         popTips : cc.Prefab,
+        CDKeyDialog : cc.Prefab,
     },
 
     onLoad(){
@@ -184,7 +185,7 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.每个仙丹附加10%的DPS伤害",
+        const info = ["1.每个未使用的仙丹附加10%的DPS伤害",
             "2.英雄每1000级伤害翻40倍改为翻10倍",
             "3.解决女娲补天石无效的BUG",
             "4.离线收益受葫芦和九曲珠影响",
@@ -195,5 +196,13 @@ cc.Class({
                 mid: '确 定',
             },
         });
+    },
+
+    popCDKeyDialog(){
+        let dialog = cc.instantiate(this.CDKeyDialog)
+        // dialog.getComponent("CDKeyDialog")
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 });

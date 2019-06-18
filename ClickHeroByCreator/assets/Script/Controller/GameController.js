@@ -558,10 +558,13 @@ cc.Class({
         //     // let pos = event.getLocation();
         //     ClickEnable = false;
         // }
-        self.clickHit();
-        var map = DataCenter.KeyMap;
-        DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
-        Events.emit(Events.ON_MANUAL_CLICK)
+        let pos = event.getLocation();
+        if (pos.y>cc.winSize.height*0.22 && pos.y<cc.winSize.height*0.78) {
+            self.clickHit();
+            var map = DataCenter.KeyMap;
+            DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
+            Events.emit(Events.ON_MANUAL_CLICK)
+        }
     },
 
     clickHit (isAuto) {
@@ -954,12 +957,13 @@ cc.Class({
     },
 
     showRankDialog () {
-        console.log("showRankDialog");
-        let dialog = cc.instantiate(this.RankDialog)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
-        AudioMgr.playBtn();
+        PublicFunc.popCDKeyDialog()
+        // console.log("showRankDialog");
+        // let dialog = cc.instantiate(this.RankDialog)
+        // dialog.parent = cc.director.getScene();
+        // dialog.x = cc.winSize.width / 2;
+        // dialog.y = cc.winSize.height / 2;
+        // AudioMgr.playBtn();
     },
 
     // onLeftBtnClick () {

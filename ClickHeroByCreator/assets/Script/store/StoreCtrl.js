@@ -9,6 +9,7 @@ cc.Class({
         dialogPrefab : cc.Prefab,
         lbRuby : cc.Label,
         btnAd : cc.Node,
+        btnKey : cc.Node,
     },
 
     onLoad(){
@@ -91,6 +92,9 @@ cc.Class({
 
     onMaxPassLavelChange(){
         let lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) || 0
+        if (lv >= 50) {
+            this.btnKey.active = true
+        }
         lv = lv + 100
         this.items.forEach(node => {
             let data = node.getComponent("GoodsItem").data
