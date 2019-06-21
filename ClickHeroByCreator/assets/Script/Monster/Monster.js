@@ -8,6 +8,7 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var zoneCfg = require("ZoneCfg")
+var bossFlag = {}
 
 cc.Class({
     extends: cc.Component,
@@ -76,6 +77,10 @@ cc.Class({
         }
     },
 
+    getBossFlag(){
+        return bossFlag
+    },
+
     setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack, onMonsterTalk) {
         const self = this;
         self._lv = lv;
@@ -93,11 +98,11 @@ cc.Class({
                 if (self._isTreasureChest) {
                     self._gold = self._gold.times(10 * GameData.getTreasureTimes());
                 }
-                if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
-                    if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds * 100)) {
-                        self._gold = self._gold.times(10);
-                    }
-                }
+                // if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
+                //     if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds)) {
+                //         self._gold = self._gold.times(10);
+                //     }
+                // }
             }
             if (monsterCloudInfo.soul) {
                 self._soul = monsterCloudInfo.soul;
@@ -106,21 +111,29 @@ cc.Class({
                     self._soul = Formulas.getPrimalBossSoul(self._lv);
                 }
             }
+            bossFlag = monsterCloudInfo.bossFlag || {}
         } else {
             self._isBoss = self._lv % 5 == 0;
             if (!self._isBoss) {
-                var odds = Math.min((1 + GameData.getTreasureOdds() * 100), 100);
+                var odds = 0.01 + GameData.getTreasureOdds()
                 self._isTreasureChest = Formulas.isHitRandom(odds);
             } else {
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
                     var baseOdds = 0.25;
-                    var realOdds = Math.min((baseOdds + GameData.getPrimalBossOdds()), 1);
+                    var realOdds = baseOdds + GameData.getPrimalBossOdds()
                     if (lv <= 100 && lv % 100 == 0) {
                         self._isPrimalBoss = true; // 百夫长
                     } else if (lv >= 110 && lv <= 130 && lv%10 == 0) {
                         self._isPrimalBoss = true; // 百夫长
                     } else {
-                        self._isPrimalBoss = Formulas.isHitRandom(realOdds * 100);
+                        if (bossFlag.lv == lv) {
+                            self._isPrimalBoss = bossFlag.isPrimalBoss
+                        }else{
+                            console.log("百夫长odds:" + realOdds);
+                            self._isPrimalBoss = Formulas.isHitRandom(realOdds);
+                            bossFlag.lv = lv
+                            bossFlag.isPrimalBoss = self._isPrimalBoss
+                        }
                     }
                     if (self._isPrimalBoss) {
                         self._soul = Formulas.getPrimalBossSoul(self._lv);
@@ -137,7 +150,7 @@ cc.Class({
             // if (!self._isBoss) { // 非Boss怪有一定概率金币翻10倍,基础概率是0
             // }
             // 有一定概率金币翻10倍,基础概率是0
-            if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds * 100)) {
+            if (Formulas.isHitRandom(GameData.addTenfoldGoldOdds)) {
                 self._gold = self._gold.times(10);
             }
         }

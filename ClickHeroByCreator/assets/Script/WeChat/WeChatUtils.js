@@ -66,6 +66,11 @@ cc.Class({
             }
             this.checkUpdate()
             this.newBannerAd()
+            if (this.compareVersion(version, '1.4.0')>=0) {
+                wx.setKeepScreenOn({
+                    keepScreenOn: true
+                })
+            }
         }
     },
 
@@ -759,5 +764,12 @@ cc.Class({
         }
     },
 
-
+    copyToClipboard(str,callback){
+        if (this.isWeChatPlatform) {
+            wx.setClipboardData({
+                data : str,
+                success : callback
+            })
+        }
+    },
 });

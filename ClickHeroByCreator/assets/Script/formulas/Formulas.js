@@ -168,12 +168,12 @@ cc.Class({
             }
         },
         
-        // 在 rate 概率下是否命中随机事件，rate 为百分数，大于等于0，小于100
+        // 在 rate 概率下是否命中随机事件，rate 为百分数，大于等于0，小于1
         isHitRandom (rate) {
-            if (rate >= 100) {
+            if (rate >= 1) {
                 return true;
             } else if (rate >= 0) {
-                if (Math.random()*100 < rate) {
+                if (Math.random() <= rate) {
                     return true;
                 } else {
                     return false;

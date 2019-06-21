@@ -147,7 +147,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveGoldTimes = 1 + this.level*0.25 - diff*0.01;//需要判断挂机
+            GameData.addLeaveGoldTimes = this.level*0.25 - diff*0.01;//需要判断挂机
             GameData.calGoldTimes()
         } else if (this.id == 18) {
             // +5% Gold
@@ -159,7 +159,10 @@ cc.Class({
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {
-            // 	空闲时每个未分配的自动点击器+ 10％Gold（没有点击60秒）。 放弃。。
+            // 	空闲时每个未分配的自动点击器+ 10％DPS（没有点击60秒）
+            let autoCount = GoodsDatas.getBuyCount(4)
+            GameData.addAutoIdleTimes = autoCount * this.level * 0.1
+            GameData.refresh()
         } else if (this.id == 22) {
             // +30% gold from Golden Clicks 
             GameData.addGoldClickTimes = 1 + 0.3*this.level;
@@ -175,7 +178,7 @@ cc.Class({
                     diff += (lv - i * 10);
                 }
             }
-            GameData.addLeaveDPSTimes = 1 + this.level*0.25 - diff*0.01;//需要判断挂机
+            GameData.addLeaveDPSTimes = this.level*0.25 - diff*0.01;//需要判断挂机
             console.log("GameData.addLeaveDPSTimes:" + GameData.addLeaveDPSTimes);
             GameData.refresh()
         } else if (this.id == 25) {
@@ -259,7 +262,7 @@ cc.Class({
             desc = "每关"+GameData.getMinusMonsterNum().toFixed(4)+"个怪数量"
         } else if (this.id == 17) {
             // 加挂机金币
-            desc = "+" + ((GameData.addLeaveGoldTimes-1)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时妖丹"
+            desc = "+" + ((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时妖丹"
         } else if (this.id == 18) {
             // +5% Gold
             desc = "+" + (5*this.level) + "%妖丹倍数"
@@ -269,7 +272,10 @@ cc.Class({
         } else if (this.id == 20) {
             // soul dps 不做
         } else if (this.id == 21) {
-            // 	空闲时每个未分配的自动点击器+ 10％Gold（没有点击60秒）。 放弃。。
+            // 	空闲时每个未分配的自动点击+ 10％Gold（没有点击60秒）
+            let autoCount = GoodsDatas.getBuyCount(4)
+            let result = autoCount * this.level * 10 * GameData.gdLeaveTimes
+            desc = "+"  + result.toFixed(2) + "%挂机时DPS伤害\n（自动点击×"+autoCount+"）"
         } else if (this.id == 22) {
             // +30% gold from Golden Clicks 
             desc = "+" + (30*this.level) + "%点石成金倍数"
@@ -277,7 +283,7 @@ cc.Class({
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {
             // 加挂机DPS伤害
-            desc = "+" + ((GameData.addLeaveDPSTimes-1)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时DPS伤害"
+            desc = "+" + ((GameData.addLeaveDPSTimes)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时DPS伤害"
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;

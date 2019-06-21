@@ -172,6 +172,10 @@ cc.Class({
         const self = this;
         if (skillInfo.heroID == self._heroID) {
             self.setDisplay();
+        } else if(skillInfo.heroID == 39){
+            if (this._heroID == 5 || this._heroID == 15) {
+                self.setDisplay()
+            }
         }
     },
 

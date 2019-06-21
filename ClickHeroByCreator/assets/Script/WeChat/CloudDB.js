@@ -117,7 +117,7 @@ cc.Class({
                             success: function (res) {
                                 // res.data 包含该记录的数据
                                 childDatas = childDatas.concat(res.data)
-                                if (res.data.length < 20) {
+                                if (res.data.length < 20||childDatas.length == 200) {
                                     DataCenter.saveChildUserData(childDatas)
                                     callBack(false, childDatas);
                                     Events.emit(Events.ON_BUY_GOODS,16)

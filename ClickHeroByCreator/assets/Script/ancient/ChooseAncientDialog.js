@@ -28,6 +28,8 @@ cc.Class({
         this.selIndex = -1;
         // 用选好的AncientList遍历初始化
         this.selAncients = HeroDatas.selAncients;
+        console.log(this.selAncients);
+        
         for (let i = 0; i < 4; i++) {
             if (i >= this.selAncients.length) {
                 this.items[i].node.active = false;
