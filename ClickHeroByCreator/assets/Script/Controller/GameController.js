@@ -212,6 +212,7 @@ cc.Class({
         Events.off(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
         Events.off(Events.ON_RESUME_GAME, self.onResumeGame, self);
         Events.off(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
+        Events.off(Events.ON_RESETGAME, this.resetGame, this);
     },
 
     onGameStart () {
@@ -253,6 +254,7 @@ cc.Class({
             Events.on(Events.ON_LEVEL_PASSED, self.onlvPassed, self);
             Events.on(Events.ON_RESUME_GAME, self.onResumeGame, self);
             Events.on(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
+            Events.on(Events.ON_RESETGAME, this.resetGame, this);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             // self.totalSoulLab.string = DataCenter.getSoulStr();
@@ -335,7 +337,8 @@ cc.Class({
         var rebirthSoul = DataCenter.getDataByKey(map.rebirthSoul);
         var obj = {}
         // 所有的bignumber都务必要 num.curGold.toExponential(4) 再存起来
-        obj[map.bAutoClickOpen] = self.getComponent("AutoClick").bAutoClickOpen; // 商店购买的自动点击是否开启
+        // obj[map.bAutoClickOpen] = self.getComponent("AutoClick").bAutoClickOpen; // 商店购买的自动点击是否开启
+        obj[map.bAutoClickOpen] = false
         let lastTime = Date.now()
         DataCenter.setDataByKey(map.lastTime,lastTime)
         obj[map.lastTime] = lastTime.toString(); // 上次存档的时间
@@ -966,6 +969,7 @@ cc.Class({
     },
 
     showRankDialog () {
+        // PublicFunc.resetGame()
         console.log("showRankDialog");
         let dialog = cc.instantiate(this.RankDialog)
         dialog.parent = cc.director.getScene();
@@ -1051,4 +1055,13 @@ cc.Class({
 
         
     // },
+    resetGame(){
+        this.setPageNodeActive(false)
+        this.tabs[2].active = false
+        this.tabs[3].active = false
+        this.tabs[4].active = false
+        this.shareBtn.active = false
+        this.btnSignin.active = false
+        this.getComponent("AutoClick").showAutoBtn(false)
+    },
 });

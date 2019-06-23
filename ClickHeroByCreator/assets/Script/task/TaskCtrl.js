@@ -9,7 +9,11 @@ cc.Class({
 
     onLoad(){
         console.log("xxxj task onload");
-        
+        Events.on(Events.ON_RESETGAME, this.resetGame, this);
+        this.fullViews()
+    },
+
+    fullViews(){
         this.items = []
         try {
             this.addItem(-1)
@@ -21,6 +25,10 @@ cc.Class({
         }
     },
 
+    onDestroy(){
+        Events.off(Events.ON_RESETGAME, this.resetGame, this);
+    },
+
     addItem(i) {
         console.log("xxxj additem" + i);
         
@@ -28,6 +36,15 @@ cc.Class({
         node.parent = this.sv.content;
         node.getComponent("TaskItem").bind(i);
         this.items[i] = node
+    },
+
+    resetGame(){
+        TaskDatas.resetGame()
+        this.sv.content.removeAllChildren()
+        // this.items.forEach(e => {
+        //     e.removeFromParent()
+        // });
+        this.fullViews()
     },
 })
 

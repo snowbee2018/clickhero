@@ -20,6 +20,7 @@ cc.Class({
         this.showRuby();
         this.onMaxPassLavelChange()
         Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
+        Events.on(Events.ON_RESETGAME, this.resetGame, this)
         // Events.on(Events.ON_LEVEL_PASSED, this.onlvPassed, this);
 
         if (!window.videoAd) {
@@ -68,6 +69,7 @@ cc.Class({
 
     onDestroy (){
         Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxPassLavelChange, this)
+        Events.off(Events.ON_RESETGAME, this.resetGame, this)
     },
 
     showRuby(){
@@ -120,7 +122,14 @@ cc.Class({
     },
 
     resetGame(){
-        this.sv.content.removeAllChildren()
+        console.log("xxxj storeCtrl resetGame");
+        
         this.btnKey.active = false
+        this.items.forEach(node => {
+            node.removeFromParent()
+        });
+        this.fullViews()
+        this.showRuby();
+        this.onMaxPassLavelChange()
     },
 });

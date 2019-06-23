@@ -112,10 +112,16 @@ Datas.getTodayStr = function(){
 }
 
 Datas.resetGame = function() {
+    let ruby = 0
+    Datas.datas.forEach(e => {
+        ruby +=e.getTotalRuby()
+    });
     Datas.buyCounts.forEach(e => {
+
         e.count = 0
     })
     Datas.refresh()
+    return ruby
 }
 
 module.exports = Datas

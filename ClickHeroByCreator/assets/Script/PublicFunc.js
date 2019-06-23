@@ -85,10 +85,11 @@ cc.Class({
 
     resetGame(){
         // 重置游戏
-        const self = this;
+        let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
         DataCenter.resetGame();
-        GoodsDatas.resetGame()
+        let ruby2 = GoodsDatas.resetGame()
         HeroDatas.resetGame();
+        Events.emit(Events.ON_RESETGAME);
         this.getComponent("HeroListControl").rebirth();
         this.getComponent("AncientCtrl").resetGame();
         this.getComponent("MonsterController").rebirth();
@@ -96,8 +97,9 @@ cc.Class({
         this.getComponent("UserSkillController").rebirth();
         Events.emit(Events.ON_GOLD_CHANGE);
         Events.emit(Events.ON_SOUL_CHANGE);
-        WeChatUtil.onHide();
-
+        Events.emit(Events.ON_RUBY_CHANGE);
+        // WeChatUtil.onHide();
+        this.popGoldDialog(2,ruby + Math.round(ruby2*0.75),null,true)
     },
 
     bindAncientSprite () {

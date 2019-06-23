@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-06-12 14:25:46 
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-12 21:16:24
+ * @Last Modified time: 2019-06-23 20:59:42
  */
 
 const self = {}
@@ -125,6 +125,12 @@ self.getRuby = function(i) {
         return true
     }
     return false
+}
+
+self.resetGame = function() {
+    self.datas = [
+        -1,-1,-1,-1,-1,
+    ]
 }
 
 module.exports = self

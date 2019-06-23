@@ -42,6 +42,7 @@ cc.Class({
     onDestroy(){
         Events.off(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
         Events.off(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
+        Events.off(Events.ON_BUY_GOODS, this.onBuyGoods, this);
     },
 
     onSoulChange(){

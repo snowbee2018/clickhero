@@ -240,4 +240,38 @@ cc.Class({
         soul = soul.times(GameData.getPrimalBossOdds() + 0.25).plus(4).integerValue()
         return soul
     },
+
+    getTotalRuby(){
+        let ruby = 0
+        let count = this.getCount();
+        switch (this.id) {
+            case 0:
+            case 14:
+            case 1:
+            case 6:
+            case 2:
+            case 5:
+            case 3:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 15:
+                ruby = this.ruby * count
+                break;
+            case 4:
+                for (let i = 0; i < count; i++) {
+                    ruby += 500 + 500 * i
+                }
+                break;
+            case 11:
+            case 12:
+            case 13:
+                for (let i = 0; i < count; i++) {
+                    ruby += Math.min(200  + 100 * i,500)
+                }
+                break;
+        }
+        return ruby
+    },
 })
