@@ -53,7 +53,6 @@ cc.Class({
         CfgMgr.loadSkillCfg(self.checkReady.bind(self));
         CfgMgr.loadAncientCfg();
         
-        
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.init();
             console.log('加载怪物资源');

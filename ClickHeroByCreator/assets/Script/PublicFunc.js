@@ -185,7 +185,7 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.邀请用户过第一关才能领奖励",
+        const info = ["1.新增新神器诛仙阵图",
             "2.第40个英雄北海龙王的技能改为给春十三娘和女国王加伤害",
             "3.阿弥陀佛的效果现在会永久叠加，每次穿越后最多叠20次",
             ].join("\n")
@@ -195,6 +195,19 @@ cc.Class({
                 mid: '确 定',
             },
         });
+        // wx.showModal({
+        //     title: '更新内容',
+        //     content: info,
+        //     // confirmText: '分享游戏',
+        //     // success: function(res) {
+        //     //     if (res.confirm) {
+        //     //         console.log('用户点击分享游戏')
+        //     //         WeChatUtil.shareAppMessage();
+        //     //         cc.sys.localStorage.setItem("sharetime",Date.now())
+        //     //         self.onCloseAd({isEnded:true})
+        //     //     }
+        //     // }
+        // })
     },
 
     popCDKeyDialog(){

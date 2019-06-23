@@ -231,8 +231,8 @@ cc.Class({
             self.isIdle = true; // 是否为挂机状态
             self.combo = 0; // 当前连击数
             DataCenter.init();
-            HeroDatas.init();
             GoodsDatas.init();
+            HeroDatas.init();
             TaskDatas.init();
             self.getComponent("AutoClick").init();
             self.heroListControl.setHeroList();
