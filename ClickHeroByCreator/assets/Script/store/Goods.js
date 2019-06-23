@@ -79,7 +79,7 @@ cc.Class({
                 break;
             case 4:
                 name = "自动点击"
-                desc = "(+10每秒点击击)"
+                desc = "(+10每秒点击)"
                 state = "当前拥有数:" + this.getCount()
                 ruby = 500 + 500 * this.getCount()// + 已拥有数*500
                 unlockLv = 80

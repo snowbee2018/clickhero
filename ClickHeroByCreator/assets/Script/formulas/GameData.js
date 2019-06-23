@@ -51,11 +51,12 @@ cc.Class({
         addDPSClickDamageTimes : 0, //14- 连击DPS倍数 √
         addGoldClickSecond: 0,     //15*- 点金手时间 2s++ √
         addMinusMonsterNum: 0,     //16   减怪数
-        addLeaveGoldTimes : 1,      //17- 挂机金币倍数 √
+        addLeaveGoldTimes : 0,      //17- 挂机金币加成 √
         addGoldTimes: 1,           //18* +5% Gold √
         addTreasureTimes: 1,       //19* 宝箱金币倍数 √
+        addAutoIdleTimes: 0,       //21 自动点击的挂机DPS加成
         addGoldClickTimes: 1,      //22*- 点金手倍数 +30% gold from Golden Clicks √
-        addLeaveDPSTimes : 1,       //24- 加挂机DPS伤害 √
+        addLeaveDPSTimes : 0,       //24- 加挂机DPS伤害 √
         addCritStormSecond: 0,     //25*- 增加暴击风暴时间 +2s √
         addSkillCoolReduction: 0,  //26*- 技能冷却减少 0~1 √
 
@@ -116,10 +117,12 @@ cc.Class({
                 if (hero.isBuy) {
                     var a = hero.getGlobalDPSTimes();
                     times *= a;
-                    
                 }
             });
-            let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes:1)*this.gdLeaveTimes;
+            this.skDPSTimes = Math.pow(1.05,DataCenter.getSkill6Data().count)
+            let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes*this.gdLeaveTimes:0) + 1
+            let idleAutoTimes = (this.playerStatus==1?this.addAutoIdleTimes*this.gdLeaveTimes:0) + 1
+            idleTimes *= idleAutoTimes
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes*this.gdShareDPSTimes
                 *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS*this.gd10xDpsTimes;
             if (this.playerStatus == 0) {
@@ -135,10 +138,9 @@ cc.Class({
                     times*=hero.getGlobalGoldTimes();
                 }
             });
-            let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes:1)*this.gdLeaveTimes;
+            let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes*this.gdLeaveTimes:0) + 1
             this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
                  * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdGoldTimes;
-            
         },
         // 计算总DPS伤害
         calDPSDamage(){

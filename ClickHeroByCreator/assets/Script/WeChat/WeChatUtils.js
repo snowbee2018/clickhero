@@ -75,7 +75,11 @@ cc.Class({
                       top: this.sys.screenHeight - 80,
                       width: 40,
                       height: 40
-                    }
+                    }})
+            }
+            if (this.compareVersion(version, '1.4.0')>=0) {
+                wx.setKeepScreenOn({
+                    keepScreenOn: true
                 })
             }
         }
@@ -783,4 +787,12 @@ cc.Class({
         }
     },
 
+    copyToClipboard(str,callback){
+        if (this.isWeChatPlatform) {
+            wx.setClipboardData({
+                data : str,
+                success : callback
+            })
+        }
+    },
 });

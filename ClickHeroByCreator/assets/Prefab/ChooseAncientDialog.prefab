@@ -2430,7 +2430,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 2,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -2607,8 +2607,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 400,
-      "height": 80
+      "width": 500,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2652,8 +2652,8 @@
     "_useOriginalSize": false,
     "_string": "DescDescDescDescDescDescDescDescDescDesc",
     "_N$string": "DescDescDescDescDescDescDescDescDescDesc",
-    "_fontSize": 30,
-    "_lineHeight": 40,
+    "_fontSize": 26,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

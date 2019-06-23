@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-15 18:11:16
+ * @Last Modified time: 2019-06-21 15:57:17
  */
  
 cc.Class({
@@ -65,7 +65,7 @@ cc.Class({
             if (i < this.times) {
                 lbCount.string = "已领取"
             } else {
-                lbCount.string = "✖"+this.rubys[i]
+                lbCount.string = "×"+this.rubys[i]
             }
             if (i == this.today) {
                 view.color = new cc.Color(0xFC,0xFF,0x9D)

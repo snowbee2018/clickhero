@@ -35,6 +35,7 @@ cc.Class({
             shareDate : "shareDate", // 分享日期
             totalSoul:"totalSoul", // 历史总仙丹
             totalRuby: "totalRuby", // 历史总仙桃
+            skill6Data : "skill6Data", // 阿弥陀佛的次数
         }
         self.ContentData = {}
         self.DataMap = {
@@ -147,6 +148,11 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.totalRuby, 0);
         }
+        var skill6Data = DataCenter.getCloudDataByKey(DataCenter.KeyMap.skill6Data)
+        self.setDataByKey(self.KeyMap.skill6Data, {count:0,useCount:0})
+        if (skill6Data) {
+            self.setDataByKey(self.KeyMap.skill6Data, skill6Data);
+        }
     },
 
     // 保存数据
@@ -178,7 +184,22 @@ cc.Class({
     saveChildUserData(data){
         console.log("保存子用户数据");
         this.setChildUserArr(data)
-        cc.sys.localStorage.setItem("ChildGameData",JSON.stringify(data))
+        var childUserArr = [];
+        if (data && data.length > 0) {
+            for (let index = 0; index < data.length; index++) {
+                const childUserCloudData = data[index];
+                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                childUserArr.push({
+                    weChatUserInfo: childUserCloudData.WeChatUserInfo,
+                    isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
+                    registerTime: childUserCloudData.registerTime,
+                    mark : true,
+                    maxLv : childUserCloudData.maxLv
+                });
+            }
+        }
+        DataCenter.setDataByKey("ChildUserArr", childUserArr);
+        cc.sys.localStorage.setItem("ChildGameData",JSON.stringify(childUserArr))
         cc.sys.localStorage.setItem("savechildtime",Date.now())
         Events.emit(Events.ON_CHILDUSERDATA)
     },
@@ -197,13 +218,19 @@ cc.Class({
             }
         }
         DataCenter.setDataByKey("ChildUserArr", childUserArr);
+        return childUserArr
     },
 
     readChildUserData(){
         let json = cc.sys.localStorage.getItem('ChildGameData')
         if (json&&json.length>0) {
             let data = JSON.parse(json);
-            this.setChildUserArr(data)
+            if (data.length>0&&data[0].mark) {
+                DataCenter.setDataByKey("ChildUserArr", data);
+            }else{
+                data = this.setChildUserArr(data)
+                DataCenter.setDataByKey("ChildUserArr", data);
+            }
             return data
         }
         return null
@@ -280,6 +307,7 @@ cc.Class({
         var key = this.KeyMap.rebirthCount;
         var old = this.getDataByKey(key);
         this.setDataByKey(key, (old+1) );
+        this.getSkill6Data().useCount = 0
         Events.emit(Events.ON_REBIRTH_COUNT)
     },
     addRebirthSoul(soul) {
@@ -456,6 +484,21 @@ cc.Class({
         if (key && cloudData && cloudData.gamedata && cloudData.gamedata[key]) {
             return cloudData.gamedata[key];
         }
+    },
+
+    addSkill6Count(bDouble){
+        var skill6Data = DataCenter.getDataByKey(this.KeyMap.skill6Data)
+        console.log("当前世界阿弥陀佛使用次数：" + skill6Data.useCount);
+        
+        if (skill6Data.useCount < 20) {
+            skill6Data.count += bDouble?2:1
+            skill6Data.useCount ++
+        }
+    },
+
+    getSkill6Data(){
+        var skill6Data = DataCenter.getDataByKey(this.KeyMap.skill6Data)
+        return skill6Data
     },
 
     rebirth () {

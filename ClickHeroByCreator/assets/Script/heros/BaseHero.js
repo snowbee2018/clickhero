@@ -261,6 +261,10 @@ cc.Class({
             else if(skill.gold)
             {
                 result = "获得的妖丹增加" + (skill.gold -1)*100+"%";
+            }else if(this.id == 39 && skillID == 2){
+                result = "春十三娘\nDPS伤害+500,000,000%"
+            }else if(this.id == 39 && skillID == 3){
+                result = "女儿国国王\nDPS伤害+10,000,000,000%"
             }
             return result;
         }
@@ -274,6 +278,10 @@ cc.Class({
             } else {
                 this.DPS = Formulas.getClickDPS(this.level, this.getDPSTimes());
                 // this.cost = Formulas.getClickHeroCost(this.level);
+            }
+            if (this.id == 39) {
+                HeroDatas.getHero(5).refresh()
+                HeroDatas.getHero(15).refresh()
             }
         }
         this.calGoldByLvUnit();
@@ -290,6 +298,17 @@ cc.Class({
         }
         // 金身
         times *= (1+this.golden*0.5 + GameData.addGoldenDpsTimes);
+        if (this.id == 5) {
+            let hero39 = HeroDatas.getHero(39)
+            if (hero39 && hero39.isBuy && hero39.skills[2].isBuy) {
+                times *= 5000001
+            }
+        } else if(this.id == 15){
+            let hero39 = HeroDatas.getHero(39)
+            if (hero39 && hero39.isBuy && hero39.skills[3].isBuy) {
+                times *= 100000001
+            }
+        }
         return times;
     },
     // 全局DPS倍数

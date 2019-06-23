@@ -95,6 +95,7 @@ cc.Class({
         obj.isTreasureChest = monsterInfo.isTreasureChest;
         obj.isBoss = monsterInfo.isBoss;
         obj.isPrimalBoss = monsterInfo.isPrimalBoss;
+        obj.bossFlag = monsterInfo.bossFlag
         try {
             obj.gold = monsterInfo.gold.toExponential(4);
             obj.soul = monsterInfo.soul.toExponential(4);
@@ -308,6 +309,7 @@ cc.Class({
             isTreasureChest: self.curMonster._isTreasureChest,
             isBoss: self.curMonster._isBoss,
             isPrimalBoss: self.curMonster._isPrimalBoss,
+            bossFlag : self.curMonster.getBossFlag()
         }
     },
 

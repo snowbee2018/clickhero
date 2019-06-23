@@ -134,18 +134,12 @@ cc.Class({
     skill6(flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
-        console.log("user skill " + str + "--祭天大典");
+        console.log("user skill " + str + "--阿弥陀佛");
         if (flag) {
-            // 祭天大典DPS翻倍
-            var baseValue = self.baseValue;
-            if (self.getDoubleSkill() == true) {
-                baseValue = (baseValue - 1) * 2 + 1;
-                self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
-            }
-            GameData.skDPSTimes *= baseValue;
+            DataCenter.addSkill6Count(self.getDoubleSkill())
+            self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
+            // GameData.skDPSTimes *= baseValue;
             GameData.refresh();
-        } else {
-            
         }
     },
 
@@ -293,7 +287,7 @@ cc.Class({
             // 处理效果加成，持续时间和冷却时间的加成
             // var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
-            return "当前DPS伤害×" + baseValue + "，可无限叠加，冷却时间" + coolingTimeStr;
+            return "当前DPS伤害×" + baseValue + "，每次穿越后最多叠加20次，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 20 && self.skillID == 4) {
             // 如意金箍
             // 处理效果加成，持续时间和冷却时间的加成

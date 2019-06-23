@@ -41,10 +41,10 @@ cc.Class({
         } else {
             this.shareRuby = shareRuby
         }
-        this.lbRuby.string = String(this.shareRuby) + "仙桃"
+        this.lbRuby.string = String(this.shareRuby)
         this.lbRuby.node.opacity = 255
         this.lbRuby2.node.opacity = 255
-        this.sp1.node.y = 68
+        // this.sp1.node.y = 68
         this.sp2.node.y = 25
         if (data) {
             if (data.weChatUserInfo&&data.weChatUserInfo.avatarUrl) {
@@ -61,10 +61,15 @@ cc.Class({
                 this.btnGet.interactable = false
                 this.lbBtn.string = "已领取"
                 this.lbRuby.node.opacity = 0
-                this.sp1.node.y = 48
+                // this.sp1.node.y = 48
             } else {
-                this.btnGet.interactable = true
-                this.lbBtn.string = "领取"
+                if (data.maxLv && data.maxLv >= 1) {
+                    this.btnGet.interactable = true
+                    this.lbBtn.string = "领取"
+                } else {
+                    this.btnGet.interactable = false
+                    this.lbBtn.string = "未完成"
+                }
             }
             if (this.isReceived(1)) {
                 this.btnGet1.interactable = false

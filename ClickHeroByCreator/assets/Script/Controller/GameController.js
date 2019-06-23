@@ -306,9 +306,14 @@ cc.Class({
                 console.log("离线伤害："+Formulas.formatBigNumber(totalDamage));
                 var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
                 let timesTreas = GameData.getTreasureTimes()*GameData.getTreasureOdds()+1
+                console.log("timesTreas:" + timesTreas);
                 let times10x = (10*GameData.addTenfoldGoldOdds+1)
+                console.log("times10x:" + times10x);
                 let times = GameData.globalGoldTimes*timesTreas*times10x
-                var gold = Formulas.getMonsterGold(lv,totalDamage).times(times)
+                console.log("globalGoldTimes:" + GameData.globalGoldTimes);
+                console.log("times:" + times);
+                let hp = Formulas.getMonsterHP(lv)
+                var gold = Formulas.getMonsterGold(lv,hp).times(totalDamage.div(hp)).times(times)
                 if (gold.gt(0)) {
                     PublicFunc.popGoldDialog(0,gold,"离线收益")
                 }
@@ -362,6 +367,7 @@ cc.Class({
         obj[map.shareDate] = DataCenter.getDataByKey(map.shareDate); // 分享日期
         obj[map.totalSoul] = DataCenter.getDataByKey(map.totalSoul).toExponential(4)
         obj[map.totalRuby] = DataCenter.getDataByKey(map.totalRuby);
+        obj[map.skill6Data] = DataCenter.getDataByKey(map.skill6Data); // 阿弥陀佛
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
@@ -574,7 +580,7 @@ cc.Class({
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));
-        var bCrit = Formulas.isHitRandom(GameData.critOdds * 100); // 是否是暴击
+        var bCrit = Formulas.isHitRandom(GameData.critOdds); // 是否是暴击
         if (bCrit) {
             self.monsterController.hit(GameData.clickDamage.times(GameData.critTimes), false, true,isAuto);
             self.damageArr.push(GameData.clickDamage.times(GameData.critTimes));
