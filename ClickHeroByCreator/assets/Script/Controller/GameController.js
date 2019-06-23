@@ -969,7 +969,6 @@ cc.Class({
     },
 
     showRankDialog () {
-        // PublicFunc.resetGame()
         console.log("showRankDialog");
         let dialog = cc.instantiate(this.RankDialog)
         dialog.parent = cc.director.getScene();

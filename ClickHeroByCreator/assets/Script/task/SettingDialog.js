@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-05-19
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-15 18:15:38
+ * @Last Modified time: 2019-06-23 21:53:20
  */
  
 cc.Class({
@@ -47,6 +47,10 @@ cc.Class({
 
     onDestroy(){
         WeChatUtil.hideBannerAd()
+    },
+
+    resetGame(){
+        PublicFunc.resetGame()
     },
 
     onCheckBgm(){

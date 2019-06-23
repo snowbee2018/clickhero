@@ -111,6 +111,14 @@ Datas.getTodayStr = function(){
     return str
 }
 
+Datas.getTotalRuby = function(){
+    let ruby = 0
+    Datas.datas.forEach(e => {
+        ruby +=e.getTotalRuby()
+    })
+    return ruby
+}
+
 Datas.resetGame = function() {
     let ruby = 0
     Datas.datas.forEach(e => {
