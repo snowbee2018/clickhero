@@ -95,8 +95,8 @@ cc.Class({
             // 下面是超越了
             case 7:
                 name = "一动不动是萌萌" + (count>0? " Lv" + count:"")
-                desc = "每次购买+50%的挂机型神器效果"
-                state = "挂机效果增加:+" + (this.getCount()*50)+"%"
+                desc = "购买+"+(50*Math.pow(1.1,count)).toFixed(2)+"%的挂机型神器效果"
+                state = "挂机效果增加:+" + (PublicFunc.get10TimesByCount(count)*5).toFixed(2)+"%"
                 ruby = 300
                 unlockLv = 300
                 break;
@@ -110,22 +110,22 @@ cc.Class({
                 break;
             case 9:
                 name = "伤害高又高" + (count>0? " Lv" + count:"")
-                desc = "购买+"+(100+10*this.getCount())+"%的DPS"
-                state = "DPS增加:+" + (PublicFunc.get10TimesByCount(this.getCount())*10)+"%"
+                desc = "购买+"+(100*Math.pow(1.1,this.getCount())).toFixed(2)+"%的DPS"
+                state = "DPS增加:+" + (PublicFunc.get10TimesByCount(this.getCount())*10).toFixed(2)+"%"
                 ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
                 name = "妖丹多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+(1000+100*this.getCount())+"%的妖丹加成"
-                state = "妖丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
+                desc = "购买+"+(1000*Math.pow(1.1,this.getCount())).toFixed(2)+"%的妖丹加成"
+                state = "妖丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100).toFixed(2)+"%"
                 ruby = 500
                 unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+(1000+100*this.getCount())+"%的仙丹加成"
-                state = "仙丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
+                desc = "购买+"+(1000*Math.pow(1.1,this.getCount())).toFixed(2)+"%的仙丹加成"
+                state = "仙丹加成:+" + (PublicFunc.get10TimesByCount(this.getCount())*100).toFixed(2)+"%"
                 ruby = 500
                 unlockLv = 300
                 break;
@@ -133,21 +133,21 @@ cc.Class({
                 name = "催泪铃加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+25%的催泪铃的效果"
                 state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
-                ruby = 200  + 200 * this.getCount()
+                ruby = Math.min(200  + 100 * this.getCount(),500)
                 unlockLv = 300
                 break;
             case 12:
                 name = "昊天塔加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买增加+75%昊天塔效果"
                 state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
-                ruby = 200  + 200 * this.getCount()
+                ruby = Math.min(200  + 100 * this.getCount(),500)
                 unlockLv = 300
                 break;
             case 13:
                 name = "崆峒印加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+增加100%崆峒印效果"
                 state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
-                ruby = 200  + 200 * this.getCount()
+                ruby = Math.min(200  + 100 * this.getCount(),500)
                 unlockLv = 300
                 break;
         }

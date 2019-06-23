@@ -45,7 +45,7 @@ Datas.refresh = function(){
         } else if (e.id == 4) {
             GameData.gdAutoClick = count
         } else if (e.id == 7) {
-            GameData.gdLeaveTimes = 1 + count*0.5
+            GameData.gdLeaveTimes = 1 + PublicFunc.get10TimesByCount(count)/20
         } else if (e.id == 8) {
             GameData.gdAncientSale = Math.pow(0.95,count)
         } else if (e.id == 9) {
@@ -54,7 +54,6 @@ Datas.refresh = function(){
             GameData.gdGoldTimes = 1 + PublicFunc.get10TimesByCount(count)
         } else if (e.id == 15) {
             GameData.gdSoulTimes = 1 + PublicFunc.get10TimesByCount(count)
-            console.log("GameData.gdSoulTimes1"+GameData.gdSoulTimes);
         } else if (e.id == 11) {
             GameData.gdPBossTimes = count*0.25 + 1
         } else if (e.id == 12) {
@@ -110,6 +109,13 @@ Datas.getTodayStr = function(){
     let date = new Date()
     let str = date.getFullYear() +"-"+ date.getMonth() +"-"+ date.getDate()
     return str
+}
+
+Datas.resetGame = function() {
+    Datas.buyCounts.forEach(e => {
+        e.count = 0
+    })
+    Datas.refresh()
 }
 
 module.exports = Datas

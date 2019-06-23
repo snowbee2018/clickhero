@@ -118,4 +118,9 @@ cc.Class({
         node.getComponent("GoodsItem").bind(goods);
         this.items.push(node)
     },
+
+    resetGame(){
+        this.sv.content.removeAllChildren()
+        this.btnKey.active = false
+    },
 });
