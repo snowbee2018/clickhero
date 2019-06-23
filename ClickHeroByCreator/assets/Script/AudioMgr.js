@@ -15,10 +15,10 @@ cc.Class({
         if (this.tgBgm === "") {
             this.tgBgm = 1
         }
-        this.tgGold = cc.sys.localStorage.getItem("tgGold")
-        if (this.tgGold === "") {
-            this.tgGold = 1
-        }
+        // this.tgGold = cc.sys.localStorage.getItem("tgGold")
+        // if (this.tgGold === "") {
+        //     this.tgGold = 1
+        // }
         this.tgClick = cc.sys.localStorage.getItem("tgClick")
         if (this.tgClick === "") {
             this.tgClick = 1
@@ -28,7 +28,7 @@ cc.Class({
             this.tgClickEffect = 1
         }
         this.tgBgm = Number(this.tgBgm)
-        this.tgGold = Number(this.tgGold)
+        // this.tgGold = Number(this.tgGold)
         this.tgClick = Number(this.tgClick)
         this.tgClickEffect = Number(this.tgClickEffect)
         this.openMusic(this.tgBgm);
@@ -133,7 +133,7 @@ cc.Class({
     },
 
     playGetGoin() {
-        if (this.tgGold) {
+        if (this.tgClick) {
             if (this.getGoinAudioClip) {
                 cc.audioEngine.playEffect(this.getGoinAudioClip, false);
             }

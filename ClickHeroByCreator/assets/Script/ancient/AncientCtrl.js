@@ -48,7 +48,7 @@ cc.Class({
         for (let i = 0; i < HeroDatas.myAncients.length; i++) {
             soul = soul.plus(HeroDatas.buyAncientSouls[i][0]);
         }
-        soul = soul.times(0.75).integerValue()
+        soul = soul.times(0.75*GameData.gdAncientSale).integerValue()
         dialog.getComponent("Dialog").setCallback(function(result) {
             if (result) {
                 HeroDatas.myAncients.forEach(e => {
