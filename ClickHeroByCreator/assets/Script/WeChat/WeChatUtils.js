@@ -30,6 +30,7 @@ cc.Class({
 
 
         if (self.isWeChatPlatform) {
+            this.sys = wx.getSystemInfoSync()
             self.fs = wx.getFileSystemManager();
             self.localStoragePath = `${wx.env.USER_DATA_PATH}/LocalUserStorage.json`;
 
@@ -66,6 +67,17 @@ cc.Class({
             }
             this.checkUpdate()
             this.newBannerAd()
+            if (this.compareVersion(version, '2.0.3') >= 0) {
+                this.btnClub = wx.createGameClubButton({
+                    icon: 'dark',
+                    style: {
+                      left: 10,
+                      top: this.sys.screenHeight - 80,
+                      width: 40,
+                      height: 40
+                    }
+                })
+            }
         }
     },
 
@@ -759,5 +771,16 @@ cc.Class({
         }
     },
 
+    showBtnClub(){
+        if (this.btnClub) {
+            this.btnClub.show()
+        }
+    },
+
+    hideBtnClub(){
+        if (this.btnClub) {
+            this.btnClub.hide()
+        }
+    },
 
 });

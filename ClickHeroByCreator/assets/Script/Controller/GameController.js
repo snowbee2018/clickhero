@@ -134,8 +134,10 @@ cc.Class({
         // self.pageNode.scale = bActive ? 1:0
         this.pageNode.active = bActive;
         if (bActive) {
+            WeChatUtil.hideBtnClub()
             this.monsterController.moveUp();
         } else {
+            WeChatUtil.showBtnClub()
             this.monsterController.moveDown();
         }
     },

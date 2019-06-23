@@ -19,7 +19,7 @@ cc.Class({
     },
 
     // 重置英雄，转身时使用
-    clear(){
+    clear(isReset){
         this.isActive = false;
         this.isBuy = false;
         this.level = 0;
@@ -29,6 +29,9 @@ cc.Class({
             sk.isBuy = false;
         });
         this.calGoldByLvUnit();
+        if (isReset) {
+            this.golden = 0
+        }
     },
 
     init(id, heroName, baseCost, baseDPS, isBuy, desc, cloudHeroInfo) {

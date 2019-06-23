@@ -465,6 +465,12 @@ cc.Class({
         PublicFunc.popGoldDialog(1,rebirthSoul.plus(2))
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
         self.setDataByKey(self.KeyMap.passLavel, 0);
+        this.addRebirthCount()
+    },
+
+    resetGame () {
+        this.saveCloudData({})
+        this.init()
     },
 
 });

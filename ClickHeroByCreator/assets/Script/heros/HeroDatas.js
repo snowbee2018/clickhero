@@ -276,5 +276,11 @@ cc.Class({
             });
             GameData.refresh();
         },
+
+        resetGame(){
+            this.heroList.forEach(hero => {
+                hero.clear(true)
+            });
+        },
     },
 });

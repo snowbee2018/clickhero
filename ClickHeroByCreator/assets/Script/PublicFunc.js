@@ -72,15 +72,32 @@ cc.Class({
     rebirth () {
         const self = this;
         DataCenter.rebirth();
+        // GoodsDatas.rebirth()
         HeroDatas.rebirth();
         self.getComponent("HeroListControl").rebirth();
         self.getComponent("MonsterController").rebirth();
         GameData.refresh();
         self.getComponent("UserSkillController").rebirth();
-        DataCenter.addRebirthCount()
         Events.emit(Events.ON_GOLD_CHANGE);
         Events.emit(Events.ON_SOUL_CHANGE);
         WeChatUtil.onHide();
+    },
+
+    resetGame(){
+        // 重置游戏
+        const self = this;
+        DataCenter.resetGame();
+        GoodsDatas.resetGame()
+        HeroDatas.resetGame();
+        this.getComponent("HeroListControl").rebirth();
+        this.getComponent("AncientCtrl").resetGame();
+        this.getComponent("MonsterController").rebirth();
+        GameData.refresh();
+        this.getComponent("UserSkillController").rebirth();
+        Events.emit(Events.ON_GOLD_CHANGE);
+        Events.emit(Events.ON_SOUL_CHANGE);
+        WeChatUtil.onHide();
+
     },
 
     bindAncientSprite () {
@@ -177,7 +194,8 @@ cc.Class({
     get10TimesByCount(c){
         let result = 0
         for (let i = 0; i < c; i++) {
-            result += 10+1*i
+            // result += 10+1*i
+            result += Math.pow(1.1,i) * 10
         }
         console.log("xxxj 10times " + c + " " + result);
         

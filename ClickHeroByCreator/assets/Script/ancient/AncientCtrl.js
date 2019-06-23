@@ -81,6 +81,16 @@ cc.Class({
         GameData.refresh();
         // 更新主面板
     },
+
+    resetGame () {
+        HeroDatas.myAncients.forEach(e => {
+            e.level = 0;
+            e.refresh()
+        });
+        this.body.removeAllChildren()
+        this.body.height = 0
+        HeroDatas.initAncient(false)
+    },
 });
 
 //next
