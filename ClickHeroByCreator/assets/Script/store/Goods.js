@@ -133,21 +133,21 @@ cc.Class({
                 name = "催泪铃加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+25%的催泪铃的效果"
                 state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
-                ruby = Math.min(200  + 100 * this.getCount(),500)
+                ruby = 200 + 200 * count
                 unlockLv = 300
                 break;
             case 12:
                 name = "昊天塔加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买增加+75%昊天塔效果"
                 state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
-                ruby = Math.min(200  + 100 * this.getCount(),500)
+                ruby = 200 + 200 * count
                 unlockLv = 300
                 break;
             case 13:
                 name = "崆峒印加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+增加100%崆峒印效果"
-                state = "崆峒印效力增加:+" + (this.getCount()*100)+"%"
-                ruby = Math.min(200  + 100 * this.getCount(),500)
+                state = "崆峒印效力增加:+" + (count*100)+"%"
+                ruby = 200 + 200 * count
                 unlockLv = 300
                 break;
         }
@@ -268,7 +268,7 @@ cc.Class({
             case 12:
             case 13:
                 for (let i = 0; i < count; i++) {
-                    ruby += Math.min(200  + 100 * i,500)
+                    ruby += 200 * (i+1)
                 }
                 break;
         }
