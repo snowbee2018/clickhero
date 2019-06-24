@@ -280,6 +280,7 @@ cc.Class({
                 this.showBtnSigninTips()
             }
             this.showBtnShareTips()
+            WeChatUtil.showBtnClub()
         } catch (error) {
             console.error(error)
         }

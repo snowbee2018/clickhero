@@ -75,7 +75,8 @@ cc.Class({
                       top: this.sys.screenHeight - 80,
                       width: 40,
                       height: 40
-                    }})
+                }})
+                this.hideBtnClub()
             }
             if (this.compareVersion(version, '1.4.0')>=0) {
                 wx.setKeepScreenOn({
