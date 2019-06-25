@@ -581,6 +581,13 @@ cc.Class({
     },
 
     clickHit (isAuto) {
+        const curtime = Date.now();
+        this.lastClickTime = this.lastClickTime || 0
+        if (curtime - this.lastClickTime < 30) {
+            return;
+        }
+        this.lastClickTime = curtime;
+
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);
         // console.log("hit : count = " + self._totalClickCount.toExponential(3));

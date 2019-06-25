@@ -8,8 +8,7 @@ cc.Class({
     },
 
     onLoad(){
-        console.log("xxxj task onload");
-        Events.on(Events.ON_RESETGAME, this.resetGame, this);
+        // Events.on(Events.ON_RESETGAME, this.resetGame, this);
         this.fullViews()
     },
 
@@ -26,7 +25,7 @@ cc.Class({
     },
 
     onDestroy(){
-        Events.off(Events.ON_RESETGAME, this.resetGame, this);
+        // Events.off(Events.ON_RESETGAME, this.resetGame, this);
     },
 
     addItem(i) {
@@ -38,14 +37,14 @@ cc.Class({
         this.items[i] = node
     },
 
-    resetGame(){
-        TaskDatas.resetGame()
-        this.sv.content.removeAllChildren()
-        // this.items.forEach(e => {
-        //     e.removeFromParent()
-        // });
-        this.fullViews()
-    },
+    // resetGame(){
+    //     TaskDatas.resetGame()
+    //     this.sv.content.removeAllChildren()
+    //     // this.items.forEach(e => {
+    //     //     e.removeFromParent()
+    //     // });
+    //     this.fullViews()
+    // },
 })
 
 /**19.3.2

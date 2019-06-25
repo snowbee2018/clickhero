@@ -512,8 +512,17 @@ cc.Class({
     },
 
     resetGame () {
+        // 不需要重置的数据
+        const shareDate = this.getDataByKey(this.KeyMap.shareDate)
+        const signinData = this.getDataByKey(this.KeyMap.signinData)
+        const shareReceiveData = this.getDataByKey(this.KeyMap.shareReceiveData)
+        
         this.saveCloudData({})
         this.init()
+
+        this.setDataByKey(this.KeyMap.shareDate, shareDate);
+        this.setDataByKey(this.KeyMap.signinData, signinData);
+        this.setDataByKey(this.KeyMap.shareReceiveData, shareReceiveData || [])
     },
 
 });
