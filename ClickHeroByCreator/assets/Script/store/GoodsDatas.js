@@ -125,7 +125,7 @@ Datas.resetGame = function() {
         ruby +=e.getTotalRuby()
     });
     Datas.buyCounts.forEach(e => {
-
+        e.lastBuyDate = ""
         e.count = 0
     })
     Datas.refresh()

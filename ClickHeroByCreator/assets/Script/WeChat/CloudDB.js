@@ -222,13 +222,13 @@ cc.Class({
             }
         },
 
-        getRankUsers(callback,offset){
+        getRankUsers(type,callback,offset){
             if (WeChatUtil.isWeChatPlatform) {
                 const db = this.getDB()
                 const _ = this.db().command
-                db.orderBy('maxLv','desc').where({
-                    isbug: _.neq(true)
-                }).skip(offset).limit(20).get({
+                db.orderBy('maxLv','desc').where(
+                        type == 0 ? {isbug: _.neq(true)} : {registerTime: _.gt(Date.now() - 3600000*24*7)}
+                    ).skip(offset).limit(20).get({
                     success: function (res) {
                         console.log("getRankUsers success");
                         console.log(res);

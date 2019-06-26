@@ -36,6 +36,8 @@ cc.Class({
         sFinger : cc.SpriteFrame,
         sTips : cc.SpriteFrame,
         spSetting : cc.Node,
+
+        clickLight : cc.Prefab,
     },
     
     // use this for initialization
@@ -565,7 +567,30 @@ cc.Class({
         // self.costLab.string = Formulas.formatBigNumber(info.gold);
     },
 
+    showClickLight(pos){
+        let light = cc.instantiate(this.clickLight)
+        if (this.node) {
+            light.parent = this.node
+        }
+        light.x = pos.x - cc.winSize.width / 2
+        light.y = pos.y - cc.winSize.height / 2
+        var anim = light.getComponent(cc.Animation)
+        anim.play("click")
+        let onStop = function() {
+            anim.off('stop', onStop)
+            light.removeFromParent()
+        }
+        anim.on('stop', onStop)
+    },
+
     onTouchStart (event) {
+        const curtime = Date.now();
+        this.lastClickTime = this.lastClickTime || 0
+        if (curtime - this.lastClickTime < 30) {
+            return;
+        }
+        
+        this.lastClickTime = curtime;
         const self = this;
         // if (ClickEnable == true) {
         //     // let pos = event.getLocation();
@@ -573,6 +598,7 @@ cc.Class({
         // }
         let pos = event.getLocation();
         if (pos.y>cc.winSize.height*0.22 && pos.y<cc.winSize.height*0.78) {
+            this.showClickLight(pos)
             self.clickHit();
             var map = DataCenter.KeyMap;
             DataCenter.setDataByKey(map.totalClick, DataCenter.getDataByKey(map.totalClick) + 1);
@@ -581,12 +607,6 @@ cc.Class({
     },
 
     clickHit (isAuto) {
-        const curtime = Date.now();
-        this.lastClickTime = this.lastClickTime || 0
-        if (curtime - this.lastClickTime < 30) {
-            return;
-        }
-        this.lastClickTime = curtime;
 
         const self = this;
         self._totalClickCount = self._totalClickCount.plus(1);

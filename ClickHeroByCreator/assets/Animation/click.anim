@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "click",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.15,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "f35cd6c2-72a2-4553-8b7a-f8493d06ca93"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "3fd1343d-97c3-46bb-84fd-e091de274284"
+            }
+          },
+          {
+            "frame": 0.06666666666666667,
+            "value": {
+              "__uuid__": "71deec3e-98c0-4bde-bc14-ee988bd7f423"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "86485e1a-a609-4832-a545-eb3fa5492025"
+            }
+          },
+          {
+            "frame": 0.13333333333333333,
+            "value": {
+              "__uuid__": "a86281d1-42dc-4940-bd0b-a70d5b9f0360"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
