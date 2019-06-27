@@ -120,7 +120,7 @@ cc.Class({
                 }
             });
             this.skDPSTimes = Math.pow(1.05,DataCenter.getSkill6Data().count)
-            let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes*this.gdLeaveTimes:0) + 1
+            let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes*this.gdLeaveTimes:0) + 1
             let idleAutoTimes = (this.playerStatus==1?this.addAutoIdleTimes*this.gdLeaveTimes:0) + 1
             idleTimes *= idleAutoTimes
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes*this.gdShareDPSTimes

@@ -18,6 +18,14 @@ cc.Class({
         Events.on(Events.ON_LEVEL_PASSED, this.onFloor, this)
     },
 
+    onEnable(){
+        if (this.data && (this.data.id == 1 || this.data.id == 14) ) {
+            console.log("bind 1 14");
+            
+            this.bind()
+        }
+    },
+
     onDestroy (){
         Events.off(Events.ON_BUY_GOODS,this.onBuy,this)
         Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxFloor, this)

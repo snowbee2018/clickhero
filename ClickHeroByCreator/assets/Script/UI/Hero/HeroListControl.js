@@ -7,6 +7,8 @@ cc.Class({
         heroItemPrefab: cc.Prefab,
         heroRes: cc.SpriteAtlas,
         skillRes: cc.SpriteAtlas,
+        btnBuySkills : cc.Node,
+        btnBuyHeros : cc.Node,
     },
 
     ctor () {
@@ -48,6 +50,12 @@ cc.Class({
             }
         }
         Events.on(Events.ON_GOLD_CHANGE, this.onGoldChange, this);
+
+        let count = DataCenter.getDataByKey(DataCenter.KeyMap.rebirthCount)
+        if (count > 0) {
+            this.btnBuySkills.active = true
+            this.btnBuyHeros.active = true
+        }
         // const self = this;
         // var id = 0;
         // for (let heroID = 0; heroID < HeroDatas.heroList.length; heroID++) {
@@ -99,9 +107,10 @@ cc.Class({
         listItemNode.parent = self.heroList.content;
         self._heroItemMap[heroID] = true;
         listItemNode.active = false
-
-        this.heroList.content.height = 140 * this.heroList.content.childrenCount
         this.pushItem(listItemNode)
+        this.heroList.content.height = 140 * this.items.length + 100
+        this.btnBuySkills.y = - this.heroList.content.height + 50
+        this.btnBuyHeros.y = - this.heroList.content.height + 50
     },
 
     onGoldChange () {
@@ -143,11 +152,23 @@ cc.Class({
     //     }
     // },
 
+    onBuySkillsClick(){
+        Events.emit(Events.ON_BUYSKILLS)
+    },
+
+    onBuyHerosClick(){
+        Events.emit(Events.ON_BUYHEROS)
+    },
+
     rebirth () {
         const self = this;
         self._heroItemMap = {}
+        for (let i = 0; i < this.items.length; i++) {
+            const e = this.items[i];
+            e.removeFromParent()
+        }
         this.clearItems()
-        self.heroList.content.removeAllChildren();
+        // self.heroList.content.removeAllChildren();
         // Events.off(Events.ON_BY_HERO, self.onBuyHero, self);
         Events.off(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         self.setHeroList();

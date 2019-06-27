@@ -46,6 +46,9 @@ cc.Class({
         Events.on(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
         Events.on(Events.REFRESH_HERO_BUYCOST, self.refreshBuyCost, self);
         Events.on(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
+        Events.on(Events.ON_BUYSKILLS, self.onBuySkills, self);
+        Events.on(Events.ON_BUYHEROS, self.onBuyHeros, self);
+        
     },
 
     start () {
@@ -67,6 +70,8 @@ cc.Class({
         Events.off(Events.ON_UPGRADE_HERO_SKILLS, self.onSkillChange, self);
         Events.off(Events.REFRESH_HERO_BUYCOST,self.refreshBuyCost,self);
         Events.off(Events.ON_HEROLVUNIT_CHANGE, self.refreshBuyCost, self);
+        Events.off(Events.ON_BUYSKILLS, self.onBuySkills, self);
+        Events.off(Events.ON_BUYHEROS, self.onBuyHeros, self);
     },
 
     onGoldChange () {
@@ -194,8 +199,8 @@ cc.Class({
     onPosChange() {
         // console.log('ppppppppppp');
         
-        let topPos = this.node.convertToWorldSpaceAR(this.checkPointTop);
-        let botmPos = this.node.convertToWorldSpaceAR(this.checkPointBotm);
+        // let topPos = this.node.convertToWorldSpaceAR(this.checkPointTop);
+        // let botmPos = this.node.convertToWorldSpaceAR(this.checkPointBotm);
         
         // console.log(this);
         // console.log(this.viewRect);
@@ -326,6 +331,40 @@ cc.Class({
         }
     },
 
+    onBuyHeros(){
+        var hero = HeroDatas.getHero(this._heroID);
+        if (hero.id == 0 && hero.level >= 200) {
+            return 
+        }
+        if (this.btn.interactable) {
+            this.onUpgradeBtnClick(true)
+        }
+    },
+
+    onBuySkills(){
+        var hero = HeroDatas.getHero(this._heroID);
+        var skillArr = hero.skills;
+        let hasChange = false
+        if (hero.isBuy&&skillArr) {
+            console.log("buy hero skill" + hero.heroName);
+            for (let skillID = 0; skillID < skillArr.length; skillID++) {
+                console.log(skillArr[skillID]);
+                if (!skillArr[skillID].isBuy) {
+                    console.log("buy " + skillArr[skillID].name);
+                    let result = hero.buySkill(skillID,true)
+                    console.log("result:" + result);
+                    hasChange = hasChange || result
+                    if (!result) {
+                        break
+                    }
+                }
+            }
+        }
+        if (hasChange) {
+            this.setDisplay()
+        }
+    },
+
     onItemClick () {
         const self = this;
         AudioMgr.playBtn();
@@ -347,9 +386,11 @@ cc.Class({
         }
     },
 
-    onUpgradeBtnClick () {
+    onUpgradeBtnClick (isIntant) {
         const self = this;
-        AudioMgr.playBtn();
+        if (isIntant!=true) {
+            AudioMgr.playBtn();
+        }
         var hero = HeroDatas.getHero(self._heroID);
         if (hero.isBuy) {
             hero.upgrade();

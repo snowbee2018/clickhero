@@ -177,7 +177,7 @@ cc.Class({
         GameData.calDPSDamage();
     },
 
-    buySkill(skillID){
+    buySkill(skillID,isInstant){
         if (this.skills) {
             let skill = this.skills[skillID];
             if (this.level >= skill.level && skill.isBuy == false) {
@@ -185,6 +185,9 @@ cc.Class({
                 var isCanBuy = DataCenter.isGoldEnough(cost);
                 if (isCanBuy) {
                     if (this.id == 19 && skillID == 3) {
+                        if (isInstant) {
+                            return false
+                        }
                         // 弹出对话框
                         var num = DataCenter.getRealRebirthSoul();
                         PublicFunc.popDialog({

@@ -32,6 +32,8 @@ cc.Class({
         ON_REBIRTH_COUNT : "ON_REBIRTH_COUNT", // 穿越次数改变
         ON_MANUAL_CLICK : "ON_MANUAL_CLICK", // 手动点击次数
         ON_RESETGAME : "ON_RESETGAME",
+        ON_BUYSKILLS : "ON_BUYSKILLS",
+        ON_BUYHEROS : "ON_BUYHEROS",
         
         emit(name,params){
             cc.systemEvent.emit(name,params);
