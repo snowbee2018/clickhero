@@ -164,7 +164,7 @@ cc.Class({
     },
 
     playBoss() {
-        // if (this.tgBgm) {
+        if (this.tgBgm) {
             if (this.bossAudioClip) {
                 cc.audioEngine.playMusic(this.bossAudioClip, true);
             }
@@ -177,6 +177,6 @@ cc.Class({
                     }.bind(this));
                 }.bind(this));
             }
-        // }
+        }
     },
 });

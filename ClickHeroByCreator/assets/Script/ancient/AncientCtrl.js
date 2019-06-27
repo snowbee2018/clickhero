@@ -9,6 +9,7 @@ cc.Class({
         dialogPrefab : cc.Prefab,
         disbandDialogPrefab : cc.Prefab,
         body : cc.Node,
+        btnAll : cc.Node,
     },
 
     start () {
@@ -16,7 +17,13 @@ cc.Class({
             console.log("ancient.id:" + id);
         },this);
         Events.on(Events.ON_IDLE_STATE,this.onIdleState,this);
+        Events.on(Events.ON_SOUL_CHANGE,this.showBtns,this);
         this.fullViews();
+    },
+
+    onDestroy(){
+        Events.off(Events.ON_IDLE_STATE,this.onIdleState,this);
+        Events.off(Events.ON_SOUL_CHANGE,this.showBtns,this);
     },
 
     fullViews(){
@@ -24,6 +31,59 @@ cc.Class({
         list.forEach(e => {
             this.addItem(e);
         });
+        this.showBtns()
+    },
+
+    showBtns(){
+        // 召唤所有
+        if (HeroDatas.selAncients.length == 0) {
+            this.btnAll.parent.active = false
+            console.log("showBtns 1");
+            return
+        }
+        console.log("showBtns 2");
+        this.btnAll.parent.active = true
+        let tsoul = DataCenter.getDataByKey(DataCenter.KeyMap.totalSoul)
+        let soul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)
+        if (tsoul.gt(150000)) {
+            console.log("showBtns 3");
+            this.btnAll.active = true
+            this.btnAll.parent.x = -110
+            let hasCount = HeroDatas.myAncients.length
+            let summonSoul = 0
+            for (let i = hasCount; i < HeroDatas.buyAncientSouls.length; i++) {
+                summonSoul += HeroDatas.buyAncientSouls[i][0]
+            }
+            this.btnAll.interactable = soul.gte(summonSoul)
+        }
+    },
+
+    onClickAll () {
+        let hasCount = HeroDatas.myAncients.length
+        let summonSoul = 0
+        let moreCount = HeroDatas.otherAncients.length+HeroDatas.selAncients.length
+        for (let i = hasCount; i < hasCount + moreCount; i++) {
+            console.log(i);
+            
+            summonSoul += HeroDatas.buyAncientSouls[i][0]
+        }
+        let soul = DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)
+        if (soul.gte(summonSoul)) {
+            const self = this
+            PublicFunc.popDialog({
+                contentStr: "共花费"+summonSoul+"仙丹召唤剩余的"
+                    +moreCount+"个神器，你确定吗？",
+                btnStrs: {
+                    left: '是 的',
+                    right: '不，谢谢'
+                },
+                onTap: function (dialog, bSure) {
+                    if (bSure&&summonSoul) {
+                        self.summonAll(summonSoul)
+                    }
+                }
+            });
+        }
     },
 
     onClickSummon () {
@@ -57,9 +117,9 @@ cc.Class({
                 });
                 this.body.removeAllChildren();
                 this.body.height = 0;
-                DataCenter.addSoul(soul);
                 HeroDatas.initAncient(false);
-                GameData.refresh();
+                DataCenter.addSoul(soul);
+                // GameData.refresh();
             }
         }.bind(this));
         dialog.parent = cc.director.getScene();
@@ -69,10 +129,29 @@ cc.Class({
         dialog.getComponent("Dialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"仙丹");
     },
 
+    summonAll(summonSoul){
+        console.log("summonAll" + summonSoul);
+        for (let i = 0; i < HeroDatas.selAncients.length; i++) {
+            let item = HeroDatas.selAncients.splice(0,1)[0];
+            i--
+            HeroDatas.myAncients.push(item)
+            this.addItem(item)
+        }
+        for (let i = 0; i < HeroDatas.otherAncients.length; i++) {
+            let item = HeroDatas.otherAncients.splice(0,1)[0];
+            i--
+            HeroDatas.myAncients.push(item)
+            this.addItem(item)
+        }
+        DataCenter.consumeSoul(new BigNumber(summonSoul))
+    },
+
     addItem(ancient) {
-        var node = cc.instantiate(this.itemPrefab);
-        node.parent = this.body;
-        node.getComponent("AncientItem").bind(ancient);
+        if (ancient) {
+            var node = cc.instantiate(this.itemPrefab);
+            node.parent = this.body;
+            node.getComponent("AncientItem").bind(ancient);
+        }
     },
 
     onIdleState(isIdle){
