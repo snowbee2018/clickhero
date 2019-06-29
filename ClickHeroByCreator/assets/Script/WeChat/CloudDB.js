@@ -38,9 +38,11 @@ cc.Class({
                 }).get({
                     success : function(res) {
                         console.log("获取addruby成功");
+                        
                         if (res.data) {
                             if (res.data.length>0) {
-                                self.addrubyID = res._id
+                                // console.log(res.data[0])
+                                self.addrubyID = res.data[0]._id
                                 let ruby = res.data[0].ruby
                                 if (ruby>0) {
                                     self.zeroAddruby(callback,ruby)
@@ -52,7 +54,6 @@ cc.Class({
                     },
                     fail: function (params) {
                         console.log("获取addruby失败");
-                        console.log(params);
                         // callBack(false);
                     }
                 })
@@ -68,7 +69,7 @@ cc.Class({
                         ruby: 0,
                     },
                     success: function (res) {
-                        // console.log(res);
+                        console.log("修改加仙丹数值成功");
                         callback(true,ruby)
                     }
                 })
