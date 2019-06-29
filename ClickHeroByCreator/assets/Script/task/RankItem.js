@@ -33,15 +33,47 @@ cc.Class({
             this.spHead.spriteFrame = this.spHead.spriteFrame
         }
         this.type = type
+        this.index = index
         this.btnAward.active = index < 10
     },
 
     onAwardClick(){
         let str
         if (this.type == 0) {
-            str = "总榜奖励的文字内容"
+            if(this.index==0)
+            {
+                str = "第1名每周获得3000仙桃，100魅力值\n\n *以每周天晚十点数据为准\n*详情见游戏圈"
+            }             
+            else if(this.index==1)
+            {
+                str = "第2名每周获得2000仙桃，50魅力值\n\n *以每周天晚十点数据为准\n*详情见游戏圈"
+            }
+            else if(this.index==2)
+            {
+                str = "第3名每周获得1000仙桃，20魅力值\n\n *以每周天晚十点数据为准\n*详情见游戏圈"
+            }
+            else if(3 <=this. index <10)
+            {
+                str = "排行榜第4-10名每周获得500仙桃\n\n *以每周天晚十点数据为准\n*详情见游戏圈"
+            }
+
         } else {
-            str = "新人榜奖励的文字内容"
+            if(this.index==0)
+            {
+                str = "第1名每周获得1000仙桃，20魅力值\n\n *新人榜只针对本周新玩家\n*以每周天晚十点数据为准\n*详情见游戏圈"
+            }             
+            else if(this.index==1)
+            {
+                str = "新人榜第2名每周获得600仙桃\n\n *新人榜只针对本周新玩家\n*以每周天晚十点数据为准\n*详情见游戏圈"
+            }
+            else if(this.index==2)
+            {
+                str = "新人榜第3名每周获得300仙桃\n\n *新人榜只针对本周新玩家\n*以每周天晚十点数据为准\n*详情见游戏圈"
+            }
+            else if(3 <=this. index <10)
+            {
+                str = "新人榜第4-10名每周获得100仙桃\n\n *新人榜只针对本周新玩家\n*以每周天晚十点数据为准\n*详情见游戏圈"
+            }
         }
         PublicFunc.popDialog({
             contentStr: str,
