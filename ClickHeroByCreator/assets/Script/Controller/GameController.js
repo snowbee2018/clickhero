@@ -290,7 +290,7 @@ cc.Class({
             this.initGuide()
             setTimeout(function() {
                 GameData.refresh();
-                this.checkOfflineGold()
+                self.checkOfflineGold()
             },100)
             this.showSettingAnim()
             if (!PublicFunc.isSignin()) {

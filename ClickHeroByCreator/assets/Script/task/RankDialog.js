@@ -69,7 +69,7 @@ cc.Class({
     },
 
     onBindView (view, index) {
-        view.getComponent('RankItem').bind(index,this.getDatas()[index])
+        view.getComponent('RankItem').bind(index,this.getDatas()[index],this.index)
     },
 
     onScrollToBottom(){
