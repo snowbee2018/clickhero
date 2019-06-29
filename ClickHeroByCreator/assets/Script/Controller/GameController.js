@@ -55,6 +55,7 @@ cc.Class({
 
         WeChatUtil.setCloudDataFormat(self.cacheGameData.bind(self));
 
+        this.autoCacheTime = Date.now()
     },
 
     initGuide(){
@@ -181,15 +182,26 @@ cc.Class({
         }
         this.dt = 0
         
-        this.dtCombo = this.dtCombo || 0
+        this.autoCacheGame()
+        // this.dtCombo = this.dtCombo || 0
         this.lastComboTime = this.lastComboTime || 0
         if (curtime - this.lastComboTime < 500) {
-            this.dtCombo += dt
+            // this.dtCombo += dt
             return;
         }
         this.lastComboTime = curtime;
         GameData.refreshComboDPS()
-        this.dtCombo = 0
+        // this.dtCombo = 0
+    },
+
+    autoCacheGame(){
+        const curtime = Date.now();
+        if (curtime - this.autoCacheTime < 1000*30) {
+            return;
+        }
+        this.autoCacheTime = curtime;
+        console.log("每30秒保存一次游戏");
+        this.cacheGameData()
     },
 
     start () {
@@ -276,7 +288,10 @@ cc.Class({
 
             
             this.initGuide()
-            this.checkOfflineGold()
+            setTimeout(function() {
+                GameData.refresh();
+                this.checkOfflineGold()
+            },100)
             this.showSettingAnim()
             if (!PublicFunc.isSignin()) {
                 this.showBtnSigninTips()

@@ -105,6 +105,13 @@ cc.Class({
             this.calCritTimes();
             this.calCritOdds();
         },
+        refreshDamage(){
+            this.calDPSDamage();
+            this.calDPSClickDamage();
+            this.calClickDamage();
+            this.calCritTimes();
+            this.calCritOdds();
+        },
         refreshComboDPS(){
             if (this.playerStatus == 0&&this.addDPSClickDamageTimes>0) {
                 this.refresh()

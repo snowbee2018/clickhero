@@ -120,8 +120,7 @@ cc.Class({
             this.level += GameData.heroLvUnit;
             this.isBuy = true;
             this.refresh();
-            GameData.calDPSDamage()
-            GameData.calClickDamage()
+            GameData.refreshDamage()
             // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
@@ -140,8 +139,7 @@ cc.Class({
         if (isCanUpgrade) {
             this.level += GameData.heroLvUnit;
             this.refresh();
-            GameData.calDPSDamage()
-            GameData.calClickDamage()
+            GameData.refreshDamage()
             // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
@@ -159,8 +157,7 @@ cc.Class({
             DataCenter.consumeRuby(GameData.upGoldenRuby)
             this.golden ++;
             this.refresh();
-            GameData.calDPSDamage()
-            GameData.calClickDamage()
+            GameData.refreshDamage()
             // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
             Events.emit(Events.ON_UPGRADE_HERO, this.id);
             return true
@@ -180,8 +177,7 @@ cc.Class({
     addGolden(golden){
         this.golden += golden;
         this.refresh();
-        GameData.calDPSDamage()
-        GameData.calClickDamage()
+        GameData.refreshDamage()
     },
 
     buySkill(skillID,isInstant){
