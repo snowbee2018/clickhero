@@ -59,7 +59,7 @@ Datas.refresh = function(){
         } else if (e.id == 12) {
             GameData.gdPBossTSTimes = count*0.75 + 1
         } else if (e.id == 13) {
-            GameData.gdTreasureTimes = count + 1
+            GameData.gdTreasureTimes = PublicFunc.get10TimesByCount(count,1.15)/10 + 1
         }
     });
     const childDatas = DataCenter.readChildUserData() || []

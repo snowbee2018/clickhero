@@ -145,8 +145,8 @@ cc.Class({
                 break;
             case 13:
                 name = "崆峒印加持" + (count>0? " Lv" + count:"")
-                desc = "每次购买+增加100%崆峒印效果"
-                state = "崆峒印效力增加:+" + (count*100)+"%"
+                desc = "每次购买+"+(100*Math.pow(1.15,this.getCount())).toFixed(2)+"%崆峒印效果"
+                state = "崆峒印效力增加:+" + (PublicFunc.get10TimesByCount(count,1.15)/10*100).toFixed(2)+"%"
                 ruby = 300 + 200 * count
                 unlockLv = 300
                 break;
@@ -268,7 +268,7 @@ cc.Class({
             case 12:
             case 13:
                 for (let i = 0; i < count; i++) {
-                    ruby += 200 * (i+1)
+                    ruby += 300 * (i+1)
                 }
                 break;
         }

@@ -120,7 +120,9 @@ cc.Class({
             this.level += GameData.heroLvUnit;
             this.isBuy = true;
             this.refresh();
-            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+            GameData.calDPSDamage()
+            GameData.calClickDamage()
+            // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
             Events.emit(Events.ON_BY_HERO, this.id);
@@ -138,7 +140,9 @@ cc.Class({
         if (isCanUpgrade) {
             this.level += GameData.heroLvUnit;
             this.refresh();
-            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+            GameData.calDPSDamage()
+            GameData.calClickDamage()
+            // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
             Events.emit(Events.ON_UPGRADE_HERO, this.id);
@@ -155,26 +159,29 @@ cc.Class({
             DataCenter.consumeRuby(GameData.upGoldenRuby)
             this.golden ++;
             this.refresh();
-            this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
+            GameData.calDPSDamage()
+            GameData.calClickDamage()
+            // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
             Events.emit(Events.ON_UPGRADE_HERO, this.id);
             return true
         } else {
             return false
         }
     },
-    // 回收金身 当转移金身时 使用
-    delGolden(){
-        var g = this.golden;
-        this.golden = 0;
-        this.refresh();
-        GameData.calDPSDamage();
-        return g;
-    },
+    // // 回收金身 当转移金身时 使用
+    // delGolden(){
+    //     var g = this.golden;
+    //     this.golden = 0;
+    //     this.refresh();
+    //     GameData.calDPSDamage();
+    //     return g;
+    // },
     // 增加金身 当转移金身时 使用
     addGolden(golden){
         this.golden += golden;
         this.refresh();
-        GameData.calDPSDamage();
+        GameData.calDPSDamage()
+        GameData.calClickDamage()
     },
 
     buySkill(skillID,isInstant){

@@ -205,11 +205,11 @@ cc.Class({
         return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
     },
     // 计算10倍仙丹和妖丹 根据购买数 得到的百分比结果
-    get10TimesByCount(c){
+    get10TimesByCount(c,n){
         let result = 0
         for (let i = 0; i < c; i++) {
             // result += 10+1*i
-            result += Math.pow(1.1,i) * 10
+            result += Math.pow(n||1.1,i) * 10
         }
         console.log("xxxj 10times " + c + " " + result);
         

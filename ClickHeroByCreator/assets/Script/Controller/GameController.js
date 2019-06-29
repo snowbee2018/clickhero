@@ -892,6 +892,7 @@ cc.Class({
         const self = this;
         AudioMgr.playBtn();
         if (self.pageNode.active) {
+            const maxLv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
             var curPageIndex = this.pageIndex
             if (curPageIndex == 0) {
                 var unit = GameData.heroLvUnit;
@@ -909,11 +910,11 @@ cc.Class({
                         unit = 1000;
                         break;
                     case 1000:
+                        unit = maxLv>=1000?10000:1;
+                        break;
+                    case 10000:
                         unit = 1;
                         break;
-                    // case 10000:
-                    //     unit = 1;
-                    //     break;
                     default:
                         break;
                 }
@@ -936,11 +937,11 @@ cc.Class({
                         unit = 1000;
                         break;
                     case 1000:
+                        unit = maxLv>=1000?10000:1;
+                        break;
+                    case 10000:
                         unit = 1;
                         break;
-                    // case 10000:
-                    //     unit = 1;
-                    //     break;
                     default:
                         break;
                 }
