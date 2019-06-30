@@ -228,7 +228,7 @@ cc.Class({
                 const db = this.getDB()
                 const _ = this.db().command
                 db.orderBy('maxLv','desc').where(
-                        type == 0 ? {isbug: _.neq(true)} : {registerTime: _.gt(Date.now() - 3600000*24*7)}
+                        type == 0 ? {isbug: _.neq(true)} : {isbug: _.neq(true), registerTime: _.gt(Date.now() - 3600000*24*7)}
                     ).skip(offset).limit(20).get({
                     success: function (res) {
                         console.log("getRankUsers success");
