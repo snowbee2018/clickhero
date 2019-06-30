@@ -167,6 +167,11 @@ cc.Class({
 
     buy(){
         var isCanBy = DataCenter.isRubyEnough(this.ruby)
+        //神器打个折上限
+        if(this.id== 8 && this.getCount() >= 150)
+        {
+            return false
+        }
         if (isCanBy) {
             DataCenter.consumeRuby(this.ruby)
             GoodsDatas.addBuyCount(this.id)
