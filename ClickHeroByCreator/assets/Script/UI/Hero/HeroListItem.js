@@ -29,6 +29,8 @@ cc.Class({
         contentNode: cc.Node,
         sTips : cc.SpriteFrame,
 
+        nodeGolden : cc.Node,
+        lbGolden : cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -317,6 +319,13 @@ cc.Class({
             icon.lightIcon(skillArr[skillID].isBuy);
         }
         this.setSkillsDisplay()
+
+        if (hero.golden > 0) {
+            this.nodeGolden.active = true
+            this.lbGolden.string = "×"+hero.golden
+        } else {
+            this.nodeGolden.active = false
+        }
     },
 
     setSkillsDisplay(){

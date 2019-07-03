@@ -84,7 +84,7 @@ cc.Class({
     refresh(){
         if (this.id == 1) {
             // 所有金身倍数 加 2%
-            GameData.addGoldenDpsTimes = this.level * 0.02;
+            GameData.addGoldenDpsTimes = 1 + this.level * 0.02;
             GameData.refreshGoldenHero();
         } else if (this.id == 2) {
             // 增加远古boss出现几率

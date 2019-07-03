@@ -151,7 +151,7 @@ cc.Class({
         // golden
         this.goldenBar.active = true; // 通过金身等级 为0 不显示
         this.lbGolden.string = "金身等级："+hero.golden;
-        this.lbGoldenTimes.string = "伤害加成：+"+(hero.golden*50)+"%"
+        this.lbGoldenTimes.string = "伤害加成：+"+(hero.golden*50*GameData.addGoldenDpsTimes).toFixed(2)+"%"
     },
 
     onClickUpGolden(){

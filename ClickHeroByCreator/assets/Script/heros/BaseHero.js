@@ -303,7 +303,7 @@ cc.Class({
             });
         }
         // 金身
-        times *= (1+this.golden*0.5 + GameData.addGoldenDpsTimes);
+        times *= (1+(this.golden*0.5 * GameData.addGoldenDpsTimes))
         if (this.id == 5) {
             let hero39 = HeroDatas.getHero(39)
             if (hero39 && hero39.isBuy && hero39.skills[2].isBuy) {
