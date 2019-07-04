@@ -196,11 +196,11 @@ cc.Class({
 
     autoCacheGame(){
         const curtime = Date.now();
-        if (curtime - this.autoCacheTime < 1000*30) {
+        if (curtime - this.autoCacheTime < 1000*60) {
             return;
         }
         this.autoCacheTime = curtime;
-        console.log("每30秒保存一次游戏");
+        console.log("每60秒保存一次游戏");
         this.cacheGameData()
     },
 
@@ -521,6 +521,7 @@ cc.Class({
                 this.showBtnShareTips()
             }
         }
+        CloudDB.updateMaxLv()
     },
 
     showBtnSigninTips(){
@@ -1014,13 +1015,11 @@ cc.Class({
 
     showRankDialog () {
         console.log("showRankDialog");
-
-        GameData.calGlobalDPSTimes()
-        // let dialog = cc.instantiate(this.RankDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // AudioMgr.playBtn();
+        let dialog = cc.instantiate(this.RankDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     // onLeftBtnClick () {

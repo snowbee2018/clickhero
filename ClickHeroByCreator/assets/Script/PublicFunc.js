@@ -104,7 +104,7 @@ cc.Class({
                 self.getComponent("AncientCtrl").resetGame();
                 self.getComponent("MonsterController").rebirth();
                 GameData.refresh();
-                self.getComponent("UserSkillController").rebirth();
+                self.getComponent("UserSkillController").rebirth(true);
                 Events.emit(Events.ON_GOLD_CHANGE);
                 Events.emit(Events.ON_SOUL_CHANGE);
                 Events.emit(Events.ON_RUBY_CHANGE);
@@ -217,8 +217,8 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.解决退出游戏后伤害异常的bug",
-        "2.解决金刚琢引起的金身伤害计算错误问题",
+        const info = ["1.解决逐日弓无效的BUG",
+        "2.实时更新排行榜排名",
         "3.解决了一些小bug",
             ].join("\n")
         this.popDialog({

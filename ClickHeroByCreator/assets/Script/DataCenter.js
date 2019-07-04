@@ -155,6 +155,35 @@ cc.Class({
         }
     },
 
+    saveUserData(data){
+        console.log("xxxj saveUserData");
+        if (data) {
+            cc.sys.localStorage.setItem("UserData",JSON.stringify(data))
+        }
+    },
+
+    readUserData(){
+        console.log("xxxj readUserData");
+        let json = cc.sys.localStorage.getItem('UserData')
+        if (json&&json.length>0) {
+            let data = JSON.parse(json);
+            return data
+        }
+        return null
+    },
+
+    saveOpenID(id){
+        console.log("xxxj saveOpenID");
+        if (id) {
+            cc.sys.localStorage.setItem("OpenID",id)
+        }
+    },
+
+    readOpenID(){
+        console.log("xxxj readOpenID");
+        return cc.sys.localStorage.getItem('OpenID')
+    },
+
     // 保存数据
     saveGameData(data){
         if (!data) {

@@ -207,7 +207,7 @@ cc.Class({
             }
         },
 
-        updateMaxLv (){
+        updateMaxLv() {
             if (WeChatUtil.isWeChatPlatform) {
                 let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)||0;
                 this.getDB().doc(this.id).update({

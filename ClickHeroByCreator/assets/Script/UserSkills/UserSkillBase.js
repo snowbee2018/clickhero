@@ -339,8 +339,14 @@ cc.Class({
     appply() { }, // 应用技能
     backout() { }, // 撤销技能效果
 
-    rebirth () {
+    rebirth (isReset) {
         const self = this;
+        if (!isReset && self.heroID == 17 && self.skillID == 3) {
+            setTimeout(function() {
+                PublicFunc.schedule(self._scheCallback, 0.5);
+            },0.5)
+            return
+        }
         PublicFunc.unscheduleAllCallbacks();
         if (self.bSustain && !self._isSustainFinish) self.backout();
         self.onCoolingDone();

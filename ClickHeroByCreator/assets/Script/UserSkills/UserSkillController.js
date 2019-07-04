@@ -120,12 +120,12 @@ cc.Class({
         }
     },
 
-    rebirth () {
+    rebirth (isReset) {
         const self = this;
         for (let index = 0; index < self.skillList.children.length; index++) {
             const item = self.skillList.children[index];
             var component = item.getComponent("UserSkill");
-            component.rebirth();
+            component.rebirth(isReset);
         }
     },
 });

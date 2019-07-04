@@ -179,7 +179,7 @@ cc.Class({
     },
 
     checkAddruby(){
-        // console.log("checkAddruby");
+        console.log("checkAddruby");
         CloudDB.getAddruby(function (b, ruby) {
             if (b&&ruby>0) {
                 PublicFunc.popGoldDialog(2,ruby,null,true)
@@ -192,51 +192,67 @@ cc.Class({
         console.log("onWeChatUserInfo");
         let DataMap = DataCenter.DataMap;
         DataCenter.setDataByKey(DataMap.WXUserInfo, userData.userInfo);
-        wx.cloud.callFunction({
-            name: 'login', // 需调用的云函数名
-            data: userData, // 传给云函数的参数
-            complete: res => { // 成功回调
-                if (res.result) {
-                    var openID = res.result.OPENID;
-                    console.log("openID = " + openID);
-                    if (openID) {
-                        self.onOpenID(openID);
+        const openid = DataCenter.readOpenID()
+        if (openid) {
+            console.log("xxxj 使用本地的 OPENID");
+            self.onOpenID(openid);
+        } else {
+            console.log("xxxj 云函数 login");
+            wx.cloud.callFunction({
+                name: 'login', // 需调用的云函数名
+                data: userData, // 传给云函数的参数
+                complete: res => { // 成功回调
+                    if (res.result) {
+                        var openID = res.result.OPENID;
+                        console.log("openID = " + openID);
+                        if (openID) {
+                            DataCenter.saveOpenID(openID)
+                            self.onOpenID(openID);
+                        }
+                    } else {
+                        console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
                     }
-                } else {
-                    console.log("requestID = " + res.requestID + ", errMsg = " + res.errMsg);
-                }
-            },
-        })
+                },
+            })
+        }
     },
 
-    login () {
+    login() {
         const self = this;
         console.log("login");
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             WeChatUtil.checkSystemTime()
-            WeChatUtil.getUserInfo(function (err, userData) {
-                console.log(userData);
-                if (err) {
-                    if (err == 1) {
-                        // 显示按钮
-                        CloudRes.getLoginBtn(function (url) {
-                            if (url) {
-                                cc.loader.load({url:url,type:"png"}, function (err, textrue) {
-                                    if (!err && textrue) {
-                                        cc.find('Canvas/tip').active = false
-                                        self.loginBtn.node.active = true;
-                                        self.loginBtn.spriteFrame = new cc.SpriteFrame(textrue);
-                                        self.loginBtn.node.width = textrue.width;
-                                        self.loginBtn.node.height = textrue.height;
-                                    }
-                                });
-                            }
-                        });
+            const userdata = DataCenter.readUserData()
+            if (userdata) {
+                console.log("xxxj 使用本地的WXUserData");
+                self.onWeChatUserInfo(userdata);
+            }else{
+                console.log("xxxj 请求WXUserData");
+                WeChatUtil.getUserInfo(function (err, userData) {
+                    console.log(userData);
+                    if (err) {
+                        if (err == 1) {
+                            // 显示按钮
+                            CloudRes.getLoginBtn(function (url) {
+                                if (url) {
+                                    cc.loader.load({url:url,type:"png"}, function (err, textrue) {
+                                        if (!err && textrue) {
+                                            cc.find('Canvas/tip').active = false
+                                            self.loginBtn.node.active = true;
+                                            self.loginBtn.spriteFrame = new cc.SpriteFrame(textrue);
+                                            self.loginBtn.node.width = textrue.width;
+                                            self.loginBtn.node.height = textrue.height;
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    } else if (userData && userData.userInfo) {
+                        DataCenter.saveUserData(userData)
+                        self.onWeChatUserInfo(userData);
                     }
-                } else if (userData && userData.userInfo) {
-                    self.onWeChatUserInfo(userData);
-                }
-            });
+                });
+            }
         } else {
             self.startGame();
             

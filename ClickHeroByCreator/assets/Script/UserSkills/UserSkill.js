@@ -120,7 +120,7 @@ cc.Class({
         console.log("user skill " + str + "--点石成金");
         if (flag) {
             // 每次点击获得金币
-            var baseValue = self.baseValue;
+            var baseValue = self.baseValue * GameData.addGoldClickTimes
             if (self.getDoubleSkill() == true) {
                 baseValue *= 2;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
