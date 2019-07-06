@@ -521,7 +521,9 @@ cc.Class({
                 this.showBtnShareTips()
             }
         }
-        CloudDB.updateMaxLv()
+        try {
+            CloudDB.updateMaxLv()
+        } catch (error) {}
     },
 
     showBtnSigninTips(){
