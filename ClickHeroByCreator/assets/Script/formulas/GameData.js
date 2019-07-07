@@ -30,7 +30,7 @@ cc.Class({
         clickCombo : 0,
 
         heroLvUnit: 1, // 英雄等级单位 1 10 25 100 1000 10000
-        ancientLvUnit: 1,// 古神等级单位
+        ancientLvUnit: 1,// 古神等级单位 1 10 25 100 1000 10000 -1
 
         upGoldenRuby : 30,
 

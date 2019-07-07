@@ -868,7 +868,8 @@ cc.Class({
             self.setPageActive(2);
         }
         self.upgrageSelectBtn.active = true;
-        self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
+        // self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
+        self.upgrageSelectBtnLab.string = "×" + (GameData.ancientLvUnit > 0?GameData.ancientLvUnit:"手动输入")
         AudioMgr.playBtn();
     },
 
@@ -958,13 +959,18 @@ cc.Class({
                         unit = maxLv>=1000?10000:1;
                         break;
                     case 10000:
+                        unit = 0;
+                        break;
+                    case 0:
                         unit = 1;
                         break;
                     default:
                         break;
                 }
+                console.log("xxxx " + unit);
+                
                 HeroDatas.setAncientLvUnit(unit);//
-                self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
+                self.upgrageSelectBtnLab.string = "×" + (GameData.ancientLvUnit > 0?GameData.ancientLvUnit:"手动输入")
                 Events.emit(Events.ON_ANCIENT_LVUNIT_CHANGE);//
             }
         }

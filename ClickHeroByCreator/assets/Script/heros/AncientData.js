@@ -55,8 +55,8 @@ cc.Class({
         }
     },
 
-    calSoulByLvUnit(){
-        var unit = GameData.ancientLvUnit;
+    calSoulByLvUnit(num){
+        var unit = num || GameData.ancientLvUnit;
         this.soul = Formulas.getAncientSoulByLevel(this.id,this.level,unit);
         if (this.soul.eq(0)) {
             this.soul = new BigNumber(1)
@@ -68,12 +68,15 @@ cc.Class({
         return this.soul.times(GameData.gdAncientSale).integerValue(2);//这里到时候会要加折扣
     },
 
-    upgrade(){
+    upgrade(num){
+        if (num) {
+            this.calSoulByLvUnit(num)
+        }
         var soul = this.getSoul();
         var isCanUpgrade = DataCenter.isSoulEnough(soul);
         soul = new BigNumber(soul);
         if (isCanUpgrade) {
-            this.level += GameData.ancientLvUnit;
+            this.level += num || GameData.ancientLvUnit;
             DataCenter.consumeSoul(soul);
             this.calSoulByLvUnit();
             this.refresh();
