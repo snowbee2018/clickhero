@@ -81,6 +81,7 @@ cc.Class({
                 new AncientData().init(2,false,false,"催泪铃",0,"每级约+0.96%妖王boss出现几率"),
                 new AncientData().init(3,false,false,"鬼手刀",0,"每级增加三头六臂持续时间2秒"),
                 new AncientData().init(4,false,false,"莫邪宝剑",0,"每级+15%暴击伤害"),
+                // 5
                 new AncientData().init(6,false,false,"不须鞭",0,"每级增加猴子猴孙持续时间2秒"),
                 new AncientData().init(7,false,false,"昊天塔",0,"每级+1秒boss战通关时间"),
                 new AncientData().init(8,false,false,"神农鼎",0,"每级约-0.99%购买和升级英雄花费"),
@@ -95,7 +96,7 @@ cc.Class({
                 new AncientData().init(17,false,false,"女蜗石",0,"每级+25%挂机妖丹倍数(60秒无点击)"),
                 new AncientData().init(18,false,false,"昆仑镜",0,"每级+5%妖丹倍数"),
                 new AncientData().init(19,false,false,"崆峒印",0,"每级+50%葫芦妖丹倍数"),
-                // new AncientData().init(20,false,false,"Argaiv",0),
+                new AncientData().init(20,false,false,"玉净瓶",0,"每级+11%仙丹DPS伤害（将仙丹的10%DPS加成转化为11%，多余的仙丹全买我就对了）"),
                 new AncientData().init(21,false,false,"诛仙阵图",0,"每级+自动点击数*10%挂机DPS(60秒无点击，自动点击需要关闭)"),
                 new AncientData().init(22,false,false,"逐日弓",0,"每级+30%点石成金技能效果"),
                 // new AncientData().init(23,false,false,"Argaiv",0),

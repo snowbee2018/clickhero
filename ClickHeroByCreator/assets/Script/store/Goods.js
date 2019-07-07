@@ -150,6 +150,13 @@ cc.Class({
                 ruby =  Math.min(300 + 200 * count,2000)  
                 unlockLv = 300
                 break;
+            case 17:
+                name = "玉净瓶加持" + (count>0? " Lv" + count:"")
+                desc = "购买+"+(25*Math.pow(1.1,this.getCount())).toFixed(2)+"%玉净瓶效果"
+                state = "玉净瓶效力增加:+" + (PublicFunc.get10TimesByCount(count)*2.5).toFixed(2)+"%"
+                ruby =  300 
+                unlockLv = 300
+                break;
         }
         this.name = name
         this.desc = desc
@@ -262,6 +269,7 @@ cc.Class({
             case 9:
             case 10:
             case 15:
+            case 17:
                 ruby = this.ruby * count
                 break;
             case 4:
@@ -273,7 +281,8 @@ cc.Class({
             case 12:
             case 13:
                 for (let i = 0; i < count; i++) {
-                    ruby += 300 * (i+1)
+                    // ruby += 300 * (i+1)
+                    ruby += Math.min(300 + 200 * i,2000) 
                 }
                 break;
         }

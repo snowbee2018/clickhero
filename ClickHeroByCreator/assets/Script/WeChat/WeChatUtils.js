@@ -724,56 +724,56 @@ cc.Class({
     },
 
     newBannerAd(){
-        const self = this
-        if (this.bannerAd) {
-            this.bannerAd.destroy()
-            this.bannerAd = null
-        }
-        let sys = wx.getSystemInfoSync()
-        console.log(sys);
-        let offset = 0
-        let w = sys.screenWidth * 0.8
-        if (sys.model.indexOf('iPhone X')>-1) {
-            offset = -40
-        }
-        this.bannerAd = wx.createBannerAd({
-            adUnitId: 'adunit-44843eb83e4ec896',
-            style: {
-                left: (sys.screenWidth-w)/2,
-                top: sys.screenHeight-80 + offset,
-                width: w,
-                height : 80,
-            }
-        })
-        this.bannerAd.onError(function(errMsg,errCode) {
-            console.log("bannerAd.onError");
-            console.log(errCode + ":" + errMsg);
+        // const self = this
+        // if (this.bannerAd) {
+        //     this.bannerAd.destroy()
+        //     this.bannerAd = null
+        // }
+        // let sys = wx.getSystemInfoSync()
+        // console.log(sys);
+        // let offset = 0
+        // let w = sys.screenWidth * 0.8
+        // if (sys.model.indexOf('iPhone X')>-1) {
+        //     offset = -40
+        // }
+        // this.bannerAd = wx.createBannerAd({
+        //     adUnitId: 'adunit-44843eb83e4ec896',
+        //     style: {
+        //         left: (sys.screenWidth-w)/2,
+        //         top: sys.screenHeight-80 + offset,
+        //         width: w,
+        //         height : 80,
+        //     }
+        // })
+        // this.bannerAd.onError(function(errMsg,errCode) {
+        //     console.log("bannerAd.onError");
+        //     console.log(errCode + ":" + errMsg);
             
-        })
-        this.bannerAd.onResize(function(res) {
-            self.bannerAd.style.top = sys.screenHeight - res.height + offset
-        })
-        this.bannerAd.showCount = 0
+        // })
+        // this.bannerAd.onResize(function(res) {
+        //     self.bannerAd.style.top = sys.screenHeight - res.height + offset
+        // })
+        // this.bannerAd.showCount = 0
     },
 
     showBannerAd(){
-        if (this.isWeChatPlatform) {
-            if (!this.bannerAd) {
-                this.newBannerAd()
-            }
-            this.bannerAd.showCount ++
-            this.bannerAd.show()
-        }
+        // if (this.isWeChatPlatform) {
+        //     if (!this.bannerAd) {
+        //         this.newBannerAd()
+        //     }
+        //     this.bannerAd.showCount ++
+        //     this.bannerAd.show()
+        // }
     },
 
     hideBannerAd(){
-        if (this.bannerAd) {
-            if (this.bannerAd.showCount>=3) {
-                this.newBannerAd()
-            }else{
-                this.bannerAd.hide()
-            }
-        }
+        // if (this.bannerAd) {
+        //     if (this.bannerAd.showCount>=3) {
+        //         this.newBannerAd()
+        //     }else{
+        //         this.bannerAd.hide()
+        //     }
+        // }
     },
 
     showBtnClub(){

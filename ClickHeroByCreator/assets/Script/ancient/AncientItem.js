@@ -36,6 +36,8 @@ cc.Class({
         }else if((event == 4 || event == 7) && this.data.id == 21){
             this.data.refresh()
             this.bind()
+        }else if (event == 17 && this.data.id == 20){
+            this.bind()
         }
     },
 
@@ -58,7 +60,7 @@ cc.Class({
         this.data = data;
         this.sp.spriteFrame = this.imgs.getSpriteFrame("ancient_" + data.id)
         this.lbName.string = data.name;
-        this.lbLv.string = "等级"+data.level;
+        this.lbLv.string = "等级"+PublicFunc.numToStr(data.level)
         this.lbSoul.string = ""+Formulas.formatBigNumber(data.getSoul())
         // 这个要根据不同的 id和等级 写描述
         this.lbDesc.string = data.getDesc();
@@ -66,6 +68,7 @@ cc.Class({
     },
 
     onUpgradeClick(){
+        // 这里要判断下 unit 是不是-1 是的话 就是手动输入了
         let result = this.data.upgrade();
         if (result) {
             this.bind();

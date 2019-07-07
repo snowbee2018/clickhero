@@ -206,13 +206,13 @@ cc.Class({
     },
     // 计算10倍仙丹和妖丹 根据购买数 得到的百分比结果
     get10TimesByCount(c,n){
-        let result = 0
-        for (let i = 0; i < c; i++) {
-            // result += 10+1*i
-            result += Math.pow(n||1.1,i) * 10
-        }
-        console.log("xxxj 10times " + c + " " + result);
-        
+        // let result = 0
+        // for (let i = 0; i < c; i++) {
+        //     // result += 10+1*i
+        //     result += Math.pow(n||1.1,i) * 10
+        // }
+        n = n?n:1.1
+        var result = (Math.pow(n,c) - 1)/(n-1) *10
         return result
     },
 
@@ -249,4 +249,17 @@ cc.Class({
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
     },
+
+    numToStr(num){
+        if (num >= 1000000) {
+            return this.num2e(num)
+        }
+        return Number(num.toFixed(2))
+    },
+
+    num2e(num){
+        var p = Math.floor(Math.log(num)/Math.LN10);
+        var n = (num * Math.pow(10, -p)).toFixed(3)
+        return n + 'e' + p;
+    }
 });
