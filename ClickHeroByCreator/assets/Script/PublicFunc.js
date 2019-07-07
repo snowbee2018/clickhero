@@ -249,4 +249,17 @@ cc.Class({
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;
     },
+
+    numToStr(num){
+        if (num >= 1000000) {
+            return this.num2e(num)
+        }
+        return Number(num.toFixed(2))
+    },
+
+    num2e(num){
+        var p = Math.floor(Math.log(num)/Math.LN10);
+        var n = (num * Math.pow(10, -p)).toFixed(3)
+        return n + 'e' + p;
+    }
 });

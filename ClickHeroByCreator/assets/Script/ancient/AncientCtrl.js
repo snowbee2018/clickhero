@@ -103,12 +103,14 @@ cc.Class({
         let dialog = cc.instantiate(this.disbandDialogPrefab);
         var soul = new BigNumber(0);
         HeroDatas.myAncients.forEach(e => {
-            soul = soul.plus(Formulas.getAncientSoul(e.id,e.level));
+            if (e.level > 1) {
+                soul = soul.plus(Formulas.getAncientSoul(e.id,e.level));
+            }
         });
         for (let i = 0; i < HeroDatas.myAncients.length; i++) {
             soul = soul.plus(HeroDatas.buyAncientSouls[i][0]);
         }
-        soul = soul.times(0.75*GameData.gdAncientSale).integerValue()
+        soul = soul.times(0.75*GameData.gdAncientSale).integerValue(3)
         dialog.getComponent("Dialog").setCallback(function(result) {
             if (result) {
                 HeroDatas.myAncients.forEach(e => {

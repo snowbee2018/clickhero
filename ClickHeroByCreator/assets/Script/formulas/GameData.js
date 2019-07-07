@@ -54,6 +54,7 @@ cc.Class({
         addLeaveGoldTimes : 0,      //17- 挂机金币加成 √
         addGoldTimes: 1,           //18* +5% Gold √
         addTreasureTimes: 1,       //19* 宝箱金币倍数 √
+        addSoulDPSTimes : 0,       //20  11%仙丹伤害加成
         addAutoIdleTimes: 0,       //21 自动点击的挂机DPS加成
         addGoldClickTimes: 1,      //22*- 点金手倍数 +30% gold from Golden Clicks √
         addLeaveDPSTimes : 0,       //24- 加挂机DPS伤害 √
@@ -62,7 +63,7 @@ cc.Class({
 
         //--------商店的影响--------
         gdDayDPSTimes : 1, //1 每天叠一次的永久伤害叠加
-        gdShareDPSTimes : 1, //15 呼朋唤友
+        gdShareDPSTimes : 1, //16 呼朋唤友
         gdDayGoldTimes : 1, //14 每天叠一次的永久金币
         gdDoubleGold : 1, //2 双倍金币
         gdDoubleDPS : 1, //3 双倍DPS
@@ -76,7 +77,7 @@ cc.Class({
         gdPBossTimes : 1,//11 addPrimalBossOdds倍数
         gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
         gdTreasureTimes : 1,//13 addTreasureTimes倍数
-        gdMinusMonsterTimes : 1,//17
+        gdSoulDPSTimes : 1,//17 addSoulDPSTimes倍数
 
         //--------被动技能的影响--------
         // cskCritTimes : 1, // 暴击倍数 :calCritTimes()
@@ -138,7 +139,7 @@ cc.Class({
             if (this.playerStatus == 0) {
                 this.globalDPSTimes = this.globalDPSTimes * (1+this.addDPSClickDamageTimes*this.clickCombo)
             }
-            this.globalDPSTimes *= 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1)
+            this.globalDPSTimes *= 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1 + this.addSoulDPSTimes*this.gdSoulDPSTimes)
         },
         // 计算全局金币倍数
         calGoldTimes(){
@@ -240,7 +241,7 @@ cc.Class({
         },
 
         getMinusMonsterNum() {
-            return this.addMinusMonsterNum * this.gdMinusMonsterTimes
+            return this.addMinusMonsterNum
         },
         // 根据关卡等级 获得怪数
         getZoneMonsterCount(lv){

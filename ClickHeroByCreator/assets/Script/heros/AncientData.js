@@ -58,11 +58,14 @@ cc.Class({
     calSoulByLvUnit(){
         var unit = GameData.ancientLvUnit;
         this.soul = Formulas.getAncientSoulByLevel(this.id,this.level,unit);
+        if (this.soul.eq(0)) {
+            this.soul = new BigNumber(1)
+        }
     },
 
     // 获得升级花费
     getSoul(){
-        return this.soul.times(GameData.gdAncientSale).integerValue();//这里到时候会要加折扣
+        return this.soul.times(GameData.gdAncientSale).integerValue(2);//这里到时候会要加折扣
     },
 
     upgrade(){
@@ -158,6 +161,8 @@ cc.Class({
             GameData.addTreasureTimes = 1 + 0.5 * this.level;//直接使用
         } else if (this.id == 20) {
             // soul dps 不做
+            GameData.addSoulDPSTimes = 0.11 * this.level
+            GameData.refresh()
         } else if (this.id == 21) {
             // 	空闲时每个未分配的自动点击器+ 10％DPS（没有点击60秒）
             let autoCount = GoodsDatas.getBuyCount(4)
@@ -214,7 +219,7 @@ cc.Class({
         let desc = ""
         if (this.id == 1) {
             // 所有金身倍数 加 2%
-            desc = "+" + (this.level * 2) + "%金身伤害" // 需要bigNumber
+            desc = "+" + PublicFunc.numToStr(this.level * 2) + "%金身伤害" // 需要bigNumber
         } else if (this.id == 2) {
             // 增加远古boss出现几率
             desc = "+" + (GameData.getPrimalBossOdds()*100).toFixed(4) + "%的妖王出现概率"
@@ -223,7 +228,7 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s三头六臂持续时间"
         } else if (this.id == 4) {
             // +15% 暴击伤害 
-            desc = "+" + (this.level * 15) + "%暴击伤害" // 需要bigNumber
+            desc = "+" + PublicFunc.numToStr(this.level * 15) + "%暴击伤害" // 需要bigNumber
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
             // 感觉太废物了 所以懒得做
@@ -247,13 +252,13 @@ cc.Class({
             desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的10倍妖丹概率"
         } else if (this.id == 12) {
             // +20% click damage
-            desc = "+" + (20 * this.level) + "%点击伤害" // 需要bigNumber
+            desc = "+" + PublicFunc.numToStr(20 * this.level) + "%点击伤害" // 需要bigNumber
         } else if (this.id == 13) {
             // 	+2s Super Clicks duration
             desc = "+" + (this.level * 2) + "s如意金箍持续时间"
         } else if (this.id == 14) {
             // 附加DPS点击伤害倍数
-            desc = "+" + (0.01*this.level) + "%连击DPS伤害"
+            desc = "+" + PublicFunc.numToStr(0.01*this.level) + "%连击DPS伤害"
         } else if (this.id == 15) {
             // +2s Golden Clicks duration
             desc = "+" + (this.level * 2) + "s点石成金持续时间"
@@ -262,28 +267,29 @@ cc.Class({
             desc = "每关"+GameData.getMinusMonsterNum().toFixed(4)+"个怪数量"
         } else if (this.id == 17) {
             // 加挂机金币
-            desc = "+" + ((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时妖丹"
+            desc = "+" + PublicFunc.numToStr((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100) + "%挂机时妖丹"
         } else if (this.id == 18) {
             // +5% Gold
             desc = "+" + (5*this.level) + "%妖丹倍数"
         } else if (this.id == 19) {
             // 宝箱金币倍数
-            desc = "+" + (50*this.level*GameData.gdTreasureTimes).toFixed(4) + "%葫芦妖丹倍数"
+            desc = "+" + PublicFunc.numToStr(50*this.level*GameData.gdTreasureTimes) + "%葫芦妖丹倍数"
         } else if (this.id == 20) {
             // soul dps 不做
+            desc = "+"+PublicFunc.numToStr(11*this.level*GameData.gdSoulDPSTimes) + "%的额外仙丹DPS加成"
         } else if (this.id == 21) {
             // 	空闲时每个未分配的自动点击+ 10％Gold（没有点击60秒）
             let autoCount = GoodsDatas.getBuyCount(4)
             let result = autoCount * this.level * 10 * GameData.gdLeaveTimes
-            desc = "+"  + result.toFixed(2) + "%挂机时DPS伤害\n（自动点击×"+autoCount+"）"
+            desc = "+"  + PublicFunc.numToStr(result) + "%挂机时DPS伤害\n（自动点击×"+autoCount+"）"
         } else if (this.id == 22) {
             // +30% gold from Golden Clicks 
-            desc = "+" + (30*this.level) + "%点石成金倍数"
+            desc = "+" + PublicFunc.numToStr(30*this.level) + "%点石成金倍数"
         } else if (this.id == 23) {
             // 红宝石掉落后可点击双重红宝石的机会增加
         } else if (this.id == 24) {
             // 加挂机DPS伤害
-            desc = "+" + ((GameData.addLeaveDPSTimes)*GameData.gdLeaveTimes*100).toFixed(0) + "%挂机时DPS伤害"
+            desc = "+" + PublicFunc.numToStr((GameData.addLeaveDPSTimes)*GameData.gdLeaveTimes*100) + "%挂机时DPS伤害"
         } else if (this.id == 25) {
             // 增加暴击风暴时间 +2s
             GameData.addCritStormSecond = this.level * 2;
