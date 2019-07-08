@@ -217,9 +217,9 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.解决逐日弓无效的BUG",
-        "2.实时更新排行榜排名",
-        "3.解决了一些小bug",
+        const info = ["1.增加新神器玉净瓶，以及它的加持，详细看游戏圈",
+        "2.古神增加手动输入升级等级",
+        "3.去掉了讨厌的Banner广告",
             ].join("\n")
         this.popDialog({
             contentStr: info,

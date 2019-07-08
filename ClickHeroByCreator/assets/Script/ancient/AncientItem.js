@@ -49,8 +49,10 @@ cc.Class({
     },
 
     onSoulChange(){
-        let result = DataCenter.isSoulEnough(this.data.getSoul());
-        this.btn.interactable = result;
+        if (GameData.ancientLvUnit > 0) {
+            let result = DataCenter.isSoulEnough(this.data.getSoul());
+            this.btn.interactable = result;
+        }
     },
 
     bind(data){
@@ -84,12 +86,11 @@ cc.Class({
             node.x = cc.winSize.width/2;
             node.y = cc.winSize.height/2;
             InputLvDialog.setCallback(function(num) {
-                console.log("xxx num"+num);
-                
                 let result = self.data.upgrade(num);
                 if (result) {
                     self.bind();
                 }
+                return result
             })
         }
         AudioMgr.playBtn();

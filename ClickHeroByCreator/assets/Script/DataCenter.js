@@ -181,7 +181,7 @@ cc.Class({
 
     readOpenID(){
         console.log("xxxj readOpenID");
-        return cc.sys.localStorage.getItem('OpenID')
+        return cc.sys.localStorage.getItem('OpenID_')
     },
 
     // 保存数据
