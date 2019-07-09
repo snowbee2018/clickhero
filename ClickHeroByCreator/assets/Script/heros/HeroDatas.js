@@ -81,7 +81,7 @@ cc.Class({
                 new AncientData().init(2,false,false,"催泪铃",0,"每级约+0.96%妖王boss出现几率"),
                 new AncientData().init(3,false,false,"鬼手刀",0,"每级增加三头六臂持续时间2秒"),
                 new AncientData().init(4,false,false,"莫邪宝剑",0,"每级+15%暴击伤害"),
-                new AncientData().init(5,false,false,"照妖镜",0,"每级约-0.99%的BOSS生命值,最高上限为50%"),
+                new AncientData().init(5,false,false,"照妖镜",0,"每级约-0.099%的BOSS生命值,最高上限为50%"),
                 new AncientData().init(6,false,false,"不须鞭",0,"每级增加猴子猴孙持续时间2秒"),
                 new AncientData().init(7,false,false,"昊天塔",0,"每级+1秒boss战通关时间"),
                 new AncientData().init(8,false,false,"神农鼎",0,"每级约-0.99%购买和升级英雄花费"),

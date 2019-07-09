@@ -217,9 +217,9 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.增加新神器玉净瓶，以及它的加持，详细看游戏圈",
-        "2.古神增加手动输入升级等级",
-        "3.去掉了讨厌的Banner广告",
+        const info = ["1.增加新神器照妖镜",
+        "2.增加新神器玉净瓶，以及它的加持",
+        "3.古神增加手动输入升级等级",
             ].join("\n")
         this.popDialog({
             contentStr: info,
