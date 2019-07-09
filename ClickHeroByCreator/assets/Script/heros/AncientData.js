@@ -105,7 +105,7 @@ cc.Class({
             GameData.calCritTimes();
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
-            // 感觉太废物了 所以懒得做
+            GameData.addMinusBoosLife = -5*(1- Math.exp(-0.002*this.level))
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
             GameData.addClickstormSecond = this.level * 2;
@@ -235,6 +235,7 @@ cc.Class({
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
             // 感觉太废物了 所以懒得做
+            desc = (GameData.addMinusBoosLife*100).toFixed(4) + "%Boss的生命值"
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
             desc = "+" + (this.level * 2) + "s猴子猴孙持续时间"

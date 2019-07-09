@@ -84,7 +84,7 @@ cc.Class({
     setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack, onMonsterTalk) {
         const self = this;
         self._lv = lv;
-        self._totalHP = Formulas.getMonsterHP(lv);
+        self._totalHP = Formulas.getMonsterHP(lv).times(1+GameData.addMinusBoosLife);
         self._curHP = new BigNumber(self._totalHP);
         if (monsterCloudInfo) {
             self._isTreasureChest = !!monsterCloudInfo.isTreasureChest;
