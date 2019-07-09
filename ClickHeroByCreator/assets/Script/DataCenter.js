@@ -164,7 +164,7 @@ cc.Class({
 
     readUserData(){
         console.log("xxxj readUserData");
-        let json = cc.sys.localStorage.getItem('UserData')
+        let json = cc.sys.localStorage.getItem('UserData_')
         if (json&&json.length>0) {
             let data = JSON.parse(json);
             return data
