@@ -9,16 +9,12 @@
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
-    init() {
+    init(b) {
         // this.openMusic(true);
         this.tgBgm = cc.sys.localStorage.getItem("tgBgm")
         if (this.tgBgm === "") {
             this.tgBgm = 1
         }
-        // this.tgGold = cc.sys.localStorage.getItem("tgGold")
-        // if (this.tgGold === "") {
-        //     this.tgGold = 1
-        // }
         this.tgClick = cc.sys.localStorage.getItem("tgClick")
         if (this.tgClick === "") {
             this.tgClick = 1
@@ -31,49 +27,39 @@ cc.Class({
         // this.tgGold = Number(this.tgGold)
         this.tgClick = Number(this.tgClick)
         this.tgClickEffect = Number(this.tgClickEffect)
-        this.openMusic(this.tgBgm);
+        // this.openMusic(this.tgBgm);
         this.openEffect(true);
-        // CloudRes.getMp3Url('login', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         cc.audioEngine.playMusic(clip, true);
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('bg', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.bgAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('hit', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.hitAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('bighit', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.bighitAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('getGoin', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.getGoinAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('btn', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.btnAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // CloudRes.getMp3Url('bg_boss', function (url) {
-        //     cc.loader.load(url, function (err, clip) {
-        //         this.bossAudioClip = clip;
-        //     }.bind(this));
-        // }.bind(this));
-        // bg_boss
+        if (b) {
+            this.playBG()
+        }
+    },
+
+    playBGM(){
+        const self = this
+        if (this.bgAudioClip) {
+            self.bgmId = cc.audioEngine.playMusic(this.bgAudioClip, true);
+        } else {
+            CloudRes.getMp3Url('bg', function (url) {
+                cc.loader.load(url, function (err, clip) {
+                    self.bgAudioClip = clip;
+                    self.bgmId = cc.audioEngine.playMusic(self.bgAudioClip, true);
+                }.bind(this));
+            }.bind(this));
+        }
+    },
+
+    stopBGM(){
+        cc.audioEngine.stopMusic()
     },
 
     openMusic(bool) {
         cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
         cc.audioEngine.setVolume(this.bgAudioClip,bool ? 0.3 : 0)
+        if (bool) {
+            this.playBGM()
+        } else {
+            this.stopBGM()
+        }
     },
 
     openEffect(bool) {
@@ -81,19 +67,25 @@ cc.Class({
     },
 
     playBG() {
+        this.openMusic(this.tgBgm)
         // if (this.tgBgm) {
-            if (this.bgAudioClip) {
-                cc.audioEngine.playMusic(this.bgAudioClip, true);
-            }
-            else
-            {
-                CloudRes.getMp3Url('bg', function (url) {
-                    cc.loader.load(url, function (err, clip) {
-                        this.bgAudioClip = clip;
-                        cc.audioEngine.playMusic(this.bgAudioClip, true);
-                    }.bind(this));
-                }.bind(this));
-            }
+        //     this.playBGM()
+        // } else {
+        //     this.stopBGM()
+        // }
+        // if (this.tgBgm) {
+            // if (this.bgAudioClip) {
+            //     cc.audioEngine.playMusic(this.bgAudioClip, true);
+            // }
+            // else
+            // {
+            //     CloudRes.getMp3Url('bg', function (url) {
+            //         cc.loader.load(url, function (err, clip) {
+            //             this.bgAudioClip = clip;
+            //             cc.audioEngine.playMusic(this.bgAudioClip, true);
+            //         }.bind(this));
+            //     }.bind(this));
+            // }
             
         // }
     },
