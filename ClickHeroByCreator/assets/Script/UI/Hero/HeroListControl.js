@@ -109,8 +109,8 @@ cc.Class({
         listItemNode.active = false
         this.pushItem(listItemNode)
         this.heroList.content.height = 140 * this.items.length + 100
-        this.btnBuySkills.y = - this.heroList.content.height + 50
-        this.btnBuyHeros.y = - this.heroList.content.height + 50
+        // this.btnBuySkills.y = - this.heroList.content.height + 50
+        // this.btnBuyHeros.y = - this.heroList.content.height + 50
     },
 
     onGoldChange () {
