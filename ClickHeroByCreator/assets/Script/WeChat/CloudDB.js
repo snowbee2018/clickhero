@@ -192,20 +192,20 @@ cc.Class({
             }
         },
 
-        updataChildUsers (usersArr) {
-            const self = this;
-            if (WeChatUtil.isWeChatPlatform) {
-                self.getDB().doc(self.id).update({
-                    // data 传入需要局部更新的数据
-                    data: {
-                        ChildUsers: usersArr
-                    },
-                    success: function (res) {
-                        console.log(res);
-                    }
-                });
-            }
-        },
+        // updataChildUsers (usersArr) {
+        //     const self = this;
+        //     if (WeChatUtil.isWeChatPlatform) {
+        //         self.getDB().doc(self.id).update({
+        //             // data 传入需要局部更新的数据
+        //             data: {
+        //                 ChildUsers: usersArr
+        //             },
+        //             success: function (res) {
+        //                 console.log(res);
+        //             }
+        //         });
+        //     }
+        // },
 
         updateMaxLv() {
             if (WeChatUtil.isWeChatPlatform) {

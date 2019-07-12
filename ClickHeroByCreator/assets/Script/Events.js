@@ -34,6 +34,7 @@ cc.Class({
         ON_RESETGAME : "ON_RESETGAME",
         ON_BUYSKILLS : "ON_BUYSKILLS",
         ON_BUYHEROS : "ON_BUYHEROS",
+        MAKE_CLICKRUBY : "MAKE_CLICKRUBY", // 生成一个 冰糕
         
         emit(name,params){
             cc.systemEvent.emit(name,params);

@@ -183,6 +183,7 @@ cc.Class({
         this.dt = 0
         
         this.autoCacheGame()
+        this.updateClickruby()
         // this.dtCombo = this.dtCombo || 0
         this.lastComboTime = this.lastComboTime || 0
         if (curtime - this.lastComboTime < 500) {
@@ -192,6 +193,20 @@ cc.Class({
         this.lastComboTime = curtime;
         GameData.refreshComboDPS()
         // this.dtCombo = 0
+    },
+
+    updateClickruby(){
+        if (window.nextClickruby) {
+            let data = nextClickruby
+            if (Date.now() > data.time) {
+                console.log(data);
+                nextClickruby = null
+                Events.emit(Events.MAKE_CLICKRUBY,data.type)
+            } else {
+                console.log(data.time - Date.now());
+                
+            }
+        }
     },
 
     autoCacheGame(){
@@ -298,6 +313,7 @@ cc.Class({
             }
             this.showBtnShareTips()
             WeChatUtil.showBtnClub()
+            PublicFunc.makeNextClickruby()
         } catch (error) {
             console.error(error)
         }
