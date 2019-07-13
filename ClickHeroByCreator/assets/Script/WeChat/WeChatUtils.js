@@ -723,6 +723,24 @@ cc.Class({
         }
     },
 
+    getSystemTime(callback){
+        if (this.isWeChatPlatform) {
+            wx.cloud.callFunction({
+                name: 'test', // 需调用的云函数名
+                complete: res => { // 成功回调
+                    if (res.result&&res.result.time) {
+                        const time = res.result.time;
+                        callback(true,time)
+                    } else {
+                        callback(false)
+                    }
+                },
+            })
+        } else {
+            callback(true,Date.now())
+        }
+    },
+
     newBannerAd(){
         // const self = this
         // if (this.bannerAd) {

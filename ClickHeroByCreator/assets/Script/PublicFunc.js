@@ -16,6 +16,7 @@ cc.Class({
         goldDialog: cc.Prefab,
         popTips : cc.Prefab,
         CDKeyDialog : cc.Prefab,
+        imgClickruby : cc.SpriteFrame,
     },
 
     onLoad(){
@@ -261,5 +262,47 @@ cc.Class({
         var p = Math.floor(Math.log(num)/Math.LN10);
         var n = (num * Math.pow(10, -p)).toFixed(3)
         return n + 'e' + p;
-    }
+    },
+
+    makeNextClickruby(){
+        // 随机5~10分钟产生一个nextClickruby
+        // let nextTime = Date.now() + (Math.random()+1) * 5 * 1000 * 60
+        let nextTime = Date.now() + 1000 * 10
+        let r = Math.random()
+        let type
+        if (r <= 0.5) {
+            type = 1
+        } else {
+            type = Math.ceil((r - 0.5)*10)
+        }
+        window.nextClickruby = {
+            type : type,
+            time : nextTime
+        }
+        console.log(nextClickruby);
+    },
+
+    // 一袋金币的数额
+    getBagGold(){
+        var key = DataCenter.KeyMap.passLavel
+        var lv = DataCenter.getDataByKey(key) + 1
+        lv = Math.ceil(lv / 5) * 5
+        let timesTreas = GameData.getTreasureTimes()*GameData.getTreasureOdds()+1
+        let times10x = (10*GameData.addTenfoldGoldOdds+1)
+        let times = GameData.globalGoldTimes*timesTreas*times10x
+        var gold = Formulas.getMonsterGold(lv).times(100).times(times)
+        return gold
+    },
+    // 快速转生能获得的英魂
+    getBagSoul(){
+        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+        var soul = new BigNumber(0)
+        for (let lv = 0; lv <= maxlv; lv++) {
+            if (lv >= 100 && (lv % 5) == 0) {
+                soul = soul.plus(Formulas.getPrimalBossSoul(lv))
+            }
+        }
+        soul = soul.times(GameData.getPrimalBossOdds() + 0.25).plus(4).integerValue()
+        return soul
+    },
 });
