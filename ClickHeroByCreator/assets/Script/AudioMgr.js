@@ -59,8 +59,8 @@ cc.Class({
     },
 
     openMusic(bool) {
-        // cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
-        // cc.audioEngine.setVolume(this.bgAudioClip,bool ? 0.3 : 0)
+        cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
+        cc.audioEngine.setVolume(this.bgAudioClip,bool ? 0.3 : 0)
         console.log("打开声音")
         if (bool) {
             this.playBGM()
