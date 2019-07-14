@@ -38,6 +38,7 @@ cc.Class({
         spSetting : cc.Node,
 
         clickLight : cc.Prefab,
+        nodeClickRuby : cc.Node,
     },
     
     // use this for initialization
@@ -200,11 +201,56 @@ cc.Class({
             let data = nextClickruby
             if (Date.now() > data.time) {
                 console.log(data);
-                nextClickruby = null
                 Events.emit(Events.MAKE_CLICKRUBY,data.type)
             } else {
                 console.log(data.time - Date.now());
-                
+            }
+        }
+    },
+
+    onMakeClickRuby(){
+        if (window.nextClickruby) {
+            if (Date.now() > nextClickruby.time) {
+                const next = nextClickruby
+                nextClickruby = null
+                WeChatUtil.getSystemTime(function(b,time) {
+                    console.log("xxxxxxj mark time");
+                    console.log(time);
+                    console.log(next.time);
+                    if (b&&time > next.time - 10000) {
+                        let node = new cc.Node()
+                        let sp = node.addComponent(cc.Sprite)
+                        sp.spriteFrame = PublicFunc.imgClickruby
+                        this.nodeClickRuby.removeAllChildren()
+                        node.parent = this.nodeClickRuby
+                        let winWidth = cc.winSize.width - 60
+                        let winHeight = cc.winSize.height - 300
+                        let x = winWidth * Math.random() - winWidth/2
+                        let y = winHeight * Math.random() - winHeight/2
+                        node.x=x
+                        node.y=y
+                        node.addComponent(cc.Button)
+                        node.on('click', function() {
+                            let r = Math.random()
+                            if (r < 0.45) {
+                                PublicFunc.popGoldDialog(0, PublicFunc.getBagGold().times(0.5)) // 一袋妖丹
+                            } else if(r < 0.75){
+                                var lv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.maxPassLavel)
+                                if (lv < 200) {
+                                    PublicFunc.popGoldDialog(0, PublicFunc.getBagGold()) // 一袋妖丹
+                                } else {
+                                    PublicFunc.popGoldDialog(1,PublicFunc.getBagSoul().times(0.04).integerValue())
+                                }
+                            } else {
+                                PublicFunc.popGoldDialog(2,20+Math.ceil(Math.random()*10))
+                            }
+                            node.removeFromParent()
+                            PublicFunc.makeNextClickruby()
+                        }, this);
+                    } else {
+                        PublicFunc.makeNextClickruby()
+                    }
+                }.bind(this))
             }
         }
     },
@@ -242,6 +288,7 @@ cc.Class({
         Events.off(Events.ON_RESUME_GAME, self.onResumeGame, self);
         Events.off(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
         Events.off(Events.ON_RESETGAME, this.resetGame, this);
+        Events.off(Events.MAKE_CLICKRUBY, this.onMakeClickRuby, this);
     },
 
     onGameStart () {
@@ -284,6 +331,7 @@ cc.Class({
             Events.on(Events.ON_RESUME_GAME, self.onResumeGame, self);
             Events.on(Events.SHOW_SKILL_FINGER, self.showSkillTabFinger, self);
             Events.on(Events.ON_RESETGAME, this.resetGame, this);
+            Events.on(Events.MAKE_CLICKRUBY, this.onMakeClickRuby, this);
 
             self.totalCostLab.string = DataCenter.getGoldStr();
             // self.totalSoulLab.string = DataCenter.getSoulStr();
