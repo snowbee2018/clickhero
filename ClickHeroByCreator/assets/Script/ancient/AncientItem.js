@@ -39,6 +39,10 @@ cc.Class({
             this.bind()
         }else if (event == 17 && this.data.id == 20){
             this.bind()
+        }else if (event == 18 && this.data.id == 16){
+            this.bind()
+        }else if (event == 19 && this.data.id == 5){
+            this.bind()
         }
     },
 

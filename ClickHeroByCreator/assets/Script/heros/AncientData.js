@@ -105,7 +105,7 @@ cc.Class({
             GameData.calCritTimes();
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
-            GameData.addMinusBoosLife = -5*(1- Math.exp(-0.002*this.level))/10
+            GameData.addMinusBoosLife = -0.5*(1- Math.exp(-0.002*this.level))
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
             GameData.addClickstormSecond = this.level * 2;
@@ -225,7 +225,7 @@ cc.Class({
             desc = "+" + PublicFunc.numToStr(this.level * 2) + "%金身伤害" // 需要bigNumber
         } else if (this.id == 2) {
             // 增加远古boss出现几率
-            desc = "+" + (GameData.getPrimalBossOdds()*100).toFixed(4) + "%的妖王出现概率"
+            desc = "+" + (GameData.getAddPrimalBossOdds()*100).toFixed(4) + "%的妖王出现概率"
         } else if (this.id == 3) {
             // + 2s Powersurge持续时间
             desc = "+" + (this.level * 2) + "s三头六臂持续时间"
@@ -235,19 +235,19 @@ cc.Class({
         } else if (this.id == 5) {
             // 减少boss生命 -5×(1-e^-0.002n) * 10% boss生命
             // 感觉太废物了 所以懒得做
-            desc = (GameData.addMinusBoosLife*100).toFixed(4) + "%Boss的生命值"
+            desc = (GameData.addMinusBoosLife*GameData.gdMinusBoosLifeTimes*100).toFixed(4) + "%Boss的生命值"
         } else if (this.id == 6) {
             // + 2s Clickstorm持续时间
             desc = "+" + (this.level * 2) + "s猴子猴孙持续时间"
         } else if (this.id == 7) {
             // boss计时器 增加 30×(1-e^-0.034n)  需要bigNumber
-            desc = "+" + GameData.getBossTimerSecond().toFixed(4) + "秒Boss战时长"
+            desc = "+" + GameData.getAddBossTimerSecond().toFixed(4) + "秒Boss战时长"
         } else if (this.id == 8) {
             // 英雄费用降低 99.99999999×(1-e^-0.01n)
             desc = "-" + (99.99999999 * (1 - Math.exp(-0.01*this.level))).toFixed(4) + "%解锁和升级英雄花费"
         } else if (this.id == 9) {
             // 	宝箱出现概率 基于0.01 9900×(1-e^-0.002n)
-            desc = "+" + (GameData.getTreasureOdds()*100-1).toFixed(4) + "%的葫芦妖出现概率"
+            desc = "+" + (GameData.getAddTreasureOdds()*100-1).toFixed(4) + "%的葫芦妖出现概率"
         } else if (this.id == 10) {
             // 增加金币探测器持续时间2s MetalDetector
             desc = "+" + (this.level * 2) + "s火眼金睛持续时间"

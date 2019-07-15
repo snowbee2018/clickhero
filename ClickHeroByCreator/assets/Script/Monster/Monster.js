@@ -84,7 +84,7 @@ cc.Class({
     setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack, onMonsterTalk) {
         const self = this;
         self._lv = lv;
-        self._totalHP = Formulas.getMonsterHP(lv).times(1+GameData.addMinusBoosLife);
+        self._totalHP = Formulas.getMonsterHP(lv).times(GameData.getMonsterHpTimes(lv));
         self._curHP = new BigNumber(self._totalHP);
         if (monsterCloudInfo) {
             self._isTreasureChest = !!monsterCloudInfo.isTreasureChest;
@@ -115,12 +115,11 @@ cc.Class({
         } else {
             self._isBoss = self._lv % 5 == 0;
             if (!self._isBoss) {
-                var odds = 0.01 + GameData.getTreasureOdds()
+                var odds = GameData.getTreasureOdds()
                 self._isTreasureChest = Formulas.isHitRandom(odds);
             } else {
                 if (lv >= 100 && !DataCenter.isLevelPassed(lv)) { // 生成远古BOSS
-                    var baseOdds = 0.25;
-                    var realOdds = baseOdds + GameData.getPrimalBossOdds()
+                    var realOdds =  GameData.getPrimalBossOdds()
                     if (lv <= 100 && lv % 100 == 0) {
                         self._isPrimalBoss = true; // 百夫长
                     } else if (lv >= 110 && lv <= 130 && lv%10 == 0) {

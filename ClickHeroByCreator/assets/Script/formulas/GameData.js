@@ -44,7 +44,7 @@ cc.Class({
         addClickstormSecond: 0,    //6*- 猴子猴孙秒数增加 2s++ √
         addBossTimerSecond: 0,     //7* Boss计时器持续时间 0~30.0s √
         buyHeroDiscount : 1,        //8- 购买英雄折扣 0~1 √
-        addTreasureOdds: 0.01,     //9* 宝箱出现概率 0~1 √
+        addTreasureOdds: 0,     //9* 宝箱出现概率 0~1 √
         addMetalDetectorSecond: 0, //10*- 金币探测器 2s++ √
         addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1 √
         addClickDamageTimes : 1,    //12- 点击伤害倍数 每级+20% √
@@ -79,6 +79,8 @@ cc.Class({
         gdPBossTSTimes : 1,//12 addBossTimerSecond倍数
         gdTreasureTimes : 1,//13 addTreasureTimes倍数
         gdSoulDPSTimes : 1,//17 addSoulDPSTimes倍数
+        gdMinusMonsterNumTimes : 1,//18 addMinusMonsterNum倍数
+        gdMinusBoosLifeTimes : 1,//19 addMinusBoosLife倍数
 
         //--------被动技能的影响--------
         // cskCritTimes : 1, // 暴击倍数 :calCritTimes()
@@ -129,9 +131,6 @@ cc.Class({
                 }
             });
             this.skDPSTimes = Math.pow(1.05,DataCenter.getSkill6Data().count)
-            console.log("Math.pow(1.05,DataCenter.getSkill6Data().count):" + Math.pow(1.05,DataCenter.getSkill6Data().count))
-            console.log("DataCenter.getSkill6Data().count:" + DataCenter.getSkill6Data().count)
-            
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes*this.gdLeaveTimes:0) + 1
             let idleAutoTimes = (this.playerStatus==1?this.addAutoIdleTimes*this.gdLeaveTimes:0) + 1
             idleTimes *= idleAutoTimes
@@ -225,16 +224,45 @@ cc.Class({
 
         //====下面是游戏区的====
         // 获得增加的远古Boss出现几率（原为0-0.75 现可能大于0.75）
-        getPrimalBossOdds() {
+        getAddPrimalBossOdds() {
             return this.addPrimalBossOdds * this.gdPBossTimes;
         },
+        // 实际妖王概率
+        getPrimalBossOdds(){
+            var zonesRule = this.getZonesRule() * -0.02
+            var odds = 0.25 + this.getAddPrimalBossOdds() + zonesRule
+            odds = Math.max(odds,0.05)
+            return odds
+        },
+        // 每500关为一个区
+        getZonesRule(){
+            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+            return Math.floor(lv / 500)
+        },
+        getMonsterHpTimes(lv){
+            let hpTimes = 1
+            if (lv % 5 == 0) {
+                hpTimes = Math.max(1 + this.addMinusBoosLife*this.gdMinusBoosLifeTimes
+                     + Math.floor(lv/500)*0.04, 0.5)
+            }
+            return hpTimes
+        },
         // 获得Boss计时增加时间
-        getBossTimerSecond() {
+        getAddBossTimerSecond() {
             return this.addBossTimerSecond * this.gdPBossTSTimes;
+        },
+        // 获得Boss计时时间
+        getBossTimerSecond() {
+            return this.addBossTimerSecond * this.gdPBossTSTimes + 30 + this.getZonesRule()*-2
+        },
+        // 获得add宝箱出现概率
+        getAddTreasureOdds() {
+            return this.addTreasureOdds
         },
         // 获得宝箱出现概率
         getTreasureOdds() {
-            return this.addTreasureOdds
+            let n = Math.floor(this.getZonesRule())
+            return (this.addTreasureOdds + 0.01) * Math.pow(0.994,n)
         },
         // 获得宝箱倍数
         getTreasureTimes() {
@@ -242,7 +270,7 @@ cc.Class({
         },
 
         getMinusMonsterNum() {
-            return this.addMinusMonsterNum
+            return this.addMinusMonsterNum * this.gdMinusMonsterNumTimes
         },
         // 根据关卡等级 获得怪数
         getZoneMonsterCount(lv){

@@ -142,7 +142,7 @@ cc.Class({
                 
                 if (DataCenter.isLevelPassed(self.curMonster._lv)) {
                     self.curMonster.recoverHP();
-                    self._countdown = 30 + GameData.getBossTimerSecond();
+                    self._countdown = GameData.getBossTimerSecond()
                     self.setTimeLabel(self._countdown);
                 } else {
                     self.goToLastLevel();
@@ -190,7 +190,7 @@ cc.Class({
             }
         }
         if (self.curMonster._isBoss) { // 开始倒计时
-            self._countdown = 30 + GameData.getBossTimerSecond();
+            self._countdown = GameData.getBossTimerSecond()
             self.setTimeLabel(self._countdown);
         }
         self.monsterCount = GameData.getZoneMonsterCount(lv);
