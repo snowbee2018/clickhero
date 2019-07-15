@@ -37,12 +37,18 @@ cc.Class({
     playBGM(){
         const self = this
         if (this.bgAudioClip) {
+            console.log("播放背景音乐")
             self.bgmId = cc.audioEngine.playMusic(this.bgAudioClip, true);
         } else {
             CloudRes.getMp3Url('bg', function (url) {
                 cc.loader.load(url, function (err, clip) {
+                    console.log(err)
                     self.bgAudioClip = clip;
-                    self.bgmId = cc.audioEngine.playMusic(self.bgAudioClip, true);
+                    if(self.tgBgm)
+                    {
+                        console.log("加载完后播放背景音乐")
+                        self.bgmId = cc.audioEngine.playMusic(self.bgAudioClip, true);
+                    }
                 }.bind(this));
             }.bind(this));
         }
@@ -55,6 +61,7 @@ cc.Class({
     openMusic(bool) {
         cc.audioEngine.setMusicVolume(bool ? 0.3 : 0);
         cc.audioEngine.setVolume(this.bgAudioClip,bool ? 0.3 : 0)
+        console.log("打开声音")
         if (bool) {
             this.playBGM()
         } else {
@@ -165,7 +172,10 @@ cc.Class({
                 CloudRes.getMp3Url('bg_boss', function (url) {
                     cc.loader.load(url, function (err, clip) {
                         this.bossAudioClip = clip;
-                        cc.audioEngine.playMusic(this.bossAudioClip, true);
+                        if(this.tgBgm)
+                        {
+                            cc.audioEngine.playMusic(this.bossAudioClip, true);
+                        }
                     }.bind(this));
                 }.bind(this));
             }
