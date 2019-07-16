@@ -44,7 +44,7 @@ cc.Class({
         addClickstormSecond: 0,    //6*- 猴子猴孙秒数增加 2s++ √
         addBossTimerSecond: 0,     //7* Boss计时器持续时间 0~30.0s √
         buyHeroDiscount : 1,        //8- 购买英雄折扣 0~1 √
-        addTreasureOdds: 0,     //9* 宝箱出现概率 0~1 √
+        addTreasureOdds: 0.01,     //9* 宝箱出现概率 0~1 √
         addMetalDetectorSecond: 0, //10*- 金币探测器 2s++ √
         addTenfoldGoldOdds : 0,     //11* 普怪 宝箱 10倍金币的概率 0~1 √
         addClickDamageTimes : 1,    //12- 点击伤害倍数 每级+20% √
@@ -236,14 +236,14 @@ cc.Class({
         },
         // 每500关为一个区
         getZonesRule(){
-            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel)
             return Math.floor(lv / 500)
         },
         getMonsterHpTimes(lv){
             let hpTimes = 1
             if (lv % 5 == 0) {
                 hpTimes = Math.max(1 + this.addMinusBoosLife*this.gdMinusBoosLifeTimes
-                     + Math.floor(lv/500)*0.04, 0.5)
+                     + Math.floor((lv-1)/500)*0.04, 0.5)
             }
             return hpTimes
         },
@@ -262,7 +262,7 @@ cc.Class({
         // 获得宝箱出现概率
         getTreasureOdds() {
             let n = Math.floor(this.getZonesRule())
-            return (this.addTreasureOdds + 0.01) * Math.pow(0.994,n)
+            return this.addTreasureOdds * Math.pow(0.994,n)
         },
         // 获得宝箱倍数
         getTreasureTimes() {
@@ -274,7 +274,7 @@ cc.Class({
         },
         // 根据关卡等级 获得怪数
         getZoneMonsterCount(lv){
-            let c = Math.floor(10 + lv/500*0.1 + this.getMinusMonsterNum())
+            let c = Math.floor(10 + (lv-1)/500*0.1 + this.getMinusMonsterNum())
             return Math.max(c,2)
         },
     }

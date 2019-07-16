@@ -5,6 +5,7 @@ cc.Class({
     properties: {
         lbName : cc.Label,
         lbDesc : cc.Label,
+        lbStatus : cc.Label,
         sp : cc.Sprite,
         lbLv : cc.Label,
         lbSoul : cc.Label,
@@ -72,6 +73,19 @@ cc.Class({
         // 这个要根据不同的 id和等级 写描述
         this.lbDesc.string = data.getDesc();
         this.onSoulChange();
+        let statusStr = ""
+        if (data.id == 2) {
+            statusStr = "实际妖王概率：" + (GameData.getPrimalBossOdds()*100).toFixed(4) + "%"
+        } else if (data.id == 9){
+            statusStr = "实际葫芦概率：" + (GameData.getTreasureOdds()*100).toFixed(4) + "%"
+        } else if (data.id == 5){
+            statusStr = "游戏每500关Boss会+4%生命值"
+        } else if (data.id == 16){
+            statusStr = "游戏每500关会增加0.1个小怪"
+        } else if (data.id == 7){
+            statusStr = "游戏每500关会-2秒Boss计时器时长"
+        }
+        this.lbStatus.string = statusStr
     },
 
     onUpgradeClick(){
