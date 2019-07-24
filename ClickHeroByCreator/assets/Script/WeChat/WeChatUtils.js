@@ -576,16 +576,19 @@ cc.Class({
             var data = datas[0]
             var result = datas[1]
             let time = cc.sys.localStorage.getItem("savetime") || 0
-            if (Date.now() - time > 1*60*1000||!result) {
+            if (Date.now() - time > 100||!result) {
                 if (data&&data.heroList&&data.ancientList) {
-                    // 每1分钟保存一次
+                    // 每1分钟保存一次 -- 10s
                     console.log("保存数据到服务器");
-                    CloudDB.update(data);
+                    let gameData = DataCenter.getDataByKey("CloudData")
+                    HttpUtil.updateGameData(gameData);
+                    // CloudDB.update(data);
                     cc.sys.localStorage.setItem("savetime",Date.now())
                 }
             }
             this.uploadRankScore()
-            CloudDB.updateMaxLv()
+            HttpUtil.updateMaxLv()
+            // CloudDB.updateMaxLv()
         }
     },
 

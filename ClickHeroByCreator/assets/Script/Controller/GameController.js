@@ -590,7 +590,7 @@ cc.Class({
             }
         }
         try {
-            CloudDB.updateMaxLv()
+            HttpUtil.updateMaxLv()
         } catch (error) {}
     },
 
@@ -1054,27 +1054,6 @@ cc.Class({
             this.nodeSigninTips.removeFromParent()
             this.nodeSigninTips = null
         }
-
-    //    var datas = {_openid:"zhwwxc"}
-    //         PublicFunc.httpRequest({
-    //             url : "https://www.magicfun.xyz/where",
-                
-    //             handler : function (event, response) {
-    //                 console.info("http请求返回");
-    //                 console.info(event);
-    //                 console.info(response);
-    //                 if (event == "success") {
-                        
-    //                 } else if (event == "error") {
-    //                     // 
-    //                 } else if (event == "timeout") {
-    //                     // 
-    //                 }
-    //             }.bind(this),
-    //             method : "POST",
-                
-    //             uploadData : JSON.stringify({doc:"UserGameData",data:datas}),
-    //     });
     },
 
     showShareDialog () {
@@ -1090,10 +1069,6 @@ cc.Class({
     },
 
     showRankDialog () {
-        // console.log("getMonsterHpTimes:" + GameData.getMonsterHpTimes(500));
-        // console.log("getBossTimerSecond:" + GameData.getBossTimerSecond());
-        // console.log("getTreasureOdds:" + GameData.getTreasureOdds());
-        // console.log("getPrimalBossOdds:" + GameData.getPrimalBossOdds());
         console.log("showRankDialog");
         let dialog = cc.instantiate(this.RankDialog)
         dialog.parent = cc.director.getScene();

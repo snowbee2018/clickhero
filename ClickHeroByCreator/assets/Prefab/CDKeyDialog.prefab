@@ -443,7 +443,7 @@
       "__id__": 6
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -506,8 +506,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": true,
-    "_string": "",
-    "_N$string": "",
+    "_string": "11d5a28f9b7f516bf885195873d77053",
+    "_N$string": "11d5a28f9b7f516bf885195873d77053",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -541,7 +541,7 @@
       "__id__": 6
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -640,7 +640,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "",
+    "_string": "11d5a28f9b7f516bf885195873d77053",
     "_tabIndex": 0,
     "editingDidBegan": [],
     "textChanged": [],
@@ -670,7 +670,7 @@
       "b": 187,
       "a": 255
     },
-    "_N$maxLength": 30,
+    "_N$maxLength": 32,
     "_N$stayOnTop": false,
     "_id": ""
   },
@@ -1070,10 +1070,12 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
+    "target": {
+      "__id__": 1
+    },
     "component": "",
-    "_componentId": "",
-    "handler": "",
+    "_componentId": "06041lm8s9I/6Q/STkBPQ7r",
+    "handler": "onClick",
     "customEventData": ""
   },
   {
@@ -2225,6 +2227,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "eb": {
+      "__id__": 16
+    },
     "_id": ""
   },
   {

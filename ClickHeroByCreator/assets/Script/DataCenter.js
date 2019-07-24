@@ -184,6 +184,14 @@ cc.Class({
         return cc.sys.localStorage.getItem('OpenID_')
     },
 
+    setLocalValue(key,value){
+        cc.sys.localStorage.setItem(key,value)
+    },
+
+    getLocalValue(key){
+        return cc.sys.localStorage.getItem(key)
+    },
+
     // 保存数据
     saveGameData(data){
         if (!data) {
@@ -194,14 +202,25 @@ cc.Class({
         // console.log(data);
         if (cdata) {
             cdata.gamedata = data
+            cdata.rebirthCount = data.rebirthCount
+            cdata.maxLv = data.maxPassLavel
             console.log("保存数据到本地");
-            cc.sys.localStorage.setItem("GameData",JSON.stringify(cdata))
+            cc.sys.localStorage.setItem("GameDataNew",JSON.stringify(cdata))
             return true
         }
         return false
     },
 
     readGameData(){
+        let json = cc.sys.localStorage.getItem('GameDataNew')
+        if (json&&json.length>0) {
+            let data = JSON.parse(json);
+            return data
+        }
+        return null
+    },
+
+    readOldGameData(){
         let json = cc.sys.localStorage.getItem('GameData')
         if (json&&json.length>0) {
             let data = JSON.parse(json);
@@ -217,7 +236,7 @@ cc.Class({
         if (data && data.length > 0) {
             for (let index = 0; index < data.length; index++) {
                 const childUserCloudData = data[index];
-                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                var rebirthCount = childUserCloudData.rebirthCount;
                 childUserArr.push({
                     weChatUserInfo: childUserCloudData.WeChatUserInfo,
                     isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
@@ -238,7 +257,7 @@ cc.Class({
         if (data && data.length > 0) {
             for (let index = 0; index < data.length; index++) {
                 const childUserCloudData = data[index];
-                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                var rebirthCount = childUserCloudData.rebirthCount;
                 childUserArr.push({
                     weChatUserInfo: childUserCloudData.WeChatUserInfo,
                     isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,

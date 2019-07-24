@@ -74,8 +74,8 @@ cc.Class({
         if (monsterCloudInfo) {
             // 云端有数据
             monsterCloudInfo.lv = monsterCloudInfo.lv?parseInt(monsterCloudInfo.lv):1;
-            monsterCloudInfo.gold = monsterCloudInfo.gold ? (new BigNumber(monsterCloudInfo.gold)) : false;
-            monsterCloudInfo.soul = monsterCloudInfo.soul ? (new BigNumber(monsterCloudInfo.soul)) : false;
+            monsterCloudInfo.gold = monsterCloudInfo.gold ? (newBigNumber(monsterCloudInfo.gold)) : false;
+            monsterCloudInfo.soul = monsterCloudInfo.soul ? (newBigNumber(monsterCloudInfo.soul)) : false;
             self.killCount = monsterCloudInfo.killCount ? monsterCloudInfo.killCount : 0;
             self.monsterCount = monsterCloudInfo.monsterCount ? monsterCloudInfo.monsterCount : 10;
             self.toggle.isChecked = monsterCloudInfo.autoNext ? true : false;
