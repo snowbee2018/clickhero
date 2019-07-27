@@ -7,7 +7,8 @@ cc.Class({
 
     start(){
         // this.refreshView()
-        CloudDB.getChildUserData(this.onChildData.bind(this),true)
+        HttpUtil.getChildUsers(this.onChildData.bind(this))
+        // CloudDB.getChildUserData(this.onChildData.bind(this),true)
         WeChatUtil.showBannerAd()
     },
 

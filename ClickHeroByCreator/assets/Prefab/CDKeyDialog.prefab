@@ -663,7 +663,7 @@
       "b": 187,
       "a": 255
     },
-    "_N$maxLength": 30,
+    "_N$maxLength": 32,
     "_N$stayOnTop": false,
     "_id": ""
   },
@@ -1060,10 +1060,12 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
+    "target": {
+      "__id__": 1
+    },
     "component": "",
-    "_componentId": "",
-    "handler": "",
+    "_componentId": "06041lm8s9I/6Q/STkBPQ7r",
+    "handler": "onClick",
     "customEventData": ""
   },
   {
@@ -2208,6 +2210,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "eb": {
+      "__id__": 16
+    },
     "_id": ""
   },
   {

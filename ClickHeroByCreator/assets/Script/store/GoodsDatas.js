@@ -26,6 +26,8 @@ Datas.init = function() {
         new Goods().init(12),
         new Goods().init(13),
         new Goods().init(17),
+        new Goods().init(18),
+        new Goods().init(19),
     ];
     Datas.refresh()
 }
@@ -63,6 +65,10 @@ Datas.refresh = function(){
             GameData.gdTreasureTimes = PublicFunc.get10TimesByCount(count,1.15)/10 + 1
         } else if (e.id == 17) {
             GameData.gdSoulDPSTimes = count*0.25 + 1
+        } else if (e.id == 18) {
+            GameData.gdMinusMonsterNumTimes = count*0.125 + 1
+        } else if (e.id == 19) {
+            GameData.gdMinusBoosLifeTimes = count*0.5 + 1
         }
     });
     const childDatas = DataCenter.readChildUserData() || []

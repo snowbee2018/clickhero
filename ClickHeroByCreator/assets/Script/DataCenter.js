@@ -55,21 +55,21 @@ cc.Class({
         // 初始化金币
         var cloudGold = self.getCloudDataByKey(self.KeyMap.curGold);
         if (cloudGold) {
-            self.setDataByKey(self.KeyMap.curGold, (new BigNumber(cloudGold)));
+            self.setDataByKey(self.KeyMap.curGold, (newBigNumber(cloudGold)));
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
             // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000000000000000000000000000000000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
         if (historyTotalGold) {
-            self.setDataByKey(self.KeyMap.historyTotalGold, (new BigNumber(historyTotalGold)));
+            self.setDataByKey(self.KeyMap.historyTotalGold, (newBigNumber(historyTotalGold)));
         } else {
             self.setDataByKey(self.KeyMap.historyTotalGold, new BigNumber(0));
         }
         // 初始化英魂
         var cloudSoul = self.getCloudDataByKey(self.KeyMap.curSoul);
         if (cloudSoul) {
-            self.setDataByKey(self.KeyMap.curSoul, (new BigNumber(cloudSoul)));
+            self.setDataByKey(self.KeyMap.curSoul, (newBigNumber(cloudSoul)));
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("0")));
         }
@@ -82,7 +82,7 @@ cc.Class({
         }
         var cloudRebirthSoul = self.getCloudDataByKey(self.KeyMap.rebirthSoul);
         if (cloudRebirthSoul) {
-            self.setDataByKey(self.KeyMap.rebirthSoul, (new BigNumber(cloudRebirthSoul)));
+            self.setDataByKey(self.KeyMap.rebirthSoul, (newBigNumber(cloudRebirthSoul)));
         } else {
             self.setDataByKey(self.KeyMap.rebirthSoul, (new BigNumber(0)));
         }
@@ -138,7 +138,7 @@ cc.Class({
         // }
         var totalSoul = self.getCloudDataByKey(self.KeyMap.totalSoul);
         if (totalSoul) {
-            self.setDataByKey(self.KeyMap.totalSoul, (new BigNumber(totalSoul)));
+            self.setDataByKey(self.KeyMap.totalSoul, (newBigNumber(totalSoul)));
         } else {
             self.setDataByKey(self.KeyMap.totalSoul, new BigNumber(0));
         }
@@ -184,6 +184,14 @@ cc.Class({
         return cc.sys.localStorage.getItem('OpenID_')
     },
 
+    setLocalValue(key,value){
+        cc.sys.localStorage.setItem(key,value)
+    },
+
+    getLocalValue(key){
+        return cc.sys.localStorage.getItem(key)
+    },
+
     // 保存数据
     saveGameData(data){
         if (!data) {
@@ -194,14 +202,25 @@ cc.Class({
         // console.log(data);
         if (cdata) {
             cdata.gamedata = data
+            cdata.rebirthCount = data.rebirthCount
+            cdata.maxLv = data.maxPassLavel
             console.log("保存数据到本地");
-            cc.sys.localStorage.setItem("GameData",JSON.stringify(cdata))
+            cc.sys.localStorage.setItem("GameDataNew",JSON.stringify(cdata))
             return true
         }
         return false
     },
 
     readGameData(){
+        let json = cc.sys.localStorage.getItem('GameDataNew')
+        if (json&&json.length>0) {
+            let data = JSON.parse(json);
+            return data
+        }
+        return null
+    },
+
+    readOldGameData(){
         let json = cc.sys.localStorage.getItem('GameData')
         if (json&&json.length>0) {
             let data = JSON.parse(json);
@@ -217,7 +236,7 @@ cc.Class({
         if (data && data.length > 0) {
             for (let index = 0; index < data.length; index++) {
                 const childUserCloudData = data[index];
-                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                var rebirthCount = childUserCloudData.rebirthCount;
                 childUserArr.push({
                     weChatUserInfo: childUserCloudData.WeChatUserInfo,
                     isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,
@@ -238,7 +257,7 @@ cc.Class({
         if (data && data.length > 0) {
             for (let index = 0; index < data.length; index++) {
                 const childUserCloudData = data[index];
-                var rebirthCount = childUserCloudData.gamedata.rebirthCount;
+                var rebirthCount = childUserCloudData.rebirthCount;
                 childUserArr.push({
                     weChatUserInfo: childUserCloudData.WeChatUserInfo,
                     isRebirth: (rebirthCount && rebirthCount > 0) ? true : false,

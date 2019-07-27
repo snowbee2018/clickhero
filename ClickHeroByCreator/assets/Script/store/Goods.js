@@ -157,6 +157,20 @@ cc.Class({
                 ruby =  300 
                 unlockLv = 300
                 break;
+            case 18:
+                name = "太虚神甲加持" + (count>0? " Lv" + count:"")
+                desc = "购买+12.5%太虚神甲效果"
+                state = "太虚神甲效力增加:+" + (this.getCount()*12.5)+"%"
+                ruby =  Math.min(300 + 100 * count,2000)   
+                unlockLv = 300
+                break;
+            case 19:
+                name = "照妖镜加持" + (count>0? " Lv" + count:"")
+                desc = "购买+50%照妖镜效果"
+                state = "照妖镜效力增加:+" + (this.getCount()*50)+"%"
+                ruby =  Math.min(300 + 100 * count,2000)   
+                unlockLv = 300
+                break;
         }
         this.name = name
         this.desc = desc
@@ -249,7 +263,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 0.25).plus(4).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds()).plus(4).integerValue()
         return soul
     },
 
@@ -283,6 +297,13 @@ cc.Class({
                 for (let i = 0; i < count; i++) {
                     // ruby += 300 * (i+1)
                     ruby += Math.min(300 + 200 * i,2000) 
+                }
+                break;
+            case 18:
+            case 19:
+                for (let i = 0; i < count; i++) {
+                    // ruby += 300 * (i+1)
+                    ruby += Math.min(300 + 100 * i,2000)
                 }
                 break;
         }

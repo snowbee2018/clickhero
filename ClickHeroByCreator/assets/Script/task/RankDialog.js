@@ -43,7 +43,8 @@ cc.Class({
             return
         }
         this.isloading = true
-        CloudDB.getRankUsers(this.index,this.onData.bind(this),this.getItemCount())
+        HttpUtil.getRankUsers(this.index==1,this.getItemCount(),this.onData.bind(this))
+        // CloudDB.getRankUsers(this.index,this.onData.bind(this),this.getItemCount())
     },
 
     onData(datas){

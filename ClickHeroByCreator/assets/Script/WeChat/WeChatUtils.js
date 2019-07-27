@@ -580,12 +580,15 @@ cc.Class({
                 if (data&&data.heroList&&data.ancientList) {
                     // 每1分钟保存一次
                     console.log("保存数据到服务器");
-                    CloudDB.update(data);
+                    let gameData = DataCenter.getDataByKey("CloudData")
+                    HttpUtil.updateGameData(gameData);
+                    // CloudDB.update(data);
                     cc.sys.localStorage.setItem("savetime",Date.now())
                 }
             }
             this.uploadRankScore()
-            CloudDB.updateMaxLv()
+            HttpUtil.updateMaxLv()
+            // CloudDB.updateMaxLv()
         }
     },
 

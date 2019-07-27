@@ -6,6 +6,9 @@ cc.Class({
         bg: cc.Node,
         uiRoot: cc.Node,
         loginBtn: cc.Sprite,
+        viewLoading : cc.Node,
+        spLoading : cc.Node,
+        lbTips : cc.Label,
     },
 
     ctor () {
@@ -37,6 +40,19 @@ cc.Class({
         window.TaskDatas = require("TaskDatas");
         window.Events = require("Events");
         window.BigNumber = (require("BigNumber")).clone();
+        // 更安全的创建bigNumber
+        window.newBigNumber = function(numStr){
+            numStr = String(numStr)
+            if (numStr.indexOf("e ")) {
+                numStr = numStr.replace("e ","e+")
+            }
+            let num = new BigNumber(numStr)
+            if (num.s==null&&num.e==null&&num.c==null) {
+                num = new BigNumber(0)
+            }
+            return num
+        }
+        window.HttpUtil = require("HttpUtil");
         cc.game.setFrameRate(40)
         // wx.setPreferredFramesPerSecond(34)
         cc.debug.setDisplayStats(false);
@@ -108,15 +124,27 @@ cc.Class({
             console.log(dataArr[0]);
             var data = dataArr[0];
             CloudDB.saveDBID(data._id);
+            HttpUtil.setGameDataID(data._id)
             console.log(data);
+            let oldData = DataCenter.readOldGameData()
+            if (oldData && oldData.gamedata) {
+                data.gamedata = oldData.gamedata
+                cc.sys.localStorage.setItem("GameData","")
+            }
             DataCenter.saveCloudData(data);
             // 获取子用户
-            CloudDB.getChildUserData(function (err, dataArr) {
-                if (!err) {
-                    console.log(dataArr);
-                    self.onChildUserData(dataArr);
+            // CloudDB.getChildUserData(function (err, dataArr) {
+            //     if (!err) {
+            //         console.log(dataArr);
+            //         self.onChildUserData(dataArr);
+            //     }
+            // });
+            HttpUtil.getChildUsers(function(success,datas) {
+                if (success) {
+                    console.log(datas);
+                    self.onChildUserData(datas);
                 }
-            });
+            })
         } else {
             console.log("未获取到用户数据，用户第一次进入游戏");
             var launchOptions = WeChatUtil.getLaunchOptionsSync();
@@ -144,38 +172,53 @@ cc.Class({
             
             var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
             console.log(weChatUserInfo);
-            CloudDB.add({
-                gamedata: {},
+            let oldData = DataCenter.readOldGameData()
+            let gamedata = {}
+            if (oldData && oldData.gamedata) {
+                gamedata = oldData.gamedata
+                cc.sys.localStorage.setItem("GameData","")
+            }
+            const gameData = {
+                gamedata: gamedata,
                 WeChatUserInfo: weChatUserInfo,
-                referrer: referrer,
-                registerTime: new Date().getTime()
-            });
-            var inviteInfo = {
-                allChild: 0,
-                addedChild: 0,
-                allRebirthChild: 0,
+                referrer: referrer || "",
+                registerTime: new Date().getTime(),
+                _openid : openID,
+                maxLv : 0,
             }
-            DataCenter.setDataByKey("UsetInviteInfo", inviteInfo);
-            self.gameController.setWeChatUser();
-            self.startGame();
-            if (referrer) {
-                PublicFunc.popGoldDialog(2,100,"被邀请奖励")
-            }
+            // CloudDB.add(gameData);
+            HttpUtil.addGameData(gameData,function(success,_id) {
+                if (success) {
+                    // gameData._id = _id
+                    DataCenter.saveCloudData(gameData);
+                    self.gameController.setWeChatUser();
+                    self.startGame();
+                    if (referrer) {
+                        PublicFunc.popGoldDialog(2,100,"被邀请奖励")
+                    }
+                }
+            })
         }
     },
 
     onOpenID(openID) {
         const self = this;
         console.log("onOpenID");
+        HttpUtil.setOpenID(openID)
         let DataMap = DataCenter.DataMap;
         DataCenter.setDataByKey(DataMap.OPENID, openID);
         // 从云数据库中获取用户数据
         console.log("使用openID从云数据库中获取用户数据");
-        CloudDB.getUserData(function (err, dataArr) {
-            if (!err) {
+        // CloudDB.getUserData(function (err, dataArr) {
+        //     if (!err) {
+        //         self.onCloudGameData(dataArr);
+        //     }
+        // });
+        HttpUtil.getGameData(openID , function (success, dataArr) {
+            if (success) {
                 self.onCloudGameData(dataArr);
             }
-        });
+        })
     },
 
     checkAddruby(){
@@ -220,6 +263,23 @@ cc.Class({
     login() {
         const self = this;
         console.log("login");
+        this.viewLoading.active = true
+        this.spLoading.stopAllActions()
+        this.spLoading.runAction(
+            cc.repeatForever(
+                cc.sequence(
+                    cc.delayTime(0.3),cc.rotateBy(0.3,90)
+                )
+            )
+        )
+        let tipsArr = [
+            "我就是你最爱的冰棍~",
+            "游戏每5~10分钟会出现冰棍",
+            "冰棍可以得到妖丹、仙丹、仙桃奖励哦",
+        ]
+        let index = Formulas.randomNum(0,tipsArr.length - 1)
+        this.lbTips.string = tipsArr[index]
+        this.lbTips.node.active = true
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             WeChatUtil.checkSystemTime()
             const userdata = DataCenter.readUserData()
@@ -239,6 +299,7 @@ cc.Class({
                                         if (!err && textrue) {
                                             cc.find('Canvas/tip').active = false
                                             self.loginBtn.node.active = true;
+                                            self.viewLoading.active = false
                                             self.loginBtn.spriteFrame = new cc.SpriteFrame(textrue);
                                             self.loginBtn.node.width = textrue.width;
                                             self.loginBtn.node.height = textrue.height;
@@ -246,6 +307,7 @@ cc.Class({
                                     });
                                 }
                             });
+                            // cc.sys.localStorage.setItem("GameData","")
                         }
                     } else if (userData && userData.userInfo) {
                         DataCenter.saveUserData(userData)
@@ -270,11 +332,14 @@ cc.Class({
         // console.log('self.monsterResDone = ' + self.monsterResDone);
         // console.log('self.loginDone = ' + self.loginDone);
         if (self.monsterResDone == true && self.loginDone == true) {
-            console.log("开始游戏逻辑");
-            self.bg.zIndex = 0;
-            self.uiRoot.active = true;
-            self.gameController.onGameStart();
-            CloudDB.updateMaxLv()
+            setTimeout(function() {
+                console.log("开始游戏逻辑");
+                self.bg.zIndex = 0;
+                self.uiRoot.active = true;
+                self.viewLoading.active = false
+                self.gameController.onGameStart();
+                HttpUtil.updateMaxLv()
+            },500)
         }
     },
 

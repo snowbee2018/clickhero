@@ -2,15 +2,44 @@
  * @Author: xj 
  * @Date: 2019-06-18 16:01:20 
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-20 19:03:17
+ * @Last Modified time: 2019-07-24 19:02:49
  */
-const url = "【西游降魔铺子】https://m.tb.cn/h.eUKHC2j?sm=2194cc 点击链接，再选择浏览器咑閞；或復·制这段描述￥nBezYU6mCQq￥"
+const url = "【西游降魔仙桃兑换码 微信小游戏小程序桃子】，椱ァ製这段描述₴2H36Y7T1NkV₴后到◇綯℡寳"
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        
+        eb : cc.EditBox,
+    },
+
+    onClick () {
+        const self = this
+        let key = this.eb.string.trim()
+        HttpUtil.keycode(key,function(success,data) {
+            if (success) {
+                console.log(data)
+                if (data.used == false && data.openid.length == 0) {
+                    PublicFunc.popGoldDialog(2,data.ruby,"兑换成功",true)
+                    self.eb.string = ""
+                } else if(data.used) {
+                    wx.showToast({
+                        title: "兑换码已被使用过",
+                        icon: 'none',
+                    })
+                }else {
+                    wx.showToast({
+                        title: "兑换码校验失败",
+                        icon: 'none',
+                    })
+                }
+            } else {
+                wx.showToast({
+                    title: "兑换码校验失败",
+                    icon: 'none',
+                })
+            }
+        })
     },
 
     finish(){

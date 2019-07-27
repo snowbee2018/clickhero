@@ -203,7 +203,7 @@ cc.Class({
                 console.log(data);
                 Events.emit(Events.MAKE_CLICKRUBY,data.type)
             } else {
-                console.log(data.time - Date.now());
+                // console.log(data.time - Date.now());
             }
         }
     },
@@ -229,13 +229,17 @@ cc.Class({
                         let y = winHeight * Math.random() - winHeight/2
                         node.x=x
                         node.y=y
+                        node.scale = 0.25
+                        node.rotation = Math.random()*360
                         node.addComponent(cc.Button)
                         node.on('click', function() {
                             let r = Math.random()
+                            var lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+                            console.log("maxPassLavel:"+lv);
                             if (r < 0.45) {
                                 PublicFunc.popGoldDialog(0, PublicFunc.getBagGold().times(0.5)) // 一袋妖丹
                             } else if(r < 0.75){
-                                var lv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.maxPassLavel)
+                                
                                 if (lv < 200) {
                                     PublicFunc.popGoldDialog(0, PublicFunc.getBagGold()) // 一袋妖丹
                                 } else {
@@ -586,7 +590,7 @@ cc.Class({
             }
         }
         try {
-            CloudDB.updateMaxLv()
+            HttpUtil.updateMaxLv()
         } catch (error) {}
     },
 
@@ -1050,27 +1054,6 @@ cc.Class({
             this.nodeSigninTips.removeFromParent()
             this.nodeSigninTips = null
         }
-
-    //    var datas = {_openid:"zhwwxc"}
-    //         PublicFunc.httpRequest({
-    //             url : "https://www.magicfun.xyz/where",
-                
-    //             handler : function (event, response) {
-    //                 console.info("http请求返回");
-    //                 console.info(event);
-    //                 console.info(response);
-    //                 if (event == "success") {
-                        
-    //                 } else if (event == "error") {
-    //                     // 
-    //                 } else if (event == "timeout") {
-    //                     // 
-    //                 }
-    //             }.bind(this),
-    //             method : "POST",
-                
-    //             uploadData : JSON.stringify({doc:"UserGameData",data:datas}),
-    //     });
     },
 
     showShareDialog () {

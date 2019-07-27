@@ -218,9 +218,9 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.增加新神器照妖镜",
-        "2.增加新神器玉净瓶，以及它的加持",
-        "3.古神增加手动输入升级等级",
+        const info = ["1.搬迁了服务器，后面会推出更丰富的功能",
+        "2.现在可以在商店用兑换码兑换仙桃了（熊猫会发波码庆祝，详见游戏圈）",
+        // "3.游戏中每隔一会儿会出现一个冰棍",
             ].join("\n")
         this.popDialog({
             contentStr: info,
@@ -266,8 +266,8 @@ cc.Class({
 
     makeNextClickruby(){
         // 随机5~10分钟产生一个nextClickruby
-        // let nextTime = Date.now() + (Math.random()+1) * 5 * 1000 * 60
-        let nextTime = Date.now() + 1000 * 10
+        let nextTime = Date.now() + (Math.random()+1) * 5 * 1000 * 60
+        // let nextTime = Date.now() + 1000 * 10
         let r = Math.random()
         let type
         if (r <= 0.5) {
@@ -302,7 +302,7 @@ cc.Class({
                 soul = soul.plus(Formulas.getPrimalBossSoul(lv))
             }
         }
-        soul = soul.times(GameData.getPrimalBossOdds() + 0.25).plus(4).integerValue()
+        soul = soul.times(GameData.getPrimalBossOdds()).plus(4).integerValue()
         return soul
     },
 });
