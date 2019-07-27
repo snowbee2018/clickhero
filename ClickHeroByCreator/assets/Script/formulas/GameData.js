@@ -134,12 +134,26 @@ cc.Class({
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes*this.gdLeaveTimes:0) + 1
             let idleAutoTimes = (this.playerStatus==1?this.addAutoIdleTimes*this.gdLeaveTimes:0) + 1
             idleTimes *= idleAutoTimes
+            console.log("英雄的times" + times)
+            console.log("skDPSTimes" + this.skDPSTimes)
+            console.log("idleTimes" + idleTimes)
+            console.log("this.gdShareDPSTimes" + this.gdShareDPSTimes)
+            console.log("this.gdDayDPSTimes" + this.gdDayDPSTimes)
+            console.log("this.gdDPSTimes" + this.gdDPSTimes)
+            console.log("this.gdDoubleDPS" + this.gdDoubleDPS)
+            console.log("this.gd10xDpsTimes" + this.gd10xDpsTimes)
             this.globalDPSTimes = times * this.skDPSTimes * idleTimes*this.gdShareDPSTimes
                 *this.gdDayDPSTimes*this.gdDPSTimes*this.gdDoubleDPS*this.gd10xDpsTimes;
+
+                console.log("this.globalDPSTimes" + this.globalDPSTimes)
             if (this.playerStatus == 0) {
                 this.globalDPSTimes = this.globalDPSTimes * (1+this.addDPSClickDamageTimes*this.clickCombo)
             }
+            
             this.globalDPSTimes *= 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1 + this.addSoulDPSTimes*this.gdSoulDPSTimes)
+            console.log("this.addSoulDPSTimes" + this.addSoulDPSTimes)
+            console.log("this.gdSoulDPSTimes" + this.gdSoulDPSTimes)
+            console.log("this.globalDPSTimes" + this.globalDPSTimes)
         },
         // 计算全局金币倍数
         calGoldTimes(){
@@ -161,9 +175,14 @@ cc.Class({
                     dps = dps.plus(hero.DPS)
                 }
             });
+            console.log("计算总的dps")
+            console.log("this.globalDPSTimes"+this.globalDPSTimes)
+            console.log("this.powersurgeTimes"+this.powersurgeTimes)     
             this.dpsDamage = dps.times(this.globalDPSTimes).times(this.powersurgeTimes)
+            console.log("this.dpsDamage"+this.dpsDamage)
             if (!this.dpsDamage.eq(this._tempDpsDamage)) {
                 this._tempDpsDamage = this.dpsDamage
+                console.log("this._tempDpsDamage"+this._tempDpsDamage)
                 Events.emit(Events.ON_DPS_DAMAGE_CHANGE);
             }
         },

@@ -129,6 +129,13 @@ cc.Class({
         dialog.y = cc.winSize.height / 2;
         dialog.getComponent("Dialog").setBtnText({left: '是 的',right: '不，谢谢'})                      
         dialog.getComponent("Dialog").setDesc("确定要摧毁这些古神吗？你会由此获得"+Formulas.formatBigNumber(soul)+"仙丹");
+        this.changeSoul()
+    },
+
+    changeSoul()
+    {
+        var soul = new BigNumber(0);
+        soul = 8888888888888;
     },
 
     summonAll(summonSoul){

@@ -54,7 +54,7 @@ cc.Class({
     },
 
     onCheckBgm(){
-        console.log(this.tgBgm.isChecked);
+        console.log("onCheckBgm" + this.tgBgm.isChecked);
         cc.sys.localStorage.setItem("tgBgm",this.tgBgm.isChecked ? 1 : 0)
         AudioMgr.init(true)
     },
