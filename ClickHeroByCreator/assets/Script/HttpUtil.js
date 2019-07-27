@@ -46,7 +46,7 @@ self.addGameData = function(data,callback) {
             callback(false)
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({doc:"UserGameData",data:data}),
+        uploadData : encodeURIComponent(JSON.stringify({doc:"UserGameData",data:data})),
     });
 }
 
@@ -70,7 +70,7 @@ self.updateGameData = function(data) {
             }
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({doc:"UserGameData",_id:self.gameDataID,data:data}),
+        uploadData : encodeURIComponent(JSON.stringify({doc:"UserGameData",_id:self.gameDataID,data:data})),
     });
 }
 
@@ -102,7 +102,7 @@ self.getGameData = function(id,callback) {
             callback(false)
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({doc:"UserGameData",data:{_openid:self.openid}}),
+        uploadData : encodeURIComponent(JSON.stringify({doc:"UserGameData",data:{_openid:self.openid}})),
     });
 }
 
@@ -185,7 +185,7 @@ self.getChildUsers = function(callback) {
             }
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({openid:self.openid}),
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid})),
     });
 }
 
@@ -214,7 +214,7 @@ self.keycode = function(key,callback) {
             }
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({keycode:key,openid:self.openid}),
+        uploadData : encodeURIComponent(JSON.stringify({keycode:key,openid:self.openid})),
     });
 }
 

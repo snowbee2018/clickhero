@@ -39,7 +39,7 @@ cc.Class({
     },
 
     getItemCount () {
-        return 200;
+        return 500;
     },
 
     onBindView (view, index) {

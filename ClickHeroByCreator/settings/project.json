@@ -20,7 +20,10 @@
     "Collider",
     "Physics",
     "StudioComponent",
-    "Intersection"
+    "Intersection",
+    "Geom Utils",
+    "3D",
+    "3D Primitive"
   ],
   "facebook": {
     "appID": "",
