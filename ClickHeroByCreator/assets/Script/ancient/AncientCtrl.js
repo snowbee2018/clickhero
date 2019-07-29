@@ -144,12 +144,20 @@ cc.Class({
             let item = HeroDatas.selAncients.splice(0,1)[0];
             i--
             HeroDatas.myAncients.push(item)
+            item.isBuy = true;
+            item.level ++;
+            item.refresh()
+            item.calSoulByLvUnit();
             this.addItem(item)
         }
         for (let i = 0; i < HeroDatas.otherAncients.length; i++) {
             let item = HeroDatas.otherAncients.splice(0,1)[0];
             i--
             HeroDatas.myAncients.push(item)
+            item.isBuy = true;
+            item.level ++;
+            item.refresh()
+            item.calSoulByLvUnit();
             this.addItem(item)
         }
         DataCenter.consumeSoul(new BigNumber(summonSoul))
