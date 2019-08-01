@@ -335,7 +335,7 @@ cc.Class({
                     func(lv, gold, isBoss, soul);
                 }
             }
-        },300)
+        },150)
     },
 
     onDieAnimEnd () {

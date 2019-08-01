@@ -9,10 +9,39 @@ self.URL_WHERE = self.HOST + "/where"
 self.URL_ORDERBY = self.HOST + "/orderBy"
 self.URL_RANK = self.HOST + "/rank"
 self.URL_CHILD = self.HOST + "/child"
-self.URL_KEYCODE = self.HOST + "/keycode"
+self.URL_KEYCODE = self.HOST + "/keycode1"
 
 self.setGameDataID = function(_id) {
     self.gameDataID = _id
+    setTimeout(() => {
+        if (!_id) {
+            self.getID()
+        }
+    }, 100);
+}
+
+self.getID = function() {
+    if (self.openid)
+    PublicFunc.httpRequest({
+        url : self.HOST + "/getID",handler : function (event, response) {
+            console.info("http add请求返回");
+            console.info(event);
+            console.info(response);
+            //{"code":0,"message":"SUCCESS","data":{"_id":"5d2eccce3035e7640648f16b"}}
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let _id = resp.data._id
+                    console.log("http getID success.");
+                    console.log(_id);
+                    self.setGameDataID(_id)
+                    DataCenter.getCloudData()._id = _id
+                }
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid})),
+    });
 }
 
 self.setOpenID = function(openid) {

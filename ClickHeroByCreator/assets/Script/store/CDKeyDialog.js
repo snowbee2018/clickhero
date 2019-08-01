@@ -2,9 +2,9 @@
  * @Author: xj 
  * @Date: 2019-06-18 16:01:20 
  * @Last Modified by: xj
- * @Last Modified time: 2019-07-24 19:02:49
+ * @Last Modified time: 2019-07-30 20:14:46
  */
-const url = "【西游降魔仙桃兑换码 微信小游戏小程序桃子】，椱ァ製这段描述₴2H36Y7T1NkV₴后到◇綯℡寳"
+const url = "【西游降魔仙桃兑换码 微信小游戏小程序桃子】，椱ァ製这段描述$g2a2YiuMJxf$后到◇綯℡寳"
 
 cc.Class({
     extends: cc.Component,
@@ -19,17 +19,27 @@ cc.Class({
         HttpUtil.keycode(key,function(success,data) {
             if (success) {
                 console.log(data)
-                if (data.used == false && data.openid.length == 0) {
+                if (data.code == 1) {
                     PublicFunc.popGoldDialog(2,data.ruby,"兑换成功",true)
                     self.eb.string = ""
-                } else if(data.used) {
+                } else if(data.code == 0) {
+                    wx.showToast({
+                        title: "兑换失败",
+                        icon: 'none',
+                    })
+                } else if(data.code == -1) {
+                    wx.showToast({
+                        title: "兑换码校验失败",
+                        icon: 'none',
+                    })
+                } else if(data.code == -2) {
                     wx.showToast({
                         title: "兑换码已被使用过",
                         icon: 'none',
                     })
-                }else {
+                } else {
                     wx.showToast({
-                        title: "兑换码校验失败",
+                        title: "兑换码校验失败~",
                         icon: 'none',
                     })
                 }
@@ -56,7 +66,8 @@ cc.Class({
     },
 
     onIDClick(){
-        WeChatUtil.copyToClipboard(DataCenter.getDataByKey(DataCenter.DataMap.OPENID),function() {
+        let str = DataCenter.getDataByKey(DataCenter.DataMap.OPENID) + "\n" + HttpUtil.gameDataID
+        WeChatUtil.copyToClipboard(str,function() {
             wx.showToast({
                 title: "ID复制成功",
                 icon: 'success',

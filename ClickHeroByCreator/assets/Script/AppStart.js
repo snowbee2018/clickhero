@@ -189,7 +189,7 @@ cc.Class({
             // CloudDB.add(gameData);
             HttpUtil.addGameData(gameData,function(success,_id) {
                 if (success) {
-                    // gameData._id = _id
+                    gameData._id = _id
                     DataCenter.saveCloudData(gameData);
                     self.gameController.setWeChatUser();
                     self.startGame();

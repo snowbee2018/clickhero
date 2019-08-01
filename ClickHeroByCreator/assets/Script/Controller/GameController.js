@@ -589,9 +589,17 @@ cc.Class({
                 this.showBtnShareTips()
             }
         }
+        this.lastMaxlvTime = this.lastMaxlvTime || 0
+        const curtime = Date.now();
+        if (curtime - this.lastMaxlvTime < 30*1000) {
+            return;
+        }
+        this.lastMaxlvTime = curtime;
         try {
             HttpUtil.updateMaxLv()
-        } catch (error) {}
+        } catch (error) {
+            
+        }
     },
 
     showBtnSigninTips(){
