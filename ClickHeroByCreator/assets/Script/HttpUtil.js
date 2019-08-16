@@ -1,7 +1,7 @@
 const self = {}
 
 self.HOST = "https://www.magicfun.xyz"
-// self.HOST = "https://localhost:443"
+// self.HOST = "https://localhost"
 
 self.URL_ADD = self.HOST + "/add"
 self.URL_UPDATE = self.HOST + "/update"
@@ -84,7 +84,7 @@ self.updateGameData = function(data) {
     console.log(data);
     data = DataCenter.readGameData()
     delete data._id
-    data.maxLv = data.gamedata.maxPassLavel
+    data.maxLv = data.gamedata.maxPassLavel + 1
     PublicFunc.httpRequest({
         url : self.URL_UPDATE,handler : function (event, response) {
             console.info("http update请求返回");
@@ -137,7 +137,7 @@ self.getGameData = function(id,callback) {
 
 self.updateMaxLv = function() {
     console.log("httpUtil updateMaxLv");
-    let maxPassLavel = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)||0;
+    let maxLv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)+1||1;
     PublicFunc.httpRequest({
         url : self.URL_UPDATE,handler : function (event, response) {
             console.info("http updateMaxLv 请求返回");
@@ -149,7 +149,7 @@ self.updateMaxLv = function() {
             }
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({doc:"UserGameData",_id:self.gameDataID,data:{maxLv:maxPassLavel}}),
+        uploadData : JSON.stringify({doc:"UserGameData",_id:self.gameDataID,data:{maxLv:maxLv,openid:self.openid}}),
     });
 }
 
@@ -222,8 +222,6 @@ self.keycode = function(key,callback) {
     PublicFunc.httpRequest({
         url : self.URL_KEYCODE,handler : function (event, response) {
             console.info("http keycode 请求返回");
-            console.log(JSON.stringify({openid:self.openid}));
-            
             console.info(event);
             console.info(response);
             if (event == "success") {
@@ -244,6 +242,154 @@ self.keycode = function(key,callback) {
         }.bind(this),
         method : "POST",
         uploadData : encodeURIComponent(JSON.stringify({keycode:key,openid:self.openid})),
+    });
+}
+
+// ============== Club ===============
+self.club = function(callback) {
+    PublicFunc.httpRequest({
+        url : self.HOST + "/club",handler : function (event, response) {
+            console.info("http club 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http club success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid})),
+    });
+}
+self.createClub = function(name,callback) {
+    PublicFunc.httpRequest({
+        url : self.HOST + "/createClub",handler : function (event, response) {
+            console.info("http createClub 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http createClub success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid,name:name})),
+    });
+}
+self.searchClub = function(name,callback) {
+    PublicFunc.httpRequest({
+        url : self.HOST + "/searchClub",handler : function (event, response) {
+            console.info("http searchClub 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http searchClub success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid,name:name})),
+    });
+}
+self.joinClub = function(clubid,callback) {
+    PublicFunc.httpRequest({
+        url : self.HOST + "/joinClub",handler : function (event, response) {
+            console.info("http joinClub 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http joinClub success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid,clubid:clubid})),
+    });
+}
+self.randomClub = function(callback) {
+    PublicFunc.httpRequest({
+        url : self.HOST + "/randomClub",handler : function (event, response) {
+            console.info("http randomClub 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http randomClub success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid})),
+    });
+}
+self.request = function(fname,updata,callback) {
+    updata = updata || {}
+    updata.openid = updata.openid || self.openid
+    PublicFunc.httpRequest({
+        url : self.HOST + "/" + fname,handler : function (event, response) {
+            console.info("http "+fname+" 请求返回");
+            console.info(event);
+            console.info(response);
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http "+fname+" success.");
+                    console.log(data);
+                    callback(true,data);
+                    return
+                }
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify(updata)),
     });
 }
 

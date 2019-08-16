@@ -36,6 +36,10 @@ cc.Class({
         ON_BUYHEROS : "ON_BUYHEROS",
         MAKE_CLICKRUBY : "MAKE_CLICKRUBY", // 生成一个 冰糕
         
+        ON_CLUB_CREATED : "ON_CLUB_CREATED",
+        ON_CLUB_EXIT : "ON_CLUB_EXIT",
+        REQ_JOIN_CLUB : "REQ_JOIN_CLUB",
+
         emit(name,params){
             cc.systemEvent.emit(name,params);
         },

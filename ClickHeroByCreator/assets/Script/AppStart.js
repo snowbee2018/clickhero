@@ -273,9 +273,9 @@ cc.Class({
             )
         )
         let tipsArr = [
-            "我就是你最爱的冰棍~",
-            "游戏每5~10分钟会出现冰棍",
-            "冰棍可以得到妖丹、仙丹、仙桃奖励哦",
+            "部落100关解锁，快加入进来吧！",
+            "部落等级越高，各项奖励越多，成员也更多",
+            "部落每日BOSS可以分多次、多人击败哦！",
         ]
         let index = Formulas.randomNum(0,tipsArr.length - 1)
         this.lbTips.string = tipsArr[index]

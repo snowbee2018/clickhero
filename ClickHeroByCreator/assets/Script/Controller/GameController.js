@@ -25,6 +25,7 @@ cc.Class({
         SigninDialog : cc.Prefab,
         ShareDialog : cc.Prefab,
         RankDialog : cc.Prefab,
+        preClub : cc.Prefab,
         offlineDialog : cc.Prefab,
         settingDialog : cc.Prefab,
 
@@ -32,6 +33,7 @@ cc.Class({
         pages : [cc.Node],
         shareBtn : cc.Node,
         btnSignin : cc.Node,
+        btnClub : cc.Node,
 
         sFinger : cc.SpriteFrame,
         sTips : cc.SpriteFrame,
@@ -74,6 +76,7 @@ cc.Class({
         this.tabs[4].active = v1
         this.shareBtn.active = v1
         this.btnSignin.active = v1
+        this.btnClub.active = Boolean(maxPassLavel && maxPassLavel >= 100)
 
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");
@@ -243,7 +246,7 @@ cc.Class({
                                 if (lv < 200) {
                                     PublicFunc.popGoldDialog(0, PublicFunc.getBagGold()) // 一袋妖丹
                                 } else {
-                                    PublicFunc.popGoldDialog(1,PublicFunc.getBagSoul().times(0.04).integerValue())
+                                    PublicFunc.popGoldDialog(1,PublicFunc.getBagSoul().times(0.03).integerValue())
                                 }
                             } else {
                                 PublicFunc.popGoldDialog(2,20+Math.ceil(Math.random()*10))
@@ -589,6 +592,7 @@ cc.Class({
                 this.showBtnShareTips()
             }
         }
+        this.btnClub.active = Boolean(maxPassLavel && maxPassLavel >= 100)
         this.lastMaxlvTime = this.lastMaxlvTime || 0
         const curtime = Date.now();
         if (curtime - this.lastMaxlvTime < 30*1000) {
@@ -1085,6 +1089,14 @@ cc.Class({
         AudioMgr.playBtn();
     },
 
+    showClub(){
+        let club = cc.instantiate(this.preClub)
+        club.parent = cc.director.getScene();
+        club.x = cc.winSize.width / 2;
+        club.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
+    },
+
     // onLeftBtnClick () {
     //     const self = this;
     //     // WeChatUtil.authorize(WeChatUtil.scope.userLocation, function (result) {
@@ -1169,6 +1181,7 @@ cc.Class({
         this.tabs[4].active = false
         this.shareBtn.active = false
         this.btnSignin.active = false
+        this.btnClub.active = false
         this.getComponent("AutoClick").showAutoBtn(false)
     },
 });

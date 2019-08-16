@@ -17,6 +17,8 @@ cc.Class({
         popTips : cc.Prefab,
         CDKeyDialog : cc.Prefab,
         imgClickruby : cc.SpriteFrame,
+        ClubInfo : cc.Prefab,
+        baseClubLogo : cc.SpriteFrame,
     },
 
     onLoad(){
@@ -203,7 +205,7 @@ cc.Class({
     },
     getDateStr(){
         var d = new Date()
-        return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate()
+        return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate()
     },
     // 计算10倍仙丹和妖丹 根据购买数 得到的百分比结果
     get10TimesByCount(c,n){
@@ -218,8 +220,8 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.搬迁了服务器，后面会推出更丰富的功能",
-        "2.现在可以在商店用兑换码兑换仙桃了（熊猫会发波码庆祝，详见游戏圈）",
+        const info = ["1.增加了部落，100关解锁",
+        "2.关于部落的说明见游戏圈的帖子",
         // "3.游戏中每隔一会儿会出现一个冰棍",
             ].join("\n")
         this.popDialog({
@@ -304,5 +306,30 @@ cc.Class({
         }
         soul = soul.times(GameData.getPrimalBossOdds()).plus(4).integerValue()
         return soul
+    },
+
+    showClubInfo(club,com){
+        let v = cc.instantiate(this.ClubInfo)
+        v.parent = cc.director.getScene();
+        v.x = cc.winSize.width / 2;
+        v.y = cc.winSize.height / 2;
+        v.getComponent("ClubInfo").setClub(club,com)
+    },
+
+    toast(str){
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            wx.showToast({
+                title: str,
+                icon: 'none',
+            })
+        }
+    },
+
+    setClubLogo(sp,id){
+        if (id==-1) {
+            sp.spriteFrame = this.baseClubLogo
+        } else {
+
+        }
     },
 });

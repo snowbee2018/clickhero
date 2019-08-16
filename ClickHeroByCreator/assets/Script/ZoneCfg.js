@@ -55,7 +55,6 @@ var obj = [
     { zone: "车迟国", bossName: "虎力大仙", des:"法身元运逢车力 心正妖邪度脊关", resNum:"16" },
     { zone: "车迟国", bossName: "鹿力大仙", des:"", resNum:"17" },
     { zone: "车迟国", bossName: "羊力大仙", des:"", resNum:"18" },
-
     { zone: "通天河", bossName: "灵感大王", des:"圣僧夜阻通天水 金木垂慈救小童", resNum:"19" },
     { zone: "金兜山", bossName: "青牛精兕怪", des:"情乱性从因爱欲 神昏心动遇魔头", resNum:"20" },
     { zone: "女儿国", bossName: "如意真仙", des:"禅主吞餐怀鬼孕 黄婆运水解邪胎", resNum:"21" },
@@ -70,7 +69,6 @@ var obj = [
     { zone: "七绝山", bossName: "蟒蛇精", des:"拯救驼罗禅性稳 脱离秽污道心清", resNum:"30" },
     { zone: "麒麟山", bossName: "金毛吼", des:"妖魔宝放烟沙火 悟空计盗紫金铃", resNum:"31" },
     { zone: "盘丝洞", bossName: "蜘蛛精", des:"盘丝洞七情迷本 濯垢泉八戒忘形", resNum:"32" },
-
     { zone: "盘丝洞", bossName: "蜈蚣精", des:"情因旧恨生灾毒 心主遭魔幸破光", resNum:"33" },
     { zone: "狮驼洞", bossName: "狮子精", des:"长庚传报魔头狠 行者施为变化能", resNum:"34" },
     { zone: "狮驼洞", bossName: "白象精", des:"", resNum:"35" },
