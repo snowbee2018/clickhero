@@ -3,9 +3,6 @@
  * @Date: 2019-08-06 23:23:15 
  * @Last Modified by: xj
  * @Last Modified time: 2019-08-14 23:46:32
- * 
- * 
- * 下一步就是要做这个里面了
  */
 var zoneCfg = require("ZoneCfg")
 cc.Class({
@@ -32,6 +29,7 @@ cc.Class({
         btnJoin : cc.Node,
         btnEdit : cc.Node,
         pfJoinList : cc.Prefab,
+        pfClubChat : cc.Prefab,
         pfBoss : cc.Prefab,
         lbJoin : cc.Label,
         lbMember : cc.Label,
@@ -244,7 +242,16 @@ cc.Class({
     },
 
     clickChat(){
-        PublicFunc.toast("功能还未开放")
+        const v = cc.instantiate(this.pfClubChat)
+        v.parent = cc.director.getScene();
+        v.x = cc.winSize.width / 2;
+        v.y = cc.winSize.height / 2;
+        v.getComponent("ClubChat").setData([
+            {nickname:"少时",content:"请听到逼的一声后留言"},
+            {nickname:"XXXX",content:"HAHAHAHAHAH HAHAHAHA"},
+            {nickname:"DAFDS",content:"THIS IS MY ALL"},
+            {nickname:"MARY",content:"HERO IN THE ......"},
+        ])
     },
 
     clickMember(){
