@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-06 23:23:15 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-14 23:46:32
+ * @Last Modified time: 2019-08-19 14:53:21
  */
 var zoneCfg = require("ZoneCfg")
 cc.Class({
@@ -33,10 +33,12 @@ cc.Class({
         pfBoss : cc.Prefab,
         lbJoin : cc.Label,
         lbMember : cc.Label,
+        lbChat : cc.Label,
     },
 
     setClub(data){
         this.club = data
+        this.club.chats = this.club.chats || []
         PublicFunc.setClubLogo(this.spHead,data.logoid)
         this.bindInfo()
         let member
@@ -69,6 +71,14 @@ cc.Class({
     refreshBtn(){
         this.lbJoin.string = "加入申请" + "("+this.club.joinList.length+")"
         this.lbMember.string = "成员" + "("+this.club.members.length+"/"+this.club.maxSeat+")"
+        let unread = 0
+        let readChatTime = DataCenter.getLocalValue("readChatTime") || 0
+        this.club.chats.forEach(e => {
+            if (e.time > readChatTime) {
+                unread ++
+            }
+        });
+        this.lbChat.string = "留言板" + "("+unread+")"
     },
 
     bindBoss(){
@@ -246,12 +256,12 @@ cc.Class({
         v.parent = cc.director.getScene();
         v.x = cc.winSize.width / 2;
         v.y = cc.winSize.height / 2;
-        v.getComponent("ClubChat").setData([
-            {nickname:"少时",content:"请听到逼的一声后留言"},
-            {nickname:"XXXX",content:"HAHAHAHAHAH HAHAHAHA"},
-            {nickname:"DAFDS",content:"THIS IS MY ALL"},
-            {nickname:"MARY",content:"HERO IN THE ......"},
-        ])
+        v.getComponent("ClubChat").setClub(this.club)
+        if (this.club.chats.length > 0) {
+            let lastChat = this.club.chats[this.club.chats.length-1]
+            DataCenter.setLocalValue("readChatTime",lastChat.time)
+        }
+        this.refreshBtn()
     },
 
     clickMember(){

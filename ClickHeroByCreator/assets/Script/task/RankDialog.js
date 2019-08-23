@@ -11,20 +11,16 @@ cc.Class({
         this.datas = this.datas || [[],[]]
         WeChatUtil.showBannerAd()
 
-        var cloudData = DataCenter.getDataByKey("CloudData");
-        let time = cloudData ? cloudData.registerTime : 0
-        this.onTab(null,time >Date.now() - 3600000*24*7 ? 1 : 0)
+        // var cloudData = DataCenter.getDataByKey("CloudData");
+        // let time = cloudData ? cloudData.registerTime : 0
+        this.onTab(null,0)
     },
 
     onTab(event,i){
         if (this.isloading|| this.index == i) {
             return
         }
-        if(i == 0){
-            this.lbTips.string = PublicFunc.getTipsStr()
-        } else {
-            this.lbTips.string = "新人榜收集的是7天内的新玩家等级排行"
-        }
+        this.lbTips.string = PublicFunc.getTipsStr()
         this.index = Number(i)
         this.refresh()
         if (this.getItemCount()==0) {
@@ -39,12 +35,26 @@ cc.Class({
     },
 
     loadmore(){
-        if (this.isloading||this.getItemCount()>= 200) {
+        if (this.isloading||this.getItemCount()>= 100) {
+            return
+        }
+        if (this.index == 1&&this.getItemCount() > 0) {
             return
         }
         this.isloading = true
-        HttpUtil.getRankUsers(this.index==1,this.getItemCount(),this.onData.bind(this))
-        // CloudDB.getRankUsers(this.index,this.onData.bind(this),this.getItemCount())
+        if (this.index == 0) {
+            HttpUtil.getRankUsers(this.index==1,this.getItemCount(),this.onData.bind(this))
+        } else if (this.index == 1){
+            HttpUtil.request("getRankClubs",null,this.onClubs.bind(this))
+        }
+    },
+
+    onClubs(b,data){
+        if (b && data.clubs) {
+            this.datas[1] = data.clubs
+            this.refresh()
+        }
+        this.isloading = false
     },
 
     onData(datas){
@@ -65,12 +75,20 @@ cc.Class({
         return this.datas[this.index]
     },
 
+    getType (index) { //type对应prefabs
+        return this.index
+    },
+
     getItemCount () {
         return this.getDatas().length;
     },
 
     onBindView (view, index) {
-        view.getComponent('RankItem').bind(index,this.getDatas()[index],this.index)
+        if (view.type == 0) {
+            view.getComponent('RankItem').bind(index,this.getDatas()[index],this.index)
+        } else {
+            view.getComponent('ClubItem').bindRank(index,this.getDatas()[index])
+        }
     },
 
     onScrollToBottom(){

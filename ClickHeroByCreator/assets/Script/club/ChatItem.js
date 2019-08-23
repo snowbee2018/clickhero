@@ -8,8 +8,10 @@ cc.Class({
     },
 
     bind(data){
-        this.lbName.string = data.nickname
-        this.lbContent.string = data.content
+        let d = new Date(data.time)
+        // let date = (d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" + d.getMinutes()
+        this.lbName.string = data.nickname + "    " + d.format("MM/dd hh:mm")
+        this.lbContent.string = data.msg
     },
 
 })

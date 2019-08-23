@@ -17,7 +17,7 @@ cc.Class({
     bind(index,data,type){
         this.lbNo.string = String(index+1)
         this.lbName.string = data.WeChatUserInfo.nickName
-        this.lbLevel.string = (data.maxLv||'0')+"级"
+        this.lbLevel.string = (data.maxLv||'1')+"关"
         if (data.WeChatUserInfo&&data.WeChatUserInfo.avatarUrl) {
             cc.loader.load({url: data.WeChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
                 try {

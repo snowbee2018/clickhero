@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-07 13:27:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-15 00:11:27
+ * @Last Modified time: 2019-08-19 16:35:01
  */
 cc.Class({
     extends: require("ListView"),
@@ -88,8 +88,8 @@ cc.Class({
                 e.isMe = true
                 this.isLeader = e.isLeader || false
                 if (this.isLeader) {
-                    this.btn.active =false
-                    // this.lbBtn.string = "解散部落"
+                    this.btn.active =true
+                    this.lbBtn.string = "解散部落"
                 }else{
                     this.lbBtn.string = "退出部落"
                 }
@@ -102,21 +102,38 @@ cc.Class({
     },
 
     onClick(){
+        var lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+        if (lv < 100) {
+            PublicFunc.toast("100关以后才能加入部落")
+            return
+        }
         if (this.isMy) {
+            let str
+            let req
+            let tips
+            if (this.isLeader) {
+                str = "你确定要解散部落吗？"
+                req = "delClub"
+                tips = ["已解散部落","操作失败"]
+            } else {
+                str = "你确定要退出部落吗？"
+                req = "exitClub"
+                tips = ["已退出部落","操作失败"]
+            }
             PublicFunc.popDialog({
-                contentStr: "你确定要退出部落吗？",
+                contentStr: str,
                 btnStrs: {
                     left: '是 的',
                     right: '不'
                 },
                 onTap: function (dialog, bSure) {
-                    HttpUtil.request("exitClub",null,function(b,data) {
+                    HttpUtil.request(req,null,function(b,data) {
                         if (b&&data.success) {
-                            PublicFunc.toast("已退出部落")
+                            PublicFunc.toast(tips[0])
                             Events.emit(Events.ON_CLUB_EXIT)
                             this.finish()
                         }else{
-                            PublicFunc.toast("退出失败")
+                            PublicFunc.toast(tips[1])
                         }
                     }.bind(this))
                 }.bind(this)

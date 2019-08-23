@@ -33,6 +33,21 @@ cc.Class({
             "紫霞的月光宝盒带你回500年前，收获仙丹",
             "每个仙丹会附加10%的DPS伤害",
         ]
+        Date.prototype.format = function (fmt) { //author: meizz 
+            var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
     },
 
     // params = {
@@ -220,9 +235,9 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.增加了部落，100关解锁",
-        "2.关于部落的说明见游戏圈的帖子",
-        // "3.游戏中每隔一会儿会出现一个冰棍",
+        const info = ["1.部落开放留言板功能",
+        "2.排行榜增加部落排行",
+        "3.部落族长现在可以解散部落",
             ].join("\n")
         this.popDialog({
             contentStr: info,
