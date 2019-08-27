@@ -153,7 +153,7 @@ self.updateMaxLv = function() {
     });
 }
 
-self.getRankUsers = function(isNew,offset,callback) {
+self.getRankUsers = function(registerTime,offset,callback) {
     PublicFunc.httpRequest({
         url : self.URL_RANK,handler : function (event, response) {
             console.info("http rank 请求返回");
@@ -178,7 +178,7 @@ self.getRankUsers = function(isNew,offset,callback) {
             }
         }.bind(this),
         method : "POST",
-        uploadData : JSON.stringify({skip:offset, isNew:isNew}
+        uploadData : JSON.stringify({skip:offset, registerTime:registerTime}
             // ,data:{maxLv:lv}}
         ),
     });

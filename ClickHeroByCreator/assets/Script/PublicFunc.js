@@ -106,7 +106,7 @@ cc.Class({
         ruby += Math.round(GoodsDatas.getTotalRuby()*0.75)
         const self = this;
         PublicFunc.popDialog({
-            contentStr: "这将重置你的所有游戏数据，但是会保留仙桃，并以75%的价值变卖商店的道具，共保留"+ruby+"仙桃，你确定要重置吗？",
+            contentStr: "这将重置你的所有游戏数据，你会进入新区（排行榜），但是会保留仙桃，并以75%的价值变卖商店的道具，共保留"+ruby+"仙桃，你确定要重置吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'

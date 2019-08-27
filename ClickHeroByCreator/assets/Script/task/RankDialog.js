@@ -10,9 +10,8 @@ cc.Class({
     start(){
         this.datas = this.datas || [[],[]]
         WeChatUtil.showBannerAd()
-
-        // var cloudData = DataCenter.getDataByKey("CloudData");
-        // let time = cloudData ? cloudData.registerTime : 0
+        var cloudData = DataCenter.getDataByKey("CloudData");
+        this.registerTime = cloudData ? cloudData.registerTime : 0
         this.onTab(null,0)
     },
 
@@ -43,7 +42,7 @@ cc.Class({
         }
         this.isloading = true
         if (this.index == 0) {
-            HttpUtil.getRankUsers(this.index==1,this.getItemCount(),this.onData.bind(this))
+            HttpUtil.getRankUsers(this.registerTime,this.getItemCount(),this.onData.bind(this))
         } else if (this.index == 1){
             HttpUtil.request("getRankClubs",null,this.onClubs.bind(this))
         }

@@ -2,6 +2,7 @@ cc.Class({
     
     ctor () {
         const self = this;
+        self.zoneStartTimes = [0,1566943200000]
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
@@ -565,12 +566,29 @@ cc.Class({
         const signinData = this.getDataByKey(this.KeyMap.signinData)
         const shareReceiveData = this.getDataByKey(this.KeyMap.shareReceiveData)
         
-        this.saveCloudData({})
+        this.saveCloudData({
+            registerTime : Date.now(),
+            _openid : HttpUtil.openid
+        })
         this.init()
 
         this.setDataByKey(this.KeyMap.shareDate, shareDate);
         this.setDataByKey(this.KeyMap.signinData, signinData);
         this.setDataByKey(this.KeyMap.shareReceiveData, shareReceiveData || [])
+    },
+
+    getUserZone(){
+        let zone = 0
+        var cloudData = this.getDataByKey("CloudData");
+        const registerTime = cloudData ? cloudData.registerTime : 0
+        for (let i = this.zoneStartTimes.length-1; i >= 0; i--) {
+            const time = this.zoneStartTimes[i];
+            if (registerTime && registerTime >= time) {
+                zone = i
+                break
+            }
+        }
+        return zone
     },
 
 });

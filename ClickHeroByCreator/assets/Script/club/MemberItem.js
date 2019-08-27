@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-07 13:40:54 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-14 23:40:45
+ * @Last Modified time: 2019-08-27 19:03:20
  */
 cc.Class({
     extends: cc.Component,
@@ -15,6 +15,7 @@ cc.Class({
         btnAgree : cc.Node,
         vContent : cc.Node,
         lbTips : cc.Label,
+        lbSignin : cc.Label,
         leader : cc.Node,
     },
 
@@ -32,8 +33,11 @@ cc.Class({
             this.lbLevel.string = user.maxLv + "关"
             if (isLeader&&user._openid!=HttpUtil.openid) {
                 this.btnDel.active = true
+                this.lbSignin.node.active = true
+                this.lbSignin.string = "签到日期：" + (user.signinDate||"无")
             }else {
                 this.btnDel.active = false
+                this.lbSignin.node.active = false
             }
             this.leader.active = Boolean(user.isLeader)
             cc.loader.load({url: user.headurl, type: 'jpg'},function(err, texture) {
