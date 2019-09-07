@@ -52,6 +52,7 @@ cc.Class({
             }
             return num
         }
+        Formulas.initTempP()
         window.HttpUtil = require("HttpUtil");
         cc.game.setFrameRate(40)
         // wx.setPreferredFramesPerSecond(34)

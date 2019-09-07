@@ -140,10 +140,13 @@ cc.Class({
                     } else {
                         self._soul = new BigNumber(1)
                     }
+                    if (DataCenter.getGoldenLv() == lv) {
+                        self.isGolden = Formulas.isHitRandom(0.25)
+                    }
                 }
-                if (!DataCenter.isLevelMaxPassed(lv)) {
-                    self.isGolden = Formulas.isHitRandom(0.25)
-                }
+                // if (!DataCenter.isLevelMaxPassed(lv)) {
+                //     self.isGolden = Formulas.isHitRandom(0.25)
+                // }
             }
             self._gold = Formulas.getMonsterGold(lv, self._totalHP);
             if (self._isTreasureChest) {

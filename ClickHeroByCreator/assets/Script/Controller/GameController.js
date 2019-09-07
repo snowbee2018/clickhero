@@ -462,6 +462,7 @@ cc.Class({
         obj[map.totalSoul] = DataCenter.getDataByKey(map.totalSoul).toExponential(4)
         obj[map.totalRuby] = DataCenter.getDataByKey(map.totalRuby);
         obj[map.skill6Data] = DataCenter.getDataByKey(map.skill6Data); // 阿弥陀佛
+        obj[map.goldenLv] = DataCenter.getDataByKey(map.goldenLv);
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]

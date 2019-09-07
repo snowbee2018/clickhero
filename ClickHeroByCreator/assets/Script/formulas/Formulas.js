@@ -111,6 +111,23 @@ cc.Class({
             
             return hp
         },
+
+        saveTempP(){
+            console.log("saveTempP");
+            if (this.tempP) {
+                let jsonstr= JSON.stringify({lv:this.tempP.lv,P:this.tempP.P.toString()})
+                cc.sys.localStorage.setItem("tempP",jsonstr)
+            }
+        },
+        initTempP(){
+            console.log("initTempP");
+            let jsonstr = cc.sys.localStorage.getItem("tempP")
+            if (jsonstr&&!this.tempP) {
+                let data = JSON.parse(jsonstr)
+                this.tempP = {lv:data.lv,P:newBigNumber(data.P)}
+                console.log("init success");
+            }
+        },
         // 计算怪物金币 for monster
         // hp = getMonsterHP(lv);
         getMonsterGold(lv, hp) {

@@ -37,6 +37,7 @@ cc.Class({
             totalSoul:"totalSoul", // 历史总仙丹
             totalRuby: "totalRuby", // 历史总仙桃
             skill6Data : "skill6Data", // 阿弥陀佛的次数
+            goldenLv : "goldenLv", // 下一个金身判断等级
         }
         self.ContentData = {}
         self.DataMap = {
@@ -154,6 +155,8 @@ cc.Class({
         if (skill6Data) {
             self.setDataByKey(self.KeyMap.skill6Data, skill6Data);
         }
+        var goldenLv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.goldenLv)
+        self.setDataByKey(self.KeyMap.goldenLv, goldenLv ? goldenLv:5);
     },
 
     saveUserData(data){
@@ -207,6 +210,7 @@ cc.Class({
             cdata.maxLv = data.maxPassLavel
             console.log("保存数据到本地");
             cc.sys.localStorage.setItem("GameDataNew",JSON.stringify(cdata))
+            Formulas.saveTempP()
             return true
         }
         return false
@@ -503,6 +507,9 @@ cc.Class({
             self.updataMaxPassLevel(level);
             Events.emit(Events.ON_LEVEL_PASSED);
         }
+        if (level == self.getGoldenLv()) {
+            self.upGoldenLv()
+        }
     },
 
     isLevelPassed (level) {
@@ -557,6 +564,16 @@ cc.Class({
         return skill6Data
     },
 
+    getGoldenLv(){
+        return DataCenter.getDataByKey(this.KeyMap.goldenLv) || 5
+    },
+
+    upGoldenLv(){
+        var goldenLv = this.getGoldenLv()
+        goldenLv += 5
+        DataCenter.setDataByKey(this.KeyMap.goldenLv,goldenLv)
+    },
+
     rebirth () {
         const self = this;
         var rebirthSoul = self.consumeRebirthSoul();
@@ -568,6 +585,7 @@ cc.Class({
         setTimeout(function() {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
         }.bind(this),100)
+        Formulas.tempP = null
     },
 
     resetGame () {
@@ -588,6 +606,7 @@ cc.Class({
         setTimeout(function() {
             this.setDataByKey(this.KeyMap.curGold, (new BigNumber(0)));
         }.bind(this),100)
+        Formulas.tempP = null
     },
 
     getUserZone(){
