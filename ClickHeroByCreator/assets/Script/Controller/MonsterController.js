@@ -123,7 +123,7 @@ cc.Class({
                 if (!this.noMoreReminders) {
                     // 弹出对话框
                     PublicFunc.popDialog({
-                        contentStr: '温馨提示，你未在时限内击败妖怪，回到之前的关卡，打小怪，得妖丹，升级你的英雄，提高他们的攻击力，再回来挑战Boss吧。',
+                        contentStr: '温馨提示，你未在时限内击败妖怪，回到之前的关卡，打小怪，得金币，升级你的英雄，提高他们的攻击力，再回来挑战Boss吧。',
                         btnStrs: {
                             mid: '确 定',
                         },
@@ -219,7 +219,7 @@ cc.Class({
             this.monsterSoul.string = Formulas.formatBigNumber(this.curMonster._soul)+"仙丹"
         } else if(self.curMonster._isTreasureChest){
             this.monsterSoul.node.active = true
-            this.monsterSoul.string = (10 * GameData.getTreasureTimes()).toFixed(2) + "倍妖丹"
+            this.monsterSoul.string = (10 * GameData.getTreasureTimes()).toFixed(2) + "倍金币"
         } else {
             this.monsterSoul.node.active = false
         }
@@ -261,7 +261,7 @@ cc.Class({
         self.hpBar.progress = percent;
     },
 
-    onCurMonsterDestroy (lv, gold, isBoss, soul) {
+    onCurMonsterDestroy (lv, gold, isBoss, soul,isGolden) {
         const self = this;
         if (!DataCenter.isLevelPassed(lv)) {
             if (isBoss) {
@@ -296,6 +296,9 @@ cc.Class({
         
         if (soul && soul.isGreaterThan(0)) {
             self.gameController.onMonsterSoul(soul);
+        }
+        if (isGolden) {
+            self.gameController.addRandomGolden()
         }
     },
 

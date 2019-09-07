@@ -30,18 +30,18 @@ cc.Class({
                 state = "邀请数量：" + count + "  当前增益：" + (count*30) +"%"
                 break
             case 0:
-                name = "一袋妖丹"
+                name = "一袋金币"
                 var gold = this.getBagGold()
                 var str = Formulas.formatBigNumber(gold)
-                desc = "立即获得"+str+"妖丹" // 封装个方法去获取数量
+                desc = "立即获得"+str+"金币" // 封装个方法去获取数量
                 state = ""
                 ruby = 50
                 break;
             case 14:
                 name = "聚宝盆"
-                desc = "永久妖丹倍数×1.2，每天可购一次"
+                desc = "永久金币倍数×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
-                state = "等级：" + count + "  妖丹增益：" + PublicFunc.numToStr(num) +"%"
+                state = "等级：" + count + "  金币增益：" + PublicFunc.numToStr(num) +"%"
                 ruby = 30
                 cd = 60*10
                 unlockLv = 10
@@ -62,8 +62,8 @@ cc.Class({
                 unlockLv = 30
                 break;
             case 2:
-                name = "双倍妖丹"
-                desc = "永久双倍妖丹"
+                name = "双倍金币"
+                desc = "永久双倍金币"
                 state = "仅可购买一次"
                 ruby = 500
                 only = true;
@@ -117,9 +117,9 @@ cc.Class({
                 unlockLv = 200
                 break;
             case 10:
-                name = "妖丹多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(1.1,this.getCount()))+"%的妖丹加成"
-                state = "妖丹加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
+                name = "金币多又多" + (count>0? " Lv" + count:"")
+                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(1.1,this.getCount()))+"%的金币加成"
+                state = "金币加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 600
                 unlockLv = 200
                 break;
@@ -306,7 +306,7 @@ cc.Class({
                 break;
             case 15:
                 for (let i = 0; i < count; i++) {
-                    ruby += 600 + DataCenter.getUserZone() == 1? 25 * i : 0
+                    ruby += (600 + (DataCenter.getUserZone() == 1? 25 * i : 0))
                 }
                 break
         }

@@ -87,15 +87,15 @@ cc.Class({
                 new AncientData().init(8,false,false,"神农鼎",0,"每级约-0.99%购买和升级英雄花费"),
                 new AncientData().init(9,false,false,"伏羲琴",0,"每级约+1.978%葫芦妖出现概率"),
                 new AncientData().init(10,false,false,"夺魂箫",0,"增加火眼金睛持续时间2秒"),
-                new AncientData().init(11,false,false,"九曲珠",0,"每级约+0.24%的10倍妖丹概率"),
+                new AncientData().init(11,false,false,"九曲珠",0,"每级约+0.24%的10倍金币概率"),
                 new AncientData().init(12,false,false,"盘古斧",0,"每级增加20%点击伤害"),
                 new AncientData().init(13,false,false,"玄天伞",0,"增加如意金箍持续时间2秒"),
                 new AncientData().init(14,false,false,"轩辕剑",0,"每次连击+0.01%DPS伤害"),
                 new AncientData().init(15,false,false,"炼妖壶",0,"每级+2秒点石成金持续时间"), // 每级+0.01%*DPS的点击伤害
                 new AncientData().init(16,false,false,"太虚神甲",0,"每级约-0.19752每关妖怪数量（每关最少2个怪）"),
-                new AncientData().init(17,false,false,"女蜗石",0,"每级+25%挂机妖丹倍数(60秒无点击)"),
-                new AncientData().init(18,false,false,"昆仑镜",0,"每级+5%妖丹倍数"),
-                new AncientData().init(19,false,false,"崆峒印",0,"每级+50%葫芦妖丹倍数"),
+                new AncientData().init(17,false,false,"女蜗石",0,"每级+25%挂机金币倍数(60秒无点击)"),
+                new AncientData().init(18,false,false,"昆仑镜",0,"每级+5%金币倍数"),
+                new AncientData().init(19,false,false,"崆峒印",0,"每级+50%葫芦金币倍数"),
                 new AncientData().init(20,false,false,"玉净瓶",0,"每级+11%仙丹DPS伤害（将仙丹的10%DPS加成转化为11%，多余的仙丹全买我就对了）"),
                 new AncientData().init(21,false,false,"诛仙阵图",0,"每级+自动点击数*10%挂机DPS(60秒无点击，自动点击需要关闭)"),
                 new AncientData().init(22,false,false,"逐日弓",0,"每级+30%点石成金技能效果"),
@@ -189,6 +189,16 @@ cc.Class({
             }
             return count
         },
+        // 随机获得一个金身
+        addRandomGolden(){
+            let count = this.getBuyHeroCount()
+            let index = Math.floor((Math.random() * count))
+            console.log("获得金身：" + index);
+            let hero = this.heroList[index]
+            hero.addGolden(1)
+            return hero
+        },
+
         formatAncientList() {
             var arr = [[],[]];
             this.myAncients.forEach(ancient => {

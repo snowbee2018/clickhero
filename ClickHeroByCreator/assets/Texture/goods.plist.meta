@@ -4,7 +4,7 @@
   "rawTextureUuid": "6e712f82-a08d-4d57-81a4-26cfa8cac406",
   "size": {
     "width": 102,
-    "height": 272
+    "height": 236
   },
   "type": "Texture Packer",
   "subMetas": {
@@ -15,14 +15,14 @@
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
-      "offsetX": -2,
+      "offsetX": 0,
       "offsetY": 0,
       "trimX": 1,
       "trimY": 191,
-      "width": 84,
-      "height": 80,
-      "rawWidth": 100,
-      "rawHeight": 100,
+      "width": 44,
+      "height": 44,
+      "rawWidth": 44,
+      "rawHeight": 44,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

@@ -219,11 +219,11 @@ cc.Class({
         var hero = HeroDatas.getHero(this._heroID);
         if (hero.isBuy) {
             self.btnTitle.string = "升" + GameData.heroLvUnit + "级";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 妖丹";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 妖丹";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
             self.btn.interactable = self.isCanBuy();
         }
 
@@ -281,11 +281,11 @@ cc.Class({
         
         if (hero.isBuy) {
             self.btnTitle.string = "升" + GameData.heroLvUnit + "级";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 妖丹";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getCost()) + " 金币";
             self.btn.interactable = self.isCanUpgrade();
         } else {
             self.btnTitle.string = "购买";
-            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 妖丹";
+            self.upgradeCost.string = Formulas.formatBigNumber(hero.getBaseCost()) + " 金币";
             self.btn.interactable = self.isCanBuy();
         }
 

@@ -91,7 +91,7 @@ cc.Class({
                 if (hero.level >= skillData.level) {
                     self.levelLimit.node.active = false;
                     self.btn.node.active = true;
-                    self.cost.string = Formulas.formatBigNumber(skillData.cost) + " 妖丹";
+                    self.cost.string = Formulas.formatBigNumber(skillData.cost) + " 金币";
                     if (DataCenter.isGoldEnough(skillData.cost)) {
                         self.btn.interactable = true;
                         if ((self._heroID == 0 && self._skillID <= 1)||

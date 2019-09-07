@@ -42,7 +42,7 @@ cc.Class({
                 strAd = "随机翻2-10倍"
                 let times = Formulas.randomNum(2,10)
                 this.numAd = this.num.times(times-1)
-                this.lbTips.string = "妖丹×" + times
+                this.lbTips.string = "金币×" + times
             } else if (type == 1) {
                 let add = this.num.times(0.2).integerValue()
                 if (add.lt(2)) {

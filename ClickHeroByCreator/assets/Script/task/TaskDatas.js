@@ -18,7 +18,7 @@ self.init = function() {
 self.targets = [
     // 关卡任务
     [10,50,100,150,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,4500,5000,6000,7000,8000,9000,10000,],
-    // 妖丹任务
+    // 金币任务
     ["5e+4","5e+6","5e+9","5e+12","5e+18","5e+24","5e+30","5e+36","5e+42","5e+48","5e+54","5e+60","5e+66","5e+72",],
     // 手动点击次数
     [5000,10000,20000,30000,40000,50000,60000,70000,80000,90000,100000,120000,140000,160000,180000,200000,240000,280000,320000],
@@ -29,7 +29,7 @@ self.targets = [
 ]
 
 self.titles = [
-    "通关任务","妖丹任务","点击任务","英雄数任务","穿越任务",
+    "通关任务","金币任务","点击任务","英雄数任务","穿越任务",
 ]
 
 self.getTitle = function(i) {
@@ -42,7 +42,7 @@ self.getTitle = function(i) {
         return "击败" + lv + "级妖怪"
     } else if (i == 1){
         let gold = new BigNumber(self.targets[i][index])
-        return "累计获得" + Formulas.formatBigNumber(gold)+"妖丹"
+        return "累计获得" + Formulas.formatBigNumber(gold)+"金币"
     } else if (i == 2){
         let count = new BigNumber(self.targets[i][index])
         return "手动点击" + count + "次"

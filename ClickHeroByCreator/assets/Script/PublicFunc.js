@@ -19,6 +19,7 @@ cc.Class({
         imgClickruby : cc.SpriteFrame,
         ClubInfo : cc.Prefab,
         baseClubLogo : cc.SpriteFrame,
+        goldenDialog : cc.Prefab,
     },
 
     onLoad(){
@@ -222,7 +223,7 @@ cc.Class({
         var d = new Date()
         return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate()
     },
-    // 计算10倍仙丹和妖丹 根据购买数 得到的百分比结果
+    // 计算10倍仙丹和金币 根据购买数 得到的百分比结果
     get10TimesByCount(c,n){
         // let result = 0
         // for (let i = 0; i < c; i++) {
@@ -235,9 +236,9 @@ cc.Class({
     },
 
     showUpgradeInfo(){
-        const info = ["1.部落开放留言板功能",
-        "2.排行榜增加部落排行",
-        "3.部落族长现在可以解散部落",
+        const info = ["1.每次击败最高关卡的BOSS有25%的概率随机获得一个金身",
+        "2.老玩家重置游戏数据后会转入新区排行榜",
+        "3.部落族长可以看成员签到日期",
             ].join("\n")
         this.popDialog({
             contentStr: info,
@@ -263,6 +264,14 @@ cc.Class({
     popCDKeyDialog(){
         let dialog = cc.instantiate(this.CDKeyDialog)
         // dialog.getComponent("CDKeyDialog")
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+    },
+
+    popGoldenDialog(hero){
+        let dialog = cc.instantiate(this.goldenDialog)
+        dialog.getComponent("GoldenDialog").setHero(hero,this.node.getComponent("HeroListControl"))
         dialog.parent = cc.director.getScene();
         dialog.x = cc.winSize.width / 2;
         dialog.y = cc.winSize.height / 2;

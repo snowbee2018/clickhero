@@ -512,6 +512,13 @@ cc.Class({
         return curPassLevel >= level;
     },
 
+    isLevelMaxPassed (level) {
+        const self = this;
+        var key = self.KeyMap.maxPassLavel;
+        var curPassLevel = self.getDataByKey(key);
+        return curPassLevel >= level;
+    },
+
     saveCloudData (data) {
         const self = this;
         if (data) {
@@ -558,6 +565,9 @@ cc.Class({
         self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
         self.setDataByKey(self.KeyMap.passLavel, 0);
         this.addRebirthCount()
+        setTimeout(function() {
+            self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
+        }.bind(this),100)
     },
 
     resetGame () {
@@ -575,6 +585,9 @@ cc.Class({
         this.setDataByKey(this.KeyMap.shareDate, shareDate);
         this.setDataByKey(this.KeyMap.signinData, signinData);
         this.setDataByKey(this.KeyMap.shareReceiveData, shareReceiveData || [])
+        setTimeout(function() {
+            this.setDataByKey(this.KeyMap.curGold, (new BigNumber(0)));
+        }.bind(this),100)
     },
 
     getUserZone(){

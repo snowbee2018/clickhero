@@ -41,6 +41,8 @@ cc.Class({
 
         clickLight : cc.Prefab,
         nodeClickRuby : cc.Node,
+
+        btnGolden : cc.Node,
     },
     
     // use this for initialization
@@ -240,11 +242,11 @@ cc.Class({
                             var lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
                             console.log("maxPassLavel:"+lv);
                             if (r < 0.45) {
-                                PublicFunc.popGoldDialog(0, PublicFunc.getBagGold().times(0.5)) // 一袋妖丹
+                                PublicFunc.popGoldDialog(0, PublicFunc.getBagGold().times(0.5)) // 一袋金币
                             } else if(r < 0.75){
                                 
                                 if (lv < 200) {
-                                    PublicFunc.popGoldDialog(0, PublicFunc.getBagGold()) // 一袋妖丹
+                                    PublicFunc.popGoldDialog(0, PublicFunc.getBagGold()) // 一袋金币
                                 } else {
                                     PublicFunc.popGoldDialog(1,PublicFunc.getBagSoul().times(0.03).integerValue())
                                 }
@@ -833,6 +835,23 @@ cc.Class({
     onMonsterSoul (soul) {
         // DataCenter.addSoul(soul);
         DataCenter.addRebirthSoul(soul);
+    },
+    
+    addRandomGolden(){
+        console.log("addRandomGolden");
+        let hero = HeroDatas.addRandomGolden()
+        this.btnGolden.active = true
+        this.btnGolden.hero = hero
+    },
+
+    onClickGolden(){
+        // 显示出获得的金身，
+        this.btnGolden.active = false
+        let hero = this.btnGolden.hero
+        if (hero) {
+            this.btnGolden.hero = null
+            PublicFunc.popGoldenDialog(hero)
+        }
     },
 
     setWeChatUser () {

@@ -178,6 +178,7 @@ cc.Class({
         this.golden += golden;
         this.refresh();
         GameData.refreshDamage()
+        Events.emit(Events.ON_UPGRADE_HERO, this.id);
     },
 
     buySkill(skillID,isInstant){
@@ -194,7 +195,7 @@ cc.Class({
                         // 弹出对话框
                         var num = DataCenter.getRealRebirthSoul();
                         PublicFunc.popDialog({
-                            contentStr: "这将清空你的英雄等级和游戏关卡和妖丹，并获得"+Formulas.formatBigNumber(num)+"仙丹，每个仙丹+10%DPS("+Formulas.formatBigNumber(num.div(10))+"%)，你愿意回到500年前吗？",
+                            contentStr: "这将清空你的英雄等级和游戏关卡和金币，并获得"+Formulas.formatBigNumber(num)+"仙丹，每个仙丹+10%DPS("+Formulas.formatBigNumber(num.div(10))+"%)，你愿意回到500年前吗？",
                             btnStrs: {
                                 left: '是 的',
                                 right: '不，谢谢'
@@ -266,7 +267,7 @@ cc.Class({
             }
             else if(skill.gold)
             {
-                result = "获得的妖丹增加" + (skill.gold -1)*100+"%";
+                result = "获得的金币增加" + (skill.gold -1)*100+"%";
             }else if(this.id == 39 && skillID == 2){
                 result = "春十三娘\nDPS伤害+500,000,000%"
             }else if(this.id == 39 && skillID == 3){

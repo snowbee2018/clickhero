@@ -25,6 +25,7 @@ cc.Class({
         _isPrimalBoss: false,
 
         damageAnim: cc.Prefab,
+        monsterFrames : cc.SpriteAtlas,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -140,6 +141,9 @@ cc.Class({
                         self._soul = new BigNumber(1)
                     }
                 }
+                if (!DataCenter.isLevelMaxPassed(lv)) {
+                    self.isGolden = Formulas.isHitRandom(0.25)
+                }
             }
             self._gold = Formulas.getMonsterGold(lv, self._totalHP);
             if (self._isTreasureChest) {
@@ -193,20 +197,26 @@ cc.Class({
             if (!self._isTreasureChest) {
                 self._monsterName = zoneObj.zone + "小妖";
             }
-            if (cc.sys.platform === cc.sys.WECHAT_GAME) {
-                CloudRes.getMonsterRes(function (err, texture) {
-                    if (!err && texture && cc.isValid(self.node)) {
-                        let scale = 350 / texture.height
-                        texture.width = texture.width * scale
-                        texture.height = texture.height * scale
-                        self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-                    }
-                },self._isTreasureChest);
-                if (lv % 5 == 4) {
-                    let i = parseInt((lv + 1) / 5)
-                    CloudRes.preloadBoosRes(i);
-                }
-            }
+            let index = self._isTreasureChest ?57 : Math.ceil(Math.random() * 56)
+            var frame = self.monsterFrames.getSpriteFrame('monster' + index);
+            let scale = 350 / frame.getOriginalSize().height
+            self.getComponent(cc.Sprite).spriteFrame = frame;
+            self.node.width = frame.getOriginalSize().width * scale
+            self.node.height = frame.getOriginalSize().height * scale
+            // if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            //     CloudRes.getMonsterRes(function (err, texture) {
+            //         if (!err && texture && cc.isValid(self.node)) {
+            //             let scale = 350 / texture.height
+            //             texture.width = texture.width * scale
+            //             texture.height = texture.height * scale
+            //             self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+            //         }
+            //     },self._isTreasureChest);
+            //     if (lv % 5 == 4) {
+            //         let i = parseInt((lv + 1) / 5)
+            //         CloudRes.preloadBoosRes(i);
+            //     }
+            // }
             
         }
 
@@ -329,10 +339,11 @@ cc.Class({
         const gold = this._gold
         const isBoss = this._isBoss
         const soul = this._soul
+        const isGolden = this.isGolden
         setTimeout(function() {
             if (!self._isByeBye) {
                 if (func) {
-                    func(lv, gold, isBoss, soul);
+                    func(lv, gold, isBoss, soul,isGolden);
                 }
             }
         },150)

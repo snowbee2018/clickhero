@@ -274,14 +274,14 @@ cc.Class({
             // 处理效果加成，持续时间和冷却时间的加成
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
-            return "妖丹掉落×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
+            return "金币掉落×" + baseValue + "，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 15 && self.skillID == 4) {
             // 点石成金
             // 处理效果加成，持续时间和冷却时间的加成
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
             var value = baseValue * GameData.addGoldClickTimes; // 古神点金手倍数
-            return "每次点击获得怪物妖丹的" + value * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
+            return "每次点击获得怪物金币的" + value * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 17 && self.skillID == 3) {
             // 祭天大典
             // 处理效果加成，持续时间和冷却时间的加成

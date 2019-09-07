@@ -253,7 +253,7 @@ cc.Class({
             desc = "+" + (this.level * 2) + "s火眼金睛持续时间"
         } else if (this.id == 11) {
             // 普怪 宝箱 10倍金币的概率
-            desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的10倍妖丹概率"
+            desc = "+" + (GameData.addTenfoldGoldOdds*100).toFixed(4) + "%的10倍金币概率"
         } else if (this.id == 12) {
             // +20% click damage
             desc = "+" + PublicFunc.numToStr(20 * this.level) + "%点击伤害" // 需要bigNumber
@@ -271,13 +271,13 @@ cc.Class({
             desc = "每关"+GameData.getMinusMonsterNum().toFixed(4)+"个怪数量"
         } else if (this.id == 17) {
             // 加挂机金币
-            desc = "+" + PublicFunc.numToStr((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100) + "%挂机时妖丹"
+            desc = "+" + PublicFunc.numToStr((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100) + "%挂机时金币"
         } else if (this.id == 18) {
             // +5% Gold
-            desc = "+" + (5*this.level) + "%妖丹倍数"
+            desc = "+" + (5*this.level) + "%金币倍数"
         } else if (this.id == 19) {
             // 宝箱金币倍数
-            desc = "+" + PublicFunc.numToStr(50*this.level*GameData.gdTreasureTimes) + "%葫芦妖丹倍数"
+            desc = "+" + PublicFunc.numToStr(50*this.level*GameData.gdTreasureTimes) + "%葫芦金币倍数"
         } else if (this.id == 20) {
             // soul dps 不做
             desc = "+"+PublicFunc.numToStr(11*this.level*GameData.gdSoulDPSTimes) + "%的额外仙丹DPS加成"
