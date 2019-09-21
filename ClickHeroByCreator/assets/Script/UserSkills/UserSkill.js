@@ -281,7 +281,7 @@ cc.Class({
             var sustainTimeStr = self.dateFormat(sustainTime);
             var coolingTimeStr = self.dateFormat(coolingTime);
             var value = baseValue * GameData.addGoldClickTimes; // 古神点金手倍数
-            return "每次点击获得怪物金币的" + value * 100 + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
+            return "每次点击获得怪物金币的" + PublicFunc.numToStr(value * 100) + "%，持续" + sustainTimeStr + "，冷却时间" + coolingTimeStr;
         } else if (self.heroID == 17 && self.skillID == 3) {
             // 祭天大典
             // 处理效果加成，持续时间和冷却时间的加成

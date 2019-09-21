@@ -119,6 +119,7 @@ cc.Class({
 
     onCloudGameData(dataArr) {
         const self = this;
+        let DataMap = DataCenter.DataMap;
         console.log("onCloudGameData");
         if (dataArr.length > 0) {
             console.log("获取到了用户游戏数据");
@@ -132,7 +133,7 @@ cc.Class({
                 data.gamedata = oldData.gamedata
                 cc.sys.localStorage.setItem("GameData","")
             }
-            DataCenter.saveCloudData(data);
+            DataCenter.saveCloudData(data);//
             // 获取子用户
             // CloudDB.getChildUserData(function (err, dataArr) {
             //     if (!err) {
@@ -151,7 +152,6 @@ cc.Class({
             var launchOptions = WeChatUtil.getLaunchOptionsSync();
             var referrer;
             console.log(launchOptions);
-            let DataMap = DataCenter.DataMap;
             var openID = DataCenter.getDataByKey(DataMap.OPENID);
             switch (launchOptions.scene) {
                 case 1007:
@@ -311,7 +311,7 @@ cc.Class({
                             // cc.sys.localStorage.setItem("GameData","")
                         }
                     } else if (userData && userData.userInfo) {
-                        DataCenter.saveUserData(userData)
+                        // DataCenter.saveUserData(userData)
                         self.onWeChatUserInfo(userData);
                     }
                 });

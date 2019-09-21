@@ -274,7 +274,7 @@ cc.Class({
             desc = "+" + PublicFunc.numToStr((GameData.addLeaveGoldTimes)*GameData.gdLeaveTimes*100) + "%挂机时金币"
         } else if (this.id == 18) {
             // +5% Gold
-            desc = "+" + (5*this.level) + "%金币倍数"
+            desc = "+" + PublicFunc.numToStr(5*this.level) + "%金币倍数"
         } else if (this.id == 19) {
             // 宝箱金币倍数
             desc = "+" + PublicFunc.numToStr(50*this.level*GameData.gdTreasureTimes) + "%葫芦金币倍数"

@@ -38,6 +38,7 @@ cc.Class({
             totalRuby: "totalRuby", // 历史总仙桃
             skill6Data : "skill6Data", // 阿弥陀佛的次数
             goldenLv : "goldenLv", // 下一个金身判断等级
+            sale0 : "sale0",
         }
         self.ContentData = {}
         self.DataMap = {
@@ -157,22 +158,26 @@ cc.Class({
         }
         var goldenLv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.goldenLv)
         self.setDataByKey(self.KeyMap.goldenLv, goldenLv ? goldenLv:5);
+        var sale0 = DataCenter.getCloudDataByKey(DataCenter.KeyMap.sale0)
+        self.setDataByKey(self.KeyMap.sale0, sale0 ? sale0:false);
+        
     },
 
     saveUserData(data){
         console.log("xxxj saveUserData");
         if (data) {
-            cc.sys.localStorage.setItem("UserData",JSON.stringify(data))
+            // DataCenter.getCloudData().WeChatUserInfo = data
+            // cc.sys.localStorage.setItem("UserData",JSON.stringify(data))
         }
     },
 
     readUserData(){
-        console.log("xxxj readUserData");
-        let json = cc.sys.localStorage.getItem('UserData_')
-        if (json&&json.length>0) {
-            let data = JSON.parse(json);
-            return data
-        }
+        // console.log("xxxj readUserData");
+        // let json = cc.sys.localStorage.getItem('UserData_')
+        // if (json&&json.length>0) {
+        //     let data = JSON.parse(json);
+        //     return data
+        // }
         return null
     },
 
@@ -529,6 +534,10 @@ cc.Class({
     saveCloudData (data) {
         const self = this;
         if (data) {
+            let wxinfo = self.getDataByKey(self.DataMap.WXUserInfo);
+            if (wxinfo) {
+                data.WeChatUserInfo = wxinfo
+            }
             self.setDataByKey("CloudData", data);
         }
     },
@@ -572,6 +581,12 @@ cc.Class({
         var goldenLv = this.getGoldenLv()
         goldenLv += 5
         DataCenter.setDataByKey(this.KeyMap.goldenLv,goldenLv)
+    },
+    isSale0(){
+        return DataCenter.getDataByKey(this.KeyMap.sale0)
+    },
+    useSale0(){
+        DataCenter.setDataByKey(this.KeyMap.sale0,true)
     },
 
     rebirth () {

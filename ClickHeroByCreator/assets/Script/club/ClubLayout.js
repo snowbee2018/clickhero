@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-06 23:23:15 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-19 14:53:21
+ * @Last Modified time: 2019-09-09 20:43:16
  */
 var zoneCfg = require("ZoneCfg")
 cc.Class({
@@ -199,7 +199,7 @@ cc.Class({
                 this.bindInfo()
                 this.btnSignin.interactable = false
                 this.lbSignin.string = "已签到"
-                let i = Math.min(this.club.level-1,5)
+                let i = Math.min(this.club.level-1,4)
                 const ruby = [20,30,40,50,60][i]
                 PublicFunc.popGoldDialog(2,ruby,"签到奖励",true)
             } else {

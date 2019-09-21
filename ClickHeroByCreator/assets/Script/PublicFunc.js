@@ -20,6 +20,7 @@ cc.Class({
         ClubInfo : cc.Prefab,
         baseClubLogo : cc.SpriteFrame,
         goldenDialog : cc.Prefab,
+        SaleDialog : cc.Prefab,
     },
 
     onLoad(){
@@ -230,15 +231,25 @@ cc.Class({
         //     // result += 10+1*i
         //     result += Math.pow(n||1.1,i) * 10
         // }
-        n = n?n:1.1
+        this.goodsExp = this.goodsExp || (DataCenter.getUserZone()==1?1.12:1.1)
+        n = n?n:this.goodsExp
         var result = (Math.pow(n,c) - 1)/(n-1) *10
         return result
     },
 
     showUpgradeInfo(){
-        const info = ["1.100关以后，每个boss首次击败有25%的概率随机获得一个金身，100关以上的老玩家需要穿越一次触发",
-        "2.优化1000关以后，进游戏会卡一会儿的问题",
-            ].join("\n")
+        let info
+        info = ["1.1000关之后穿越后前25%的关卡秒杀时会跳过小怪直接打BOSS",
+        "2.新区商店的仙丹多又多价格调整为1200仙桃",
+        "3.新区商店所有每级额外+10%的物品的加成增加为+12%",
+        ].join("\n")
+        // if (DataCenter.getUserZone()==1) {
+            
+        // } else {
+        //     info = ["1.100关以后，每个boss首次击败有25%的概率随机获得一个金身，100关以上的老玩家需要穿越一次触发",
+        //     "2.优化1000关以后，进游戏会卡一会儿的问题",
+        //     ].join("\n")
+        // }
         this.popDialog({
             contentStr: info,
             btnStrs: {
@@ -261,6 +272,9 @@ cc.Class({
     },
 
     popCDKeyDialog(){
+        if (this.showSale(true)) {
+            return
+        }
         let dialog = cc.instantiate(this.CDKeyDialog)
         // dialog.getComponent("CDKeyDialog")
         dialog.parent = cc.director.getScene();
@@ -354,5 +368,40 @@ cc.Class({
         } else {
 
         }
+    },
+
+    showSale(active){
+        if (this.switchList&&this.switchList.sale0) {
+            let showday = DataCenter.getLocalValue("showsaledate")
+            let today = this.getDateStr()
+            if (!active&&showday === today) {
+                console.log("今天已经显示了");
+                return false
+            }
+            let max = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+            if(max>=10&&!DataCenter.isSale0()){
+                let v = cc.instantiate(this.SaleDialog)
+                v.parent = cc.director.getScene();
+                v.x = cc.winSize.width / 2;
+                v.y = cc.winSize.height / 2;
+                DataCenter.setLocalValue("showsaledate",today)
+                return true
+            }
+            return false
+        }else{
+            return false
+        }
+    },
+
+    initSwitch(){
+        HttpUtil.request("switch",null,function(b,data) {
+            if (data.switchList) {
+                let switchList = data.switchList
+                this.switchList = switchList
+                if (switchList.sale0) {
+                    this.showSale()
+                }
+            }
+        }.bind(this))
     },
 });

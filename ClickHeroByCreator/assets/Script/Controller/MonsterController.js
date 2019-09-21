@@ -219,11 +219,12 @@ cc.Class({
             this.monsterSoul.string = Formulas.formatBigNumber(this.curMonster._soul)+"仙丹"
         } else if(self.curMonster._isTreasureChest){
             this.monsterSoul.node.active = true
-            this.monsterSoul.string = (10 * GameData.getTreasureTimes()).toFixed(2) + "倍金币"
+            this.monsterSoul.string = PublicFunc.numToStr(10 * GameData.getTreasureTimes()) + "倍金币"
         } else {
             this.monsterSoul.node.active = false
         }
         self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
+        self.lastMakeTime = Date.now()
     },
 
     hit(damage, bDPS, bCrit, isAuto) {
@@ -267,7 +268,7 @@ cc.Class({
             if (isBoss) {
                 DataCenter.passLevel(lv);
                 if (self._autoNext) {
-                    self.goToNextLevel();
+                    self.autoNextLevel();
                 } else {
                     self.makeMonster(lv);
                 }
@@ -275,7 +276,7 @@ cc.Class({
                 if (self.killCount >= this.monsterCount) {
                     DataCenter.passLevel(lv);
                     if (self._autoNext) {
-                        self.goToNextLevel();
+                        self.autoNextLevel();
                     } else {
                         self.makeMonster(lv);
                     }
@@ -286,7 +287,7 @@ cc.Class({
             }
         } else {
             if (self._autoNext) {
-                self.goToNextLevel();
+                self.autoNextLevel();
             } else {
                 self.makeMonster(lv);
             }
@@ -326,6 +327,26 @@ cc.Class({
             self.curMonster.byebye();
             self.makeMonster(targetLv);
         }
+    },
+
+    autoNextLevel(){
+        const self = this;
+        // 如果秒杀 要判断 是否跳关，根据maxpasslevel
+        if (self.lastMakeTime && Date.now() - self.lastMakeTime < 1000) {
+            let maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            let lv = self.curMonster._lv
+            if (maxlv >= 1000 && lv<= maxlv / 4) {
+                lv += 5 - (lv % 5)
+                delete self.killCount;
+                delete self.monsterCount;
+                delete self._countdown;
+                var targetLv = lv
+                self.curMonster.byebye();
+                self.makeMonster(targetLv);
+                return
+            }
+        }
+        this.goToNextLevel()
     },
 
     goToNextLevel () {

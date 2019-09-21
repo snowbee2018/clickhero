@@ -271,7 +271,11 @@ cc.Class({
         }
         this.autoCacheTime = curtime;
         console.log("每60秒保存一次游戏");
-        this.cacheGameData()
+        try {
+            this.cacheGameData()
+        } catch (error) {
+            console.log(err);
+        }
     },
 
     start () {
@@ -371,6 +375,7 @@ cc.Class({
             this.showBtnShareTips()
             WeChatUtil.showBtnClub()
             PublicFunc.makeNextClickruby()
+            PublicFunc.initSwitch()
         } catch (error) {
             console.error(error)
         }
@@ -463,6 +468,7 @@ cc.Class({
         obj[map.totalRuby] = DataCenter.getDataByKey(map.totalRuby);
         obj[map.skill6Data] = DataCenter.getDataByKey(map.skill6Data); // 阿弥陀佛
         obj[map.goldenLv] = DataCenter.getDataByKey(map.goldenLv);
+        obj[map.sale0] = DataCenter.isSale0()
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
@@ -652,11 +658,11 @@ cc.Class({
     },
 
     onlvPassed(e){
-        let lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel);
-        if (lv%5==0) {
-            console.log("每通过5关 保存一下数据");
-            this.cacheGameData()
-        }
+        // let lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel);
+        // if (lv%5==0) {
+        //     console.log("每通过5关 保存一下数据");
+        //     this.cacheGameData()
+        // }
     },
 
     updataMonsterInfoDisplay () {

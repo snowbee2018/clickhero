@@ -1,8 +1,8 @@
 /*
  * @Author: xj 
- * @Date: 2019-06-18 16:01:20 
+ * @Date: 2019-09-08 20:55:10 
  * @Last Modified by: xj
- * @Last Modified time: 2019-09-08 22:51:00
+ * @Last Modified time: 2019-09-08 22:49:46
  */
 const url = "【西游降魔仙桃兑换码 微信小游戏小程序桃子】，椱ァ製这段描述$g2a2YiuMJxf$后到◇綯℡寳"
 
@@ -22,12 +22,10 @@ cc.Class({
                 if (data.code == 1) {
                     PublicFunc.popGoldDialog(2,data.ruby,"兑换成功",true)
                     self.eb.string = ""
-                    // if (data.single&&data.ruby>=500&&!DataCenter.isSale0()) {
-                    //     if (PublicFunc.switchList&&PublicFunc.switchList.sale0) {
-                    //         DataCenter.useSale0()
-                    //         PublicFunc.popGoldDialog(2,1000,"首充奖励",true)
-                    //     }
-                    // }
+                    if (data.single&&data.ruby>=500&&!DataCenter.isSale0()) {
+                        DataCenter.useSale0()
+                        PublicFunc.popGoldDialog(2,1000,"首充奖励",true)
+                    }
                 } else if(data.code == 0) {
                     wx.showToast({
                         title: "兑换失败",

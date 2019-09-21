@@ -20,6 +20,7 @@ cc.Class({
         let cd = 0
         let unlockLv = 0
         let count = this.getCount();
+        let exp = (DataCenter.getUserZone()==1?1.12:1.1)
         switch (this.id) {
             case 16:
                 name = "呼朋唤友"
@@ -95,9 +96,8 @@ cc.Class({
             // 下面是超越了
             case 7:
                 name = "一动不动是萌萌" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(50*Math.pow(1.1,count))+"%的挂机型神器效果"
-                // desc = "购买+"+(50*Math.pow(1.1,count)).toFixed(2)+"%的挂机型神器效果"
-                state = "挂机效果增加:+" + (PublicFunc.get10TimesByCount(count)*5).toFixed(2)+"%"
+                desc = "购买+"+PublicFunc.numToStr(50*Math.pow(exp,count))+"%的挂机型神器效果"
+                state = "挂机效果增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*5)+"%"
                 ruby = 300
                 unlockLv = 300
                 break;
@@ -111,23 +111,23 @@ cc.Class({
                 break;
             case 9:
                 name = "伤害高又高" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(100*Math.pow(1.1,this.getCount()))+"%的DPS"
+                desc = "购买+"+PublicFunc.numToStr(100*Math.pow(exp,this.getCount()))+"%的DPS"
                 state = "DPS增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*10)+"%"
                 ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
                 name = "金币多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(1.1,this.getCount()))+"%的金币加成"
+                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,this.getCount()))+"%的金币加成"
                 state = "金币加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
                 ruby = 600
                 unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(1.1,this.getCount()))+"%的仙丹加成"
+                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,this.getCount()))+"%的仙丹加成"
                 state = "仙丹加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
-                ruby = 600 + (DataCenter.getUserZone()==1? 25 * this.getCount():0)
+                ruby = 600 + (DataCenter.getUserZone()==1? 600:0)
                 unlockLv = 300
                 break;
             case 11:
@@ -153,7 +153,7 @@ cc.Class({
                 break;
             case 17:
                 name = "玉净瓶加持" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(25*Math.pow(1.1,this.getCount()))+"%玉净瓶效果"
+                desc = "购买+"+PublicFunc.numToStr(25*Math.pow(exp,this.getCount()))+"%玉净瓶效果"
                 state = "玉净瓶效力增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*2.5)+"%"
                 ruby =  300 
                 unlockLv = 300
@@ -306,7 +306,7 @@ cc.Class({
                 break;
             case 15:
                 for (let i = 0; i < count; i++) {
-                    ruby += (600 + (DataCenter.getUserZone() == 1? 25 * i : 0))
+                    ruby += (600 + (DataCenter.getUserZone() == 1? 600 : 0))
                 }
                 break
         }
