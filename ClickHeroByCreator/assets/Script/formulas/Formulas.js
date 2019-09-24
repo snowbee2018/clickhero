@@ -253,5 +253,17 @@ cc.Class({
         randomNum(lower, upper){
             return Math.round(Math.random() * (upper - lower)) + lower
         },
+        // 根据soul换算AS
+        calASBySoul(soul){
+            let numSoul = new Number(soul.toExponential(20))
+            let AS = Math.floor(5 * Math.log(numSoul)/Math.LN10)
+            return AS
+        },
+        // 根据AS换算soul
+        calSoulByAS(AS){
+            let soul = newBigNumber(Math.pow(10,AS/5)).integerValue(2)
+            // let soul = bigPow(10,AS/2.5).integerValue(2)
+            return soul
+        },
     },
 });
