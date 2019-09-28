@@ -333,7 +333,7 @@ cc.Class({
         const self = this;
         // 如果秒杀 要判断 是否跳关，根据maxpasslevel
         if (self.lastMakeTime && Date.now() - self.lastMakeTime < 1000) {
-            let maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+            let maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxlvNew);
             let lv = self.curMonster._lv
             if (maxlv >= 1000 && lv<= maxlv / 4) {
                 lv += 5 - (lv % 5)

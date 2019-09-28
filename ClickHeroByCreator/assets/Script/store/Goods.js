@@ -265,7 +265,7 @@ cc.Class({
     },
     // 快速转生能获得的英魂
     getBagSoul(){
-        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxLvNew) + 1
         var soul = new BigNumber(0)
         for (let lv = 0; lv <= maxlv; lv++) {
             if (lv >= 100 && (lv % 5) == 0) {

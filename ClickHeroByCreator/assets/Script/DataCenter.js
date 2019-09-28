@@ -2,7 +2,7 @@ cc.Class({
     
     ctor () {
         const self = this;
-        self.zoneStartTimes = [0,1566943200000]
+        self.zoneStartTimes = [0,1566943200000,1569674098857]
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
@@ -13,22 +13,18 @@ cc.Class({
             monsterInfo: "monsterInfo", // 怪物信息，关卡，序号，是否宝箱，剩余血量
             passLavel: "passLavel", // 当前世界已通过的最高关卡
             maxPassLavel: "maxPassLavel", // 历史最高通过关卡
+            maxLvNew : "maxLvNew", // 当前大循环的最高关卡
             curDiamond: "curDiamond", // 当前钻石数量
             curGold: "curGold", // 当前金币数量
             historyTotalGold: "historyTotalGold", // 历史获得的所有金币
             curSoul: "curSoul", // 当前可用英魂数量
             ruby : "ruby", // 当前可用宝石仙丹数量
             rebirthSoul: "rebirthSoul", // 转生英魂
-            additionalSoul: "additionalSoul", // 由雇佣兵完成任务而附加的英魂数量，英雄等级加成的英魂不在此列
             heroList: "heroList", // 用户所有英雄的状态，存起来
             skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
             ancientList: "ancientList", // 用户所拥有的古神
             goodsList: "goodsList",     // 用户拥有的商店道具
             ASCounts: "ASCounts",     // 用户拥有的商店道具
-            achievementList: "achievementList", // 成就列表，转生次数也在这里
-            equipmentList: "equipmentList", // 装备列表，圣遗物和神器都存这里
-            shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
-            lansquenetList: "lansquenetList", // 雇佣兵列表，任务的完成状态也存里面
 
             taskTargets: "taskTargets", // 任务领取索引列表
 
@@ -40,6 +36,8 @@ cc.Class({
             skill6Data : "skill6Data", // 阿弥陀佛的次数
             goldenLv : "goldenLv", // 下一个金身判断等级
             sale0 : "sale0",
+            AS : "AS",
+            totalAS : "totalAS",
         }
         self.ContentData = {}
         self.DataMap = {
@@ -84,6 +82,12 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.ruby, 0);
         }
+        var AS = self.getCloudDataByKey(self.KeyMap.AS);
+        if (AS) {
+            self.setDataByKey(self.KeyMap.AS, Number(AS));
+        } else {
+            self.setDataByKey(self.KeyMap.AS, 0);
+        }
         var cloudRebirthSoul = self.getCloudDataByKey(self.KeyMap.rebirthSoul);
         if (cloudRebirthSoul) {
             self.setDataByKey(self.KeyMap.rebirthSoul, (newBigNumber(cloudRebirthSoul)));
@@ -102,8 +106,11 @@ cc.Class({
         if (maxPassLavel) {
             self.setDataByKey(self.KeyMap.maxPassLavel, Number(maxPassLavel));
         } else {
-            self.setDataByKey(self.KeyMap.maxPassLavel, 0);
+            maxPassLavel = 0
+            self.setDataByKey(self.KeyMap.maxPassLavel, maxPassLavel);
         }
+        var maxLvNew = self.getCloudDataByKey(self.KeyMap.maxLvNew);
+        self.setDataByKey(self.KeyMap.maxLvNew, maxLvNew ? maxLvNew : maxPassLavel);
         // 初始化历史总点击数
         var cloudTotalClick = self.getCloudDataByKey(self.KeyMap.totalClick);
         if (cloudTotalClick) {
@@ -152,6 +159,12 @@ cc.Class({
         } else {
             self.setDataByKey(self.KeyMap.totalRuby, 0);
         }
+        var totalAS = self.getCloudDataByKey(self.KeyMap.totalAS);
+        if (totalAS) {
+            self.setDataByKey(self.KeyMap.totalAS, Number(totalAS));
+        } else {
+            self.setDataByKey(self.KeyMap.totalAS, 0);
+        }
         var skill6Data = DataCenter.getCloudDataByKey(DataCenter.KeyMap.skill6Data)
         self.setDataByKey(self.KeyMap.skill6Data, {count:0,useCount:0})
         if (skill6Data) {
@@ -165,7 +178,6 @@ cc.Class({
     },
 
     saveUserData(data){
-        console.log("xxxj saveUserData");
         if (data) {
             // DataCenter.getCloudData().WeChatUserInfo = data
             // cc.sys.localStorage.setItem("UserData",JSON.stringify(data))
@@ -361,6 +373,14 @@ cc.Class({
         this.setDataByKey(this.KeyMap.totalRuby, this.getDataByKey(this.KeyMap.totalRuby)+ruby);
         Events.emit(Events.ON_RUBY_CHANGE);
     },
+    // 魂魄增加
+    addAS (AS) {
+        var key = this.KeyMap.AS;
+        var old = this.getDataByKey(key);
+        this.setDataByKey(key, (old+AS) );
+        this.setDataByKey(this.KeyMap.totalAS, this.getDataByKey(this.KeyMap.totalAS)+AS);
+        Events.emit(Events.ON_AS_CHANGE);
+    },
     // 转身次数增加
     addRebirthCount () {
         var key = this.KeyMap.rebirthCount;
@@ -423,6 +443,13 @@ cc.Class({
         this.setDataByKey(key, (old-ruby) );
         Events.emit(Events.ON_RUBY_CHANGE);
     },
+    // 消费魂魄
+    consumeAS (AS) {
+        var key = this.KeyMap.AS;
+        var old = this.getDataByKey(key);
+        this.setDataByKey(key, (old-AS) );
+        Events.emit(Events.ON_AS_CHANGE);
+    },
     consumeRebirthSoul() {
         const self = this;
         var key = self.KeyMap.rebirthSoul;
@@ -468,6 +495,12 @@ cc.Class({
         var old = this.getDataByKey(key);
         return old >= ruby
     },
+    // 魂魄是否足够
+    isASEnough(AS) {
+        var key = this.KeyMap.AS;
+        var old = this.getDataByKey(key);
+        return old >= AS
+    },
 
     getGoldStr () {
         const self = this;
@@ -486,16 +519,25 @@ cc.Class({
     updataMaxPassLevel(level) {
         const self = this;
         var key = self.KeyMap.maxPassLavel;
+        var key2 = self.KeyMap.maxLvNew;
         var curPassLevel = self.getDataByKey(key);
-        if (curPassLevel) {
-            if (level > curPassLevel) {
-                self.setDataByKey(key, level);
-                Events.emit(Events.ON_MAXLEVEL_UPDATE);
-            }
-        } else {
+        var maxLvNew = self.getDataByKey(key2);
+        if (level > curPassLevel) {
             self.setDataByKey(key, level);
+        }
+        if (level > maxLvNew) {
+            self.setDataByKey(key2, level);
             Events.emit(Events.ON_MAXLEVEL_UPDATE);
         }
+        // if (curPassLevel) {
+        //     if (level > curPassLevel) {
+        //         self.setDataByKey(key, level);
+        //         Events.emit(Events.ON_MAXLEVEL_UPDATE);
+        //     }
+        // } else {
+        //     self.setDataByKey(key, level);
+        //     Events.emit(Events.ON_MAXLEVEL_UPDATE);
+        // }
     },
 
     passLevel (level) {
@@ -527,7 +569,7 @@ cc.Class({
 
     isLevelMaxPassed (level) {
         const self = this;
-        var key = self.KeyMap.maxPassLavel;
+        var key = self.KeyMap.maxLvNew;
         var curPassLevel = self.getDataByKey(key);
         return curPassLevel >= level;
     },
@@ -604,6 +646,18 @@ cc.Class({
         Formulas.tempP = null
     },
 
+    revive(){
+        this.setDataByKey(this.KeyMap.curSoul, (new BigNumber("0")));
+        this.setDataByKey(this.KeyMap.rebirthSoul, (new BigNumber("0")));
+        this.setDataByKey(this.KeyMap.skill6Data, {count:0,useCount:0})
+        this.setDataByKey(this.KeyMap.maxLvNew, 0);
+
+        setTimeout(function() {
+            this.setDataByKey(this.KeyMap.curGold, (new BigNumber(0)));
+        }.bind(this),100)
+        Formulas.tempP = null
+    },
+
     resetGame () {
         // 不需要重置的数据
         const shareDate = this.getDataByKey(this.KeyMap.shareDate)
@@ -626,7 +680,6 @@ cc.Class({
     },
 
     getUserZone(){
-        return 2
         let zone = 0
         var cloudData = this.getDataByKey("CloudData");
         const registerTime = cloudData ? cloudData.registerTime : 0

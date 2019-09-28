@@ -103,6 +103,33 @@ cc.Class({
         WeChatUtil.onHide();
     },
 
+    revive(AS){
+        const self = this;
+        PublicFunc.popDialog({
+            contentStr: "转世将失去所有金币、仙丹、英雄等级、神器、关卡，由此获得"+AS+"魂魄，你确定要转世吗？",
+            btnStrs: {
+                left: '是 的',
+                right: '不，谢谢'
+            },
+            onTap: function (dialog, bSure) {
+                // 重置游戏
+                DataCenter.revive();
+                HeroDatas.rebirth();
+                // Events.emit(Events.ON_RESETGAME);
+                self.getComponent("HeroListControl").rebirth();
+                self.getComponent("AncientCtrl").resetGame();
+                self.getComponent("MonsterController").rebirth();
+                GameData.refresh();
+                self.getComponent("UserSkillController").rebirth(true);
+                Events.emit(Events.ON_GOLD_CHANGE);
+                Events.emit(Events.ON_LEVEL_PASSED);
+                Events.emit(Events.ON_MAXLEVEL_UPDATE);
+                self.popGoldDialog(3,AS,"转世魂魄",true)
+                Events.emit(Events.ON_SOUL_CHANGE);
+            }
+        });
+    },
+
     resetGame(){
         let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
         ruby += Math.round(GoodsDatas.getTotalRuby()*0.75)
@@ -239,9 +266,9 @@ cc.Class({
 
     showUpgradeInfo(){
         let info
-        info = ["1.1000关之后穿越后前25%的关卡秒杀时会跳过小怪直接打BOSS",
-        "2.新区商店的仙丹多又多价格调整为1200仙桃",
-        "3.新区商店所有每级额外+10%的物品的加成增加为+12%",
+        info = ["1.10月1号0点后的新玩家和重置玩家会进入三区",
+        "2.三区新增了新功能[轮回]，300级解锁，游戏节奏更平滑",
+        "3.三区的商店改动较大，请知悉"
         ].join("\n")
         // if (DataCenter.getUserZone()==1) {
             
@@ -334,7 +361,7 @@ cc.Class({
     },
     // 快速转生能获得的英魂
     getBagSoul(){
-        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel) + 1
+        var maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxLvNew) + 1
         var soul = new BigNumber(0)
         for (let lv = 0; lv <= maxlv; lv++) {
             if (lv >= 100 && (lv % 5) == 0) {

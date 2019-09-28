@@ -73,10 +73,14 @@ cc.Class({
         }else{
             this.tabs[2].active = v0
         }
-        if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
-            this.tabs[5].active = true
-        }else{
-            this.tabs[5].active = v0
+        if (DataCenter.getUserZone() === 2) {
+            if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
+                this.tabs[5].active = true
+            }else{
+                this.tabs[5].active = v0
+            }
+        } else {
+            this.tabs[5].active = false
         }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
         this.tabs[3].active = v1
@@ -313,7 +317,7 @@ cc.Class({
         const self = this;
         console.log("onGameStart");
         try {
-            var lv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.maxPassLavel);
+            var lv = DataCenter.getCloudDataByKey(DataCenter.KeyMap.maxLvNew);
             if (lv >= 300) {
                 BigNumber.config({
                     DECIMAL_PLACES: 4,
@@ -448,25 +452,21 @@ cc.Class({
         obj[map.monsterInfo] = self.monsterController.formatMonsterInfo(); // 怪物模块需要存档的数据
         obj[map.passLavel] = DataCenter.getDataByKey(map.passLavel); // 当前世界已通过的最高关卡
         obj[map.maxPassLavel] = DataCenter.getDataByKey(map.maxPassLavel); // 历史最高通过关卡
-        // obj[map.curDiamond] = 
+        obj[map.maxLvNew] = DataCenter.getDataByKey(map.maxLvNew); // 历史最高通过关卡
         obj[map.curGold] = curGold.toExponential(4); // 当前金币总数
         obj[map.historyTotalGold] = historyTotalGold.toExponential(4); // 历史获得的所有金币
         obj[map.curSoul] = curSoul.toExponential(4); // 当前可用英魂总数
         obj[map.ruby] = DataCenter.getDataByKey(map.ruby);
         obj[map.rebirthSoul] = rebirthSoul.toExponential(4); // 转生英魂
         obj[map.rebirthCount] = DataCenter.getDataByKey(map.rebirthCount); // 已转生次数
-        // obj[map.additionalSoul] = 
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
         obj[map.goodsList] = GoodsDatas.buyCounts; // 用户所拥有的商品
         obj[map.ASCounts] = GoodsDatas.ASCounts; // 用户所拥有的商品
         obj[map.taskTargets] = TaskDatas.datas; // 任务领取列表
-        // obj[map.skillList] = 
+
         obj[map.skillList] = self.userSkillController.formatUserSkillsInfo(); // 所有主动技能的状态
-        // obj[map.achievementList] = 
-        // obj[map.equipmentList] = 
-        // obj[map.shopList] = 
-        // obj[map.lansquenetList] = 
+
         obj[map.signinData] = DataCenter.getDataByKey(map.signinData); // 签到数据
         obj[map.shareReceiveData] = DataCenter.getDataByKey(map.shareReceiveData); // 分享任务 领取信息
         obj[map.shareDate] = DataCenter.getDataByKey(map.shareDate); // 分享日期
@@ -475,6 +475,9 @@ cc.Class({
         obj[map.skill6Data] = DataCenter.getDataByKey(map.skill6Data); // 阿弥陀佛
         obj[map.goldenLv] = DataCenter.getDataByKey(map.goldenLv);
         obj[map.sale0] = DataCenter.isSale0()
+        obj[map.maxLvNew] = DataCenter.getDataByKey(map.maxLvNew);
+        obj[map.AS] = DataCenter.getDataByKey(map.AS);
+        obj[map.totalAS] = DataCenter.getDataByKey(map.totalAS);
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]

@@ -4,6 +4,21 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>goods_AS.jpg</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{66,66}</string>
+                <key>spriteSourceSize</key>
+                <string>{66,66}</string>
+                <key>textureRect</key>
+                <string>{{1,191},{66,66}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>goods_gold.png</key>
             <dict>
                 <key>aliases</key>
@@ -15,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{44,44}</string>
                 <key>textureRect</key>
-                <string>{{1,191},{44,44}}</string>
+                <string>{{69,191},{44,44}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -54,16 +69,14 @@
         <dict>
             <key>format</key>
             <integer>3</integer>
-            <key>pixelFormat</key>
-            <string>RGBA8888</string>
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
             <string>goods.png</string>
             <key>size</key>
-            <string>{102,236}</string>
+            <string>{114,258}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ebe72b71e498d0e6a5e46c432b13f967:f8a148822510c3cb25a62698ca264687:38d9ec3b7271396a81cfe9250157b3b3$</string>
+            <string>$TexturePacker:SmartUpdate:87ab2b79adc6806119888124ae85443e:70c8e61d9f9fa78ef2ee5199045478a9:38d9ec3b7271396a81cfe9250157b3b3$</string>
             <key>textureFileName</key>
             <string>goods.png</string>
         </dict>

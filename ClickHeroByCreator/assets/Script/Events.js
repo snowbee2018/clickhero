@@ -5,6 +5,7 @@ cc.Class({
         ON_GOLD_CHANGE : "on_gold_change", // 金币变化
         ON_SOUL_CHANGE : "on_soul_change", // 魂变化
         ON_RUBY_CHANGE : "on_ruby_change", // 仙丹变化
+        ON_AS_CHANGE : "on_AS_change", // 魂魄变化
         ON_LEVEL_PASSED: "on_level_passed", // 当前世界初次通过关卡
         ON_BY_HERO: "on_by_hero", // 购买英雄
         ON_UPGRADE_HERO : 'on-upgrade-hero', //升级英雄

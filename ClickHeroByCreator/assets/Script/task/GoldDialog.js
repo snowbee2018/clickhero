@@ -30,7 +30,7 @@ cc.Class({
         this.num = num
         this.disDouble = disDouble
         this.sp.spriteFrame = this.icons[type]
-        this.lbCount.string = type == 2?num : Formulas.formatBigNumber(num)
+        this.lbCount.string = type >= 2?num : Formulas.formatBigNumber(num)
         if (disDouble||!window.videoAd) {
             this.btnAd.active = false
             this.lbTips.node.active = false
@@ -64,6 +64,8 @@ cc.Class({
             DataCenter.addSoul(this.num)
         }else if(this.type == 2){
             DataCenter.addRuby(this.num)
+        }else if(this.type == 3){
+            DataCenter.addAS(this.num)
         }
     },
 

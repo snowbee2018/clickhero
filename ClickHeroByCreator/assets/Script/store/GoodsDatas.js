@@ -30,8 +30,8 @@ Datas.init = function() {
         Datas.ASDatas = [
             new ASGoods().init(9),
             new ASGoods().init(7),
-            new ASGoods().init(8),
             new ASGoods().init(15),
+            new ASGoods().init(8),
             new ASGoods().init(11),
             new ASGoods().init(12),
             new ASGoods().init(13),
@@ -118,19 +118,19 @@ Datas.refreshAS = function() {
     Datas.ASCounts.forEach(e => {
         var count = e.count
         if (e.id == 7) {
-            GameData.gdLeaveTimes = 1 + PublicFunc.get10TimesByCount(count)/20
+            GameData.gdLeaveTimes = Math.pow(1.5,count)
         } else if (e.id == 8) {
             GameData.gdAncientSale = Math.pow(0.95,count)
         } else if (e.id == 9) {
-            GameData.gdDPSTimes = 1 + PublicFunc.get10TimesByCount(count)/10
+            GameData.gdDPSTimes = 1 + count
         } else if (e.id == 15) {
-            GameData.gdSoulTimes = 1 + PublicFunc.get10TimesByCount(count)
+            GameData.gdSoulTimes = 1 + Math.pow(count,2) * 10
         } else if (e.id == 11) {
             GameData.gdPBossTimes = count*0.25 + 1
         } else if (e.id == 12) {
             GameData.gdPBossTSTimes = count*0.75 + 1
         } else if (e.id == 13) {
-            GameData.gdTreasureTimes = PublicFunc.get10TimesByCount(count,1.15)/10 + 1
+            GameData.gdTreasureTimes = 1 + count
         } else if (e.id == 18) {
             GameData.gdMinusMonsterNumTimes = count*0.125 + 1
         } else if (e.id == 19) {
