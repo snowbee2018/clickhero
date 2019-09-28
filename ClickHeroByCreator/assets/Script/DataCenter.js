@@ -24,6 +24,7 @@ cc.Class({
             skillList: "skillList", // 所有主动技能的状态,主要是要记录技能是否激活的和最后使用的时间，以便确定何时冷却完毕
             ancientList: "ancientList", // 用户所拥有的古神
             goodsList: "goodsList",     // 用户拥有的商店道具
+            ASCounts: "ASCounts",     // 用户拥有的商店道具
             achievementList: "achievementList", // 成就列表，转生次数也在这里
             equipmentList: "equipmentList", // 装备列表，圣遗物和神器都存这里
             shopList: "shopList", // 钻石商店商品列表，用户的购买状态也存里面
@@ -625,6 +626,7 @@ cc.Class({
     },
 
     getUserZone(){
+        return 2
         let zone = 0
         var cloudData = this.getDataByKey("CloudData");
         const registerTime = cloudData ? cloudData.registerTime : 0

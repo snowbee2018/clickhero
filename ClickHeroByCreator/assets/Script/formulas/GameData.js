@@ -81,7 +81,7 @@ cc.Class({
         gdSoulDPSTimes : 1,//17 addSoulDPSTimes倍数
         gdMinusMonsterNumTimes : 1,//18 addMinusMonsterNum倍数
         gdMinusBoosLifeTimes : 1,//19 addMinusBoosLife倍数
-
+        ngdSoulTimes : 1,// new 15
         //--------被动技能的影响--------
         // cskCritTimes : 1, // 暴击倍数 :calCritTimes()
         // cskCritOdds : 0, // 附加暴击概率 :calCritOdds()

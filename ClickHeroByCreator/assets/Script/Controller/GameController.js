@@ -73,6 +73,11 @@ cc.Class({
         }else{
             this.tabs[2].active = v0
         }
+        if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
+            this.tabs[5].active = true
+        }else{
+            this.tabs[5].active = v0
+        }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
         this.tabs[3].active = v1
         this.tabs[4].active = v1
@@ -454,6 +459,7 @@ cc.Class({
         obj[map.heroList] = HeroDatas.formatHeroList(); // 用户所有英雄的状态
         obj[map.ancientList] = HeroDatas.formatAncientList(); // 用户所拥有的古神
         obj[map.goodsList] = GoodsDatas.buyCounts; // 用户所拥有的商品
+        obj[map.ASCounts] = GoodsDatas.ASCounts; // 用户所拥有的商品
         obj[map.taskTargets] = TaskDatas.datas; // 任务领取列表
         // obj[map.skillList] = 
         obj[map.skillList] = self.userSkillController.formatUserSkillsInfo(); // 所有主动技能的状态
@@ -602,6 +608,9 @@ cc.Class({
             }
         }
         this.btnClub.active = Boolean(maxPassLavel && maxPassLavel >= 100)
+        if (DataCenter.getUserZone() === 2) {
+            this.tabs[5].active = maxPassLavel >= 300
+        }
         this.lastMaxlvTime = this.lastMaxlvTime || 0
         const curtime = Date.now();
         if (curtime - this.lastMaxlvTime < 30*1000) {
@@ -1008,6 +1017,23 @@ cc.Class({
         } else {
             self.setPageNodeActive(true);
             self.setPageActive(4);
+        }
+        self.upgrageSelectBtn.active = false;
+        AudioMgr.playBtn();
+    },
+
+    onReviveBtnClick() {
+        const self = this;
+        if (self.pageNode.active) {
+            var curPageIndex = this.pageIndex
+            if (curPageIndex == 5) { // 转世界面
+                self.setPageNodeActive(false);
+            } else {
+                self.setPageActive(5);
+            }
+        } else {
+            self.setPageNodeActive(true);
+            self.setPageActive(5);
         }
         self.upgrageSelectBtn.active = false;
         AudioMgr.playBtn();

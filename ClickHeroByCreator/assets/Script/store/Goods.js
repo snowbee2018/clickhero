@@ -21,6 +21,7 @@ cc.Class({
         let unlockLv = 0
         let count = this.getCount();
         let exp = (DataCenter.getUserZone()==1?1.12:1.1)
+        const z2 = GoodsDatas.isZone2()
         switch (this.id) {
             case 16:
                 name = "呼朋唤友"
@@ -63,19 +64,19 @@ cc.Class({
                 unlockLv = 30
                 break;
             case 2:
-                name = "双倍金币"
-                desc = "永久双倍金币"
-                state = "仅可购买一次"
+                name = z2?"金币多又多":"双倍金币"
+                desc = z2?"每次购买增加100%金币":"永久双倍金币"
+                state = z2 ? ("等级：" + count + "  金币增益：" + PublicFunc.numToStr(count*100 )+"%") : "仅可购买一次"
                 ruby = 500
-                only = true;
+                only = !z2;
                 unlockLv = 50
                 break;
             case 3:
-                name = "双倍DPS"
-                desc = "永久双倍DPS"
-                state = "仅可购买一次"
-                ruby = 700
-                only = true;
+                name = z2?"伤害高又高":"双倍DPS"
+                desc = z2?"每次购买增加100%DPS":"永久双倍DPS"
+                state = z2 ? ("等级：" + count + "  DPS增益：" + PublicFunc.numToStr(count*100 )+"%") : "仅可购买一次"
+                ruby = z2?1000:700
+                only = !z2;
                 unlockLv = 50
                 break;
             case 4:
@@ -92,6 +93,13 @@ cc.Class({
                 state = "穿越次数+1，立即获得" + str + "仙丹"
                 ruby = 400
                 unlockLv = 130
+                break;
+            case 100:
+                name = "仙丹多又多"
+                desc = "每次购买增加100%仙丹"
+                state = "等级：" + count + "  仙丹增益：" + PublicFunc.numToStr(count*100 )+"%"
+                ruby = 2500
+                unlockLv = 300
                 break;
             // 下面是超越了
             case 7:
