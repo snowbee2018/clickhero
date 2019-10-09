@@ -2,7 +2,7 @@ cc.Class({
     
     ctor () {
         const self = this;
-        self.zoneStartTimes = [0,1566943200000,1569674098857]
+        self.zoneStartTimes = [0,1566943200000,1569794400000]
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
@@ -569,7 +569,7 @@ cc.Class({
 
     isLevelMaxPassed (level) {
         const self = this;
-        var key = self.KeyMap.maxLvNew;
+        var key = self.KeyMap.maxPassLavel;
         var curPassLevel = self.getDataByKey(key);
         return curPassLevel >= level;
     },
@@ -648,6 +648,7 @@ cc.Class({
 
     revive(){
         this.setDataByKey(this.KeyMap.curSoul, (new BigNumber("0")));
+        this.setDataByKey(this.KeyMap.passLavel, 0);
         this.setDataByKey(this.KeyMap.rebirthSoul, (new BigNumber("0")));
         this.setDataByKey(this.KeyMap.skill6Data, {count:0,useCount:0})
         this.setDataByKey(this.KeyMap.maxLvNew, 0);

@@ -131,20 +131,20 @@ cc.Class({
     },
 
     resetGame(){
-        let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
-        ruby += Math.round(GoodsDatas.getTotalRuby()*0.75)
+        let ruby2 = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
+        ruby2 += Math.round(GoodsDatas.getTotalRuby()*0.75)
         const self = this;
         PublicFunc.popDialog({
-            contentStr: "这将重置你的所有游戏数据，你会进入新区（排行榜），但是会保留仙桃，并以75%的价值变卖商店的道具，共保留"+ruby+"仙桃，你确定要重置吗？",
+            contentStr: "这将重置你的所有游戏数据，你会进入新区（排行榜），但是会保留仙桃，并以75%的价值变卖商店的道具，共保留"+ruby2+"仙桃，你确定要重置吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'
             },
             onTap: function (dialog, bSure) {
                 // 重置游戏
-                let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
+                // let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
                 DataCenter.resetGame();
-                let ruby2 = GoodsDatas.resetGame()
+                GoodsDatas.resetGame()
                 HeroDatas.resetGame();
                 Events.emit(Events.ON_RESETGAME);
                 self.getComponent("HeroListControl").rebirth();
@@ -156,7 +156,7 @@ cc.Class({
                 Events.emit(Events.ON_SOUL_CHANGE);
                 Events.emit(Events.ON_RUBY_CHANGE);
                 // WeChatUtil.onHide();
-                self.popGoldDialog(2,ruby + Math.round(ruby2*0.75),null,true)
+                self.popGoldDialog(2, ruby2,null,true)
             }
         });
     },
@@ -266,7 +266,7 @@ cc.Class({
 
     showUpgradeInfo(){
         let info
-        info = ["1.10月1号0点后的新玩家和重置玩家会进入三区",
+        info = ["1.9月30号6点后的新玩家和重置玩家会进入三区",
         "2.三区新增了新功能[轮回]，300级解锁，游戏节奏更平滑",
         "3.三区的商店改动较大，请知悉"
         ].join("\n")

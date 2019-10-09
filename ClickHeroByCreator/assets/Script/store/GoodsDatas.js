@@ -8,12 +8,14 @@ Datas.isZone2 = function(){
     return DataCenter.getUserZone() === 2
 }
 
-Datas.init = function() {
-    var cloudInfo = DataCenter.getCloudDataByKey(DataCenter.KeyMap.goodsList);
-    // 购买次数，永久效果的商品需要记录并持久化
-    Datas.buyCounts = cloudInfo || []
-    cloudInfo = DataCenter.getCloudDataByKey(DataCenter.KeyMap.ASCounts);
-    Datas.ASCounts = cloudInfo || []
+Datas.init = function(reset) {
+    if (!reset) {
+        var cloudInfo = DataCenter.getCloudDataByKey(DataCenter.KeyMap.goodsList);
+        // 购买次数，永久效果的商品需要记录并持久化
+        Datas.buyCounts = cloudInfo || []
+        cloudInfo = DataCenter.getCloudDataByKey(DataCenter.KeyMap.ASCounts);
+        Datas.ASCounts = cloudInfo || []
+    }
     if (Datas.isZone2()) {
         Datas.datas = [
             new Goods().init(16),
@@ -111,32 +113,33 @@ Datas.refresh = function(){
     const childDatas = DataCenter.readChildUserData() || []
     console.log("childDatas.length"+childDatas.length);
     GameData.gdShareDPSTimes = childDatas.length * 0.3 + 1
-
 }
 
 Datas.refreshAS = function() {
-    Datas.ASCounts.forEach(e => {
-        var count = e.count
-        if (e.id == 7) {
-            GameData.gdLeaveTimes = Math.pow(1.5,count)
-        } else if (e.id == 8) {
-            GameData.gdAncientSale = Math.pow(0.95,count)
-        } else if (e.id == 9) {
-            GameData.gdDPSTimes = 1 + count
-        } else if (e.id == 15) {
-            GameData.gdSoulTimes = 1 + Math.pow(count,2) * 10
-        } else if (e.id == 11) {
-            GameData.gdPBossTimes = count*0.25 + 1
-        } else if (e.id == 12) {
-            GameData.gdPBossTSTimes = count*0.75 + 1
-        } else if (e.id == 13) {
-            GameData.gdTreasureTimes = 1 + count
-        } else if (e.id == 18) {
-            GameData.gdMinusMonsterNumTimes = count*0.125 + 1
-        } else if (e.id == 19) {
-            GameData.gdMinusBoosLifeTimes = count*0.5 + 1
-        }
-    });
+    if (Datas.isZone2()) {
+        Datas.ASCounts.forEach(e => {
+            var count = e.count
+            if (e.id == 7) {
+                GameData.gdLeaveTimes = Math.pow(1.5,count)
+            } else if (e.id == 8) {
+                GameData.gdAncientSale = Math.pow(0.95,count)
+            } else if (e.id == 9) {
+                GameData.gdDPSTimes = 1 + count
+            } else if (e.id == 15) {
+                GameData.gdSoulTimes = 1 + Math.pow(count,2) * 10
+            } else if (e.id == 11) {
+                GameData.gdPBossTimes = count*0.25 + 1
+            } else if (e.id == 12) {
+                GameData.gdPBossTSTimes = count*0.75 + 1
+            } else if (e.id == 13) {
+                GameData.gdTreasureTimes = 1 + count
+            } else if (e.id == 18) {
+                GameData.gdMinusMonsterNumTimes = count*0.125 + 1
+            } else if (e.id == 19) {
+                GameData.gdMinusBoosLifeTimes = count*0.5 + 1
+            }
+        });
+    }
 }
 
 Datas.addBuyCount = function(id) {
@@ -229,7 +232,8 @@ Datas.resetGame = function() {
         e.lastBuyDate = ""
         e.count = 0
     })
-    Datas.refresh()
+    Datas.init(true)
+    // Datas.refresh()
     return ruby
 }
 

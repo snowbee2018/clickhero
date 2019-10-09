@@ -44,7 +44,7 @@ cc.Class({
                 desc = "永久金币倍数×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  金币增益：" + PublicFunc.numToStr(num) +"%"
-                ruby = 30
+                ruby = 50
                 cd = 60*10
                 unlockLv = 10
                 break;
@@ -53,7 +53,7 @@ cc.Class({
                 desc = "永久DPS伤害×1.2，每天可购一次"
                 var num = (Math.pow(1.2,count)-1)*100
                 state = "等级：" + count + "  DPS增益：" + PublicFunc.numToStr(num) +"%"
-                ruby = 40
+                ruby = 50
                 cd = 60*10
                 unlockLv = 10
                 break;
@@ -91,7 +91,7 @@ cc.Class({
                 desc = "在平行时空穿梭，不需要重置游戏"
                 var str = Formulas.formatBigNumber(this.getBagSoul())
                 state = "穿越次数+1，立即获得" + str + "仙丹"
-                ruby = 400
+                ruby = z2?800:400
                 unlockLv = 130
                 break;
             case 100:
@@ -207,6 +207,8 @@ cc.Class({
             GoodsDatas.addBuyCount(this.id)
             this.init()
             this.onBuy()
+            GoodsDatas.refreshAS()
+            GameData.refresh()
             Events.emit(Events.ON_BUY_GOODS,this.id)
             return true
         } else {
@@ -249,7 +251,6 @@ cc.Class({
         } else if(this.id == 7){
             // 仙丹多多 GameData里提供个支持数值 GoodsDatas刷新
         }
-        GameData.refresh()
     },
 
     // 一袋金币的数额
