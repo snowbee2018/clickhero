@@ -65,7 +65,6 @@ Datas.init = function(reset) {
         ];
     }
     Datas.refresh()
-    Datas.refreshAS()
 }
 
 Datas.refresh = function(){
@@ -113,6 +112,7 @@ Datas.refresh = function(){
     const childDatas = DataCenter.readChildUserData() || []
     console.log("childDatas.length"+childDatas.length);
     GameData.gdShareDPSTimes = childDatas.length * 0.3 + 1
+    Datas.refreshAS()
 }
 
 Datas.refreshAS = function() {

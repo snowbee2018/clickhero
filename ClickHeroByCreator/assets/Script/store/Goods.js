@@ -207,7 +207,6 @@ cc.Class({
             GoodsDatas.addBuyCount(this.id)
             this.init()
             this.onBuy()
-            GoodsDatas.refreshAS()
             GameData.refresh()
             Events.emit(Events.ON_BUY_GOODS,this.id)
             return true

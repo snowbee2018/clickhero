@@ -332,8 +332,10 @@ cc.Class({
     autoNextLevel(){
         const self = this;
         // 如果秒杀 要判断 是否跳关，根据maxpasslevel
+        console.log(self.lastMakeTime );
+        
         if (self.lastMakeTime && Date.now() - self.lastMakeTime < 1000) {
-            let maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxlvNew);
+            let maxlv = DataCenter.getDataByKey(DataCenter.KeyMap.maxLvNew);
             let lv = self.curMonster._lv
             if (maxlv >= 1000 && lv<= maxlv / 4) {
                 lv += 5 - (lv % 5)

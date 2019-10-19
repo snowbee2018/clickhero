@@ -1136,6 +1136,17 @@ cc.Class({
     },
 
     showRankDialog () {
+        // let soul = Formulas.calSoulByAS(55)
+        // let soul2 = Formulas.calSoulByAS2(55)
+        // console.log(soul.toString());
+        // console.log(soul2.toString());
+
+        // let s = 100000000000
+        // let as = Formulas.calASBySoul(newBigNumber(s))
+        // let as2 = Formulas.calASBySoul2(newBigNumber(s))
+        // console.log(as);
+        // console.log(as2);
+        
         console.log("showRankDialog");
         let dialog = cc.instantiate(this.RankDialog)
         dialog.parent = cc.director.getScene();
