@@ -74,6 +74,10 @@ cc.Class({
         AudioMgr.init()
     },
 
+    clickValueInfo(){
+        PublicFunc.showValueInfo()  
+    },
+
     finish(){
         this.node.destroy()
     },

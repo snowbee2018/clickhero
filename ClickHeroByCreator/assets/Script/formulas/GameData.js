@@ -34,6 +34,13 @@ cc.Class({
 
         upGoldenRuby : 30,
 
+        //--------为统计数据--------
+        idleTimes : 1,
+        idleGoldTimes : 1,
+        heroGlobalDPSTimes : 1,
+        comboDPSTimes : 1,
+        heroGoldTimes : 1,
+        soulDPSTimes : 1,
         //--------古神的影响--------
         //说明：//[id][* 家恒支持][- 监听ON_UPGRADE_ANCIENT改变UI]
         addGoldenDpsTimes : 1,      //1- 所有金身加成倍数2% 0.02++ √
@@ -130,10 +137,12 @@ cc.Class({
                     times *= a;
                 }
             });
+            this.heroGlobalDPSTimes = times
             this.skDPSTimes = Math.pow(1.05,DataCenter.getSkill6Data().count)
             let idleTimes = (this.playerStatus==1?this.addLeaveDPSTimes*this.gdLeaveTimes:0) + 1
             let idleAutoTimes = (this.playerStatus==1?this.addAutoIdleTimes*this.gdLeaveTimes:0) + 1
             idleTimes *= idleAutoTimes
+            this.idleTimes = idleTimes
             // console.log("英雄的times" + times)
             // console.log("skDPSTimes" + this.skDPSTimes)
             // console.log("idleTimes" + idleTimes)
@@ -147,10 +156,11 @@ cc.Class({
 
                 // console.log("this.globalDPSTimes" + this.globalDPSTimes)
             if (this.playerStatus == 0) {
-                this.globalDPSTimes = this.globalDPSTimes * (1+this.addDPSClickDamageTimes*this.clickCombo)
+                this.comboDPSTimes = (1+this.addDPSClickDamageTimes*this.clickCombo)
+                this.globalDPSTimes = this.globalDPSTimes * this.comboDPSTimes
             }
-            
-            this.globalDPSTimes *= 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1 + this.addSoulDPSTimes*this.gdSoulDPSTimes)
+            this.soulDPSTimes = 1 + (DataCenter.getDataByKey(DataCenter.KeyMap.curSoul)*0.1 + this.addSoulDPSTimes*this.gdSoulDPSTimes)
+            this.globalDPSTimes *= this.soulDPSTimes
             // console.log("this.addSoulDPSTimes" + this.addSoulDPSTimes)
             // console.log("this.gdSoulDPSTimes" + this.gdSoulDPSTimes)
             // console.log("this.globalDPSTimes" + this.globalDPSTimes)
@@ -163,8 +173,10 @@ cc.Class({
                     times*=hero.getGlobalGoldTimes();
                 }
             });
+            this.heroGoldTimes = times
             let idleTimes = (this.playerStatus==1?this.addLeaveGoldTimes*this.gdLeaveTimes:0) + 1
-            this.globalGoldTimes = times * this.skGoldTimes * this.addGoldTimes
+            this.idleGoldTimes = idleTimes
+            this.globalGoldTimes = this.heroGoldTimes * this.skGoldTimes * this.addGoldTimes
                  * idleTimes * this.gdDoubleGold * this.gdDayGoldTimes * this.gdGoldTimes;
         },
         // 计算总DPS伤害

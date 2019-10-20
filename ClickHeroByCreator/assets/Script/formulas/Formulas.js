@@ -273,12 +273,12 @@ cc.Class({
             if (numSoul <= 0) {
                 return 0
             }
-            let AS = Math.floor(6 * Math.log(numSoul)/Math.LN10)
+            let AS = Math.floor(7 * Math.log(numSoul)/Math.LN10)
             return AS
         },
         // 根据AS换算soul
         calSoulByAS(AS){
-            let soul = newBigNumber(Math.ceil(Math.pow(10,AS/6)))
+            let soul = newBigNumber(Math.ceil(Math.pow(10,AS/7)))
             // let soul = bigPow(10,AS/2.5).integerValue(2)
             return soul
         },
