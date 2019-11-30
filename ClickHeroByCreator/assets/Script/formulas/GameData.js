@@ -107,14 +107,24 @@ cc.Class({
         // 刷新暴击倍数
         // 刷新暴击倍率
         // 刷新点击伤害
-        refresh(){
-            this.calGlobalDPSTimes();
-            this.calGoldTimes();
-            this.calDPSDamage();
-            this.calDPSClickDamage();
-            this.calClickDamage();
-            this.calCritTimes();
-            this.calCritOdds();
+        refresh(async){
+            if (async) {
+                if (!this.needRefresh) {
+                    this.needRefresh = true
+                    setTimeout(function() {
+                        this.needRefresh = false
+                        this.refresh()
+                    }.bind(this), 10);
+                }
+            } else {
+                this.calGlobalDPSTimes();
+                this.calGoldTimes();
+                this.calDPSDamage();
+                this.calDPSClickDamage();
+                this.calClickDamage();
+                this.calCritTimes();
+                this.calCritOdds();
+            }
         },
         refreshDamage(){
             this.calDPSDamage();

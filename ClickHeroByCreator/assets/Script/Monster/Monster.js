@@ -1,12 +1,4 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+
 var zoneCfg = require("ZoneCfg")
 var bossFlag = {}
 
@@ -36,18 +28,22 @@ cc.Class({
     },
 
     onLoad () {
-        const self = this;
-        self._gold = new BigNumber(0);
-        self._totalHP = new BigNumber(0);
-        self._curHP = new BigNumber(0);
-        self._soul = new BigNumber(0);
-        self.anim = self.getComponent(cc.Animation);
+        // const self = this;
+        // self._gold = new BigNumber(0);
+        // self._totalHP = new BigNumber(0);
+        // self._curHP = new BigNumber(0);
+        // self._soul = new BigNumber(0);
+        // self.anim = self.getComponent(cc.Animation);
     },
 
     start () {
-        const self = this;
-        self.playAnim("ComeOn");
-        self._alive = true;
+        // const self = this;
+        // self.playAnim("ComeOn");
+        // self._alive = true;
+    },
+
+    setCtrl(c){
+        this.ctrl = c
     },
 
     playAnim (name) {
@@ -82,7 +78,24 @@ cc.Class({
         return bossFlag
     },
 
+    show(){
+        this.node.active = true
+        const self = this;
+        this._isPrimalBoss = false
+        this.isGolden = false
+        this._isTreasureChest = false
+        self._gold = new BigNumber(0);
+        self._totalHP = new BigNumber(0);
+        self._curHP = new BigNumber(0);
+        self._soul = new BigNumber(0);
+        self.anim = self.getComponent(cc.Animation);
+        self.playAnim("ComeOn");
+        self._alive = true;
+        this._isByeBye = false
+    },
+
     setMonsterByLv(lv, monsterCloudInfo, onMonsterDestroy, hpChangeCallBack, clickHertCallBack, onMonsterTalk) {
+        this.show()
         const self = this;
         self._lv = lv;
         self._totalHP = Formulas.getMonsterHP(lv).times(GameData.getMonsterHpTimes(lv));
@@ -362,14 +375,16 @@ cc.Class({
 
     onDieAnimEnd () {
         if (cc.isValid(this.node)) {
-            this.node.destroy();
+            // this.node.destroy();
+            this.ctrl.onMonsterOut(this.node)
         }
     },
 
     byebye () { // 上一关下一关调用的，不回调
         this._isByeBye = true;
         if (cc.isValid(this.node)) {
-            this.node.destroy();
+            // this.node.destroy();
+            this.ctrl.onMonsterOut(this.node)
         }
     },
 });

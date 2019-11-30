@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
     extends: cc.Component,
@@ -32,6 +23,7 @@ cc.Class({
         const self = this;
         self.gameController = self.getComponent("GameController");
         self.zoneInfo = self.zoneInfoNode.getComponent("ZoneInfo");
+        this.nodePool = [] // 对象池
     },
 
     playGoldAnim(numStr) {
@@ -171,10 +163,21 @@ cc.Class({
 
     makeMonster(lv, cloudMonsterInfo) {
         const self = this;
-        let monsterNode = cc.instantiate(self.monsterPrefab);
+        // 搞个对象池
+        let monsterNode
+        if (this.nodePool.length > 0) {
+            monsterNode = this.nodePool.pop()
+        } else {
+            monsterNode = cc.instantiate(self.monsterPrefab);
+        }
+        // if (this.monsterPos.childrenCount > 2) {
+        //     this.monsterPos.removeAllChildren()
+        // }
         monsterNode.parent = self.monsterPos;
         self.hideTalkBubble();
+
         self.curMonster = monsterNode.getComponent("Monster");
+        this.curMonster.setCtrl(this)
         self.curMonster.setMonsterByLv(
             lv, cloudMonsterInfo,
             self.onCurMonsterDestroy.bind(self),
@@ -225,6 +228,12 @@ cc.Class({
         }
         self.lastMonsterType = self.curMonster._isBoss ? 'boss' : 'normal';
         self.lastMakeTime = Date.now()
+    },
+
+    onMonsterOut(node){
+        node.active = false
+        node.parent = null
+        this.nodePool.push(node)
     },
 
     hit(damage, bDPS, bCrit, isAuto) {

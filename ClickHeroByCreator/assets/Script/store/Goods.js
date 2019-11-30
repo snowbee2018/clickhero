@@ -66,7 +66,7 @@ cc.Class({
             case 2:
                 name = z2?"金币多又多":"双倍金币"
                 desc = z2?"每次购买增加100%金币":"永久双倍金币"
-                state = z2 ? ("等级：" + count + "  金币增益：" + PublicFunc.numToStr(count*100 )+"%") : "仅可购买一次"
+                state = z2 ? ("等级：" + count + "  金币增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%") : "仅可购买一次"
                 ruby = 500
                 only = !z2;
                 unlockLv = 50
@@ -74,7 +74,7 @@ cc.Class({
             case 3:
                 name = z2?"伤害高又高":"双倍DPS"
                 desc = z2?"每次购买增加100%DPS":"永久双倍DPS"
-                state = z2 ? ("等级：" + count + "  DPS增益：" + PublicFunc.numToStr(count*100 )+"%") : "仅可购买一次"
+                state = z2 ? ("等级：" + count + "  DPS增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%") : "仅可购买一次"
                 ruby = z2?1000:700
                 only = !z2;
                 unlockLv = 50
@@ -97,7 +97,7 @@ cc.Class({
             case 100:
                 name = "仙丹多又多"
                 desc = "每次购买增加100%仙丹"
-                state = "等级：" + count + "  仙丹增益：" + PublicFunc.numToStr(count*100 )+"%"
+                state = "等级：" + count + "  仙丹增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%"
                 ruby = 2500
                 unlockLv = 300
                 break;

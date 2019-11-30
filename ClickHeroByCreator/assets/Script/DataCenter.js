@@ -60,7 +60,7 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curGold, (newBigNumber(cloudGold)));
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000")));
+            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("9999910000000000000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
         if (historyTotalGold) {
@@ -659,7 +659,8 @@ cc.Class({
         this.setDataByKey(this.KeyMap.curSoul, (new BigNumber("0")));
         this.setDataByKey(this.KeyMap.passLavel, 0);
         this.setDataByKey(this.KeyMap.rebirthSoul, (new BigNumber("0")));
-        this.setDataByKey(this.KeyMap.skill6Data, {count:0,useCount:0})
+        const c6 = this.getSkill6Data().count || 0
+        this.setDataByKey(this.KeyMap.skill6Data, {count:Math.ceil(c6/2),useCount:0})
         this.setDataByKey(this.KeyMap.maxLvNew, 0);
 
         setTimeout(function() {

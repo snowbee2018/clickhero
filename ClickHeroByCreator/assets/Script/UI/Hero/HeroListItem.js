@@ -334,7 +334,7 @@ cc.Class({
         if (skillArr) {
             for (let skillID = 0; skillID < skillArr.length; skillID++) {
                 const icon = this.skillIcon[skillID];
-                console.log(hero.level >= skillArr[skillID].level);
+                // console.log(hero.level >= skillArr[skillID].level);
                 icon.node.active = hero.level >= skillArr[skillID].level
             }
         }
@@ -355,13 +355,13 @@ cc.Class({
         var skillArr = hero.skills;
         let hasChange = false
         if (hero.isBuy&&skillArr) {
-            console.log("buy hero skill" + hero.heroName);
+            // console.log("buy hero skill" + hero.heroName);
             for (let skillID = 0; skillID < skillArr.length; skillID++) {
-                console.log(skillArr[skillID]);
+                // console.log(skillArr[skillID]);
                 if (!skillArr[skillID].isBuy) {
-                    console.log("buy " + skillArr[skillID].name);
+                    // console.log("buy " + skillArr[skillID].name);
                     let result = hero.buySkill(skillID,true)
-                    console.log("result:" + result);
+                    // console.log("result:" + result);
                     hasChange = hasChange || result
                     if (!result) {
                         break
@@ -402,9 +402,9 @@ cc.Class({
         }
         var hero = HeroDatas.getHero(self._heroID);
         if (hero.isBuy) {
-            hero.upgrade();
+            hero.upgrade(isIntant);
         } else {
-            hero.buy();
+            hero.buy(isIntant);
         }
         if (this.nodeFingerTips) {
             this.nodeFingerTips.removeFromParent()

@@ -301,7 +301,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 110,
-      "height": 35.28
+      "height": 33.72
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -361,7 +361,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 1,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {
@@ -403,8 +403,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
-      "height": 27.72
+      "width": 48.92,
+      "height": 27.2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -464,7 +464,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 1,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {
@@ -506,8 +506,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
-      "height": 27.72
+      "width": 48.92,
+      "height": 27.2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -567,7 +567,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 1,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {
@@ -851,7 +851,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_N$cacheMode": 1,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {
@@ -954,7 +954,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 2,
-    "_N$cacheMode": 0,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {
@@ -1642,7 +1642,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 20.52,
-      "height": 50.4
+      "height": 44.68
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1702,7 +1702,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_N$cacheMode": 0,
+    "_N$cacheMode": 2,
     "_id": ""
   },
   {

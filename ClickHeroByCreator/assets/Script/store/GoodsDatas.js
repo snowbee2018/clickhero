@@ -77,9 +77,9 @@ Datas.refresh = function(){
         } else if (e.id == 14) {
             GameData.gdDayGoldTimes = Math.pow(1.2,count)
         } else if (e.id == 2) { // 特殊
-            GameData.gdDoubleGold = count+1
+            GameData.gdDoubleGold = PublicFunc.get10TimesByCount(count,1.05)/10+1
         } else if (e.id == 3) { // 特殊
-            GameData.gdDoubleDPS = count+1
+            GameData.gdDoubleDPS = PublicFunc.get10TimesByCount(count,1.05)/10+1
         } else if (e.id == 4) {
             GameData.gdAutoClick = count
         } else if (e.id == 7) {
@@ -106,7 +106,7 @@ Datas.refresh = function(){
             GameData.gdMinusBoosLifeTimes = count*0.5 + 1
         } else if (e.id == 100) { // 特殊
             // +100% 仙丹
-            GameData.ngdSoulTimes = count + 1
+            GameData.ngdSoulTimes = PublicFunc.get10TimesByCount(count,1.05)/10 + 1
         }
     });
     const childDatas = DataCenter.readChildUserData() || []

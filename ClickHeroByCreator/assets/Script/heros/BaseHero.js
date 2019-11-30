@@ -110,7 +110,7 @@ cc.Class({
         return obj;
     },
 
-    buy(){
+    buy(isInstant){
         // 伪代码
         // let isSuccess = UserData.spendGold(this.baseCost);
         var isCanBy = DataCenter.isGoldEnough(this.getBaseCost());
@@ -124,7 +124,13 @@ cc.Class({
             // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
-            Events.emit(Events.ON_BY_HERO, this.id);
+            if (isInstant) {
+                setTimeout(function() {
+                    Events.emit(Events.ON_BY_HERO, this.id);
+                }.bind(this), 20);
+            } else {
+                Events.emit(Events.ON_BY_HERO, this.id);
+            }
             return true;
         } else {
             return false;
@@ -132,18 +138,25 @@ cc.Class({
     },
 
     // 升级
-    upgrade(){
+    upgrade(isInstant){
         // 伪代码
         var isCanUpgrade = DataCenter.isGoldEnough(this.getCost());
         var cost = new BigNumber(this.getCost());
         if (isCanUpgrade) {
             this.level += GameData.heroLvUnit;
             this.refresh();
-            GameData.refreshDamage()
+            GameData.refresh(true)
+            // GameData.refreshDamage()
             // this.isPassive ? GameData.calDPSDamage() : GameData.calClickDamage();
 
             DataCenter.consumeGold(cost);
-            Events.emit(Events.ON_UPGRADE_HERO, this.id);
+            if (isInstant) {
+                setTimeout(function() {
+                    Events.emit(Events.ON_UPGRADE_HERO, this.id);
+                }.bind(this), 20);
+            } else {
+                Events.emit(Events.ON_UPGRADE_HERO, this.id);
+            }
             return true;
         } else {
             return false;
@@ -214,15 +227,8 @@ cc.Class({
                         });
                     } else {
                         this.skills[skillID].isBuy = true;
-                        // 刷新全局点击附加
-                        // 刷新全局DPS倍数
-                        // 刷新全局金币倍数
-                        // 刷新点击伤害
-                        // 刷新DPS伤害
-                        // 刷新暴击倍数
-                        // 刷新暴击倍率
                         this.refresh();
-                        GameData.refresh();
+                        GameData.refresh(isInstant);
                         if (this.skills[skillID].unlock) {
                             Events.emit(Events.ON_USER_SKILL_UNLOCK, {
                                 heroID: this.id,

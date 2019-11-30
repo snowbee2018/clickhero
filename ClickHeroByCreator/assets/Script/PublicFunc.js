@@ -107,7 +107,7 @@ cc.Class({
     revive(AS){
         const self = this;
         PublicFunc.popDialog({
-            contentStr: "转世将失去所有金币、仙丹、英雄等级、神器、关卡，由此获得"+AS+"魂魄，你确定要转世吗？",
+            contentStr: "转世将失去所有金币、仙丹、英雄等级、神器、关卡、一半阿弥陀佛，由此获得"+AS+"魂魄，你确定要转世吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'
@@ -267,9 +267,9 @@ cc.Class({
 
     showUpgradeInfo(){
         let info
-        info = ["修复了一些BUG",
-        // "2.解决部分技能冷却时间不显示的bug",
-        // "3.解决部分新玩家进不了游戏的bug"
+        info = ["1.转世现在会保留一半阿弥陀佛次数",
+        "2.优化了刷怪、一键升级的性能",
+        "3.三区商店的伤害高又高、金币多又多、仙丹多又多每次购买额外增加1.05倍的指数增长"
         ].join("\n")
         // if (DataCenter.getUserZone()==1) {
             
