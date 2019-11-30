@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-07 13:40:54 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-27 19:03:20
+ * @Last Modified time: 2019-11-24 15:25:30
  */
 cc.Class({
     extends: cc.Component,
@@ -40,16 +40,18 @@ cc.Class({
                 this.lbSignin.node.active = false
             }
             this.leader.active = Boolean(user.isLeader)
-            cc.loader.load({url: user.headurl, type: 'jpg'},function(err, texture) {
-                try {
-                    var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
-                    this.spHead.spriteFrame = spriteFrame
-                } catch (error) {
+            if (user.headurl) {
+                cc.loader.load({url: user.headurl, type: 'jpg'},function(err, texture) {
                     try {
-                        this.spHead.spriteFrame = this.frameHead
-                    } catch (error) {}
-                }
-            }.bind(this))
+                        var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
+                        this.spHead.spriteFrame = spriteFrame
+                    } catch (error) {
+                        try {
+                            this.spHead.spriteFrame = this.frameHead
+                        } catch (error) {}
+                    }
+                }.bind(this))
+            }
         }else {
             this.vContent.active = false
             this.lbTips.string = "（空位）"
@@ -64,16 +66,18 @@ cc.Class({
         this.lbLevel.string = user.maxLv + "关"
         this.btnDel.active = true
         this.btnAgree.active = true
-        cc.loader.load({url: user.avatarUrl, type: 'jpg'},function(err, texture) {
-            try {
-                var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
-                this.spHead.spriteFrame = spriteFrame
-            } catch (error) {
+        if (user.avatarUrl) {
+            cc.loader.load({url: user.avatarUrl, type: 'jpg'},function(err, texture) {
                 try {
-                    this.spHead.spriteFrame = this.frameHead
-                } catch (error) {}
-            }
-        }.bind(this))
+                    var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
+                    this.spHead.spriteFrame = spriteFrame
+                } catch (error) {
+                    try {
+                        this.spHead.spriteFrame = this.frameHead
+                    } catch (error) {}
+                }
+            }.bind(this))
+        }
     },
 
     delSelfOnInfo(){

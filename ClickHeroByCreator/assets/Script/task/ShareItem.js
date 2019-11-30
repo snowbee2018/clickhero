@@ -28,7 +28,7 @@ cc.Class({
         this.data = data
         this.index = index
         let i = index+1
-        this.lbNo.string = "第" + i + "位"
+        this.lbNo.string = "" + i
         if(i == 1)
         {
             this.shareRuby = 200
@@ -41,11 +41,11 @@ cc.Class({
         } else {
             this.shareRuby = shareRuby
         }
-        this.lbRuby.string = String(this.shareRuby)
-        this.lbRuby.node.opacity = 255
-        this.lbRuby2.node.opacity = 255
+        this.lbRuby.string = "×"+this.shareRuby
+        // this.lbRuby.node.opacity = 255
+        // this.lbRuby2.node.opacity = 255
         // this.sp1.node.y = 68
-        this.sp2.node.y = 25
+        // this.sp2.node.y = 25
         if (data) {
             if (data.weChatUserInfo&&data.weChatUserInfo.avatarUrl) {
                 cc.loader.load({url: data.weChatUserInfo.avatarUrl, type: 'jpg'},function(err, texture) {
@@ -60,7 +60,7 @@ cc.Class({
             if (this.isReceived(0)) {
                 this.btnGet.interactable = false
                 this.lbBtn.string = "已领取"
-                this.lbRuby.node.opacity = 0
+                // this.lbRuby.node.opacity = 0
                 // this.sp1.node.y = 48
             } else {
                 if (data.maxLv && data.maxLv >= 1) {
@@ -74,8 +74,8 @@ cc.Class({
             if (this.isReceived(1)) {
                 this.btnGet1.interactable = false
                 this.lbBtn1.string = "已领取"
-                this.lbRuby2.node.opacity = 0
-                this.sp2.node.y = 5
+                // this.lbRuby2.node.opacity = 0
+                // this.sp2.node.y = 5
             } else {
                 if (data.isRebirth) {
                     this.btnGet1.interactable = true

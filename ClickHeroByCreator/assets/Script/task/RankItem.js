@@ -8,6 +8,9 @@ cc.Class({
         lbName : cc.Label,
         lbLevel : cc.Label,
         btnAward : cc.Node,
+        spNo : cc.Sprite,
+        sfRanks : [cc.SpriteFrame],
+        sfBoxs : [cc.SpriteFrame],
     },
 
     start(){
@@ -15,6 +18,12 @@ cc.Class({
     },
 
     bind(index,data,type){
+        if (index < 3) {
+            this.spNo.node.active = true
+            this.spNo.spriteFrame = this.sfRanks[index]
+        } else {
+            this.spNo.node.active = false
+        }
         this.lbNo.string = String(index+1)
         this.lbName.string = data.WeChatUserInfo.nickName
         this.lbLevel.string = (data.maxLv||'1')+"关"
@@ -35,6 +44,9 @@ cc.Class({
         this.type = type
         this.index = index
         this.btnAward.active = index < 10
+        if (index < 10) {
+            this.btnAward.getComponent(cc.Sprite).spriteFrame = this.sfBoxs[Math.min(index,3)]
+        }
     },
 
     onAwardClick(){

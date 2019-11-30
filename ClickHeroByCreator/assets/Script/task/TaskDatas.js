@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-06-12 14:25:46 
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-25 11:29:48
+ * @Last Modified time: 2019-11-17 12:38:00
  */
 
 const self = {}
@@ -57,7 +57,7 @@ self.getTitle = function(i) {
 
 self.getProgress = function(i) {
     const index = self.datas[i] + 1
-    let str = "进度："
+    let str = ""
     const key = DataCenter.KeyMap
     if (i == 0) {
         let count = DataCenter.getDataByKey(key.maxPassLavel);

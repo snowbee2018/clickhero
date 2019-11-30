@@ -219,6 +219,14 @@ Datas.getTotalRuby = function(){
     return ruby
 }
 
+Datas.resetAS = function() {
+    Datas.ASCounts.forEach(e => {
+        e.lastBuyDate = ""
+        e.count = 0
+    })
+    Datas.init(true)
+}
+
 Datas.resetGame = function() {
     let ruby = 0
     Datas.datas.forEach(e => {

@@ -72,7 +72,7 @@ cc.Class({
                     icon: 'dark',
                     style: {
                       left: 10,
-                      top: this.sys.screenHeight - 80,
+                      top: this.sys.screenHeight - 100,
                       width: 40,
                       height: 40
                 }})

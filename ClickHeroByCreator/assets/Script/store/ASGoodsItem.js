@@ -27,7 +27,6 @@ cc.Class({
         this.lbDesc.string = this.data.desc
         this.lbState.string = this.data.state
         this.lbBtn.string = this.data.AS+" 魂魄"
-        this.node.color = new cc.Color(0xEC,0xE0,0xB0)
         this.lbBought.active = false
         this.btn.active = true
     },

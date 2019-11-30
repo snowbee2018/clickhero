@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-06 19:14:11 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-31 21:45:17
+ * @Last Modified time: 2019-11-24 15:24:50
  */
 cc.Class({
     extends: cc.Component,
@@ -13,6 +13,8 @@ cc.Class({
         lbLv : cc.Label,
         lbCount : cc.Label,
         lbNo : cc.Label,
+        spNo : cc.Sprite,
+        sfRanks : [cc.SpriteFrame],
         spUserHead : cc.Sprite,
         lbUserName : cc.Label,
     },
@@ -34,21 +36,29 @@ cc.Class({
     },
 
     bindRank(index,data){
+        if (index < 3) {
+            this.spNo.node.active = true
+            this.spNo.spriteFrame = this.sfRanks[index]
+        } else {
+            this.spNo.node.active = false
+        }
         this.lbNo.string = String(index+1)
         this.bind(data)
         let user = data.members[0]
         if (user) {
             this.lbUserName.string = user.nickname
-            cc.loader.load({url: user.headurl, type: 'jpg'},function(err, texture) {
-                try {
-                    var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
-                    this.spUserHead.spriteFrame = spriteFrame
-                } catch (error) {
+            if (user.headurl) {
+                cc.loader.load({url: user.headurl, type: 'jpg'},function(err, texture) {
                     try {
-                        this.spUserHead.spriteFrame = this.frameHead
-                    } catch (error) {}
-                }
-            }.bind(this))
+                        var spriteFrame = texture ? new cc.SpriteFrame(texture):this.frameHead
+                        this.spUserHead.spriteFrame = spriteFrame
+                    } catch (error) {
+                        try {
+                            this.spUserHead.spriteFrame = this.frameHead
+                        } catch (error) {}
+                    }
+                }.bind(this))
+            }
         }
     },
 

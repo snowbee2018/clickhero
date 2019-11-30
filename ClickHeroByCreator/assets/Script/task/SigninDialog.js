@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-21 15:57:17
+ * @Last Modified time: 2019-11-17 16:29:27
  */
  
 cc.Class({
@@ -11,7 +11,6 @@ cc.Class({
     properties: {
         days : cc.Node,
         day1 : cc.Node,
-        day7 : cc.Node,
         lbTips : cc.Label,
         btn : cc.Button,
     },
@@ -53,29 +52,31 @@ cc.Class({
             var view
             if (i == 0) {
                 view = this.day1
-            } else if(i == 6){
-                view = this.day7
             } else {
                 view = cc.instantiate(this.day1)
                 view.parent = this.days
+                const w = 640 / 8
+                if (i < 4) {
+                    view.x = w * ((i - 2) * 2 + 1)
+                } else {
+                    view.x = w * ((i - 4 - 1) * 2)
+                    view.y = -339
+                }
+                // 这里根据i 设置x 和 y
             }
             let lbDay = view.getChildByName("lbDay").getComponent(cc.Label)
             let lbCount = view.getChildByName("lbCount").getComponent(cc.Label)
+            let ndGray = view.getChildByName("ndGray")
+            let ndToday = view.getChildByName("ndToday")
             lbDay.string = "第"+(i+1)+"天"
-            if (i < this.times) {
-                lbCount.string = "已领取"
-            } else {
-                lbCount.string = "×"+this.rubys[i]
-            }
-            if (i == this.today) {
-                view.color = new cc.Color(0xFC,0xFF,0x9D)
-            } else {
-                view.color = new cc.Color(0xFB,0xE1,0xAC)
-            }
+            ndGray.active = i < this.times
+            lbCount.string = "×"+this.rubys[i]
+            ndToday.active = i == this.today
             this.viewHolders[i] = {}
             this.viewHolders[i].view = view
             this.viewHolders[i].lbDay = lbDay
             this.viewHolders[i].lbCount = lbCount
+            this.viewHolders[i].ndGray = ndGray
         }
     },
 
@@ -93,7 +94,7 @@ cc.Class({
         let dateStr = new Date().toLocaleDateString()
         this.data = {times:this.times+1,date:dateStr}
         DataCenter.setDataByKey(DataCenter.KeyMap.signinData,this.data)
-        this.viewHolders[this.today].lbCount.string = "已领取"
+        this.viewHolders[this.today].ndGray.active = true
         this.btn.interactable = false
     },
     isSignin(){

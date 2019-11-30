@@ -8,7 +8,6 @@ cc.Class({
         loginBtn: cc.Sprite,
         viewLoading : cc.Node,
         spLoading : cc.Node,
-        lbTips : cc.Label,
     },
 
     ctor () {
@@ -24,6 +23,17 @@ cc.Class({
     },
     
     start () {
+        cc.loader.downloader.loadSubpackage('boss', function (err) {
+            console.log("loadSubpackage 结果：");
+            if (err) {
+                return console.error(err);
+            }
+            console.log('load subpackage successfully.');
+        });
+        // const res = wx.getStorageInfoSync()
+        // console.log("看看这里 小伙子");
+        
+        // console.log(res);
         
     },
 
@@ -128,11 +138,11 @@ cc.Class({
             CloudDB.saveDBID(data._id);
             HttpUtil.setGameDataID(data._id)
             console.log(data);
-            let oldData = DataCenter.readOldGameData()
-            if (oldData && oldData.gamedata) {
-                data.gamedata = oldData.gamedata
-                cc.sys.localStorage.setItem("GameData","")
-            }
+            // let oldData = DataCenter.readOldGameData()
+            // if (oldData && oldData.gamedata) {
+            //     data.gamedata = oldData.gamedata
+            //     cc.sys.localStorage.setItem("GameData","")
+            // }
             DataCenter.saveCloudData(data);//
             // 获取子用户
             // CloudDB.getChildUserData(function (err, dataArr) {
@@ -173,12 +183,12 @@ cc.Class({
             
             var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
             console.log(weChatUserInfo);
-            let oldData = DataCenter.readOldGameData()
             let gamedata = {}
-            if (oldData && oldData.gamedata) {
-                gamedata = oldData.gamedata
-                cc.sys.localStorage.setItem("GameData","")
-            }
+            // let oldData = DataCenter.readOldGameData()
+            // if (oldData && oldData.gamedata) {
+            //     gamedata = oldData.gamedata
+            //     cc.sys.localStorage.setItem("GameData","")
+            // }
             const gameData = {
                 gamedata: gamedata,
                 WeChatUserInfo: weChatUserInfo,
@@ -268,19 +278,9 @@ cc.Class({
         this.spLoading.stopAllActions()
         this.spLoading.runAction(
             cc.repeatForever(
-                cc.sequence(
-                    cc.delayTime(0.3),cc.rotateBy(0.3,90)
-                )
+                cc.rotateBy(0.3,90)
             )
         )
-        let tipsArr = [
-            "部落100关解锁，快加入进来吧！",
-            "部落等级越高，各项奖励越多，成员也更多",
-            "部落每日BOSS可以分多次、多人击败哦！",
-        ]
-        let index = Formulas.randomNum(0,tipsArr.length - 1)
-        this.lbTips.string = tipsArr[index]
-        this.lbTips.node.active = true
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             WeChatUtil.checkSystemTime()
             const userdata = DataCenter.readUserData()

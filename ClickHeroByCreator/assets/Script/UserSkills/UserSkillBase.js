@@ -21,11 +21,14 @@ cc.Class({
         heroID: 0,
         skillID: 0,
 
+        lock:cc.Node,
         gray: cc.Node,
         skillNameLab: cc.Label,
         describeLab: cc.Label,
         timeLab: cc.Label,
         icon: cc.Sprite,
+        bgDuration : cc.Node,
+        lbDuration : cc.Label,
         
         _isBuy: false, // 是否已经购买
         _lastTimestamp: 0, // 上次使用技能的时间
@@ -35,7 +38,21 @@ cc.Class({
         // _sustainAdd: 0, // 增加的持续时间
     },
 
-    // LIFE-CYCLE CALLBACKS:
+    setData(skillName,baseValue,coolingTime,bSustain,sustainTime,cost,heroID,skillID,sfIcon){
+        this.skillName = skillName
+        this.baseValue = baseValue
+        this.coolingTime = coolingTime
+        this.bSustain = bSustain
+        this.sustainTime = sustainTime
+        this.cost = cost
+        this.heroID = heroID
+        this.skillID = skillID
+        console.log("fuck !!!!");
+        
+        console.log(sfIcon);
+        
+        this.icon.spriteFrame = sfIcon
+    },
 
     onLoad () {
         const self = this;
@@ -142,7 +159,8 @@ cc.Class({
 
         // 重新打开游戏的时候默认技能持续已经结束，不保留技能使用效果
         self._isSustainFinish = true;
-        self.gray.active = !self.isCanUse();
+        // self.gray.active = !self.isCanUse();
+        this.setLock()
 
         // Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
@@ -166,7 +184,8 @@ cc.Class({
                 self._isActive = true;
                 self._coolingCurtail = 0;
                 self.onCoolingDone();
-                self.gray.active = !self.isCanUse();
+                // self.gray.active = !self.isCanUse();
+                this.setLock()
                 if (!self.gray.active) {
                     PublicFunc.unschedule(this._scheCallback);
                 }
@@ -180,14 +199,20 @@ cc.Class({
                 var realSustainTime = self.sustainTime + self.getSustainTimeAdded();
                 var timeSustain = 1000 * realSustainTime - nowTime + self._lastTimestamp;
                 if (timeSustain > 0) {
+                    this.bgDuration.active = true
+                    this.lbDuration.string = (timeSustain / 1000)+'s'
                     // var timeStr = self.dateFormat(timeSustain / 1000);
                     // self.onSustainCountDown(timeSustain / 1000, timeStr);
                 } else {
+                    this.bgDuration.active = false
                     self._isSustainFinish = true;
                     self.backout();
-                    self.gray.active = !self.isCanUse();
+                    // self.gray.active = !self.isCanUse();
+                    this.setLock()
                 }
             }
+        } else {
+            this.setLock()
         }
     },
 
@@ -223,9 +248,14 @@ cc.Class({
         if (skillInfo.heroID == self.heroID) {
             if (skillInfo.skillID == self.skillID) {
                 self._isBuy = true;
-                self.gray.active = !self.isCanUse();
+                // self.gray.active = !self.isCanUse();
+                this.setLock()
             }
         }
+    },
+    setLock(){
+        this.gray.active = !this.isCanUse();
+        this.lock.active = !this._isBuy
     },
 
     dateFormat (second) {
@@ -246,13 +276,13 @@ cc.Class({
         hh = second / 3600 | 0;
         if (hh > 0) {
             second = Math.round(second) - hh * 3600;
-            result += hh + "小时";
+            result += hh + "时";
         }
         //分
         mm = second / 60 | 0;
         if (mm > 0) {
             second = Math.round(second) - mm * 60;
-            result += mm + "分钟";
+            result += mm + "分";
         }
         //秒
         ss = Math.round(second);

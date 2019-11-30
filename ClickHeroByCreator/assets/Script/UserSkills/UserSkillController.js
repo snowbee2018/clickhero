@@ -13,6 +13,8 @@ cc.Class({
 
     properties: {
         skillList: cc.Node,
+        ndItem0 : cc.Node,
+        sfIcons : [cc.SpriteFrame],
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -51,6 +53,29 @@ cc.Class({
     },
 
     initUserSkills () {
+        if (this.skillList.children.length <= 1) {
+            // 初始化9个技能
+            const skillDatas = [
+                ["三头六臂",2,600,true,30,"2e+5",2,3],
+                ["暴击风暴",0.5,1800,true,30,"1.2e+11",9,4],
+                ["火眼金睛",2,1800,true,30,"4e+14",13,4],
+                ["点石成金",0.01,3600,true,30,"3.2e+16",15,4],
+                ["阿弥陀佛",1.05,28800,false,0,"2.56e+17",17,3],
+                ["如意金箍",3,3600,true,30,"2.4e+21",20,4],
+                ["观音赐福",1,3600,false,0,"2.799e+23",22,3],
+                ["筋斗云",1,3600,false,0,"1.12e+26",23,4],
+            ]
+            
+            for (let i = 0; i < 8; i++) {
+                const d = skillDatas[i]
+                const node = cc.instantiate(this.ndItem0)
+                node.parent = this.skillList
+                console.log(this.sfIcons[i+1]);
+                
+                node.getComponent("UserSkill").setData(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],this.sfIcons[i+1])
+            }
+        }
+        
         const self = this;
         // 获取存档，初始化关卡和怪物
         var map = DataCenter.KeyMap;

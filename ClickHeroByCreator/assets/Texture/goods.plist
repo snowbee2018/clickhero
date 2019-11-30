@@ -4,18 +4,18 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>goods_AS.jpg</key>
+            <key>goods_AS.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{66,66}</string>
+                <string>{74,52}</string>
                 <key>spriteSourceSize</key>
-                <string>{66,66}</string>
+                <string>{80,52}</string>
                 <key>textureRect</key>
-                <string>{{1,191},{66,66}}</string>
+                <string>{{77,1},{74,52}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,37 +30,37 @@
                 <key>spriteSourceSize</key>
                 <string>{44,44}</string>
                 <key>textureRect</key>
-                <string>{{69,191},{44,44}}</string>
+                <string>{{196,1},{44,44}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>goods_ruby.PNG</key>
+            <key>goods_ruby.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{100,100}</string>
+                <string>{50,41}</string>
                 <key>spriteSourceSize</key>
-                <string>{100,100}</string>
+                <string>{50,41}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{100,100}}</string>
+                <string>{{153,1},{50,41}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>goods_soul.PNG</key>
+            <key>goods_soul.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-1}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{90,86}</string>
+                <string>{74,53}</string>
                 <key>spriteSourceSize</key>
-                <string>{100,100}</string>
+                <string>{80,53}</string>
                 <key>textureRect</key>
-                <string>{{1,103},{90,86}}</string>
+                <string>{{1,1},{74,53}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -74,9 +74,9 @@
             <key>realTextureFileName</key>
             <string>goods.png</string>
             <key>size</key>
-            <string>{114,258}</string>
+            <string>{241,55}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:87ab2b79adc6806119888124ae85443e:70c8e61d9f9fa78ef2ee5199045478a9:38d9ec3b7271396a81cfe9250157b3b3$</string>
+            <string>$TexturePacker:SmartUpdate:0edef88d467b580cc641da3703e32370:b25f6ab6a8979ae3291c5e703fec7614:38d9ec3b7271396a81cfe9250157b3b3$</string>
             <key>textureFileName</key>
             <string>goods.png</string>
         </dict>

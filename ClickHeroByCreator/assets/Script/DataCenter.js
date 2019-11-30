@@ -60,7 +60,7 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curGold, (newBigNumber(cloudGold)));
         } else {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber("0")));
-            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000000000000000000000000000000000")));
+            // self.setDataByKey(self.KeyMap.curGold, (new BigNumber("10000000000000")));
         }
         var historyTotalGold = self.getCloudDataByKey(self.KeyMap.historyTotalGold);
         if (historyTotalGold) {
@@ -227,7 +227,11 @@ cc.Class({
             cdata.rebirthCount = data.rebirthCount
             cdata.maxLv = data.maxPassLavel
             console.log("保存数据到本地");
-            cc.sys.localStorage.setItem("GameDataNew",JSON.stringify(cdata))
+            if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+                wx.setStorageSync('GameDataNew',JSON.stringify(cdata))
+            } else {
+                cc.sys.localStorage.setItem("GameDataNew",JSON.stringify(cdata))
+            }
             Formulas.saveTempP()
             return true
         }
@@ -235,7 +239,12 @@ cc.Class({
     },
 
     readGameData(){
-        let json = cc.sys.localStorage.getItem('GameDataNew')
+        let json
+        if (cc.sys.platform === cc.sys.WECHAT_GAME) {
+            json = wx.getStorageSync('GameDataNew')
+        } else {
+            json = cc.sys.localStorage.getItem('GameDataNew')
+        }
         if (json&&json.length>0) {
             let data = JSON.parse(json);
             return data
@@ -243,14 +252,14 @@ cc.Class({
         return null
     },
 
-    readOldGameData(){
-        let json = cc.sys.localStorage.getItem('GameData')
-        if (json&&json.length>0) {
-            let data = JSON.parse(json);
-            return data
-        }
-        return null
-    },
+    // readOldGameData(){
+    //     let json = cc.sys.localStorage.getItem('GameData')
+    //     if (json&&json.length>0) {
+    //         let data = JSON.parse(json);
+    //         return data
+    //     }
+    //     return null
+    // },
 
     saveChildUserData(data){
         console.log("保存子用户数据");

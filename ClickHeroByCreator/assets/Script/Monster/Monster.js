@@ -173,18 +173,26 @@ cc.Class({
             }else{
                 self._monsterName = zoneObj.bossName;
             }
-            CloudRes.getBossUrl(zoneObj.resNum, function (url) {
-                if (url) {
-                    cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
-                        if (!err && texture && cc.isValid(self.node)) {
-                            let scale = 360 / texture.height
-                            texture.width = texture.width * scale
-                            texture.height = texture.height * scale
-                            self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-                        }
-                    });
+            cc.loader.loadRes("boss/boss_"+zoneObj.resNum, cc.SpriteFrame, function (err, frame) {
+                if (!err && frame && cc.isValid(self.node)) {
+                    let scale = 360 / frame.getOriginalSize().height
+                    self.getComponent(cc.Sprite).spriteFrame = frame;
+                    self.node.width = frame.getOriginalSize().width * scale
+                    self.node.height = frame.getOriginalSize().height * scale
                 }
             });
+            // CloudRes.getBossUrl(zoneObj.resNum, function (url) {
+            //     if (url) {
+            //         cc.loader.load({ url: url, type: 'png' }, function (err, texture) {
+            //             if (!err && texture && cc.isValid(self.node)) {
+            //                 let scale = 360 / texture.height
+            //                 texture.width = texture.width * scale
+            //                 texture.height = texture.height * scale
+            //                 self.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+            //             }
+            //         });
+            //     }
+            // });
             if (flag && zoneObj.des.length > 0) {
                 // 放剧情
                 // zoneObj.des

@@ -30,6 +30,7 @@ cc.Class({
         settingDialog : cc.Prefab,
 
         tabs : [cc.Node],
+        tabSelBg : cc.Node,
         pages : [cc.Node],
         shareBtn : cc.Node,
         btnSignin : cc.Node,
@@ -142,6 +143,10 @@ cc.Class({
 
     },
 
+    hidePageView(){
+        this.setPageNodeActive(false)
+    },
+
     setPageNodeActive (bActive) {
         // if (!this.pageNode.active) {
         //     this.pageNode.active = true
@@ -151,6 +156,7 @@ cc.Class({
         // self.pageNode.opacity = bActive ? 255:0
         // self.pageNode.scale = bActive ? 1:0
         this.pageNode.active = bActive;
+        this.tabSelBg.active = bActive
         if (bActive) {
             WeChatUtil.hideBtnClub()
             this.monsterController.moveUp();
@@ -878,12 +884,17 @@ cc.Class({
         var DataMap = DataCenter.DataMap;
         var weChatUserInfo = DataCenter.getDataByKey(DataMap.WXUserInfo);
         console.log("weChatUserInfo.avatarUrl = " + weChatUserInfo.avatarUrl);
-        
-        cc.loader.load({ url: weChatUserInfo.avatarUrl, type: "png"}, function (err, texture) {
-            if (!err && texture) {
-                self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
+        try {
+            if (weChatUserInfo.avatarUrl) {
+                cc.loader.load({ url: weChatUserInfo.avatarUrl,type:  "png"}, function (err, texture) {
+                    if (!err && texture) {
+                        self.headSprite.spriteFrame = new cc.SpriteFrame(texture);
+                    }
+                });
             }
-        });
+        } catch (error) {
+            
+        }
         // var str = weChatUserInfo.country;
         // str += " " + weChatUserInfo.province;
         // str += " " + weChatUserInfo.city;
@@ -914,22 +925,6 @@ cc.Class({
         this.pageIndex = curPageIndex
     },
     onHeroBtnClick () {
-
-        // console.log("请求http");
-           
-        // PublicFunc.httpRequest({
-        //     url : "https://www.magicfun.xyz/",
-        //     // url : "https://www.shenguigame.com/",
-        // // url : "https://39.97.176.206",
-        //     handler : this.onUploadResponse.bind(this),
-        //     method : "GET",
-        // });
-
-        // if(true)
-        // {
-        //     return;
-        // }
-
         const self = this;
         if (self.pageNode.active) {
             var curPageIndex = this.pageIndex
@@ -949,6 +944,7 @@ cc.Class({
             this.nodeOpenTabTips.removeFromParent()
             this.nodeOpenTabTips = null
         }
+        this.tabSelBg.x = this.tabs[0].x
     },
 
     onUserSkillBtnClick () {
@@ -970,6 +966,7 @@ cc.Class({
             this.nodeSkillTabTips.removeFromParent()
             this.nodeSkillTabTips = null
         }
+        this.tabSelBg.x = this.tabs[1].x
     },
 
     onAncientBtnClick() {
@@ -989,6 +986,7 @@ cc.Class({
         // self.upgrageSelectBtnLab.string = "×" + GameData.ancientLvUnit;
         self.upgrageSelectBtnLab.string = "×" + (GameData.ancientLvUnit > 0?GameData.ancientLvUnit:"手动输入")
         AudioMgr.playBtn();
+        this.tabSelBg.x = this.tabs[2].x
     },
 
     onStoreBtnClick() {
@@ -1006,6 +1004,7 @@ cc.Class({
         }
         self.upgrageSelectBtn.active = false;
         AudioMgr.playBtn();
+        this.tabSelBg.x = this.tabs[3].x
     },
 
     onTaskBtnClick() {
@@ -1023,6 +1022,7 @@ cc.Class({
         }
         self.upgrageSelectBtn.active = false;
         AudioMgr.playBtn();
+        this.tabSelBg.x = this.tabs[4].x
     },
 
     onReviveBtnClick() {
@@ -1040,6 +1040,7 @@ cc.Class({
         }
         self.upgrageSelectBtn.active = false;
         AudioMgr.playBtn();
+        this.tabSelBg.x = this.tabs[5].x
     },
 
     onUpgradeSelectClick() { // 1 10 25 100 1000 10000

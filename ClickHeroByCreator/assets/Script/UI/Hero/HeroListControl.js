@@ -92,7 +92,7 @@ cc.Class({
         const self = this;
         var listItemNode = cc.instantiate(self.heroItemPrefab);
 
-        listItemNode.y = heroID * -140 - 70
+        listItemNode.y = heroID * -120 - 70
         listItemNode.zIndex = 100 - heroID
         let wPos = self.heroList.content.parent.convertToWorldSpaceAR(cc.v2(0, 0));
         let view = self.heroList.content.parent;
@@ -108,7 +108,7 @@ cc.Class({
         self._heroItemMap[heroID] = true;
         listItemNode.active = false
         this.pushItem(listItemNode)
-        this.heroList.content.height = 140 * this.items.length + 100
+        this.heroList.content.height = 120 * this.items.length + 20
         // this.btnBuySkills.y = - this.heroList.content.height + 50
         // this.btnBuyHeros.y = - this.heroList.content.height + 50
     },
