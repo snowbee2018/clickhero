@@ -33,7 +33,7 @@ cc.Class({
     },
 
     onChildData(){
-        if (this.node.isValid) {
+        if (this.isValid&&this.node.isValid) {
             this.refreshView()
         }
     },

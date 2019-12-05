@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-08-06 16:06:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-08-14 19:02:03
+ * @Last Modified time: 2019-12-01 13:36:05
  * 进来后 用openid请求下club，返回的code是1 就显示layoutClub，是2就显示layoutJoin
  */
 
@@ -24,6 +24,9 @@ cc.Class({
 
     onClub(b,data){
         console.log("onClub");
+        if (!this.isValid) {
+            return
+        }
         if (!b) {
             return
         }

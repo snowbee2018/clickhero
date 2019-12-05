@@ -101,7 +101,7 @@ cc.Class({
         self.getComponent("UserSkillController").rebirth();
         Events.emit(Events.ON_GOLD_CHANGE);
         Events.emit(Events.ON_SOUL_CHANGE);
-        WeChatUtil.onHide();
+        // WeChatUtil.onHide();
     },
 
     revive(AS){

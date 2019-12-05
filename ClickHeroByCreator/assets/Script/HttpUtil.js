@@ -105,11 +105,16 @@ self.updateGameData = function(data) {
 
 
 self.getGameData = function(id,callback) {
-    let userData = DataCenter.readGameData()
-    if (userData) {
-        console.log("使用本地UserData数据");
-        callback(true, [userData]);
-        return
+    const userData = DataCenter.readGameData()
+    if (userData&&userData.gamedata) {
+        const time = userData.gamedata.lastEnterGameTime
+        console.log("数据时间差值：" + (Date.now() - time));
+        
+        if (Date.now() - time < 1 * 86400000) {
+            console.log("使用本地UserData数据");
+            callback(true, [userData]);
+            return
+        }
     } 
     PublicFunc.httpRequest({
         url : self.URL_WHERE,handler : function (event, response) {
@@ -120,9 +125,21 @@ self.getGameData = function(id,callback) {
                 let resp = JSON.parse(response)
                 if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
                     let data = resp.data
-                    console.log("http get success.");
+                    console.log("http getGameData success.");
                     console.log(data);
-                    callback(true,data)
+                    // 比较数据
+                    if (userData&&userData.gamedata&&data.length > 0) {
+                        console.log("xxxj 比较本地数据和服务器数据，取最新的");
+                        const time0 = userData.gamedata.lastEnterGameTime
+                        const time1 = data[0].gamedata.lastEnterGameTime
+                        console.log("本地："+time0);
+                        console.log("云端："+time1);
+                        console.log("实际使用数据："+(time0 > time1 ? "本地" : "云端"));
+                        let d = time0 > time1 ? [userData] : data
+                        callback(true,d)
+                    }else {
+                        callback(true,data)
+                    }
                     return
                 }
             } else if (event == "error") {

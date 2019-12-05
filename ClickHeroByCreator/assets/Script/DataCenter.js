@@ -651,7 +651,7 @@ cc.Class({
         this.addRebirthCount()
         setTimeout(function() {
             self.setDataByKey(self.KeyMap.curGold, (new BigNumber(0)));
-        }.bind(this),100)
+        }.bind(this),200)
         Formulas.tempP = null
     },
 
@@ -665,7 +665,7 @@ cc.Class({
 
         setTimeout(function() {
             this.setDataByKey(this.KeyMap.curGold, (new BigNumber(0)));
-        }.bind(this),100)
+        }.bind(this),200)
         Formulas.tempP = null
     },
 

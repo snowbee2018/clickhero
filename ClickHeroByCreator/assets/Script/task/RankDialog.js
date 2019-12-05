@@ -58,7 +58,7 @@ cc.Class({
 
     onData(datas){
         console.log("onData");
-        if (this.node.isValid) {
+        if (this.isValid&&this.node.isValid) {
             console.log(datas);
             this.datas[this.index] = this.getDatas().concat(datas)
             if (this.getDatas().length == datas.length) {

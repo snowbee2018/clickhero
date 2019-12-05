@@ -373,8 +373,9 @@ cc.Class({
         const self = this;
         if (!isReset && self.heroID == 17 && self.skillID == 3) {
             setTimeout(function() {
+                self._scheCallback = self.skillScheduleCallBack.bind(this)
                 PublicFunc.schedule(self._scheCallback, 0.5);
-            },0.5)
+            },500)
             return
         }
         PublicFunc.unscheduleAllCallbacks();

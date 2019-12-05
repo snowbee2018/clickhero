@@ -332,7 +332,14 @@ cc.Class({
         if (self.curMonster._lv > 1) {
             delete self.killCount;
             delete self._countdown;
-            var targetLv = self.curMonster._lv - 1;
+            const lv = DataCenter.getDataByKey(DataCenter.KeyMap.passLavel) + 1
+            var targetLv = 1
+            if (self.curMonster._lv > lv) {
+                targetLv = lv
+                this.monsterPos.removeAllChildren()
+            } else {
+                targetLv = self.curMonster._lv - 1;
+            }
             self.curMonster.byebye();
             self.makeMonster(targetLv);
         }
