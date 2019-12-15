@@ -26,7 +26,7 @@ cc.Class({
 
         ON_CLICK_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
         ON_DPS_DAMAGE_CHANGE : "ON_CLICK_DAMAGE_CHANGE",
-        CLOSE_DIALOG : "CLOSE_DIALOG",
+        BEFORE_REBIRTH : "BEFORE_REBIRTH", // 穿越前，关闭窗口，自动点击关掉
         ON_RESUME_GAME : "ON_RESUME_GAME", // 恢复游戏，当从后台切换到前台
         // ON_UPGRADE_HERO : 'on-upgrade-hero',
         SHOW_SKILL_FINGER : "SHOW_SKILL_FINGER",

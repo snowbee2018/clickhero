@@ -216,9 +216,13 @@ cc.Class({
                             onTap: function (dialog, bSure) {
                                 if (bSure) {
                                     try {
-                                        Events.emit(Events.CLOSE_DIALOG)
+                                        Events.emit(Events.BEFORE_REBIRTH)
                                         DataCenter.consumeGold(cost);
-                                        PublicFunc.rebirth(); // 处理转生逻辑
+                                        GameData.clickDamage = newBigNumber(0)
+                                        GameData.dpsDamage = newBigNumber(0)
+                                        setTimeout(() => {
+                                            PublicFunc.rebirth(); // 处理转生逻辑
+                                        }, 200);
                                     } catch (error) {
                                         console.error(error);
                                     }

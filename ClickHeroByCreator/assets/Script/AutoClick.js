@@ -10,7 +10,14 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        Events.on(Events.BEFORE_REBIRTH,function() {
+            if (this.bAutoClickOpen) { // 当前是开启的状态
+                this.destroyAutoClick();
+            }
+            this.destroyClickStorm()
+        }.bind(this))
+    },
 
     // update (dt) {},
 
