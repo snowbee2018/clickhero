@@ -1137,12 +1137,13 @@ cc.Class({
     },
 
     showRankDialog () {
-        console.log("showRankDialog");
-        let dialog = cc.instantiate(this.RankDialog)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
-        AudioMgr.playBtn();
+        PublicFunc.showGoldTree()
+        // console.log("showRankDialog");
+        // let dialog = cc.instantiate(this.RankDialog)
+        // dialog.parent = cc.director.getScene();
+        // dialog.x = cc.winSize.width / 2;
+        // dialog.y = cc.winSize.height / 2;
+        // AudioMgr.playBtn();
     },
 
     showClub(){

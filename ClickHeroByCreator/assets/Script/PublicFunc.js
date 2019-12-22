@@ -22,6 +22,7 @@ cc.Class({
         goldenDialog : cc.Prefab,
         SaleDialog : cc.Prefab,
         ValueInfo : cc.Prefab,
+        GoldTree : cc.Prefab,
     },
 
     onLoad(){
@@ -438,5 +439,12 @@ cc.Class({
         v.parent = cc.director.getScene();
         v.x = cc.winSize.width / 2;
         v.y = cc.winSize.height / 2;
+    },
+
+    showGoldTree(){
+        let v = cc.instantiate(this.GoldTree)
+        v.parent = cc.director.getScene();
+        // v.x = cc.winSize.width / 2;
+        // v.y = cc.winSize.height / 2;
     },
 });
