@@ -38,6 +38,7 @@ cc.Class({
             sale0 : "sale0",
             AS : "AS",
             totalAS : "totalAS",
+            tree : "tree",
         }
         self.ContentData = {}
         self.DataMap = {
@@ -164,6 +165,12 @@ cc.Class({
             self.setDataByKey(self.KeyMap.totalAS, Number(totalAS));
         } else {
             self.setDataByKey(self.KeyMap.totalAS, 0);
+        }
+        var tree = self.getCloudDataByKey(self.KeyMap.tree);
+        if (tree) {
+            self.setDataByKey(self.KeyMap.tree, tree);
+        } else {
+            self.setDataByKey(self.KeyMap.tree, {date:"",tickets:[]});
         }
         var skill6Data = DataCenter.getCloudDataByKey(DataCenter.KeyMap.skill6Data)
         self.setDataByKey(self.KeyMap.skill6Data, {count:0,useCount:0})
@@ -639,6 +646,10 @@ cc.Class({
     },
     useSale0(){
         DataCenter.setDataByKey(this.KeyMap.sale0,true)
+    },
+
+    getTreeData(){
+        return DataCenter.getDataByKey(this.KeyMap.tree)
     },
 
     rebirth () {

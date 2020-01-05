@@ -35,6 +35,7 @@ cc.Class({
         shareBtn : cc.Node,
         btnSignin : cc.Node,
         btnClub : cc.Node,
+        btnTree : cc.Node,
 
         sFinger : cc.SpriteFrame,
         sTips : cc.SpriteFrame,
@@ -88,7 +89,11 @@ cc.Class({
         this.tabs[4].active = v1
         this.shareBtn.active = v1
         this.btnSignin.active = v1
-        this.btnClub.active = Boolean(maxPassLavel && maxPassLavel >= 100)
+        let bb = Boolean(maxPassLavel && maxPassLavel >= 100)
+        this.btnClub.active = bb
+        if (Date.now() < 1578240000000) {
+            this.btnTree.active = bb
+        }
 
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");
@@ -484,6 +489,7 @@ cc.Class({
         obj[map.maxLvNew] = DataCenter.getDataByKey(map.maxLvNew);
         obj[map.AS] = DataCenter.getDataByKey(map.AS);
         obj[map.totalAS] = DataCenter.getDataByKey(map.totalAS);
+        obj[map.tree] = DataCenter.getDataByKey(map.tree);
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
@@ -616,7 +622,11 @@ cc.Class({
                 this.showBtnShareTips()
             }
         }
-        this.btnClub.active = Boolean(maxPassLavel && maxPassLavel >= 100)
+        let bb = Boolean(maxPassLavel && maxPassLavel >= 100)
+        this.btnClub.active = bb
+        if (Date.now() < 1578240000000) {
+            this.btnTree.active = bb
+        }
         if (DataCenter.getUserZone() === 2) {
             this.tabs[5].active = maxPassLavel >= 300
         }
@@ -1136,14 +1146,17 @@ cc.Class({
         }
     },
 
-    showRankDialog () {
+    showTree(){
         PublicFunc.showGoldTree()
-        // console.log("showRankDialog");
-        // let dialog = cc.instantiate(this.RankDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // AudioMgr.playBtn();
+    },
+
+    showRankDialog () {
+        console.log("showRankDialog");
+        let dialog = cc.instantiate(this.RankDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        AudioMgr.playBtn();
     },
 
     showClub(){
@@ -1238,6 +1251,7 @@ cc.Class({
         this.tabs[4].active = false
         this.shareBtn.active = false
         this.btnSignin.active = false
+        this.btnTree.active = false
         this.btnClub.active = false
         this.getComponent("AutoClick").showAutoBtn(false)
     },

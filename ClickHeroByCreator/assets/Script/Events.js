@@ -41,6 +41,8 @@ cc.Class({
         ON_CLUB_EXIT : "ON_CLUB_EXIT",
         REQ_JOIN_CLUB : "REQ_JOIN_CLUB",
 
+        CONSUME_TICKET : "CONSUME_TICKET",
+
         emit(name,params){
             cc.systemEvent.emit(name,params);
         },

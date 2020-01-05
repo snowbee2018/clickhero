@@ -400,26 +400,27 @@ cc.Class({
     },
 
     showSale(active){
-        if (this.switchList&&this.switchList.sale0) {
-            let showday = DataCenter.getLocalValue("showsaledate")
-            let today = this.getDateStr()
-            if (!active&&showday === today) {
-                console.log("今天已经显示了");
-                return false
-            }
-            let max = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
-            if(max>=10&&!DataCenter.isSale0()){
-                let v = cc.instantiate(this.SaleDialog)
-                v.parent = cc.director.getScene();
-                v.x = cc.winSize.width / 2;
-                v.y = cc.winSize.height / 2;
-                DataCenter.setLocalValue("showsaledate",today)
-                return true
-            }
-            return false
-        }else{
-            return false
-        }
+        return false
+        // if (this.switchList&&this.switchList.sale0) {
+        //     let showday = DataCenter.getLocalValue("showsaledate")
+        //     let today = this.getDateStr()
+        //     if (!active&&showday === today) {
+        //         console.log("今天已经显示了");
+        //         return false
+        //     }
+        //     let max = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel)
+        //     if(max>=10&&!DataCenter.isSale0()){
+        //         let v = cc.instantiate(this.SaleDialog)
+        //         v.parent = cc.director.getScene();
+        //         v.x = cc.winSize.width / 2;
+        //         v.y = cc.winSize.height / 2;
+        //         DataCenter.setLocalValue("showsaledate",today)
+        //         return true
+        //     }
+        //     return false
+        // }else{
+        //     return false
+        // }
     },
 
     initSwitch(){

@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-06-18 16:01:20 
  * @Last Modified by: xj
- * @Last Modified time: 2019-09-08 22:51:00
+ * @Last Modified time: 2019-12-24 22:12:54
  */
 const url = "【西游降魔仙桃兑换码 微信小游戏小程序桃子】，椱ァ製这段描述$g2a2YiuMJxf$后到◇綯℡寳"
 
@@ -20,7 +20,9 @@ cc.Class({
             if (success) {
                 console.log(data)
                 if (data.code == 1) {
-                    PublicFunc.popGoldDialog(2,data.ruby,"兑换成功",true)
+                    const b = self.useTicket(data.ruby)
+                    let ruby = b ? data.ruby*2 : data.ruby
+                    PublicFunc.popGoldDialog(2,ruby,"兑换成功" +(b?"（已翻倍）":""),true)
                     self.eb.string = ""
                     // if (data.single&&data.ruby>=500&&!DataCenter.isSale0()) {
                     //     if (PublicFunc.switchList&&PublicFunc.switchList.sale0) {
@@ -56,6 +58,19 @@ cc.Class({
                 })
             }
         })
+    },
+
+    useTicket(ruby){
+        let datas = DataCenter.getDataByKey(DataCenter.KeyMap.tree).tickets
+        for (let i = 0; i < datas.length; i++) {
+            const d = datas[i];
+            if (d.ruby == ruby) {
+                datas.splice(i,1)
+                Events.emit(Events.CONSUME_TICKET,d)
+                return true
+            }
+        }
+        return false
     },
 
     finish(){
