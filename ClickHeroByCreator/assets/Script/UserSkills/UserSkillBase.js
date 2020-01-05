@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
     extends: cc.Component,
@@ -248,7 +239,24 @@ cc.Class({
         if (skillInfo.heroID == self.heroID) {
             if (skillInfo.skillID == self.skillID) {
                 self._isBuy = true;
-                // self.gray.active = !self.isCanUse();
+                if (self.heroID == 17 && self.skillID == 3&&this._lastTimestamp && this._lastTimestamp > 0) {
+                    console.log("_lastTimestamp:"+this._lastTimestamp);
+                    // 计算技能当前的状态
+                    var nowTime = Date.parse(new Date());
+                    // self._isBuy = true;
+                    // self._lastTimestamp = nowTime;
+                    var realCoolingTime = self.coolingTime * (1 - self.getCoolingTimeReduction());
+                    var timeCooling = 1000 * realCoolingTime - nowTime + self._lastTimestamp;
+                    if (timeCooling - self._coolingCurtail > 0) { // 技能还在冷却过程中
+                        self._isActive = false;
+                        this._scheCallback = self.skillScheduleCallBack.bind(this)
+                        PublicFunc.schedule(this._scheCallback, 0.5);
+                    } else { // 技能已经冷却
+                        self._isActive = true;
+                        self._coolingCurtail = 0;
+                        self.onCoolingDone();
+                    }
+                }
                 this.setLock()
             }
         }
@@ -370,19 +378,15 @@ cc.Class({
     backout() { }, // 撤销技能效果
 
     rebirth (isReset) {
-        const self = this;
-        if (!isReset && self.heroID == 17 && self.skillID == 3) {
-            setTimeout(function() {
-                self._scheCallback = self.skillScheduleCallBack.bind(this)
-                PublicFunc.schedule(self._scheCallback, 0.5);
-            },500)
-            return
-        }
         PublicFunc.unscheduleAllCallbacks();
-        if (self.bSustain && !self._isSustainFinish) self.backout();
-        self.onCoolingDone();
-        Events.off(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
-        Events.off(Events.ON_UPGRADE_ANCIENT, self.onUpgrandAncient, self);
-        self.initUserSkill();
+        if (this.bSustain && !this._isSustainFinish) this.backout();
+        this.onCoolingDone();
+        Events.off(Events.ON_USER_SKILL_UNLOCK, this.onSkillUnlock, this);
+        Events.off(Events.ON_UPGRADE_ANCIENT, this.onUpgrandAncient, this);
+        let time = this._lastTimestamp
+        this.initUserSkill();
+        if (!isReset && this.heroID == 17 && this.skillID == 3) {
+            this._lastTimestamp = time
+        }
     },
 });
