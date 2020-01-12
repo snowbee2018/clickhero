@@ -365,16 +365,17 @@ cc.Class({
     },
 
     // 英魂增加
-    addSoul (soul) {
+    addSoul (soul,bRecycle) {
         const self = this;
         if (BigNumber.isBigNumber(soul)) {
             var key = self.KeyMap.curSoul;
             var old = self.getDataByKey(key);
             self.setDataByKey(key, old.plus(soul));
-            
-            var key = self.KeyMap.totalSoul;
-            var totalSoul = self.getDataByKey(key);
-            self.setDataByKey(key, totalSoul.plus(soul));
+            if (!bRecycle) {
+                var key = self.KeyMap.totalSoul;
+                var totalSoul = self.getDataByKey(key);
+                self.setDataByKey(key, totalSoul.plus(soul));
+            }
             Events.emit(Events.ON_SOUL_CHANGE);
             GameData.refresh()
         } else {

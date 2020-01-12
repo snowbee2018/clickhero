@@ -120,7 +120,7 @@ cc.Class({
                 this.body.removeAllChildren();
                 this.body.height = 0;
                 HeroDatas.initAncient(false);
-                DataCenter.addSoul(soul);
+                DataCenter.addSoul(soul,true);
                 // GameData.refresh();
             }
         }.bind(this));

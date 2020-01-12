@@ -384,9 +384,11 @@ cc.Class({
         Events.off(Events.ON_USER_SKILL_UNLOCK, this.onSkillUnlock, this);
         Events.off(Events.ON_UPGRADE_ANCIENT, this.onUpgrandAncient, this);
         let time = this._lastTimestamp
+        let cooltime = this._coolingCurtail
         this.initUserSkill();
         if (!isReset && this.heroID == 17 && this.skillID == 3) {
             this._lastTimestamp = time
+            this._coolingCurtail = cooltime
         }
     },
 });
