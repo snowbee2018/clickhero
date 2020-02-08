@@ -425,7 +425,7 @@ cc.Class({
 
     initSwitch(){
         HttpUtil.request("switch",null,function(b,data) {
-            if (data.switchList) {
+            if (data&&data.switchList) {
                 let switchList = data.switchList
                 this.switchList = switchList
                 if (switchList.sale0) {

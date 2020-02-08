@@ -91,9 +91,10 @@ cc.Class({
         this.btnSignin.active = v1
         let bb = Boolean(maxPassLavel && maxPassLavel >= 100)
         this.btnClub.active = bb
-        if (Date.now() < 1578240000000) {
-            this.btnTree.active = bb
-        }
+        // if (Date.now() < 1581350400000) {
+        //     this.btnTree.active = bb
+        // }
+        this.btnTree.active = true
 
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");

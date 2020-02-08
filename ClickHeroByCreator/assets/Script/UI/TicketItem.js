@@ -20,9 +20,9 @@ cc.Class({
 
     // 分解
     click1(){
-        const ruby = this.data.ruby*0.05
+        const ruby = this.data.ruby*0.02
         PublicFunc.popDialog({
-            contentStr: "这会消耗翻倍券并获得额度的5%的仙桃，共"+ruby+"仙桃，你确定要分解吗？",
+            contentStr: "这会消耗翻倍券并获得额度的2%的仙桃，共"+ruby+"仙桃，你确定要分解吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'

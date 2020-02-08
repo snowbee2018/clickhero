@@ -130,7 +130,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 124.88,
+      "width": 120,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -796,8 +796,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "圣诞砍树活动1月5号截止哦",
-    "_N$string": "圣诞砍树活动1月5号截止哦",
+    "_string": "冬季砍树活动2月10号截止哦",
+    "_N$string": "冬季砍树活动2月10号截止哦",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,

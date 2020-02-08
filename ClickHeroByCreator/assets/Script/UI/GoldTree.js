@@ -15,9 +15,15 @@ cc.Class({
     },
 
     onLoad(){
+        if (Date.now() > 1581350400000) {
+            this.lbTime.string = "活动已结束"
+            this.btnClose.active = true
+            this.btn.active = true
+            return
+        }
         this.treedata = DataCenter.getDataByKey(DataCenter.KeyMap.tree)
         if (this.isToday(this.treedata.date)) {
-            this.lbTime.string = "圣诞快乐，明天再来！"
+            this.lbTime.string = "新年快乐，明天再来！"
             this.btnClose.active = true
             this.btn.active = true
         } else {
@@ -46,7 +52,7 @@ cc.Class({
     },
 
     createTickets(){
-        const rubys0 = [500,1000,2000,3000,5000]
+        const rubys0 = [1000,2000,3000,5000,10000]
         const rubys1 = [10000,24000,50000,100000,150000,240000]
         let ruby
         const r0 = Math.random()
@@ -54,7 +60,7 @@ cc.Class({
             ruby = rubys0[0]
         } else if (r0<=0.6) {
             ruby = rubys0[1]
-        } else if (r0 <= 0.85) {
+        } else if (r0 <= 0.8) {
             ruby = rubys0[2]
         } else {
             ruby = rubys0[3]
@@ -64,37 +70,37 @@ cc.Class({
             ruby : ruby
         }
         const r1 = Math.random()
-        if (r1<=0.3) {
+        if (r1<=0.2) {
             ruby = rubys0[0]
-        } else if (r1<=0.6) {
+        } else if (r1<=0.5) {
             ruby = rubys0[1]
-        } else if (r1 <= 0.8) {
+        } else if (r1 <= 0.7) {
             ruby = rubys0[2]
-        } else if (r1 <= 0.9) {
+        } else if (r1 <= 0.8) {
             ruby = rubys0[3]
         } else {
             ruby = rubys0[4]
         }
         this.tickets[1] = {
-            index : Math.floor(Math.random()*20+18),
+            index : Math.floor(Math.random()*20+17),
             ruby : ruby
         }
         const r2 = Math.random()
-        if (r2<=0.4) {
+        if (r2<=0.35) {
             ruby = rubys1[0]
-        } else if (r2<=0.75) {
+        } else if (r2<=0.7) {
             ruby = rubys1[1]
-        } else if (r2 <= 0.88) {
+        } else if (r2 <= 0.82) {
             ruby = rubys1[2]
-        } else if (r2 <= 0.94) {
+        } else if (r2 <= 0.9) {
             ruby = rubys1[3]
-        } else if (r2 <= 0.98) {
+        } else if (r2 <= 0.95) {
             ruby = rubys1[4]
         } else {
             ruby = rubys1[5]
         }
         this.tickets[2] = {
-            index : Math.floor(Math.random()*10+27),
+            index : Math.floor(Math.random()*10+26),
             ruby : ruby
         }
         console.log(this.tickets);
@@ -207,7 +213,7 @@ cc.Class({
         let countdown = this.endtime - Date.now()
         if (countdown<= 0) {
             this.isEnd = true
-            this.lbTime.string = "圣诞快乐，明天再来！"
+            this.lbTime.string = "新年快乐，明天再来！"
             this.showResult()
             return
         }

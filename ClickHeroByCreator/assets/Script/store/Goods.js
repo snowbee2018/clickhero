@@ -292,6 +292,7 @@ cc.Class({
             case 9:
             case 10:
             case 17:
+            case 100:
                 ruby = this.ruby * count
                 break;
             case 4:
