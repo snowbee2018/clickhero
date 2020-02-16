@@ -45,6 +45,7 @@ cc.Class({
         window.DataCenter = new (require("DataCenter"))();
         window.Formulas = require("Formulas");
         window.GameData = require("GameData");
+        window.EquipDatas = require("EquipDatas");
         window.HeroDatas = require("HeroDatas");
         window.GoodsDatas = require("GoodsDatas");
         window.TaskDatas = require("TaskDatas");
@@ -103,6 +104,7 @@ cc.Class({
         if (window.DataCenter == undefined) return;
         if (window.Formulas == undefined) return;
         if (window.GameData == undefined) return;
+        if (window.EquipDatas == undefined) return;
         if (window.HeroDatas == undefined) return;
         if (window.GoodsDatas == undefined) return;
         if (window.TaskDatas == undefined) return;

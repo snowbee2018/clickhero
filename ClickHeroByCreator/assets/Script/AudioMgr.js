@@ -134,14 +134,21 @@ cc.Class({
     playGetGoin() {
         if (this.tgClick) {
             if (this.getGoinAudioClip) {
-                cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+                try {
+                    cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+                } catch (error) {
+                }
             }
             else
             {
                 CloudRes.getMp3Url('getGoin', function (url) {
                     cc.loader.load(url, function (err, clip) {
                         this.getGoinAudioClip = clip;
-                        cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+                        try {
+                            cc.audioEngine.playEffect(this.getGoinAudioClip, false);
+                        } catch (error) {
+                            
+                        }
                     }.bind(this));
                 }.bind(this));
             }

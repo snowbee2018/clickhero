@@ -448,4 +448,8 @@ cc.Class({
         // v.x = cc.winSize.width / 2;
         // v.y = cc.winSize.height / 2;
     },
+    // type 0普通+ 1稀有+ 2史诗+
+    randomEquip(type){
+        return {id:0,type:0,name:'name',level:1,} // 也可能返回空 表示失败
+    },
 });

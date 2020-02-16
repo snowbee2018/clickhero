@@ -345,6 +345,7 @@ cc.Class({
             self.combo = 0; // 当前连击数
             DataCenter.init();
             GoodsDatas.init();
+            EquipDatas.init();
             HeroDatas.init();
             TaskDatas.init();
             self.getComponent("AutoClick").init();
