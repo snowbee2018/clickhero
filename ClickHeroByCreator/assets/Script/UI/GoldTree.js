@@ -15,7 +15,7 @@ cc.Class({
     },
 
     onLoad(){
-        if (Date.now() > 2581350400000) {
+        if (Date.now() > 1581350400000) {
             this.lbTime.string = "活动已结束"
             this.btnClose.active = true
             this.btn.active = true
@@ -223,7 +223,7 @@ cc.Class({
     },
 
     showClickLight(pos){
-        let light = cc.instantiate(this.clickLight)
+        let light = cc.instntiate(this.clickLight)
         if (this.node) {
             light.parent = this.node
         }
