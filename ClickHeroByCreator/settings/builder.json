@@ -33,11 +33,12 @@
   "zipCompressJs": true,
   "android-instant": {
     "REMOTE_SERVER_ROOT": "",
-    "pathPattern": "",
-    "scheme": "https",
     "host": "",
-    "skipRecord": false,
-    "recordPath": ""
+    "packageName": "org.cocos2d.helloworld",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
   },
   "baidugame": {
     "appid": "testappid",
@@ -45,5 +46,15 @@
     "REMOTE_SERVER_ROOT": "",
     "subContext": ""
   },
-  "appBundle": false
+  "appBundle": false,
+  "android": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.helloworld"
+  },
+  "win32": {}
 }

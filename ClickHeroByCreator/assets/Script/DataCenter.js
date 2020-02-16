@@ -170,7 +170,8 @@ cc.Class({
         if (tree) {
             self.setDataByKey(self.KeyMap.tree, tree);
         } else {
-            self.setDataByKey(self.KeyMap.tree, {date:"",tickets:[]});
+            self.setDataByKey(self.KeyMap.tree, {date:"",tickets:[],boxList:[] });
+            
         }
         var skill6Data = DataCenter.getCloudDataByKey(DataCenter.KeyMap.skill6Data)
         self.setDataByKey(self.KeyMap.skill6Data, {count:0,useCount:0})

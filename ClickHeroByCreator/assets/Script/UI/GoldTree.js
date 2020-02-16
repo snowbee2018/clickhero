@@ -31,6 +31,7 @@ cc.Class({
             this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
             this.isEnd=false
             this.poptime = 0
+            this._popBox = 0
             this.interval = 0
             this.giftIndex = 0
             this.endtime = Date.now() + 30*1000
@@ -130,6 +131,7 @@ cc.Class({
         this.interval = Math.random() * 2000
         console.log("弹出礼物！");
         this.popGold()
+        this.popBox()
         this.tickets.forEach(t => {
             if (this.giftIndex == t.index) {
                 t.b = true
@@ -221,7 +223,7 @@ cc.Class({
     },
 
     showClickLight(pos){
-        let light = cc.instantiate(this.clickLight)
+        let light = cc.instntiate(this.clickLight)
         if (this.node) {
             light.parent = this.node
         }
@@ -240,5 +242,49 @@ cc.Class({
         this.node.destroy()
     },
     onDestroy(){
+    },
+
+    popBox ()
+    {
+        if(this._popBox > 4)
+            return
+        this._popBox = this._popBox + 1
+        let boxType
+        const r0 = Math.random()
+        if (r0<=0.3) {  //铜箱子
+            boxType = 0
+        } else if (r0<=0.44) {   //银箱子
+            boxType = 1
+        } else if (r0<=0.5) {   //金箱子,这里丢掉百分之十
+            boxType = 2
+        } 
+        else
+        {
+            return 
+        }
+        this.treedata.boxList.unshift({
+            isnew : true,
+            time : Date.now(),
+            boxType : boxType,
+        }) 
+        
+        this.showBox(boxType)     
+    },
+
+    showBox(boxType){
+        console.log("showBox boxType:" + boxType);
+        let x = (Math.random() - 0.5) * 600
+        let y = -180
+        let pos = cc.v2(x,y)
+        let node = new cc.Node()
+        node._localZOrder = 100
+        let sp = node.addComponent(cc.Sprite)
+        var sfId = boxType + 2
+        sp.spriteFrame = this.sfArr[sfId]
+        node.parent = this.ndImgs
+        let h = Math.random() * 100 + 200
+        let r = 720
+        node.runAction(cc.spawn(cc.jumpTo(0.8,pos,h,2),cc.rotateBy(0.8,r)))
+        
     },
 })

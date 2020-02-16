@@ -21,7 +21,7 @@ cc.Class({
         WeChatUtil.hideBannerAd()
     },
 
-    // type: 0 gold, 1 soul, 2 ruby.
+    // type: 0 gold, 1 soul, 2 ruby.3.装备（暂时）
     setDatas(type,num,title,disDouble){
         if (title) {
             this.lbTitle.string = title
