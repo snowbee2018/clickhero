@@ -75,6 +75,7 @@ cc.Class({
             self.setDataByKey(self.KeyMap.curSoul, (newBigNumber(cloudSoul)));
         } else {
             self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("0")));
+            // self.setDataByKey(self.KeyMap.curSoul, (new BigNumber("90990")));
         }
         // 初始化宝石
         var cloudRuby = self.getCloudDataByKey(self.KeyMap.ruby);
@@ -82,6 +83,7 @@ cc.Class({
             self.setDataByKey(self.KeyMap.ruby, Number(cloudRuby));
         } else {
             self.setDataByKey(self.KeyMap.ruby, 0);
+            // self.setDataByKey(self.KeyMap.ruby, 99990);
         }
         var AS = self.getCloudDataByKey(self.KeyMap.AS);
         if (AS) {
@@ -654,7 +656,7 @@ cc.Class({
         return DataCenter.getDataByKey(this.KeyMap.tree)
     },
 
-    rebirth () {
+    rebirth() {
         const self = this;
         var rebirthSoul = self.consumeRebirthSoul();
         // self.addSoul(rebirthSoul.plus(2));

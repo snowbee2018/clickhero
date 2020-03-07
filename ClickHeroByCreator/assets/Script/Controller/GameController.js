@@ -74,6 +74,7 @@ cc.Class({
             this.tabs[2].active = true
         }else{
             this.tabs[2].active = v0
+            // this.tabs[2].active = true
         }
         if (DataCenter.getUserZone() === 2) {
             if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
@@ -94,7 +95,7 @@ cc.Class({
         // if (Date.now() < 1581350400000) {
         //     this.btnTree.active = bb
         // }
-        this.btnTree.active = true
+        // this.btnTree.active = true
 
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");
@@ -128,25 +129,6 @@ cc.Class({
             this.spSetting.stopAllActions()
             this.spSetting.active = false
         }
-        // var datas = {registerTime:1.558077800538e+12,_openid:"zhwwxc",WeChatUserInfo:{gender:1.0,language:"zh_CN",city:"长春",province:"吉林",country:"中国",nickName:"东军"},gamedata:{}}
-        // PublicFunc.httpRequest({
-        //     url : "https://www.magicfun.xyz/add",
-        //                 handler : function (event, response) {
-        //         console.info("http请求返回");
-        //         console.info(event);
-        //         console.info(response);
-        //         if (event == "success") {
-                    
-        //         } else if (event == "error") {
-        //             // 
-        //         } else if (event == "timeout") {
-        //             // 
-        //         }
-        //     }.bind(this),
-        //     method : "POST",
-        //     uploadData : JSON.stringify({doc:"UserGameData",data:datas}),
-        // });
-
     },
 
     hidePageView(){
@@ -295,7 +277,7 @@ cc.Class({
         try {
             this.cacheGameData()
         } catch (error) {
-            console.log(err);
+            console.error(error);
         }
     },
 

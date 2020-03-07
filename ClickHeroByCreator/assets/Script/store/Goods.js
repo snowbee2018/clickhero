@@ -20,8 +20,11 @@ cc.Class({
         let cd = 0
         let unlockLv = 0
         let count = this.getCount();
+        const add = count?this.getAddCount():0
+        const realCount = count + add
         let exp = (DataCenter.getUserZone()==1?1.12:1.1)
         const z2 = GoodsDatas.isZone2()
+        let strAdd = add?"(+"+add+")":""
         switch (this.id) {
             case 16:
                 name = "呼朋唤友"
@@ -42,17 +45,19 @@ cc.Class({
             case 14:
                 name = "聚宝盆"
                 desc = "永久金币倍数×1.2，每天可购一次"
-                var num = (Math.pow(1.2,count)-1)*100
-                state = "等级：" + count + "  金币增益：" + PublicFunc.numToStr(num) +"%"
+                var num = (Math.pow(1.2,realCount)-1)*100
+                state = "等级：" + count + strAdd+"  金币增益：" + PublicFunc.numToStr(num) +"%"
                 ruby = 50
                 cd = 60*10
                 unlockLv = 10
                 break;
             case 1:
+                console.log(this.getAddCount());
+                
                 name = "苦海无涯"
                 desc = "永久DPS伤害×1.2，每天可购一次"
-                var num = (Math.pow(1.2,count)-1)*100
-                state = "等级：" + count + "  DPS增益：" + PublicFunc.numToStr(num) +"%"
+                var num = (Math.pow(1.2,realCount)-1)*100
+                state = "等级：" + count + strAdd+"  DPS增益：" + PublicFunc.numToStr(num) +"%"
                 ruby = 50
                 cd = 60*10
                 unlockLv = 10
@@ -66,7 +71,7 @@ cc.Class({
             case 2:
                 name = z2?"金币多又多":"双倍金币"
                 desc = z2?"每次购买增加100%金币":"永久双倍金币"
-                state = z2 ? ("等级：" + count + "  金币增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%") : "仅可购买一次"
+                state = z2 ? ("等级：" + count + strAdd + "  金币增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(realCount,1.07)*10)+"%") : "仅可购买一次"
                 ruby = 500
                 only = !z2;
                 unlockLv = 50
@@ -74,7 +79,7 @@ cc.Class({
             case 3:
                 name = z2?"伤害高又高":"双倍DPS"
                 desc = z2?"每次购买增加100%DPS":"永久双倍DPS"
-                state = z2 ? ("等级：" + count + "  DPS增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%") : "仅可购买一次"
+                state = z2 ? ("等级：" + count + strAdd + "  DPS增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(realCount,1.07)*10)+"%") : "仅可购买一次"
                 ruby = z2?1000:700
                 only = !z2;
                 unlockLv = 50
@@ -82,8 +87,8 @@ cc.Class({
             case 4:
                 name = "自动点击"
                 desc = "(+10每秒点击)"
-                state = "当前拥有数:" + this.getCount()
-                ruby = 500 + 500 * this.getCount()// + 已拥有数*500
+                state = "当前拥有数:" + count + strAdd
+                ruby = 500 + 500 * count// + 已拥有数*500
                 unlockLv = 80
                 break;
             case 5:
@@ -97,7 +102,7 @@ cc.Class({
             case 100:
                 name = "仙丹多又多"
                 desc = "每次购买增加100%仙丹"
-                state = "等级：" + count + "  仙丹增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount(),1.05)*10)+"%"
+                state = "等级：" + count + strAdd + "  仙丹增益：" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(realCount,1.07)*10)+"%"
                 ruby = 2500
                 unlockLv = 300
                 break;
@@ -112,56 +117,56 @@ cc.Class({
             case 8:
                 name = "神器打个折" + (count>0? " Lv" + count:"")
                 desc = "每次购买-5%的上古神器费用，上限150次"
-                var num = ((1 - Math.pow(0.95,this.getCount())) * 100).toFixed(4)
+                var num = ((1 - Math.pow(0.95,count)) * 100).toFixed(4)
                 state = "上古神器升级费用:-" + num +"%" 
                 ruby = 300
                 unlockLv = 300
                 break;
             case 9:
                 name = "伤害高又高" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(100*Math.pow(exp,this.getCount()))+"%的DPS"
-                state = "DPS增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*10)+"%"
+                desc = "购买+"+PublicFunc.numToStr(100*Math.pow(exp,count))+"%的DPS"
+                state = "DPS增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*10)+"%"
                 ruby = 300 
                 unlockLv = 200
                 break;
             case 10:
                 name = "金币多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,this.getCount()))+"%的金币加成"
-                state = "金币加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
+                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,count))+"%的金币加成"
+                state = "金币加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*100)+"%"
                 ruby = 600
                 unlockLv = 200
                 break;
             case 15:
                 name = "仙丹多又多" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,this.getCount()))+"%的仙丹加成"
-                state = "仙丹加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(this.getCount())*100)+"%"
+                desc = "购买+"+PublicFunc.numToStr(1000*Math.pow(exp,count))+"%的仙丹加成"
+                state = "仙丹加成:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*100)+"%"
                 ruby = 600 + (DataCenter.getUserZone()==1? 600:0)
                 unlockLv = 300
                 break;
             case 11:
                 name = "催泪铃加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买+25%的催泪铃的效果"
-                state = "催泪铃效力增加:+" + (this.getCount()*25)+"%"
+                state = "催泪铃效力增加:+" + (count*25)+"%"
                 ruby = Math.min(300 + 200 * count,2000) 
                 unlockLv = 300
                 break;
             case 12:
                 name = "昊天塔加持" + (count>0? " Lv" + count:"")
                 desc = "每次购买增加+75%昊天塔效果"
-                state = "昊天塔效力增加:+" + (this.getCount()*75)+"%"
+                state = "昊天塔效力增加:+" + (count*75)+"%"
                 ruby = Math.min(300 + 200 * count,2000) 
                 unlockLv = 300
                 break;
             case 13:
                 name = "崆峒印加持" + (count>0? " Lv" + count:"")
-                desc = "每次购买+"+PublicFunc.numToStr(100*Math.pow(1.15,this.getCount()))+"%崆峒印效果"
+                desc = "每次购买+"+PublicFunc.numToStr(100*Math.pow(1.15,count))+"%崆峒印效果"
                 state = "崆峒印效力增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count,1.15)/10*100)+"%"
                 ruby =  Math.min(300 + 200 * count,2000)  
                 unlockLv = 300
                 break;
             case 17:
                 name = "玉净瓶加持" + (count>0? " Lv" + count:"")
-                desc = "购买+"+PublicFunc.numToStr(25*Math.pow(exp,this.getCount()))+"%玉净瓶效果"
+                desc = "购买+"+PublicFunc.numToStr(25*Math.pow(exp,count))+"%玉净瓶效果"
                 state = "玉净瓶效力增加:+" + PublicFunc.numToStr(PublicFunc.get10TimesByCount(count)*2.5)+"%"
                 ruby =  300 
                 unlockLv = 300
@@ -169,14 +174,14 @@ cc.Class({
             case 18:
                 name = "太虚神甲加持" + (count>0? " Lv" + count:"")
                 desc = "购买+12.5%太虚神甲效果"
-                state = "太虚神甲效力增加:+" + (this.getCount()*12.5)+"%"
+                state = "太虚神甲效力增加:+" + (count*12.5)+"%"
                 ruby =  Math.min(300 + 100 * count,2000)   
                 unlockLv = 300
                 break;
             case 19:
                 name = "照妖镜加持" + (count>0? " Lv" + count:"")
                 desc = "购买+50%照妖镜效果"
-                state = "照妖镜效力增加:+" + (this.getCount()*50)+"%"
+                state = "照妖镜效力增加:+" + (count*50)+"%"
                 ruby =  Math.min(300 + 100 * count,2000)   
                 unlockLv = 300
                 break;
@@ -193,6 +198,9 @@ cc.Class({
 
     getCount(){
         return GoodsDatas.getBuyCount(this.id)
+    },
+    getAddCount(){
+        return GameData.eqGoods[this.id] || 0
     },
 
     buy(){

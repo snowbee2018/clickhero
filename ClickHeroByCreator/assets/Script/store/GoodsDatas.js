@@ -69,17 +69,17 @@ Datas.init = function(reset) {
 
 Datas.refresh = function(){
     Datas.buyCounts.forEach(e => {
-        var count = e.count
+        let add = GameData.eqGoods[e.id] || 0
+        add = e.count ? add : 0 // 0个 不给加
+        var count = e.count + add
         if (e.id == 1) {
             GameData.gdDayDPSTimes = Math.pow(1.2,count)
-        // } else if (e.id == 16) {
-        //     // 这里要取子用户数量
         } else if (e.id == 14) {
             GameData.gdDayGoldTimes = Math.pow(1.2,count)
         } else if (e.id == 2) { // 特殊
-            GameData.gdDoubleGold = PublicFunc.get10TimesByCount(count,1.05)/10+1
+            GameData.gdDoubleGold = PublicFunc.get10TimesByCount(count,1.07)/10+1
         } else if (e.id == 3) { // 特殊
-            GameData.gdDoubleDPS = PublicFunc.get10TimesByCount(count,1.05)/10+1
+            GameData.gdDoubleDPS = PublicFunc.get10TimesByCount(count,1.07)/10+1
         } else if (e.id == 4) {
             GameData.gdAutoClick = count
         } else if (e.id == 7) {
@@ -106,7 +106,7 @@ Datas.refresh = function(){
             GameData.gdMinusBoosLifeTimes = count*0.5 + 1
         } else if (e.id == 100) { // 特殊
             // +100% 仙丹
-            GameData.ngdSoulTimes = PublicFunc.get10TimesByCount(count,1.05)/10 + 1
+            GameData.ngdSoulTimes = PublicFunc.get10TimesByCount(count,1.07)/10 + 1
         }
     });
     const childDatas = DataCenter.readChildUserData() || []

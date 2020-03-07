@@ -6,38 +6,12 @@ cc.Class({
         sceneRoot: cc.Node,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
-    // start () {,
-
-    // update (dt) {},
-
-    // onItemClick() {
-    //     const self = this;
-    //     console.log("onItemClick");
-    //     self.releaseSkill();
-    // },
-
-    // onCoolingDone() {
-    //     const self = this;
-    //     console.log("onCoolingDone");
-    //     self.timeLab.string = "";
-    //     self.gray.active = !self._isActive;
-    // }, // 冷却完成
-
-    // onSustainDone() {
-    //     const self = this;
-    //     console.log("onSustainDone");
-    // }, // 技能持续结束
-
     skill1(flag) {
         const self = this;
         var str = flag ? "apply" : "backout";
         console.log("user skill " + str + "--猴子猴孙");
         if (flag) {
-            var baseValue = self.baseValue;
+            var baseValue = self.getBaseValue();
             if (self.getDoubleSkill() == true) {
                 baseValue*=2;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
@@ -54,7 +28,7 @@ cc.Class({
         var str = flag ? "apply" : "backout";
         console.log("user skill " + str + "--三头六臂");
         if (flag) {
-            var baseValue = self.baseValue;
+            var baseValue = self.getBaseValue();
             if (self.getDoubleSkill() == true) {
                 baseValue = (baseValue - 1) * 2 + 1;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
@@ -73,7 +47,7 @@ cc.Class({
         console.log("user skill " + str + "--暴击风暴");
         if (flag) {
             // 暴击几率增加50%
-            var baseValue = self.baseValue;
+            var baseValue = self.getBaseValue();
             if (self.getDoubleSkill() == true) {
                 baseValue = 1;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
@@ -92,7 +66,7 @@ cc.Class({
         console.log("user skill " + str + "--火眼金睛");
         if (flag) {
             // 金币掉落增加100%
-            var baseValue = self.baseValue;
+            var baseValue = self.getBaseValue();
             if (self.getDoubleSkill() == true) {
                 baseValue = (baseValue - 1) * 2 + 1;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
@@ -140,7 +114,7 @@ cc.Class({
         console.log("user skill " + str + "--如意金箍");
         if (flag) {
             // 点击伤害翻倍
-            var baseValue = self.baseValue;
+            var baseValue = self.getBaseValue();
             if (self.getDoubleSkill() == true) {
                 baseValue = (baseValue - 1) * 2 + 1;
                 self.sceneRoot.getComponent("UserSkillController").setDoubleSkill(false);
@@ -233,7 +207,16 @@ cc.Class({
             self.skill9(false); // 时光穿越
         }
         
-    }, // 撤销技能效果    
+    }, // 撤销技能效果  
+    
+    getBaseValue(){
+        const v = GameData.eqSkill[this.id]
+        let base = this.baseValue
+        if (v) {
+            base += v
+        }
+        return base
+    },
 
     getSkillDesStr () {
         const self = this;
@@ -241,7 +224,8 @@ cc.Class({
         var coolingTimeReduction = self.getCoolingTimeReduction(); // 冷却缩减
         var sustainTime = self.sustainTime + sustainTimeAdded;
         var coolingTime = self.coolingTime * (1 - coolingTimeReduction);
-        var baseValue = self.baseValue;
+        var baseValue = self.getBaseValue()
+
         if (self.heroID == 0 && self.skillID == 1) {
             // 猴子猴孙
             // 处理效果加成，持续时间和冷却时间的加成

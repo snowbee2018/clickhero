@@ -63,7 +63,7 @@ cc.Class({
                 node.parent = this.skillList
                 console.log(this.sfIcons[i+1]);
                 
-                node.getComponent("UserSkill").setData(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],this.sfIcons[i+1])
+                node.getComponent("UserSkill").setData(i+1,d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],this.sfIcons[i+1])
             }
         }
         
@@ -136,7 +136,7 @@ cc.Class({
         }
     },
 
-    rebirth (isReset) {
+    rebirth(isReset) {
         const self = this;
         for (let index = 0; index < self.skillList.children.length; index++) {
             const item = self.skillList.children[index];

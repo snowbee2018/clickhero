@@ -8,6 +8,7 @@ cc.Class({
         lbStatus : cc.Label,
         sp : cc.Sprite,
         lbLv : cc.Label,
+        lbAddlv : cc.Label,
         lbSoul : cc.Label,
         btn : cc.Button,
         imgs : cc.SpriteAtlas,
@@ -22,6 +23,7 @@ cc.Class({
         Events.on(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
         Events.on(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
         Events.on(Events.ON_BUY_GOODS, this.onBuyGoods, this);
+        Events.on(Events.ON_EQUIP_UPDATE, this.onEquip, this);
     },
 
     onBuyGoods(event){
@@ -46,11 +48,20 @@ cc.Class({
             this.bind()
         }
     },
+    onEquip(){
+        const v = GameData.eqAncient[this.data.id] || 0
+        if (this.eqValue != v) {
+            this.eqValue = v
+            this.data.refresh()
+            this.bind();
+        }
+    },
 
     onDestroy(){
         Events.off(Events.ON_SOUL_CHANGE,this.onSoulChange,this);
         Events.off(Events.ON_ANCIENT_LVUNIT_CHANGE, this.bind, this);
         Events.off(Events.ON_BUY_GOODS, this.onBuyGoods, this);
+        Events.off(Events.ON_EQUIP_UPDATE, this.onEquip, this);
     },
 
     onSoulChange(){
@@ -62,13 +73,14 @@ cc.Class({
 
     bind(data){
         console.log("bind ancient");
-        
         data = data?data:this.data;
         console.log(data);
         this.data = data;
         this.sp.spriteFrame = this.imgs.getSpriteFrame("ancient_" + data.id)
         this.lbName.string = data.name;
         this.lbLv.string = "等级"+PublicFunc.numToStr(data.level)
+        const addlv = data.getAddLevel() 
+        this.lbAddlv.string = addlv ? '(+'+addlv+')' : ''
         this.lbSoul.string = GameData.ancientLvUnit?""+Formulas.formatBigNumber(data.getSoul()):"手动输入"
         // 这个要根据不同的 id和等级 写描述
         this.lbDesc.string = data.getDesc();

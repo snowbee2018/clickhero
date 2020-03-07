@@ -3,6 +3,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        id : 0,
         skillName: "", // 技能名称
         baseValue: 1, // 加成数值
         coolingTime: 0, // 冷却时间，秒
@@ -29,7 +30,8 @@ cc.Class({
         // _sustainAdd: 0, // 增加的持续时间
     },
 
-    setData(skillName,baseValue,coolingTime,bSustain,sustainTime,cost,heroID,skillID,sfIcon){
+    setData(id,skillName,baseValue,coolingTime,bSustain,sustainTime,cost,heroID,skillID,sfIcon){
+        this.id = id
         this.skillName = skillName
         this.baseValue = baseValue
         this.coolingTime = coolingTime
@@ -156,6 +158,7 @@ cc.Class({
         // Events.on(Events.ON_GOLD_CHANGE, self.onGoldChange, self);
         Events.on(Events.ON_USER_SKILL_UNLOCK, self.onSkillUnlock, self);
         Events.on(Events.ON_UPGRADE_ANCIENT, self.onUpgrandAncient, self);
+        Events.on(Events.ON_EQUIP_UPDATE, self.onEquip, self);
     },
 
     skillScheduleCallBack () {
@@ -222,6 +225,14 @@ cc.Class({
                 break;
             default:
                 break;
+        }
+    },
+
+    onEquip(){
+        const v = GameData.eqSkill[this.id] || 0
+        if (this.eqValue != v) {
+            this.eqValue = v
+            this.setSkillDes();
         }
     },
 
@@ -377,12 +388,13 @@ cc.Class({
     appply() { }, // 应用技能
     backout() { }, // 撤销技能效果
 
-    rebirth (isReset) {
+    rebirth(isReset) {
         PublicFunc.unscheduleAllCallbacks();
         if (this.bSustain && !this._isSustainFinish) this.backout();
         this.onCoolingDone();
         Events.off(Events.ON_USER_SKILL_UNLOCK, this.onSkillUnlock, this);
         Events.off(Events.ON_UPGRADE_ANCIENT, this.onUpgrandAncient, this);
+        Events.off(Events.ON_EQUIP_UPDATE, this.onEquip, this);
         let time = this._lastTimestamp
         let cooltime = this._coolingCurtail
         this.initUserSkill();

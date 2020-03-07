@@ -160,7 +160,7 @@ cc.Class({
         Events.emit(Events.ON_BUYHEROS)
     },
 
-    rebirth () {
+    rebirth() {
         const self = this;
         self._heroItemMap = {}
         for (let i = 0; i < this.items.length; i++) {

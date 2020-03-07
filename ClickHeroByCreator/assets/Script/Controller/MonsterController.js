@@ -380,7 +380,7 @@ cc.Class({
         }
     },
 
-    rebirth () {
+    rebirth() {
         const self = this;
         delete self.killCount;
         delete self.monsterCount;

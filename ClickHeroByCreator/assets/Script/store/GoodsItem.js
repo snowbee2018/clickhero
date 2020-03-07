@@ -16,6 +16,7 @@ cc.Class({
         Events.on(Events.ON_BUY_GOODS,this.onBuy,this)
         Events.on(Events.ON_MAXLEVEL_UPDATE, this.onMaxFloor, this)
         Events.on(Events.ON_LEVEL_PASSED, this.onFloor, this)
+        Events.on(Events.ON_EQUIP_UPDATE, this.onEquip, this)
     },
 
     onEnable(){
@@ -30,6 +31,18 @@ cc.Class({
         Events.off(Events.ON_BUY_GOODS,this.onBuy,this)
         Events.off(Events.ON_MAXLEVEL_UPDATE, this.onMaxFloor, this)
         Events.off(Events.ON_LEVEL_PASSED, this.onFloor, this)
+        Events.off(Events.ON_EQUIP_UPDATE, this.onEquip, this)
+    },
+
+    onEquip(){
+        const v = GameData.eqGoods[this.data.id] || 0
+        if (this.eqValue != v) {
+            console.error("Goods onEquip");
+            this.eqValue = v
+            this.data.init()
+            GoodsDatas.refresh()
+            this.bind();
+        }
     },
 
     onMaxFloor(){

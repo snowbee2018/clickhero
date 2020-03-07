@@ -98,6 +98,10 @@ cc.Class({
         skGoldTimes : 1,// 当开启金币探测器时 改为2 结束为1 :calGoldTimes()
         skDPSTimes : 1,// 当使用一次祭天大典，乘以1.05 :refresh()
         skClickTimes : 1,// 开启如意金箍 改为相应倍数 结束改为1 :calClickDamage()
+        //--------装备的影响--------
+        eqSkill : [],// 猴子猴孙 +10*v,三头六臂 +1x*v,暴击风暴 +1%*x,火眼金睛 +1x*v,如意金箍 +1x*v
+        eqAncient : [], // 
+        eqGoods : [],
 
         // 购买技能时触发
         // 刷新全局DPS倍数
