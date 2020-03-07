@@ -19,8 +19,9 @@ cc.Class({
         Events.on(Events.CONSUME_TICKET,this.refresh.bind(this))
         WeChatUtil.showBannerAd()
         this.datas = DataCenter.getDataByKey(DataCenter.KeyMap.tree).tickets
-        this._boxData = DataCenter.getDataByKey(DataCenter.KeyMap.tree).boxList
-        this.onBtnBox()
+        // this._boxData = DataCenter.getDataByKey(DataCenter.KeyMap.tree).boxList
+        // this.onBtnBox()
+        this.onBtnTicket()
         
     },
 
@@ -83,10 +84,10 @@ cc.Class({
     onBtnTicket()
     {
         this._type = 2
-        this.btnNode2.scale = 1.2
-        this.btnStr2.color = new cc.Color(0x41,0xff,0x05)
-        this.btnNode1.scale = 1
-        this.btnStr1.color = new cc.Color(0xff,0xff,0xff)
+        // this.btnNode2.scale = 1.2
+        // this.btnStr2.color = new cc.Color(0x41,0xff,0x05)
+        // this.btnNode1.scale = 1
+        // this.btnStr1.color = new cc.Color(0xff,0xff,0xff)
         this.refresh()
     },
 

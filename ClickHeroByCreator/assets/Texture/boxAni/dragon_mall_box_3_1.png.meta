@@ -1,0 +1,34 @@
+{
+  "ver": "2.3.3",
+  "uuid": "2803ce77-c529-4c70-b93a-88d53c6accac",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+    "dragon_mall_box_3_1": {
+      "ver": "1.0.4",
+      "uuid": "f1025f58-9dd2-4e0a-a2f8-2b9e894b9867",
+      "rawTextureUuid": "2803ce77-c529-4c70-b93a-88d53c6accac",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -23,
+      "offsetY": -30,
+      "trimX": 20,
+      "trimY": 73,
+      "width": 264,
+      "height": 264,
+      "rawWidth": 350,
+      "rawHeight": 350,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -5,7 +5,9 @@ cc.Class({
         ndNew : cc.Node,
         boxDes : cc.Label,
         sfArr : [cc.SpriteFrame],// 2种图片
-        boxSpr : cc.Sprite
+        boxSpr : cc.Sprite,
+        openItem : cc.Prefab,
+        openBox : cc.Prefab,
     },
 
     onLoad(){
@@ -24,30 +26,35 @@ cc.Class({
 
     // 打开
     click1(){
-        const self = this
-        const ruby = this.data.ruby*0.02
-        const str = [100,1000,10000]
+        // const self = this
+        // const ruby = this.data.ruby*0.02
+        // const str = [100,1000,10000]
         
-        PublicFunc.popDialog({
-            contentStr: "花费"+str[this.data.boxType]+"仙桃，打开宝箱，获得装备",
-            btnStrs: {
-                left: '是 的',
-                right: '不，谢谢'
-            },
-            onTap: function (dialog, bSure) {
-                const count = [100,1000,10000]
-                var isCanUpgrade = DataCenter.isRubyEnough(count[self.data.boxType]);
-                if (!isCanUpgrade) {
-                    PublicFunc.toast("仙桃不足")
-                    return
-                }
-                let b = self.lv.consume(self.data)
-                if (b) {
-                    console.log("打开宝箱获得装备")
-                    PublicFunc.popGoldDialog(3,"狂战斧","获得装备",true)
-                }
-            }.bind(this)
-        })
+        // PublicFunc.popDialog({
+        //     contentStr: "花费"+str[this.data.boxType]+"仙桃，打开宝箱，获得装备",
+        //     btnStrs: {
+        //         left: '是 的',
+        //         right: '不，谢谢'
+        //     },
+        //     onTap: function (dialog, bSure) {
+        //         const count = [100,1000,10000]
+        //         var isCanUpgrade = DataCenter.isRubyEnough(count[self.data.boxType]);
+        //         if (!isCanUpgrade) {
+        //             PublicFunc.toast("仙桃不足")
+        //             return
+        //         }
+        //         let b = self.lv.consume(self.data)
+        //         if (b) {
+        //             // console.log("打开宝箱获得装备")
+        //             // PublicFunc.popGoldDialog(3,"狂战斧","获得装备",true)
+        //         }
+        //     }.bind(this)
+        // })
+
+        let dialog = cc.instantiate(this.openBox)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
         
     },
 

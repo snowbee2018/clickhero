@@ -178,7 +178,7 @@
         "__id__": 4
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 7
@@ -513,8 +513,8 @@
       "__type__": "TypedArray",
       "ctor": "Float32Array",
       "array": [
-        110,
-        422,
+        -11.66100025177002,
+        416.9309997558594,
         0,
         0,
         0,
@@ -684,7 +684,7 @@
     "node": {
       "__id__": 11
     },
-    "_enabled": true,
+    "_enabled": false,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
@@ -1595,7 +1595,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "551b0UtLRlMKpGwY56gRMKW",
+    "_componentId": "f1d66YE4slPA6PerCG7IYsg",
     "handler": "finish",
     "customEventData": ""
   },
