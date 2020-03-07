@@ -45,6 +45,7 @@ cc.Class({
         nodeClickRuby : cc.Node,
 
         btnGolden : cc.Node,
+        openBox : cc.Prefab,
     },
     
     // use this for initialization
@@ -95,7 +96,7 @@ cc.Class({
         //     this.btnTree.active = bb
         // }
         this.btnTree.active = true
-
+        this.openBox.active = DataCenter.getDataByKey(DataCenter.KeyMap.tree).boxList.length > 0
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");
             this.createClickGuide()
@@ -343,11 +344,17 @@ cc.Class({
             }
             self.isIdle = true; // 是否为挂机状态
             self.combo = 0; // 当前连击数
+            console.log("init0")
             DataCenter.init();
+            console.log("init1")
             GoodsDatas.init();
+            console.log("init2")
             EquipDatas.init();
+            console.log("init3")
             HeroDatas.init();
+            console.log("init4")
             TaskDatas.init();
+            console.log("init5")
             self.getComponent("AutoClick").init();
             self.heroListControl.setHeroList();
             self.monsterController.init();
@@ -1256,5 +1263,13 @@ cc.Class({
         this.btnTree.active = false
         this.btnClub.active = false
         this.getComponent("AutoClick").showAutoBtn(false)
+    },
+
+    onBtnBox() {
+        // this.openBox
+        let dialog = cc.instantiate(this.openBox)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 });
