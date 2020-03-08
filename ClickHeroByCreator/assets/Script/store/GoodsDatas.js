@@ -7,6 +7,14 @@ var Datas = {}
 Datas.isZone2 = function(){
     return DataCenter.getUserZone() === 2
 }
+Datas.getGoods = function(id) {
+    for (let i = 0; i < Datas.datas.length; i++) {
+        const e = Datas.datas[i];
+        if (e.id == id) {
+            return e
+        }
+    }
+}
 
 Datas.init = function(reset) {
     if (!reset) {

@@ -151,21 +151,24 @@ cc.Class({
             return this.heroList[id];
         },
         getAncient(id){
-            this.otherAncients.forEach(e => {
+            for (let i = 0; i < this.otherAncients.length; i++) {
+                const e = this.otherAncients[i];
                 if (id == e.id) {
                     return e;
                 }
-            });
-            this.myAncients.forEach(e => {
+            }
+            for (let i = 0; i < this.myAncients.length; i++) {
+                const e = this.myAncients[i];
                 if (id == e.id) {
                     return e;
                 }
-            });
-            this.selAncients.forEach(e => {
+            }
+            for (let i = 0; i < this.selAncients.length; i++) {
+                const e = this.selAncients[i];
                 if (id == e.id) {
                     return e;
                 }
-            });
+            }
             console.error("getAncient(id) 错误 找不到");
             return null;
         },

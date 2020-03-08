@@ -706,7 +706,7 @@ cc.Class({
     },
 
     getUserZone(){
-        let zone = 0
+        let zone = 2
         var cloudData = this.getDataByKey("CloudData");
         const registerTime = cloudData ? cloudData.registerTime : 0
         for (let i = this.zoneStartTimes.length-1; i >= 0; i--) {

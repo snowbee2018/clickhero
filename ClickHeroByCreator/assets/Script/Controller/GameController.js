@@ -46,6 +46,7 @@ cc.Class({
 
         btnGolden : cc.Node,
         openBox : cc.Prefab,
+        ndBottom : cc.Node,
     },
     
     // use this for initialization
@@ -79,11 +80,14 @@ cc.Class({
         }
         if (DataCenter.getUserZone() === 2) {
             if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
+                this.ndBottom.active = true
                 this.tabs[5].active = true
             }else{
+                this.ndBottom.active = v0
                 this.tabs[5].active = v0
             }
         } else {
+            this.ndBottom.active = false
             this.tabs[5].active = false
         }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
@@ -120,16 +124,18 @@ cc.Class({
     },
 
     openSetting(){
+        EquipDatas.roll(0)
+        EquipDatas.roll(1)
         console.log("打开设置界面");
-        let dialog = cc.instantiate(this.settingDialog)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
-        if (this.spSetting.active) {
-            cc.sys.localStorage.setItem("usedSetting",true)
-            this.spSetting.stopAllActions()
-            this.spSetting.active = false
-        }
+        // let dialog = cc.instantiate(this.settingDialog)
+        // dialog.parent = cc.director.getScene();
+        // dialog.x = cc.winSize.width / 2;
+        // dialog.y = cc.winSize.height / 2;
+        // if (this.spSetting.active) {
+        //     cc.sys.localStorage.setItem("usedSetting",true)
+        //     this.spSetting.stopAllActions()
+        //     this.spSetting.active = false
+        // }
     },
 
     hidePageView(){
@@ -620,6 +626,7 @@ cc.Class({
         }
         if (DataCenter.getUserZone() === 2) {
             this.tabs[5].active = maxPassLavel >= 300
+            this.ndBottom.active = maxPassLavel >= 300
         }
         this.lastMaxlvTime = this.lastMaxlvTime || 0
         const curtime = Date.now();
