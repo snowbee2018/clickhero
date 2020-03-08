@@ -80,14 +80,14 @@ cc.Class({
         }
         if (DataCenter.getUserZone() === 2) {
             if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
-                this.ndBottom.active = true
+                // this.ndBottom.active = true
                 this.tabs[5].active = true
             }else{
-                this.ndBottom.active = v0
+                // this.ndBottom.active = v0
                 this.tabs[5].active = v0
             }
         } else {
-            this.ndBottom.active = false
+            // this.ndBottom.active = false
             this.tabs[5].active = false
         }
         let v1 = Boolean(maxPassLavel && maxPassLavel >= 5)
@@ -626,7 +626,7 @@ cc.Class({
         }
         if (DataCenter.getUserZone() === 2) {
             this.tabs[5].active = maxPassLavel >= 300
-            this.ndBottom.active = maxPassLavel >= 300
+            // this.ndBottom.active = maxPassLavel >= 300
         }
         this.lastMaxlvTime = this.lastMaxlvTime || 0
         const curtime = Date.now();
