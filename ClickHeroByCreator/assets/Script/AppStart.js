@@ -30,6 +30,13 @@ cc.Class({
             }
             console.log('load subpackage successfully.');
         });
+        cc.loader.downloader.loadSubpackage('equip', function (err) {
+            console.log("loadSubpackage 结果：");
+            if (err) {
+                return console.error(err);
+            }
+            console.log('load subpackage successfully.');
+        });
         // const res = wx.getStorageInfoSync()
         // console.log("看看这里 小伙子");
         
