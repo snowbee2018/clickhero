@@ -27,7 +27,7 @@ cc.Class({
         // this.tgGold = Number(this.tgGold)
         this.tgClick = Number(this.tgClick)
         this.tgClickEffect = Number(this.tgClickEffect)
-        // this.openMusic(this.tgBgm);
+        // this.openMusic(this.tgBgm); 
         this.openEffect(true);
         if (b) {
             this.playBG()
