@@ -74,7 +74,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         360,
         640,
@@ -141,7 +141,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -291,7 +291,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         40,
@@ -365,7 +365,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         -125,
@@ -439,7 +439,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         280,
         0,
@@ -503,7 +503,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -1,
         0,
@@ -659,7 +659,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         310,
@@ -730,7 +730,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -1025,7 +1025,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         295,
@@ -1089,7 +1089,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -250,
         20,
@@ -1194,7 +1194,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -250,
         -20,
@@ -1312,7 +1312,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         200,
         0,
@@ -1376,7 +1376,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         19.600000381469727,
@@ -1481,7 +1481,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -26.899999618530273,
         -12,
@@ -1590,7 +1590,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -1.5,
         -11.899999618530273,
@@ -1838,7 +1838,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         80,
         0,
@@ -1909,7 +1909,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -1973,7 +1973,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -2347,7 +2347,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         420,
@@ -2414,7 +2414,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -189,
         0,
@@ -2525,7 +2525,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -106,
         40,
@@ -2630,7 +2630,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         81,
         40,
@@ -2735,7 +2735,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -106,
         9,
@@ -2840,7 +2840,7 @@
     "_id": "",
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         -106,
         -35,

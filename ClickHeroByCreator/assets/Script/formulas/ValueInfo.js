@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-05-19
  * @Last Modified by: xj
- * @Last Modified time: 2019-06-23 21:53:20
+ * @Last Modified time: 2020-04-05 16:17:09
  */
  
 cc.Class({
@@ -18,7 +18,7 @@ cc.Class({
     },
 
     refresh(){
-        const z2 = DataCenter.getUserZone() === 2
+        const z2 = DataCenter.getUserZone() >= 2
         const g = GameData
         const arr = []
         const push = function(k,v,u) {

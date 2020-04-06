@@ -24,6 +24,7 @@ cc.Class({
         ValueInfo : cc.Prefab,
         GoldTree : cc.Prefab,
         pfEquipDialog : cc.Prefab,
+        pfBoxDialog : cc.Prefab,
     },
 
     onLoad(){
@@ -115,20 +116,31 @@ cc.Class({
                 right: '不，谢谢'
             },
             onTap: function (dialog, bSure) {
-                // 重置游戏
-                DataCenter.revive();
-                HeroDatas.rebirth();
-                // Events.emit(Events.ON_RESETGAME);
-                self.getComponent("HeroListControl").rebirth();
-                self.getComponent("AncientCtrl").resetGame();
-                self.getComponent("MonsterController").rebirth();
-                GameData.refresh();
-                self.getComponent("UserSkillController").rebirth(true);
-                Events.emit(Events.ON_GOLD_CHANGE);
-                Events.emit(Events.ON_LEVEL_PASSED);
-                Events.emit(Events.ON_MAXLEVEL_UPDATE);
-                self.popGoldDialog(3,AS,"转世魂魄",true)
-                Events.emit(Events.ON_SOUL_CHANGE);
+                if (bSure) {
+                    try {
+                        Events.emit(Events.BEFORE_REBIRTH)
+                        GameData.clickDamage = newBigNumber(0)
+                        GameData.dpsDamage = newBigNumber(0)
+                        setTimeout(() => {
+                            // 重置游戏
+                            DataCenter.revive();
+                            HeroDatas.rebirth();
+                            // Events.emit(Events.ON_RESETGAME);
+                            self.getComponent("HeroListControl").rebirth();
+                            self.getComponent("AncientCtrl").resetGame();
+                            self.getComponent("MonsterController").rebirth();
+                            GameData.refresh();
+                            self.getComponent("UserSkillController").rebirth(true);
+                            Events.emit(Events.ON_GOLD_CHANGE);
+                            Events.emit(Events.ON_LEVEL_PASSED);
+                            Events.emit(Events.ON_MAXLEVEL_UPDATE);
+                            self.popGoldDialog(3,AS,"转世魂魄",true)
+                            Events.emit(Events.ON_SOUL_CHANGE);
+                        }, 200);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
             }
         });
     },
@@ -144,22 +156,33 @@ cc.Class({
                 right: '不，谢谢'
             },
             onTap: function (dialog, bSure) {
+                if (bSure) {
+                    try {
+                        Events.emit(Events.BEFORE_REBIRTH)
+                        GameData.clickDamage = newBigNumber(0)
+                        GameData.dpsDamage = newBigNumber(0)
+                        setTimeout(() => {
+                            DataCenter.resetGame();
+                            GoodsDatas.resetGame()
+                            HeroDatas.resetGame();
+                            Events.emit(Events.ON_RESETGAME);
+                            self.getComponent("HeroListControl").rebirth();
+                            self.getComponent("AncientCtrl").resetGame();
+                            self.getComponent("MonsterController").rebirth();
+                            GameData.refresh();
+                            self.getComponent("UserSkillController").rebirth(true);
+                            Events.emit(Events.ON_GOLD_CHANGE);
+                            Events.emit(Events.ON_SOUL_CHANGE);
+                            Events.emit(Events.ON_RUBY_CHANGE);
+                            // WeChatUtil.onHide();
+                            self.popGoldDialog(2, ruby2,null,true)
+                        }, 200);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
                 // 重置游戏
                 // let ruby = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
-                DataCenter.resetGame();
-                GoodsDatas.resetGame()
-                HeroDatas.resetGame();
-                Events.emit(Events.ON_RESETGAME);
-                self.getComponent("HeroListControl").rebirth();
-                self.getComponent("AncientCtrl").resetGame();
-                self.getComponent("MonsterController").rebirth();
-                GameData.refresh();
-                self.getComponent("UserSkillController").rebirth(true);
-                Events.emit(Events.ON_GOLD_CHANGE);
-                Events.emit(Events.ON_SOUL_CHANGE);
-                Events.emit(Events.ON_RUBY_CHANGE);
-                // WeChatUtil.onHide();
-                self.popGoldDialog(2, ruby2,null,true)
             }
         });
     },
@@ -270,7 +293,10 @@ cc.Class({
     showUpgradeInfo(){
         let info
         info = [
-            "1.三区商店的伤害高又高、金币多又多、仙丹多又多每次购买附加1.05倍的指数增长调整为1.07倍"
+            "1.开启四区，4月6日0点后注册的玩家计入新区，可重置游戏进入新区",
+            "2.三、四区新增装备功能，100关后开启",
+            "3.装备宝箱通过砍树活动获得，本次开放铜箱子，获得普通及稀有装备，后续会有银箱子金箱子，同时会新增更多装备",
+            "4.新装备上线后短期可能会有小幅度平衡调整",
         ].join("\n")
         // if (DataCenter.getUserZone()==1) {
             
@@ -448,14 +474,16 @@ cc.Class({
         // v.x = cc.winSize.width / 2;
         // v.y = cc.winSize.height / 2;
     },
-    // type 0普通+ 1稀有+ 2史诗+
-    randomEquip(type){
-        return {id:0,type:0,name:'name',level:1,} // 也可能返回空 表示失败
-    },
     showEquipDialog(){
         let v = cc.instantiate(this.pfEquipDialog)
         v.parent = cc.director.getScene();
         v.x = cc.winSize.width / 2;
         v.y = cc.winSize.height / 2;
+    },
+    showBoxDialog(){
+        let dialog = cc.instantiate(this.pfBoxDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
     },
 });

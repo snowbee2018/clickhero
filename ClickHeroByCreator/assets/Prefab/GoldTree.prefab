@@ -77,7 +77,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         360,
         640,
@@ -131,7 +131,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 214.88,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -141,7 +141,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         400,
@@ -182,8 +182,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "圣诞树🎄",
-    "_N$string": "圣诞树🎄",
+    "_string": "会掉装备箱哦🎄",
+    "_N$string": "会掉装备箱哦🎄",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -246,7 +246,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         340,
@@ -351,7 +351,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -454,7 +454,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -525,7 +525,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -610,7 +610,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         -450,
@@ -674,7 +674,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,
@@ -779,7 +779,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         -80,
@@ -820,8 +820,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "冬季砍树活动2月10号截止哦",
-    "_N$string": "冬季砍树活动2月10号截止哦",
+    "_string": "开箱子得装备！",
+    "_N$string": "开箱子得装备！",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -956,7 +956,7 @@
     },
     "component": "",
     "_componentId": "c5421i0uFVAkoXhuGTBGDuy",
-    "handler": "showTicketView",
+    "handler": "onClick",
     "customEventData": ""
   },
   {
@@ -1011,7 +1011,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         275,
         555,
@@ -1078,7 +1078,7 @@
     },
     "_trs": {
       "__type__": "TypedArray",
-      "ctor": "Float32Array",
+      "ctor": "Float64Array",
       "array": [
         0,
         0,

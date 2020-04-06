@@ -9,6 +9,7 @@ cc.Class({
         lbUpgradeChip : cc.Label,
         lbUpgradeRuby : cc.Label,
         rtDesc : cc.RichText,
+        lbDesc : cc.Label,
         ndOn : cc.Node,
         ndOff : cc.Node,
         ndAct : cc.Node,
@@ -66,7 +67,7 @@ cc.Class({
         }
         this.ndAct.active = false
         this.cur = null
-        this.rtDesc.string = ''
+        this.lbDesc.string = ''
     },
     onSelOnItem(b,c){
         // b 是否选中 c.data装备数据
@@ -82,7 +83,7 @@ cc.Class({
             this.lbResolveChip.string = '+'+EquipDatas.getResolveChip(data)
             this.lbUpgradeChip.string = '-'+EquipDatas.getUpgradeChip(data)
             this.lbUpgradeRuby.string = '-'+EquipDatas.getUpgradeRuby(data)
-            this.rtDesc.string = EquipDatas.getDesc(data)
+            this.lbDesc.string = EquipDatas.getDesc(data)
         } else {
             this.clearSel()
         }
@@ -163,7 +164,10 @@ cc.Class({
             }.bind(this)
         });
     },
-
+    onTab(e,i){
+        this.tab = i
+        PublicFunc.toast('暂未开放')
+    },
     finish(){
         this.node.destroy()
     },

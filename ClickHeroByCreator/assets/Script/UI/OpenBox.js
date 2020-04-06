@@ -14,10 +14,12 @@ cc.Class({
     properties: {
         pirceLab : cc.Label,
         boxDes : cc.Label,
-        boxNode : [cc.Node],
-        sprArr : [cc.Sprite],
-        itemArr : [cc.SpriteFrame],// 
+        spBox : cc.Sprite,
+        // boxNode : [cc.Node],
+        // sprArr : [cc.Sprite],
+        sfs : [cc.SpriteFrame],
         noBoxNode : cc.Node,
+        pfEquip : cc.Prefab,
     },
 
 
@@ -31,9 +33,7 @@ cc.Class({
 
     setNoBox(){
         this.noBoxNode.active = true
-        for (let index = 0; index < 3; index++) {
-            this.boxNode[index].active = false
-    }
+        this.spBox.node.active = false
     },
 
     onBtnClose() {
@@ -61,68 +61,86 @@ cc.Class({
         var data = this._boxData[this._index]
         var str = ["打开铜箱子，必定获得普通及以上品质的装备","打开银箱子，必定获得稀有及以上品质的装备","打开金箱子，必定获得史诗及以上品质的装备"]
         this.boxDes.string = str[data.boxType]
-        var str1 = ["点击宝箱，花费100桃子","击宝箱，花费1000桃子","击宝箱，花费10000桃子"]
-        this.pirceLab.string = str1[data.boxType]
-        for (let index = 0; index < 3; index++) {
-                this.boxNode[index].active = index == data.boxType
-        }
+        this.pirceLab.string = "点击宝箱，花费"+EquipDatas.buyRubys[data.boxType]+"桃子"
+        this.spBox.node.active = true
+        this.spBox.spriteFrame = this.sfs[data.boxType]
     },
 
     clickNext(){
+        if (this.ndEquip) {
+            this.ndEquip.destroy()
+            this.ndEquip = null
+        }
         if(this._boxData.length == 0){
             this.setNoBox()
             return
         }
         this._isopen = false
-        this.stopAllAction()
+        // this.stopAllAction()
         this._index = this._index >= this._boxData.length - 1 ? 0 : this._index + 1 
         console.log("this._index"+ this._index)   
         console.log(this._boxData)     
         this.setView()
     },
     clickPre(){
+        if (this.ndEquip) {
+            this.ndEquip.destroy()
+            this.ndEquip = null
+        }
         if(this._boxData.length == 0){
             this.setNoBox()
             return
         }
         this._isopen = false
-        this.stopAllAction()
+        // this.stopAllAction()
         this._index = this._index <= 0 ? this._boxData.length - 1 : this._index- 1  
         console.log("this._index"+ this._index)      
         console.log(this._boxData) 
         this.setView()
     },
-    stopAllAction(){
-        for (let index = 0; index < 3; index++) {
-            // this.boxNode[index].stopAllAction()
-            var anim = this.boxNode[index].getComponent(cc.Animation);
-            var name = "openBox" + (index + 1)
-            anim.resume(name);
-            anim.setCurrentTime(0, name);
-        }   
-    },
-    clickBox()
-    {
+    // stopAllAction(){
+    //     for (let index = 0; index < 3; index++) {
+    //         // this.boxNode[index].stopAllAction()
+    //         var anim = this.boxNode[index].getComponent(cc.Animation);
+    //         var name = "openBox" + (index + 1)
+    //         anim.resume(name);
+    //         anim.setCurrentTime(0, name);
+    //     }   
+    // },
+    clickBox() {
         if(this._isopen) return
         var data = this._boxData[this._index]
-        const count = [100,1000,10000]
-        var isCanUpgrade = DataCenter.isRubyEnough(count[data.boxType]);
-        if (!isCanUpgrade) {
-            PublicFunc.toast("仙桃不足")
-            return
-        }
-        let b = this.consume(data)
-        if (b) {
-            this._isopen = true
-            // console.log("打开宝箱获得装备")
-            // PublicFunc.popGoldDialog(3,"狂战斧","获得装备",true)
-            // this.sprArr[data.boxType].SpriteFrame = this.itemArr[0]
-            var anim = this.boxNode[data.boxType].getComponent(cc.Animation);
-            var name = "openBox" + (data.boxType + 1)
-            anim.play(name);
-            
-        }
-    },
+        const ruby = EquipDatas.buyRubys[data.boxType]
+        PublicFunc.popDialog({
+            contentStr: "你确定要花费"+ruby+"仙桃开启装备箱吗？",
+            btnStrs: {
+                left: '是 的',
+                right: '不，谢谢'
+            },
+            onTap: function (dialog, bSure) {
+                var b = DataCenter.isRubyEnough(ruby);
+                if (!b) {
+                    PublicFunc.toast("仙桃不足")
+                    return
+                }
+                DataCenter.consumeRuby(ruby)
+                b = this.consume(data)
+                if (b) {
+                    this._isopen = true
+                    this.spBox.node.active = false
+                    const e = EquipDatas.roll(data.boxType)
+                    const eq = cc.instantiate(this.pfEquip).getComponent('Equip')
+                    eq.node.parent = this.node
+                    eq.node.scale = 2
+                    eq.setData(e)
+                    this.ndEquip = eq.node
+                }
+            }.bind(this)
+        });
 
+    },
+    toEquipDialog(){
+        PublicFunc.showEquipDialog()
+    },
 
 });

@@ -45,7 +45,6 @@ cc.Class({
         nodeClickRuby : cc.Node,
 
         btnGolden : cc.Node,
-        openBox : cc.Prefab,
         ndBottom : cc.Node,
     },
     
@@ -78,14 +77,13 @@ cc.Class({
             this.tabs[2].active = v0
             // this.tabs[2].active = true
         }
-        if (DataCenter.getUserZone() === 2) {
+        if (DataCenter.getUserZone() >= 2) {
             if (Boolean(maxPassLavel && maxPassLavel >= 300)) {
-                this.ndBottom.active = true
                 this.tabs[5].active = true
             }else{
-                this.ndBottom.active = v0
                 this.tabs[5].active = v0
             }
+            this.ndBottom.active = maxPassLavel >= 100
         } else {
             this.ndBottom.active = false
             this.tabs[5].active = false
@@ -100,8 +98,7 @@ cc.Class({
         // if (Date.now() < 1581350400000) {
         //     this.btnTree.active = bb
         // }
-        // this.btnTree.active = true
-        this.openBox.active = DataCenter.getDataByKey(DataCenter.KeyMap.tree).boxList.length > 0
+        // this.btnTree.active = bb
         if(!Boolean(maxPassLavel)){
             console.log("加个点击手引导");
             this.createClickGuide()
@@ -124,18 +121,16 @@ cc.Class({
     },
 
     openSetting(){
-        EquipDatas.roll(0)
-        EquipDatas.roll(1)
         console.log("打开设置界面");
-        // let dialog = cc.instantiate(this.settingDialog)
-        // dialog.parent = cc.director.getScene();
-        // dialog.x = cc.winSize.width / 2;
-        // dialog.y = cc.winSize.height / 2;
-        // if (this.spSetting.active) {
-        //     cc.sys.localStorage.setItem("usedSetting",true)
-        //     this.spSetting.stopAllActions()
-        //     this.spSetting.active = false
-        // }
+        let dialog = cc.instantiate(this.settingDialog)
+        dialog.parent = cc.director.getScene();
+        dialog.x = cc.winSize.width / 2;
+        dialog.y = cc.winSize.height / 2;
+        if (this.spSetting.active) {
+            cc.sys.localStorage.setItem("usedSetting",true)
+            this.spSetting.stopAllActions()
+            this.spSetting.active = false
+        }
     },
 
     hidePageView(){
@@ -244,7 +239,7 @@ cc.Class({
                         let y = winHeight * Math.random() - winHeight/2
                         node.x=x
                         node.y=y
-                        node.scale = 0.25
+                        node.scale = 0.6
                         node.rotation = Math.random()*360
                         node.addComponent(cc.Button)
                         node.on('click', function() {
@@ -487,6 +482,7 @@ cc.Class({
         obj[map.AS] = DataCenter.getDataByKey(map.AS);
         obj[map.totalAS] = DataCenter.getDataByKey(map.totalAS);
         obj[map.tree] = DataCenter.getDataByKey(map.tree);
+        obj[map.myEquips] = EquipDatas.mys
         console.log(obj);
         let result = DataCenter.saveGameData(obj)
         return [obj,result]
@@ -621,12 +617,15 @@ cc.Class({
         }
         let bb = Boolean(maxPassLavel && maxPassLavel >= 100)
         this.btnClub.active = bb
-        if (Date.now() < 1578240000000) {
-            this.btnTree.active = bb
-        }
-        if (DataCenter.getUserZone() === 2) {
+        // if (Date.now() < 1578240000000) {
+        //     this.btnTree.active = bb
+        // }
+        // this.btnTree.active = bb
+        if (DataCenter.getUserZone() >= 2) {
             this.tabs[5].active = maxPassLavel >= 300
-            this.ndBottom.active = maxPassLavel >= 300
+            this.ndBottom.active = maxPassLavel >= 100
+        } else {
+            this.ndBottom.active = false
         }
         this.lastMaxlvTime = this.lastMaxlvTime || 0
         const curtime = Date.now();
@@ -1252,13 +1251,5 @@ cc.Class({
         this.btnTree.active = false
         this.btnClub.active = false
         this.getComponent("AutoClick").showAutoBtn(false)
-    },
-
-    onBtnBox() {
-        // this.openBox
-        let dialog = cc.instantiate(this.openBox)
-        dialog.parent = cc.director.getScene();
-        dialog.x = cc.winSize.width / 2;
-        dialog.y = cc.winSize.height / 2;
     },
 });

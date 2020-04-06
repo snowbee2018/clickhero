@@ -2,7 +2,7 @@ cc.Class({
     
     ctor () {
         const self = this;
-        self.zoneStartTimes = [0,1566943200000,1569794400000]
+        self.zoneStartTimes = [0,1566943200000,1569794400000,1586102400000]
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
@@ -39,6 +39,7 @@ cc.Class({
             AS : "AS",
             totalAS : "totalAS",
             tree : "tree",
+            myEquips : 'myEquips',
         }
         self.ContentData = {}
         self.DataMap = {
@@ -171,10 +172,21 @@ cc.Class({
         var tree = self.getCloudDataByKey(self.KeyMap.tree);
         if (tree) {
             self.setDataByKey(self.KeyMap.tree, tree);
+            tree.boxList = tree.boxList || []
         } else {
             self.setDataByKey(self.KeyMap.tree, {date:"",tickets:[],boxList:[] });
             
         }
+        console.log("xxxxj init 0");
+        
+        var myEquips = self.getCloudDataByKey(self.KeyMap.myEquips);
+        if (myEquips) {
+            self.setDataByKey(self.KeyMap.myEquips, myEquips);
+        } else {
+            self.setDataByKey(self.KeyMap.myEquips, {on:[],off:[],chip:0});
+        }
+        console.log(DataCenter.getCloudDataByKey(DataCenter.KeyMap.myEquips));
+        
         var skill6Data = DataCenter.getCloudDataByKey(DataCenter.KeyMap.skill6Data)
         self.setDataByKey(self.KeyMap.skill6Data, {count:0,useCount:0})
         if (skill6Data) {
@@ -706,10 +718,10 @@ cc.Class({
     },
 
     getUserZone(){
-        let zone = 2
+        let zone = this.zoneStartTimes.length-1
         var cloudData = this.getDataByKey("CloudData");
         const registerTime = cloudData ? cloudData.registerTime : 0
-        for (let i = this.zoneStartTimes.length-1; i >= 0; i--) {
+        for (let i = zone; i >= 0; i--) {
             const time = this.zoneStartTimes[i];
             if (registerTime && registerTime >= time) {
                 zone = i

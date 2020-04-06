@@ -15,15 +15,15 @@ cc.Class({
     },
 
     onLoad(){
-        if (Date.now() > 1581350400000) {
-            this.lbTime.string = "活动已结束"
-            this.btnClose.active = true
-            this.btn.active = true
-            return
-        }
+        // if (Date.now() > 1581350400000) {
+        //     this.lbTime.string = "活动已结束"
+        //     this.btnClose.active = true
+        //     this.btn.active = true
+        //     return
+        // }
         this.treedata = DataCenter.getDataByKey(DataCenter.KeyMap.tree)
         if (this.isToday(this.treedata.date)) {
-            this.lbTime.string = "新年快乐，明天再来！"
+            this.lbTime.string = "开心每一天😄，明天再来！"
             this.btnClose.active = true
             this.btn.active = true
         } else {
@@ -31,13 +31,14 @@ cc.Class({
             this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this));
             this.isEnd=false
             this.poptime = 0
-            this._popBox = 0
             this.interval = 0
             this.giftIndex = 0
             this.endtime = Date.now() + 30*1000
             // 生成一个奖励列表
             this.tickets = []
-            this.createTickets()
+            // this.createTickets()
+            this.boxs = []
+            this.createBoxs()
         }
     },
     isToday(d){
@@ -51,7 +52,34 @@ cc.Class({
         }
         return value;
     },
-
+    createBoxs(){
+        // const r0 = Math.random()
+        // if (r0<=0.3) {
+        //     ruby = rubys0[0]
+        // } else if (r0<=0.6) {
+        //     ruby = rubys0[1]
+        // } else if (r0 <= 0.8) {
+        //     ruby = rubys0[2]
+        // } else {
+        //     ruby = rubys0[3]
+        // }
+        this.boxs[0] = {
+            index : Math.ceil(Math.random()*10+10),
+            type : 0
+        }
+        this.boxs[1] = {
+            index : Math.floor(Math.random()*20+12),
+            type : 0
+        }
+        this.boxs[2] = {
+            index : Math.floor(Math.random()*20+17),
+            type : 0
+        }
+        this.boxs[3] = {
+            index : Math.floor(Math.random()*10),
+            type : 0
+        }
+    },
     createTickets(){
         const rubys0 = [1000,2000,3000,5000,10000]
         const rubys1 = [10000,24000,50000,100000,150000,240000]
@@ -131,11 +159,17 @@ cc.Class({
         this.interval = Math.random() * 2000
         console.log("弹出礼物！");
         this.popGold()
-        this.popBox()
+        // this.popBox()
         this.tickets.forEach(t => {
             if (this.giftIndex == t.index) {
                 t.b = true
                 this.popTicket(t.ruby)
+            }
+        });
+        this.boxs.forEach(e => {
+            if (this.giftIndex == e.index) {
+                e.b = true
+                this.popBox(e.type)
             }
         });
         this.giftIndex++
@@ -171,6 +205,26 @@ cc.Class({
         
     },
 
+    popBox (type) {
+        this.treedata.boxList.unshift({
+            isnew : true,
+            time : Date.now(),
+            boxType : type,
+        })
+        let x = (Math.random() - 0.5) * 600
+        let y = Math.random() * +100 + 120
+        let pos = cc.v2(x,y)
+        let node = new cc.Node()
+        node._localZOrder = 100
+        let sp = node.addComponent(cc.Sprite)
+        var sfId = type + 2
+        sp.spriteFrame = this.sfArr[sfId]
+        node.parent = this.ndImgs
+        let h = Math.random() * 100 + 200
+        let r = (Math.random()-0.5)*720
+        node.runAction(cc.spawn(cc.jumpTo(0.8,pos,h,2),cc.rotateBy(0.8,r)))   
+    },
+
     showResult(){
         this.ndImgs.children.forEach(e => {
             e.stopAllActions()
@@ -192,7 +246,7 @@ cc.Class({
                 }
             });
             console.log(this.treedata);
-            this.showTicketView()
+            // this.showTicketView()
             // 弹出获得的金币
             if (this.giftIndex > 0) {
                 const gold = PublicFunc.getBagGold().times(this.giftIndex/2)
@@ -208,6 +262,10 @@ cc.Class({
         node.y = cc.winSize.height / 2;
     },
 
+    onClick(){
+        PublicFunc.showBoxDialog()
+    },
+
     update(dt){
         if (this.isEnd!=false) {
             return
@@ -215,7 +273,7 @@ cc.Class({
         let countdown = this.endtime - Date.now()
         if (countdown<= 0) {
             this.isEnd = true
-            this.lbTime.string = "新年快乐，明天再来！"
+            this.lbTime.string = "开心每一天😄，明天再来！"
             this.showResult()
             return
         }
@@ -223,7 +281,7 @@ cc.Class({
     },
 
     showClickLight(pos){
-        let light = cc.instntiate(this.clickLight)
+        let light = cc.instantiate(this.clickLight)
         if (this.node) {
             light.parent = this.node
         }
@@ -244,47 +302,4 @@ cc.Class({
     onDestroy(){
     },
 
-    popBox ()
-    {
-        if(this._popBox > 4)
-            return
-        this._popBox = this._popBox + 1
-        let boxType
-        const r0 = Math.random()
-        if (r0<=0.3) {  //铜箱子
-            boxType = 0
-        } else if (r0<=0.44) {   //银箱子
-            boxType = 1
-        } else if (r0<=0.5) {   //金箱子,这里丢掉百分之十
-            boxType = 2
-        } 
-        else
-        {
-            return 
-        }
-        this.treedata.boxList.unshift({
-            isnew : true,
-            time : Date.now(),
-            boxType : boxType,
-        }) 
-        
-        this.showBox(boxType)     
-    },
-
-    showBox(boxType){
-        console.log("showBox boxType:" + boxType);
-        let x = (Math.random() - 0.5) * 600
-        let y = -180
-        let pos = cc.v2(x,y)
-        let node = new cc.Node()
-        node._localZOrder = 100
-        let sp = node.addComponent(cc.Sprite)
-        var sfId = boxType + 2
-        sp.spriteFrame = this.sfArr[sfId]
-        node.parent = this.ndImgs
-        let h = Math.random() * 100 + 200
-        let r = 720
-        node.runAction(cc.spawn(cc.jumpTo(0.8,pos,h,2),cc.rotateBy(0.8,r)))
-        
-    },
 })
