@@ -15,6 +15,8 @@ cc.Class({
         ndAct : cc.Node,
         lbBtn : cc.Label,// 装备按钮的文字
         pfEquip : cc.Prefab,
+        tabBtns : [cc.Button],
+        tabs : [cc.Node],
     },
 
     onLoad(){
@@ -24,6 +26,7 @@ cc.Class({
         this.showRuby()
         // 先填充4个on装备
         this.refresh()
+        this.onTab(null,0)
     },
     refresh(){
         this.onItems = this.onItems || []
@@ -165,8 +168,15 @@ cc.Class({
         });
     },
     onTab(e,i){
+        i = Number(i)
         this.tab = i
-        PublicFunc.toast('暂未开放')
+        const j = (i+1)%2
+        console.log(i + " " + j);
+        
+        this.tabBtns[i].interactable = false
+        this.tabBtns[j].interactable = true
+        this.tabs[j].active = false
+        this.tabs[i].active = true
     },
     finish(){
         this.node.destroy()

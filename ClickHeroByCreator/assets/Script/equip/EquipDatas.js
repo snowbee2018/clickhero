@@ -46,7 +46,7 @@ self.init = function() {
         eqGoods : [],
     })
     arr0.push({id:5,type:0,name:'name0',level:1,
-        eqSkill : [{id:3,v:1},{id:6,v:1},],
+        eqSkill : [{id:3,v:1},{id:6,v:2},],
         eqAncient : [],
         eqGoods : [],
     })
@@ -54,7 +54,7 @@ self.init = function() {
     arr1.push({id:8,type:1,name:'name0',level:1,
         eqSkill : [],
         eqAncient : [],
-        eqGoods : [{id:14,v:3},{id:1,v:2},],
+        eqGoods : [{id:14,v:2},{id:1,v:2},],
     })
     arr1.push({id:9,type:1,name:'name0',level:1,
         eqSkill : [],
@@ -66,7 +66,35 @@ self.init = function() {
         eqAncient : [],
         eqGoods : [{id:100,v:2}],
     })
+    arr1.push({id:11,type:1,name:'name0',level:1,
+        eqSkill : [{id:0,v:10}],
+        eqAncient : [],
+        eqGoods : [{id:4,v:2}],
+    })
+    arr1.push({id:12,type:1,name:'name0',level:1,
+        eqSkill : [{id:1,v:1},{id:6,v:2},],
+        eqAncient : [],
+        eqGoods : [{id:4,v:1},{id:3,v:2},],
+    })
     let arr2 = self.equips[2]
+    arr2.push({id:16,type:2,name:'',level:1,
+        eqSkill : [],
+        eqAncient : [{id:2,v:2},{id:3,v:2},{id:5,v:2},],
+        eqGoods : [{id:14,v:8},{id:1,v:8},],
+    })
+    arr2.push({id:17,type:2,name:'',level:1,
+        eqSkill : [],
+        eqAncient : [{id:6,v:2},{id:7,v:2},{id:8,v:2},],
+        eqGoods : [{id:2,v:32},{id:3,v:16},],
+    })
+    arr2.push({id:18,type:2,name:'',level:1,
+        eqSkill : [{id:0,v:10}],
+        eqAncient : [{id:9,v:2},{id:10,v:2},{id:11,v:2},],
+        eqGoods : [{id:100,v:7},{id:4,v:4},],
+    })
+    // 技能id:0,1,2,3,6 猴子猴孙 +10*v,三头六臂 +1x*v,暴击风暴 +1%*x,火眼金睛 +1x*v,如意金箍 +1x*v
+    // 古神id:2,3,5,6,7,8,9,10,11,13,15,16,23,25,26 
+    // 商品id:1苦海,14聚宝,2金币,3伤害,4自动点击,100仙丹 ，，，，，
     let arr3 = self.equips[3]
     self.alls = arr0.concat(arr1,arr2,arr3)
     // 读取玩家的装备数据
@@ -96,6 +124,7 @@ self.refresh = function(){
         });
     });
     Events.emit(Events.ON_EQUIP_UPDATE)
+    GoodsDatas.refresh()
     GameData.refresh(true)
 }
 // 
@@ -213,7 +242,7 @@ self.resetGame = function() {
 self.getDesc = function(data){
     const names = ['魔法石','石锤','魔力法杖','生命石','断剑','魔法披风','木棍','木甲',
         '熔岩斧','红色法杖','幽魂碎片','幽魂之刃','幽魂宝石','','','',
-        '符文战刃','狼牙棒','雷电之锤','邪能法杖','飞云枪','巫术法杖','魔晶权杖','魔晶利刃',
+        '狼牙棒','雷电之锤','邪能法杖','飞云枪','巫术法杖','魔晶权杖','魔晶利刃','符文战刃',
         '战神之戟','战神权杖','雷神之锤','永恒遗物','邪神权杖','战神斧','魔龙之心','战神枪',]
     const types = ['普通','稀有','史诗','传说']
     const tcolors = ['666666','363CC0','862CCC','C2A822',]

@@ -69,7 +69,7 @@ cc.Class({
         }
         this.boxs[1] = {
             index : Math.floor(Math.random()*20+12),
-            type : 0
+            type : 1
         }
         this.boxs[2] = {
             index : Math.floor(Math.random()*20+17),

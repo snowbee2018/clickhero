@@ -5,7 +5,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // openDataNode : cc.Node,
 
         headSprite : cc.Sprite,
 
@@ -121,6 +120,11 @@ cc.Class({
     },
 
     openSetting(){
+        // DataCenter.getDataByKey(DataCenter.KeyMap.tree).boxList.unshift({
+        //     isnew : true,
+        //     time : Date.now(),
+        //     boxType : 1,
+        // })
         console.log("打开设置界面");
         let dialog = cc.instantiate(this.settingDialog)
         dialog.parent = cc.director.getScene();
@@ -805,57 +809,10 @@ cc.Class({
         Events.emit(Events.ON_IDLE_STATE, self.isIdle);
         Events.emit(Events.ON_COMBO_CHANGE, self.combo);
     },
-
     
-    onUploadResponse(event, response){
-
-        console.log("onUploadResponse"+event);
-        
-        // if (event == "success") {
-        //     console.log("上传图片请求成功！");
-        //     let res = JSON.parse(response);
-        //     console.log(JSON.stringify(res));
-        //     if (res.code == 1) {
-        //         console.log("上传图片成功");
-        //         this.fnames = this.fnames?this.fnames:[];
-        //         this.fnames.push(res.data);
-        //         if (this.fnames.length == this.imagePaths.length) {
-        //             console.log(JSON.stringify(this.fnames));
-        //             this.pubPosts();
-        //         }
-        //     } else {
-        //         console.log("上传图片失败");
-        //     }
-        // } else if (event == "error") {
-        //     console.log("上传图片请求出错");
-        // } else if (event == "timeout") {
-        //     console.log("上传图片超时");
-        // }
-    },
-
     onShareBtnClick () {
-        // WeChatUtil.shareAppMessage();
-        // Events.emit(Events.ON_SHARE_CLICK);
         this.showShareDialog();
         AudioMgr.playBtn();
-        // var datas = {_id:"zhwwaaaaaa",registerTime:1.558077800538e+12,_openid:"newopenid",WeChatUserInfo:{gender:1.0,language:"zh_CN",city:"长春",province:"吉林",country:"中国",nickName:"东军"},gamedata:{}}
-        // PublicFunc.httpRequest({
-        //     url : "https://www.magicfun.xyz/update",
-        //                 handler : function (event, response) {
-        //         console.info("http请求返回");
-        //         console.info(event);
-        //         console.info(response);
-        //         if (event == "success") {
-                    
-        //         } else if (event == "error") {
-        //             // 
-        //         } else if (event == "timeout") {
-        //             // 
-        //         }
-        //     }.bind(this),
-        //     method : "POST",
-        //     uploadData : JSON.stringify({doc:"UserGameData",_id:"zhwwaaaaaa",data:datas}),
-        // });
     },
 // mark
     onMonsterGold (gold) {
@@ -902,28 +859,8 @@ cc.Class({
         } catch (error) {
             
         }
-        // var str = weChatUserInfo.country;
-        // str += " " + weChatUserInfo.province;
-        // str += " " + weChatUserInfo.city;
-        // self.location.string = str;
-        // switch (weChatUserInfo.gender) {
-        //     case 1: self.gender.string = "男"; break;
-        //     case 2: self.gender.string = "女"; break;
-        //     default: self.gender.string = "未知"; break;
-        // }
-        // self.nickaName.string = weChatUserInfo.nickName;
     },
 
-    // showOpenDataView () {
-    //     const self = this;
-    //     self._isShow = !self._isShow;
-    //     // self.openDataNode.stopAllActions();
-    //     // if (self._isShow) {
-    //     //     self.openDataNode.runAction(self._show);
-    //     // } else {
-    //     //     self.openDataNode.runAction(self._hide);
-    //     // }
-    // },
     setPageActive(curPageIndex) {
         for (let i = 0; i < this.pages.length; i++) {
             const page = this.pages[i];
@@ -1163,84 +1100,7 @@ cc.Class({
         club.y = cc.winSize.height / 2;
         AudioMgr.playBtn();
     },
-
-    // onLeftBtnClick () {
-    //     const self = this;
-    //     // WeChatUtil.authorize(WeChatUtil.scope.userLocation, function (result) {
-    //     //     console.log("FFFFFFF, result = " + result);
-            
-    //     // });
-    //     self.showOpenDataView();
-    //     WeChatUtil.showModal({
-    //         title: "分享给好友",
-    //         content: "点一下，玩一年，把快乐分享给好友吧",
-    //         callBack: function (res) {
-    //             console.log("模态对话框用户操作返回");
-    //             console.log(res);
-    //             if (res.confirm) {
-    //                 console.log("点击了确定");
-    //                 WeChatUtil.shareAppMessage();
-    //                 self.showOpenDataView();
-    //             } else if (res.cancel) {
-    //                 console.log("点击了取消");
-    //                 self.showOpenDataView();
-    //                 WeChatUtil.showToast("取消了分享");
-    //             }
-    //         }
-    //     });
-    //     WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
-    // },
-
-    // onRightBtnClick () {
-    //     const self = this;
-    //     // WeChatUtil.postMsgToOpenDataView("你好，开放数据域。这是来自主域的问候！");
-    //     // let obj = {
-    //     //     helloMsg: "你好，开放数据域。这是主域托管的数据！"
-    //     // }
-    //     // WeChatUtil.setCloudStorage("test_cloud_storage", obj);
-
-    //     // obj.helloMsg = "你好，微信小游戏。这是保存到微信小游戏文件系统的数据！";
-    //     // WeChatUtil.setLocalStorage(JSON.stringify(obj));
-    //     // WeChatUtil.getLocalStorage(function (bSuccess, jsonStr) {
-    //     //     if (bSuccess) {
-    //     //         console.log("jsonStr = " + jsonStr);
-    //     //         WeChatUtil.showModal({
-    //     //             title: "测试模态对话框",
-    //     //             content: "本地数据获取成功：" + jsonStr,
-    //     //             callBack: function (res) {
-    //     //                 console.log("模态对话框用户操作返回");
-    //     //                 console.log(res);
-    //     //                 if (res.confirm) {
-    //     //                     console.log("点击了确定");
-    //     //                     WeChatUtil.showToast("点击了确定");
-    //     //                 } else if (res.cancel) {
-    //     //                     console.log("点击了取消");
-    //     //                     WeChatUtil.showToast("点击了取消");
-    //     //                 }
-    //     //             }
-    //     //         });
-    //     //     }
-    //     // });
-
-    //     // WeChatUtil.showModal({
-    //     //     title: "温馨提示",
-    //     //     content: "点击确定将增加100点击伤害",
-    //     //     callBack: function (res) {
-    //     //         console.log("模态对话框用户操作返回");
-    //     //         console.log(res);
-    //     //         if (res.confirm) {
-    //     //             console.log("点击了确定");
-    //     //             WeChatUtil.showToast("点击伤害+100");
-    //     //             self.clickDamage = self.clickDamage.plus(100);
-    //     //         } else if (res.cancel) {
-    //     //             console.log("点击了取消");
-    //     //             // WeChatUtil.showToast("点击了取消");
-    //     //         }
-    //     //     }
-    //     // });
-
-        
-    // },
+    
     resetGame(){
         this.setPageNodeActive(false)
         this.tabs[2].active = false
