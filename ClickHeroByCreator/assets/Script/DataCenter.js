@@ -203,6 +203,7 @@ cc.Class({
         var sale0 = DataCenter.getCloudDataByKey(DataCenter.KeyMap.sale0)
         self.setDataByKey(self.KeyMap.sale0, sale0 ? sale0:false);
         
+        this.isbug = DataCenter.getCloudData().isbug
     },
 
     saveUserData(data){
@@ -254,6 +255,9 @@ cc.Class({
             cdata.gamedata = data
             cdata.rebirthCount = data.rebirthCount
             cdata.maxLv = data.maxPassLavel
+            if (this.isbug) {
+                cdata.isbug = true
+            }
             console.log("保存数据到本地");
             if (cc.sys.platform === cc.sys.WECHAT_GAME) {
                 wx.setStorageSync('GameDataNew',JSON.stringify(cdata))
@@ -502,6 +506,9 @@ cc.Class({
 
     // 金币是否足够
     isGoldEnough(price) {
+        if (this.checkBug()) {
+            return false
+        }
         const self = this;
         if (BigNumber.isBigNumber(price)) {
             var key = self.KeyMap.curGold;
@@ -515,6 +522,9 @@ cc.Class({
     
     // 英魂是否足够
     isSoulEnough(soul) {
+        if (this.checkBug()) {
+            return false
+        }
         const self = this;
         if (BigNumber.isBigNumber(soul)) {
             var key = self.KeyMap.curSoul;
@@ -529,15 +539,52 @@ cc.Class({
     
     // 仙桃是否足够
     isRubyEnough(ruby) {
+        if (this.checkBug()) {
+            return false
+        }
         var key = this.KeyMap.ruby;
         var old = this.getDataByKey(key);
         return old >= ruby
     },
     // 魂魄是否足够
     isASEnough(AS) {
+        if (this.checkBug()) {
+            return false
+        }
         var key = this.KeyMap.AS;
         var old = this.getDataByKey(key);
         return old >= AS
+    },
+
+    checkBug(){
+        let isbug = this.isbug
+        if (isbug) {
+            return true
+        }
+        // 1.判断ruby是否大于9000000
+        // 2.判断ruby是否大于totalruby
+        var key = this.KeyMap.ruby
+        var ruby = this.getDataByKey(key);
+        key = this.KeyMap.totalRuby
+        var totalRuby = this.getDataByKey(key);
+        if (ruby >= 9000000) {
+            isbug = true
+        } else if (ruby > totalRuby) {
+            isbug = true
+        }
+        // 3.判断AS是否大于totalAS
+        key = this.KeyMap.AS
+        var AS = this.getDataByKey(key);
+        key = this.KeyMap.totalAS
+        var totalAS = this.getDataByKey(key);
+        if (AS > totalAS) {
+            isbug = true
+        }
+        // 如果有一项为true，直接标为isbug
+        if (isbug) {
+            this.isbug = true
+        }
+        return isbug
     },
 
     getGoldStr () {
