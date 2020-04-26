@@ -92,10 +92,36 @@ self.init = function() {
         eqAncient : [{id:9,v:2},{id:10,v:2},{id:11,v:2},],
         eqGoods : [{id:100,v:7},{id:4,v:4},],
     })
-    // 技能id:0,1,2,3,6 猴子猴孙 +10*v,三头六臂 +1x*v,暴击风暴 +1%*x,火眼金睛 +1x*v,如意金箍 +1x*v
-    // 古神id:2,3,5,6,7,8,9,10,11,13,15,16,23,25,26 
-    // 商品id:1苦海,14聚宝,2金币,3伤害,4自动点击,100仙丹 ，，，，，
+    arr2.push({id:19,type:2,name:'',level:1,
+        eqSkill : [{id:0,v:40},{id:1,v:3},],
+        eqAncient : [{id:13,v:2},{id:15,v:2},{id:16,v:2},],
+        eqGoods : [{id:4,v:10},],
+    })
+    arr2.push({id:20,type:2,name:'',level:1,
+        eqSkill : [{id:3,v:4},{id:6,v:4},],
+        eqAncient : [{id:25,v:2},{id:26,v:2},],
+        eqGoods : [{id:2,v:24},{id:14,v:8},],
+    })
     let arr3 = self.equips[3]
+    const acv = 3
+    arr3.push({id:24,type:3,name:'',level:1,
+        eqSkill : [{id:0,v:60},{id:1,v:6},],
+        eqAncient : [{id:2,v:acv},{id:3,v:acv},{id:5,v:acv},{id:6,v:acv},{id:7,v:acv},],
+        eqGoods : [{id:1,v:36},{id:14,v:36},{id:4,v:8},],
+    })
+    arr3.push({id:25,type:3,name:'',level:1,
+        eqSkill : [{id:3,v:6},{id:6,v:6},],
+        eqAncient : [{id:8,v:acv},{id:9,v:acv},{id:10,v:acv},{id:11,v:acv},{id:13,v:acv},],
+        eqGoods : [{id:2,v:144},{id:3,v:72},{id:1,v:5},{id:14,v:5},],
+    })
+    arr3.push({id:26,type:3,name:'',level:1,
+        eqSkill : [{id:2,v:0.5},],
+        eqAncient : [{id:15,v:acv},{id:16,v:acv},{id:25,v:acv},{id:26,v:acv},],
+        eqGoods : [{id:100,v:40},{id:4,v:10},],
+    })
+    // 技能id:0,1,2,3,6 猴子猴孙 +10*v,三头六臂 +1x*v,暴击风暴 +1%*x,火眼金睛 +1x*v,如意金箍 +1x*v
+    // 古神id:2,3,5,6,7,8,9,10,11,13,15,16,25,26 
+    // 商品id:1苦海,14聚宝,2金币,3伤害,4自动点击,100仙丹 ，，，，，
     self.alls = arr0.concat(arr1,arr2,arr3)
     // 读取玩家的装备数据
         console.log("xxxxj init 1");
@@ -139,7 +165,7 @@ self.get = function(id) {
 // 随机增加装备
 self.roll = function(type) {
     console.log("xxj roll");
-    const bUp = Math.random()>0.9
+    const bUp = Math.random()>0.92
     type = bUp? type + 1 : type
     const arr = self.equips[type]
     const i = Math.floor(Math.random()*arr.length)
@@ -243,7 +269,7 @@ self.getDesc = function(data){
     const names = ['魔法石','石锤','魔力法杖','生命石','断剑','魔法披风','木棍','木甲',
         '熔岩斧','红色法杖','幽魂碎片','幽魂之刃','幽魂宝石','','','',
         '狼牙棒','雷电之锤','邪能法杖','飞云枪','巫术法杖','魔晶权杖','魔晶利刃','符文战刃',
-        '战神之戟','战神权杖','雷神之锤','永恒遗物','邪神权杖','战神斧','魔龙之心','战神枪',]
+        '战神权杖','雷神之锤','永恒遗物','邪神权杖','战神斧','魔龙之心','战神枪','战神之戟',]
     const types = ['普通','稀有','史诗','传说']
     const tcolors = ['666666','363CC0','862CCC','C2A822',]
     // <color=#00ff00>Rich</c><color=#0fffff>Text</color>

@@ -53,16 +53,8 @@ cc.Class({
         return value;
     },
     createBoxs(){
-        // const r0 = Math.random()
-        // if (r0<=0.3) {
-        //     ruby = rubys0[0]
-        // } else if (r0<=0.6) {
-        //     ruby = rubys0[1]
-        // } else if (r0 <= 0.8) {
-        //     ruby = rubys0[2]
-        // } else {
-        //     ruby = rubys0[3]
-        // }
+        let lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
+        const b = lv > 2000
         this.boxs[0] = {
             index : Math.ceil(Math.random()*10+10),
             type : 0
@@ -73,7 +65,7 @@ cc.Class({
         }
         this.boxs[2] = {
             index : Math.floor(Math.random()*20+17),
-            type : 0
+            type : b ? 2:1
         }
         this.boxs[3] = {
             index : Math.floor(Math.random()*10),

@@ -2,7 +2,13 @@ cc.Class({
     
     ctor () {
         const self = this;
-        self.zoneStartTimes = [0,1566943200000,1569794400000,1586102400000]
+        self.zoneStartTimes = [0,1566943200000,1569794400000,1586102400000
+            ,1590940800000 // 6.1
+            ,1596211200000 // 8.1
+            ,1601481600000 // 10.1
+            ,1606752000000 // 12.1
+            ,1612108800000 // 2021.2.1
+        ];
         self.KeyMap = {
             lastTime: "lastEnterGameTime", // 最近一次保存数据的时间
             // 所有当前必须要保存的数据，用于恢复现场
@@ -161,7 +167,7 @@ cc.Class({
         if (totalRuby) {
             self.setDataByKey(self.KeyMap.totalRuby, Number(totalRuby));
         } else {
-            self.setDataByKey(self.KeyMap.totalRuby, 0);
+            self.setDataByKey(self.KeyMap.totalRuby, 1);
         }
         var totalAS = self.getCloudDataByKey(self.KeyMap.totalAS);
         if (totalAS) {
