@@ -10,6 +10,7 @@ self.URL_ORDERBY = self.HOST + "/orderBy"
 self.URL_RANK = self.HOST + "/rank"
 self.URL_CHILD = self.HOST + "/child"
 self.URL_KEYCODE = self.HOST + "/keycode1"
+self.URL_MYADDRUBY = self.HOST + "/myAddRuby"
 
 self.setGameDataID = function(_id) {
     self.gameDataID = _id
@@ -110,11 +111,11 @@ self.getGameData = function(id,callback) {
         const time = userData.gamedata.lastEnterGameTime
         console.log("数据时间差值：" + (Date.now() - time));
         
-        if (Date.now() - time < 1 * 86400000) {
+        // if (Date.now() - time < 1 * 86400000) {
             console.log("使用本地UserData数据");
             callback(true, [userData]);
             return
-        }
+        // }
     } 
     PublicFunc.httpRequest({
         url : self.URL_WHERE,handler : function (event, response) {
@@ -259,6 +260,30 @@ self.keycode = function(key,callback) {
         }.bind(this),
         method : "POST",
         uploadData : encodeURIComponent(JSON.stringify({keycode:key,openid:self.openid})),
+    });
+}
+
+self.myAddRuby = function(callback) {
+    PublicFunc.httpRequest({
+        url : self.URL_MYADDRUBY,handler : function (event, response) {
+            if (event == "success") {
+                let resp = JSON.parse(response)
+                if (resp.code == 0 && resp.message == "SUCCESS" && resp.data) {
+                    let data = resp.data
+                    console.log("http myAddRuby success.");
+                    console.log(data);
+                    callback(data);
+                    return
+                }
+            } else if (event == "error") {
+            } else if (event == "timeout") {
+            }
+            if (callback) {
+                callback(false);
+            }
+        }.bind(this),
+        method : "POST",
+        uploadData : encodeURIComponent(JSON.stringify({openid:self.openid})),
     });
 }
 

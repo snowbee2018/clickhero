@@ -11,6 +11,7 @@ self.init = function() {
     self.buyRubys = [150,1500,15000]
     self.upgradeRubys = [100,1000,10000,100000]
     self.upgradeAddRubys = [100,800,6400,25600]
+    self.upgradeMaxRubys = [1600,4200,26000,158000]
     // 图鉴
     self.equips = [
         [],[],[],[]
@@ -258,6 +259,7 @@ self.getUpgradeRuby = function(data) {
     const type = data.type
     const lv = data.level
     let ruby = self.upgradeRubys[type] + self.upgradeAddRubys[type]*(lv-1)
+    ruby = Math.min(this.upgradeMaxRubys[type],ruby)
     return ruby
 }
 

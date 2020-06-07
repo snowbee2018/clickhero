@@ -147,10 +147,10 @@ cc.Class({
 
     resetGame(){
         let ruby2 = DataCenter.getDataByKey(DataCenter.KeyMap.ruby)
-        ruby2 += Math.round(GoodsDatas.getTotalRuby()*0.75)
+        // ruby2 += Math.round(GoodsDatas.getTotalRuby()*0.75)
         const self = this;
         PublicFunc.popDialog({
-            contentStr: "这将重置你的所有游戏数据，你会进入新区（排行榜），但是会保留仙桃，并以75%的价值变卖商店的道具，共保留"+ruby2+"仙桃，你确定要重置吗？",
+            contentStr: "这将重置你的所有游戏数据，你会进入新区，会保留未使用的仙桃，不会变卖商店的道具，共保留"+ruby2+"仙桃，你确定要重置吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'
@@ -293,9 +293,9 @@ cc.Class({
     showUpgradeInfo(){
         let info
         info = [
-            "1.增加了2个史诗装备，3个传说装备",
-            "2.砍树中增加金箱子，2000级以上才会掉落，可以开出史诗和传说装备",
-            "3.新装备上线后短期可能会有小幅度平衡调整",
+            "现在排行榜每周奖励会在打开排行榜后自动发放~",
+            // "2.",
+            // "3.",
         ].join("\n")
         // if (DataCenter.getUserZone()==1) {
             
@@ -446,6 +446,16 @@ cc.Class({
         // }else{
         //     return false
         // }
+    },
+
+    checkAddRuby(){
+        HttpUtil.myAddRuby(function(data) {
+            if (data&&data.ruby) {
+                const ruby = data.ruby
+                let title = data.title || (data.type == 1? '周榜奖励':null)
+                PublicFunc.popGoldDialog(2,ruby,title,true)
+            }
+        }.bind(this))
     },
 
     initSwitch(){

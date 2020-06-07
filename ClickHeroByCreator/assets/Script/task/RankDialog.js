@@ -13,6 +13,7 @@ cc.Class({
         var cloudData = DataCenter.getDataByKey("CloudData");
         this.registerTime = cloudData ? cloudData.registerTime : 0
         this.onTab(null,0)
+        PublicFunc.checkAddRuby()
     },
 
     onTab(event,i){

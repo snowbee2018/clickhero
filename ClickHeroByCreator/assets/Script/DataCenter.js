@@ -3,6 +3,7 @@ cc.Class({
     ctor () {
         const self = this;
         self.zoneStartTimes = [0,1566943200000,1569794400000,1586102400000
+            ,1589126400000 // 5.11
             ,1590940800000 // 6.1
             ,1596211200000 // 8.1
             ,1601481600000 // 10.1
@@ -202,8 +203,10 @@ cc.Class({
         self.setDataByKey(self.KeyMap.goldenLv, goldenLv ? goldenLv:5);
         var sale0 = DataCenter.getCloudDataByKey(DataCenter.KeyMap.sale0)
         self.setDataByKey(self.KeyMap.sale0, sale0 ? sale0:false);
+        if (DataCenter.getCloudData()) {
+            this.isbug = DataCenter.getCloudData().isbug
+        }
         
-        this.isbug = DataCenter.getCloudData().isbug
     },
 
     saveUserData(data){
@@ -757,6 +760,7 @@ cc.Class({
         
         this.saveCloudData({
             registerTime : Date.now(),
+            // registerTime : this.getDataByKey("CloudData").registerTime,
             _openid : HttpUtil.openid
         })
         this.init()

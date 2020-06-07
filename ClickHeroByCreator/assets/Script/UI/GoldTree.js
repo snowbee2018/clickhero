@@ -56,19 +56,19 @@ cc.Class({
         let lv = DataCenter.getDataByKey(DataCenter.KeyMap.maxPassLavel);
         const b = lv > 2000
         this.boxs[0] = {
-            index : Math.ceil(Math.random()*10+10),
+            index : Math.ceil(Math.random()*10+15),
             type : 0
         }
         this.boxs[1] = {
-            index : Math.floor(Math.random()*20+12),
+            index : Math.floor(Math.random()*20+20),
             type : 1
         }
         this.boxs[2] = {
-            index : Math.floor(Math.random()*20+17),
+            index : Math.floor(Math.random()*20+22),
             type : b ? 2:1
         }
         this.boxs[3] = {
-            index : Math.floor(Math.random()*10),
+            index : Math.floor(Math.random()*20+16),
             type : 0
         }
     },

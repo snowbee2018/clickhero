@@ -243,11 +243,12 @@ cc.Class({
 
     checkAddruby(){
         console.log("checkAddruby");
-        CloudDB.getAddruby(function (b, ruby) {
-            if (b&&ruby>0) {
-                PublicFunc.popGoldDialog(2,ruby,null,true)
-            }
-        });
+        // CloudDB.getAddruby(function (b, ruby) {
+        //     if (b&&ruby>0) {
+        //         PublicFunc.popGoldDialog(2,ruby,null,true)
+        //     }
+        // });
+        PublicFunc.checkAddRuby()
     },
 
     onWeChatUserInfo(userData) {
