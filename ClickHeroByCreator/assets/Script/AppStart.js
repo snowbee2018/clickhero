@@ -350,6 +350,7 @@ cc.Class({
                 self.viewLoading.active = false
                 self.gameController.onGameStart();
                 HttpUtil.updateMaxLv()
+                self.checkAddruby()
             },500)
         }
     },
@@ -363,7 +364,6 @@ cc.Class({
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             CloudRes.initUrl(function () {
                 start()
-                self.checkAddruby()
             });
         } else {
             start();

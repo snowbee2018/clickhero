@@ -150,7 +150,7 @@ cc.Class({
         // ruby2 += Math.round(GoodsDatas.getTotalRuby()*0.75)
         const self = this;
         PublicFunc.popDialog({
-            contentStr: "这将重置你的所有游戏数据，你会进入新区，会保留未使用的仙桃，不会变卖商店的道具，共保留"+ruby2+"仙桃，你确定要重置吗？",
+            contentStr: "这将重置你的所有游戏数据，你会进入新区，会保留未使用的仙桃，共保留"+ruby2+"仙桃，你确定要重置吗？",
             btnStrs: {
                 left: '是 的',
                 right: '不，谢谢'
@@ -293,9 +293,8 @@ cc.Class({
     showUpgradeInfo(){
         let info
         info = [
-            "现在排行榜每周奖励会在打开排行榜后自动发放~",
-            // "2.",
-            // "3.",
+            "1.9月1日新增第7区",
+            // "2.排行榜中下拉可以看到所在区",
         ].join("\n")
         // if (DataCenter.getUserZone()==1) {
             

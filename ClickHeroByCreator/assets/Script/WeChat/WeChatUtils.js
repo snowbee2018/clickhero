@@ -547,7 +547,12 @@ cc.Class({
             if (window.SkillCfg == undefined) return;
     
             const self = this;
-            console.log("on game back");
+            if (this._hideTime) {
+                const diff = Math.abs(Date.now()-this._hideTime)
+                if (diff > 600 * 1000) {
+                    this.isTimeErr = true
+                }
+            }
             if (this.isTimeErr) {
                 console.log("系统时间异常");
                 return
@@ -571,6 +576,7 @@ cc.Class({
             console.log("系统时间异常，不保存任何数据");
             return
         }
+        this._hideTime = Date.now()
         if (self.cloudDataFormatFunc) {
             var datas = self.cloudDataFormatFunc();
             var data = datas[0]

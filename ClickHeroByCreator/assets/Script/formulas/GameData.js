@@ -298,7 +298,8 @@ cc.Class({
         },
         // 获得Boss计时时间
         getBossTimerSecond() {
-            return this.addBossTimerSecond * this.gdPBossTSTimes + 30 + this.getZonesRule()*-2
+            // boss最少时间两秒
+            return Math.max(this.addBossTimerSecond * this.gdPBossTSTimes + 30 + this.getZonesRule()*-2,2)
         },
         // 获得add宝箱出现概率
         getAddTreasureOdds() {

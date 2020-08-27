@@ -14,6 +14,7 @@ cc.Class({
         this.registerTime = cloudData ? cloudData.registerTime : 0
         this.onTab(null,0)
         PublicFunc.checkAddRuby()
+        this.addZoneTips()
     },
 
     onTab(event,i){
@@ -98,5 +99,15 @@ cc.Class({
 
     finish(){
         this.node.destroy()
+    },
+
+    addZoneTips(){
+        var node = new cc.Node("lbTips");
+        node.setPosition(cc.v2(0,40));
+        node.color = new cc.Color(0x66,0x66,0x66);
+        var label = node.addComponent(cc.Label);
+        label.fontSize = 30;
+        this.content.addChild(node);
+        label.string = (DataCenter.getUserZone()+1)+"区"
     },
 })

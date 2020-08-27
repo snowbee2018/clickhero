@@ -2,7 +2,7 @@
  * @Author: xj 
  * @Date: 2019-01-01 02:18:47 
  * @Last Modified by: xj
- * @Last Modified time: 2019-11-17 16:29:27
+ * @Last Modified time: 2020-07-09 21:13:03
  */
  
 cc.Class({
@@ -103,6 +103,12 @@ cc.Class({
         }
         let date = this.strToDate(this.data.date)
         let b = date.toLocaleDateString() == new Date().toLocaleDateString()
+        if (!b) {
+            if (date.getTime() > Date.now()) {
+                WeChatUtil.isTimeErr = true
+                b = true
+            }
+        }
         return b
     },
     isThisWeek(){
